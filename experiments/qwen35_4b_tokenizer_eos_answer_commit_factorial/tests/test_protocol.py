@@ -109,6 +109,29 @@ class AnswerCommitProtocolTests(unittest.TestCase):
             )
         )
 
+    def test_suffix_binding_uses_semantic_candidate_first_operation(self) -> None:
+        left = protocol.canonical_full_program(
+            ["B", "C"], candidate_first_alias="A"
+        )
+        right = protocol.canonical_full_program(
+            ["B", "C"], candidate_first_alias="D"
+        )
+        self.assertEqual(left, ("A", "B", "C"))
+        self.assertNotEqual(left, right)
+
+    def test_suffix_and_direct_share_one_canonical_proposal_type(self) -> None:
+        suffix = protocol.canonical_full_program(
+            ["B", "C"], candidate_first_alias="A"
+        )
+        direct = protocol.canonical_full_program(["A", "B", "C"])
+        self.assertEqual(suffix, direct)
+
+    def test_canonical_program_rejects_row_identity_instead_of_alias(self) -> None:
+        with self.assertRaisesRegex(ValueError, "outside A-X"):
+            protocol.canonical_full_program(
+                ["B", "C"], candidate_first_alias="candidate-row-7"
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

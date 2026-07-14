@@ -39,12 +39,17 @@ oracle ceilings remain sealed.
 
 ## Interpretation
 
-Two independent review passes returned prospective holds. The contract now
+Three independent review passes returned prospective holds. The contract now
 also freezes the dual-qualification invariant, distinct parse/cap metrics,
 calibration/transport balance, arm-blind selection and all-eight-row task
 success, resource-exhaustion terminal, and pilot-only claim scope. It awaits
 rereview at a new exact pushed commit and does not establish a live interface
 or capability gain.
+
+Third-pass review additionally required one canonical proposal type. Every
+two-operation suffix is now bound to its semantic candidate first operation,
+and all suffix/direct proposal processing uses the resulting full three-
+operation tuple.
 
 ## Next Experiments
 

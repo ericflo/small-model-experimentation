@@ -68,9 +68,12 @@ This is an interface hypothesis, not yet a capability hypothesis.
   receipt authentication.
 - Conditional mechanics is fully frozen at 24 tasks, 24 candidates per suffix
   arm, and a 96-row-per-task direct ceiling. Controls are materialized state,
-  name-only, shuffled
-  materialized state/target, candidate-blind direct samples, exhaustive CPU
-  ceiling, and taskwise sampled/logical-token matched-compute prefixes.
+  name-only, shuffled materialized state/target, candidate-blind direct
+  samples, exhaustive CPU ceiling, and taskwise sampled/logical-token matched-
+  compute prefixes.
+- Every suffix is bound to its semantic candidate first operation before any
+  deduplication or scoring, yielding the same canonical full three-operation
+  proposal type used by direct sampling.
 - Primary capability metric if opened: hidden exact accuracy of a frozen
   visible-only selector versus all structured controls and matched-compute
   direct sampling.

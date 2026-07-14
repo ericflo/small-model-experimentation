@@ -238,6 +238,20 @@ visible selection or hidden access as `DIRECT_RESOURCE_MATCH_POOL_EXHAUSTED`.
 This is a non-capability resource-design failure, not a materialized-residual
 failure.
 
+Every parsed suffix proposal is immediately bound to the semantic first-
+operation alias carried by its signed candidate relation, producing canonical
+full tuple `(candidate_first, suffix_1, suffix_2)`. Materialized, name-only,
+and shuffled rows all use that rule; target derangement never changes the
+row's semantic candidate first operation. A direct proposal is already parsed
+as canonical `(operation_1, operation_2, operation_3)`. Candidate row ID,
+candidate index, request order, and sampling order are never tuple content.
+All later deduplication, execution, visible filtering, probe clustering,
+hashing, selection, hidden scoring, oracle coverage, and first-operation
+support operate only on these canonical full three-operation tuples. Thus an
+identical sampled suffix bound to two different semantic first operations
+remains two distinct proposals, while suffix and direct proposals denoting the
+same full tuple are comparable.
+
 For each task, the complete 24-row materialized arm freezes two conservative
 first-over prefixes of the already generated direct pool. Sampled-token cost is
 the count of every stage-one and stage-two sampled token ID, including terminal
@@ -254,15 +268,16 @@ The deployable primary is task-level hidden accuracy of
 `visible-probe-consensus-v1`, selected before hidden plaintext opens. For each
 arm/task it rejects programs that fail to parse, execute, or exactly match the
 public target on every one of the eight visible rows. It deduplicates canonical
-token-ID programs and clusters survivors by their output vector on the 16
-unlabeled probes. It chooses the largest cluster; tied clusters are ordered by
-the minimum member hash of the canonical byte string UTF-8
+full three-operation tuples and clusters survivors by their output vector on
+the 16 unlabeled probes. It chooses the largest cluster; tied clusters are
+ordered by the minimum member hash of the canonical byte string UTF-8
 `visible-probe-consensus-v1`, NUL, UTF-8 task ID, NUL, then each program token
-ID as unsigned four-byte big-endian. The member with minimum same hash
+ID from the tokenizer receipt's normalized full-program encoding as unsigned
+four-byte big-endian. The member with minimum same hash
 represents the winning cluster; an exact hash collision falls back to
-lexicographically smallest token-ID tuple. This tie-break contains no arm,
-candidate index, sampled order, hidden value, or outcome. If no survivor
-exists, the selector abstains and the task scores zero. The same selector
+lexicographically smallest canonical operation-alias tuple. This tie-break
+contains no arm, candidate index, sampled order, hidden value, or outcome. If
+no survivor exists, the selector abstains and the task scores zero. The same selector
 applies to materialized, name-only, shuffled, and both direct prefixes.
 
 A selected program succeeds on a task only if it executes and exactly matches

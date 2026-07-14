@@ -11,6 +11,7 @@ MODEL_REVISION = "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
 HF_MODEL_EOS_ID = 248044
 TOKENIZER_EOS_ID = 248046
 NEWLINE_ID = 198
+OPERATION_ALIASES = tuple(chr(ord("A") + index) for index in range(24))
 
 
 @dataclasses.dataclass(frozen=True)
@@ -30,6 +31,26 @@ class BoundaryPairResult:
     tokenizer_event: str
     hf_event: str
     failure: str | None
+
+
+def canonical_full_program(
+    parsed_aliases: Sequence[str], *, candidate_first_alias: str | None = None
+) -> tuple[str, str, str]:
+    """Canonicalize direct triples or bind a suffix to its semantic first op."""
+
+    aliases = tuple(str(alias) for alias in parsed_aliases)
+    allowed = set(OPERATION_ALIASES)
+    if any(alias not in allowed for alias in aliases):
+        raise ValueError("program contains an alias outside A-X")
+    if candidate_first_alias is None:
+        if len(aliases) != 3:
+            raise ValueError("direct proposal must contain exactly three aliases")
+        return aliases
+    if candidate_first_alias not in allowed:
+        raise ValueError("candidate first operation is outside A-X")
+    if len(aliases) != 2:
+        raise ValueError("candidate-bound suffix must contain exactly two aliases")
+    return (candidate_first_alias, aliases[0], aliases[1])
 
 
 def _authenticate_terminal_event(

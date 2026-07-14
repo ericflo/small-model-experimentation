@@ -95,3 +95,20 @@ arm-blind task/program hash and all-row exactness; exhaustion is
 `DIRECT_RESOURCE_MATCH_POOL_EXHAUSTED`; and no pass is generalized beyond the
 large-effect pilot. Live calls remain held pending another exact-commit design
 rereview and a later implementation release review.
+
+## Independent review: third pass
+
+Rereview of exact pushed/green commit
+`ef4e09ceb46a211d5bf8dcf92bb84863151108cf` returned `HOLD_DESIGN`. It
+confirmed every second-pass repair, then found one mechanics ambiguity: suffix
+arms emit two operations for a semantic candidate first operation, while direct
+emits full arity-three programs, but downstream proposal identity was not
+explicitly unified.
+
+The prospective repair binds every parsed suffix as
+`(semantic_candidate_first, suffix_1, suffix_2)` before any deduplication or
+scoring. Direct parses directly to the same canonical three-operation tuple.
+Every selector, execution, hash, hidden/oracle metric, and first-operation-
+support count now operates on that full tuple and never on row index or sampled
+order. Live calls remain held pending another exact-commit design rereview and
+the separate implementation release review.

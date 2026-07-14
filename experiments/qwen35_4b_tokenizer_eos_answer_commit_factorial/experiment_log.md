@@ -23,6 +23,11 @@
   alias and live-operation balance, disjoint transport namespace, arm-blind
   selector/all-eight-row success, direct-pool exhaustion terminal, and 24-task
   pilot claim scope. Model calls remain zero.
+- Third-pass review verified those repairs but held on suffix/direct proposal
+  identity. Prospectively froze suffix binding to the semantic candidate first
+  operation and canonical full-tuple identity for every downstream selector,
+  execution, hash, hidden/oracle score, and support count. Model calls remain
+  zero.
 
 ## Scaffold
 

@@ -125,11 +125,14 @@ mechanics:
   arms: [materialized, name_only, shuffled, direct]
   suffix_rows_per_task: 24
   direct_master_pool_per_task: 96
+  suffix_proposal_binding: canonical_tuple_of_semantic_candidate_first_plus_two_parsed_suffix_aliases
+  direct_proposal_binding: canonical_tuple_of_three_parsed_aliases
+  proposal_deduplication_unit: canonical_full_three_operation_tuple
   invocation_order: [transport, direct, materialized, name_only, shuffled]
   matched_direct_prefixes: [sampled_token_first_over, logical_model_token_first_over]
   selector: visible-probe-consensus-v1
   visible_filter: exact_correctness_on_all_8_visible_rows
-  selector_tie_break: arm_blind_sha256_task_id_and_program_token_ids
+  selector_tie_break: arm_blind_sha256_task_id_and_canonical_full_program_token_ids
   abstention_task_score: 0
   hidden_task_success: exact_correctness_on_all_8_hidden_rows
   all_generation_parse_rate_min: 0.90
