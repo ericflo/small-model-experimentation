@@ -169,7 +169,8 @@ class _FakeCalibrationRunner:
         self._called("calibration_thoughts")
         rows = []
         for index, record in enumerate(records):
-            stage1 = self.tokenizer.encode("reason", add_special_tokens=False)
+            retained = self.tokenizer.encode("reason", add_special_tokens=False)
+            stage1 = retained + [248044]
             prompt, original = self._prompt_fields(record, thinking=True, prefix=[])
             seed = _stable_seed(sampling.run_seed, record["id"], -1, "thought")
             rows.append(
@@ -186,28 +187,28 @@ class _FakeCalibrationRunner:
                             "seed_domain_stage1": "thought",
                             "seed_domain_stage2": None,
                             "text": "reason",
-                            "token_ids": stage1,
+                            "token_ids": retained,
                             "stage1_token_ids": stage1,
-                            "retained_thinking_token_ids": stage1,
+                            "retained_thinking_token_ids": retained,
                             "answer_prefix_token_ids": [],
                             "injected_token_ids": [],
                             "stage2_token_ids": [],
-                            "n_thinking_tokens": len(stage1),
+                            "n_thinking_tokens": len(retained),
                             "n_answer_tokens": 0,
                             "n_sampled_tokens": len(stage1),
                             "n_injected_tokens": 0,
-                            "n_completion_tokens": len(stage1),
-                            "n_terminal_tokens_trimmed": 0,
+                            "n_completion_tokens": len(retained),
+                            "n_terminal_tokens_trimmed": 1,
                             "n_tokens_discarded_after_close": 0,
                             "n_stage1_prompt_tokens": len(original),
                             "n_stage2_prompt_tokens": 0,
                             "thinking_closed": False,
                             "forced_close": False,
-                            "finish_reason": "length",
-                            "stop_reason": None,
-                            "stage1_finish_reason": "length",
-                            "stage1_stop_reason": None,
-                            "truncated": True,
+                            "finish_reason": "stop",
+                            "stop_reason": 248044,
+                            "stage1_finish_reason": "stop",
+                            "stage1_stop_reason": 248044,
+                            "truncated": False,
                         }
                     ],
                 }
@@ -228,10 +229,16 @@ class _FakeCalibrationRunner:
             )
             expected = record["meta"]["expected"]
             continuation = expected[len("PROGRAM:") :] if prefix else expected
-            stage2 = self.tokenizer.encode(continuation, add_special_tokens=False)
+            answer_ids = self.tokenizer.encode(
+                continuation, add_special_tokens=False
+            )
+            stage2 = answer_ids + [248044]
             close = [248069, 271]
             final_ids = (
-                source["retained_thinking_token_ids"] + close + prefix + stage2
+                source["retained_thinking_token_ids"]
+                + close
+                + prefix
+                + answer_ids
             )
             rows.append(
                 {
@@ -258,7 +265,7 @@ class _FakeCalibrationRunner:
                             "seed_domain_stage2": "answer",
                             "answer_prefix_token_ids": prefix,
                             "injected_token_ids": close + prefix,
-                            "n_answer_tokens": len(stage2),
+                            "n_answer_tokens": len(answer_ids),
                             "n_thinking_tokens": len(
                                 source["retained_thinking_token_ids"]
                             ),
@@ -272,16 +279,16 @@ class _FakeCalibrationRunner:
                             + len(stage2),
                             "n_injected_tokens": len(close) + len(prefix),
                             "n_completion_tokens": len(final_ids),
-                            "n_terminal_tokens_trimmed": 0,
+                            "n_terminal_tokens_trimmed": 2,
                             "n_tokens_discarded_after_close": 0,
                             "thinking_closed": True,
                             "forced_close": True,
                             "finish_reason": "stop",
-                            "stop_reason": None,
+                            "stop_reason": 248044,
                             "stage1_finish_reason": source[
                                 "stage1_finish_reason"
                             ],
-                            "stage1_stop_reason": None,
+                            "stage1_stop_reason": 248044,
                             "truncated": False,
                         }
                     ],
@@ -304,8 +311,9 @@ class _FakeCalibrationRunner:
             )
             expected = record["meta"]["expected"]
             answer = expected[len("PROGRAM:") :] if prefix else expected
-            stage1 = self.tokenizer.encode(answer, add_special_tokens=False)
-            final_ids = prefix + stage1
+            answer_ids = self.tokenizer.encode(answer, add_special_tokens=False)
+            stage1 = answer_ids + [248044]
+            final_ids = prefix + answer_ids
             seed = _stable_seed(sampling.run_seed, record["id"], 0, "answer")
             rows.append(
                 {
@@ -328,20 +336,20 @@ class _FakeCalibrationRunner:
                             "answer_prefix_token_ids": prefix,
                             "injected_token_ids": prefix,
                             "stage2_token_ids": [],
-                            "n_answer_tokens": len(stage1),
+                            "n_answer_tokens": len(answer_ids),
                             "n_thinking_tokens": 0,
                             "n_stage1_prompt_tokens": len(original) + len(prefix),
                             "n_stage2_prompt_tokens": 0,
                             "n_sampled_tokens": len(stage1),
                             "n_injected_tokens": len(prefix),
                             "n_completion_tokens": len(final_ids),
-                            "n_terminal_tokens_trimmed": 0,
+                            "n_terminal_tokens_trimmed": 1,
                             "thinking_closed": False,
                             "forced_close": False,
                             "finish_reason": "stop",
-                            "stop_reason": None,
+                            "stop_reason": 248044,
                             "stage1_finish_reason": "stop",
-                            "stage1_stop_reason": None,
+                            "stage1_stop_reason": 248044,
                             "truncated": False,
                         }
                     ],
@@ -464,6 +472,26 @@ class CalibrationStageTests(unittest.TestCase):
             output["seed_stage1"] += 1
         with self.assertRaisesRegex(RuntimeError, "stable seed changed"):
             _authenticate_factorial_pairing(forged_seed, inputs, tokenizer)
+
+        forged_finish = json.loads(json.dumps(bundles))
+        output = forged_finish["no_think_freeform"]["rows"][0]["outputs"][0]
+        output["finish_reason"] = "length"
+        output["stage1_finish_reason"] = "length"
+        output["truncated"] = True
+        with self.assertRaisesRegex(RuntimeError, "registered cap"):
+            _authenticate_factorial_pairing(forged_finish, inputs, tokenizer)
+
+        for label, arm, field, size in (
+            ("thought", "calibration_thoughts", "stage1_token_ids", 513),
+            ("thinking answer", "think512_freeform", "stage2_token_ids", 25),
+            ("no-think answer", "no_think_freeform", "stage1_token_ids", 25),
+        ):
+            with self.subTest(over_cap=label):
+                forged_cap = json.loads(json.dumps(bundles))
+                output = forged_cap[arm]["rows"][0]["outputs"][0]
+                output[field] = [1100] * size
+                with self.assertRaisesRegex(RuntimeError, "registered cap"):
+                    _authenticate_factorial_pairing(forged_cap, inputs, tokenizer)
 
         restarted = _FakeCalibrationRunner(
             runner_path, tokenizer, fail_on_call=True

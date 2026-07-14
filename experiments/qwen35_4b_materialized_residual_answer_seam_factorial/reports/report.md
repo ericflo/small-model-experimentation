@@ -90,7 +90,7 @@ materialized residuals help.
 Before calibration: finish the model-free authentication audit, obtain an
 independent PASS over the exact final pushed hashes, and only then publish the
 calibration implementation lock after both required workflows are green. The
-third implementation review remained HOLD; no live call is authorized.
+fourth implementation review remained HOLD; no live call is authorized.
 
 ## Artifact Manifest
 

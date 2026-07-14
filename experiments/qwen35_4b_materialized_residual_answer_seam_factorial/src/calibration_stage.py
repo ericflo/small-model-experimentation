@@ -486,6 +486,36 @@ def _trim_model_eos(token_ids: Sequence[int], eos_id: int) -> list[int]:
     return values[: values.index(eos_id)] if eos_id in values else values
 
 
+def _authenticate_finish_reason(
+    *,
+    reason: Any,
+    stop_reason: Any,
+    sampled_ids: Sequence[int],
+    cap: int,
+    eos_id: int,
+    label: str,
+) -> None:
+    sampled_tokens = len(sampled_ids)
+    if (
+        reason not in {"stop", "length"}
+        or not 0 <= sampled_tokens <= cap
+        or (reason == "length" and sampled_tokens != cap)
+        or (
+            reason == "length"
+            and (stop_reason is not None or eos_id in sampled_ids)
+        )
+        or (
+            reason == "stop"
+            and (
+                stop_reason != eos_id
+                or not sampled_ids
+                or sampled_ids[-1] != eos_id
+            )
+        )
+    ):
+        raise RuntimeError(f"{label} finish reason differs from registered cap")
+
+
 def _expected_prompt(
     *,
     tokenizer: Any,
@@ -525,13 +555,26 @@ def _require_fields(value: Mapping[str, Any], expected: Mapping[str, Any], label
 
 
 def _authenticate_source_output(
-    *, output: Mapping[str, Any], tokenizer: Any, prompt_ids: Sequence[int], eos_id: int
+    *,
+    output: Mapping[str, Any],
+    tokenizer: Any,
+    prompt_ids: Sequence[int],
+    eos_id: int,
+    thinking_budget: int,
 ) -> None:
     sampled = _ids(output.get("stage1_token_ids"), label="source stage one")
     without_eos = _trim_model_eos(sampled, eos_id)
     close_id = int(tokenizer.encode("</think>", add_special_tokens=False)[0])
     close_index = without_eos.index(close_id) if close_id in without_eos else None
     retained = without_eos[:close_index] if close_index is not None else without_eos
+    _authenticate_finish_reason(
+        reason=output.get("finish_reason"),
+        stop_reason=output.get("stop_reason"),
+        sampled_ids=sampled,
+        cap=thinking_budget,
+        eos_id=eos_id,
+        label="shared thought",
+    )
     _require_fields(
         output,
         {
@@ -575,6 +618,7 @@ def _authenticate_arm_output(
     prefix_ids: Sequence[int],
     close_ids: Sequence[int],
     eos_id: int,
+    answer_cap: int,
 ) -> None:
     thinking = arm.startswith("think512_")
     if thinking:
@@ -584,6 +628,14 @@ def _authenticate_arm_output(
         )
         stage2 = _ids(output.get("stage2_token_ids"), label=f"{arm} stage two")
         stage2_trimmed = _trim_model_eos(stage2, eos_id)
+        _authenticate_finish_reason(
+            reason=output.get("finish_reason"),
+            stop_reason=output.get("stop_reason"),
+            sampled_ids=stage2,
+            cap=answer_cap,
+            eos_id=eos_id,
+            label=f"{arm} answer",
+        )
         final_ids = retained + list(close_ids) + list(prefix_ids) + stage2_trimmed
         _require_fields(
             output,
@@ -630,6 +682,14 @@ def _authenticate_arm_output(
         return
     stage1 = _ids(output.get("stage1_token_ids"), label=f"{arm} stage one")
     stage1_trimmed = _trim_model_eos(stage1, eos_id)
+    _authenticate_finish_reason(
+        reason=output.get("finish_reason"),
+        stop_reason=output.get("stop_reason"),
+        sampled_ids=stage1,
+        cap=answer_cap,
+        eos_id=eos_id,
+        label=f"{arm} answer",
+    )
     final_ids = list(prefix_ids) + stage1_trimmed
     _require_fields(
         output,
@@ -736,6 +796,22 @@ def authenticate_full_generation_bundle(
                 output.get("stage2_token_ids"), label="full-generation stage two"
             )
             stage2_trimmed = _trim_model_eos(stage2, eos_id)
+            _authenticate_finish_reason(
+                reason=output.get("stage1_finish_reason"),
+                stop_reason=output.get("stage1_stop_reason"),
+                sampled_ids=stage1,
+                cap=int(sampling.thinking_budget),
+                eos_id=eos_id,
+                label="full-generation thought",
+            )
+            _authenticate_finish_reason(
+                reason=output.get("finish_reason"),
+                stop_reason=output.get("stop_reason"),
+                sampled_ids=stage2,
+                cap=sampling.answer_max_tokens,
+                eos_id=eos_id,
+                label="full-generation answer",
+            )
             final_ids = retained + list(close_ids) + prefix_ids + stage2_trimmed
             parent_seed = _stable_seed(
                 sampling.run_seed, record["id"], -1, "thought"
@@ -790,6 +866,7 @@ def authenticate_full_generation_bundle(
                 prefix_ids=prefix_ids,
                 close_ids=close_ids,
                 eos_id=eos_id,
+                answer_cap=sampling.max_tokens,
             )
             _require_fields(
                 output,
@@ -876,6 +953,7 @@ def _authenticate_factorial_pairing(
             tokenizer=tokenizer,
             prompt_ids=prompt_ids,
             eos_id=eos_id,
+            thinking_budget=int(plan["calibration_thoughts"].thinking_budget),
         )
         expected_thought_seed = _stable_seed(
             plan["calibration_thoughts"].run_seed,
@@ -910,6 +988,9 @@ def _authenticate_factorial_pairing(
                 prefix_ids=arm_prefix,
                 close_ids=close_ids,
                 eos_id=eos_id,
+                answer_cap=plan[arm].answer_max_tokens
+                if thinking
+                else plan[arm].max_tokens,
             )
             expected_answer_seed = _stable_seed(
                 plan[arm].run_seed,

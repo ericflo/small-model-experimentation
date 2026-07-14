@@ -106,3 +106,20 @@ now recomputes the same stable seeds. Regressions reject prompt, seed, text, and
 cost forgeries, including a rehashed transport chain that generic transaction
 authentication alone accepts. This remediation still requires a new exact-hash
 review; the HOLD remains.
+
+## Fourth review at `c7bea55d`
+
+Both third-review blockers and both green workflows passed independent audit,
+but the reviewer reproduced one last gate-relevant termination gap. Coherent
+bundles could exceed the registered 512/24-token caps, and a short stopped
+answer could be relabeled `length`; `finish_reason == "length"` directly enters
+cap-contact scoring. The exact verdict remained `HOLD_RELEASE_LIVE_CALLS`.
+
+Current remediation binds every stage to its registered cap. A `length` finish
+requires exactly the cap and no stop reason/EOS; a `stop` finish requires the
+registered model-EOS stop reason and terminal model-EOS token. Values over cap
+always fail. Changing `length` to `stop` at exactly the cap cannot change cap
+contact because sampled-token count already triggers it. Regression cases now
+cover 513/512 thought tokens, 25/24 thinking-answer tokens, 25/24 no-think
+tokens, and short `length` rewrites across calibration and mechanics. A fifth
+exact-hash review is required; the HOLD remains.

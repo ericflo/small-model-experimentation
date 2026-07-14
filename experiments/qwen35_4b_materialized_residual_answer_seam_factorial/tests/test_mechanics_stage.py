@@ -140,10 +140,12 @@ class FakeRunner:
                 enable_thinking=True,
             )
             original = self.tokenizer.encode(rendered, add_special_tokens=False)
-            stage1 = self.tokenizer.encode("reason", add_special_tokens=False)
-            stage2 = self.tokenizer.encode(expected, add_special_tokens=False)
+            retained = self.tokenizer.encode("reason", add_special_tokens=False)
+            answer_ids = self.tokenizer.encode(expected, add_special_tokens=False)
+            stage1 = retained + [248044]
+            stage2 = answer_ids + [248044]
             close = [248069, 271]
-            final_ids = stage1 + close + stage2
+            final_ids = retained + close + answer_ids
             thought_seed = _stable_seed(
                 sampling.run_seed, record["id"], -1, "thought"
             )
@@ -174,26 +176,26 @@ class FakeRunner:
                             ),
                             "token_ids": final_ids,
                             "stage1_token_ids": stage1,
-                            "retained_thinking_token_ids": stage1,
+                            "retained_thinking_token_ids": retained,
                             "answer_prefix_token_ids": [],
                             "injected_token_ids": close,
                             "stage2_token_ids": stage2,
-                            "n_answer_tokens": len(stage2),
-                            "n_thinking_tokens": len(stage1),
+                            "n_answer_tokens": len(answer_ids),
+                            "n_thinking_tokens": len(retained),
                             "n_sampled_tokens": len(stage1) + len(stage2),
                             "n_injected_tokens": len(close),
                             "n_completion_tokens": len(final_ids),
-                            "n_terminal_tokens_trimmed": 0,
+                            "n_terminal_tokens_trimmed": 2,
                             "n_stage1_prompt_tokens": len(original),
                             "n_stage2_prompt_tokens": len(original)
-                            + len(stage1)
+                            + len(retained)
                             + len(close),
                             "thinking_closed": True,
                             "forced_close": True,
                             "finish_reason": "stop",
-                            "stop_reason": None,
+                            "stop_reason": 248044,
                             "stage1_finish_reason": "stop",
-                            "stage1_stop_reason": None,
+                            "stage1_stop_reason": 248044,
                             "truncated": False,
                         }
                     ],
@@ -332,6 +334,29 @@ class MechanicsStageTests(unittest.TestCase):
                             "n_sampled_tokens",
                             bundle["rows"][0]["outputs"][0]["n_sampled_tokens"]
                             + 1,
+                        ),
+                    ),
+                    (
+                        "finish",
+                        lambda bundle: (
+                            bundle["rows"][0]["outputs"][0].__setitem__(
+                                "finish_reason", "length"
+                            ),
+                            bundle["rows"][0]["outputs"][0].__setitem__(
+                                "truncated", True
+                            ),
+                        ),
+                    ),
+                    (
+                        "thought_cap",
+                        lambda bundle: bundle["rows"][0]["outputs"][0].__setitem__(
+                            "stage1_token_ids", [1100] * 513
+                        ),
+                    ),
+                    (
+                        "answer_cap",
+                        lambda bundle: bundle["rows"][0]["outputs"][0].__setitem__(
+                            "stage2_token_ids", [1100] * 25
                         ),
                     ),
                 ):
