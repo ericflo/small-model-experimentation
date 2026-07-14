@@ -41,6 +41,10 @@ Completed reruns authenticate tracked outputs without reading that key.
 - The calibration review report is now pre-scaffolded as a tracked,
   non-authorizing HOLD artifact because the lock's reviewed critical inventory
   requires that path to exist in the implementation commit.
+- Fresh three-round review of exact pushed-green commit `50fd804b` returned
+  `PASS_IMPLEMENTATION`: 145/145 protected-safe tests and 48/48 predecessor
+  mutation probes passed with zero model/GPU/protected access. Machine review
+  receipts and both release locks remain to be published separately.
 
 ## Controls
 

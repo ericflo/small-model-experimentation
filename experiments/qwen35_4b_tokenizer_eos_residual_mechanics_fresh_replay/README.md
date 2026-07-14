@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Residual Mechanics Fresh Replay
 
-**Status:** in-progress · since 2026-07-14 · `CONSTRUCTION_PASS`; repaired implementation candidate 147/147, fresh adversarial review, locks, and all model calls remain
+**Status:** in-progress · since 2026-07-14 · `CONSTRUCTION_PASS`; repaired implementation 147/147 and exact review PASS; review receipts, locks, and all model calls remain
 
 This fresh-identity successor preserves the parent's qualified tokenizer-EOS
 interface and frozen residual-mechanics science while separating initial
@@ -139,6 +139,13 @@ an implementation-review report that had never been scaffolded in the
 successor. A tracked `HOLD_IMPLEMENTATION` placeholder and regression test now
 ensure the exact reviewed commit contains that required path; the placeholder
 cannot authorize a lock.
+
+Fresh three-round independent review of exact pushed-green commit `50fd804b`
+returned `PASS_IMPLEMENTATION`: 145/145 protected-safe tests passed, the full
+48/48 predecessor mutation matrix failed closed, both static launchers rebuilt
+byte-identically, and model/GPU/protected access remained zero. Canonical
+calibration and mechanics machine receipts must still be committed, pushed,
+and green before either model-free lock can be published.
 
 ## Interpretation
 
