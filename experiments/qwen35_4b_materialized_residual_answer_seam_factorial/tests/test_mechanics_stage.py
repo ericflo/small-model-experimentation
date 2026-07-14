@@ -348,6 +348,18 @@ class MechanicsStageTests(unittest.TestCase):
                         ),
                     ),
                     (
+                        "thought_internal_stop",
+                        lambda bundle: bundle["rows"][0]["outputs"][0].__setitem__(
+                            "stage1_token_ids", [248044, 1100, 248044]
+                        ),
+                    ),
+                    (
+                        "answer_internal_stop",
+                        lambda bundle: bundle["rows"][0]["outputs"][0].__setitem__(
+                            "stage2_token_ids", [248044, 1100, 248044]
+                        ),
+                    ),
+                    (
                         "thought_cap",
                         lambda bundle: bundle["rows"][0]["outputs"][0].__setitem__(
                             "stage1_token_ids", [1100] * 513

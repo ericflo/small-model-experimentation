@@ -123,3 +123,20 @@ contact because sampled-token count already triggers it. Regression cases now
 cover 513/512 thought tokens, 25/24 thinking-answer tokens, 25/24 no-think
 tokens, and short `length` rewrites across calibration and mechanics. A fifth
 exact-hash review is required; the HOLD remains.
+
+## Fifth review at `f542730b`
+
+The exact pushed commit and both green workflows passed the review preconditions.
+The reviewer then constructed a stopped sample whose token sequence contained
+the registered model terminator internally and again at the final position.
+It passed because authentication required a terminal terminator but did not
+forbid an earlier one. The pinned runner registers this token as an explicit
+vLLM stop token, so sampling must halt at its first occurrence; tokens after it
+are impossible. Accepting the forged sequence could preserve decoded text while
+inflating sampled-token and matched-compute accounting. The exact verdict
+remained `HOLD_RELEASE_LIVE_CALLS`.
+
+Current remediation requires the registered terminator to occur exactly once,
+as the final sampled token, on every `stop` path. Calibration and mechanics
+regressions now reject an internal-terminator-plus-final-terminator trace. A
+sixth exact-hash review is required; the HOLD remains.

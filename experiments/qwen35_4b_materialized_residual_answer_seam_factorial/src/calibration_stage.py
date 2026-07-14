@@ -510,6 +510,7 @@ def _authenticate_finish_reason(
                 stop_reason != eos_id
                 or not sampled_ids
                 or sampled_ids[-1] != eos_id
+                or eos_id in sampled_ids[:-1]
             )
         )
     ):

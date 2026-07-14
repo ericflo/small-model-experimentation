@@ -481,6 +481,20 @@ class CalibrationStageTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "registered cap"):
             _authenticate_factorial_pairing(forged_finish, inputs, tokenizer)
 
+        for label, arm, field in (
+            ("thought", "calibration_thoughts", "stage1_token_ids"),
+            ("thinking answer", "think512_freeform", "stage2_token_ids"),
+            ("no-think answer", "no_think_freeform", "stage1_token_ids"),
+        ):
+            with self.subTest(internal_stop=label):
+                forged_internal_stop = json.loads(json.dumps(bundles))
+                output = forged_internal_stop[arm]["rows"][0]["outputs"][0]
+                output[field] = [248044, 1100, 248044]
+                with self.assertRaisesRegex(RuntimeError, "registered cap"):
+                    _authenticate_factorial_pairing(
+                        forged_internal_stop, inputs, tokenizer
+                    )
+
         for label, arm, field, size in (
             ("thought", "calibration_thoughts", "stage1_token_ids", 513),
             ("thinking answer", "think512_freeform", "stage2_token_ids", 25),
