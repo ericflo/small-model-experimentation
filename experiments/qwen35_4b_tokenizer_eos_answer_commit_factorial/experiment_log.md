@@ -84,6 +84,21 @@
   extra keys, logprob injection, row-order-independent semantic IDs, and pool
   exhaustion. The model-free suite passes 124/124; mechanics calls and all
   protected reads remain zero pending a fresh exact-commit rereview.
+- The round-two exact-SHA review of pushed-green commit `3d2f0512` confirmed
+  those seven repairs but returned `HOLD_IMPLEMENTATION` after 10/10 hostile
+  durable-preflight mutations replayed successfully and Boolean schema values
+  aliased integer version `1` at visible authorization and generic transaction
+  boundaries. It ran 124/124 tests and made zero protected reads, model
+  requests, sampled-output reads, or GPU calls.
+- Replaced partial preflight replay checks with a complete exact-typed expected
+  value derived from every live runner/runtime field plus authenticated
+  recorded CI, and made visible reanalysis exact-typed. The shared transaction
+  module is calibration-locked, so an additive mechanics-only transaction
+  layer now exact-authenticates STARTED, generated bundle, GENERATED, COMPLETE,
+  chain, and registration receipts without changing the calibration anchor.
+  Ten preflight mutations and durable Boolean/integer aliases are explicit
+  regression tests. The model-free suite passes 130/130; mechanics calls and
+  all protected reads remain zero pending a third exact-commit rereview.
 
 ## Scaffold
 

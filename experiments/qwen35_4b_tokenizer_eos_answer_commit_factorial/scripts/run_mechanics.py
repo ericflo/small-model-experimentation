@@ -31,6 +31,7 @@ _BOOTSTRAP_IMPORT_FILES = (
     str(EXP_REL / "src/mechanics_protocol.py"),
     str(EXP_REL / "src/mechanics_runtime.py"),
     str(EXP_REL / "src/mechanics_stage.py"),
+    str(EXP_REL / "src/mechanics_transactions.py"),
     str(EXP_REL / "src/plans.py"),
     str(EXP_REL / "src/protocol.py"),
     str(EXP_REL / "src/stats.py"),
@@ -473,7 +474,12 @@ from mechanics_stage import (  # noqa: E402
     run_transport_transaction,
     score_hidden,
 )
-from transactions import inventory_state, read_canonical, write_exclusive_durable  # noqa: E402
+from mechanics_transactions import (  # noqa: E402
+    exact_json_equal,
+    inventory_state,
+    read_canonical,
+    write_exclusive_durable,
+)
 from vllm_runner import VLLMRunner  # noqa: E402
 
 
@@ -502,7 +508,7 @@ def mechanics_process_lock() -> Iterator[None]:
 
 def _write_or_verify(path: Path, value: dict[str, Any]) -> dict[str, Any]:
     if path.exists() or path.is_symlink():
-        if read_canonical(path) != value:
+        if not exact_json_equal(read_canonical(path), value):
             raise RuntimeError(f"recorded mechanics artifact changed: {path.name}")
     else:
         write_exclusive_durable(path, value)

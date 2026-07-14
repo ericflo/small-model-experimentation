@@ -1,6 +1,6 @@
 # Qwen3.5-4B Tokenizer-EOS Answer Commit Factorial
 
-**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; first conditional-mechanics implementation review held and repaired, fresh rereview pending
+**Status:** in-progress · since 2026-07-14 · `PASS_DESIGN` + calibration `PASS_IMPLEMENTATION`; fresh calibration: tokenizer-EOS-only interface qualified; two conditional-mechanics implementation reviews held and repaired, fresh rereview pending
 
 This fresh successor tests whether the prior strict answer-seam failure was
 caused by waiting past Qwen3.5's tokenizer chat-end token. It registers the
@@ -240,6 +240,23 @@ likelihood diagnostics, a durable `DIRECT_RESOURCE_MATCH_POOL_EXHAUSTED`
 receipt, and explicit overshoot/row-ID inventories. The model-free suite now
 passes 124/124. These repairs do not authorize mechanics; a fresh pushed-green
 exact-commit adversarial review and second lock are still required.
+
+The round-two review of pushed-green commit
+`3d2f051203c56456fad716e20950b55d5717afd5` verified all seven earlier repairs
+and held on three new exact-type replay failures: the recorded mechanics
+preflight authenticated only a runtime subset, visible authorization inherited
+Python's Boolean/integer equality, and the calibration-era generic transaction
+envelopes had the same alias at STARTED and bundle schema boundaries. The
+prospective repair now reconstructs the entire clean preflight from the live
+runner and exact-compares every JSON-domain field after authenticating recorded
+CI. Visible authorization also uses recursive exact-type comparison. Because
+the generic transaction source is an immutable calibration-critical file,
+mechanics routes through a new additive exact-typed transaction layer rather
+than altering the calibration anchor. Durable hostile tests cover all ten
+preflight mutations, visible `true` versus `1`, STARTED/bundle aliases,
+receipt aliases, and registered row-count aliases. The full model-free suite
+passes 130/130; mechanics calls and protected reads remain zero. A third fresh
+pushed-green exact-commit review is still required.
 
 ## Interpretation
 

@@ -42,6 +42,7 @@ from mechanics_stage import (
     mechanics_sampling_plan,
     selected_interface,
 )
+from mechanics_transactions import exact_json_equal
 from transactions import (
     MODEL_ID,
     MODEL_REVISION,
@@ -74,6 +75,7 @@ MECHANICS_RUNTIME_FILES = (
     PREFIX + "src/mechanics_protocol.py",
     PREFIX + "src/mechanics_runtime.py",
     PREFIX + "src/mechanics_stage.py",
+    PREFIX + "src/mechanics_transactions.py",
     PREFIX + "src/plans.py",
     PREFIX + "src/protocol.py",
     PREFIX + "src/stats.py",
@@ -87,6 +89,7 @@ MECHANICS_CRITICAL_FILES = (
     PREFIX + "tests/test_mechanics_lock.py",
     PREFIX + "tests/test_mechanics_runtime.py",
     PREFIX + "tests/test_mechanics_stage.py",
+    PREFIX + "tests/test_mechanics_transactions.py",
     PREFIX + "tests/test_plans.py",
     PREFIX + "tests/test_stats.py",
 )
@@ -623,44 +626,52 @@ def publish_or_verify_mechanics_preflight(
             "hidden_files_read",
             "benchmark_files_read",
         }
+        runtime = loaded.get("runtime")
         if (
             not isinstance(value, dict)
             or set(value) != expected_keys
-            or value["schema_version"] != 1
-            or value["decision"] != "MECHANICS_LIVE_ENGINE_PREFLIGHT_PASS"
-            or value["model"] != MODEL_ID
-            or value["revision"] != MODEL_REVISION
-            or value["mechanics_lock_sha256"] != sha256_file(MECHANICS_LOCK)
-            or value["live_head"] != loaded["runtime"].get("git_commit")
-            or value["runtime"].get("git_dirty") is not False
-            or _validate_ci(
-                value["live_head"], value["live_head_ci"], label="mechanics live head"
-            )
-            != value["live_head_ci"]
-            or value["selected_interface"] != lock["selected_interface"]
-            or value["sampling"] != lock["sampling"]
-            or value["runner_sha256"] != sha256_file(EXP / "src/vllm_runner.py")
-            or value["engine"] != _normalized(dataclasses.asdict(runner.config))
-            or value["engine_args_sha256"]
-            != canonical_sha256(_normalized(runner.engine_args))
-            or value["resolved_cudagraph"] != _normalized(runner.resolved_cudagraph)
-            or value["resolved_logprobs_mode"] != runner.resolved_logprobs_mode
-            or value["adapter"] is not None
-            or not isinstance(value["rng_isolation"], dict)
-            or set(value["rng_isolation"])
-            != {"engine_seed", "caller_global_rng_state_restored"}
-            or type(value["rng_isolation"]["engine_seed"]) is not int
-            or value["rng_isolation"]["engine_seed"] != runner.engine_args["seed"]
-            or value["rng_isolation"]["caller_global_rng_state_restored"] is not True
-            or value["experimental_generation_requests_before_preflight"] != 0
-            or value["sampled_model_outputs_before_preflight"] != 0
-            or value["hidden_files_read"] != []
-            or value["benchmark_files_read"] != []
-            or any(
-                value["runtime"].get(field) != loaded["runtime"].get(field)
-                for field in ("python", "python_executable", "packages", "gpu")
-            )
+            or not isinstance(runtime, dict)
+            or runtime.get("git_dirty") is not True
+            or not isinstance(runtime.get("git_commit"), str)
         ):
+            raise RuntimeError("recorded mechanics preflight changed")
+        recorded_ci = _validate_ci(
+            runtime["git_commit"],
+            value["live_head_ci"],
+            label="mechanics live head",
+        )
+        verify_recorded_ci(runtime["git_commit"], recorded_ci)
+        clean_runtime = _normalized(runtime)
+        clean_runtime["git_dirty"] = False
+        expected = {
+            "schema_version": 1,
+            "decision": "MECHANICS_LIVE_ENGINE_PREFLIGHT_PASS",
+            "model": MODEL_ID,
+            "revision": MODEL_REVISION,
+            "mechanics_lock_sha256": sha256_file(MECHANICS_LOCK),
+            "live_head": runtime["git_commit"],
+            "live_head_ci": recorded_ci,
+            "selected_interface": lock["selected_interface"],
+            "sampling": lock["sampling"],
+            "runner_sha256": sha256_file(EXP / "src/vllm_runner.py"),
+            "engine": _normalized(dataclasses.asdict(runner.config)),
+            "engine_args_sha256": canonical_sha256(
+                _normalized(runner.engine_args)
+            ),
+            "resolved_cudagraph": _normalized(runner.resolved_cudagraph),
+            "resolved_logprobs_mode": runner.resolved_logprobs_mode,
+            "adapter": _normalized(runner.adapter_info),
+            "rng_isolation": {
+                "engine_seed": runner.engine_args["seed"],
+                "caller_global_rng_state_restored": True,
+            },
+            "runtime": clean_runtime,
+            "experimental_generation_requests_before_preflight": 0,
+            "sampled_model_outputs_before_preflight": 0,
+            "hidden_files_read": [],
+            "benchmark_files_read": [],
+        }
+        if not exact_json_equal(value, expected):
             raise RuntimeError("recorded mechanics preflight changed")
         return value
     value = mechanics_preflight_value(runner=runner, inputs=inputs)
@@ -679,7 +690,7 @@ def authorize_hidden_read(path: Path = VISIBLE_SELECTION) -> dict[str, Any]:
     expected_visible = analyze_visible(
         decision=decision, inputs=inputs, tokenizer=tokenizer
     )
-    if visible != expected_visible:
+    if not exact_json_equal(visible, expected_visible):
         raise RuntimeError("visible receipt differs from exact visible analysis")
     if (
         visible.get("decision") != "MECHANICS_VISIBLE_SELECTION_FROZEN"

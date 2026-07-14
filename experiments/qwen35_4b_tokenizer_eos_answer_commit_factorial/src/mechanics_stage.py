@@ -29,7 +29,7 @@ from task_data import (
     apply_pipeline,
     operation_from_record,
 )
-from transactions import (
+from mechanics_transactions import (
     artifact_paths,
     authenticate_registered_complete_chain,
     authenticate_registered_complete_prefix,
