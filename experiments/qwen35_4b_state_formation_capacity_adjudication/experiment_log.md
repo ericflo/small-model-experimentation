@@ -814,6 +814,32 @@ Only seed-7412 training-cell validation, commit, push, and workflow verification
 After both workflows pass, run Stage-A seed 7413. Evaluation, analysis, and conditional branches
 remain blocked on the complete Stage-A barrier.
 
+## 2026-07-14 — Stage-A seed-7413 LoRA joint training completes; barrier complete
+
+- Seed-7412 training commit `07547f4e` passed both required workflows before the final Stage-A cell
+  began. Source v11 remained exactly `5a8ed26d…6666`, local and remote `main` were identical, seeds
+  7411/7412 classified `COMPLETE`, seed 7413 classified `ABSENT`, and the sole GPU was idle.
+- The authorized seed-7413 attempt reached terminal `COMPLETE` without retry or recovery. Exactly
+  1,500 fixed updates ran in 9,527.480490207672 seconds. Interim scientific metric values were not
+  inspected during execution.
+- The production classifier reopens the cell as `COMPLETE` with no errors. Run SHA-256 is
+  `8bbdb3b3…8b59`, run identity `07f91939…362b`, checkpoint-metadata SHA-256
+  `25936f83…fbfd`, and checkpoint identity `d65d5bb3…e68d`.
+- Adaptation-state SHA-256 is `2ed8167f…9a65`; loop-state SHA-256 is `97d59a7f…b298`; optimizer
+  journal SHA-256 is `44f9eaa2…fc9c`; metrics SHA-256 is `6afe4d38…cd38`. Each of the four tracked
+  mirrors is byte-identical to but inode-distinct from its external counterpart.
+- All 1,500 optimizer rows report finite gradients and zero base trainable parameters. The cell binds
+  setup barrier `eb1fa85a…bc77`, seed-7413 G0/control, source v11, and the exact initialization. It
+  opened only train, no benchmark or sealed contrast. The realized-artifact suite passes 363/363.
+- All three Stage-A cells classify `COMPLETE` with no errors. Their complete training-barrier identity
+  is `31d7f6f3…6451`.
+
+## Current authorization
+
+Only final Stage-A training validation, commit, push, and workflow verification are authorized.
+After both workflows pass, evaluate the three LoRA joint checkpoints on the trigger set in frozen
+seed order, then analyze `lora_joint`. Conditional branches remain blocked on that analysis receipt.
+
 ## 2026-07-13 — source-v9 seed-7411 G0 stops before model load; cache proof repaired
 
 - Non-model setup commit `ff4a8b9b` passed both repository workflows before the exact seed-7411 LoRA

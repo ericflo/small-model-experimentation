@@ -1,0 +1,72 @@
+{
+  "canonical_paths": [
+    "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_joint_seed7413",
+    "experiments/qwen35_4b_state_formation_capacity_adjudication/runs/training/lora_joint_seed7413"
+  ],
+  "cell": {
+    "capacity": "lora",
+    "objective": "joint",
+    "seed": 7413,
+    "slug": "lora_joint_seed7413",
+    "stage": "A"
+  },
+  "events": [
+    {
+      "authorization": {
+        "attempt_identity_sha256": "56323da9791d43b3a1b508b4b09e11c7a4b63a73c350f834eedfbf646abf7557",
+        "attempt_index": 1,
+        "attempt_kind": "training",
+        "canonical_paths": [
+          "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_joint_seed7413",
+          "experiments/qwen35_4b_state_formation_capacity_adjudication/runs/training/lora_joint_seed7413"
+        ],
+        "cell": {
+          "capacity": "lora",
+          "objective": "joint",
+          "seed": 7413,
+          "slug": "lora_joint_seed7413",
+          "stage": "A"
+        },
+        "context": {
+          "branch_authorization_lineage": null,
+          "prior_training_barrier_identity_sha256s": [],
+          "setup_barrier_identity_sha256": "eb1fa85a8cee3ee08aa47df8d23d0d97fe25840cb8a5619278c5c8c5103dbc77",
+          "training_launch_peer_vector": [
+            {
+              "cell": "lora_joint_seed7411",
+              "state": "COMPLETE"
+            },
+            {
+              "cell": "lora_joint_seed7412",
+              "state": "COMPLETE"
+            }
+          ],
+          "training_launch_preflight_identity_sha256": "1634bdd10d64b034a2ec8068391c5a6319421175efd515fb7813b0fc32c5e206"
+        },
+        "replay_archive": null,
+        "schema_version": 1,
+        "status": "ATTEMPT_AUTHORIZED"
+      },
+      "state": "COMPLETE",
+      "terminal_run_lineage": {
+        "path": "large_artifacts/qwen35_4b_state_formation_capacity_adjudication/lora_joint_seed7413/run.json",
+        "receipt_identity_sha256": "07f91939e013a4ae7b017b1617b2119da722631e6fb104b5992abe8c1f03362b",
+        "sha256": "8bbdb3b32f83ca6a4c7dba088522cf8487343208020c6f13af8f2f7471d08b59"
+      }
+    }
+  ],
+  "header": {
+    "backend": "transformers",
+    "config_sha256": "eeb4e828526f750dce1258bcc91d03114c80688d300112e03d18c9d911489393",
+    "design_receipt_identity_sha256": "d943b909250c2ebd377b8094bb55324a5d5ccf555c7559736526f013d248ac52",
+    "design_receipt_sha256": "490035fe77519739e18eb3494ad693544c423a62d4222cf4ea0b4e3d5684d45e",
+    "experiment_id": "qwen35_4b_state_formation_capacity_adjudication",
+    "model_id": "Qwen/Qwen3.5-4B",
+    "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "requirements_training_lock_sha256": "05546fe977583116d6169ea0dfa7b27e1184dd4a2b61d556dfb3f889d5b2b7b1",
+    "source_contract_sha256": "5a8ed26ddb9446c728191ca8e7849ae44cff92a700e24b237dac522cf4286666"
+  },
+  "receipt_identity_sha256": "812998d146a17988e403e6c4890ec721d439eaad8a484aa48829ca789246ca69",
+  "schema_version": 1,
+  "status": "TRAINING_ATTEMPT_JOURNAL"
+}

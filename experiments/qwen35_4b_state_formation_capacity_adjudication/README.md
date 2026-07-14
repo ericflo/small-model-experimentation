@@ -1,6 +1,6 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v11 PREPARED-output repair reviewed at 363/363; source-v10 setup invalidated before any result training; Stage-A seeds 7411 and 7412 LoRA joint training complete, with seed 7412 awaiting publication before seed 7413
+**Status:** in-progress · since 2026-07-13 · frozen design unchanged; source-v11 PREPARED-output repair reviewed at 363/363; source-v10 setup invalidated before any result training; all three Stage-A LoRA joint training cells complete, with the training barrier awaiting publication before trigger evaluation
 
 ## Current status
 
@@ -65,7 +65,16 @@ state SHA-256 `cba9fb80…8c74`, and loop-state SHA-256 `03f4b811…8076`. All f
 byte-identical and inode-distinct from their external artifacts; the attempt journal is terminal
 `COMPLETE`; all 1,500 optimizer rows are finite. The cell opened only train, no benchmark or sealed
 contrast, and authorizes no evaluation until seed 7413 completes the Stage-A training barrier.
-Publish this training checkpoint and require both workflows green before seed 7413.
+Publish this training checkpoint and require both workflows green before seed 7413. That checkpoint
+is green at `07547f4e`. Stage-A seed-7413 LoRA joint training then completed exactly 1,500 fixed
+updates in 9,527.480 seconds. The canonical classifier returns `COMPLETE` with no errors: run
+SHA-256 `8bbdb3b3…8b59`, run identity `07f91939…362b`, checkpoint identity `d65d5bb3…e68d`,
+adaptation state SHA-256 `2ed8167f…9a65`, and loop-state SHA-256 `97d59a7f…b298`. All four tracked
+mirrors are byte-identical and inode-distinct from their external artifacts; the attempt journal is
+terminal `COMPLETE`; all 1,500 optimizer rows are finite. The cell opened only train, no benchmark
+or sealed contrast. All three cells reopen `COMPLETE`, producing the exact Stage-A training barrier
+identity `31d7f6f3…6451`. Publish this checkpoint and require both workflows green before the three
+preregistered trigger evaluations.
 
 Historically, the integrated source-v10 review was `GO` for reviewed implementation
 `a5a494b7…6f1c4a` and full source contract `979a9012…f394b7`; the 360/360 suite and exact machine gate
