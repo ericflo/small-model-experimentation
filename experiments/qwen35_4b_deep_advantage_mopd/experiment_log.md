@@ -648,3 +648,19 @@
   initialization, so it is dominated on both strata.
 - Soup50 started next with external journal hash
   `b55a6675fea796006dc99e44bf7b24f42b7344f6ceae11d163c568d260fd544d`.
+
+## 2026-07-14 — block-0 soup50 traces the same Pareto trade
+
+- Soup50 completed sealed generation and strict validation. `GENERATED.json`
+  and `COMPLETE.json` hash to
+  `da8d590fadceff3aa4403da29d1b60aca3b99427133826e937cafe072ac0230d`
+  and `8c2e437777096f6e024a6a65ac08f6a0e661e3abc853803fba9fa91412fb4e02`;
+  the score hashes to
+  `9226553f6189d59fbac461c8eb4faf8e6299bc22c941210ef2b9195fb2effafa`.
+- Registered means are `0.562536` deep and `0.812542` quick, `−0.017532` and
+  `+0.002514` versus the deep source, using 4,494,796 sampled tokens. Relative
+  to the immutable 40/60 initialization, soup50 is `−0.009208` deep and
+  `+0.001415` quick. Every MOPD seed is higher on deep and lower on quick, so
+  neither checkpoint class dominates the other.
+- Soup75 started next with external journal hash
+  `4e2c0077e11ab05405721899382e64609824af62146372d229ce4c1ede874263`.

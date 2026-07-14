@@ -252,7 +252,11 @@ next. Soup25 then scored `0.543311` deep and `0.801212` quick, `−0.036757`
 and `−0.008817` versus the deep source, using 4,693,690 sampled tokens. It is
 also dominated by the 40/60 initialization by `−0.028434` deep and `−0.009916`
 quick, so this interpolation does not explain the treatment's position. Soup50
-is running next.
+then scored `0.562536` deep and `0.812542` quick, `−0.017532` and `+0.002514`
+versus the deep source, using 4,494,796 sampled tokens. Relative to the 40/60
+initialization it trades `−0.009208` deep for only `+0.001415` quick. Every MOPD
+seed is above soup50 on deep and below it on quick, again describing a Pareto
+trade rather than capability installation. Soup75 is running next.
 
 ## NF4/BF16 Interpretation Diagnostic
 

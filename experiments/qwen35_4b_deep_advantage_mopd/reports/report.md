@@ -189,7 +189,11 @@ Soup25 then scores `0.543311` deep and `0.801212` quick, `−0.036757` and
 dominated by the 40/60 initialization by `−0.028434` deep and `−0.009916`
 quick. This first interpolation control therefore does not explain the
 treatment checkpoints; soup50, soup75, and the remaining controls are still
-required.
+required. Soup50 then scores `0.562536` deep and `0.812542` quick, `−0.017532`
+and `+0.002514` versus the deep source, using 4,494,796 sampled tokens. It gives
+up `0.009208` deep for only `0.001415` quick versus the immutable 40/60 soup.
+All three treatments lie on the opposite side of that trade—higher deep and
+lower quick—so neither checkpoint class dominates the other.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply
