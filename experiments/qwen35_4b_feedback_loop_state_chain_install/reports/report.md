@@ -2,7 +2,7 @@
 
 ## Summary
 
-Model-free construction is frozen for the two-tie install: a 160-row episode-protocol curriculum (act→observe→revise feedback loops and narrated hidden-state chains on six invented, legality-bounded formalisms) to be trained as a fresh rank-32 adapter from the hygiene_explore parent against an exact zero-delta exposure-matched replay control, gated on a fresh 40-row episode holdout plus the program's first pooled_k3 three-screen retention adjudication, with a conditional medium-tier event at sealed seed 78,151 where the recorded goal gate needs exactly menders > 0 and rites > 0 with no new losses. The adversarial review confirmed and we fixed one MAJOR pre-freeze (unbounded op grammars versus the finite uniqueness enumeration); nothing has trained.
+The two-tie install closed NOT_PROMOTED with a split mechanism reading. The state-chain half installed: 11/20 on fresh holdout instances, strictly above both the parent (7) and the strong replay control (10) — narrated hidden-state tracking is teachable at an 80-row dose. The feedback-loop half failed completely: 0/20 on fresh instances of the very formalisms it trained 80 rows on, below both untrained controls (1/20) — repair-with-feedback is the third failed pedagogy at the menders-shaped skill. Promotion failed on the axis-total tie against replay (11–11), the u_feedloop loss, and a pooled retention deficit of 5.67 against the replay control (0.67 outside the calibrated ±5 band; the parent band passed at −3.0). The pooled_k3 instrument's first live use measured delta SD 4.08 versus the calibration's 4.27 — the new protocol performed as designed. Sealed seed 78,151 was never opened and is permanently sealed.
 
 ## Research Program Fit
 
@@ -14,7 +14,7 @@ See the preregistration: frozen corpus with generator-verified uniqueness/state-
 
 ## Results
 
-No model event has run.
+`runs/local/seed88026_promotion.json`: axis totals 8 / 11 / 11 (parent / replay / candidate; tie fails), per-kind u_feedloop 1 / 1 / 0 and u_statechain 7 / 10 / 11 (statechain strict win, feedloop loss), pooled retention 62.33 / 65.00 / 59.33 with caps 10.67 / 11.00 / 13.00 and parsed 93.33 / 93.33 / 90.67; replay gained +2.67 retention over the parent, repeating the replay-compounding law.
 
 ## Controls
 
@@ -26,7 +26,7 @@ Executable truth grades everything local; the benchmark stage consumes only gate
 
 ## Next Stage
 
-Freeze-commit and CI, then train-control → compute review → train-candidate → merge → the pooled_k3 local gate → conditional medium event.
+Closed. The natural successor is a statechain-only dose (drop the dead feedloop rows) from this same parent under the same calibrated gates; menders remains open with no surviving small-dose pedagogy.
 
 ## Artifact Manifest
 

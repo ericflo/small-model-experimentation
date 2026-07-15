@@ -1,0 +1,245 @@
+{
+  "adjudication_protocol": "pooled_k3",
+  "aggregate_seed": 78151,
+  "aggregate_seed_open": false,
+  "axis_kind_wins": 1,
+  "axis_kinds": [
+    "u_feedloop",
+    "u_statechain"
+  ],
+  "axis_rows": 40,
+  "backend": "vllm_merged_composite",
+  "benchmark_data_read": false,
+  "candidates": [
+    "feedloop_state"
+  ],
+  "checks": {
+    "axis_kind_wins_both_of_2": false,
+    "axis_total_strictly_beats_parent": true,
+    "axis_total_strictly_beats_replay": false,
+    "retention_pooled_cap_contacts_within_3_of_parent": true,
+    "retention_pooled_cap_contacts_within_3_of_replay": true,
+    "retention_pooled_correct_within_5_of_parent": true,
+    "retention_pooled_correct_within_5_of_replay": false,
+    "retention_pooled_parsed_within_3_of_parent": true,
+    "retention_pooled_parsed_within_3_of_replay": true
+  },
+  "controls": [
+    "replay_ctl",
+    "hygiene_explore_parent"
+  ],
+  "descriptive_noise": {
+    "delta_sd_pooled": 4.0824829046386295,
+    "deltas_vs_parent": {
+      "feedloop_state": {
+        "by_screen": [
+          -4,
+          0,
+          -5
+        ],
+        "pooled_mean": -3.0,
+        "sd": 2.6457513110645907,
+        "vs": "hygiene_explore_parent"
+      },
+      "replay_ctl": {
+        "by_screen": [
+          -3,
+          7,
+          4
+        ],
+        "pooled_mean": 2.6666666666666665,
+        "sd": 5.131601439446884,
+        "vs": "hygiene_explore_parent"
+      }
+    },
+    "reported_not_gated": true,
+    "screen_sd_pooled_levels": 2.748737083745107
+  },
+  "design_receipt_sha256": "e42614cb0fc23a2d9f21fa894454af078a4167aaa55f63673f6d86181eadb29c",
+  "eligible": [],
+  "experiment_id": "qwen35_4b_feedback_loop_state_chain_install",
+  "kind_wins": {
+    "u_feedloop": false,
+    "u_statechain": true
+  },
+  "local_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_feedback_loop_state_chain_install/runs/local/seed88026.json",
+  "local_receipt_sha256": "2fd06bbdc9b9bc170fb54bbb2a65dcb3531162215d7504eda05f68b1a4b3076f",
+  "no_absolute_per_kind_floors": true,
+  "promoted": null,
+  "retention_rows_per_screen": 104,
+  "retention_screens": 3,
+  "schema_version": 1,
+  "screen_seeds": [
+    88027,
+    88028,
+    88030
+  ],
+  "seed": 88026,
+  "summaries": {
+    "feedloop_state": {
+      "adapter": "feedloop_state",
+      "axis": {
+        "cap_contacts": 3,
+        "correct": 11,
+        "parsed": 37,
+        "per_kind_correct": {
+          "u_feedloop": 0,
+          "u_statechain": 11
+        },
+        "rows": 40
+      },
+      "retention": {
+        "correct_by_screen": [
+          59,
+          61,
+          58
+        ],
+        "pooled_means": {
+          "cap_contacts": 13.0,
+          "correct": 59.333333333333336,
+          "parsed": 90.66666666666667,
+          "route_abstentions": 0.0
+        },
+        "screens": {
+          "88027": {
+            "cap_contacts": 17,
+            "correct": 59,
+            "parsed": 87,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88028": {
+            "cap_contacts": 11,
+            "correct": 61,
+            "parsed": 92,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88030": {
+            "cap_contacts": 11,
+            "correct": 58,
+            "parsed": 93,
+            "route_abstentions": 0,
+            "rows": 104
+          }
+        },
+        "sums": {
+          "cap_contacts": 39,
+          "correct": 178,
+          "parsed": 272,
+          "route_abstentions": 0
+        }
+      }
+    },
+    "hygiene_explore_parent": {
+      "adapter": "hygiene_explore_parent",
+      "axis": {
+        "cap_contacts": 3,
+        "correct": 8,
+        "parsed": 37,
+        "per_kind_correct": {
+          "u_feedloop": 1,
+          "u_statechain": 7
+        },
+        "rows": 40
+      },
+      "retention": {
+        "correct_by_screen": [
+          63,
+          61,
+          63
+        ],
+        "pooled_means": {
+          "cap_contacts": 10.666666666666666,
+          "correct": 62.333333333333336,
+          "parsed": 93.33333333333333,
+          "route_abstentions": 0.0
+        },
+        "screens": {
+          "88027": {
+            "cap_contacts": 10,
+            "correct": 63,
+            "parsed": 94,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88028": {
+            "cap_contacts": 11,
+            "correct": 61,
+            "parsed": 93,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88030": {
+            "cap_contacts": 11,
+            "correct": 63,
+            "parsed": 93,
+            "route_abstentions": 0,
+            "rows": 104
+          }
+        },
+        "sums": {
+          "cap_contacts": 32,
+          "correct": 187,
+          "parsed": 280,
+          "route_abstentions": 0
+        }
+      }
+    },
+    "replay_ctl": {
+      "adapter": "replay_ctl",
+      "axis": {
+        "cap_contacts": 4,
+        "correct": 11,
+        "parsed": 36,
+        "per_kind_correct": {
+          "u_feedloop": 1,
+          "u_statechain": 10
+        },
+        "rows": 40
+      },
+      "retention": {
+        "correct_by_screen": [
+          60,
+          68,
+          67
+        ],
+        "pooled_means": {
+          "cap_contacts": 11.0,
+          "correct": 65.0,
+          "parsed": 93.33333333333333,
+          "route_abstentions": 0.0
+        },
+        "screens": {
+          "88027": {
+            "cap_contacts": 14,
+            "correct": 60,
+            "parsed": 91,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88028": {
+            "cap_contacts": 10,
+            "correct": 68,
+            "parsed": 94,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88030": {
+            "cap_contacts": 9,
+            "correct": 67,
+            "parsed": 95,
+            "route_abstentions": 0,
+            "rows": 104
+          }
+        },
+        "sums": {
+          "cap_contacts": 33,
+          "correct": 195,
+          "parsed": 280,
+          "route_abstentions": 0
+        }
+      }
+    }
+  }
+}

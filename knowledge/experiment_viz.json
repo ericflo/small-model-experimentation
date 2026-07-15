@@ -49213,33 +49213,43 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Preregistered stage completion",
+     "title": "Episode-holdout correct (of 20) and pooled retention, seed 88026 gate",
      "categories": [
-      "intake",
-      "corpus + exposure frozen",
-      "design review",
-      "train both arms",
-      "local gate (pooled_k3)",
-      "conditional medium event"
+      "u_feedloop (20)",
+      "u_statechain (20)",
+      "retention pooled mean (104)"
      ],
      "series": [
       {
-       "label": "completed checkpoint",
+       "label": "hygiene_explore_parent",
        "values": [
         1,
+        7,
+        62.33
+       ]
+      },
+      {
+       "label": "replay_ctl",
+       "values": [
         1,
+        10,
+        65.0
+       ]
+      },
+      {
+       "label": "feedloop_state",
+       "values": [
         0,
-        0,
-        0,
-        0
+        11,
+        59.33
        ]
       }
      ],
-     "x_label": "preregistered experiment stage",
-     "y_label": "completion indicator",
-     "y_format": "integer",
-     "note": "The two-tie install: 160 episode-protocol rows (act-observe-revise feedback loops; narrated hidden-state chains) on six invented formalisms, fresh rank-32 adapter from the hygiene_explore parent vs an exact zero-delta MILP replay control; axis holdout at seed 88026; first use of the calibrated pooled_k3 retention protocol (screens 88027/88028/88030); conditional medium event at sealed seed 78151 where the recorded goal gate needs menders > 0 and rites > 0 with no new losses.",
-     "source": "experiments/qwen35_4b_feedback_loop_state_chain_install/reports/preregistration.md"
+     "x_label": "gate instrument",
+     "y_label": "correct",
+     "y_format": "number",
+     "note": "NOT_PROMOTED, split install: u_statechain installed (11/20, strict over both controls) while u_feedloop failed completely (0/20 on fresh instances of its own training formalisms — the third failed pedagogy at the menders-shaped skill); axis total tied replay 11-11 (ties fail); pooled retention fell 5.67 below the replay control, 0.67 outside the calibrated +/-5 band, on the pooled_k3 protocol's first live use (event delta SD 4.08 vs calibration 4.27). Sealed seed 78151 never opened.",
+     "source": "experiments/qwen35_4b_feedback_loop_state_chain_install/runs/local/seed88026_promotion.json"
     }
    ]
   }

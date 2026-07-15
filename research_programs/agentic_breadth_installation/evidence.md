@@ -1079,3 +1079,40 @@ historically reached 0.3–0.4 there; the same-shape trace-repair dose is
 closed by kill rule, so the successor must bring a genuinely new mechanism
 argument for menders, carry rites alongside, start from the
 hygiene_explore parent, and gate retention under pooled_k3.
+
+## qwen35_4b_feedback_loop_state_chain_install (2026-07-15 — NOT_PROMOTED, split install: state-chains teach, feedback-repair fails a third time)
+
+The two-tie install ran the full ladder cleanly (paired fresh rank-32
+adapters from the hygiene_explore parent, exact zero-delta exposure,
+control first, merges pinned, 12-run authenticated gate). The adversarial
+review had corrected one MAJOR pre-freeze (unbounded op grammars versus
+the finite uniqueness enumeration — 15 rows admitted out-of-grammar valid
+fixes; every parameterized op now carries a documented legality clause and
+an extended-grammar exclusion audit).
+
+Verdict NOT_PROMOTED on three frozen bars, and the split IS the reading:
+u_statechain INSTALLED — 11/20 on fresh instances, strict over parent (7)
+and the strong replay control (10); narrated hidden-state tracking is
+teachable at an 80-row dose (C14's state-chain law reaching the episode
+protocol). u_feedloop FAILED COMPLETELY — 0/20 on fresh instances of the
+four formalisms it trained 80 rows on, below both untrained controls
+(1/20): repair-with-feedback is the THIRD failed pedagogy at the
+menders-shaped skill (after asserted single-turn repair and demonstrated
+bounded search, both closed by kill rule). Retention: candidate −3.0
+pooled vs the parent (inside the revised 1–4-point tax law) but −5.67 vs
+the replay control — 0.67 outside the calibrated ±5 pooled band — because
+replay itself GAINED +2.67 over the parent, repeating the
+replay-compounding law at the retention instrument. The pooled_k3
+protocol's first live use measured event delta SD 4.08 versus the
+calibration's 4.27: the instrument performs as designed. Axis total tied
+replay 11–11 (ties fail). Sealed seed 78,151 was never opened and is
+permanently sealed.
+
+Program consequences: (1) extend the repair kill rule — no small designed
+dose of ANY tested pedagogy (asserted, demonstrated-search,
+episode-feedback) installs the repair-shaped skill; menders is open only
+to genuinely different mechanism classes (scale, scaffolding, or
+non-SFT levers). (2) The statechain lesson is a proven install and the
+rites-relevant successor is a statechain-only dose (drop the dead
+feedloop rows), which also relieves the retention pressure that came from
+competing against replay's own gain.

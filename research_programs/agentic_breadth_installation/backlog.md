@@ -269,15 +269,25 @@
   menders and rites (both 0.0). The recorded goal gate is two tie-flips
   wide. Sirens resolved at medium as the forensics predicted; base inside
   the historical envelope everywhere.
-- FUNDED NEXT (the two-tie install): a menders+rites dose from the
-  hygiene_explore parent (fresh adapter per the dose-three law), retention
-  gated under pooled_k3 (three fresh screens, +/-5 on the mean), then ONE
-  medium event on a fresh sealed seed with the goal gate recorded.
-  Constraints from standing laws: menders needs a genuinely NEW mechanism
-  argument (same-shape trace-repair is closed by kill rule; two attempts
-  failed); rites is elicitable in-lineage (0.1 this event at designed_fresh;
-  flipped at quick by replay); any pass must then survive the confirmation
-  law (independent seeds + matched-compute sample-more) before a claim.
+- Completed two-tie install (NOT_PROMOTED, split):
+  `qwen35_4b_feedback_loop_state_chain_install` — u_statechain INSTALLED
+  (11/20 fresh-instance holdout, strict over parent 7 and replay 10) but
+  u_feedloop failed completely (0/20 in-domain, below untrained controls):
+  the THIRD failed pedagogy at the menders-shaped skill. Retention -3.0 vs
+  parent (inside the tax law) but -5.67 vs replay (0.67 outside the
+  calibrated band; replay itself gained +2.67). pooled_k3's first live use
+  measured SD 4.08 vs calibration 4.27. Seed 78151 permanently sealed.
+- REPAIR KILL RULE EXTENDED: asserted repair, demonstrated bounded search,
+  and episode feedback-loop doses have ALL failed at the menders-shaped
+  skill; no further small designed SFT dose of any pedagogy is believable
+  there without a different mechanism CLASS (scale, external scaffolding,
+  or non-SFT levers).
+- FUNDED NEXT (statechain-only dose): 160 statechain rows (or 80 + fresh
+  variants) from the hygiene_explore parent, same calibrated gates —
+  the installed skill without the dead feedloop rows that dragged
+  retention while teaching nothing; then the medium event on a fresh
+  sealed seed with the goal gate recorded (rites is the reachable tie;
+  menders stays open and the gate likely lands 9/10).
 - Queued (calibration notes attached): (a) replay-compounding line — measure
   whether iterated replay rounds keep gaining aggregate and where they saturate;
   the published `replay_repeat` composite (0.5081) is the presumptive parent;

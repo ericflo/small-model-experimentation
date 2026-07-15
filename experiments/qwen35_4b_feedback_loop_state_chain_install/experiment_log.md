@@ -35,3 +35,19 @@
 - Corpus/streams/receipts regenerated (corpus e6d45ed4…, MILP re-solved
   exact zero-delta, retention screens byte-unchanged); 76/76 tests green;
   smoke green.
+
+## 2026-07-15 — Training, the pooled_k3 gate, and closure
+
+- Both arms trained clean behind green checkpoints (control loss 0.4334,
+  candidate 0.54); merges published and pinned; the 12-run local event
+  executed with boundary re-authentication throughout.
+- Verdict NOT_PROMOTED on three frozen bars: axis total tied replay 11–11;
+  u_feedloop 0/20 versus 1/20 for both controls (the candidate trained on
+  80 in-formalism rows and installed nothing); pooled retention 59.33 vs
+  replay 65.00 — 0.67 outside the ±5 pooled band (parent band passed at
+  −3.0). u_statechain installed: 11/20, strict over parent 7 and replay
+  10. Event delta SD 4.08 ≈ the calibration's 4.27 — the new instrument
+  behaved exactly as calibrated on first use.
+- Seed 78,151 permanently sealed. The mechanism map sharpens: state-chain
+  protocol is teachable; repair-with-feedback is the third failed
+  pedagogy at the menders-shaped skill; replay gained retention again.
