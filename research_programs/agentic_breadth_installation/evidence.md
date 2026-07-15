@@ -1019,3 +1019,32 @@ than priced. Vehicle, descriptive only: rank-64 pooled −0.75 versus
 rank-32's −3.75 (+3.0 favoring capacity, within noise) — the capacity
 question stays open and is now cheaply adjudicable under pooled_k3 with
 both arms already published.
+
+## qwen35_4b_menders_sirens_tier_forensics (2026-07-15 — CONSTANTS_ARE_INSTRUMENT_ARTIFACTS: the goal gate's venue moves to medium)
+
+The backlog's queued prerequisite ran as pure receipt analysis (2,278
+committed gateway files, 356 cleaned family-score rows, zero GPU, zero
+seeds, `benchmarks/` never read). The goal-gap pilot's standing claim —
+menders = 0 and sirens = 0.500 for every arm at every seed at quick/tb1024
+— has three committed counterexamples at the line's own instrument (base
+sirens 0.375 at 78,131; candidate menders 0.021 at 78,131; replay_refresh
+menders 0.125 at 78,133): the constants are item-draw artifacts of the
+quick tier's 1/8-step granularity, not model walls.
+
+The decisive tier read, from paired within-event strict-win adjudication:
+the goal gate (all ten families strictly above base) passed 9 of 94
+historical medium arm-events versus 1 of 84 at quick — the medium mode is
+8/10 strict wins with 20 events at 9/10. Base never sits at a family
+ceiling at medium (0/95 events; quick 2/82), sirens leaves its 0.500
+sticking point (base exactly-0.5 in 14/95 medium events vs 49/82 quick,
+spanning 0.2–0.6), and menders stays beatable (base zero in 54/95, max
+0.3; treated arms reached 0.4). Near-miss blockers: menders/sirens/warren
+at quick; menders/rites/warren at medium.
+
+Honest limit carried on every reading: the nine medium passers were
+gym-trained arms from the old line (trained ON menagerie-family data);
+instrument feasibility is established, line transfer is not — the
+contamination-free universal arms (best 0.5081 quick aggregate) have
+never been measured at medium. Funded successor: that measurement — base
+plus the line's best published composites, one fresh sealed medium seed,
+tb1024, paired same-backend, the goal gate recorded from the same event.

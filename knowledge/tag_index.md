@@ -672,6 +672,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_materialized_residual_answer_seam_factorial` (new): [README](../experiments/qwen35_4b_materialized_residual_answer_seam_factorial/README.md)
 - `qwen35_4b_materialized_residual_sibling_search` (new): [README](../experiments/qwen35_4b_materialized_residual_sibling_search/README.md)
 - `qwen35_4b_materialized_residual_sibling_search_fresh_replication` (new): [README](../experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/README.md)
+- `qwen35_4b_menders_sirens_tier_forensics` (new): [README](../experiments/qwen35_4b_menders_sirens_tier_forensics/README.md)
 - `qwen35_4b_meta_induction` (new): [README](../experiments/qwen35_4b_meta_induction/README.md)
 - `qwen35_4b_metacognitive_boundary` (new): [README](../experiments/qwen35_4b_metacognitive_boundary/README.md)
 - `qwen35_4b_model_in_loop_counterexamples` (track-z): [README](../experiments/qwen35_4b_model_in_loop_counterexamples/README.md)

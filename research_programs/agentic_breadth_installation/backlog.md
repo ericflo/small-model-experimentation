@@ -253,9 +253,19 @@
   four-model pilot (candidate > base/replay/parent aggregate; every-family
   -vs-base recorded as the goal gate). The revised 1-4-point tax makes (b)
   cheaper than previously priced.
-- Standing queued directions (unchanged): medium-native measurement intake for
-  existing artifacts; mechanism-diverse attacks on menders/sirens (needs new
-  mechanism evidence first).
+- Completed tier forensics (CONSTANTS_ARE_INSTRUMENT_ARTIFACTS):
+  `qwen35_4b_menders_sirens_tier_forensics` — zero-GPU receipt analysis; the
+  menders/sirens constants have three committed quick/tb1024 counterexamples
+  and the all-ten-families goal gate passed 9/94 historical medium
+  arm-events vs 1/84 quick (base never at a family ceiling at medium). The
+  goal gate's venue is medium; a same-shape menders/sirens treatment at
+  quick is dead. Caveat: medium passers were gym-trained; the universal
+  line is unmeasured at medium.
+- FUNDED NEXT (medium measurement intake): base + the line's best published
+  composites (designed_fresh parent, replay_repeat, hygiene_explore_direct)
+  on ONE fresh sealed medium seed, tb1024, paired same-backend explicit
+  merges, goal gate recorded from the same event. Eval-only; decides
+  whether the goal path needs a new dose at all or just the right venue.
 - Queued (calibration notes attached): (a) replay-compounding line — measure
   whether iterated replay rounds keep gaining aggregate and where they saturate;
   the published `replay_repeat` composite (0.5081) is the presumptive parent;

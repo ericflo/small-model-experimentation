@@ -1,0 +1,8 @@
+experiment_id: qwen35_4b_menders_sirens_tier_forensics
+status: closed
+model: none (analysis-only; committed gateway receipts)
+inputs: experiments/*/runs/**/*.json (2278 files scanned)
+outputs: [receipt_table.json, constants_analysis.json]
+verdict: CONSTANTS_ARE_INSTRUMENT_ARTIFACTS
+training: none
+benchmark_stage: none

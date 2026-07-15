@@ -49073,6 +49073,52 @@
      "source": "experiments/qwen35_4b_retention_screen_calibration/runs/local/calibration_readout.json"
     }
    ]
+  },
+  "qwen35_4b_menders_sirens_tier_forensics": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Strict family wins vs base per paired event, by tier",
+     "categories": [
+      "<=5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10 (goal gate)"
+     ],
+     "series": [
+      {
+       "label": "quick tier (84 events)",
+       "values": [
+        3,
+        20,
+        35,
+        17,
+        8,
+        1
+       ]
+      },
+      {
+       "label": "medium tier (94 events)",
+       "values": [
+        0,
+        5,
+        14,
+        46,
+        20,
+        9
+       ]
+      }
+     ],
+     "x_label": "families strictly above base (of 10)",
+     "y_label": "paired arm-events",
+     "y_format": "integer",
+     "note": "Every committed gateway receipt paired within its event: the all-ten-families goal gate passed 9/94 medium arm-events vs 1/84 quick. Base never sits at a family ceiling at medium (0/95 events) and sirens leaves its exactly-0.500 sticking point (14/95 vs 49/82 at quick). The menders=0 / sirens=0.500 constants have three committed counterexamples at quick/tb1024. Caveat: medium passers were gym-trained arms from the older line; the contamination-free universal arms have never been measured at medium.",
+     "source": "experiments/qwen35_4b_menders_sirens_tier_forensics/runs/constants_analysis.json"
+    }
+   ]
   }
  }
 }

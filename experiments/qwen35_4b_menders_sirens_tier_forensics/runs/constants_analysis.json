@@ -1,0 +1,2623 @@
+{
+ "base_profile": {
+  "medium": {
+   "events": 95,
+   "families": {
+    "chronicle": {
+     "exactly_half": 1,
+     "max": 0.7,
+     "median": 0.2,
+     "min": 0.0,
+     "n": 95,
+     "one": 0,
+     "zero": 9
+    },
+    "lockpick": {
+     "exactly_half": 0,
+     "max": 0.4,
+     "median": 0.1,
+     "min": 0.0,
+     "n": 95,
+     "one": 0,
+     "zero": 46
+    },
+    "menders": {
+     "exactly_half": 0,
+     "max": 0.3,
+     "median": 0.0,
+     "min": 0.0,
+     "n": 95,
+     "one": 0,
+     "zero": 54
+    },
+    "mirage": {
+     "exactly_half": 2,
+     "max": 0.6,
+     "median": 0.0,
+     "min": 0.0,
+     "n": 95,
+     "one": 0,
+     "zero": 65
+    },
+    "rites": {
+     "exactly_half": 1,
+     "max": 0.575,
+     "median": 0.1,
+     "min": 0.0,
+     "n": 95,
+     "one": 0,
+     "zero": 42
+    },
+    "siftstack": {
+     "exactly_half": 2,
+     "max": 0.7,
+     "median": 0.1,
+     "min": 0.0,
+     "n": 95,
+     "one": 0,
+     "zero": 44
+    },
+    "sirens": {
+     "exactly_half": 14,
+     "max": 0.6,
+     "median": 0.4,
+     "min": 0.2,
+     "n": 95,
+     "one": 0,
+     "zero": 0
+    },
+    "stockade": {
+     "exactly_half": 0,
+     "max": 0.3601084010840109,
+     "median": 0.1,
+     "min": 0.0,
+     "n": 95,
+     "one": 0,
+     "zero": 21
+    },
+    "toolsmith": {
+     "exactly_half": 3,
+     "max": 0.63,
+     "median": 0.35,
+     "min": 0.0,
+     "n": 95,
+     "one": 0,
+     "zero": 1
+    },
+    "warren": {
+     "exactly_half": 1,
+     "max": 0.8666666666666666,
+     "median": 0.2,
+     "min": 0.0,
+     "n": 95,
+     "one": 0,
+     "zero": 3
+    }
+   }
+  },
+  "quick": {
+   "events": 82,
+   "families": {
+    "chronicle": {
+     "exactly_half": 3,
+     "max": 0.875,
+     "median": 0.125,
+     "min": 0.0,
+     "n": 82,
+     "one": 0,
+     "zero": 35
+    },
+    "lockpick": {
+     "exactly_half": 0,
+     "max": 0.375,
+     "median": 0.0,
+     "min": 0.0,
+     "n": 82,
+     "one": 0,
+     "zero": 72
+    },
+    "menders": {
+     "exactly_half": 0,
+     "max": 0.25,
+     "median": 0.0,
+     "min": 0.0,
+     "n": 82,
+     "one": 0,
+     "zero": 64
+    },
+    "mirage": {
+     "exactly_half": 1,
+     "max": 0.75,
+     "median": 0.0,
+     "min": 0.0,
+     "n": 82,
+     "one": 0,
+     "zero": 68
+    },
+    "rites": {
+     "exactly_half": 3,
+     "max": 0.625,
+     "median": 0.0,
+     "min": 0.0,
+     "n": 82,
+     "one": 0,
+     "zero": 54
+    },
+    "siftstack": {
+     "exactly_half": 1,
+     "max": 0.5,
+     "median": 0.0,
+     "min": 0.0,
+     "n": 82,
+     "one": 0,
+     "zero": 71
+    },
+    "sirens": {
+     "exactly_half": 49,
+     "max": 0.875,
+     "median": 0.5,
+     "min": 0.25,
+     "n": 82,
+     "one": 0,
+     "zero": 0
+    },
+    "stockade": {
+     "exactly_half": 0,
+     "max": 0.5535714285714286,
+     "median": 0.05341463414634146,
+     "min": 0.0,
+     "n": 82,
+     "one": 0,
+     "zero": 38
+    },
+    "toolsmith": {
+     "exactly_half": 5,
+     "max": 1.0,
+     "median": 0.5572916666666667,
+     "min": 0.125,
+     "n": 82,
+     "one": 1,
+     "zero": 0
+    },
+    "warren": {
+     "exactly_half": 0,
+     "max": 1.0,
+     "median": 0.0,
+     "min": 0.0,
+     "n": 82,
+     "one": 1,
+     "zero": 55
+    }
+   }
+  }
+ },
+ "benchmark_data_read": false,
+ "cleaned_rows": 356,
+ "constant_check": {
+  "medium": {
+   "base": {
+    "menders": {
+     "exactly_half": 0,
+     "max": 0.3,
+     "median": 0.0,
+     "min": 0.0,
+     "n": 95,
+     "one": 0,
+     "zero": 54
+    },
+    "sirens": {
+     "exactly_half": 14,
+     "max": 0.6,
+     "median": 0.4,
+     "min": 0.2,
+     "n": 95,
+     "one": 0,
+     "zero": 0
+    }
+   },
+   "quick_tb1024_counterexamples_to_frozen_constants": [],
+   "treated": {
+    "menders": {
+     "exactly_half": 0,
+     "max": 0.4,
+     "median": 0.0,
+     "min": 0.0,
+     "n": 94,
+     "one": 0,
+     "zero": 51
+    },
+    "sirens": {
+     "exactly_half": 13,
+     "max": 0.8,
+     "median": 0.6,
+     "min": 0.3,
+     "n": 94,
+     "one": 0,
+     "zero": 0
+    }
+   }
+  },
+  "quick": {
+   "base": {
+    "menders": {
+     "exactly_half": 0,
+     "max": 0.25,
+     "median": 0.0,
+     "min": 0.0,
+     "n": 82,
+     "one": 0,
+     "zero": 64
+    },
+    "sirens": {
+     "exactly_half": 49,
+     "max": 0.875,
+     "median": 0.5,
+     "min": 0.25,
+     "n": 82,
+     "one": 0,
+     "zero": 0
+    }
+   },
+   "quick_tb1024_counterexamples_to_frozen_constants": [
+    {
+     "arm": "base",
+     "menders": 0.0,
+     "receipt": "experiments/qwen35_4b_universal_curriculum/runs/benchmark/quick_tb1024_seed78131_pilot1_tb1024/base.json",
+     "seed": 78131,
+     "sirens": 0.375,
+     "think_budget": 1024
+    },
+    {
+     "arm": "candidate",
+     "menders": 0.020833333333333332,
+     "receipt": "experiments/qwen35_4b_universal_curriculum/runs/benchmark/quick_tb1024_seed78131_pilot1_tb1024/candidate.json",
+     "seed": 78131,
+     "sirens": 0.5,
+     "think_budget": 1024
+    },
+    {
+     "arm": "replay_refresh",
+     "menders": 0.125,
+     "receipt": "experiments/qwen35_4b_universal_replay_anchor/runs/benchmark/quick_tb1024_seed78133_pilot1/replay_refresh.json",
+     "seed": 78133,
+     "sirens": 0.5,
+     "think_budget": 1024
+    }
+   ],
+   "treated": {
+    "menders": {
+     "exactly_half": 0,
+     "max": 0.25,
+     "median": 0.0,
+     "min": 0.0,
+     "n": 85,
+     "one": 0,
+     "zero": 65
+    },
+    "sirens": {
+     "exactly_half": 69,
+     "max": 0.75,
+     "median": 0.5,
+     "min": 0.375,
+     "n": 85,
+     "one": 0,
+     "zero": 0
+    }
+   }
+  }
+ },
+ "goal_gate_feasibility": {
+  "medium": {
+   "base_events": 95,
+   "events_with_all_ten_interior": 3,
+   "events_with_no_base_ceiling_family": 95,
+   "per_event": [
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_breadth_round1/runs/menagerie/medium_seed52006_base.json",
+     "seed": 52006
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_breadth_round1/runs/menagerie/medium_seed52009_base.json",
+     "seed": 52009
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53006_base.json",
+     "seed": 53006
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53009_base.json",
+     "seed": 53009
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "mirage"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53012_base.json",
+     "seed": 53012
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "rites",
+      "siftstack"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53013_base.json",
+     "seed": 53013
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "mirage",
+      "siftstack"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53016_base.json",
+     "seed": 53016
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "mirage",
+      "rites",
+      "stockade"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53018_base.json",
+     "seed": 53018
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "mirage"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53019_base.json",
+     "seed": 53019
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "mirage",
+      "siftstack"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53020_base.json",
+     "seed": 53020
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53023_base.json",
+     "seed": 53023
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "mirage"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53024_base.json",
+     "seed": 53024
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "rites"
+     ],
+     "interior_count": 9,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53025_base.json",
+     "seed": 53025
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "rites",
+      "siftstack"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53026_base.json",
+     "seed": 53026
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick"
+     ],
+     "interior_count": 9,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53027_base.json",
+     "seed": 53027
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53030_base.json",
+     "seed": 53030
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53031_base.json",
+     "seed": 53031
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "rites",
+      "siftstack"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53032_base.json",
+     "seed": 53032
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "mirage",
+      "rites"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53035_base.json",
+     "seed": 53035
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage",
+      "warren"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53036_base.json",
+     "seed": 53036
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage",
+      "rites"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53037_base.json",
+     "seed": 53037
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "rites",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53040_base.json",
+     "seed": 53040
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53041_base.json",
+     "seed": 53041
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53042_base.json",
+     "seed": 53042
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "stockade"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53051_base.json",
+     "seed": 53051
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage",
+      "rites",
+      "stockade"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53052_base.json",
+     "seed": 53052
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack",
+      "toolsmith"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53053_base.json",
+     "seed": 53053
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "mirage"
+     ],
+     "interior_count": 9,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53058_base.json",
+     "seed": 53058
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage",
+      "stockade"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53059_base.json",
+     "seed": 53059
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53060_base.json",
+     "seed": 53060
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "mirage",
+      "stockade"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53065_base.json",
+     "seed": 53065
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "mirage",
+      "rites"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53066_base.json",
+     "seed": 53066
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53067_base.json",
+     "seed": 53067
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "menders",
+      "mirage"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53072_base.json",
+     "seed": 53072
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "mirage",
+      "rites"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53073_base.json",
+     "seed": 53073
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53074_base.json",
+     "seed": 53074
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "mirage",
+      "rites"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53075_base.json",
+     "seed": 53075
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "mirage",
+      "rites"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53082_base.json",
+     "seed": 53082
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "mirage",
+      "rites"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53083_base.json",
+     "seed": 53083
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "siftstack"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53084_base.json",
+     "seed": 53084
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "mirage"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53085_base.json",
+     "seed": 53085
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53086_base.json",
+     "seed": 53086
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53087_base.json",
+     "seed": 53087
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "mirage",
+      "rites",
+      "siftstack"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53091_base.json",
+     "seed": 53091
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "mirage",
+      "siftstack"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53092_base.json",
+     "seed": 53092
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53093_base.json",
+     "seed": 53093
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage",
+      "siftstack"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53097_base.json",
+     "seed": 53097
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "mirage",
+      "siftstack"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53098_base.json",
+     "seed": 53098
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "mirage"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53099_base.json",
+     "seed": 53099
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53100_base.json",
+     "seed": 53100
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "rites",
+      "siftstack"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53101_base.json",
+     "seed": 53101
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "rites",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53102_base.json",
+     "seed": 53102
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53103_base.json",
+     "seed": 53103
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "siftstack"
+     ],
+     "interior_count": 9,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53109_base.json",
+     "seed": 53109
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53110_base.json",
+     "seed": 53110
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "stockade"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53111_base.json",
+     "seed": 53111
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53112_base.json",
+     "seed": 53112
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "mirage"
+     ],
+     "interior_count": 9,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53113_base.json",
+     "seed": 53113
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage",
+      "rites",
+      "siftstack"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53114_base.json",
+     "seed": 53114
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53115_base.json",
+     "seed": 53115
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "mirage",
+      "rites"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53116_base.json",
+     "seed": 53116
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "mirage",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53117_base.json",
+     "seed": 53117
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53118_base.json",
+     "seed": 53118
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53119_base.json",
+     "seed": 53119
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "mirage",
+      "stockade"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53120_base.json",
+     "seed": 53120
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "mirage",
+      "siftstack"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53121_base.json",
+     "seed": 53121
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "rites",
+      "siftstack"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53122_base.json",
+     "seed": 53122
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53126_base.json",
+     "seed": 53126
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53127_base.json",
+     "seed": 53127
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53128_base.json",
+     "seed": 53128
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53129_base.json",
+     "seed": 53129
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "rites",
+      "stockade"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53130_base.json",
+     "seed": 53130
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "siftstack"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53131_base.json",
+     "seed": 53131
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders"
+     ],
+     "interior_count": 9,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53132_base.json",
+     "seed": 53132
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "siftstack"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed53133_base.json",
+     "seed": 53133
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed54001_base.json",
+     "seed": 54001
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "mirage",
+      "rites",
+      "siftstack"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed54002_base.json",
+     "seed": 54002
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage",
+      "rites"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed54003_base.json",
+     "seed": 54003
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed54004_base.json",
+     "seed": 54004
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "mirage"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed54005_base.json",
+     "seed": 54005
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders"
+     ],
+     "interior_count": 9,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed54006_base.json",
+     "seed": 54006
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage",
+      "siftstack"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed54007_base.json",
+     "seed": 54007
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "mirage",
+      "rites"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed54008_base.json",
+     "seed": 54008
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed54009_base.json",
+     "seed": 54009
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "siftstack"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed54010_base.json",
+     "seed": 54010
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [],
+     "interior_count": 10,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed55003_base.json",
+     "seed": 55003
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick"
+     ],
+     "interior_count": 9,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed55004_base.json",
+     "seed": 55004
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders"
+     ],
+     "interior_count": 9,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed56003_base.json",
+     "seed": 56003
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [],
+     "interior_count": 10,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed56004_base.json",
+     "seed": 56004
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick"
+     ],
+     "interior_count": 9,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed57003_base.json",
+     "seed": 57003
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders"
+     ],
+     "interior_count": 9,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed57004_base.json",
+     "seed": 57004
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders"
+     ],
+     "interior_count": 9,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed57005_base.json",
+     "seed": 57005
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [],
+     "interior_count": 10,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed57006_base.json",
+     "seed": 57006
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders"
+     ],
+     "interior_count": 9,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed57007_base.json",
+     "seed": 57007
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders"
+     ],
+     "interior_count": 9,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/medium_seed57008_base.json",
+     "seed": 57008
+    }
+   ]
+  },
+  "quick": {
+   "base_events": 82,
+   "events_with_all_ten_interior": 4,
+   "events_with_no_base_ceiling_family": 80,
+   "per_event": [
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 2,
+     "receipt": "experiments/qwen35_4b_gauntlet_breadth_round1/runs/menagerie/quick_seed52001_base0.json",
+     "seed": 52001
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_breadth_round1/runs/menagerie/quick_seed52001_base1.json",
+     "seed": 52001
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 2,
+     "receipt": "experiments/qwen35_4b_gauntlet_breadth_round1/runs/menagerie/quick_seed52002_base.json",
+     "seed": 52002
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_breadth_round1/runs/menagerie/quick_seed52003_base.json",
+     "seed": 52003
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_breadth_round1/runs/menagerie/quick_seed52004_base.json",
+     "seed": 52004
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_breadth_round1/runs/menagerie/quick_seed52005_base.json",
+     "seed": 52005
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_breadth_round1/runs/menagerie/quick_seed52007_base.json",
+     "seed": 52007
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_breadth_round1/runs/menagerie/quick_seed52008_base.json",
+     "seed": 52008
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_breadth_round1/runs/menagerie/quick_seed52010_base.json",
+     "seed": 52010
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53001_base.json",
+     "seed": 53001
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53002_base.json",
+     "seed": 53002
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 2,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53003_base.json",
+     "seed": 53003
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53004_base.json",
+     "seed": 53004
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53005_base.json",
+     "seed": 53005
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 2,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53007_base.json",
+     "seed": 53007
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53008_base.json",
+     "seed": 53008
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53010_base.json",
+     "seed": 53010
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "rites",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53011_base.json",
+     "seed": 53011
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53014_base.json",
+     "seed": 53014
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53015_base.json",
+     "seed": 53015
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53017_base.json",
+     "seed": 53017
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 2,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53021_base.json",
+     "seed": 53021
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "mirage",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53022_base.json",
+     "seed": 53022
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53028_base.json",
+     "seed": 53028
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53029_base.json",
+     "seed": 53029
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "rites",
+      "siftstack"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53033_base.json",
+     "seed": 53033
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53034_base.json",
+     "seed": 53034
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53038_base.json",
+     "seed": 53038
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53039_base.json",
+     "seed": 53039
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53043_base.json",
+     "seed": 53043
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53044_base.json",
+     "seed": 53044
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53045_base.json",
+     "seed": 53045
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53046_base.json",
+     "seed": 53046
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53047_base.json",
+     "seed": 53047
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "warren"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53048_base.json",
+     "seed": 53048
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53049_base.json",
+     "seed": 53049
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53050_base.json",
+     "seed": 53050
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53054_base.json",
+     "seed": 53054
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "stockade"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53055_base.json",
+     "seed": 53055
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53056_base.json",
+     "seed": 53056
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53057_base.json",
+     "seed": 53057
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 2,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53061_base.json",
+     "seed": 53061
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53062_base.json",
+     "seed": 53062
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53063_base.json",
+     "seed": 53063
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53064_base.json",
+     "seed": 53064
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 2,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53068_base.json",
+     "seed": 53068
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53069_base.json",
+     "seed": 53069
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53070_base.json",
+     "seed": 53070
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53071_base.json",
+     "seed": 53071
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage",
+      "rites",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53076_base.json",
+     "seed": 53076
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53077_base.json",
+     "seed": 53077
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53078_base.json",
+     "seed": 53078
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53079_base.json",
+     "seed": 53079
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53080_base.json",
+     "seed": 53080
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53081_base.json",
+     "seed": 53081
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "rites",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53088_base.json",
+     "seed": 53088
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53089_base.json",
+     "seed": 53089
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53090_base.json",
+     "seed": 53090
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53094_base.json",
+     "seed": 53094
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53095_base.json",
+     "seed": 53095
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "mirage",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53096_base.json",
+     "seed": 53096
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53104_base.json",
+     "seed": 53104
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53105_base.json",
+     "seed": 53105
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53106_base.json",
+     "seed": 53106
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53107_base.json",
+     "seed": 53107
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "siftstack"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53108_base.json",
+     "seed": 53108
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53123_base.json",
+     "seed": 53123
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53124_base.json",
+     "seed": 53124
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "mirage",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53125_base.json",
+     "seed": 53125
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 5,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53134_base.json",
+     "seed": 53134
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53135_base.json",
+     "seed": 53135
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 2,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed53136_base.json",
+     "seed": 53136
+    },
+    {
+     "ceiling_families": [
+      "toolsmith"
+     ],
+     "floor_families": [
+      "menders"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed55001_base.json",
+     "seed": 55001
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [],
+     "interior_count": 10,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed55002_base.json",
+     "seed": 55002
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [],
+     "interior_count": 10,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed56001_base.json",
+     "seed": 56001
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [],
+     "interior_count": 10,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed56002_base.json",
+     "seed": 56002
+    },
+    {
+     "ceiling_families": [
+      "warren"
+     ],
+     "floor_families": [
+      "menders"
+     ],
+     "interior_count": 8,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed57001_base.json",
+     "seed": 57001
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [],
+     "interior_count": 10,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed57002_base.json",
+     "seed": 57002
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 3,
+     "receipt": "experiments/qwen35_4b_gauntlet_frontier/runs/menagerie/quick_seed58001_base.json",
+     "seed": 58001
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "warren"
+     ],
+     "interior_count": 4,
+     "receipt": "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/runs/benchmark/quick_tb1024_seed78144_pilot/base.json",
+     "seed": 78144
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "lockpick",
+      "menders",
+      "siftstack"
+     ],
+     "interior_count": 7,
+     "receipt": "experiments/qwen35_4b_universal_curriculum/runs/benchmark/quick_tb1024_seed78131_pilot1_tb1024/base.json",
+     "seed": 78131
+    },
+    {
+     "ceiling_families": [],
+     "floor_families": [
+      "menders",
+      "mirage",
+      "stockade",
+      "warren"
+     ],
+     "interior_count": 6,
+     "receipt": "experiments/qwen35_4b_universal_replay_anchor/runs/benchmark/quick_tb1024_seed78133_pilot1/base.json",
+     "seed": 78133
+    }
+   ]
+  }
+ },
+ "paired_goal_gate": {
+  "medium": {
+   "blocking_families_in_9_win_events": [
+    "menders",
+    "rites",
+    "warren"
+   ],
+   "goal_gate_passes": 9,
+   "near_misses_9_of_10": 20,
+   "paired_arm_events": 94,
+   "passes": [
+    {
+     "arm": "adapter",
+     "experiment": "qwen35_4b_gauntlet_breadth_round1",
+     "goal_gate_pass": true,
+     "losses": [],
+     "seed": 52006,
+     "strict_wins": 10,
+     "ties": []
+    },
+    {
+     "arm": "merged",
+     "experiment": "qwen35_4b_gauntlet_frontier",
+     "goal_gate_pass": true,
+     "losses": [],
+     "seed": 53024,
+     "strict_wins": 10,
+     "ties": []
+    },
+    {
+     "arm": "merged",
+     "experiment": "qwen35_4b_gauntlet_frontier",
+     "goal_gate_pass": true,
+     "losses": [],
+     "seed": 53031,
+     "strict_wins": 10,
+     "ties": []
+    },
+    {
+     "arm": "merged",
+     "experiment": "qwen35_4b_gauntlet_frontier",
+     "goal_gate_pass": true,
+     "losses": [],
+     "seed": 53035,
+     "strict_wins": 10,
+     "ties": []
+    },
+    {
+     "arm": "merged",
+     "experiment": "qwen35_4b_gauntlet_frontier",
+     "goal_gate_pass": true,
+     "losses": [],
+     "seed": 53066,
+     "strict_wins": 10,
+     "ties": []
+    },
+    {
+     "arm": "merged",
+     "experiment": "qwen35_4b_gauntlet_frontier",
+     "goal_gate_pass": true,
+     "losses": [],
+     "seed": 53115,
+     "strict_wins": 10,
+     "ties": []
+    },
+    {
+     "arm": "merged",
+     "experiment": "qwen35_4b_gauntlet_frontier",
+     "goal_gate_pass": true,
+     "losses": [],
+     "seed": 53127,
+     "strict_wins": 10,
+     "ties": []
+    },
+    {
+     "arm": "merged",
+     "experiment": "qwen35_4b_gauntlet_frontier",
+     "goal_gate_pass": true,
+     "losses": [],
+     "seed": 53129,
+     "strict_wins": 10,
+     "ties": []
+    },
+    {
+     "arm": "merged",
+     "experiment": "qwen35_4b_gauntlet_frontier",
+     "goal_gate_pass": true,
+     "losses": [],
+     "seed": 57007,
+     "strict_wins": 10,
+     "ties": []
+    }
+   ],
+   "strict_win_distribution": {
+    "0": 0,
+    "1": 0,
+    "10": 9,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 5,
+    "7": 14,
+    "8": 46,
+    "9": 20
+   }
+  },
+  "quick": {
+   "blocking_families_in_9_win_events": [
+    "menders",
+    "sirens",
+    "warren"
+   ],
+   "goal_gate_passes": 1,
+   "near_misses_9_of_10": 8,
+   "paired_arm_events": 84,
+   "passes": [
+    {
+     "arm": "merged",
+     "experiment": "qwen35_4b_gauntlet_frontier",
+     "goal_gate_pass": true,
+     "losses": [],
+     "seed": 53002,
+     "strict_wins": 10,
+     "ties": []
+    }
+   ],
+   "strict_win_distribution": {
+    "0": 1,
+    "1": 0,
+    "10": 1,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 2,
+    "6": 20,
+    "7": 35,
+    "8": 17,
+    "9": 8
+   }
+  }
+ },
+ "schema_version": 1
+}

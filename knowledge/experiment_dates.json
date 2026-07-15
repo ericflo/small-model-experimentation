@@ -883,6 +883,14 @@
     "identity-reservation scaffold and experiment log"
    ]
   },
+  "qwen35_4b_menders_sirens_tier_forensics": {
+   "start": "2026-07-15",
+   "end": "2026-07-15",
+   "confidence": "high",
+   "sources": [
+    "dated experiment_log.md heading (2026-07-15 sweep, analysis, and closure)"
+   ]
+  },
   "qwen35_4b_meta_induction": {
    "start": "2026-07-07",
    "end": "2026-07-07",

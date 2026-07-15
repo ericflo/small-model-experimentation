@@ -14265,6 +14265,44 @@
      "chart_takeaway": "Single readings swing from -10 to +4 for the same unchanged model — the historical one-quiz forgetting verdicts were reading this noise."
     }
    ]
+  },
+  "qwen35_4b_menders_sirens_tier_forensics": {
+   "verdict_tag": "The two-family wall was the measuring tier, not the model",
+   "concept_primer": "The program's goal needs one trained model to beat the untouched base on every one of ten benchmark families at once. The last attempt failed on exactly two families that looked frozen: one always scored zero, the other always exactly one half, for every model at every attempt on the quick benchmark tier. Before designing another training treatment against that wall, this study dug through every benchmark receipt the repository has ever produced — including hundreds from an older experiment line that also ran the bigger, finer-grained medium tier — to check whether the wall is real or an artifact of the quick tier's coarse scoring.",
+   "plain_question": "Are the two frozen family scores a real model wall, or an artifact of the quick benchmark tier — and on which tier is the all-families goal actually winnable?",
+   "plain_answer": "An artifact. The constants already have committed counterexamples on the line's own instrument, and the all-ten-families-at-once win happened 9 times in 94 historical medium-tier comparisons versus once in 84 quick-tier ones. On medium, the base model never maxes out any family (so strict wins are always available) and the always-one-half family spreads out to a normal range. The catch: those nine winners trained on benchmark-family data, which this program forbids — so the next step is measuring this line's own clean models on medium for the first time.",
+   "why_it_matters": "Every future attempt at the program goal was about to be aimed at two families that cannot be beaten at quick granularity. This redirect — costing zero GPU hours — moves the goal gate to a tier where history says it is winnable.",
+   "verdict_tone": "positive",
+   "key_numbers": [
+    {
+     "label": "Goal-gate passes, medium",
+     "value": "9/94",
+     "sub": "all ten families strictly above base"
+    },
+    {
+     "label": "Goal-gate passes, quick",
+     "value": "1/84",
+     "sub": "the tier the line has been using"
+    },
+    {
+     "label": "GPU hours",
+     "value": "0",
+     "sub": "committed receipts only"
+    },
+    {
+     "label": "Base at a family ceiling, medium",
+     "value": "0/95",
+     "sub": "strict wins always available"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "How many of the ten families a trained model strictly beat the base on, by tier",
+     "chart_read": "Each bar counts historical paired comparisons; the rightmost group (10 of 10) is the program goal.",
+     "chart_takeaway": "Medium-tier comparisons cluster at eight and nine family wins with nine full passes; quick-tier ones cluster at six and seven with one pass."
+    }
+   ]
   }
  }
 }

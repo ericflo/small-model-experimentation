@@ -3800,6 +3800,37 @@
   },
   {
     "file_counts": {
+      ".json": 2,
+      ".md": 6,
+      ".py": 4,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_menders_sirens_tier_forensics",
+    "path": "experiments/qwen35_4b_menders_sirens_tier_forensics",
+    "primary_readme": "experiments/qwen35_4b_menders_sirens_tier_forensics/README.md",
+    "primary_report": "experiments/qwen35_4b_menders_sirens_tier_forensics/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation"
+    ],
+    "source_track": "new",
+    "summary": "Adjudicate the two \"frozen constants\" blocking the all-families goal gate (menders = 0, sirens = 0.500 at quick/tb1024) from committed gateway receipts only: zero GPU, zero seeds, `benchmarks/` never read.",
+    "tags": [
+      "small-model"
+    ],
+    "title": "Menders/Sirens + Tier Forensics",
+    "top_level_dirs": [
+      "configs",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 15,
+    "total_size_bytes": 328018
+  },
+  {
+    "file_counts": {
       ".json": 31,
       ".jsonl": 9,
       ".log": 15,
