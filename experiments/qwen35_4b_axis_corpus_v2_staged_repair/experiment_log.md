@@ -57,3 +57,10 @@
   arm stream hashes). Left fail-closed on purpose: `PUBLISHED_ARM_HASHES`
   (both arms) and the eval's `EXPECTED_TREE_SHA256` pins — filled only after
   training/merges publish. No model was loaded; no GPU stage ran.
+
+## 2026-07-15 — Authenticated control training
+
+- `train-control` ran only after freeze commit `516c7b33` matched `origin/main`
+  with both workflows green and a clean worktree.
+- `replay_repeat3` trained 1,520/1,520 rows with 0 skipped over 190 updates;
+  receipt/log published and pinned fail-closed.
