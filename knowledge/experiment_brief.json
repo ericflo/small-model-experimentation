@@ -14229,40 +14229,40 @@
    ]
   },
   "qwen35_4b_retention_screen_calibration": {
-   "verdict_tag": "Design under construction; nothing trains",
-   "concept_primer": "The guard on the last trial caught the measuring stick wobbling: the same model's forgetting score moved four points between two fresh screens, as much as the pass/fail rule itself. Before any more training conclusions, this study re-measures five already-built models on four brand-new screens to size the wobble directly.",
+   "verdict_tag": "The measuring stick wobbles twice as much as the pass/fail rule assumed",
+   "concept_primer": "Every training trial in this program ends with a forgetting check: the new model retakes a 104-task quiz beside its parent, and a drop of more than five tasks fails it. But the quiz itself is regenerated fresh each time, and the guard on the last trial caught the same model's score moving four points between two fresh quizzes. This study re-measured five already-built models on four brand-new quizzes each — twenty measurement runs, zero training — to size that wobble directly.",
    "plain_question": "How much does a model's forgetting gap versus its parent wobble between fresh screens, what pass/fail margin does that imply, and which past readings survive?",
-   "plain_answer": "Nothing trains here. Twenty measurement runs — five built models by four fresh screens — size the wobble of the gap-to-parent (the number every pass/fail rule actually judges; the review caught and fixed a draft that measured raw-score wobble instead), yielding a margin, a rule for how many screens future trials must average, and a verdict on which historical readings were real.",
-   "why_it_matters": "Every forgetting conclusion this program makes — including the priced tax law and the paused capacity question — inherits its trustworthiness from this calibration.",
-   "verdict_tone": "neutral",
+   "plain_answer": "The gap wobbles with a standard deviation of 4.3 tasks — the five-task pass/fail margin was barely one wobble wide, so single-quiz forgetting verdicts were close to coin flips. Every historical 'this model forgot 5-10 tasks' reading sits inside the measured noise; averaged over four fresh quizzes the real forgetting is only 1-4 tasks. The frozen fix: future trials must average three fresh quizzes, where the same five-task margin becomes correctly sized.",
+   "why_it_matters": "Every forgetting conclusion this program made — including the priced 5-10-point dose tax and the paused capacity question — was read off a single quiz. This calibration shrinks the tax to 1-4 points, vindicates the guard that paused the last trial, and hands every future trial a sound adjudication rule.",
+   "verdict_tone": "positive",
    "key_numbers": [
     {
-     "label": "Training runs",
-     "value": "0",
-     "sub": "pure measurement — five built models"
+     "label": "Gap wobble (SD)",
+     "value": "4.3",
+     "sub": "vs the ±5 pass/fail margin"
     },
     {
-     "label": "Fresh screens",
-     "value": "4",
-     "sub": "104 tasks each, seeds 88,022-88,025"
+     "label": "Historical readings inside noise",
+     "value": "5/5",
+     "sub": "the -9, -10, -10, -7, -5"
     },
     {
-     "label": "Measurement runs",
-     "value": "20",
-     "sub": "every model on every screen"
+     "label": "Real pooled forgetting",
+     "value": "1-4",
+     "sub": "tasks, was read as 5-10"
     },
     {
-     "label": "Known wobble hint",
-     "value": "±3-4",
-     "sub": "same model across recent screens"
+     "label": "New rule",
+     "value": "3 quizzes",
+     "sub": "±5 margin on their average"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Where the experiment stands",
-     "chart_read": "Each bar is a preregistered stage; one means complete.",
-     "chart_takeaway": "The four screens and the contract are frozen; the twenty measurement runs remain."
+     "chart_plain_title": "The same model's forgetting gap on four fresh quizzes",
+     "chart_read": "Each group is one already-built model; the four bars are its gap to the parent on four freshly generated quizzes.",
+     "chart_takeaway": "Single readings swing from -10 to +4 for the same unchanged model — the historical one-quiz forgetting verdicts were reading this noise."
     }
    ]
   }

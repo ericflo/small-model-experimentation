@@ -49021,29 +49021,56 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Preregistered stage completion",
+     "title": "Retention delta vs clean_parent across four fresh screens",
      "categories": [
-      "intake",
-      "four screens frozen",
-      "design review",
-      "20-run calibration event"
+      "axis160_direct",
+      "axis160_r64",
+      "hygiene_explore_direct",
+      "replay_clean"
      ],
      "series": [
       {
-       "label": "completed checkpoint",
+       "label": "screen 88022",
        "values": [
-        1,
+        -7,
+        -4,
+        3,
+        1
+       ]
+      },
+      {
+       "label": "screen 88023",
+       "values": [
+        -10,
+        4,
+        -1,
+        2
+       ]
+      },
+      {
+       "label": "screen 88024",
+       "values": [
         0,
         0,
-        0
+        -4,
+        -1
+       ]
+      },
+      {
+       "label": "screen 88025",
+       "values": [
+        2,
+        -3,
+        -7,
+        -5
        ]
       }
      ],
-     "x_label": "preregistered experiment stage",
-     "y_label": "completion indicator",
+     "x_label": "published composite (unchanged between screens)",
+     "y_label": "retention correct minus clean_parent (104 tasks)",
      "y_format": "integer",
-     "note": "Eval-only instrument calibration: five published composites across four fresh retention screens; outputs are the measured screen-to-screen SD of the delta versus parent (the governing estimand, corrected from level SD by adversarial review), a derived band, the adjudication protocol, and historical stability flags. Nothing trains.",
-     "source": "experiments/qwen35_4b_retention_screen_calibration/reports/preregistration.md"
+     "note": "Twenty authenticated eval runs, zero training: the same frozen composites swing from -10 to +4 against the same parent purely by screen draw. Governing estimand delta_sd_pooled = 4.27 (level SD 4.81 descriptive) -> recommended_band 9, adjudication_protocol pooled_k3; all five historical single-screen tax readings (-9, -10, -10, -7, -5) fall inside pooled +/- 2 SD intervals; pooled deltas are only -3.75 / -0.75 / -2.25 / -0.75. The +/-5 band is correctly sized only on the mean of three pooled screens (2 x 4.27/sqrt(3) = 4.9).",
+     "source": "experiments/qwen35_4b_retention_screen_calibration/runs/local/calibration_readout.json"
     }
    ]
   }

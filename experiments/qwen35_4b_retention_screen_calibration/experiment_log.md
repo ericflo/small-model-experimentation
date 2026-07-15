@@ -30,3 +30,20 @@
   cancellation case (levels wobbling ±4 with a constant −5 delta must read
   band 5 / single_screen, not band 7 / pooled_k2).
 - 59/59 unit tests green after the amendment.
+
+## 2026-07-15 — Calibration event (the only model event) and closure
+
+- CI green on the freeze commit; `run.py --stage local` executed the 20
+  authenticated engine runs in the frozen screen-major order; every
+  composite tree recomputed and matched its receipt at the boundary.
+- Readings: `delta_sd_pooled` 4.27 → `recommended_band` 9 and
+  `adjudication_protocol` `pooled_k3`; level SD 4.81 (descriptive); all
+  five historical single-screen tax readings fall inside their arms'
+  pooled ± 2·SD intervals; pooled deltas −3.75 (axis160_direct), −2.25
+  (hygiene_explore_direct), −0.75 (axis160_r64), −0.75 (replay_clean).
+- Vehicle, descriptive: rank-64 −0.75 vs rank-32 −3.75 (+3.0, within
+  noise).
+- Closure: the ±5 single-screen band was ~1.2 SD wide; ±5 on a pooled
+  three-screen mean is correctly sized (2 × 4.27/√3 = 4.9), which is the
+  frozen protocol going forward. The 5–10-point per-dose tax reading
+  revises to 1–4 points pooled.

@@ -1,0 +1,360 @@
+{
+  "across_screens": {
+    "axis160_direct": {
+      "correct_by_screen": [
+        62,
+        57,
+        69,
+        66
+      ],
+      "mean_correct": 63.5,
+      "sd_correct": 5.196152422706632
+    },
+    "axis160_r64": {
+      "correct_by_screen": [
+        65,
+        71,
+        69,
+        61
+      ],
+      "mean_correct": 66.5,
+      "sd_correct": 4.43471156521669
+    },
+    "clean_parent": {
+      "correct_by_screen": [
+        69,
+        67,
+        69,
+        64
+      ],
+      "mean_correct": 67.25,
+      "sd_correct": 2.362907813126304
+    },
+    "hygiene_explore_direct": {
+      "correct_by_screen": [
+        72,
+        66,
+        65,
+        57
+      ],
+      "mean_correct": 65.0,
+      "sd_correct": 6.164414002968976
+    },
+    "replay_clean": {
+      "correct_by_screen": [
+        70,
+        69,
+        68,
+        59
+      ],
+      "mean_correct": 66.5,
+      "sd_correct": 5.066228051190222
+    }
+  },
+  "adjudication_protocol": "pooled_k3",
+  "aggregate_seed": null,
+  "aggregate_seed_open": false,
+  "answer_normalization": {
+    "applied_to": "both the parsed and the expected answer, every arm, all four screens",
+    "definition": "re.sub(r'\\s+', ' ', s).strip(), then re.sub(r'\\s*>\\s*', '>', s), then re.sub(r'\\s*;\\s*', ';', s)",
+    "function": "check_local.normalize_answer",
+    "prospective": true,
+    "rationale": "21 correct-but-rejected whitespace rows across the three prior gate events (seeds 88014/88015/88016), recorded in experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/analysis/three_event_failure_forensics.md; unchanged since the seed-88021 gate"
+  },
+  "backend": "vllm_merged_composite",
+  "benchmark_data_read": false,
+  "calibration_cell": true,
+  "candidates": [],
+  "controls": [
+    "axis160_direct",
+    "axis160_r64",
+    "clean_parent",
+    "hygiene_explore_direct",
+    "replay_clean"
+  ],
+  "deltas_vs_clean_parent": {
+    "axis160_direct": {
+      "by_screen": [
+        -7,
+        -10,
+        0,
+        2
+      ],
+      "pooled_mean": -3.75,
+      "sd": 5.678908345800274,
+      "vs": "clean_parent"
+    },
+    "axis160_r64": {
+      "by_screen": [
+        -4,
+        4,
+        0,
+        -3
+      ],
+      "pooled_mean": -0.75,
+      "sd": 3.593976442141304,
+      "vs": "clean_parent"
+    },
+    "hygiene_explore_direct": {
+      "by_screen": [
+        3,
+        -1,
+        -4,
+        -7
+      ],
+      "pooled_mean": -2.25,
+      "sd": 4.272001872658765,
+      "vs": "clean_parent"
+    },
+    "replay_clean": {
+      "by_screen": [
+        1,
+        2,
+        -1,
+        -5
+      ],
+      "pooled_mean": -0.75,
+      "sd": 3.095695936834452,
+      "vs": "clean_parent"
+    }
+  },
+  "design_receipt_sha256": "fd141b2ec1dd13a7244e56608dc14205bfd0b8f05f46160a5acec8604d078191",
+  "eligible": [],
+  "experiment_id": "qwen35_4b_retention_screen_calibration",
+  "local_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_retention_screen_calibration/runs/local/calibration.json",
+  "local_receipt_sha256": "2205d689ccc1c36ee21ab4a9b1e367230403bff52c1bab1939c786a8fd7188b3",
+  "no_promotion_in_calibration_cell": true,
+  "outcome": "CALIBRATION_READ_COMPLETE",
+  "parent": "clean_parent",
+  "promoted": null,
+  "readings": {
+    "adjudication_protocol": "pooled_k3",
+    "band_and_protocol_basis": "delta_sd_pooled",
+    "delta_sd_pooled": 4.272001872658765,
+    "recommended_band": 9,
+    "screen_sd_pooled": 4.814907406517111,
+    "stability_flags": [
+      {
+        "arm": "axis160_direct",
+        "gate_seed": 88020,
+        "historical_delta": -9,
+        "inside": true,
+        "interval_high": 7.607816691600547,
+        "interval_low": -15.107816691600547
+      },
+      {
+        "arm": "axis160_r64",
+        "gate_seed": 88021,
+        "historical_delta": -7,
+        "inside": true,
+        "interval_high": 6.437952884282608,
+        "interval_low": -7.937952884282608
+      },
+      {
+        "arm": "hygiene_explore_direct",
+        "gate_seed": 88018,
+        "historical_delta": -10,
+        "inside": true,
+        "interval_high": 6.29400374531753,
+        "interval_low": -10.79400374531753
+      },
+      {
+        "arm": "hygiene_explore_direct",
+        "gate_seed": 88020,
+        "historical_delta": -10,
+        "inside": true,
+        "interval_high": 6.29400374531753,
+        "interval_low": -10.79400374531753
+      },
+      {
+        "arm": "replay_clean",
+        "gate_seed": 88020,
+        "historical_delta": -5,
+        "inside": true,
+        "interval_high": 5.441391873668904,
+        "interval_low": -6.941391873668904
+      }
+    ],
+    "vehicle_descriptive": {
+      "r32_interval": [
+        -15.107816691600547,
+        7.607816691600547
+      ],
+      "r32_pooled_delta": -3.75,
+      "r64_interval": [
+        -7.937952884282608,
+        6.437952884282608
+      ],
+      "r64_minus_r32": 3.0,
+      "r64_pooled_delta": -0.75,
+      "reported_not_gated": true
+    }
+  },
+  "retention_rows_per_screen": 104,
+  "schema_version": 1,
+  "seeds": [
+    88022,
+    88023,
+    88024,
+    88025
+  ],
+  "summaries": {
+    "axis160_direct": {
+      "88022": {
+        "cap_contacts": 7,
+        "correct": 62,
+        "parsed": 97,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "88023": {
+        "cap_contacts": 7,
+        "correct": 57,
+        "parsed": 97,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "88024": {
+        "cap_contacts": 6,
+        "correct": 69,
+        "parsed": 97,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "88025": {
+        "cap_contacts": 6,
+        "correct": 66,
+        "parsed": 98,
+        "route_abstentions": 0,
+        "rows": 104
+      }
+    },
+    "axis160_r64": {
+      "88022": {
+        "cap_contacts": 8,
+        "correct": 65,
+        "parsed": 96,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "88023": {
+        "cap_contacts": 10,
+        "correct": 71,
+        "parsed": 94,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "88024": {
+        "cap_contacts": 6,
+        "correct": 69,
+        "parsed": 98,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "88025": {
+        "cap_contacts": 12,
+        "correct": 61,
+        "parsed": 90,
+        "route_abstentions": 0,
+        "rows": 104
+      }
+    },
+    "clean_parent": {
+      "88022": {
+        "cap_contacts": 8,
+        "correct": 69,
+        "parsed": 95,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "88023": {
+        "cap_contacts": 10,
+        "correct": 67,
+        "parsed": 94,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "88024": {
+        "cap_contacts": 8,
+        "correct": 69,
+        "parsed": 96,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "88025": {
+        "cap_contacts": 10,
+        "correct": 64,
+        "parsed": 94,
+        "route_abstentions": 0,
+        "rows": 104
+      }
+    },
+    "hygiene_explore_direct": {
+      "88022": {
+        "cap_contacts": 7,
+        "correct": 72,
+        "parsed": 97,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "88023": {
+        "cap_contacts": 11,
+        "correct": 66,
+        "parsed": 93,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "88024": {
+        "cap_contacts": 12,
+        "correct": 65,
+        "parsed": 93,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "88025": {
+        "cap_contacts": 11,
+        "correct": 57,
+        "parsed": 93,
+        "route_abstentions": 0,
+        "rows": 104
+      }
+    },
+    "replay_clean": {
+      "88022": {
+        "cap_contacts": 12,
+        "correct": 70,
+        "parsed": 93,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "88023": {
+        "cap_contacts": 12,
+        "correct": 69,
+        "parsed": 92,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "88024": {
+        "cap_contacts": 9,
+        "correct": 68,
+        "parsed": 95,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "88025": {
+        "cap_contacts": 16,
+        "correct": 59,
+        "parsed": 88,
+        "route_abstentions": 0,
+        "rows": 104
+      }
+    }
+  },
+  "thresholds": {
+    "band_minimum": 5,
+    "pooled_k2_max_sd": 3.5,
+    "rule": "delta_sd_pooled = sqrt(mean per-arm across-screen sample variance, ddof=1, of the per-screen delta vs clean_parent over the four non-parent arms); recommended_band = max(5, ceil(2 * delta_sd_pooled)); single_screen if delta_sd_pooled <= 2; else pooled_k2 if <= 3.5; else pooled_k3; screen_sd_pooled (levels, all five arms) is reported descriptively and governs nothing",
+    "single_screen_max_sd": 2.0,
+    "stability_rule": "a historical reading is stable when it lies inside the arm's pooled delta vs clean_parent +/- 2 x across-screen sample SD of that delta"
+  }
+}

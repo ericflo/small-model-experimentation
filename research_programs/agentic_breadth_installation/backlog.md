@@ -231,13 +231,28 @@
   install_preserved false, but none of it is adjudicable at current bands).
   Pooled noise across four gates: same-composite retention deltas scatter
   +/-3-4 points; the screen's seed noise rivals the +/-5 band.
-- Funded successor (eval-only calibration study, own intake): re-measure the
-  published composites (clean_parent, replay_clean, hygiene_explore_direct,
-  axis160_direct, axis160_r64) across 3-4 fresh retention screens (seeds
-  88022+) with no training, estimate per-arm screen variance directly, and
-  preregister either wider bands or a pooled-multi-screen adjudication
-  protocol for all future dose/vehicle cells. Cheap (~pure eval), decisive
-  for every retention claim the line makes afterward.
+- Completed calibration study (CALIBRATION_READ_COMPLETE):
+  `qwen35_4b_retention_screen_calibration` — the five published composites
+  across four fresh screens (88022-88025, 20 authenticated eval runs, zero
+  training). Governing delta-vs-parent SD 4.27 (adversarial review corrected
+  the draft's level-SD estimand pre-freeze); recommended band 9; frozen
+  protocol `pooled_k3` — every future retention adjudication pools THREE
+  fresh screens and applies the +/-5 band to their mean (2 x 4.27/sqrt(3) =
+  4.9). All five historical tax readings (-9, -10, -10, -7, -5) sit inside
+  measured noise; pooled deltas are only -3.75 (axis160_direct), -2.25
+  (hygiene_explore_direct), -0.75 (axis160_r64), -0.75 (replay_clean). The
+  5-10-point per-dose tax law REVISES to 1-4 points pooled; the trade is
+  cheaper than priced. Vehicle descriptive: r64 -0.75 vs r32 -3.75 (+3.0,
+  within noise) — capacity relief is plausible but unadjudicated.
+- Next funded branch (pick one, own intake): (a) vehicle resumption under
+  pooled_k3 — adjudicate rank-64 vs rank-32 retention on three fresh pooled
+  screens (eval-only if both arms stay published; decisive on the capacity
+  question the rank cell paused); (b) the goal-gate path — a
+  hygiene+explore-lesson dose from the best parent, gated under pooled_k3
+  retention plus the standard axis instrument, then the MEDIUM-tier
+  four-model pilot (candidate > base/replay/parent aggregate; every-family
+  -vs-base recorded as the goal gate). The revised 1-4-point tax makes (b)
+  cheaper than previously priced.
 - Standing queued directions (unchanged): medium-native measurement intake for
   existing artifacts; mechanism-diverse attacks on menders/sirens (needs new
   mechanism evidence first).

@@ -990,3 +990,32 @@ calibration study — the published composites re-measured across several fresh
 screens to size seed variance directly and set bands (or pooled-screen
 protocols) that separate real effects from draws. Vehicle inference (rank,
 weighting, updates) stays open until then.
+
+## qwen35_4b_retention_screen_calibration (2026-07-15 — CALIBRATION_READ_COMPLETE: the band was ~1.2 SD wide; the tax law revises downward)
+
+The instability guard's funded successor measured the measuring stick: the
+five published composites re-run on four fresh 104-row retention screens
+(seeds 88,022–88,025; 20 authenticated engine runs; zero training). The
+adversarial design review corrected the estimand pre-freeze — bands govern
+same-screen DELTAS versus the parent, so the calibration pools the
+delta-vs-parent SD (common screen difficulty cancels; the draft's level SD
+was wrong in both directions).
+
+Readings: delta SD pooled 4.27 (per-arm 5.68/4.27/3.59/3.10; level SD 4.81
+descriptive) → recommended band 9 and frozen protocol `pooled_k3`. The ±5
+single-screen band every prior gate used was ~1.2 SD wide — but ±5 applied
+to the MEAN of three pooled fresh screens is almost exactly 2 SD
+(2 × 4.27/√3 = 4.9), so the historical band size survives as a pooled-k3
+rule. All five historical single-screen tax readings (−9 axis160_direct,
+−10/−10 hygiene_explore_direct, −7 axis160_r64, −5 replay_clean) fall
+INSIDE their arms' pooled ± 2·SD intervals; the pooled deltas are −3.75,
+−2.25, −0.75, −0.75. Same-composite single readings swing −10 to +4 across
+screens; screen 88,025 ran commonly hard (parent 64 vs 67–69).
+
+The standing law revises: designed doses cost ~1–4 retention points pooled
+(not 5–10; the old figure was single-screen draws from a ±4.3-SD process).
+Installs remain unambiguous; the trade is real but several times cheaper
+than priced. Vehicle, descriptive only: rank-64 pooled −0.75 versus
+rank-32's −3.75 (+3.0 favoring capacity, within noise) — the capacity
+question stays open and is now cheaply adjudicable under pooled_k3 with
+both arms already published.
