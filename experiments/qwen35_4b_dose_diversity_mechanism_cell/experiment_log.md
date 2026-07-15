@@ -17,3 +17,10 @@
   `origin/main` with both workflows green and a clean worktree.
 - `axis160_direct` trained 1,520/1,520 rows with 0 skipped over 190 updates;
   receipt/log published and pinned fail-closed. The single merge is next.
+
+## 2026-07-15 — Authenticated candidate composite
+
+- `merge-candidate` ran only after the training checkpoint matched
+  `origin/main` with both workflows green; the composite merged (128/128
+  modules, fingerprint-verified); the tree pin filled fail-closed. The one
+  frozen four-arm gate event at seed 88,020 is the only next stage.
