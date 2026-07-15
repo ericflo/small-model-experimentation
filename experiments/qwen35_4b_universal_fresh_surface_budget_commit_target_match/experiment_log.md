@@ -41,3 +41,11 @@
 - `designed_fresh` trained 1,520/1,520 rows with 0 skipped over 190 updates
   (train loss 0.4634, 1,334.7 wrapper seconds); receipt/log published and pinned.
 - The budget arm remains untrained until this checkpoint publishes green.
+
+## 2026-07-15 — Authenticated budget-commit training
+
+- `train-budget` ran only after designed checkpoint `c54a5378` matched
+  `origin/main` with both workflows green and a clean worktree.
+- `budget_commit` trained 1,520/1,520 rows with 0 skipped over 190 updates
+  (train loss 0.5106, 1,393.4 wrapper seconds); receipt/log published and pinned.
+- All three arms are trained; merges are the only next stage.
