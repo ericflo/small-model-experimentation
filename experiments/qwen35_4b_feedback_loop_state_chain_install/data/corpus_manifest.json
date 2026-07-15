@@ -1,0 +1,260 @@
+{
+  "balance": {
+    "feedloop_formalisms": {
+      "crankwheel": 20,
+      "sigilslate": 20,
+      "trinketcord": 20,
+      "troughline": 20
+    },
+    "feedloop_out_of_bound_alternative_counts": {
+      "0": 67,
+      "1": 6,
+      "2": 5,
+      "4": 1,
+      "5": 1
+    },
+    "feedloop_round1_candidate_counts": {
+      "11": 1,
+      "12": 1,
+      "2": 48,
+      "21": 1,
+      "3": 18,
+      "4": 2,
+      "5": 6,
+      "6": 1,
+      "7": 1,
+      "9": 1
+    },
+    "feedloop_rows_with_out_of_bound_alternatives": 13,
+    "statechain_formalisms": {
+      "brewvat": 40,
+      "courierloft": 40
+    },
+    "statechain_hidden_updates_min": 5
+  },
+  "banned_vocabulary": {
+    "sha256": "df078e398559b708ee5802546a6983c3b24cbf6d624f33fb935bc722d5f2aa52",
+    "tokens": 199
+  },
+  "banned_vocabulary_checked": true,
+  "construction_seed": 77130,
+  "corpus": {
+    "kinds": {
+      "u_feedloop": 80,
+      "u_statechain": 80
+    },
+    "mix": "feedloop=80,statechain=80",
+    "path": "data/sft_feedloop_state.jsonl",
+    "rows": 160,
+    "sha256": "e6d45ed45632f7d6bea8e300f469a4d4c076eb4d8be420d677bd14c27471083b",
+    "surfaces": {
+      "brewvat": 40,
+      "courierloft": 40,
+      "crankwheel": 20,
+      "sigilslate": 20,
+      "trinketcord": 20,
+      "troughline": 20
+    }
+  },
+  "experiment_id": "qwen35_4b_feedback_loop_state_chain_install",
+  "feedloop_uniqueness_contract": {
+    "ambiguity_rule": "a draw whose bounded round-two survivor set is not exactly the true fix is rejected and redrawn from the same deterministic rng stream (attempt cap 5000)",
+    "bounded_enumeration_exhaustive": true,
+    "extended_probe_amount_bound": 12,
+    "extended_probe_items": "full module pools",
+    "out_of_bound_alternatives_excluded_by_documented_legality_only": true,
+    "parameterized_ops_bounded_in_spec_text": true
+  },
+  "generator": "scripts/gen_episode_curriculum.py",
+  "schema_version": 1,
+  "surface_freshness_audit": {
+    "match_rule": "case-insensitive word-boundary regex, zero hits required",
+    "sources": {
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/axis160_direct.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "0cbf3abf04781f3217189dd7b2bdf173d83772b0200b283a7c608dc3d386c1ee",
+        "tokens_checked": 56
+      },
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/sft_axis160.jsonl": {
+        "hits": 0,
+        "rows": 160,
+        "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e",
+        "tokens_checked": 56
+      },
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/sft_blend.jsonl": {
+        "hits": 0,
+        "rows": 2240,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2",
+        "tokens_checked": 56
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/sft_blend.jsonl": {
+        "hits": 0,
+        "rows": 2240,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2",
+        "tokens_checked": 56
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/axis_curriculum.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "e2561485ae28c9c374b663af4a002ab67e02cc75ec8994d1d89770e6b198e98a",
+        "tokens_checked": 56
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/replay_repeat.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "878f501f3c6665982b7b3e9ffb2de675382d6b366b62a61d0a13e6709841c468",
+        "tokens_checked": 56
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/sft_axis160.jsonl": {
+        "hits": 0,
+        "rows": 160,
+        "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e",
+        "tokens_checked": 56
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/sft_blend.jsonl": {
+        "hits": 0,
+        "rows": 2240,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2",
+        "tokens_checked": 56
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/hygiene_explore.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "82aa1a78c0a429a48c3db6b94ac84397cea001b041477e7b137b38c21354112f",
+        "tokens_checked": 56
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/replay_clean.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "2189d160c9c3007ccbaf935478b3354b597c71945f6dbf1c32bf4e670ace0017",
+        "tokens_checked": 56
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/sft_blend.jsonl": {
+        "hits": 0,
+        "rows": 2240,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2",
+        "tokens_checked": 56
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/sft_hygiene_explore.jsonl": {
+        "hits": 0,
+        "rows": 80,
+        "sha256": "8b3e97919c62cbb0893add281dc1d3ae881aa0138d0d1721043fec26b0c22cf1",
+        "tokens_checked": 56
+      },
+      "experiments/qwen35_4b_rank_capacity_vehicle_cell/data/axis160_r64.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "336a044557cc6802aeffce497634528b844329d872f64d1c54ea4a63311c990c",
+        "tokens_checked": 56
+      },
+      "experiments/qwen35_4b_rank_capacity_vehicle_cell/data/sft_axis160.jsonl": {
+        "hits": 0,
+        "rows": 160,
+        "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e",
+        "tokens_checked": 56
+      },
+      "experiments/qwen35_4b_rank_capacity_vehicle_cell/data/sft_blend.jsonl": {
+        "hits": 0,
+        "rows": 2240,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2",
+        "tokens_checked": 56
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/budget_commit.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "7dbc084809c6ae6b8dd794465a7057095e02b9d598c414fdad32dee7d361c8d7",
+        "tokens_checked": 56
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/designed_fresh.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "6d4dc303bc159c19a1ffd0c60ca7d08ea64b02909366701b345d888482d67f3f",
+        "tokens_checked": 56
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/replay_repeat.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "fa5198c2033dc527fa668f55f8a49865d8015a6d14cc059b319aa058dfad74f0",
+        "tokens_checked": 56
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/sft_blend.jsonl": {
+        "hits": 0,
+        "rows": 2240,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2",
+        "tokens_checked": 56
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/sft_fresh_budget160.jsonl": {
+        "hits": 0,
+        "rows": 160,
+        "sha256": "ecece8e294f0b1c34a086705b05773d6004c6a9a239283aa26ee1c1bbad39800",
+        "tokens_checked": 56
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/sft_fresh_designed160.jsonl": {
+        "hits": 0,
+        "rows": 160,
+        "sha256": "e599f1563f6e4fe68aa43ce64bbe450c264170fb07dc17dba9ea74e694f284d5",
+        "tokens_checked": 56
+      }
+    },
+    "token_inventory_sha256": "b353a8c975e3d4bd107c1c1f761a697fd120756686e5d41c0c8f143d48ecd63d",
+    "tokens": [
+      "troughline",
+      "trinketcord",
+      "crankwheel",
+      "sigilslate",
+      "brewvat",
+      "courierloft",
+      "brann",
+      "clave",
+      "dorst",
+      "grelm",
+      "murd",
+      "prell",
+      "plome",
+      "quenn",
+      "trell",
+      "vosk",
+      "yorv",
+      "zilk",
+      "drasp",
+      "fyne",
+      "golve",
+      "hilm",
+      "juss",
+      "krev",
+      "morv",
+      "nilt",
+      "pryn",
+      "quav",
+      "rulf",
+      "senn",
+      "orvan",
+      "welk",
+      "xemb",
+      "yurr",
+      "zeff",
+      "obbin",
+      "trough",
+      "troughs",
+      "trinket",
+      "trinkets",
+      "sigil",
+      "sigils",
+      "dram",
+      "drams",
+      "perch",
+      "perches",
+      "satchel",
+      "cork",
+      "corked",
+      "laden",
+      "scant",
+      "stout",
+      "faint",
+      "looped",
+      "onward",
+      "brisk"
+    ]
+  }
+}

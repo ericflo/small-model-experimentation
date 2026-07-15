@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 244
-- Manifest files: 580
+- Experiments with manifests: 245
+- Manifest files: 583
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 97 |
+| `other` | 99 |
 | `run-data` | 101 |
-| `standard-artifact` | 117 |
+| `standard-artifact` | 118 |
 
 ## Manifests
 
@@ -117,6 +117,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_executable_program_posttraining` | `dataset` | [manifest](../experiments/qwen35_4b_executable_program_posttraining/data/and_bridge/dataset_manifest.json) |
 | `qwen35_4b_executable_program_posttraining` | `dataset` | [manifest](../experiments/qwen35_4b_executable_program_posttraining/data/dataset_manifest.json) |
 | `qwen35_4b_executable_program_posttraining` | `large-artifact` | [manifest](../experiments/qwen35_4b_executable_program_posttraining/large_artifacts_manifest.md) |
+| `qwen35_4b_feedback_loop_state_chain_install` | `other` | [manifest](../experiments/qwen35_4b_feedback_loop_state_chain_install/data/corpus_manifest.json) |
+| `qwen35_4b_feedback_loop_state_chain_install` | `other` | [manifest](../experiments/qwen35_4b_feedback_loop_state_chain_install/data/stream_manifest.json) |
+| `qwen35_4b_feedback_loop_state_chain_install` | `standard-artifact` | [manifest](../experiments/qwen35_4b_feedback_loop_state_chain_install/reports/artifact_manifest.yaml) |
 | `qwen35_4b_foofah_direct_vs_abi` | `large-artifact` | [manifest](../experiments/qwen35_4b_foofah_direct_vs_abi/large_artifacts_manifest.md) |
 | `qwen35_4b_foofah_ephemeral_program_induction` | `large-artifact` | [manifest](../experiments/qwen35_4b_foofah_ephemeral_program_induction/large_artifacts_manifest.md) |
 | `qwen35_4b_foofah_external_transform_gate` | `large-artifact` | [manifest](../experiments/qwen35_4b_foofah_external_transform_gate/large_artifacts_manifest.md) |

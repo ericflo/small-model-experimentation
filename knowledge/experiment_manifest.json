@@ -2259,6 +2259,40 @@
   },
   {
     "file_counts": {
+      ".json": 6,
+      ".jsonl": 12,
+      ".md": 7,
+      ".py": 22,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_feedback_loop_state_chain_install",
+    "path": "experiments/qwen35_4b_feedback_loop_state_chain_install",
+    "primary_readme": "experiments/qwen35_4b_feedback_loop_state_chain_install/README.md",
+    "primary_report": "experiments/qwen35_4b_feedback_loop_state_chain_install/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "The two-tie install: teach the episode protocol (using rerun feedback; tracking narrated hidden state) that the public metadata names for menders and rites \u2014 the only two families separating the hygiene_explore parent from the recorded all-families goal gate at medium.",
+    "tags": [
+      "latent-state",
+      "small-model"
+    ],
+    "title": "Feedback-Loop + State-Chain Install",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 50,
+    "total_size_bytes": 19130211
+  },
+  {
+    "file_counts": {
       ".json": 43,
       ".jsonl": 3,
       ".log": 3,

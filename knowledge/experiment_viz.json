@@ -49207,6 +49207,41 @@
      "source": "experiments/qwen35_4b_universal_medium_tier_measurement/runs/benchmark/medium_tb1024_seed78150_measurement/measurement_readout.json"
     }
    ]
+  },
+  "qwen35_4b_feedback_loop_state_chain_install": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered stage completion",
+     "categories": [
+      "intake",
+      "corpus + exposure frozen",
+      "design review",
+      "train both arms",
+      "local gate (pooled_k3)",
+      "conditional medium event"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "The two-tie install: 160 episode-protocol rows (act-observe-revise feedback loops; narrated hidden-state chains) on six invented formalisms, fresh rank-32 adapter from the hygiene_explore parent vs an exact zero-delta MILP replay control; axis holdout at seed 88026; first use of the calibrated pooled_k3 retention protocol (screens 88027/88028/88030); conditional medium event at sealed seed 78151 where the recorded goal gate needs menders > 0 and rites > 0 with no new losses.",
+     "source": "experiments/qwen35_4b_feedback_loop_state_chain_install/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

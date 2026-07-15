@@ -1,0 +1,28 @@
+schema_version: 1
+experiment_id: "qwen35_4b_feedback_loop_state_chain_install"
+external_artifacts:
+  - name: hygiene_explore parent composite
+    storage: large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore
+    required_for: adapter base, baseline arm, and benchmark arm
+    checksum: 9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971
+    regenerate: experiments/qwen35_4b_hygiene_explore_destack_medium/runs/merges/hygiene_explore.json (output_tree_sha256)
+  - name: base_reserialized composite
+    storage: large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized
+    required_for: conditional benchmark arm
+    checksum: b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db
+    regenerate: reserialization of the pinned base revision (weights sha; tree recomputed at event time)
+  - name: replay_ctl and feedloop_state merged composites
+    storage: large_artifacts/qwen35_4b_feedback_loop_state_chain_install/merged/
+    required_for: local gate and conditional benchmark arms
+    checksum: pinned post-merge in runs/merges receipts and the runner TODO-pins
+    regenerate: scripts/merge_trained_arm.py via the external merger (cb9af8b4...) with --base-model
+omitted_artifacts:
+  - name: trained adapters and merged composites
+    reason: 9GB-scale weights live outside the repo per repository policy; receipts pin all hashes
+reproducibility:
+  smoke_command: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_feedback_loop_state_chain_install/scripts/run.py --smoke
+  full_command: checkpointed scripts/run.py stages train-control / train-candidate / merge-arms / local / benchmark
+  required_external_artifacts:
+    - hygiene_explore parent composite
+    - base_reserialized composite
+notes: Fresh-adapter paired training from a composite parent; every stage fail-closed behind clean pushed green main and its preregistered review verdict; sealed aggregate seed 78151 opens only on local promotion.

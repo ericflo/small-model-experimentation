@@ -531,6 +531,14 @@
     "logs/experiment_log.md:'## 2026-06-22' dated log heading ('Created standalone experiment directory')"
    ]
   },
+  "qwen35_4b_feedback_loop_state_chain_install": {
+   "start": "2026-07-15",
+   "end": "2026-07-15",
+   "confidence": "high",
+   "sources": [
+    "dated experiment_log.md heading (2026-07-15 design freeze)"
+   ]
+  },
   "qwen35_4b_foofah_adaptive_program_budget_router": {
    "start": "2026-06-28",
    "end": "2026-06-28",

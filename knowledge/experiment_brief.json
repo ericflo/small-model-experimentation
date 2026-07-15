@@ -14341,6 +14341,44 @@
      "chart_takeaway": "The trained models beat the base almost everywhere; the two zero-zero ties at menders and rites are all that separates the best model from the all-families goal."
     }
    ]
+  },
+  "qwen35_4b_feedback_loop_state_chain_install": {
+   "verdict_tag": "Design frozen; training and the two-tie shot remain",
+   "concept_primer": "The last measurement left the program's best clean model beating the untouched base on eight of ten benchmark families with zero losses — only two zero-zero ties remain. The public one-line descriptions of those two families share a trait every past training set lacked: they are multi-turn episodes, where the model must act, observe feedback, and revise. Every lesson this program ever trained was a single question with a single answer. This experiment teaches the missing loop itself — on six invented toy machines that look nothing like the benchmark — and then takes one shot at the full ten-family sweep.",
+   "plain_question": "Does teaching the act-observe-revise loop and hidden-state tracking on invented machines flip the last two zero-score families without breaking the eight wins?",
+   "plain_answer": "Nothing has run yet. The frozen plan: 160 loop-and-state lessons train against an exactly-matched replay control from the same parent; a fresh holdout tests whether the two skills installed; forgetting is judged for the first time under the newly calibrated three-quiz averaging rule; and only if all of that passes does the model take the medium-tier benchmark once, where flipping the two zeros with no new losses would be the program milestone.",
+   "why_it_matters": "This is the closest the program has been to its goal — one model, every family up. The bet is honest (~15-30%): the mechanism is new (episode protocol, not repair content), the instruments are freshly calibrated, and either outcome sharpens the map.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Ties to flip",
+     "value": "2",
+     "sub": "menders and rites, both at zero"
+    },
+    {
+     "label": "Lessons",
+     "value": "160",
+     "sub": "80 feedback-loop + 80 state-chain"
+    },
+    {
+     "label": "Invented machines",
+     "value": "6",
+     "sub": "zero vocabulary overlap with anything prior"
+    },
+    {
+     "label": "Honest prior",
+     "value": "15-30%",
+     "sub": "for the full ten-family sweep"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Where the experiment stands",
+     "chart_read": "Each bar is a preregistered stage; one means complete.",
+     "chart_takeaway": "The corpus, exposure match, and gates are frozen; training, the local gate, and the conditional benchmark shot remain."
+    }
+   ]
   }
  }
 }

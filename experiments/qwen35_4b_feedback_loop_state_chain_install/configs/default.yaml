@@ -1,0 +1,16 @@
+experiment_id: qwen35_4b_feedback_loop_state_chain_install
+status: model_free_construction
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+parent: hygiene_explore composite (tree 9eb653d7...)
+arms: [replay_ctl, feedloop_state]
+seeds:
+  construction: 77130
+  namespace: 55127
+  training: 61
+  axis_gate: 88026
+  retention_screens: [88027, 88028, 88030]
+  aggregate_sealed: 78151
+retention_protocol: pooled_k3
+conditional_benchmark: {tier: medium, think_budget: 1024}
