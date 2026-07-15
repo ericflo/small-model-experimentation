@@ -300,7 +300,11 @@ treatments beat it locally on block 1, but that signal reverses block 0 and
 does not cross the deep-source frontier. Soup25 was dominated by the soup and
 all treatments. Soup50 now scores `0.586316` deep, `0.795188` quick, and
 `0.690752` joint, trailing the soup by `−0.003145`/`−0.005677`/`−0.004411`
-and every treatment on both strata. Soup75 is running next.
+and every treatment on both strata. Soup75 then scored `0.595053` deep,
+`0.807503` quick, and `0.701278` joint. It beats seed 42 on both block-1
+strata and beats the immutable soup by `+0.006115` joint while remaining below
+deep. Ordinary interpolation therefore exceeds the primary MOPD checkpoint on
+both blocks' joint projections. Soup best-of-eight is running next.
 
 ## NF4/BF16 Interpretation Diagnostic
 

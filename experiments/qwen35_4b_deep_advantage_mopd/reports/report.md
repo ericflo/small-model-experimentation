@@ -280,6 +280,15 @@ Soup50 then scores direct item means `0.565327` deep and `0.795188` quick from
 block-1 treatment on both strata. Thus the 50%-deep interpolation is a Pareto
 trade on block 0 but strictly dominated on block 1; it does not explain a
 stable beyond-initialization effect.
+Soup75 then scores direct item means `0.576310` deep and `0.807503` quick from
+4,289,527 sampled tokens. Its equal-cell macros are `0.595053` deep,
+`0.807503` quick, and `0.701278` joint, beating the immutable soup by
+`+0.005592`, `+0.006638`, and `+0.006115`. It also exceeds primary seed 42 by
+`+0.002667` deep, `+0.000775` quick, and `+0.001721` joint. Since soup75 also
+has a block-0 joint advantage over seed 42, ordinary interpolation is stronger
+than the registered primary on both sealed blocks without routed online
+updates. It remains below deep and therefore locates, rather than crosses, the
+source frontier.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

@@ -889,3 +889,23 @@
   frontier explanation for the treatment checkpoints.
 - Soup75 started next with external journal hash
   `c9ff00e7325bff53b964cfd2ce556336a187e2e3036fc80aa75e5cb5a0395460`.
+
+## 2026-07-15 — soup75 exceeds the primary on block 1
+
+- Soup75 completed sealed generation and strict validation. `GENERATED.json`
+  and `COMPLETE.json` hash to
+  `55d92933db0da2e9de7e16bc5474f21d88c4f33cb3ce38e773706cc30ffc0b07`
+  and `8876a7bde424166d46a6e3e0f37d11ee1333f7c25fa5ec5bb6a38d3ec77af8d2`;
+  the score hashes to
+  `7367f35384ec5f50e7d02ba1d7a5f30ce2fde6390f8e6ca8bc0ad86369dc0682`.
+- Direct item-weighted means are `0.576310` deep and `0.807503` quick, using
+  4,289,527 sampled tokens. Equal-cell macros are `0.595053` deep, `0.807503`
+  quick, and `0.701278` joint, respectively `+0.005592`, `+0.006638`, and
+  `+0.006115` versus the immutable soup.
+- Soup75 beats primary seed 42 by `+0.002667` deep, `+0.000775` quick, and
+  `+0.001721` joint on block 1. Together with its block-0 joint advantage,
+  ordinary interpolation exceeds the registered primary on both blocks. Seed
+  43 trades higher deep for lower quick; soup75 is also `+0.002256` joint
+  versus seed 44.
+- Soup best-of-eight started next with external journal hash
+  `092c63c98849093b209da1a9089aee7a0f805d978286f2c39bef30af730553fe`.
