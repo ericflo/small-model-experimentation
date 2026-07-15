@@ -267,6 +267,12 @@ initialization on both block-1 strata, with joint gains of `+0.004394`,
 `+0.009185`, and `+0.003859` for seeds 42/43/44. That is a real block-local
 update signal, but it reverses the block-0 comparison—no treatment dominated
 soup there—and still does not cross the better-source frontier.
+Soup25 then scores direct item means `0.543777` deep and `0.792800` quick from
+4,688,835 sampled tokens. Its equal-cell macros are `0.562769` deep,
+`0.792800` quick, and `0.677784` joint, trailing the immutable soup by
+`−0.026693`, `−0.008066`, and `−0.017379`. The 25%-deep interpolation is
+dominated by the initialization on both sealed blocks and cannot explain the
+treatment checkpoints; all three block-1 treatment seeds dominate it as well.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

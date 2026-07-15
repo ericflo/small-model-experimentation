@@ -854,3 +854,20 @@
   the better-source frontier.
 - Soup25 started next with external journal hash
   `8dfbec59f535168b34097f2f56ea25237dc5f19f9a1bdbfddb6aea8c13f6d698`.
+
+## 2026-07-15 — soup25 is dominated on both sealed blocks
+
+- Soup25 completed sealed generation and strict validation. `GENERATED.json`
+  and `COMPLETE.json` hash to
+  `1fdfef844ceedcf74bbd48667835b805e2c8c24e32848959951ab2cf59c29a07`
+  and `36957d441d8df25fd03e68dd8eaa2de5b1bdb8e885dac7d223f76f10eb2f9d22`;
+  the score hashes to
+  `6c0d19733ad9a3dbba9c7b0364276625c6b74b7e5fda181d28e3ccc740a76d00`.
+- Direct item-weighted means are `0.543777` deep and `0.792800` quick, using
+  4,688,835 sampled tokens. Equal-cell macros are `0.562769` deep, `0.792800`
+  quick, and `0.677784` joint, respectively `−0.026693`, `−0.008066`, and
+  `−0.017379` versus the immutable soup.
+- Soup25 is dominated by the initialization on both sealed blocks and cannot
+  explain the treatment checkpoints; every block-1 treatment dominates it.
+- Soup50 started next with external journal hash
+  `fd036a60b739b9b3bf484956de8f0ab01d657bbe563824412ea8989cc3203afe`.
