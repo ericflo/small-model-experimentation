@@ -60,7 +60,12 @@ PUBLISHED_ARM_HASHES = {
     # TODO-PIN: after each arm trains and its receipt/log/adapter are published,
     # the orchestrator replaces the None with the four published sha256 values
     # {"receipt": ..., "log": ..., "adapter_config": ..., "adapter_weights": ...}.
-    "replay_repeat": None,
+    "replay_repeat": {
+        "receipt": "7336d265a6f505202ab373a46f3ceb093ded9469ecbef414ca1ac625b8cf48c3",
+        "log": "0afa01cba2524db8aafde3f3815ad2552e9e1177ebe4a313f639c26ca976f582",
+        "adapter_config": "caf8d3dcecfe1f2372654be13cf4415851f8ee0c1610f1a3868bafc378942bee",
+        "adapter_weights": "733807044900d6a095ac99c47afa88ef22ff22b187689f3ab7cc2a08c4603e3f",
+    },
     "designed_fresh": None,
     "budget_commit": None,
 }
