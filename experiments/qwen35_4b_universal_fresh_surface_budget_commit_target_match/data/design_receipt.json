@@ -1,0 +1,255 @@
+{
+  "arms": {
+    "candidate_budget": "budget_commit",
+    "candidate_designed": "designed_fresh",
+    "control": "replay_repeat",
+    "parent_eval_label": "replay_after_close_parent"
+  },
+  "benchmark_plan": {
+    "gates": {
+      "candidate_aggregate_strictly_above_base": true,
+      "candidate_aggregate_strictly_above_control": true,
+      "candidate_aggregate_strictly_above_parent": true,
+      "every_public_family_strictly_above_base": true
+    },
+    "gateway": "scripts/run_benchmark_aggregate.py",
+    "models": {
+      "base": "large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized",
+      "candidate": "large_artifacts/qwen35_4b_universal_fresh_surface_budget_commit_target_match/merged/<promoted>",
+      "control": "large_artifacts/qwen35_4b_universal_fresh_surface_budget_commit_target_match/merged/replay_repeat",
+      "parent": "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/replay_after_close"
+    },
+    "public_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "sirens",
+      "stockade",
+      "toolsmith",
+      "warren"
+    ],
+    "seed": 78143,
+    "think_budget": 1024,
+    "tier": "quick"
+  },
+  "checkpoint_policy": {
+    "clean_pushed_main_required": true,
+    "full_check_rebase_push_two_workflow_gate_between_expensive_stages": true,
+    "next_authorized_stage": "train-control",
+    "one_stage_per_invocation": true,
+    "preceding_receipt_committed_at_head": true
+  },
+  "code": {
+    "corpus_builder_sha256": "fbecde9b4ae35840b9be7de6cc1f256618963e6b86c7abc46f73457106106dc2",
+    "curriculum_generator_sha256": "70fc722a6a69f4f8a64ae4356058421ea44117c7e86d3350abfd72b047ccf080",
+    "fresh_curriculum_generator_sha256": "92dc186a8a3d898ae084f25b1cd4a91add66ae357e013294617666304b5ef18d",
+    "trainer_sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4"
+  },
+  "corpora": {
+    "arm_b": {
+      "budget_rows": 40,
+      "designed_subset_rows": 120,
+      "kinds": {
+        "u_abstain": 11,
+        "u_budget": 40,
+        "u_count": 5,
+        "u_execute": 9,
+        "u_induct": 12,
+        "u_optimize": 11,
+        "u_order": 8,
+        "u_probe": 7,
+        "u_repair": 13,
+        "u_route": 7,
+        "u_select": 7,
+        "u_state": 12,
+        "u_trace": 9,
+        "u_verify": 9
+      },
+      "path": "data/sft_fresh_budget160.jsonl",
+      "rows": 160,
+      "sha256": "ecece8e294f0b1c34a086705b05773d6004c6a9a239283aa26ee1c1bbad39800"
+    },
+    "arm_b_subset_of_arm_d": true,
+    "arm_d": {
+      "kinds": {
+        "u_abstain": 14,
+        "u_count": 6,
+        "u_execute": 12,
+        "u_induct": 16,
+        "u_optimize": 14,
+        "u_order": 10,
+        "u_probe": 10,
+        "u_repair": 18,
+        "u_route": 10,
+        "u_select": 10,
+        "u_state": 16,
+        "u_trace": 12,
+        "u_verify": 12
+      },
+      "path": "data/sft_fresh_designed160.jsonl",
+      "rows": 160,
+      "sha256": "e599f1563f6e4fe68aa43ce64bbe450c264170fb07dc17dba9ea74e694f284d5"
+    },
+    "banned_vocabulary": {
+      "checked_by_generator": true,
+      "sha256": "461439069692c13002e3818f6c081b9826281ce8cd36404f498f5d6121577014",
+      "tokens": 63
+    },
+    "manifest_sha256": "7b580e807972a5cbc186e2a4afff0a3d6c821c0bb7874fcb090b9dc24461381b",
+    "replay": {
+      "path": "data/sft_blend.jsonl",
+      "rows": 2240,
+      "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+    }
+  },
+  "experiment_id": "qwen35_4b_universal_fresh_surface_budget_commit_target_match",
+  "firewall": {
+    "aggregate_seed_sealed": true,
+    "benchmark_data_read": false,
+    "benchmark_gateway_exposed": false
+  },
+  "local_gate": {
+    "arms": [
+      "replay_after_close_parent",
+      "replay_repeat",
+      "designed_fresh",
+      "budget_commit"
+    ],
+    "bars_per_candidate": {
+      "cap_contacts_max": 8,
+      "correct_min": 68,
+      "feasible_route_abstentions_max": 4,
+      "parsed_min": 96,
+      "per_kind_correct_min": {
+        "u_execute": 4,
+        "u_induct": 4,
+        "u_probe": 4
+      }
+    },
+    "fresh_surface_generator_excluded": true,
+    "generator": "scripts/gen_curriculum.py",
+    "generator_surfaces": "original_uc2",
+    "promotion": {
+      "no_passing_candidate_keeps_aggregate_seed_sealed": true,
+      "single_winner": true,
+      "tie_break_order": [
+        "total_correct",
+        "target_24_row_correct",
+        "fewer_cap_contacts",
+        "budget_commit"
+      ]
+    },
+    "relative_wins_strict": {
+      "target_24_row_correct_beats": [
+        "replay_after_close_parent",
+        "replay_repeat"
+      ],
+      "target_kinds": [
+        "u_execute",
+        "u_induct",
+        "u_probe"
+      ],
+      "target_rows": 24,
+      "total_correct_beats": [
+        "replay_after_close_parent",
+        "replay_repeat"
+      ]
+    },
+    "rows": 104,
+    "seed": 88013,
+    "skills": 13,
+    "tasks_per_skill": 8
+  },
+  "model": {
+    "calls": 0,
+    "id": "Qwen/Qwen3.5-4B",
+    "loaded": false,
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+  },
+  "parent": {
+    "arm": "replay_after_close",
+    "deployment": "explicit_merged_composite",
+    "experiment": "qwen35_4b_universal_on_policy_prefix_repair_token_match",
+    "external_receipt_sha256": "aa763255cb3b05599e765948d3a3db1787d5813b1cfafbdc7e1c21653ae745a3",
+    "runtime_lora_forbidden": true,
+    "tracked_receipt_sha256": "bc78f33218afb99b4ebd5b173f1f24aa628b20fad82d627b00529cabf911d550",
+    "warm_start_adapter": {
+      "config_sha256": "0dfd9bda8a835926a87337782cc09b1e11e841a36f46b99c83fbae9bc89e120f",
+      "path": "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/adapters/replay_after_close",
+      "weights_sha256": "bb59d3bd9273ae3bb3dffe54e983590dada69e6e1bdba571009ffedbba05154d"
+    },
+    "weights_sha256": "7ab4c419f70135d3fe058dba6e79e3a9a61c6661d43e6acb9662f331efe36e2e",
+    "weights_size_bytes": 9078620536
+  },
+  "schema_version": 1,
+  "seeds": {
+    "conditional_aggregate": 78143,
+    "construction": 77116,
+    "local_gate": 88013,
+    "stream_slot_matching_namespace": 55117,
+    "training": 51
+  },
+  "stage": "fresh_surface_budget_commit_design",
+  "stream_geometry": {
+    "blocks": {
+      "budget_commit": {
+        "replay_filler_rows": 80,
+        "treatment_rows": 160
+      },
+      "designed_fresh": {
+        "replay_filler_rows": 80,
+        "treatment_rows": 160
+      },
+      "replay_repeat": {
+        "replay_rows": 240
+      }
+    },
+    "blocks_and_core_pairwise_disjoint_replay_indices": true,
+    "core_stratified_by": [
+      "family",
+      "kind"
+    ],
+    "exact_match_axes": [
+      "forward",
+      "nonzero_target",
+      "absolute_loss_mass_x5"
+    ],
+    "match_limit": 0,
+    "position_aligned_identical_core_slots": true,
+    "rows_per_arm": 1520,
+    "shared_core_replay_rows": 1280,
+    "slot_order_seed": 55117,
+    "solver": {
+      "backend": "highs",
+      "fillers_and_control_solved_jointly": true,
+      "method": "scipy.optimize.milp",
+      "mip_rel_gap": 0,
+      "time_limit_seconds": 600
+    },
+    "variable_block_rows": 240
+  },
+  "training_plan": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "optimizer_steps": 190,
+    "rank": 32,
+    "required_before_training": [
+      "committed exact three-axis stream token receipt",
+      "second adversarial compute review with PASS_CONTROL_TRAINING"
+    ],
+    "rows_per_arm": 1520,
+    "seed": 51,
+    "training_authorized": false,
+    "w_close": 0.2,
+    "w_think": 0.2,
+    "warm_start": "replay_after_close",
+    "zero_skipped_rows_required": true
+  }
+}

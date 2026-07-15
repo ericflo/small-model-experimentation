@@ -1,0 +1,71 @@
+experiment_id: qwen35_4b_universal_fresh_surface_budget_commit_target_match
+status: model_free_construction
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+parent:
+  experiment: qwen35_4b_universal_on_policy_prefix_repair_token_match
+  arm: replay_after_close
+  deployment: explicit_merged_composite
+  weight_sha256: 7ab4c419f70135d3fe058dba6e79e3a9a61c6661d43e6acb9662f331efe36e2e
+  warm_start_adapter_sha256: bb59d3bd9273ae3bb3dffe54e983590dada69e6e1bdba571009ffedbba05154d
+seeds:
+  construction: 77116
+  slot_match: 55117
+  training: 51
+  local: 88013
+  conditional_aggregate: 78143
+corpora:
+  completed: true
+  fresh_surfaces: [greek, elements, animals, ordinals, gems, digraphs]
+  arm_d_rows: 160
+  arm_d_sha256: e599f1563f6e4fe68aa43ce64bbe450c264170fb07dc17dba9ea74e694f284d5
+  arm_b_designed_subset_rows: 120
+  arm_b_budget_rows: 40
+  arm_b_budget_hits: 27
+  arm_b_sha256: ecece8e294f0b1c34a086705b05773d6004c6a9a239283aa26ee1c1bbad39800
+  replay_pool_rows: 2240
+  replay_pool_sha256: 25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2
+  banned_vocabulary_checked: true
+streams:
+  completed: false
+  shared_core_rows: 1280
+  variable_block_rows: 240
+  arms: [replay_repeat, designed_fresh, budget_commit]
+  match_axes: [forward, nonzero_target, absolute_loss_mass_x5]
+  match_abs_limit: 0
+training:
+  completed: false
+  rows_per_arm: 1520
+  optimizer_steps: 190
+  batch_size: 1
+  gradient_accumulation: 8
+  epochs: 1
+  learning_rate: 1.0e-5
+  lora_rank: 32
+  lora_alpha: 64
+  max_length: 4096
+  thought_weight: 0.2
+  close_weight: 0.2
+local_gate:
+  completed: false
+  tasks: 104
+  tasks_per_skill: 8
+  generator: original_surfaces
+  bars:
+    parsed_min: 96
+    correct_min: 68
+    cap_contacts_max: 8
+    route_abstentions_max: 4
+    target_kind_min_each: 4
+  strict_wins_over: [replay_after_close_parent, replay_repeat]
+conditional_aggregate:
+  completed: false
+  tier: quick
+  think_budget: 1024
+  models: [base, parent, replay_repeat, candidate]
+  gates:
+    - candidate aggregate strictly above base
+    - every public family strictly above base
+    - candidate aggregate strictly above replay_repeat
+    - candidate aggregate strictly above parent

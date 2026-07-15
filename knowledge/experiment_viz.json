@@ -48629,6 +48629,43 @@
      "source": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/README.md"
     }
    ]
+  },
+  "qwen35_4b_universal_fresh_surface_budget_commit_target_match": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered stage completion",
+     "categories": [
+      "intake",
+      "fresh corpora",
+      "exposure match",
+      "design review",
+      "train 3 arms",
+      "104-task local gate",
+      "conditional aggregate"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "The two fresh-surface corpora are frozen (160 designed rows; 120+40 budget substitution). Exposure matching, the adversarial review, training, the quadrupled local gate, and the sealed-seed aggregate remain.",
+     "source": "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

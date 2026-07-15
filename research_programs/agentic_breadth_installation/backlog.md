@@ -150,12 +150,21 @@
   close-span dose tuning: it did not improve parse/cap over ordinary training and
   both target arms remained 0/4 on execute/induct. Do not lower the gate, reuse
   seeds 88005/88006, or consume sealed seeds 78134/78135/78136.
-- Next result-separated universal-curriculum experiment: test a different
-  bounded-computation plus canonical-answer commitment mechanism from an
-  authenticated parent, with fresh procedural seeds, an exact-exposure active replay
-  control, and a prospective formatting/termination audit. It must pass the unchanged
-  local gate before merge, then beat replay continuation on every benchmark family
-  and matched-compute sampling before any universal claim.
+- Active bounded-computation successor:
+  `qwen35_4b_universal_fresh_surface_budget_commit_target_match` claims this slot
+  with a designed, non-harvested mechanism. It re-doses the frozen designed160
+  distribution on six fresh surfaces (construction seed 77116; arm sha
+  `e599f156...84d5`) and ablates 40 rows into a bounded-check budget-commit lesson
+  with a decoy planted past the allowance cutoff (arm sha `ecece8e2...9800`), both
+  from the authenticated `replay_after_close` parent against a three-axis
+  exact-exposure replay control (slot seed 55117). The local gate quadruples to 104
+  original-surface tasks at fresh seed 88013 (parsed >= 96, correct >= 68, caps <= 8,
+  strict wins over parent and replay on totals and the 24 execute+induct+probe rows),
+  so every local win is already a surface-transfer result. Training seed 51;
+  conditional aggregate seed 78143 sealed; promotion demands a strict lift of the
+  aggregate and every public family versus base plus aggregate wins over replay and
+  parent. Independent higher-tier confirmation and matched-compute sample-more remain
+  mandatory afterward.
 - Completed staged-search mechanism negative: `qwen35_4b_universal_search_scaffold_token_match` decomposed
   two-step search into five independently scored executable lesson stages before a
   bounded full-search ledger. It starts from the authenticated

@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 232
-- Manifest files: 552
+- Experiments with manifests: 233
+- Manifest files: 555
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 81 |
+| `other` | 83 |
 | `run-data` | 101 |
-| `standard-artifact` | 105 |
+| `standard-artifact` | 106 |
 
 ## Manifests
 
@@ -285,6 +285,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_universal_failure_selected_restart_target_match` | `other` | [manifest](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/data/rollout_task_manifest.json) |
 | `qwen35_4b_universal_failure_selected_restart_target_match` | `other` | [manifest](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/data/stream_manifest.json) |
 | `qwen35_4b_universal_failure_selected_restart_target_match` | `standard-artifact` | [manifest](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/reports/artifact_manifest.yaml) |
+| `qwen35_4b_universal_fresh_surface_budget_commit_target_match` | `other` | [manifest](../experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/corpus_manifest.json) |
+| `qwen35_4b_universal_fresh_surface_budget_commit_target_match` | `other` | [manifest](../experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/stream_manifest.json) |
+| `qwen35_4b_universal_fresh_surface_budget_commit_target_match` | `standard-artifact` | [manifest](../experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/reports/artifact_manifest.yaml) |
 | `qwen35_4b_universal_low_density_token_match` | `other` | [manifest](../experiments/qwen35_4b_universal_low_density_token_match/data/dose_manifest.json) |
 | `qwen35_4b_universal_low_density_token_match` | `standard-artifact` | [manifest](../experiments/qwen35_4b_universal_low_density_token_match/reports/artifact_manifest.yaml) |
 | `qwen35_4b_universal_mid_density_token_match` | `other` | [manifest](../experiments/qwen35_4b_universal_mid_density_token_match/data/dose_manifest.json) |

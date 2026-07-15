@@ -6004,6 +6004,40 @@
   },
   {
     "file_counts": {
+      ".json": 6,
+      ".jsonl": 8,
+      ".md": 9,
+      ".py": 21,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_universal_fresh_surface_budget_commit_target_match",
+    "path": "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match",
+    "primary_readme": "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/README.md",
+    "primary_report": "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "benchmark_generalization"
+    ],
+    "source_track": "new",
+    "summary": "Re-dose the proven 160-row designed distribution on six disjoint fresh surfaces from the authenticated parent, and ablate 40 of those rows into a bounded-check budget-commit lesson, under a three-axis exact-exposure replay control and a quadrupled 104-task local gate.",
+    "tags": [
+      "curriculum",
+      "small-model"
+    ],
+    "title": "Fresh-Surface Budget-Commit Universal Curriculum",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 47,
+    "total_size_bytes": 23049053
+  },
+  {
+    "file_counts": {
       ".json": 11,
       ".jsonl": 5,
       ".log": 3,

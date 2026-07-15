@@ -3,7 +3,7 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 260
+- Experiments: 261
 
 ## Structured Execution And Compilers
 
@@ -616,7 +616,7 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 Stress whether mechanisms transfer across substrates, families, lengths, distributions, and real tasks.
 
 - Charter: [benchmark_generalization](../research_programs/benchmark_generalization/charter.md)
-- Assigned experiments: 122
+- Assigned experiments: 123
 
 ### Seed Evidence
 
@@ -687,6 +687,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 - `qwen35_4b_universal_close_weight_token_match` (new): [README](../experiments/qwen35_4b_universal_close_weight_token_match/README.md)
 - `qwen35_4b_universal_curriculum` (new): [README](../experiments/qwen35_4b_universal_curriculum/README.md)
 - `qwen35_4b_universal_failure_selected_restart_target_match` (new): [README](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/README.md)
+- `qwen35_4b_universal_fresh_surface_budget_commit_target_match` (new): [README](../experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/README.md)
 - `qwen35_4b_universal_low_density_token_match` (new): [README](../experiments/qwen35_4b_universal_low_density_token_match/README.md)
 - `qwen35_4b_universal_mid_density_token_match` (new): [README](../experiments/qwen35_4b_universal_mid_density_token_match/README.md)
 - `qwen35_4b_universal_on_policy_prefix_repair_token_match` (new): [README](../experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/README.md)
@@ -998,7 +999,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 Install general agentic capability in Qwen3.5-4B via breadth-first expert iteration on a firewall-clean multi-family gym, arbitrated by the blackbox menagerie instrument.
 
 - Charter: [agentic_breadth_installation](../research_programs/agentic_breadth_installation/charter.md)
-- Assigned experiments: 28
+- Assigned experiments: 29
 
 ### Assigned Experiments
 
@@ -1020,6 +1021,7 @@ Install general agentic capability in Qwen3.5-4B via breadth-first expert iterat
 - `qwen35_4b_transaction_invariant_recovery_curriculum` (new): [README](../experiments/qwen35_4b_transaction_invariant_recovery_curriculum/README.md)
 - `qwen35_4b_universal_close_weight_token_match` (new): [README](../experiments/qwen35_4b_universal_close_weight_token_match/README.md)
 - `qwen35_4b_universal_failure_selected_restart_target_match` (new): [README](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/README.md)
+- `qwen35_4b_universal_fresh_surface_budget_commit_target_match` (new): [README](../experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/README.md)
 - `qwen35_4b_universal_low_density_token_match` (new): [README](../experiments/qwen35_4b_universal_low_density_token_match/README.md)
 - `qwen35_4b_universal_mid_density_token_match` (new): [README](../experiments/qwen35_4b_universal_mid_density_token_match/README.md)
 - `qwen35_4b_universal_on_policy_prefix_repair_token_match` (new): [README](../experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/README.md)

@@ -13885,6 +13885,44 @@
      "chart_takeaway": "With too little output room the model cannot finish a usable edit at all, but doubling the room flips it to fully fixing the pilot cases."
     }
    ]
+  },
+  "qwen35_4b_universal_fresh_surface_budget_commit_target_match": {
+   "verdict_tag": "Design frozen; nothing trained yet",
+   "concept_primer": "Take the practice set that nearly worked before, rewrite every exercise with brand-new vocabulary, and add a new lesson that teaches working to a strict step budget and committing an answer the moment the budget says stop.",
+   "plain_question": "Does the near-miss practice set still work when its vocabulary is completely replaced, and does budget-and-commit practice fix the run-on answers that kept failing the screen?",
+   "plain_answer": "Nothing is trained yet. The two practice sets are frozen: one with 160 rewritten exercises, one that swaps 40 of them for the new budget lessons. Both will be compared against pure review of old material with exactly equal training exposure, on a screen four times larger than before.",
+   "why_it_matters": "Every prior attempt failed either by copying answers the model could not have produced or by reusing the same vocabulary. This trial tests whether the designed practice binds to structure rather than words, and whether stopping-on-time is teachable as content.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Rewritten exercises",
+     "value": "160",
+     "sub": "six brand-new vocabularies, zero old words"
+    },
+    {
+     "label": "Budget lessons",
+     "value": "40",
+     "sub": "27 find-it cases, 13 stop-on-time cases"
+    },
+    {
+     "label": "Screen size",
+     "value": "104 tasks",
+     "sub": "four times the old 26-task screen"
+    },
+    {
+     "label": "Model events so far",
+     "value": "0",
+     "sub": "benchmark seed 78,143 sealed"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Where the experiment stands",
+     "chart_read": "Each bar is a preregistered stage; a bar at one means that stage is complete.",
+     "chart_takeaway": "The practice sets and the contract are frozen; training, the big screen, and the benchmark have not started."
+    }
+   ]
   }
  }
 }

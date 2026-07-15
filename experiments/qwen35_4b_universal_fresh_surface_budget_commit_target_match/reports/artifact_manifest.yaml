@@ -1,0 +1,33 @@
+schema_version: 1
+experiment_id: "qwen35_4b_universal_fresh_surface_budget_commit_target_match"
+external_artifacts:
+  - name: authenticated replay parent composite
+    storage: large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/merged/replay_after_close
+    required_for: local-gate parent arm and conditional aggregate parent arm
+    checksum: 7ab4c419f70135d3fe058dba6e79e3a9a61c6661d43e6acb9662f331efe36e2e
+    regenerate: experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/runs/merges/replay_after_close.json
+  - name: authenticated replay parent adapter (warm start)
+    storage: large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/adapters/replay_after_close
+    required_for: warm-starting all three training arms
+    checksum: bb59d3bd9273ae3bb3dffe54e983590dada69e6e1bdba571009ffedbba05154d
+    regenerate: experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/runs/training/replay_after_close.json
+  - name: reserialized base composite
+    storage: large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized
+    required_for: conditional aggregate base arm
+    checksum: b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db
+    regenerate: experiments/qwen35_4b_universal_curriculum/runs/merges/base_reserialized.json
+  - name: future arm adapters and explicit composites
+    storage: large_artifacts/qwen35_4b_universal_fresh_surface_budget_commit_target_match
+    required_for: paired training, local gate, and conditional aggregate evaluation
+    checksum: pending; training has not run
+    regenerate: checkpointed scripts/run.py stages after the design review passes
+omitted_artifacts:
+  - path: large_artifacts/qwen35_4b_universal_fresh_surface_budget_commit_target_match
+    reason: model weights exceed repository limits and carry tracked cryptographic receipts instead
+reproducibility:
+  smoke_command: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/scripts/run.py --smoke
+  full_command: checkpointed scripts/run.py stages only
+  required_external_artifacts:
+    - authenticated replay parent composite
+    - authenticated replay parent adapter (warm start)
+notes: Frozen fresh-surface corpora, the replay pool, exposure receipts, and the frozen local gate are tracked in-repo. No adapter, composite, training receipt, local result, or benchmark result exists yet.

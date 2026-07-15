@@ -1,0 +1,96 @@
+{
+  "arm_b": {
+    "budget_exhausts": 13,
+    "budget_hits": 27,
+    "budget_rows": 40,
+    "designed_subset_quotas": {
+      "abstain": 11,
+      "count": 5,
+      "execute": 9,
+      "induct": 12,
+      "optimize": 11,
+      "order": 8,
+      "probe": 7,
+      "repair": 13,
+      "route": 7,
+      "select": 7,
+      "state": 12,
+      "trace": 9,
+      "verify": 9
+    },
+    "designed_subset_rows": 120,
+    "kinds": {
+      "u_abstain": 11,
+      "u_budget": 40,
+      "u_count": 5,
+      "u_execute": 9,
+      "u_induct": 12,
+      "u_optimize": 11,
+      "u_order": 8,
+      "u_probe": 7,
+      "u_repair": 13,
+      "u_route": 7,
+      "u_select": 7,
+      "u_state": 12,
+      "u_trace": 9,
+      "u_verify": 9
+    },
+    "path": "data/sft_fresh_budget160.jsonl",
+    "rows": 160,
+    "sha256": "ecece8e294f0b1c34a086705b05773d6004c6a9a239283aa26ee1c1bbad39800"
+  },
+  "arm_b_subset_of_arm_d": true,
+  "arm_d": {
+    "kinds": {
+      "u_abstain": 14,
+      "u_count": 6,
+      "u_execute": 12,
+      "u_induct": 16,
+      "u_optimize": 14,
+      "u_order": 10,
+      "u_probe": 10,
+      "u_repair": 18,
+      "u_route": 10,
+      "u_select": 10,
+      "u_state": 16,
+      "u_trace": 12,
+      "u_verify": 12
+    },
+    "mix": "induct=16,execute=12,select=10,trace=12,verify=12,count=6,repair=18,optimize=14,abstain=14,state=16,order=10,probe=10,route=10",
+    "path": "data/sft_fresh_designed160.jsonl",
+    "rows": 160,
+    "sha256": "e599f1563f6e4fe68aa43ce64bbe450c264170fb07dc17dba9ea74e694f284d5"
+  },
+  "attributes": [
+    "heft",
+    "shine",
+    "reach",
+    "pulse"
+  ],
+  "banned_vocabulary_checked": true,
+  "budget_levels": {
+    "3": 8,
+    "4": 8,
+    "5": 9,
+    "6": 9,
+    "7": 3,
+    "8": 3
+  },
+  "construction_seed": 77116,
+  "experiment_id": "qwen35_4b_universal_fresh_surface_budget_commit_target_match",
+  "schema_version": 1,
+  "separators": [
+    " | ",
+    " :: ",
+    " .. ",
+    " * "
+  ],
+  "surfaces": [
+    "animals",
+    "digraphs",
+    "elements",
+    "gems",
+    "greek",
+    "ordinals"
+  ]
+}
