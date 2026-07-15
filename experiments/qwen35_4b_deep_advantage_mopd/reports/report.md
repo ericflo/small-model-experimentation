@@ -211,6 +211,14 @@ cells. That projection independently confirms the earlier stop: seed 42/43/44
 trail deep by `−0.000481`/`−0.005426`/`−0.004869` on the block-0 deep macro,
 and seed 42 is `−0.007642` joint versus deep. The conclusion is therefore not
 an artifact of the interim display weighting.
+Wrong-teacher closes block 0 at `0.571148` deep and `0.788833` quick. Its
+equal-cell macros are `0.587505`, `0.788833`, and `0.688169` joint, so seed 42
+beats it by only `+0.003054`, `+0.006392`, and `+0.004723`. Correct-teacher
+pressure is directionally better than quick-teacher pressure on the selected
+states, but this small mechanism signal does not approach the deficits to the
+source, initialization, interpolation, or matched-compute sampling baselines.
+Block 0 is therefore a complete recipe negative; block 1 remains required for
+the registered terminal receipt and cross-block control ranking.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

@@ -700,3 +700,21 @@
   is not caused by row weighting.
 - Wrong-teacher started as the last block-0 arm with external journal hash
   `13913bd80710ef29a2b141718bf1fa71c4395bd54c92981fea6a6151c0d5125b`.
+
+## 2026-07-15 — block 0 completes with a small teacher-identity signal
+
+- Wrong-teacher completed sealed generation and strict validation.
+  `GENERATED.json` and `COMPLETE.json` hash to
+  `5cef623a5b72921d272251a41ea153b60d0f69fb0ecc365324eb6be8465d7c0e`
+  and `5a1469de05795e5aa592a0c8ea55ed63da2d594b66aea6a3022602d4782d6a41`;
+  the score hashes to
+  `2c41e25dac43862cd7216cb6a92e66b67c0b3940656c954b05790e4e04a744e7`.
+- Direct item-weighted means are `0.571148` deep and `0.788833` quick, using
+  4,446,949 sampled tokens. Equal-cell macros are `0.587505` deep, `0.788833`
+  quick, and `0.688169` joint. Seed 42 exceeds them by only `+0.003054`,
+  `+0.006392`, and `+0.004723`, respectively.
+- The correct teacher therefore matters directionally on block 0, but the
+  effect is much smaller than the treatment's deficits to the deep source,
+  immutable soup, soup75, and sample-more. This cannot rescue the frozen gate.
+- Block 1 began with the deep source; its external `STARTED` journal hashes to
+  `20a2516780884ee672aa21f1e684ebe000770942e18d34f8954ac38ebcef07c8`.

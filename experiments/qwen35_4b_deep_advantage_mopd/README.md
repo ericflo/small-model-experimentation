@@ -1,6 +1,6 @@
 # Qwen3.5-4B Deep-Advantage MOPD
 
-**Status:** in-progress · since 2026-07-12 · Block 0 makes the frozen success rule unreachable; its last control and the full second block are running for the terminal receipt.
+**Status:** in-progress · since 2026-07-12 · Block 0 makes the frozen success rule unreachable and is complete; the full second block is running for the terminal receipt.
 
 ## Status
 
@@ -274,9 +274,12 @@ sample-more comparator then scored `0.770908` deep and `0.946205` quick, using
 35,600,602 sampled tokens. On the registered equal-cell projection it scores
 `0.770805` deep, `0.946205` quick, and `0.858505` joint; seed 42 trails it by
 `−0.180246`, `−0.150980`, and `−0.165613`, respectively. Matched-compute
-sampling therefore wins decisively on block 0. The wrong-teacher arm is the
-last running block-0 comparator; full block 1 remains mandatory for the sealed
-terminal receipt.
+sampling therefore wins decisively on block 0. Wrong-teacher then scored
+`0.571148` deep and `0.788833` quick. Under the equal-cell projection, seed 42
+beats it by only `+0.003054` deep, `+0.006392` quick, and `+0.004723` joint.
+Teacher identity therefore has a small favorable signal, but not enough to
+overcome the treatment's losses to deep, soup, soup75, or sample-more. Block 0
+is complete; full block 1 is running for the sealed terminal receipt.
 
 ## NF4/BF16 Interpretation Diagnostic
 
