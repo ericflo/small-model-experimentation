@@ -966,3 +966,27 @@ was screen fortune. Installs remain unambiguous throughout — the trade is
 real on both sides. Successors must change the vehicle (rank, loss weighting,
 update count — single variables against this same gate design) or preregister
 gates that price the trade. The recipe search remains closed.
+
+## qwen35_4b_rank_capacity_vehicle_cell (2026-07-15 — SCREEN_INSTABILITY: the guard fired; bands need calibration)
+
+The vehicle study's first cell trained a fresh rank-64/alpha-128 adapter on
+the clean-parent composite (trainer's one-argument --model-path delta;
+encode_row byte-identity enforced by an AST test) and gated it at seed 88,021
+beside the published rank-32 arm and the parent. Retention: parent 69, r32 64
+(−5), r64 62 (−7). The r32 arm's known −9 failed to reproduce, tripping the
+preregistered SCREEN_INSTABILITY guard: no capacity inference. Axis: r32 21,
+r64 19 (install_preserved false), parent 17.
+
+Consolidated across the four most recent gates, same-composite retention
+deltas scatter ±3–4 points between fresh screens (r32: −9 then −5;
+two-lesson: −10, −10; replay: −5; r64: −7). The 104-task retention screen's
+seed noise is comparable to the ±5 band, so single-screen band adjudications
+near the edge — including parts of the intrinsic-tax chain — carry real draw
+noise. Standing summary: doses cost retention ~5–10 points with screen noise
+~±3; no five-point band should be adjudicated by one screen.
+
+Funded successor (preregistered branch): an eval-only retention-screen
+calibration study — the published composites re-measured across several fresh
+screens to size seed variance directly and set bands (or pooled-screen
+protocols) that separate real effects from draws. Vehicle inference (rank,
+weighting, updates) stays open until then.

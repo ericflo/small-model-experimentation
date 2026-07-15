@@ -2,7 +2,7 @@
 
 The vehicle study's sharpest single variable: a FRESH rank-64 adapter trained on the clean parent composite with the same twice-verified corpus and exposure, judged on a fresh screen beside the published rank-32 arm (known −9 retention) and the parent — asking whether capacity removes the intrinsic retention tax while preserving the install.
 
-**Status:** in-progress · since 2026-07-15 · model-free construction under way; no model event has run
+**Status:** finished · 2026-07-15 · verdict SCREEN_INSTABILITY — the known −9 re-measured at −5, so the instability guard blocked any capacity inference; the retention screen's seed noise is comparable to the band and the preregistered successor is a screen-calibration study
 
 ## Research Program
 
@@ -44,16 +44,20 @@ Checkpointed stages:
 
 ## Results
 
-No model event has run.
+The rank-64 arm trained cleanly (0.5554 train loss, 0 skips) and merged onto the composite. The three-arm gate at seed 88,021: retention correct of 104 — clean_parent 69, axis160_direct 64 (−5), axis160_r64 62 (−7). The rank-32 arm's known −9 failed to reproduce (−5, inside the band), so the ordered partition returned **SCREEN_INSTABILITY** and no capacity inference is made. Axis holdout of 40: axis160_direct 21, axis160_r64 19 (`install_preserved: false` — the fresh rank-64 adapter also under-delivered the install on this screen), clean_parent 17.
 
 ## Interpretation
 
-None yet.
+The instability guard did exactly its job. Pooling the last four gates, the same composites' retention deltas scatter by three to four points across fresh screens (−9 then −5 for the rank-32 arm; −10 twice for the two-lesson arm; −5 for replay; −7 for rank-64): the 104-task retention screen's seed-to-seed noise is comparable to the ±5 band, which means single-screen delta comparisons near the band edge — including parts of the intrinsic-tax evidence — carry more draw noise than the bands assumed. The honest consolidated statement: doses cost retention on the order of five to ten points with screen noise of roughly ±3, and no single-screen reading should adjudicate a five-point band. Per the frozen branch, the successor is a retention-screen calibration study: the published composites re-measured across several fresh screens, eval-only, to size seed variance and set bands that separate real effects from draws.
+
+## Terminal Disposition
+
+No later event is authorized here. No benchmark seed existed. The rank-64 composite and all receipts are preserved. Per the preregistered branch, the funded successor is the screen-calibration study; vehicle inference stays open until bands are recalibrated.
 
 ## Knowledgebase Update
 
-- Program evidence updated: pending the verdict.
-- Program backlog updated: this cell is the vehicle study's first variable.
+- Program evidence updated: the instability verdict and the pooled noise estimate recorded.
+- Program backlog updated: the calibration study is the funded successor; capacity remains untested pending calibrated bands.
 - Claim ledger updated: no.
 
 ## Artifacts

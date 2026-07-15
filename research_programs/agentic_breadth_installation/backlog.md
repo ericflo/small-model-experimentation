@@ -224,14 +224,20 @@
   all-time); axis160_direct best axis (26/40) and caps (5). LAW: designed
   doses cost ~5-10 retention points intrinsically at this vehicle; the trade
   is priced, real, and two-sided.
-- Funded successor (vehicle study, own intake): single-variable arms against
-  the same gate design — adapter rank (64/128 vs 32), think/answer loss
-  weighting, and update count/LR — asking which vehicle change breaks the
-  install-retention trade. Alternative preregistered path: accept and price
-  the trade — a gate whose promotion condition is net-positive weighted score
-  (installs minus retention cost) — and take the best trade candidate to the
-  medium pilot the goal requires. Hygiene (7/7) remains the install probe for
-  either path.
+- Completed rank-capacity cell (SCREEN_INSTABILITY):
+  `qwen35_4b_rank_capacity_vehicle_cell` — the r32 arm's known -9 re-measured
+  at -5 on a fresh screen, tripping the preregistered instability guard; no
+  capacity inference (r64 measured -7 retention, 19/40 axis,
+  install_preserved false, but none of it is adjudicable at current bands).
+  Pooled noise across four gates: same-composite retention deltas scatter
+  +/-3-4 points; the screen's seed noise rivals the +/-5 band.
+- Funded successor (eval-only calibration study, own intake): re-measure the
+  published composites (clean_parent, replay_clean, hygiene_explore_direct,
+  axis160_direct, axis160_r64) across 3-4 fresh retention screens (seeds
+  88022+) with no training, estimate per-arm screen variance directly, and
+  preregister either wider bands or a pooled-multi-screen adjudication
+  protocol for all future dose/vehicle cells. Cheap (~pure eval), decisive
+  for every retention claim the line makes afterward.
 - Standing queued directions (unchanged): medium-native measurement intake for
   existing artifacts; mechanism-diverse attacks on menders/sirens (needs new
   mechanism evidence first).

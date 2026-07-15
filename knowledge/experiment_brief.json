@@ -14191,40 +14191,40 @@
    ]
   },
   "qwen35_4b_rank_capacity_vehicle_cell": {
-   "verdict_tag": "Design under construction; nothing trained",
+   "verdict_tag": "Screen too noisy to judge; guard fired",
    "concept_primer": "The forgetting tax is now a law: every practice dose costs five to ten retained answers on this training setup. The leading suspect is capacity — the small add-on module carries the whole training history, so new lessons must evict something. This trial doubles the module's size and gives the dose its own fresh module on a frozen base model.",
    "plain_question": "Does a double-size, fresh add-on module absorb the practice dose without evicting retained skills — or is the forgetting tax deeper than capacity?",
-   "plain_answer": "Nothing is trained yet. One rank-64 module will be trained on the frozen best base model with the same verified practice set, then judged beside the known rank-32 case (which forgot nine) and the base — with a three-way verdict preregistered, including a guard for the screen itself being unstable.",
-   "why_it_matters": "If capacity is the answer, every future practice dose inherits the fix and the path to the benchmark pilot reopens with no forgetting tax. If not, the program moves to loss-weighting or accepts and prices the trade — both already specified.",
-   "verdict_tone": "neutral",
+   "plain_answer": "The trial could not answer the capacity question — by design. Its built-in guard required the known nine-point forgetting case to reproduce before trusting any comparison, and on this fresh screen that case measured only five. Across the last four screens the same models' forgetting scores wobble by three to four points, which rivals the five-point rule itself. The double-size module measured seven points of forgetting and a weaker skill result, but none of that is judgeable until the measuring stick is calibrated.",
+   "why_it_matters": "A measurement rule that can be tripped by luck must be caught by its own guard — and it was. The next step costs no training at all: re-measure the built models on several fresh screens, size the wobble, and set rules that only real effects can pass. Every future forgetting claim depends on it.",
+   "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "Variable",
-     "value": "rank 64 vs 32",
-     "sub": "fresh module on a frozen base; all else fixed"
+     "label": "Guard",
+     "value": "fired",
+     "sub": "the known -9 re-measured at -5 — comparison refused"
     },
     {
-     "label": "Known comparison",
-     "value": "-9",
-     "sub": "the rank-32 arm re-measured on the same screen"
+     "label": "Screen wobble",
+     "value": "±3-4",
+     "sub": "same models across four fresh screens"
     },
     {
-     "label": "Install probe",
-     "value": "7 / 7",
-     "sub": "hygiene has never lost its category"
+     "label": "Rank-64 readings",
+     "value": "-7 / 19",
+     "sub": "retention / skill — recorded, not adjudicated"
     },
     {
-     "label": "Benchmark stage",
-     "value": "none",
-     "sub": "mechanism cells mint no claims"
+     "label": "Next step cost",
+     "value": "eval only",
+     "sub": "no training; calibrate the screen itself"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Where the experiment stands",
-     "chart_read": "Each bar is a preregistered stage; one means complete.",
-     "chart_takeaway": "The contract and inherited practice set are frozen; one training run and the three-model screen remain."
+     "chart_plain_title": "The guard refused the comparison: the screen wobbles as much as the rule",
+     "chart_read": "Bars per model: retained-skill totals on this screen.",
+     "chart_takeaway": "The known forgetting case failed to reproduce, so no capacity conclusion was drawn — the measuring stick gets calibrated next, at zero training cost."
     }
    ]
   }

@@ -1,0 +1,122 @@
+{
+  "aggregate_seed": null,
+  "aggregate_seed_open": false,
+  "answer_normalization": {
+    "applied_to": "both the parsed and the expected answer, every arm, both instruments",
+    "definition": "re.sub(r'\\s+', ' ', s).strip(), then re.sub(r'\\s*>\\s*', '>', s), then re.sub(r'\\s*;\\s*', ';', s)",
+    "function": "check_local.normalize_answer",
+    "prospective": true,
+    "rationale": "21 correct-but-rejected whitespace rows across the three prior gate events (seeds 88014/88015/88016), recorded in experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/analysis/three_event_failure_forensics.md"
+  },
+  "axis_kinds": [
+    "u_explore",
+    "u_hygiene",
+    "u_protocol",
+    "u_tracefix"
+  ],
+  "axis_rows": 40,
+  "backend": "vllm_merged_composite",
+  "benchmark_data_read": false,
+  "candidates": [
+    "axis160_r64"
+  ],
+  "capacity_mechanism": "SCREEN_INSTABILITY",
+  "controls": [
+    "clean_parent",
+    "axis160_direct"
+  ],
+  "design_receipt_sha256": "ad16e76885c77dd4f585cab79e9895471ea04d14b1fe0cb138b2f864f5ebbdaa",
+  "eligible": [],
+  "experiment_id": "qwen35_4b_rank_capacity_vehicle_cell",
+  "local_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_rank_capacity_vehicle_cell/runs/local/seed88021.json",
+  "local_receipt_sha256": "0aa5600ba0efccfcd6606e191f06308ac924807eb9c38eef14de1c14b653b3a7",
+  "mechanism_cell": true,
+  "no_promotion_in_mechanism_cell": true,
+  "outcome": "MECHANISM_READ_COMPLETE",
+  "promoted": null,
+  "readings": {
+    "axis_total_r32": 21,
+    "axis_total_r64": 19,
+    "capacity_mechanism": "SCREEN_INSTABILITY",
+    "install_preserved": false,
+    "retention_delta_r32": -5,
+    "retention_delta_r64": -7
+  },
+  "retention_rows": 104,
+  "schema_version": 1,
+  "seed": 88021,
+  "summaries": {
+    "axis160_direct": {
+      "adapter": "axis160_direct",
+      "axis": {
+        "correct": 21,
+        "per_kind_correct": {
+          "u_explore": 6,
+          "u_hygiene": 6,
+          "u_protocol": 8,
+          "u_tracefix": 1
+        },
+        "rows": 40
+      },
+      "cap_contacts": 9,
+      "retention": {
+        "cap_contacts": 7,
+        "correct": 64,
+        "parsed": 98,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "total_correct": 85
+    },
+    "axis160_r64": {
+      "adapter": "axis160_r64",
+      "axis": {
+        "correct": 19,
+        "per_kind_correct": {
+          "u_explore": 8,
+          "u_hygiene": 5,
+          "u_protocol": 5,
+          "u_tracefix": 1
+        },
+        "rows": 40
+      },
+      "cap_contacts": 14,
+      "retention": {
+        "cap_contacts": 12,
+        "correct": 62,
+        "parsed": 92,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "total_correct": 81
+    },
+    "clean_parent": {
+      "adapter": "clean_parent",
+      "axis": {
+        "correct": 17,
+        "per_kind_correct": {
+          "u_explore": 6,
+          "u_hygiene": 4,
+          "u_protocol": 7,
+          "u_tracefix": 0
+        },
+        "rows": 40
+      },
+      "cap_contacts": 20,
+      "retention": {
+        "cap_contacts": 14,
+        "correct": 69,
+        "parsed": 90,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "total_correct": 86
+    }
+  },
+  "thresholds": {
+    "forgot_at_most": -6,
+    "install_preserved_rule": "axis160_r64 axis total correct >= axis160_direct axis total correct on this same screen",
+    "retained_at_least": -5,
+    "rule": "SCREEN_INSTABILITY if retention_delta_r32 >= -5; else CAPACITY_SUPPORTED if retention_delta_r64 >= -5; else CAPACITY_REFUTED"
+  }
+}

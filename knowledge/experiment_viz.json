@@ -48984,33 +48984,35 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Preregistered stage completion",
+     "title": "Seed-88021 gate: retention and axis by arm (unadjudicated)",
      "categories": [
-      "intake",
-      "inherited corpus",
-      "exposure match",
-      "design review",
-      "train r64 arm",
-      "three-arm gate"
+      "clean_parent",
+      "axis160_direct (r32)",
+      "axis160_r64"
      ],
      "series": [
       {
-       "label": "completed checkpoint",
+       "label": "retention correct (of 104)",
        "values": [
-        1,
-        1,
-        0,
-        0,
-        0,
-        0
+        69,
+        64,
+        62
+       ]
+      },
+      {
+       "label": "axis holdout correct (of 40)",
+       "values": [
+        17,
+        21,
+        19
        ]
       }
      ],
-     "x_label": "preregistered experiment stage",
-     "y_label": "completion indicator",
+     "x_label": "explicit merged composite",
+     "y_label": "count",
      "y_format": "integer",
-     "note": "The vehicle study's first variable: a fresh rank-64 adapter on the frozen clean-parent composite, judged beside the re-measured rank-32 arm (known -9) under an ordered three-way capacity verdict. No benchmark stage.",
-     "source": "experiments/qwen35_4b_rank_capacity_vehicle_cell/reports/preregistration.md"
+     "note": "Verdict SCREEN_INSTABILITY: the r32 arm's known -9 re-measured at -5, tripping the guard; pooled across four gates the screen's seed noise (±3-4) rivals the ±5 band. The eval-only calibration study is the preregistered successor.",
+     "source": "experiments/qwen35_4b_rank_capacity_vehicle_cell/reports/report.md"
     }
    ]
   }
