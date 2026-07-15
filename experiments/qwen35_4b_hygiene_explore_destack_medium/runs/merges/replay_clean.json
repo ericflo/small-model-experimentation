@@ -1,0 +1,81 @@
+{
+  "adapter": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_hygiene_explore_destack_medium/adapters/replay_clean",
+  "adapter_config_sha256": "015bb13568c411c94d24460a9007e1f0d8fe3eb6c9749ad938958490de84d961",
+  "adapter_weights_sha256": "f6f910ed1c1dcc843f43e09a562556b8e76ee40096aa7123fd70800d94fc6bb8",
+  "aggregate_seed_open": false,
+  "applied_lora_modules": 128,
+  "benchmark_data_read": false,
+  "command": [
+    "/home/ericflo/Development/small-model-experimentation/.venv/bin/python",
+    "-B",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/scripts/merge_adapter.py",
+    "--adapter",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_hygiene_explore_destack_medium/adapters/replay_clean",
+    "--out",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/replay_clean"
+  ],
+  "experiment_id": "qwen35_4b_hygiene_explore_destack_medium",
+  "local_design_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_hygiene_explore_destack_medium/data/local_design_receipt.json",
+  "local_design_receipt_sha256": "c4952ca9d312f962e3871ffca3cc9d0827b663258ebc18d71fae33c7e6a9b442",
+  "log": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_hygiene_explore_destack_medium/runs/merges/replay_clean.log",
+  "log_sha256": "252f1da5e68095b329b0ff14882cc61cd459687fbbaa4bc99833190808f22957",
+  "merge_receipt_sha256": "aac945fb0d38f157d9c35518fb4c5de99cc5cac0ace3a280202f9dc038d77186",
+  "merged": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/replay_clean",
+  "merger": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/scripts/merge_adapter.py",
+  "merger_sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "name": "replay_clean",
+  "nonzero_lora_modules": 128,
+  "output_files": [
+    {
+      "name": "chat_template.jinja",
+      "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+      "size": 7756
+    },
+    {
+      "name": "config.json",
+      "sha256": "a1c80f0efa6f83f631eaa9c25ffa166e3b1f9db395cc3b14374dfc0962261f60",
+      "size": 2829
+    },
+    {
+      "name": "generation_config.json",
+      "sha256": "0c46d8aa4f0ae5e611c961f70b87c83fb696043c1e319337708e96f882180de1",
+      "size": 116
+    },
+    {
+      "name": "merge_receipt.json",
+      "sha256": "aac945fb0d38f157d9c35518fb4c5de99cc5cac0ace3a280202f9dc038d77186",
+      "size": 875
+    },
+    {
+      "name": "model.safetensors",
+      "sha256": "2cef3e5e7ddfbee5d2d2c3a878d64f360dc6994764b9856be7e319ce5187d0b4",
+      "size": 9078620536
+    },
+    {
+      "name": "tokenizer.json",
+      "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+      "size": 19989325
+    },
+    {
+      "name": "tokenizer_config.json",
+      "sha256": "9cf04fffe3d8c3b85e439fb35c7acad0761ab51c422a8c4256d9f887c3a0be7d",
+      "size": 1125
+    }
+  ],
+  "output_tree_sha256": "19759e12b1301a15a2f9b2db311ffff7c08e3d8b0d3237c9e7cd718fa8dc7f67",
+  "preflight_git_branch": "main",
+  "preflight_git_head": "a002d5aea81b6f5f1a3c23136f64238edc0650de",
+  "preflight_git_status": "",
+  "preflight_origin_main": "a002d5aea81b6f5f1a3c23136f64238edc0650de",
+  "schema_version": 2,
+  "training_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_hygiene_explore_destack_medium/runs/training/replay_clean.json",
+  "training_receipt_sha256": "935bd6c5e6f8ef2fcb345c0c7ddcee535db3ba8b5b71f56841dd5efad7572816",
+  "weight_files": [
+    {
+      "name": "model.safetensors",
+      "sha256": "2cef3e5e7ddfbee5d2d2c3a878d64f360dc6994764b9856be7e319ce5187d0b4"
+    }
+  ]
+}
