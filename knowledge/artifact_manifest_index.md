@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 240
-- Manifest files: 574
+- Experiments with manifests: 241
+- Manifest files: 577
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 95 |
+| `other` | 97 |
 | `run-data` | 101 |
-| `standard-artifact` | 113 |
+| `standard-artifact` | 114 |
 
 ## Manifests
 
@@ -205,6 +205,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_partial_structure_search` | `standard-artifact` | [manifest](../experiments/qwen35_4b_partial_structure_search/reports/artifact_manifest.yaml) |
 | `qwen35_4b_probe_the_parameter` | `standard-artifact` | [manifest](../experiments/qwen35_4b_probe_the_parameter/reports/artifact_manifest.yaml) |
 | `qwen35_4b_probe_to_prompt` | `standard-artifact` | [manifest](../experiments/qwen35_4b_probe_to_prompt/reports/artifact_manifest.yaml) |
+| `qwen35_4b_rank_capacity_vehicle_cell` | `other` | [manifest](../experiments/qwen35_4b_rank_capacity_vehicle_cell/data/corpus_manifest.json) |
+| `qwen35_4b_rank_capacity_vehicle_cell` | `other` | [manifest](../experiments/qwen35_4b_rank_capacity_vehicle_cell/data/stream_manifest.json) |
+| `qwen35_4b_rank_capacity_vehicle_cell` | `standard-artifact` | [manifest](../experiments/qwen35_4b_rank_capacity_vehicle_cell/reports/artifact_manifest.yaml) |
 | `qwen35_4b_real_sample_verify_commit` | `dataset` | [manifest](../experiments/qwen35_4b_real_sample_verify_commit/data/dataset_manifest.json) |
 | `qwen35_4b_recovery_payload_budget_harness` | `standard-artifact` | [manifest](../experiments/qwen35_4b_recovery_payload_budget_harness/reports/artifact_manifest.yaml) |
 | `qwen35_4b_recovery_reason_locality_interpolation` | `standard-artifact` | [manifest](../experiments/qwen35_4b_recovery_reason_locality_interpolation/reports/artifact_manifest.yaml) |

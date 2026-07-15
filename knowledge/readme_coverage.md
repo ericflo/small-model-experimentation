@@ -142,6 +142,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_prefix_value_guided_search` | [README](../experiments/qwen35_4b_prefix_value_guided_search/README.md) | [report](../experiments/qwen35_4b_prefix_value_guided_search/reports/final_report.md) |
 | `qwen35_4b_probe_the_parameter` | [README](../experiments/qwen35_4b_probe_the_parameter/README.md) | [report](../experiments/qwen35_4b_probe_the_parameter/reports/report.md) |
 | `qwen35_4b_probe_to_prompt` | [README](../experiments/qwen35_4b_probe_to_prompt/README.md) | [report](../experiments/qwen35_4b_probe_to_prompt/reports/report.md) |
+| `qwen35_4b_rank_capacity_vehicle_cell` | [README](../experiments/qwen35_4b_rank_capacity_vehicle_cell/README.md) | [report](../experiments/qwen35_4b_rank_capacity_vehicle_cell/reports/report.md) |
 | `qwen35_4b_real_sample_verify_commit` | [README](../experiments/qwen35_4b_real_sample_verify_commit/README.md) | [report](../experiments/qwen35_4b_real_sample_verify_commit/reports/qwen35_4b_real_sample_verify_commit_report.md) |
 | `qwen35_4b_recovery_payload_budget_harness` | [README](../experiments/qwen35_4b_recovery_payload_budget_harness/README.md) | [report](../experiments/qwen35_4b_recovery_payload_budget_harness/reports/report.md) |
 | `qwen35_4b_recovery_reason_locality_interpolation` | [README](../experiments/qwen35_4b_recovery_reason_locality_interpolation/README.md) | [report](../experiments/qwen35_4b_recovery_reason_locality_interpolation/reports/report.md) |

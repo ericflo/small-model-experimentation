@@ -4577,6 +4577,44 @@
   },
   {
     "file_counts": {
+      ".json": 6,
+      ".jsonl": 5,
+      ".md": 9,
+      ".py": 19,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_rank_capacity_vehicle_cell",
+    "path": "experiments/qwen35_4b_rank_capacity_vehicle_cell",
+    "primary_readme": "experiments/qwen35_4b_rank_capacity_vehicle_cell/README.md",
+    "primary_report": "experiments/qwen35_4b_rank_capacity_vehicle_cell/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "posttraining_and_adaptation",
+      "reliability_and_safety"
+    ],
+    "source_track": "new",
+    "summary": "The vehicle study's sharpest single variable: a FRESH rank-64 adapter trained on the clean parent composite with the same twice-verified corpus and exposure, judged on a fresh screen beside the published rank-32 arm (known \u22129 retention) and the parent \u2014 asking whether capacity removes the intrinsic retention tax while preserving the install.",
+    "tags": [
+      "lora",
+      "small-model",
+      "verification"
+    ],
+    "title": "Rank-Capacity Vehicle Cell",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 42,
+    "total_size_bytes": 13538950
+  },
+  {
+    "file_counts": {
       ".csv": 2,
       ".json": 24,
       ".jsonl": 7,
