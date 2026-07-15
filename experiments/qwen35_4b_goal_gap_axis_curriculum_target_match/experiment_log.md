@@ -50,3 +50,16 @@
   nonzero modules, fingerprint-verified); receipts and logs under
   `runs/merges/`; both merged-tree pins now filled fail-closed in the local
   evaluator. The one frozen 144-task gate event is the only next stage.
+
+## 2026-07-14 — Local gate event: axis_curriculum PROMOTED
+
+- The one frozen 144-task gate event ran from merge checkpoint `68916e45`
+  (clean synced green main): three sequential authenticated engine runs.
+- Axis holdout (of 40): axis_curriculum 28, parent 22, replay 18. Per-kind:
+  explore 7 vs 6/3 (win), hygiene 9 vs 5/5 (win), protocol 8 vs 8/8 (tie —
+  recorded as the preregistered control-ceiling case), tracefix 4 vs 3/2 (win)
+  — 3 of 4 kind wins.
+- Retention (of 104): axis_curriculum 71 correct / 95 parsed / 9 caps —
+  byte-equal to the parent's totals; replay drifted to 65/89/15.
+- All ten preregistered checks pass; `axis_curriculum` is promoted. The
+  conditional aggregate at sealed seed 78,144 is the only next stage.
