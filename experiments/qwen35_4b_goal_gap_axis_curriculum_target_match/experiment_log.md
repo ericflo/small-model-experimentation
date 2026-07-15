@@ -23,3 +23,12 @@
   NO absolute per-kind floors, and a four-model conditional aggregate pilot at
   seed 78,144 with the frozen quick-tier power statement.
 - No model, GPU, training, local, or benchmark event has run.
+
+## 2026-07-14 — Authenticated control training
+
+- `train-control` ran only after design-freeze commit `e1064249` matched
+  `origin/main` with both workflows green and a clean worktree.
+- `replay_repeat` trained 1,520/1,520 rows with 0 skipped over 190 updates
+  (train loss 0.3776, 1,320 wrapper seconds); receipt/log published and pinned
+  fail-closed. The candidate arm remains untrained until this checkpoint
+  publishes green.
