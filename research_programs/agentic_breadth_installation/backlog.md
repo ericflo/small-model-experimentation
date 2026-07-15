@@ -261,11 +261,23 @@
   goal gate's venue is medium; a same-shape menders/sirens treatment at
   quick is dead. Caveat: medium passers were gym-trained; the universal
   line is unmeasured at medium.
-- FUNDED NEXT (medium measurement intake): base + the line's best published
-  composites (designed_fresh parent, replay_repeat, hygiene_explore_direct)
-  on ONE fresh sealed medium seed, tb1024, paired same-backend explicit
-  merges, goal gate recorded from the same event. Eval-only; decides
-  whether the goal path needs a new dose at all or just the right venue.
+- Completed medium measurement (MEASUREMENT_READ_COMPLETE):
+  `qwen35_4b_universal_medium_tier_measurement` — seed 78150, tb1024;
+  hygiene_explore 0.3379 leads (quick ordering inverted; tier-Pareto
+  non-convexity replicates in the line); all three treated arms 8/10 strict
+  wins vs base; hygiene_explore and replay_repeat ZERO losses, ties only at
+  menders and rites (both 0.0). The recorded goal gate is two tie-flips
+  wide. Sirens resolved at medium as the forensics predicted; base inside
+  the historical envelope everywhere.
+- FUNDED NEXT (the two-tie install): a menders+rites dose from the
+  hygiene_explore parent (fresh adapter per the dose-three law), retention
+  gated under pooled_k3 (three fresh screens, +/-5 on the mean), then ONE
+  medium event on a fresh sealed seed with the goal gate recorded.
+  Constraints from standing laws: menders needs a genuinely NEW mechanism
+  argument (same-shape trace-repair is closed by kill rule; two attempts
+  failed); rites is elicitable in-lineage (0.1 this event at designed_fresh;
+  flipped at quick by replay); any pass must then survive the confirmation
+  law (independent seeds + matched-compute sample-more) before a claim.
 - Queued (calibration notes attached): (a) replay-compounding line — measure
   whether iterated replay rounds keep gaining aggregate and where they saturate;
   the published `replay_repeat` composite (0.5081) is the presumptive parent;

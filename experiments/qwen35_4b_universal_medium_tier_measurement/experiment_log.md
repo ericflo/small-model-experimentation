@@ -85,3 +85,22 @@
 - Receipt regenerated (code pins changed) with full deep tree
   verification; 46 tests green; smoke green. Verdict:
   `PASS_BENCHMARK_EVENT`.
+
+## 2026-07-15 — The event (single model event) and closure
+
+- CI green on the freeze commit; `run.py --stage benchmark` ran the four
+  gateway events in frozen order on sealed seed 78,150; every arm
+  authenticated (deep tree recompute), within budget, ledger opened before
+  the first run and closed after the summary; the readout re-derived
+  byte-identically.
+- Readings: hygiene_explore 0.3379 > designed_fresh 0.3197 >
+  replay_repeat 0.2981 > base 0.0567 (quick ordering inverted); all three
+  treated arms 8/10 strict wins vs base; hygiene_explore and replay_repeat
+  zero losses with ties only at menders and rites (both 0.0);
+  designed_fresh loses warren 0.050 vs 0.067; base inside the historical
+  envelope on all ten families; sirens resolved to a strict win (0.4 vs
+  0.6) exactly as the forensics predicted.
+- Closure: the goal gate is two tie-flips wide. rites is elicitable in the
+  lineage (0.1 in this event for designed_fresh); menders is the binding
+  constraint and needs a new mechanism argument per the standing kill rule
+  on same-shape trace-repair doses.

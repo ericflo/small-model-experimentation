@@ -14305,40 +14305,40 @@
    ]
   },
   "qwen35_4b_universal_medium_tier_measurement": {
-   "verdict_tag": "Design under construction; the single benchmark event has not run",
+   "verdict_tag": "Two tie-flips from the goal: eight family wins, zero losses, menders and rites at zero",
    "concept_primer": "The receipt forensics showed the program's all-families goal has been judged on the wrong benchmark tier: the quick tier's coarse scoring manufactures unbeatable ties, while the bigger medium tier has seen the goal pass nine times historically. But this program's own clean-trained models — the ones forbidden from ever seeing benchmark-like data — have never been measured on medium at all. This experiment runs that measurement: four already-built models, one fresh sealed seed, no training.",
    "plain_question": "Where do the line's best clean models actually stand on the medium benchmark tier, and which families still block the all-families goal there?",
-   "plain_answer": "Nothing has run yet. The frozen plan: four published models (the untouched base, the two best lineage parents, and the install carrier) each take the full medium-tier benchmark once on the same fresh seed; the readings are the aggregate ranking, a recorded verdict on the all-ten-families goal, a sanity check that the base scores inside its historical range, and the exact families that block each model.",
+   "plain_answer": "The clean models' first medium-tier outing put all three at eight-of-ten family wins over the base — matching the best historical arms — and the top two lost NOTHING: they only tied on two families where both they and the base scored zero. The install-carrier model leads the aggregate and the quick-tier ranking inverted (the old quick champion came last of the trained three). The all-families goal now needs exactly two zeros flipped: menders, a genuine capability gap, and rites, which this very lineage has already scored on elsewhere.",
    "why_it_matters": "The program goal — one trained model beating base on every family at once — needs the right courtroom. This is the first time the clean line gets judged in it, and whatever happens, the next training dose inherits exact per-family targets instead of two fake walls.",
-   "verdict_tone": "neutral",
+   "verdict_tone": "positive",
    "key_numbers": [
     {
-     "label": "Training runs",
+     "label": "Strict family wins vs base",
+     "value": "8/10",
+     "sub": "all three trained models"
+    },
+    {
+     "label": "Losses (top two arms)",
      "value": "0",
-     "sub": "measurement of published models"
+     "sub": "only ties at menders and rites"
     },
     {
-     "label": "Benchmark events",
-     "value": "4",
-     "sub": "one per model, same sealed seed"
+     "label": "Best medium aggregate",
+     "value": "0.338",
+     "sub": "hygiene_explore vs base 0.057"
     },
     {
-     "label": "Historical goal passes at medium",
-     "value": "9/94",
-     "sub": "vs 1/84 at quick (forensics)"
-    },
-    {
-     "label": "Best quick aggregate",
-     "value": "0.5081",
-     "sub": "replay_repeat, never measured at medium"
+     "label": "Ties left to flip",
+     "value": "2",
+     "sub": "menders and rites, both at zero"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Where the experiment stands",
-     "chart_read": "Each bar is a preregistered stage; one means complete.",
-     "chart_takeaway": "The contract and model pins are frozen; the four-model medium-tier event remains."
+     "chart_plain_title": "Each model's score on the ten benchmark families at medium tier",
+     "chart_read": "Grouped bars per family: the untouched base beside the three trained models.",
+     "chart_takeaway": "The trained models beat the base almost everywhere; the two zero-zero ties at menders and rites are all that separates the best model from the all-families goal."
     }
    ]
   }

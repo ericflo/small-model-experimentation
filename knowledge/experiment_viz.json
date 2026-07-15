@@ -49125,29 +49125,86 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Preregistered stage completion",
+     "title": "Per-family scores at medium tier, seed 78150 (tb 1024)",
      "categories": [
-      "intake",
-      "design receipt frozen",
-      "adversarial review",
-      "4-model medium event"
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "sirens",
+      "stockade",
+      "toolsmith",
+      "warren"
      ],
      "series": [
       {
-       "label": "completed checkpoint",
+       "label": "base",
        "values": [
-        1,
-        0,
-        0,
-        0
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.4,
+        0.0,
+        0.1,
+        0.067
+       ]
+      },
+      {
+       "label": "designed_fresh",
+       "values": [
+        0.5,
+        0.1,
+        0.0,
+        0.5,
+        0.1,
+        0.5,
+        0.6,
+        0.135,
+        0.713,
+        0.05
+       ]
+      },
+      {
+       "label": "replay_repeat",
+       "values": [
+        0.4,
+        0.4,
+        0.0,
+        0.4,
+        0.0,
+        0.4,
+        0.6,
+        0.159,
+        0.522,
+        0.1
+       ]
+      },
+      {
+       "label": "hygiene_explore",
+       "values": [
+        0.5,
+        0.2,
+        0.0,
+        0.6,
+        0.0,
+        0.5,
+        0.6,
+        0.113,
+        0.7,
+        0.167
        ]
       }
      ],
-     "x_label": "preregistered experiment stage",
-     "y_label": "completion indicator",
-     "y_format": "integer",
-     "note": "Eval-only measurement intake: base, designed_fresh, replay_repeat, and hygiene_explore (explicit merges, tree-hash bound) on sealed medium seed 78150 at think budget 1024; readings are the aggregate ordering vs quick, the recorded all-ten-families goal gate, the base sanity envelope from the tier forensics, and the blocking families. Nothing trains.",
-     "source": "experiments/qwen35_4b_universal_medium_tier_measurement/reports/preregistration.md"
+     "x_label": "public benchmark family",
+     "y_label": "family score",
+     "y_format": "number",
+     "note": "The universal line's first medium-tier paired event: aggregates base 0.0567 / designed_fresh 0.3197 / replay_repeat 0.2981 / hygiene_explore 0.3379 (quick ordering inverted). All three treated arms took 8/10 strict family wins vs base; hygiene_explore and replay_repeat lost nothing and tied only at menders and rites (both 0.0) — the recorded goal gate is two tie-flips wide. Sirens resolved to a strict win at medium granularity exactly as the tier forensics predicted; base sat inside the historical envelope on every family.",
+     "source": "experiments/qwen35_4b_universal_medium_tier_measurement/runs/benchmark/medium_tb1024_seed78150_measurement/measurement_readout.json"
     }
    ]
   }

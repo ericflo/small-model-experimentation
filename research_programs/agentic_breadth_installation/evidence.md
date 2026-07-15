@@ -1048,3 +1048,34 @@ contamination-free universal arms (best 0.5081 quick aggregate) have
 never been measured at medium. Funded successor: that measurement — base
 plus the line's best published composites, one fresh sealed medium seed,
 tb1024, paired same-backend, the goal gate recorded from the same event.
+
+## qwen35_4b_universal_medium_tier_measurement (2026-07-15 — MEASUREMENT_READ_COMPLETE: eight wins, zero losses, two ties from the goal)
+
+The forensics' funded successor ran the universal line's first medium-tier
+paired event: four published composites (trees deep-verified) on sealed
+fresh seed 78,150 at tb 1,024, one-seed write-ahead ledger, base inside the
+historical envelope on every family, all arms within budget. The
+seed-consuming runner was hardened pre-freeze by adversarial review (the
+review-verdict and code-pin checks now live at the boundary itself; a
+one-byte drift of the readings evaluator trips them).
+
+Readings: hygiene_explore 0.3379 > designed_fresh 0.3197 > replay_repeat
+0.2981 > base 0.0567 — the quick ordering INVERTED (replay_repeat, 0.5081
+best-ever at quick, ranks last of the treated at medium): the non-convex
+tier-Pareto frontier (C54) replicates inside the universal line, and the
+install carrier leads where it matters. All three treated arms took 8/10
+strict family wins versus base — the historical mode — and
+hygiene_explore/replay_repeat lost NOTHING: ties only at menders and rites
+(both 0.0). designed_fresh's sole strict loss was warren (0.050 vs 0.067).
+Sirens resolved to a strict win (base 0.4, every arm 0.6) exactly as the
+forensics predicted.
+
+Program position: the recorded goal gate is two tie-flips wide for
+hygiene_explore. rites is elicitable in this lineage (designed_fresh 0.1 in
+this same event; replay flipped it at quick). menders is the binding
+constraint — 0 for every clean arm at both tiers on every seed except one
+quick item (replay_refresh 0.125 at 78,133), while gym-trained arms
+historically reached 0.3–0.4 there; the same-shape trace-repair dose is
+closed by kill rule, so the successor must bring a genuinely new mechanism
+argument for menders, carry rites alongside, start from the
+hygiene_explore parent, and gate retention under pooled_k3.

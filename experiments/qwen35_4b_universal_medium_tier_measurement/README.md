@@ -2,7 +2,7 @@
 
 The contamination-free universal line's first medium-tier paired benchmark event: four published composites, one fresh sealed seed, the goal gate recorded at the granularity where history says it is winnable.
 
-**Status:** in-progress · since 2026-07-15 · model-free construction under way; the single benchmark event has not run
+**Status:** finished · 2026-07-15 · verdict MEASUREMENT_READ_COMPLETE — hygiene_explore leads at medium (0.3379); all three treated arms hit 8/10 strict family wins vs base (the historical mode) with hygiene_explore and replay_repeat carrying zero losses; the goal gate is two tie-flips wide (menders and rites, both at 0)
 
 ## Research Program
 
@@ -30,17 +30,30 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_me
 
 ## Results
 
-The benchmark event has not run.
+The single event ran clean (all four arms authenticated, within budget, base inside the historical envelope on every family):
+
+| arm | medium aggregate | strict wins vs base | ties | losses |
+|---|---|---|---|---|
+| base | 0.0567 | — | — | — |
+| hygiene_explore | **0.3379** | 8/10 | menders, rites | none |
+| designed_fresh | 0.3197 | 8/10 | menders | warren (0.050 vs 0.067) |
+| replay_repeat | 0.2981 | 8/10 | menders, rites | none |
+
+Per-family (base → hygiene_explore): chronicle 0→0.5, lockpick 0→0.2, menders 0→0, mirage 0→0.6, rites 0→0, siftstack 0→0.5, sirens 0.4→0.6, stockade 0→0.113, toolsmith 0.1→0.7, warren 0.067→0.167.
+
+- The quick aggregate ordering INVERTED at medium: replay_repeat (0.5081 quick, best-ever) ranks last of the treated at 0.2981, while the install carrier hygiene_explore leads — the non-convex tier-Pareto frontier reappears inside the universal line.
+- Sirens resolved exactly as the forensics predicted: base 0.4, every treated arm 0.6 — a strict win at medium granularity where quick manufactured ties.
+- Menders stayed at 0 for ALL four arms — for the contamination-free line it is a genuine capability gap, not purely an instrument artifact (though replay_refresh once scored 0.125 at quick, so it is a marginal-capability-plus-item-draw gap, not an absolute wall).
 
 ## Interpretation
 
-None yet.
+The program has never been closer: hygiene_explore beats base strictly on eight families, loses none, and needs exactly two ties flipped — menders > 0 and rites > 0 — to pass the recorded goal gate. rites is demonstrably elicitable in this lineage (designed_fresh scored 0.1 in this same event; replay flipped it at quick). menders is the binding constraint: two designed same-shape attempts already failed (the closed tracefix axis), gym-trained arms historically reached 0.3–0.4 there, and the clean line's only nonzero was one quick item. Successor design must attack menders with a genuinely new mechanism argument, with rites carried alongside, from the hygiene_explore parent, under the pooled_k3 retention protocol.
 
 ## Knowledgebase Update
 
-- Program evidence updated: pending the event.
-- Program backlog updated: this cell is the forensics' funded successor.
-- Claim ledger updated: no.
+- Program evidence updated: the medium map, the ordering inversion, and the two-tie goal-gate position recorded.
+- Program backlog updated: forensics successor closed; the two-family install (menders + rites) from the hygiene_explore parent is the funded next branch.
+- Claim ledger updated: no new claim; the tier-frontier law gains a universal-line replication.
 
 ## Artifacts
 

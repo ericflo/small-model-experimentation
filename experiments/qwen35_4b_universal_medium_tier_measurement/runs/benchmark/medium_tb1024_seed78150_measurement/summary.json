@@ -1,0 +1,102 @@
+{
+ "benchmark_data_read": false,
+ "benchmark_implementation": {
+  "runner_sha256": "a3beecd8b5c89ccfd99a172a6d85321d39b9feb6c29d12f10b2f4d7499e273cb",
+  "source_file_count": 56,
+  "source_inventory_sha256": "218b8615a95f24da962c931e9cd2dba58d853a7bdcd2847cd8e2c42fc2c05f42"
+ },
+ "design_receipt_sha256": "26034d8383a146cc3ddb3d8c67e564a53ee2262c6f99ac1269ce1f8482536cad",
+ "gateway_sha256": "53cf6533dbd710eb167503363c39f73dbf7559a0d91f40a00436a3c218a01c17",
+ "model_order": [
+  "base",
+  "designed_fresh",
+  "replay_repeat",
+  "hygiene_explore"
+ ],
+ "model_tree_sha256s": {
+  "base": "26d8ee48583adb0fb557d0ff668664949adff0068fa5baafe6f0af68e22fb677",
+  "designed_fresh": "93433aa2d5f3f0d6d4540126579c09feee1d8502df702c1563bae28eb7f60255",
+  "hygiene_explore": "9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971",
+  "replay_repeat": "4c4f3561efbcafe1b9f777f4bd21bf4949ff89177f77946d0fa0f88cafafacd7"
+ },
+ "model_weight_sha256s": {
+  "base": "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db",
+  "designed_fresh": "0a3b89cdf57ed8a73590580489d744319c12b44b60991db55b5baba6f7c27979",
+  "hygiene_explore": "e21123443a230ada2c73ded411e0b5b7c2b1459856b2c38e4f1beea8958dc02f",
+  "replay_repeat": "3df45004fcf42519ce28cdcfedcbb39b0907662f8ecfb8a87b13b416087d0072"
+ },
+ "models": {
+  "base": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized",
+  "designed_fresh": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_fresh_surface_budget_commit_target_match/merged/designed_fresh",
+  "hygiene_explore": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore",
+  "replay_repeat": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_goal_gap_axis_curriculum_target_match/merged/replay_repeat"
+ },
+ "name": "measurement",
+ "promoted": null,
+ "schema_version": 1,
+ "scores": {
+  "base": {
+   "aggregate": 0.056666666666666664,
+   "per_family": {
+    "chronicle": 0.0,
+    "lockpick": 0.0,
+    "menders": 0.0,
+    "mirage": 0.0,
+    "rites": 0.0,
+    "siftstack": 0.0,
+    "sirens": 0.4,
+    "stockade": 0.0,
+    "toolsmith": 0.1,
+    "warren": 0.06666666666666667
+   }
+  },
+  "designed_fresh": {
+   "aggregate": 0.31971153846153844,
+   "per_family": {
+    "chronicle": 0.5,
+    "lockpick": 0.1,
+    "menders": 0.0,
+    "mirage": 0.5,
+    "rites": 0.1,
+    "siftstack": 0.5,
+    "sirens": 0.6,
+    "stockade": 0.13461538461538464,
+    "toolsmith": 0.7125,
+    "warren": 0.05
+   }
+  },
+  "hygiene_explore": {
+   "aggregate": 0.3379383788254756,
+   "per_family": {
+    "chronicle": 0.5,
+    "lockpick": 0.2,
+    "menders": 0.0,
+    "mirage": 0.6,
+    "rites": 0.0,
+    "siftstack": 0.5,
+    "sirens": 0.6,
+    "stockade": 0.11271712158808933,
+    "toolsmith": 0.7,
+    "warren": 0.16666666666666666
+   }
+  },
+  "replay_repeat": {
+   "aggregate": 0.2981474358974359,
+   "per_family": {
+    "chronicle": 0.4,
+    "lockpick": 0.4,
+    "menders": 0.0,
+    "mirage": 0.4,
+    "rites": 0.0,
+    "siftstack": 0.4,
+    "sirens": 0.6,
+    "stockade": 0.158974358974359,
+    "toolsmith": 0.5225,
+    "warren": 0.1
+   }
+  }
+ },
+ "seed": 78150,
+ "think_budget": 1024,
+ "tier": "medium"
+}
