@@ -8,7 +8,8 @@ is invalid as a training prerequisite. Review 9's five load, counter, runtime,
 environment, and selected-hardware gaps were remediated model-free. Review 10 then
 reproduced four narrower runtime/import/re-exec/device-auth blockers. Their model-free
 remediations were published, but exact-SHA Review 11 returned HOLD with five concrete
-runtime/provenance counterexamples. No Qwen
+runtime/provenance counterexamples. Those findings now have model-free remediations
+awaiting exact-SHA Review 12. No Qwen
 generation, GPU, training, capability measurement, or Jacobian event exists.
 
 ## Research Program Fit
@@ -85,10 +86,21 @@ PATH-resolved Git, `uv`, and `nvcc` remain outside the authenticated executable
 boundary; and replay does not require a nonempty loaded-native closure. This remains
 implementation evidence only and all execution authorization stays unchanged.
 
+The Review-12 candidate adds byte-reproducible static training/vLLM launchers whose
+live parent executable and inherited proof descriptor must match the tracked launcher
+inode and committed hash. The dispatcher admits only fixed experiment stages and
+re-enters the pinned interpreter with `-I -B -S`; direct Python entry fails. Executable
+subprocesses use pinned open inodes rather than PATH. Lease denial is accepted only for
+an unchanged exact read-only file mount, vLLM retains the un-resolved venv bin path,
+active CUDA UUID is compared and recorded, and replay requires the full initial native
+mapping set. The 92-test/23-subtest model-free suite and a real 4,915-lease plus
+34-read-only-mount guard audit pass. This remains non-authorizing implementation
+evidence pending exact-SHA review and detached launcher/bootstrap seals.
+
 ## Next Experiments
 
-Convert all five Review-11 counterexamples into fail-closed tests, remediate them
-model-free, publish the exact revision, and obtain a fresh independent verdict before
+Publish the Review-11 remediation, run both real detached static-launcher/bootstrap
+seals at that exact SHA, and obtain a fresh independent Review 12 verdict before
 changing authorization. Nothing beyond tokenizer-only work is authorized yet.
 
 ## Artifact Manifest

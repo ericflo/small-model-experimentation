@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -23,14 +22,18 @@ def sha256_file(path: Path) -> str:
 
 
 def git_commit() -> str:
-    return subprocess.run(
-        ["git", "rev-parse", "HEAD"], check=True, capture_output=True, text=True
+    from runtime_contract import run_pinned_executable
+
+    return run_pinned_executable(
+        "git", ["rev-parse", "HEAD"], cwd=Path.cwd()
     ).stdout.strip()
 
 
 def require_clean_worktree() -> None:
-    if subprocess.run(
-        ["git", "status", "--porcelain"], check=True, capture_output=True, text=True
+    from runtime_contract import run_pinned_executable
+
+    if run_pinned_executable(
+        "git", ["status", "--porcelain"], cwd=Path.cwd()
     ).stdout:
         raise ValueError("stage consumption requires a clean worktree")
 

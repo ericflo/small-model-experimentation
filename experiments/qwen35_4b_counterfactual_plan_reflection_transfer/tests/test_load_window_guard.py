@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import sys
 import fcntl
+import mmap
 import hashlib
 import os
 import tempfile
@@ -83,7 +84,7 @@ class LoadWindowGuardTests(unittest.TestCase):
                     observed = _content(root)
                     guard.bind_authenticated_content(observed, observed)
 
-    def test_kernel_denied_leases_are_scoped_to_declared_system_roots(self) -> None:
+    def test_kernel_denied_lease_on_mutable_file_fails_closed(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             outer = Path(temporary)
             environment = outer / "environment"
@@ -105,7 +106,62 @@ class LoadWindowGuardTests(unittest.TestCase):
                     raise PermissionError(13, "synthetic kernel denial")
                 return original_fcntl(descriptor, command, argument)
 
-            with mock.patch.object(L.fcntl, "fcntl", side_effect=scoped_lease):
+            with (system / "library.so").open("r+b") as handle, mmap.mmap(
+                handle.fileno(), 0, access=mmap.ACCESS_WRITE
+            ) as mapping, mock.patch.object(
+                L.fcntl, "fcntl", side_effect=scoped_lease
+            ), self.assertRaisesRegex(RuntimeError, "exact read-only file mount"):
+                mapping[0:1] = b"S"
+                mapping.flush()
+                L.LoadWindowGuard(
+                    [environment, system],
+                    expected_content=expected,
+                    unleased_roots=[system],
+                ).__enter__()
+
+    def test_kernel_denied_lease_accepts_only_stable_exact_read_only_mount(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            outer = Path(temporary)
+            environment = outer / "environment"
+            system = outer / "system"
+            environment.mkdir()
+            system.mkdir()
+            (environment / "weights.bin").write_bytes(b"environment")
+            mounted = system / "library.so"
+            mounted.write_bytes(b"system")
+            expected = {"runtime": "pinned"}
+            original_fcntl = fcntl.fcntl
+            mount_identity = {
+                "mount_id": "1",
+                "parent_id": "0",
+                "major_minor": "1:1",
+                "root": str(mounted),
+                "mount_point": str(mounted),
+                "mount_options": "ro",
+                "optional_fields": [],
+                "filesystem_type": "synthetic",
+                "source": "/synthetic",
+                "super_options": "ro",
+            }
+
+            def scoped_lease(descriptor: int, command: int, argument: int):
+                path = Path(os.readlink(f"/proc/self/fd/{descriptor}"))
+                if (
+                    command == fcntl.F_SETLEASE
+                    and argument == fcntl.F_RDLCK
+                    and path == mounted
+                ):
+                    raise PermissionError(13, "synthetic kernel denial")
+                return original_fcntl(descriptor, command, argument)
+
+            def mounted_identity(path: Path):
+                return mount_identity if Path(path) == mounted else None
+
+            with mock.patch.object(
+                L.fcntl, "fcntl", side_effect=scoped_lease
+            ), mock.patch.object(
+                L, "read_only_file_mount_identity", side_effect=mounted_identity
+            ):
                 guard = L.LoadWindowGuard(
                     [environment, system],
                     expected_content=expected,
@@ -114,20 +170,23 @@ class LoadWindowGuardTests(unittest.TestCase):
                 guard.__enter__()
                 guard.bind_authenticated_content(expected, expected)
                 receipt = guard.verify()
-            self.assertEqual(receipt["schema_version"], 3)
-            self.assertEqual(receipt["unleased_files"], 1)
-            L.validate_load_window_receipt(
-                receipt,
-                [environment, system],
-                expected_content=expected,
-                unleased_roots=[system],
-            )
-            with self.assertRaisesRegex(ValueError, "invalid or stale"):
+                self.assertEqual(receipt["schema_version"], 4)
+                self.assertEqual(receipt["unleased_files"], 1)
+                self.assertEqual(
+                    receipt["read_only_file_mounts"], {str(mounted): mount_identity}
+                )
                 L.validate_load_window_receipt(
                     receipt,
                     [environment, system],
                     expected_content=expected,
+                    unleased_roots=[system],
                 )
+                with self.assertRaisesRegex(ValueError, "invalid or stale"):
+                    L.validate_load_window_receipt(
+                        receipt,
+                        [environment, system],
+                        expected_content=expected,
+                    )
 
 
 if __name__ == "__main__":

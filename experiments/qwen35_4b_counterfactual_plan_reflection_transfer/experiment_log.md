@@ -299,3 +299,12 @@
   made zero tokenizer/model/GPU/training/evaluation/Jacobian/benchmark calls and left
   the tree clean. Authorization remains unchanged while all five findings are made
   fail-closed.
+- Implemented all five Review-11 remediations model-free. Lease denial now requires
+  one exact stable read-only file mount; static live-parent launchers authenticate the
+  replacement pre-Python boundary; subprocesses execute pinned open inodes rather than
+  PATH names; vLLM preserves the invoked venv bin; active CUDA UUID is compared and
+  recorded; and native replay requires the complete initial mapping set. The focused
+  suite passes 92 tests plus 23 subtests, both launchers rebuild byte-identically, and
+  the real guard protects 4,915 leased files plus exactly 34 read-only NVIDIA mounts.
+  Zero tokenizer/model/GPU/training/evaluation/Jacobian/benchmark events occurred.
+  Authorization remains unchanged pending exact-SHA detached seals and Review 12.

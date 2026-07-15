@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -195,7 +196,7 @@ class EvalInputTests(unittest.TestCase):
             "max_cudagraph_capture_size": max(frozen["cudagraph_capture_sizes"]),
         }
         lock = EXP.parents[1] / "requirements-vllm.lock.txt"
-        commit = P.subprocess.run(
+        commit = subprocess.run(
             ["git", "rev-parse", "HEAD"], check=True, capture_output=True, text=True
         ).stdout.strip()
         with tempfile.TemporaryDirectory() as temporary:
@@ -306,6 +307,7 @@ class EvalInputTests(unittest.TestCase):
                         "active_visible_device_count": 1,
                         "active_name": "Synthetic GPU",
                         "active_memory_total_mib": 80000,
+                        "active_uuid": "GPU-0000",
                     },
                     "python_executable": "/synthetic/python",
                     "python_executable_sha256": "f" * 64,

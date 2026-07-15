@@ -28,6 +28,7 @@ def gpu(uuid: str = "GPU-0000") -> dict:
         "active_visible_device_count": 1,
         "active_name": "Synthetic GPU",
         "active_memory_total_mib": 80000,
+        "active_uuid": uuid,
     }
 
 

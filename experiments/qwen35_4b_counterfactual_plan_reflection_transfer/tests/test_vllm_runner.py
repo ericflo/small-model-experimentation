@@ -781,6 +781,13 @@ class TerminationSemanticsTests(unittest.TestCase):
 
 
 class CliRewriteTests(unittest.TestCase):
+    def test_no_site_runner_preserves_the_invoked_venv_bin_directory(self) -> None:
+        self.assertEqual(
+            runner._PYTHON_BIN,
+            str(Path(sys.executable).parent),
+        )
+        self.assertNotEqual(runner._PYTHON_BIN, str(Path(sys.executable).resolve().parent))
+
     def test_runner_contains_no_adaptive_exec_path(self) -> None:
         source = RUNNER_PATH.read_text()
         self.assertNotIn("os.exec", source)

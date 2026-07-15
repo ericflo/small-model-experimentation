@@ -40,6 +40,53 @@ WATCH_MASK = (
 )
 
 
+def _decode_mount_field(value: str) -> str:
+    """Decode the octal escapes used by procfs mount tables."""
+    return (
+        value.replace("\\040", " ")
+        .replace("\\011", "\t")
+        .replace("\\012", "\n")
+        .replace("\\134", "\\")
+    )
+
+
+def read_only_file_mount_identity(path: Path) -> dict[str, Any] | None:
+    """Return one exact read-only file-mount identity, never a parent mount."""
+    path = Path(path).resolve(strict=True)
+    if not path.is_file() or path.is_symlink():
+        return None
+    matches: list[dict[str, Any]] = []
+    for line in Path("/proc/self/mountinfo").read_text().splitlines():
+        fields = line.split()
+        try:
+            separator = fields.index("-")
+        except ValueError:
+            continue
+        if separator < 6 or len(fields) < separator + 4:
+            continue
+        mount_point = _decode_mount_field(fields[4])
+        mount_options = fields[5].split(",")
+        if mount_point != str(path) or "ro" not in mount_options:
+            continue
+        if not (os.statvfs(path).f_flag & os.ST_RDONLY):
+            continue
+        matches.append(
+            {
+                "mount_id": fields[0],
+                "parent_id": fields[1],
+                "major_minor": fields[2],
+                "root": _decode_mount_field(fields[3]),
+                "mount_point": mount_point,
+                "mount_options": fields[5],
+                "optional_fields": fields[6:separator],
+                "filesystem_type": fields[separator + 1],
+                "source": _decode_mount_field(fields[separator + 2]),
+                "super_options": fields[separator + 3],
+            }
+        )
+    return matches[0] if len(matches) == 1 else None
+
+
 def _canonical_sha256(value: Any) -> str:
     return hashlib.sha256(
         json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
@@ -143,6 +190,7 @@ class LoadWindowGuard:
         self._inotify_fd: int | None = None
         self._lease_fds: list[int] = []
         self._unleased_files: list[Path] = []
+        self._read_only_mounts: dict[str, dict[str, Any]] = {}
         self._watch_count = 0
         self._sigio_previous: Any = None
         self._sigio_count = 0
@@ -192,7 +240,13 @@ class LoadWindowGuard:
                         for root in self._unleased_roots
                     ):
                         raise
+                    mount_identity = read_only_file_mount_identity(path)
+                    if mount_identity is None:
+                        raise RuntimeError(
+                            "lease denial is allowed only for an exact read-only file mount"
+                        )
                     self._unleased_files.append(path)
+                    self._read_only_mounts[str(path)] = mount_identity
                     continue
                 self._lease_fds.append(file_descriptor)
         except Exception:
@@ -239,10 +293,18 @@ class LoadWindowGuard:
         events = self._event_bytes()
         after = root_commitments(self.roots)
         unleased_paths = [str(path) for path in self._unleased_files]
+        read_only_mounts = {
+            path: read_only_file_mount_identity(Path(path)) for path in unleased_paths
+        }
+        if read_only_mounts != self._read_only_mounts or any(
+            value is None for value in read_only_mounts.values()
+        ):
+            self._close()
+            raise RuntimeError("read-only file-mount identity changed during load window")
         receipt = {
-            "schema_version": 3 if unleased_paths else 2,
+            "schema_version": 4 if unleased_paths else 2,
             "method": (
-                "linux_inotify_plus_scoped_read_leases_plus_inode_surface"
+                "linux_inotify_plus_read_leases_plus_exact_read_only_file_mounts"
                 if unleased_paths
                 else "linux_inotify_plus_read_leases_plus_inode_surface"
             ),
@@ -259,6 +321,8 @@ class LoadWindowGuard:
                 unleased_files=len(unleased_paths),
                 unleased_file_paths=unleased_paths,
                 unleased_files_sha256=_canonical_sha256(unleased_paths),
+                read_only_file_mounts=read_only_mounts,
+                read_only_file_mounts_sha256=_canonical_sha256(read_only_mounts),
             )
         self._close()
         if events or self._sigio_count or after != self._before:
@@ -313,11 +377,13 @@ def validate_load_window_receipt(
         "lease_break_signals",
         "decision",
     }
-    if schema == 3:
+    if schema == 4:
         required |= {
             "unleased_files",
             "unleased_file_paths",
             "unleased_files_sha256",
+            "read_only_file_mounts",
+            "read_only_file_mounts_sha256",
         }
     files, _directories = _files_and_watch_directories(roots)
     allowed_unleased_roots = tuple(
@@ -328,10 +394,10 @@ def validate_load_window_receipt(
         not isinstance(receipt, dict)
         or set(receipt) != required
         or type(receipt.get("schema_version")) is not int
-        or schema not in {2, 3}
+        or schema not in {2, 4}
         or receipt.get("method") != (
-            "linux_inotify_plus_scoped_read_leases_plus_inode_surface"
-            if schema == 3
+            "linux_inotify_plus_read_leases_plus_exact_read_only_file_mounts"
+            if schema == 4
             else "linux_inotify_plus_read_leases_plus_inode_surface"
         )
         or receipt.get("roots") != expected_roots
@@ -339,7 +405,7 @@ def validate_load_window_receipt(
         or type(receipt.get("protected_files")) is not int
         or receipt["protected_files"] < 1
         or (
-            schema == 3
+            schema == 4
             and (
                 type(receipt.get("unleased_files")) is not int
                 or receipt["unleased_files"] < 1
@@ -362,6 +428,18 @@ def validate_load_window_receipt(
                 or not isinstance(receipt.get("unleased_files_sha256"), str)
                 or receipt["unleased_files_sha256"]
                 != _canonical_sha256(unleased_file_paths)
+                or not isinstance(receipt.get("read_only_file_mounts"), dict)
+                or receipt["read_only_file_mounts"]
+                != {
+                    path: read_only_file_mount_identity(Path(path))
+                    for path in unleased_file_paths
+                }
+                or any(
+                    value is None
+                    for value in receipt["read_only_file_mounts"].values()
+                )
+                or receipt.get("read_only_file_mounts_sha256")
+                != _canonical_sha256(receipt["read_only_file_mounts"])
             )
         )
         or (schema == 2 and receipt["protected_files"] != len(files))

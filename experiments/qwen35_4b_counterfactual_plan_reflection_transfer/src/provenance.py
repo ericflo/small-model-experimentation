@@ -6,7 +6,6 @@ import dataclasses
 import hashlib
 import json
 import re
-import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -194,6 +193,7 @@ def validate_runtime_bootstrap(
     from runtime_contract import (
         _bootstrap_locked_versions,
         _initial_import_path_allowed,
+        _launcher_environment,
         _runtime_pin,
         _sha256_file,
         _system_pin,
@@ -206,8 +206,11 @@ def validate_runtime_bootstrap(
     required = {
         "schema_version",
         "backend",
+        "launcher_authentication",
         "worktree",
         "environment_root",
+        "bin_root",
+        "bin_authentication",
         "invoked_python",
         "resolved_python",
         "resolved_python_sha256",
@@ -221,6 +224,7 @@ def validate_runtime_bootstrap(
         "startup_files",
         "environment_authentication",
         "post_import_environment_authentication",
+        "post_import_bin_authentication",
         "post_import_stdlib_authentication",
         "post_import_native_library_authentication",
         "post_import_loaded_native_closure",
@@ -234,6 +238,7 @@ def validate_runtime_bootstrap(
     pin = _runtime_pin(expected_backend)
     system_pin = _system_pin()
     environment_root = Path(pin["environment_root"])
+    bin_root = environment_root / "bin"
     invoked_python = environment_root / "bin" / "python"
     site_packages = (
         environment_root
@@ -257,6 +262,7 @@ def validate_runtime_bootstrap(
         pin["record_surface_sha256"],
         pin["site_surface_sha256"],
     )
+    bin_authentication = authenticate_tree(bin_root, pin["bin_surface_sha256"])
     stdlib_root = Path(system_pin["stdlib_root"])
     stdlib_authentication = authenticate_tree(
         stdlib_root, system_pin["stdlib_surface_sha256"]
@@ -314,6 +320,56 @@ def validate_runtime_bootstrap(
             )
         )
         for path, digest in (loaded_mappings.items() if isinstance(loaded_mappings, dict) else ())
+    ) and all(
+        loaded_mappings.get(path) == digest
+        for path, digest in native_mappings.items()
+    )
+    launcher_authentication = (
+        bootstrap.get("launcher_authentication") if isinstance(bootstrap, dict) else None
+    )
+    launcher_pin = system_pin["launchers"][expected_backend]
+    launcher_path = repo_root / launcher_pin["path"]
+    dispatcher_pin = system_pin["runtime_dispatcher"]
+    dispatcher_path = repo_root / dispatcher_pin["path"]
+    launcher_selector = (
+        launcher_authentication.get("cuda_visible_devices")
+        if isinstance(launcher_authentication, dict)
+        else None
+    )
+    expected_launcher_environment = _launcher_environment(expected_backend)
+    if launcher_selector is not None:
+        expected_launcher_environment["CUDA_VISIBLE_DEVICES"] = launcher_selector
+    valid_launcher = (
+        isinstance(launcher_authentication, dict)
+        and set(launcher_authentication)
+        == {
+            "backend", "path", "sha256", "parent_pid", "proof_fd",
+            "dispatcher_path", "dispatcher_sha256", "cuda_visible_devices",
+            "environment_sha256",
+        }
+        and launcher_authentication.get("backend") == expected_backend
+        and launcher_authentication.get("path") == str(launcher_path)
+        and launcher_authentication.get("sha256") == launcher_pin["sha256"]
+        and launcher_path.is_file()
+        and not launcher_path.is_symlink()
+        and _sha256_file(launcher_path) == launcher_pin["sha256"]
+        and type(launcher_authentication.get("parent_pid")) is int
+        and launcher_authentication["parent_pid"] > 1
+        and launcher_authentication.get("proof_fd") == 198
+        and launcher_authentication.get("dispatcher_path") == str(dispatcher_path)
+        and launcher_authentication.get("dispatcher_sha256") == dispatcher_pin["sha256"]
+        and dispatcher_path.is_file()
+        and not dispatcher_path.is_symlink()
+        and _sha256_file(dispatcher_path) == dispatcher_pin["sha256"]
+        and (
+            launcher_selector is None
+            or (
+                isinstance(launcher_selector, str)
+                and re.fullmatch(r"GPU-[A-Za-z0-9-]+", launcher_selector) is not None
+            )
+        )
+        and launcher_authentication.get("environment_sha256")
+        == canonical_sha256(expected_launcher_environment)
     )
     expected_worktree = runtime.get("worktree")
     if expected_worktree is None:
@@ -326,10 +382,13 @@ def validate_runtime_bootstrap(
     if (
         not isinstance(bootstrap, dict)
         or set(bootstrap) != required
-        or bootstrap.get("schema_version") != 2
+        or bootstrap.get("schema_version") != 3
         or bootstrap.get("backend") != expected_backend
+        or not valid_launcher
         or bootstrap.get("worktree") != expected_worktree
         or bootstrap.get("environment_root") != str(environment_root)
+        or bootstrap.get("bin_root") != str(bin_root.resolve())
+        or bootstrap.get("bin_authentication") != bin_authentication
         or bootstrap.get("invoked_python") != str(invoked_python)
         or bootstrap.get("resolved_python") != str(invoked_python.resolve())
         or bootstrap.get("resolved_python_sha256")
@@ -349,6 +408,7 @@ def validate_runtime_bootstrap(
         or bootstrap.get("environment_authentication") != environment_authentication
         or bootstrap.get("post_import_environment_authentication")
         != environment_authentication
+        or bootstrap.get("post_import_bin_authentication") != bin_authentication
         or bootstrap.get("post_import_stdlib_authentication")
         != stdlib_authentication
         or bootstrap.get("post_import_native_library_authentication")
@@ -372,6 +432,7 @@ def validate_runtime_bootstrap(
             ],
             "site_surface_sha256": environment_authentication["site_surface_sha256"],
             "packages_sha256": environment_authentication["packages_sha256"],
+            "bin_surface_sha256": bin_authentication["surface_sha256"],
             "stdlib_surface_sha256": stdlib_authentication["surface_sha256"],
             "native_library_surfaces": {
                 path: authentication["surface_sha256"]
@@ -381,7 +442,7 @@ def validate_runtime_bootstrap(
     }
     validate_load_window_receipt(
         bootstrap["import_window_guard"],
-        [site_packages, stdlib_root, *native_roots],
+        [bin_root, site_packages, stdlib_root, *native_roots],
         expected_content=expected_content,
         unleased_roots=[stdlib_root, *native_roots],
     )
@@ -399,6 +460,7 @@ def validate_gpu_identity(value: Any) -> dict[str, Any]:
         "active_visible_device_count",
         "active_name",
         "active_memory_total_mib",
+        "active_uuid",
     }
     if (
         not isinstance(value, dict)
@@ -418,6 +480,8 @@ def validate_gpu_identity(value: Any) -> dict[str, Any]:
         or value.get("active_visible_device_count") != 1
         or value.get("active_name") != value.get("name")
         or value.get("active_memory_total_mib") != value.get("memory_total_mib")
+        or not isinstance(value.get("active_uuid"), str)
+        or value["active_uuid"].lower() != value["uuid"].lower()
     ):
         raise ValueError("runtime lacks one exact selected GPU UUID identity")
     return value
@@ -610,8 +674,10 @@ def validate_generation_protocol(
         raise ValueError("trained generation hardware differs from its training hardware")
     validate_interpreter_runtime(runtime, repo_root)
     validate_runtime_bootstrap(runtime, repo_root, "vllm")
-    current_commit = subprocess.run(
-        ["git", "rev-parse", "HEAD"], check=True, capture_output=True, text=True
+    from runtime_contract import run_pinned_executable
+
+    current_commit = run_pinned_executable(
+        "git", ["rev-parse", "HEAD"], cwd=repo_root
     ).stdout.strip()
     if runtime.get("git_commit") != current_commit:
         raise ValueError("generation Git commit differs from the scoring checkout")

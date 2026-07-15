@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "system": {
     "resolved_python": "/usr/bin/python3.12",
     "resolved_python_sha256": "1d3cf64f97cadc79fdc6fe2496a21b7b456cb94211978cfef5a65f616af74fd5",
@@ -31,14 +31,43 @@
       "/usr/lib/x86_64-linux-gnu/libm.so.6": "f06f2ce1f1833df5f41cf13b6447ff07bea993ad9b27297d3428c2f70ab3f0e7",
       "/usr/lib/x86_64-linux-gnu/libz.so.1.3": "9b64150b28505a33d6bc3ecf709c279f6de97a1c184dbda65d06ee4537f6d286"
     },
-    "nvidia_smi": {
-      "path": "/usr/bin/nvidia-smi",
-      "sha256": "d786f46940a9de79f31971d8b211fd4f25336ea19427478c7f7189bfced32a71"
+    "executables": {
+      "git": {
+        "path": "/usr/bin/git",
+        "sha256": "2a8c18fbf43da9f692d75474c72bea9dfd796c260b0f3dfe456376abc3bbd668"
+      },
+      "nvidia_smi": {
+        "path": "/usr/bin/nvidia-smi",
+        "sha256": "d786f46940a9de79f31971d8b211fd4f25336ea19427478c7f7189bfced32a71"
+      },
+      "nvcc": {
+        "path": "/usr/local/cuda-12.8/bin/nvcc",
+        "sha256": "59e4e55f9a38b78c590df1e28a69dad91052958f18a03868ca4a547c043fbba7"
+      },
+      "uv": {
+        "path": "/usr/bin/uv",
+        "sha256": "f024ae4c9d3c885ecd27e91db540a50f5a3c16a6d18351576122e47a2598f5e7"
+      }
+    },
+    "runtime_dispatcher": {
+      "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/runtime_entry.py",
+      "sha256": "589abf64d1eb4548a4cb4b0091d6382f1533c37620468db99e73d5596138abf3"
+    },
+    "launchers": {
+      "training": {
+        "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/training_launcher",
+        "sha256": "2d4e2063aa7a6526cc7f1b2bab5952c43e92219283b28d05788e0bd8d3e6e828"
+      },
+      "vllm": {
+        "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/vllm_launcher",
+        "sha256": "b43044e9a59b4a57fa51330b5217e500c27c6fb681500e60fec1dfcaf74fd737"
+      }
     }
   },
   "training": {
     "environment_root": "/workspace/small-model-experimentation/.venv",
     "lock_file": "requirements-training.lock.txt",
+    "bin_surface_sha256": "dc4a64afa4595abfdc575c1b90a650b2d4c7570b064212477eb3c7879330a6be",
     "record_surface_sha256": "a5457b06fc133b62b2496c4ad41be24cb6ee78503638919467651467b271dbcd",
     "site_surface_sha256": "2ecb62fa623b41ec2fa2831d2f77d31225ac33449108fe98f0ea02afca0df0e9",
     "path_extensions": [],
@@ -51,6 +80,7 @@
   "vllm": {
     "environment_root": "/workspace/small-model-experimentation/.venv-vllm",
     "lock_file": "requirements-vllm.lock.txt",
+    "bin_surface_sha256": "d81057fb31a62c6a6a3ec0ea0fcd4566fa58b54ce5cfb7cfa11cd2e5edea2d87",
     "record_surface_sha256": "5fde29c3b6bf24d652138953b52dfb88acbbb4ef33e04dfaac5d6c184b3dff58",
     "site_surface_sha256": "9a6cfcfbd1f58394c41213fc524ca0a1f3317987d19ccde82c13cedb05ca4365",
     "path_extensions": [

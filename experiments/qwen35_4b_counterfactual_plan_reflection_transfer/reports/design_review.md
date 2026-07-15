@@ -707,3 +707,32 @@ confirmation, large-artifact, weight, or secret payload; changed no tracked file
 removed all transient review material. Authorization remains unchanged. All five
 counterexamples require executable fail-closed regressions and model-free remediation
 before another exact-SHA review.
+
+### Review 11 remediation implemented, pending Review 12
+
+1. The runtime guard no longer accepts a lease denial merely because a file lies below
+   a declared system root. The file itself must be one exact read-only mount in the
+   current mount namespace, and the complete mount identity must remain unchanged and
+   replay exactly. A pre-opened writable-mapping regression now fails at guard entry.
+   The real host audit protects 4,915 files with leases and identifies exactly 34
+   lease-denied NVIDIA files as read-only file mounts.
+2. The runner now uses `Path(sys.executable).parent`, preserving
+   `.venv-vllm/bin` under `-S`; a regression distinguishes it from the resolved
+   `/usr/bin` parent. Explicit CUTLASS activation and frozen capacity remain unchanged.
+3. Active CUDA properties must expose a UUID matching the selected physical row. The
+   receipt records `active_uuid`, and a same-name/same-memory wrong-UUID device fails.
+4. Reproducible static training/vLLM launchers now remain as each dynamic child's live
+   parent, set a parent-death signal, replace the environment, fix the interpreter,
+   dispatcher, and `-I -B -S` flags, and carry their open executable inode on inherited
+   descriptor 198. Python requires the parent, proof descriptor, and tracked path to
+   name the same stable committed bytes. The dispatcher admits only enumerated stages.
+   Git, `uv`, `nvcc`, and device inventory execute pinned leased/read-only inodes via
+   inherited descriptors, so PATH shadowing cannot satisfy provenance.
+5. Loaded-native closure creation and replay now require every pinned initial mapping
+   and digest, not merely validity of entries supplied by a receipt.
+
+The focused model-free suite passes 92 tests and 23 subtests; both launcher variants
+rebuild byte-identically as stripped static x86-64 ELF files without an interpreter.
+No tokenizer/model/GPU/training/evaluation/Jacobian/benchmark event occurred.
+Authorization remains unchanged. Exact-SHA detached launcher/bootstrap seals and a
+fresh Review 12 are required before any execution flag can change.

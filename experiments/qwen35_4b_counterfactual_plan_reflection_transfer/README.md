@@ -1,6 +1,6 @@
 # Qwen3.5-4B Counterfactual Plan Reflection Transfer
 
-**Status:** in-progress · since 2026-07-14 · exact-SHA Review 11 returned HOLD on five runtime/provenance blockers; model/GPU/training/evaluation remain unauthorized
+**Status:** in-progress · since 2026-07-14 · Review 11 blockers are remediated model-free and awaiting exact-SHA Review 12; model/GPU/training/evaluation remain unauthorized
 
 This experiment tests the paper's most actionable claim without relying on its
 consciousness framing: can supervision on what the model would say on a later
@@ -147,12 +147,13 @@ in progress:
 git fetch origin main
 git worktree add --detach /workspace/sme-reflection-exec <reviewed-authorization-sha>
 cd /workspace/sme-reflection-exec
-# Use the stage-specific pinned environments from outside this immutable
-# worktree. Every artifact-producing command requires -I -B -S.
-TRAINING_PYTHON=/workspace/small-model-experimentation/.venv/bin/python
-VLLM_PYTHON=/workspace/small-model-experimentation/.venv-vllm/bin/python
-# Every GPU stage must select exactly one physical UUID, never an index.
-export CUDA_VISIBLE_DEVICES=GPU-<exact-uuid-from-nvidia-smi>
+# Enter every artifact stage through the stage-specific tracked static launcher.
+# It supplies the pinned external interpreter, -I -B -S, and a replacement
+# environment; direct Python entry is terminal.
+TRAINING_LAUNCHER=$PWD/experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/training_launcher
+VLLM_LAUNCHER=$PWD/experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/vllm_launcher
+# GPU commands pass exactly one physical UUID to the launcher, never an index:
+# $VLLM_LAUNCHER --cuda-visible-devices=GPU-<uuid> vllm_runner <arguments>
 # Invoke only the stages enabled by that exact committed config, writing outputs
 # outside this worktree so it remains clean for the entire staged pipeline.
 ```
@@ -172,8 +173,7 @@ and both raw confirmation metadata files. Its CLI intentionally has no label or 
 argument:
 
 ```bash
-/workspace/small-model-experimentation/.venv-vllm/bin/python -I -B -S \
-  experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/run_frozen_reservoir.py \
+$VLLM_LAUNCHER --cuda-visible-devices=GPU-<exact-uuid> run_frozen_reservoir \
   --input <confirmation-prompts> --input-receipt <confirmation-input-receipt> \
   --stage-receipt <confirmation-stage-receipt> \
   --training-receipt <seed-47-training-receipt> \
@@ -305,6 +305,20 @@ tree guard; and replay accepts an empty loaded-native-mapping set. Authorization
 remains unchanged while these five counterexamples are converted into fail-closed
 regressions and remediated model-free.
 
+Review-11 remediation replaces direct dynamic-Python entry with reproducible static
+training and vLLM launchers. The launcher remains as the live parent, supplies a
+replacement environment and fixed `-I -B -S` interpreter/dispatcher, and carries its
+own open inode across both execs for a three-way parent/proof/path authentication.
+All Git, `uv`, `nvcc`, and device-inventory calls now execute pinned bytes through an
+authenticated inherited descriptor; PATH is never their trust boundary. The vLLM
+tool path preserves the invoked venv symlink rather than resolving it to `/usr/bin`.
+Lease fallback is now legal only for an exact read-only file mount whose mount identity
+is unchanged; the real host surface has 4,915 leased files and exactly 34 such NVIDIA
+mounts. Active CUDA identity compares and records UUID in addition to name and memory,
+and loaded-native replay must contain every pinned initial mapping. The model-free
+suite passes 92 tests and 23 subtests. Authorization remains unchanged pending a fresh
+exact-SHA Review 12.
+
 ## Interpretation
 
 The paper unlocks a training hypothesis, not an already-demonstrated Qwen capability.
@@ -334,6 +348,10 @@ additional sampling. No scientific result exists yet.
 - `src/load_window_guard.py`
 - `src/tokenizer_lineage.py`
 - `scripts/run.py`
+- `scripts/runtime_launcher.S`
+- `scripts/runtime_entry.py`
+- `scripts/training_launcher`
+- `scripts/vllm_launcher`
 - `scripts/tokenizer_receipt.py`
 - `scripts/train.py`
 - `scripts/merge_adapter.py`

@@ -7,7 +7,6 @@ import argparse
 import hashlib
 import json
 import os
-import subprocess
 import sys
 from pathlib import Path
 
@@ -29,7 +28,7 @@ import yaml
 
 from firewall import install_benchmark_firewall  # noqa: E402
 from gate_artifacts import validate_gate_artifact  # noqa: E402
-from stages import git_commit  # noqa: E402
+from stages import git_commit, require_clean_worktree  # noqa: E402
 
 install_benchmark_firewall(EXP.parents[1])
 
@@ -134,10 +133,7 @@ def main() -> int:
     replication = int(config["training"]["staged_seeds"]["replication"])
     inputs: list[Path] = []
     claims: list[dict] = []
-    if subprocess.run(
-        ["git", "status", "--porcelain"], check=True, capture_output=True, text=True
-    ).stdout:
-        raise ValueError("stage receipts require a clean worktree")
+    require_clean_worktree()
     if args.stage == "calibration_generation":
         if config["authorization"]["evaluation"] is not True:
             raise ValueError("calibration generation is not authorized")

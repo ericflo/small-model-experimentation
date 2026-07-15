@@ -45,7 +45,6 @@ import os
 import platform
 import random
 import re
-import subprocess
 import sys
 import time
 from pathlib import Path
@@ -74,7 +73,7 @@ os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 # Calling ``.venv-vllm/bin/python`` directly does not activate the venv, so
 # console tools installed beside it (notably ninja, used by FlashInfer JIT)
 # are otherwise invisible.  Keep direct invocation as reliable as activation.
-_PYTHON_BIN = str(Path(sys.executable).resolve().parent)
+_PYTHON_BIN = str(Path(sys.executable).parent)
 if _PYTHON_BIN not in os.environ.get("PATH", "").split(os.pathsep):
     os.environ["PATH"] = _PYTHON_BIN + os.pathsep + os.environ.get("PATH", "")
 
@@ -597,11 +596,16 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
 
 
 def _run_text(command: Sequence[str]) -> str:
+    if not command or command[0] not in {"git", "uv", "nvcc"}:
+        raise ValueError("runner subprocess is not an allowlisted pinned executable")
+    from runtime_contract import run_pinned_executable
+
     try:
-        return subprocess.run(
-            list(command), check=True, capture_output=True, text=True
-        ).stdout.strip()
-    except (OSError, subprocess.CalledProcessError):
+        result = run_pinned_executable(
+            command[0], list(command[1:]), cwd=Path.cwd()
+        )
+        return result.stdout.strip() if result.returncode == 0 else ""
+    except OSError:
         return ""
 
 

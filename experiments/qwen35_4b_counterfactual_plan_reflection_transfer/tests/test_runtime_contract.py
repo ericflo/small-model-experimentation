@@ -46,6 +46,58 @@ def _require(root: Path, *, executable: Path | None = None) -> dict[str, str]:
 
 
 class RuntimeContractTests(unittest.TestCase):
+    def test_static_launchers_rebuild_exactly_and_direct_entry_is_rejected(self) -> None:
+        pin = json.loads(R.RUNTIME_PIN.read_text())
+        source = EXP / "scripts" / "runtime_launcher.S"
+        with tempfile.TemporaryDirectory() as temporary:
+            for backend, define in (("training", "TRAINING"), ("vllm", "VLLM")):
+                output = Path(temporary) / f"{backend}_launcher"
+                subprocess.run(
+                    [
+                        "/usr/bin/gcc", "-nostdlib", "-static", "-no-pie", "-s",
+                        "-Wl,--build-id=none", f"-D{define}=1", "-o", str(output),
+                        str(source),
+                    ],
+                    check=True,
+                )
+                self.assertEqual(
+                    hashlib.sha256(output.read_bytes()).hexdigest(),
+                    pin["system"]["launchers"][backend]["sha256"],
+                )
+        environment = R._launcher_environment("training")
+        with mock.patch.dict(os.environ, environment, clear=True), self.assertRaisesRegex(
+            RuntimeError, "live pinned static-launcher parent"
+        ):
+            R.authenticate_static_launcher(EXP.parents[1], "training")
+
+    def test_pinned_git_execution_ignores_path_shadow(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            marker = root / "shadow-ran"
+            shadow = root / "git"
+            shadow.write_text(f"#!/bin/sh\ntouch {marker}\nexit 99\n")
+            shadow.chmod(0o755)
+            result = R.run_pinned_executable(
+                "git", ["--version"], cwd=EXP.parents[1], env={"PATH": str(root)}
+            )
+            self.assertEqual(result.returncode, 0)
+            self.assertIn("git version", result.stdout)
+            self.assertFalse(marker.exists())
+
+    def test_loaded_native_closure_requires_the_initial_mapping_set(self) -> None:
+        system_pin = {
+            "resolved_python": "/synthetic/python",
+            "native_mappings": {"/synthetic/python": "f" * 64},
+        }
+        with mock.patch.object(R, "_native_mapping_authentication", return_value={}), mock.patch.object(
+            R, "_system_pin", return_value=system_pin
+        ), self.assertRaisesRegex(ValueError, "omits the pinned initial closure"):
+            R._authenticate_loaded_native_closure(
+                Path("/synthetic/site"),
+                Path("/synthetic/stdlib"),
+                [Path("/synthetic/native")],
+            )
+
     def test_site_package_record_bytes_are_authenticated_before_import(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             site = Path(temporary)
@@ -143,15 +195,20 @@ class RuntimeContractTests(unittest.TestCase):
             ),
             stderr="",
         )
-        with mock.patch.object(R, "_run", return_value=inventory) as run, mock.patch.dict(
+        with mock.patch.object(
+            R, "run_pinned_executable", return_value=inventory
+        ) as run, mock.patch.dict(
             os.environ, {"CUDA_VISIBLE_DEVICES": "GPU-BBBB"}, clear=False
         ):
             identity = R.selected_gpu_identity(Path("/synthetic"))
         self.assertEqual(identity["uuid"], "GPU-BBBB")
         self.assertEqual(identity["physical_index"], 1)
-        self.assertEqual(run.call_args.args[0][0], "/usr/bin/nvidia-smi")
+        self.assertEqual(run.call_args.args[0], "nvidia_smi")
+        self.assertEqual(run.call_args.args[1][0], "--query-gpu=index,name,uuid,driver_version,memory.total")
         self.assertEqual(run.call_args.kwargs["env"]["PATH"], "/usr/bin:/bin")
-        with mock.patch.object(R, "_run", return_value=inventory), mock.patch.dict(
+        with mock.patch.object(
+            R, "run_pinned_executable", return_value=inventory
+        ), mock.patch.dict(
             os.environ, {"CUDA_VISIBLE_DEVICES": "0"}, clear=False
         ), self.assertRaisesRegex(ValueError, "physical GPU UUID"):
             R.selected_gpu_identity(Path("/synthetic"))
@@ -184,7 +241,11 @@ class RuntimeContractTests(unittest.TestCase):
                 return type(
                     "Properties",
                     (),
-                    {"name": "Synthetic GPU", "total_memory": 80000 * 1024 * 1024},
+                    {
+                        "name": "Synthetic GPU",
+                        "total_memory": 80000 * 1024 * 1024,
+                        "uuid": "GPU-BBBB",
+                    },
                 )()
 
         torch_module = type("Torch", (), {"cuda": FakeCuda})()
@@ -196,6 +257,26 @@ class RuntimeContractTests(unittest.TestCase):
         self.assertEqual(
             identity["active_memory_total_mib"], identity["memory_total_mib"]
         )
+        self.assertEqual(identity["active_uuid"], identity["uuid"])
+
+        class WrongUuidCuda(FakeCuda):
+            @staticmethod
+            def get_device_properties(_index: int):
+                return type(
+                    "Properties",
+                    (),
+                    {
+                        "name": "Synthetic GPU",
+                        "total_memory": 80000 * 1024 * 1024,
+                        "uuid": "GPU-AAAA",
+                    },
+                )()
+
+        wrong_torch = type("Torch", (), {"cuda": WrongUuidCuda})()
+        with mock.patch.object(R, "selected_gpu_identity", return_value=selected), self.assertRaisesRegex(
+            ValueError, "active CUDA device differs"
+        ):
+            R.bind_active_cuda_identity(Path("/synthetic"), wrong_torch)
 
     def test_execution_requires_clean_detached_root_cwd(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

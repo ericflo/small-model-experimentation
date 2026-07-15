@@ -5,10 +5,13 @@ from __future__ import annotations
 import hashlib
 import importlib.metadata
 import base64
+import fcntl
 import json
 import os
 import platform
 import re
+import signal
+import stat
 import subprocess
 import sys
 from pathlib import Path
@@ -19,14 +22,19 @@ RUNTIME_PIN = Path(__file__).resolve().parents[1] / "configs" / "pinned_runtime_
 _BOOTSTRAP_RECEIPT: dict[str, Any] | None = None
 _RUNTIME_IMPORT_GUARD: Any | None = None
 _RUNTIME_IMPORT_CONTENT: dict[str, Any] | None = None
+_STATIC_LAUNCHER_PROOF_FD = 198
 
 
-def _run(
-    command: list[str], *, cwd: Path, env: dict[str, str] | None = None
-) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(
-        command, cwd=cwd, capture_output=True, text=True, check=False, env=env
-    )
+def _sha256_fd(descriptor: int) -> str:
+    digest = hashlib.sha256()
+    offset = 0
+    while True:
+        block = os.pread(descriptor, 1024 * 1024, offset)
+        if not block:
+            break
+        digest.update(block)
+        offset += len(block)
+    return digest.hexdigest()
 
 
 def require_detached_execution_worktree(repo_root: Path) -> dict[str, str]:
@@ -39,11 +47,11 @@ def require_detached_execution_worktree(repo_root: Path) -> dict[str, str]:
         raise ValueError("execution interpreter must be provisioned outside the worktree")
     if sys.flags.isolated != 1 or not sys.dont_write_bytecode or sys.flags.no_site != 1:
         raise ValueError("execution requires an isolated -I -B -S Python interpreter")
-    top = _run(["git", "rev-parse", "--show-toplevel"], cwd=repo_root)
-    head = _run(["git", "rev-parse", "HEAD"], cwd=repo_root)
-    status = _run(
+    top = run_pinned_executable("git", ["rev-parse", "--show-toplevel"], cwd=repo_root)
+    head = run_pinned_executable("git", ["rev-parse", "HEAD"], cwd=repo_root)
+    status = run_pinned_executable(
+        "git",
         [
-            "git",
             "status",
             "--porcelain=v1",
             "--untracked-files=all",
@@ -51,7 +59,9 @@ def require_detached_execution_worktree(repo_root: Path) -> dict[str, str]:
         ],
         cwd=repo_root,
     )
-    branch = _run(["git", "symbolic-ref", "-q", "HEAD"], cwd=repo_root)
+    branch = run_pinned_executable(
+        "git", ["symbolic-ref", "-q", "HEAD"], cwd=repo_root
+    )
     if (
         top.returncode != 0
         or Path(top.stdout.strip()).resolve() != repo_root
@@ -84,7 +94,7 @@ def _runtime_pin(backend: str) -> dict[str, Any]:
     value = json.loads(RUNTIME_PIN.read_text())
     if (
         set(value) != {"schema_version", "system", "training", "vllm"}
-        or value["schema_version"] != 2
+        or value["schema_version"] != 3
     ):
         raise ValueError("runtime environment pin schema changed")
     if backend not in {"training", "vllm"}:
@@ -95,6 +105,7 @@ def _runtime_pin(backend: str) -> dict[str, Any]:
         or set(selected)
         != {
             "environment_root",
+            "bin_surface_sha256",
             "lock_file",
             "path_extensions",
             "record_surface_sha256",
@@ -122,7 +133,9 @@ def _system_pin() -> dict[str, Any]:
         "ld_library_path",
         "native_library_roots",
         "native_mappings",
-        "nvidia_smi",
+        "executables",
+        "runtime_dispatcher",
+        "launchers",
     }
     if (
         not isinstance(value, dict)
@@ -131,11 +144,219 @@ def _system_pin() -> dict[str, Any]:
         or not value["native_mappings"]
         or not isinstance(value.get("native_library_roots"), dict)
         or not value["native_library_roots"]
-        or not isinstance(value.get("nvidia_smi"), dict)
-        or set(value["nvidia_smi"]) != {"path", "sha256"}
+        or not isinstance(value.get("executables"), dict)
+        or set(value["executables"]) != {"git", "nvidia_smi", "nvcc", "uv"}
+        or any(
+            not isinstance(item, dict) or set(item) != {"path", "sha256"}
+            for item in value["executables"].values()
+        )
+        or not isinstance(value.get("runtime_dispatcher"), dict)
+        or set(value["runtime_dispatcher"]) != {"path", "sha256"}
+        or not isinstance(value.get("launchers"), dict)
+        or set(value["launchers"]) != {"training", "vllm"}
+        or any(
+            not isinstance(item, dict) or set(item) != {"path", "sha256"}
+            for item in value["launchers"].values()
+        )
     ):
         raise ValueError("runtime system pin changed")
     return value
+
+
+def _launcher_environment(backend: str) -> dict[str, str]:
+    environment_root = Path(_runtime_pin(backend)["environment_root"])
+    return {
+        "HOME": "/root",
+        "PATH": (
+            f"{environment_root}/bin:/usr/local/cuda-12.8/bin:/usr/bin:/bin"
+        ),
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "TZ": "Etc/UTC",
+        "PYTHONNOUSERSITE": "1",
+        "GIT_CONFIG_NOSYSTEM": "1",
+        "GIT_CONFIG_GLOBAL": "/dev/null",
+        "GIT_TERMINAL_PROMPT": "0",
+        "LD_LIBRARY_PATH": "/usr/local/cuda/lib64",
+        "CUDA_DEVICE_ORDER": "PCI_BUS_ID",
+        "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
+        "TOKENIZERS_PARALLELISM": "false",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+    }
+
+
+def authenticate_static_launcher(repo_root: Path, backend: str) -> dict[str, Any]:
+    """Prove entry through the pinned live static parent and replacement environment."""
+    repo_root = Path(repo_root).resolve()
+    system_pin = _system_pin()
+    launcher_pin = system_pin["launchers"].get(backend)
+    if not isinstance(launcher_pin, dict):
+        raise RuntimeError("runtime launcher backend is not pinned")
+    launcher = repo_root / launcher_pin["path"]
+    dispatcher_pin = system_pin["runtime_dispatcher"]
+    dispatcher = repo_root / dispatcher_pin["path"]
+    expected_environment = _launcher_environment(backend)
+    observed_environment = dict(os.environ)
+    selector = observed_environment.pop("CUDA_VISIBLE_DEVICES", None)
+    if selector is not None and re.fullmatch(r"GPU-[A-Za-z0-9-]+", selector) is None:
+        raise RuntimeError("runtime launcher supplied an invalid physical GPU UUID")
+    if observed_environment != expected_environment:
+        raise RuntimeError("runtime launcher replacement environment differs from its pin")
+    if (
+        not dispatcher.is_file()
+        or dispatcher.is_symlink()
+        or _sha256_file(dispatcher) != dispatcher_pin["sha256"]
+    ):
+        raise RuntimeError("runtime dispatcher differs from its committed pin")
+    parent_descriptor: int | None = None
+    try:
+        parent_pid = os.getppid()
+        if parent_pid <= 1:
+            raise RuntimeError("static runtime-launcher parent is absent")
+        parent_descriptor = os.open(f"/proc/{parent_pid}/exe", os.O_RDONLY)
+        if not os.get_inheritable(_STATIC_LAUNCHER_PROOF_FD):
+            raise RuntimeError("runtime-launcher proof descriptor is not inheritable")
+        parent_before = os.fstat(parent_descriptor)
+        proof_before = os.fstat(_STATIC_LAUNCHER_PROOF_FD)
+        path_before = os.stat(launcher, follow_symlinks=False)
+        if (
+            launcher.is_symlink()
+            or not stat.S_ISREG(parent_before.st_mode)
+            or not stat.S_ISREG(proof_before.st_mode)
+            or not stat.S_ISREG(path_before.st_mode)
+            or (parent_before.st_dev, parent_before.st_ino)
+            != (path_before.st_dev, path_before.st_ino)
+            or (proof_before.st_dev, proof_before.st_ino)
+            != (path_before.st_dev, path_before.st_ino)
+        ):
+            raise RuntimeError("runtime-launcher proof names different executable bytes")
+        launcher_sha256 = _sha256_fd(_STATIC_LAUNCHER_PROOF_FD)
+        parent_after = os.fstat(parent_descriptor)
+        proof_after = os.fstat(_STATIC_LAUNCHER_PROOF_FD)
+        path_after = os.stat(launcher, follow_symlinks=False)
+    except OSError as error:
+        raise RuntimeError(
+            "runtime stage requires a live pinned static-launcher parent"
+        ) from error
+    finally:
+        if parent_descriptor is not None:
+            os.close(parent_descriptor)
+    stable_fields = ("st_dev", "st_ino", "st_mode", "st_size", "st_mtime_ns")
+    if (
+        any(
+            getattr(parent_before, field) != getattr(parent_after, field)
+            for field in stable_fields
+        )
+        or any(
+            getattr(proof_before, field) != getattr(proof_after, field)
+            for field in stable_fields
+        )
+        or any(
+            getattr(path_before, field) != getattr(path_after, field)
+            for field in stable_fields
+        )
+        or (proof_after.st_dev, proof_after.st_ino)
+        != (path_after.st_dev, path_after.st_ino)
+        or launcher_sha256 != launcher_pin["sha256"]
+    ):
+        raise RuntimeError("runtime-launcher proof bytes changed or differ from their pin")
+    return {
+        "backend": backend,
+        "path": str(launcher),
+        "sha256": launcher_sha256,
+        "parent_pid": parent_pid,
+        "proof_fd": _STATIC_LAUNCHER_PROOF_FD,
+        "dispatcher_path": str(dispatcher),
+        "dispatcher_sha256": dispatcher_pin["sha256"],
+        "cuda_visible_devices": selector,
+        "environment_sha256": hashlib.sha256(
+            json.dumps(dict(os.environ), sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest(),
+    }
+
+
+def _pinned_executable(name: str) -> tuple[Path, str]:
+    pin = _system_pin()["executables"].get(name)
+    if not isinstance(pin, dict):
+        raise ValueError(f"unknown pinned executable: {name}")
+    path = Path(pin["path"])
+    if not path.is_absolute() or not path.is_file() or path.is_symlink():
+        raise ValueError(f"pinned executable is absent or not regular: {name}")
+    return path, pin["sha256"]
+
+
+def run_pinned_executable(
+    name: str,
+    arguments: list[str],
+    *,
+    cwd: Path,
+    env: dict[str, str] | None = None,
+) -> subprocess.CompletedProcess[str]:
+    """Hash, lease, and execute one exact inode through an inherited descriptor."""
+    path, expected_sha256 = _pinned_executable(name)
+    descriptor = os.open(path, os.O_RDONLY | os.O_CLOEXEC)
+    previous_handler = signal.getsignal(signal.SIGIO)
+    break_signals = 0
+
+    def saw_sigio(signum: int, frame: Any) -> None:
+        nonlocal break_signals
+        break_signals += 1
+        if callable(previous_handler):
+            previous_handler(signum, frame)
+
+    leased = False
+    try:
+        before_stat = os.fstat(descriptor)
+        path_stat = os.stat(path, follow_symlinks=False)
+        before_sha256 = _sha256_fd(descriptor)
+        if (
+            not stat.S_ISREG(before_stat.st_mode)
+            or (before_stat.st_dev, before_stat.st_ino)
+            != (path_stat.st_dev, path_stat.st_ino)
+            or before_sha256 != expected_sha256
+        ):
+            raise ValueError(f"pinned executable differs before invocation: {name}")
+        signal.signal(signal.SIGIO, saw_sigio)
+        try:
+            fcntl.fcntl(descriptor, fcntl.F_SETLEASE, fcntl.F_RDLCK)
+            leased = True
+        except OSError:
+            from load_window_guard import read_only_file_mount_identity
+
+            if read_only_file_mount_identity(path) is None:
+                raise
+        result = subprocess.run(
+            [f"/proc/self/fd/{descriptor}", *arguments],
+            cwd=cwd,
+            capture_output=True,
+            text=True,
+            check=False,
+            env=env,
+            pass_fds=(descriptor,),
+        )
+        after_stat = os.fstat(descriptor)
+        after_path_stat = os.stat(path, follow_symlinks=False)
+        if (
+            break_signals
+            or any(
+                getattr(before_stat, field) != getattr(after_stat, field)
+                for field in ("st_dev", "st_ino", "st_mode", "st_size", "st_mtime_ns")
+            )
+            or (after_stat.st_dev, after_stat.st_ino)
+            != (after_path_stat.st_dev, after_path_stat.st_ino)
+            or _sha256_fd(descriptor) != expected_sha256
+        ):
+            raise RuntimeError(f"pinned executable changed during invocation: {name}")
+        return result
+    finally:
+        if leased:
+            try:
+                fcntl.fcntl(descriptor, fcntl.F_SETLEASE, fcntl.F_UNLCK)
+            except OSError:
+                pass
+        signal.signal(signal.SIGIO, previous_handler)
+        os.close(descriptor)
 
 
 def _normalized_distribution_name(value: str) -> str:
@@ -356,6 +577,7 @@ def _authenticate_loaded_native_closure(
     site_packages: Path, stdlib_root: Path, native_roots: list[Path]
 ) -> dict[str, Any]:
     mappings = _native_mapping_authentication()
+    initial_mappings = _system_pin()["native_mappings"]
     allowed_roots = [
         site_packages.resolve(),
         stdlib_root.resolve(),
@@ -376,6 +598,8 @@ def _authenticate_loaded_native_closure(
             "loaded native mapping escaped authenticated roots: "
             + ", ".join(sorted(unexpected)[:5])
         )
+    if any(mappings.get(path) != digest for path, digest in initial_mappings.items()):
+        raise ValueError("loaded native mapping closure omits the pinned initial closure")
     return {
         "mappings": mappings,
         "mappings_sha256": hashlib.sha256(
@@ -403,11 +627,13 @@ def bootstrap_runtime_environment(repo_root: Path, backend: str) -> dict[str, An
         if _BOOTSTRAP_RECEIPT.get("backend") != backend:
             raise ValueError("process already bootstrapped for a different runtime backend")
         return dict(_BOOTSTRAP_RECEIPT)
+    launcher_authentication = authenticate_static_launcher(repo_root, backend)
     worktree = require_detached_execution_worktree(repo_root)
     pin = _runtime_pin(backend)
     system_pin = _system_pin()
     system_authentication = _authenticate_system_runtime()
     environment_root = Path(pin["environment_root"])
+    bin_root = environment_root / "bin"
     invoked_python = environment_root / "bin" / "python"
     if Path(sys.executable) != invoked_python or not invoked_python.is_file():
         raise ValueError("stage used the wrong pinned runtime interpreter path")
@@ -417,7 +643,11 @@ def bootstrap_runtime_environment(repo_root: Path, backend: str) -> dict[str, An
         / f"python{sys.version_info.major}.{sys.version_info.minor}"
         / "site-packages"
     )
-    if not site_packages.is_dir() or repo_root.resolve() in site_packages.resolve().parents:
+    if (
+        not bin_root.is_dir()
+        or not site_packages.is_dir()
+        or repo_root.resolve() in site_packages.resolve().parents
+    ):
         raise ValueError("pinned runtime import root is absent or inside the worktree")
     stdlib_root = Path(system_pin["stdlib_root"])
     if not stdlib_root.is_dir():
@@ -448,12 +678,13 @@ def bootstrap_runtime_environment(repo_root: Path, backend: str) -> dict[str, An
             ).encode()
         ).hexdigest(),
         "stdlib_surface_sha256": system_pin["stdlib_surface_sha256"],
+        "bin_surface_sha256": pin["bin_surface_sha256"],
         "native_library_surfaces": system_pin["native_library_roots"],
     }
     from load_window_guard import LoadWindowGuard
 
     import_guard = LoadWindowGuard(
-        [site_packages, stdlib_root, *native_roots],
+        [bin_root, site_packages, stdlib_root, *native_roots],
         expected_content={"runtime_environment": expected_content},
         unleased_roots=[stdlib_root, *native_roots],
     )
@@ -466,6 +697,7 @@ def bootstrap_runtime_environment(repo_root: Path, backend: str) -> dict[str, An
             pin["record_surface_sha256"],
             pin["site_surface_sha256"],
         )
+        bin_authentication = authenticate_tree(bin_root, pin["bin_surface_sha256"])
         stdlib_authentication = authenticate_tree(
             stdlib_root, system_pin["stdlib_surface_sha256"]
         )
@@ -483,6 +715,7 @@ def bootstrap_runtime_environment(repo_root: Path, backend: str) -> dict[str, An
                 "site_surface_sha256"
             ],
             "packages_sha256": environment_authentication["packages_sha256"],
+            "bin_surface_sha256": bin_authentication["surface_sha256"],
             "stdlib_surface_sha256": stdlib_authentication["surface_sha256"],
             "native_library_surfaces": {
                 path: authentication["surface_sha256"]
@@ -509,10 +742,13 @@ def bootstrap_runtime_environment(repo_root: Path, backend: str) -> dict[str, An
     _RUNTIME_IMPORT_GUARD = import_guard
     _RUNTIME_IMPORT_CONTENT = {"runtime_environment": content}
     _BOOTSTRAP_RECEIPT = {
-        "schema_version": 2,
+        "schema_version": 3,
         "backend": backend,
+        "launcher_authentication": launcher_authentication,
         "worktree": worktree,
         "environment_root": str(environment_root),
+        "bin_root": str(bin_root.resolve()),
+        "bin_authentication": bin_authentication,
         "invoked_python": str(invoked_python),
         "resolved_python": str(invoked_python.resolve()),
         "resolved_python_sha256": _sha256_file(invoked_python.resolve()),
@@ -548,6 +784,7 @@ def seal_runtime_environment(repo_root: Path, expected_backend: str) -> dict[str
     pin = _runtime_pin(expected_backend)
     system_pin = _system_pin()
     environment_root = Path(pin["environment_root"])
+    bin_root = environment_root / "bin"
     site_packages = (
         environment_root
         / "lib"
@@ -564,6 +801,7 @@ def seal_runtime_environment(repo_root: Path, expected_backend: str) -> dict[str
             pin["record_surface_sha256"],
             pin["site_surface_sha256"],
         )
+        bin_authentication = authenticate_tree(bin_root, pin["bin_surface_sha256"])
         stdlib_authentication = authenticate_tree(
             stdlib_root, system_pin["stdlib_surface_sha256"]
         )
@@ -585,6 +823,7 @@ def seal_runtime_environment(repo_root: Path, expected_backend: str) -> dict[str
                     "site_surface_sha256"
                 ],
                 "packages_sha256": environment_authentication["packages_sha256"],
+                "bin_surface_sha256": bin_authentication["surface_sha256"],
                 "stdlib_surface_sha256": stdlib_authentication["surface_sha256"],
                 "native_library_surfaces": {
                     path: authentication["surface_sha256"]
@@ -602,6 +841,7 @@ def seal_runtime_environment(repo_root: Path, expected_backend: str) -> dict[str
     _BOOTSTRAP_RECEIPT["post_import_environment_authentication"] = (
         environment_authentication
     )
+    _BOOTSTRAP_RECEIPT["post_import_bin_authentication"] = bin_authentication
     _BOOTSTRAP_RECEIPT["post_import_stdlib_authentication"] = stdlib_authentication
     _BOOTSTRAP_RECEIPT["post_import_native_library_authentication"] = (
         native_library_authentication
@@ -639,18 +879,9 @@ def selected_gpu_identity(repo_root: Path) -> dict[str, Any]:
     selector = os.environ.get("CUDA_VISIBLE_DEVICES", "")
     if not selector or "," in selector or not selector.startswith("GPU-"):
         raise ValueError("CUDA_VISIBLE_DEVICES must name exactly one physical GPU UUID")
-    executable_pin = _system_pin()["nvidia_smi"]
-    executable = Path(executable_pin["path"])
-    if (
-        not executable.is_absolute()
-        or not executable.is_file()
-        or executable.is_symlink()
-        or _sha256_file(executable) != executable_pin["sha256"]
-    ):
-        raise ValueError("selected GPU inventory executable differs from its pin")
-    query = _run(
+    query = run_pinned_executable(
+        "nvidia_smi",
         [
-            str(executable),
             "--query-gpu=index,name,uuid,driver_version,memory.total",
             "--format=csv,noheader,nounits",
         ],
@@ -689,6 +920,23 @@ def selected_gpu_identity(repo_root: Path) -> dict[str, Any]:
     return matches[0]
 
 
+def _normalized_cuda_uuid(value: Any) -> str:
+    if isinstance(value, bytes):
+        if len(value) != 16:
+            raise ValueError("active CUDA UUID byte width changed")
+        encoded = value.hex()
+        value = (
+            f"{encoded[:8]}-{encoded[8:12]}-{encoded[12:16]}-"
+            f"{encoded[16:20]}-{encoded[20:]}"
+        )
+    text = str(value)
+    if not text.startswith("GPU-"):
+        text = f"GPU-{text}"
+    if re.fullmatch(r"GPU-[A-Za-z0-9-]+", text) is None:
+        raise ValueError("active CUDA UUID schema changed")
+    return text
+
+
 def bind_active_cuda_identity(
     repo_root: Path, torch_module: Any
 ) -> dict[str, Any]:
@@ -704,9 +952,11 @@ def bind_active_cuda_identity(
     properties = cuda.get_device_properties(logical_index)
     active_name = str(properties.name)
     active_memory_mib = int(properties.total_memory) // (1024 * 1024)
+    active_uuid = _normalized_cuda_uuid(getattr(properties, "uuid", None))
     if (
         active_name != selected["name"]
         or active_memory_mib != selected["memory_total_mib"]
+        or active_uuid.lower() != str(selected["uuid"]).lower()
     ):
         raise ValueError("active CUDA device differs from the selected physical GPU row")
     return {
@@ -715,6 +965,7 @@ def bind_active_cuda_identity(
         "active_visible_device_count": visible_count,
         "active_name": active_name,
         "active_memory_total_mib": active_memory_mib,
+        "active_uuid": active_uuid,
     }
 
 
@@ -723,7 +974,7 @@ def runtime_metadata(
 ) -> dict[str, Any]:
     """Record the complete installed/runtime/hardware identity for training."""
     worktree = require_detached_execution_worktree(repo_root)
-    nvcc = _run(["nvcc", "--version"], cwd=repo_root)
+    nvcc = run_pinned_executable("nvcc", ["--version"], cwd=repo_root)
     packages = installed_packages()
     value = {
         "schema_version": 4,
