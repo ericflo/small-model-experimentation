@@ -64,3 +64,10 @@
   with both workflows green and a clean worktree.
 - `replay_repeat3` trained 1,520/1,520 rows with 0 skipped over 190 updates;
   receipt/log published and pinned fail-closed.
+
+## 2026-07-15 — Authenticated candidate training
+
+- `train-candidate` ran only after control checkpoint `a919238c` matched
+  `origin/main` with both workflows green and a clean worktree.
+- `axis_v2` trained 1,520/1,520 rows with 0 skipped over 190 updates;
+  receipt/log published and pinned fail-closed. Merges are next.
