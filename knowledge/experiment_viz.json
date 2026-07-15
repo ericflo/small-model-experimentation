@@ -48856,6 +48856,43 @@
      "source": "experiments/qwen35_4b_axis_corpus_v2_staged_repair/reports/report.md"
     }
    ]
+  },
+  "qwen35_4b_hygiene_explore_destack_medium": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered stage completion",
+     "categories": [
+      "intake",
+      "80-row corpus",
+      "exposure match",
+      "design review",
+      "train 2 arms",
+      "gate event",
+      "medium pilot"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "The de-stacking test: only the two replicated installs (hygiene, explore) at proven dose on the clean designed_fresh lineage; both kinds must win the fresh gate; conditional medium pilot at sealed seed 78,148.",
+     "source": "experiments/qwen35_4b_hygiene_explore_destack_medium/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

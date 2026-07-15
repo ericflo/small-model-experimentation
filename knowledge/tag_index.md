@@ -645,6 +645,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
 - `qwen35_4b_humaneval_adaptive_budget` (track-z): [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md)
 - `qwen35_4b_humaneval_code_confidence` (new): [README](../experiments/qwen35_4b_humaneval_code_confidence/README.md)
+- `qwen35_4b_hygiene_explore_destack_medium` (new): [README](../experiments/qwen35_4b_hygiene_explore_destack_medium/README.md)
 - `qwen35_4b_hypothesize_verify_wall` (new): [README](../experiments/qwen35_4b_hypothesize_verify_wall/README.md)
 - `qwen35_4b_icl_retrieval_vs_induction` (new): [README](../experiments/qwen35_4b_icl_retrieval_vs_induction/README.md)
 - `qwen35_4b_independent_code_abi_coverage_gate` (track-z): [README](../experiments/qwen35_4b_independent_code_abi_coverage_gate/README.md)

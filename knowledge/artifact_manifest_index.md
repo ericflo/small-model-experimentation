@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 237
-- Manifest files: 565
+- Experiments with manifests: 238
+- Manifest files: 568
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 89 |
+| `other` | 91 |
 | `run-data` | 101 |
-| `standard-artifact` | 110 |
+| `standard-artifact` | 111 |
 
 ## Manifests
 
@@ -131,6 +131,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_graphir_self_repair` | `large-artifact` | [manifest](../experiments/qwen35_4b_graphir_self_repair/large_artifacts_manifest.md) |
 | `qwen35_4b_humaneval_adaptive_budget` | `dataset` | [manifest](../experiments/qwen35_4b_humaneval_adaptive_budget/data/dataset_manifest.json) |
 | `qwen35_4b_humaneval_code_confidence` | `standard-artifact` | [manifest](../experiments/qwen35_4b_humaneval_code_confidence/reports/artifact_manifest.yaml) |
+| `qwen35_4b_hygiene_explore_destack_medium` | `other` | [manifest](../experiments/qwen35_4b_hygiene_explore_destack_medium/data/corpus_manifest.json) |
+| `qwen35_4b_hygiene_explore_destack_medium` | `other` | [manifest](../experiments/qwen35_4b_hygiene_explore_destack_medium/data/stream_manifest.json) |
+| `qwen35_4b_hygiene_explore_destack_medium` | `standard-artifact` | [manifest](../experiments/qwen35_4b_hygiene_explore_destack_medium/reports/artifact_manifest.yaml) |
 | `qwen35_4b_hypothesize_verify_wall` | `standard-artifact` | [manifest](../experiments/qwen35_4b_hypothesize_verify_wall/reports/artifact_manifest.yaml) |
 | `qwen35_4b_icl_retrieval_vs_induction` | `standard-artifact` | [manifest](../experiments/qwen35_4b_icl_retrieval_vs_induction/reports/artifact_manifest.yaml) |
 | `qwen35_4b_independent_code_abi_coverage_gate` | `large-artifact` | [manifest](../experiments/qwen35_4b_independent_code_abi_coverage_gate/large_artifacts_manifest.md) |

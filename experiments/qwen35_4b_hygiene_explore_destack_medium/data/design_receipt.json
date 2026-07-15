@@ -1,0 +1,242 @@
+{
+  "arms": {
+    "candidate": "hygiene_explore",
+    "control": "replay_clean",
+    "parent_eval_label": "clean_parent"
+  },
+  "benchmark_plan": {
+    "base_weights_sha256": "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db",
+    "gates": {
+      "candidate_aggregate_strictly_above_base": true,
+      "candidate_aggregate_strictly_above_control": true,
+      "candidate_aggregate_strictly_above_parent": true
+    },
+    "gateway": "scripts/run_benchmark_aggregate.py",
+    "goal_gate": {
+      "every_public_family_strictly_above_base": "recorded and reported from the same event as the goal gate; medium-tier family scores have finer granularity than quick and the all-families gate is empirically reachable there (8 of 92 historical medium events), but it is NOT part of the pilot pass"
+    },
+    "models": {
+      "base": "large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized",
+      "candidate": "large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore",
+      "control": "large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/replay_clean",
+      "parent": "large_artifacts/qwen35_4b_universal_fresh_surface_budget_commit_target_match/merged/designed_fresh"
+    },
+    "name": "pilot",
+    "public_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "sirens",
+      "stockade",
+      "toolsmith",
+      "warren"
+    ],
+    "seed": 78148,
+    "think_budget": 1024,
+    "tier": "medium"
+  },
+  "checkpoint_policy": {
+    "clean_pushed_main_required": true,
+    "full_check_rebase_push_two_workflow_gate_between_expensive_stages": true,
+    "next_authorized_stage": "train-control",
+    "one_stage_per_invocation": true,
+    "preceding_receipt_committed_at_head": true
+  },
+  "code": {
+    "axis_v2_generator_sha256": "7771e7c190585a949d979997137fd539c9483a7ea0c3601249f54b2ee79ddd40",
+    "corpus_builder_sha256": "fa9541f8a5af706bd2d766380a5dbc3e59c2993df571fd1879b7d4a1699dff2d",
+    "curriculum_generator_sha256": "70fc722a6a69f4f8a64ae4356058421ea44117c7e86d3350abfd72b047ccf080",
+    "trainer_sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4"
+  },
+  "corpora": {
+    "banned_vocabulary": {
+      "checked_by_generator": true,
+      "sha256": "067a8dcfc8e405857bea4b46ec649b306996577e6844841c5695f1544a2db19e",
+      "tokens": 112
+    },
+    "manifest_sha256": "cbc9ae6d132d09b9bac2eb43010c2f3eb051993493d6ea659950ac07f0a1e903",
+    "replay": {
+      "inheritance": {
+        "byte_identical": true,
+        "from_experiment": "qwen35_4b_universal_fresh_surface_budget_commit_target_match"
+      },
+      "path": "data/sft_blend.jsonl",
+      "rows": 2240,
+      "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+    },
+    "treatment": {
+      "balance": {
+        "bugfind_early_bugs": 0,
+        "bugfind_rows": 0,
+        "hygiene_colocated": 17,
+        "hygiene_injected": 27
+      },
+      "construction": {
+        "builder": "scripts/build_corpus.py",
+        "generator": "scripts/gen_axis_v2.py",
+        "mix": "hygiene=40,explore=40",
+        "seed": 77119
+      },
+      "kinds": {
+        "u_explore": 40,
+        "u_hygiene": 40
+      },
+      "path": "data/sft_hygiene_explore.jsonl",
+      "rows": 80,
+      "sha256": "8b3e97919c62cbb0893add281dc1d3ae881aa0138d0d1721043fec26b0c22cf1"
+    }
+  },
+  "experiment_id": "qwen35_4b_hygiene_explore_destack_medium",
+  "firewall": {
+    "aggregate_seed_sealed": true,
+    "benchmark_data_read": false,
+    "benchmark_gateway_exposed": false
+  },
+  "local_gate": {
+    "answer_normalization": {
+      "applied_to": "both the parsed and the expected answer, every arm, both instruments",
+      "definition": "re.sub(r'\\s+', ' ', s).strip(), then re.sub(r'\\s*>\\s*', '>', s), then re.sub(r'\\s*;\\s*', ';', s)",
+      "function": "check_local.normalize_answer",
+      "prospective": true,
+      "rationale": "21 correct-but-rejected whitespace rows across the three prior gate events (seeds 88014/88015/88016), recorded in experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/analysis/three_event_failure_forensics.md"
+    },
+    "arms": [
+      "clean_parent",
+      "replay_clean",
+      "hygiene_explore"
+    ],
+    "instruments": {
+      "axis_holdout": {
+        "generator": "scripts/gen_axis_v2.py",
+        "kinds": [
+          "u_explore",
+          "u_hygiene"
+        ],
+        "per_kind": 10,
+        "rows": 20
+      },
+      "retention": {
+        "generator": "scripts/gen_curriculum.py",
+        "per_kind": 8,
+        "rows": 104,
+        "skills": 13
+      }
+    },
+    "promotion": {
+      "axis_kind_win_requires_strictly_above_max_of_both_controls": true,
+      "axis_kind_wins_at_least": "ceil(2/3 * detectable_kinds)",
+      "axis_total_strictly_beats": [
+        "clean_parent",
+        "replay_clean"
+      ],
+      "both_kinds_must_strictly_win_when_both_detectable": true,
+      "detectability_ceiling_correct_of_10": 9,
+      "detectable_kind_definition": "an axis kind where NEITHER control scores >= 9 of 10 on the holdout",
+      "no_absolute_per_kind_floors": true,
+      "no_passing_candidate_keeps_aggregate_seed_sealed": true,
+      "recovery_flags_recorded_unconditionally": [
+        "hygiene_win",
+        "explore_win"
+      ],
+      "retention_cap_contact_band": 3,
+      "retention_correct_band": 5,
+      "retention_parsed_band": 3,
+      "route_abstentions_at_most": 4,
+      "single_candidate": "hygiene_explore",
+      "undetectable_kinds_excluded_and_reported_as_not_detectable": true,
+      "with_two_detectable_kinds_required_wins": 2,
+      "zero_detectable_kinds_fails_closed_as": "GATE_UNDETECTABLE"
+    },
+    "rows": 124,
+    "seed": 88018
+  },
+  "model": {
+    "calls": 0,
+    "id": "Qwen/Qwen3.5-4B",
+    "loaded": false,
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+  },
+  "parent": {
+    "arm": "designed_fresh",
+    "deployment": "explicit_merged_composite",
+    "experiment": "qwen35_4b_universal_fresh_surface_budget_commit_target_match",
+    "external_receipt_sha256": "10b0de69bbda6edf8e216f45667b15f73557102f0661461fec620786e8a9170f",
+    "runtime_lora_forbidden": true,
+    "tracked_receipt_sha256": "ab3f20cc93d3fe21ead7a1d573edbca2903d59d6f9fe3d2af0c93e823676acc2",
+    "tree_sha256": "93433aa2d5f3f0d6d4540126579c09feee1d8502df702c1563bae28eb7f60255",
+    "warm_start_adapter": {
+      "config_sha256": "5966461bd9dbfe280b226940e79eec49030cc44e4131089147634df549dc4055",
+      "path": "large_artifacts/qwen35_4b_universal_fresh_surface_budget_commit_target_match/adapters/designed_fresh",
+      "weights_sha256": "36f41095c2d628e4706694e7d64d16aba815870a1d3660af0e24b14dc0e6b442"
+    },
+    "weights_sha256": "0a3b89cdf57ed8a73590580489d744319c12b44b60991db55b5baba6f7c27979",
+    "weights_size_bytes": 9078620536
+  },
+  "schema_version": 1,
+  "seeds": {
+    "conditional_aggregate": 78148,
+    "construction": 77119,
+    "local_gate": 88018,
+    "stream_slot_matching_namespace": 55121,
+    "training": 55
+  },
+  "stage": "hygiene_explore_destack_design",
+  "stream_geometry": {
+    "blocks": {
+      "hygiene_explore": {
+        "replay_filler_rows": 160,
+        "treatment_rows": 80
+      },
+      "replay_clean": {
+        "replay_rows": 240
+      }
+    },
+    "blocks_and_core_pairwise_disjoint_replay_indices": true,
+    "core_stratified_by": [
+      "family",
+      "kind"
+    ],
+    "exact_match_axes": [
+      "forward",
+      "nonzero_target",
+      "absolute_loss_mass_x5"
+    ],
+    "match_limit": 0,
+    "position_aligned_identical_core_slots": true,
+    "rows_per_arm": 1520,
+    "shared_core_replay_rows": 1280,
+    "slot_order_seed": 55121,
+    "solver": {
+      "backend": "highs",
+      "filler_and_control_solved_jointly": true,
+      "method": "scipy.optimize.milp",
+      "mip_rel_gap": 0,
+      "time_limit_seconds": 600
+    },
+    "variable_block_rows": 240
+  },
+  "training_plan": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "optimizer_steps": 190,
+    "rank": 32,
+    "required_before_training": [
+      "committed exact three-axis stream token receipt",
+      "second adversarial compute review with PASS_CONTROL_TRAINING"
+    ],
+    "rows_per_arm": 1520,
+    "seed": 55,
+    "training_authorized": false,
+    "w_close": 0.2,
+    "w_think": 0.2,
+    "warm_start": "designed_fresh",
+    "zero_skipped_rows_required": true
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "absolute_loss_mass_x5_per_arm": 629207,
+  "aggregate_seed_open": false,
+  "benchmark_data_read": false,
+  "deltas": {
+    "hygiene_explore_minus_replay_clean": {
+      "absolute_loss_mass_x5": 0,
+      "answer_target": 0,
+      "close_target": 0,
+      "forward": 0,
+      "masked_context": -4824,
+      "nonzero_target": 0,
+      "parent_prefix": 0,
+      "prompt": -4824,
+      "target_span": 4824,
+      "think_target": 4824
+    }
+  },
+  "encoder": "scripts/train_think.py:encode_row",
+  "encoder_sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4",
+  "experiment_id": "qwen35_4b_hygiene_explore_destack_medium",
+  "files": {
+    "hygiene_explore": {
+      "absolute_loss_mass": 125841.4,
+      "encoded_rows": 1520,
+      "families": {
+        "burrowmaze": 164,
+        "caravan": 24,
+        "ferrier": 349,
+        "foundry_ledger": 22,
+        "gatepost": 85,
+        "glyphgate": 189,
+        "kilnrite": 336,
+        "loomfix": 113,
+        "packhouse": 34,
+        "patchwheel": 51,
+        "runeward": 16,
+        "stallwright": 57,
+        "universal": 80
+      },
+      "kinds": {
+        "atom": 85,
+        "atom_fc": 132,
+        "episode": 953,
+        "oracle_trace": 270,
+        "u_explore": 40,
+        "u_hygiene": 40
+      },
+      "max_sequence_tokens": 3193,
+      "min_sequence_tokens": 181,
+      "path": "data/hygiene_explore.jsonl",
+      "rows": 1520,
+      "sha256": "82aa1a78c0a429a48c3db6b94ac84397cea001b041477e7b137b38c21354112f",
+      "skipped": [],
+      "skipped_rows": 0,
+      "spans_per_epoch": {
+        "absolute_loss_mass_x5": 629207,
+        "answer_target": 13647,
+        "close_target": 3040,
+        "forward": 1367212,
+        "masked_context": 543548,
+        "nonzero_target": 574619,
+        "parent_prefix": 0,
+        "prompt": 543548,
+        "target_span": 823664,
+        "think_target": 806977
+      }
+    },
+    "replay_clean": {
+      "absolute_loss_mass": 125841.4,
+      "encoded_rows": 1520,
+      "families": {
+        "burrowmaze": 156,
+        "caravan": 23,
+        "ferrier": 428,
+        "foundry_ledger": 24,
+        "gatepost": 89,
+        "glyphgate": 196,
+        "kilnrite": 343,
+        "loomfix": 106,
+        "packhouse": 37,
+        "patchwheel": 48,
+        "runeward": 15,
+        "stallwright": 55
+      },
+      "kinds": {
+        "atom": 77,
+        "atom_fc": 130,
+        "episode": 1041,
+        "oracle_trace": 272
+      },
+      "max_sequence_tokens": 3193,
+      "min_sequence_tokens": 299,
+      "path": "data/replay_clean.jsonl",
+      "rows": 1520,
+      "sha256": "2189d160c9c3007ccbaf935478b3354b597c71945f6dbf1c32bf4e670ace0017",
+      "skipped": [],
+      "skipped_rows": 0,
+      "spans_per_epoch": {
+        "absolute_loss_mass_x5": 629207,
+        "answer_target": 13647,
+        "close_target": 3040,
+        "forward": 1367212,
+        "masked_context": 548372,
+        "nonzero_target": 574619,
+        "parent_prefix": 0,
+        "prompt": 548372,
+        "target_span": 818840,
+        "think_target": 802153
+      }
+    }
+  },
+  "forward_tokens_per_arm": 1367212,
+  "match_axes": [
+    "forward",
+    "nonzero_target",
+    "absolute_loss_mass_x5"
+  ],
+  "max_length": 4096,
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "nonzero_target_tokens_per_arm": 574619,
+  "rows_duplicated_for_matching": false,
+  "rows_per_arm": 1520,
+  "rows_truncated_for_matching": false,
+  "schema_version": 1,
+  "shared_position_aligned_rows": 1280,
+  "skipped_rows": 0,
+  "stage": "independent_exact_exposure_validation",
+  "stream_manifest": "data/stream_manifest.json",
+  "stream_manifest_sha256": "16b5c1a86aabcae67e3115e24d72072f42b8b2d4169835f6979901fe1e65baac",
+  "targets_modified_for_matching": false,
+  "tokenizer": {
+    "class": "Qwen2Tokenizer",
+    "eos_token_id": 248046,
+    "think_close_token_id": 248069,
+    "vocab_size": 248077
+  },
+  "training_authorized": false
+}

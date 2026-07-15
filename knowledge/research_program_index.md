@@ -3,7 +3,7 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 265
+- Experiments: 266
 
 ## Structured Execution And Compilers
 
@@ -1010,7 +1010,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 Install general agentic capability in Qwen3.5-4B via breadth-first expert iteration on a firewall-clean multi-family gym, arbitrated by the blackbox menagerie instrument.
 
 - Charter: [agentic_breadth_installation](../research_programs/agentic_breadth_installation/charter.md)
-- Assigned experiments: 33
+- Assigned experiments: 34
 
 ### Assigned Experiments
 
@@ -1022,6 +1022,7 @@ Install general agentic capability in Qwen3.5-4B via breadth-first expert iterat
 - `qwen35_4b_gauntlet_breadth_round1` (new): [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md)
 - `qwen35_4b_gauntlet_frontier` (new): [README](../experiments/qwen35_4b_gauntlet_frontier/README.md)
 - `qwen35_4b_goal_gap_axis_curriculum_target_match` (new): [README](../experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/README.md)
+- `qwen35_4b_hygiene_explore_destack_medium` (new): [README](../experiments/qwen35_4b_hygiene_explore_destack_medium/README.md)
 - `qwen35_4b_interactive_policy_curriculum` (new): [README](../experiments/qwen35_4b_interactive_policy_curriculum/README.md)
 - `qwen35_4b_pareto_policy_integration` (new): [README](../experiments/qwen35_4b_pareto_policy_integration/README.md)
 - `qwen35_4b_recovery_payload_budget_harness` (new): [README](../experiments/qwen35_4b_recovery_payload_budget_harness/README.md)

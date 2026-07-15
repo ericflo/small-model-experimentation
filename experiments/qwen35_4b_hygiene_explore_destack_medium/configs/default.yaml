@@ -1,0 +1,26 @@
+experiment_id: qwen35_4b_hygiene_explore_destack_medium
+status: model_free_construction
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+parent:
+  experiment: qwen35_4b_universal_fresh_surface_budget_commit_target_match
+  arm: designed_fresh
+  weight_sha256: 0a3b89cdf57ed8a73590580489d744319c12b44b60991db55b5baba6f7c27979
+  warm_start_adapter_sha256: 36f41095c2d628e4706694e7d64d16aba815870a1d3660af0e24b14dc0e6b442
+seeds:
+  construction: 77119
+  slot_match: 55121
+  training: 55
+  gate: 88018
+  conditional_aggregate: 78148
+corpus:
+  rows: 80
+  kinds: {u_hygiene: 40, u_explore: 40}
+arms: [replay_clean, hygiene_explore]
+gate:
+  both_kinds_must_win: true
+  recovery_flags: unconditional
+conditional_pilot:
+  tier: medium
+  think_budget: 1024

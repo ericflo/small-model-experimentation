@@ -641,6 +641,14 @@
     "experiment_log.md dated 2026-07-08 and git history (post-import)"
    ]
   },
+  "qwen35_4b_hygiene_explore_destack_medium": {
+   "start": "2026-07-15",
+   "end": "2026-07-15",
+   "confidence": "high",
+   "sources": [
+    "experiments/qwen35_4b_hygiene_explore_destack_medium/experiment_log.md: dated headings 2026-07-15 (design freeze and model-free pipeline run)"
+   ]
+  },
   "qwen35_4b_hypothesize_verify_wall": {
    "start": "2026-07-08",
    "end": "2026-07-09",
