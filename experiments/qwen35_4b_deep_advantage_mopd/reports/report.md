@@ -227,6 +227,11 @@ joint. Block-1 non-advantage then lands at equal-cell macros `0.596955` deep,
 `−0.015965`, and `−0.009599`. The matched non-route control is therefore
 below the source on both sealed blocks; this still cannot establish a routed
 treatment gain before the block-1 primary arms complete.
+Block-1 off-policy SFT has equal-cell macros `0.603801` deep, `0.800776` quick,
+and `0.702289` joint. Relative to deep it gains `+0.003614` on deep but loses
+`−0.010247` quick and `−0.003316` joint. The continuation-SFT control is
+stronger than non-advantage on this block, but it still does not dominate the
+source.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

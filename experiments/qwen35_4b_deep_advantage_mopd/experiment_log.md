@@ -748,3 +748,18 @@
 - The non-advantage control is below deep on both blocks. Off-policy SFT started
   next with external journal hash
   `4a2626981d694d6f2740a138b3d4e4a62a69ab6feb835b4b0e4d680de20c29bd`.
+
+## 2026-07-15 — block-1 off-policy trades deep for quick
+
+- Off-policy SFT completed sealed generation and strict validation.
+  `GENERATED.json` and `COMPLETE.json` hash to
+  `388288924eedd4b824354351d9427988ee91d675261f31b762e91024f582f5b8`
+  and `7a5dfe15cd57303a96514a9a912e9f9ff072f31c2109fdbfb7e52bfc9dd9400c`;
+  the score hashes to
+  `b3a3cacd73fd8e42cfee98d2674dd7c413fbca479c88aed41f854cd9718d1edc`.
+- Direct item-weighted means are `0.583994` deep and `0.800776` quick, using
+  4,282,251 sampled tokens. Equal-cell macros are `0.603801` deep, `0.800776`
+  quick, and `0.702289` joint: `+0.003614`, `−0.010247`, and `−0.003316`
+  versus deep. It is a small Pareto trade rather than a source improvement.
+- Primary seed 42 started next with external journal hash
+  `be153537b495033edafb9c84d808bb67378bb1d3fca97f3e73aac268d3069bdf`.

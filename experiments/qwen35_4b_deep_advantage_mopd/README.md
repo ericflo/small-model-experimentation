@@ -287,7 +287,11 @@ Block-1 deep then completed at `0.584024` deep and `0.811023` quick from
 not treatment evidence. Non-advantage then scored `0.578032` deep and
 `0.795058` quick from 4,369,088 sampled tokens. Its equal-cell macros trail
 deep by `−0.003232` deep, `−0.015965` quick, and `−0.009599` joint,
-replicating the block-0 control ordering. Off-policy SFT is running next.
+replicating the block-0 control ordering. Off-policy SFT then scored `0.583994`
+deep and `0.800776` quick from 4,282,251 sampled tokens. Its equal-cell
+projection is `+0.003614` deep, `−0.010247` quick, and `−0.003316` joint
+versus deep: another Pareto trade, not source domination. Primary seed 42 is
+running next.
 
 ## NF4/BF16 Interpretation Diagnostic
 
