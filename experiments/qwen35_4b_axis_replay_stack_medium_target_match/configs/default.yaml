@@ -1,0 +1,26 @@
+experiment_id: qwen35_4b_axis_replay_stack_medium_target_match
+status: model_free_construction
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+parent:
+  experiment: qwen35_4b_goal_gap_axis_curriculum_target_match
+  arm: replay_repeat
+  deployment: explicit_merged_composite
+  weight_sha256: 3df45004fcf42519ce28cdcfedcbb39b0907662f8ecfb8a87b13b416087d0072
+  warm_start_adapter_sha256: 20be87b5c7a7969d006b2825d3937b10fd0627ea2358af02879451039a07cd36
+seeds:
+  corpus_construction_inherited: 77117
+  slot_match: 55119
+  training: 53
+  gate: 88015
+  conditional_aggregate: 78145
+corpus:
+  inherited: true
+  rows: 160
+  sha256: e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e
+arms: [replay_squared, axis_on_replay]
+conditional_pilot:
+  tier: medium
+  think_budget: 1024
+  models: [base, replay_parent, replay_squared, axis_on_replay]

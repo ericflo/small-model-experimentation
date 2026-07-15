@@ -1,0 +1,20 @@
+# Generated starter metadata. Run make check after adding artifacts.
+id: "qwen35_4b_axis_replay_stack_medium_target_match"
+title: "Axis-on-Replay Stack with Medium Pilot"
+source_track: "new"
+path: "experiments/qwen35_4b_axis_replay_stack_medium_target_match"
+primary_readme: "experiments/qwen35_4b_axis_replay_stack_medium_target_match/README.md"
+primary_report: "experiments/qwen35_4b_axis_replay_stack_medium_target_match/reports/report.md"
+summary: "New experiment scaffold. Fill this before running full experiments."
+tags:
+  - "experiment"
+research_programs:
+  - "agentic_breadth_installation"
+top_level_dirs:
+  - "configs"
+  - "reports"
+  - "scripts"
+  - "src"
+file_counts: {}
+total_files: 0
+total_size_bytes: 0

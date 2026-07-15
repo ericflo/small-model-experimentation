@@ -48709,6 +48709,43 @@
      "source": "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/reports/report.md"
     }
    ]
+  },
+  "qwen35_4b_axis_replay_stack_medium_target_match": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered stage completion",
+     "categories": [
+      "intake",
+      "inherited corpus",
+      "exposure match",
+      "design review",
+      "train 2 arms",
+      "gate event",
+      "medium pilot"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "The 160-row axis corpus is inherited byte-identically onto the 0.5081 replay-compounded parent; the replay-squared control doubles as the round-two compounding measurement; the pilot is preregistered at the medium tier (seed 78,145 sealed).",
+     "source": "experiments/qwen35_4b_axis_replay_stack_medium_target_match/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

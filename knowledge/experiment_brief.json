@@ -13961,6 +13961,44 @@
      "chart_takeaway": "Every trained model crushes base; plain review of old material tops the table, so the targeted-practice model did not advance."
     }
    ]
+  },
+  "qwen35_4b_axis_replay_stack_medium_target_match": {
+   "verdict_tag": "Design under construction; nothing trained",
+   "concept_primer": "Take the two things that worked last time — the targeted practice set that installed new skills, and the plain-review round that scored highest overall — and put them in one model, then judge it on the bigger, finer-grained version of the benchmark where a full sweep has actually happened before.",
+   "plain_question": "Do the installed skills and the review boost survive together in one model, and does the bigger benchmark tier finally credit the installed skills at the family level?",
+   "plain_answer": "Nothing is trained yet. The practice set is inherited unchanged from the last trial; the starting model is the best-scoring one ever measured in this line; the comparison arm is a second round of plain review, which also answers whether review keeps compounding.",
+   "why_it_matters": "Last time the practice model and the review model each fixed a different stuck family. If both fixes survive in one model at the finer-grained tier, the all-families goal — reached 8 times in 92 attempts at that tier — comes into realistic range.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Starting model",
+     "value": "0.5081",
+     "sub": "best aggregate this line has recorded"
+    },
+    {
+     "label": "Practice set",
+     "value": "160 rows",
+     "sub": "inherited unchanged, already verified"
+    },
+    {
+     "label": "Goal passes at this tier",
+     "value": "8 / 92",
+     "sub": "versus 1 / 65 at the quick tier"
+    },
+    {
+     "label": "Model events so far",
+     "value": "0",
+     "sub": "benchmark seed 78,145 sealed"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Where the experiment stands",
+     "chart_read": "Each bar is a preregistered stage; a bar at one means complete.",
+     "chart_takeaway": "The corpus is inherited and the contract frozen; training, the screen, and the medium-tier benchmark remain."
+    }
+   ]
   }
  }
 }
