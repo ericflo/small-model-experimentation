@@ -763,3 +763,21 @@
   versus deep. It is a small Pareto trade rather than a source improvement.
 - Primary seed 42 started next with external journal hash
   `be153537b495033edafb9c84d808bb67378bb1d3fca97f3e73aac268d3069bdf`.
+
+## 2026-07-15 — block-1 seed 42 independently trails deep
+
+- Primary seed 42 completed sealed generation and strict validation.
+  `GENERATED.json` and `COMPLETE.json` hash to
+  `96475fa27b93709f939ac37571de8759495ff7f2cabf9b1b73f0b55303d5db9c`
+  and `e2be8c88c46aff569d48fbfca32fba7f4dc1332771ff4dce81579c91eef136a5`;
+  the score hashes to
+  `240cab29fe579e99e40b6a0f1b72b8fce22574ddf2780167a81416c01496892b`.
+- Direct item-weighted means are `0.575202` deep and `0.806729` quick, using
+  4,404,223 sampled tokens. Equal-cell macros are `0.592386` deep, `0.806729`
+  quick, and `0.699558` joint, respectively `−0.007800`, `−0.004294`, and
+  `−0.006047` versus deep.
+- Seed 42 therefore has a negative deep-cell sign versus deep on both sealed
+  blocks. This independently reinforces the frozen stop while the remaining
+  arms continue for the terminal receipt and control ranking.
+- Primary seed 43 started next with external journal hash
+  `62cca0f1c558cccff5f7a490aee4472188f167bbfd55f170b0aa989f638046a9`.

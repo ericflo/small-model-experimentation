@@ -232,6 +232,13 @@ and `0.702289` joint. Relative to deep it gains `+0.003614` on deep but loses
 `−0.010247` quick and `−0.003316` joint. The continuation-SFT control is
 stronger than non-advantage on this block, but it still does not dominate the
 source.
+Block-1 primary seed 42 then scores direct item means `0.575202` deep and
+`0.806729` quick from 4,404,223 sampled tokens. Its frozen equal-cell macros
+are `0.592386` deep, `0.806729` quick, and `0.699558` joint, trailing deep by
+`−0.007800`, `−0.004294`, and `−0.006047`. Thus the registered treatment's
+deep-cell sign is negative versus deep on both sealed blocks, and block 1 does
+not rescue the block-0 stop. The remaining seeds and controls are still needed
+for the terminal cross-block ranking, not to reopen the frozen success rule.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

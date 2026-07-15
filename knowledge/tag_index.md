@@ -4,6 +4,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 
 ## abi
 
+- `qwen35_4b_axis_corpus_v2_staged_repair` (new): [README](../experiments/qwen35_4b_axis_corpus_v2_staged_repair/README.md)
 - `qwen35_4b_balanced_core_answer_potential_sft` (new): [README](../experiments/qwen35_4b_balanced_core_answer_potential_sft/README.md)
 - `qwen35_4b_code_abi_compiler_heldout_primitive_pilot` (track-z): [README](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/README.md)
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
@@ -172,6 +173,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `cyclic_transition_ladder` (track-y): [README](../experiments/cyclic_transition_ladder/README.md)
 - `dense_supervision_ladder` (track-y): [README](../experiments/dense_supervision_ladder/README.md)
 - `factor_recombination_ladder` (track-z): [README](../experiments/factor_recombination_ladder/README.md)
+- `qwen35_4b_axis_corpus_v2_staged_repair` (new): [README](../experiments/qwen35_4b_axis_corpus_v2_staged_repair/README.md)
 - `qwen35_4b_bank_the_thoughts` (new): [README](../experiments/qwen35_4b_bank_the_thoughts/README.md)
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
 - `qwen35_4b_counterfactual_evidence_acquisition_curriculum` (new): [README](../experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/README.md)
@@ -549,6 +551,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `execution_conditioned_repair` (track-z): [README](../experiments/execution_conditioned_repair/README.md)
 - `factor_recombination_ladder` (track-z): [README](../experiments/factor_recombination_ladder/README.md)
 - `feature_factorized_rule_diversity` (track-z): [README](../experiments/feature_factorized_rule_diversity/README.md)
+- `qwen35_4b_axis_corpus_v2_staged_repair` (new): [README](../experiments/qwen35_4b_axis_corpus_v2_staged_repair/README.md)
 - `qwen35_4b_balanced_core_answer_potential_sft` (new): [README](../experiments/qwen35_4b_balanced_core_answer_potential_sft/README.md)
 - `qwen35_4b_executable_program_posttraining` (track-z): [README](../experiments/qwen35_4b_executable_program_posttraining/README.md)
 - `qwen35_4b_foofah_program_repair_agent` (track-z): [README](../experiments/qwen35_4b_foofah_program_repair_agent/README.md)
@@ -588,6 +591,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
 - `qwen35_4b_adaptive_tool_controller` (track-z): [README](../experiments/qwen35_4b_adaptive_tool_controller/README.md)
 - `qwen35_4b_answer_potential_trace_sft` (new): [README](../experiments/qwen35_4b_answer_potential_trace_sft/README.md)
+- `qwen35_4b_axis_corpus_v2_staged_repair` (new): [README](../experiments/qwen35_4b_axis_corpus_v2_staged_repair/README.md)
 - `qwen35_4b_axis_replay_stack_medium_target_match` (new): [README](../experiments/qwen35_4b_axis_replay_stack_medium_target_match/README.md)
 - `qwen35_4b_axis_stack_readjudication_medium_pilot` (new): [README](../experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/README.md)
 - `qwen35_4b_balanced_core_answer_potential_sft` (new): [README](../experiments/qwen35_4b_balanced_core_answer_potential_sft/README.md)
@@ -912,6 +916,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 ## verification
 
 - `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
+- `qwen35_4b_axis_corpus_v2_staged_repair` (new): [README](../experiments/qwen35_4b_axis_corpus_v2_staged_repair/README.md)
 - `qwen35_4b_axis_stack_readjudication_medium_pilot` (new): [README](../experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/README.md)
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
 - `qwen35_4b_code_confidence` (new): [README](../experiments/qwen35_4b_code_confidence/README.md)

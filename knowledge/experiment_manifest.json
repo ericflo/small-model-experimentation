@@ -801,6 +801,47 @@
   },
   {
     "file_counts": {
+      ".json": 6,
+      ".jsonl": 6,
+      ".md": 9,
+      ".py": 20,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_axis_corpus_v2_staged_repair",
+    "path": "experiments/qwen35_4b_axis_corpus_v2_staged_repair",
+    "primary_readme": "experiments/qwen35_4b_axis_corpus_v2_staged_repair/README.md",
+    "primary_report": "experiments/qwen35_4b_axis_corpus_v2_staged_repair/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "Rebuild the axis curriculum's two dead blocks from quantified failure forensics of the line's own 1,296 graded completions: staged repair lessons whose think targets DEMONSTRATE the bounded search (localize-only, repair-given-step, and trace-audit formats on the best-measured formalism, with rejected op-TYPE candidates and explicit checkpoint rules), hygiene with the co-located-injection share raised, explore unchanged \u2014 trained on the line's best local artifact against an exact-exposure replay control, judged under the corrected detectability bar with a prospectively documented answer-normalization fix, medium pilot behind it.",
+    "tags": [
+      "abi",
+      "curriculum",
+      "repair",
+      "small-model",
+      "verification"
+    ],
+    "title": "Axis Corpus V2 with Staged Repair",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 44,
+    "total_size_bytes": 18238585
+  },
+  {
+    "file_counts": {
       ".json": 15,
       ".jsonl": 9,
       ".log": 7,
@@ -1839,7 +1880,7 @@
   {
     "file_counts": {
       ".gz": 10,
-      ".json": 48,
+      ".json": 49,
       ".jsonl": 8,
       ".md": 10,
       ".py": 78,
@@ -1871,8 +1912,8 @@
       "src",
       "tests"
     ],
-    "total_files": 157,
-    "total_size_bytes": 44265514
+    "total_files": 158,
+    "total_size_bytes": 45389756
   },
   {
     "file_counts": {
