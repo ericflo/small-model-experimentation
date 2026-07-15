@@ -284,7 +284,10 @@ is complete; full block 1 is running for the sealed terminal receipt.
 Block-1 deep then completed at `0.584024` deep and `0.811023` quick from
 4,228,153 sampled tokens. Its registered equal-cell macros are `0.600187` deep,
 `0.811023` quick, and `0.705605` joint. This is the second-block source anchor,
-not treatment evidence; non-advantage is running next.
+not treatment evidence. Non-advantage then scored `0.578032` deep and
+`0.795058` quick from 4,369,088 sampled tokens. Its equal-cell macros trail
+deep by `−0.003232` deep, `−0.015965` quick, and `−0.009599` joint,
+replicating the block-0 control ordering. Off-policy SFT is running next.
 
 ## NF4/BF16 Interpretation Diagnostic
 

@@ -732,3 +732,19 @@
   quick, and `0.705605` joint. This is a source anchor only.
 - Block-1 non-advantage started next with external journal hash
   `e3951bead0ccf17014cf1479f258dfd0b7e68f055eab5eb5419d737c7724d77f`.
+
+## 2026-07-15 — block-1 non-advantage remains below deep
+
+- Non-advantage completed sealed generation and strict validation.
+  `GENERATED.json` and `COMPLETE.json` hash to
+  `9d6460a6ae69b1fb8333cac05992b8e5a0c6b8617ecab7cb94200e7cd3841863`
+  and `6c85dac0a1464cb729be4f551de2964267aac313652b0cf6be6a7d26a8833bda`;
+  the score hashes to
+  `a596c3541ab9816c15cd7dd8e3fc1f58c7c0845ccb2c62aad7c6218a79930e17`.
+- Direct item-weighted means are `0.578032` deep and `0.795058` quick, using
+  4,369,088 sampled tokens. Equal-cell macros are `0.596955` deep, `0.795058`
+  quick, and `0.696006` joint, respectively `−0.003232`, `−0.015965`, and
+  `−0.009599` versus deep.
+- The non-advantage control is below deep on both blocks. Off-policy SFT started
+  next with external journal hash
+  `4a2626981d694d6f2740a138b3d4e4a62a69ab6feb835b4b0e4d680de20c29bd`.

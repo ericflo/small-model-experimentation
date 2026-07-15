@@ -222,7 +222,11 @@ the registered terminal receipt and cross-block control ranking.
 Block-1 deep establishes the second source anchor at direct item means
 `0.584024` deep and `0.811023` quick from 4,228,153 sampled tokens. Its frozen
 equal-cell projection is `0.600187` deep, `0.811023` quick, and `0.705605`
-joint. No treatment comparison follows until the paired block-1 arms complete.
+joint. Block-1 non-advantage then lands at equal-cell macros `0.596955` deep,
+`0.795058` quick, and `0.696006` joint, trailing deep by `−0.003232`,
+`−0.015965`, and `−0.009599`. The matched non-route control is therefore
+below the source on both sealed blocks; this still cannot establish a routed
+treatment gain before the block-1 primary arms complete.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply
