@@ -1,0 +1,20 @@
+# Generated starter metadata. Run make check after adding artifacts.
+id: "qwen35_4b_axis_stack_readjudication_medium_pilot"
+title: "Axis Stack Re-adjudication with Medium Pilot"
+source_track: "new"
+path: "experiments/qwen35_4b_axis_stack_readjudication_medium_pilot"
+primary_readme: "experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/README.md"
+primary_report: "experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/reports/report.md"
+summary: "New experiment scaffold. Fill this before running full experiments."
+tags:
+  - "experiment"
+research_programs:
+  - "agentic_breadth_installation"
+top_level_dirs:
+  - "configs"
+  - "reports"
+  - "scripts"
+  - "src"
+file_counts: {}
+total_files: 0
+total_size_bytes: 0

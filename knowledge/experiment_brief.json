@@ -13999,6 +13999,44 @@
      "chart_takeaway": "The stacked model leads clearly; the second review round is the weakest arm — but a single noisy sub-check kept the stacked model from advancing."
     }
    ]
+  },
+  "qwen35_4b_axis_stack_readjudication_medium_pilot": {
+   "verdict_tag": "Design under construction; re-judging built models",
+   "concept_primer": "The skill-stacked model already exists and has twice shown its skills are real; both times a measurement quirk — one comparison category stuck at a ceiling where wins are impossible — blocked its advance. This trial re-judges the same three built models on brand-new tasks with that quirk handled explicitly, at zero training cost.",
+   "plain_question": "Judged fairly on new tasks, does the skill-stacked model clear the program's bars — and does the bigger benchmark tier then credit its skills?",
+   "plain_answer": "Nothing has run yet. The three models are inherited unchanged with their fingerprints re-verified; the new screen excludes categories where a comparison model is at the ceiling (reporting them instead of silently requiring the impossible) and fails closed if nothing is measurable.",
+   "why_it_matters": "Erasing past failures by re-rolling the dice is bad science; fixing a documented measurement flaw and saying so is how instruments improve. Both earlier failures stay on the record; this simply asks the question the flawed screen could not.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Training cost",
+     "value": "0",
+     "sub": "all three models inherited unchanged"
+    },
+    {
+     "label": "Prior evidence",
+     "value": "2 trials",
+     "sub": "skills replicated; ceiling tie both times"
+    },
+    {
+     "label": "New fail-closed outcome",
+     "value": "1",
+     "sub": "gate fails if nothing is measurable"
+    },
+    {
+     "label": "Benchmark seed",
+     "value": "78,146 sealed",
+     "sub": "medium tier, conditional"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Where the experiment stands",
+     "chart_read": "Each bar is a preregistered stage; one means complete.",
+     "chart_takeaway": "Contract and inherited models are frozen; the fresh screen and the conditional medium benchmark remain."
+    }
+   ]
   }
  }
 }

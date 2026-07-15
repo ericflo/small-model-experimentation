@@ -1,0 +1,193 @@
+{
+  "arm_roles": {
+    "candidate": "axis_on_replay",
+    "control": "replay_squared",
+    "parent_eval_label": "replay_parent"
+  },
+  "arms": {
+    "axis_on_replay": {
+      "composite": "large_artifacts/qwen35_4b_axis_replay_stack_medium_target_match/merged/axis_on_replay",
+      "composite_name": "axis_on_replay",
+      "deployment": "explicit_merged_composite",
+      "experiment": "qwen35_4b_axis_replay_stack_medium_target_match",
+      "external_receipt_sha256": "3b13f5d7e893edf1e4af1476d0296478d198e192518afdcfdffd4df6682bdb5d",
+      "runtime_lora_forbidden": true,
+      "tracked_receipt": "experiments/qwen35_4b_axis_replay_stack_medium_target_match/runs/merges/axis_on_replay.json",
+      "tracked_receipt_sha256": "f58c946259090c0647fe607b87a884a11be913f7bdc71219a005907478c4201d",
+      "tree_sha256": "77e4858fe6ddade7a8446a0c561c3c18d07c338d4dea2f0b8193693fcca264ea",
+      "weights_sha256": "7ebcad397c820196fb2271fe4c608a62a578465152b48e3fcee2c8d3b46fd0e4",
+      "weights_size_bytes": 9078620536
+    },
+    "replay_parent": {
+      "composite": "large_artifacts/qwen35_4b_goal_gap_axis_curriculum_target_match/merged/replay_repeat",
+      "composite_name": "replay_repeat",
+      "deployment": "explicit_merged_composite",
+      "experiment": "qwen35_4b_goal_gap_axis_curriculum_target_match",
+      "external_receipt_sha256": "d3b184010f0470078e77e25796c572f41c177451f0157ced35d4e4d818a11b5b",
+      "runtime_lora_forbidden": true,
+      "tracked_receipt": "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/runs/merges/replay_repeat.json",
+      "tracked_receipt_sha256": "22384463d7825ec2a0b95faeaeb273264d7331f4584f8b7e9e58a60545398af1",
+      "tree_sha256": "4c4f3561efbcafe1b9f777f4bd21bf4949ff89177f77946d0fa0f88cafafacd7",
+      "weights_sha256": "3df45004fcf42519ce28cdcfedcbb39b0907662f8ecfb8a87b13b416087d0072",
+      "weights_size_bytes": 9078620536
+    },
+    "replay_squared": {
+      "composite": "large_artifacts/qwen35_4b_axis_replay_stack_medium_target_match/merged/replay_squared",
+      "composite_name": "replay_squared",
+      "deployment": "explicit_merged_composite",
+      "experiment": "qwen35_4b_axis_replay_stack_medium_target_match",
+      "external_receipt_sha256": "2a4be2fcbb26cfeb2eb5f616bc8eef207c6f3aa99061ba79c84bd2e61b5845d6",
+      "runtime_lora_forbidden": true,
+      "tracked_receipt": "experiments/qwen35_4b_axis_replay_stack_medium_target_match/runs/merges/replay_squared.json",
+      "tracked_receipt_sha256": "3d36542e0ea91b07e94dbe9e16551f97f33faf194ed1b5e6c87526e5248ee777",
+      "tree_sha256": "01108a985d2179561656141b2b824ee15a1d7a8a260da5d9e83387ebdc3a777d",
+      "weights_sha256": "e43b885c47ecc7046c3c741b48afd53dd1cb96d2d98426b714714d5ac271069e",
+      "weights_size_bytes": 9078620536
+    }
+  },
+  "benchmark_plan": {
+    "base_weights_sha256": "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db",
+    "gates": {
+      "candidate_aggregate_strictly_above_base": true,
+      "candidate_aggregate_strictly_above_control": true,
+      "candidate_aggregate_strictly_above_parent": true
+    },
+    "gateway": "scripts/run_benchmark_aggregate.py",
+    "goal_gate": {
+      "every_public_family_strictly_above_base": "recorded and reported from the same event as the goal gate; medium-tier family scores have finer granularity than quick and the all-families gate is empirically reachable there, but it is NOT part of the pilot pass"
+    },
+    "models": {
+      "base": "large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized",
+      "candidate": "large_artifacts/qwen35_4b_axis_replay_stack_medium_target_match/merged/axis_on_replay",
+      "control": "large_artifacts/qwen35_4b_axis_replay_stack_medium_target_match/merged/replay_squared",
+      "parent": "large_artifacts/qwen35_4b_goal_gap_axis_curriculum_target_match/merged/replay_repeat"
+    },
+    "name": "pilot",
+    "public_families": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "sirens",
+      "stockade",
+      "toolsmith",
+      "warren"
+    ],
+    "seed": 78146,
+    "think_budget": 1024,
+    "tier": "medium"
+  },
+  "checkpoint_policy": {
+    "clean_pushed_main_required": true,
+    "full_check_rebase_push_two_workflow_gate_between_expensive_stages": true,
+    "next_authorized_stage": "local",
+    "one_stage_per_invocation": true,
+    "preceding_receipt_committed_at_head": true
+  },
+  "code": {
+    "axis_curriculum_generator_sha256": "11dc8df3c0b42ae7dc5449e7bb7627ea3aca645e0a3a3e6d335d22cccff877e5",
+    "curriculum_generator_sha256": "70fc722a6a69f4f8a64ae4356058421ea44117c7e86d3350abfd72b047ccf080",
+    "gate_sha256": "cb3a11d6f612de8eefce518269cae970838588423fa2e11889bb697f26df0408",
+    "runner_sha256": "cf1a766a70df8e3aacae18fc52a1a2186f2f8fc20161a6ef679b3dd51f60fcd2"
+  },
+  "corpora": {
+    "banned_vocabulary": {
+      "checked_by_generator": true,
+      "sha256": "067a8dcfc8e405857bea4b46ec649b306996577e6844841c5695f1544a2db19e",
+      "tokens": 112
+    },
+    "purpose": "frozen sources for the gate's zero-overlap receipt only; nothing is trained on them here",
+    "replay": {
+      "inheritance": {
+        "byte_identical": true,
+        "from_experiment": "qwen35_4b_axis_replay_stack_medium_target_match"
+      },
+      "path": "data/sft_blend.jsonl",
+      "rows": 2240,
+      "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+    },
+    "treatment": {
+      "inheritance": {
+        "byte_identical": true,
+        "from_experiment": "qwen35_4b_axis_replay_stack_medium_target_match"
+      },
+      "path": "data/sft_axis160.jsonl",
+      "rows": 160,
+      "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e"
+    }
+  },
+  "experiment_id": "qwen35_4b_axis_stack_readjudication_medium_pilot",
+  "firewall": {
+    "aggregate_seed_sealed": true,
+    "benchmark_data_read": false,
+    "benchmark_gateway_exposed": false
+  },
+  "local_gate": {
+    "arms": [
+      "replay_parent",
+      "replay_squared",
+      "axis_on_replay"
+    ],
+    "instruments": {
+      "axis_holdout": {
+        "generator": "scripts/gen_axis_curriculum.py",
+        "kinds": [
+          "u_explore",
+          "u_hygiene",
+          "u_protocol",
+          "u_tracefix"
+        ],
+        "per_kind": 10,
+        "rows": 40
+      },
+      "retention": {
+        "generator": "scripts/gen_curriculum.py",
+        "per_kind": 8,
+        "rows": 104,
+        "skills": 13
+      }
+    },
+    "promotion": {
+      "axis_kind_win_requires_strictly_above_max_of_both_controls": true,
+      "axis_kind_wins_at_least": "ceil(2/3 * detectable_kinds)",
+      "axis_total_strictly_beats": [
+        "replay_parent",
+        "replay_squared"
+      ],
+      "detectability_ceiling_correct_of_10": 9,
+      "detectable_kind_definition": "an axis kind where NEITHER control scores >= 9 of 10 on the holdout",
+      "no_absolute_per_kind_floors": true,
+      "no_passing_candidate_keeps_aggregate_seed_sealed": true,
+      "retention_cap_contact_band": 3,
+      "retention_correct_band": 5,
+      "retention_parsed_band": 3,
+      "route_abstentions_at_most": 4,
+      "single_candidate": "axis_on_replay",
+      "undetectable_kinds_excluded_and_reported_as_not_detectable": true,
+      "zero_detectable_kinds_fails_closed_as": "GATE_UNDETECTABLE"
+    },
+    "rows": 144,
+    "seed": 88016
+  },
+  "model": {
+    "calls": 0,
+    "id": "Qwen/Qwen3.5-4B",
+    "loaded": false,
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+  },
+  "schema_version": 1,
+  "seeds": {
+    "conditional_aggregate": 78146,
+    "construction_inherited": 77117,
+    "construction_inherited_from": "qwen35_4b_goal_gap_axis_curriculum_target_match",
+    "local_gate": 88016
+  },
+  "stage": "axis_stack_readjudication_design",
+  "training_free": true,
+  "training_plan": {
+    "reason": "training-free re-adjudication: the arms are inherited published composites; no corpus, streams, training, or merging exist in this experiment",
+    "training_authorized": false
+  }
+}

@@ -1,0 +1,20 @@
+experiment_id: qwen35_4b_axis_stack_readjudication_medium_pilot
+status: model_free_construction
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+arms:
+  replay_parent: 3df45004fcf42519ce28cdcfedcbb39b0907662f8ecfb8a87b13b416087d0072
+  replay_squared: e43b885c47ecc7046c3c741b48afd53dd1cb96d2d98426b714714d5ac271069e
+  axis_on_replay: 7ebcad397c820196fb2271fe4c608a62a578465152b48e3fcee2c8d3b46fd0e4
+seeds:
+  gate: 88016
+  conditional_aggregate: 78146
+gate:
+  corrected_breadth_bar: undetectable kinds (any control >= 9/10) excluded and reported; wins on ceil(2/3 x detectable); GATE_UNDETECTABLE fails closed
+  retention_bands: unchanged
+conditional_pilot:
+  tier: medium
+  think_budget: 1024
+  models: [base, replay_parent, replay_squared, axis_on_replay]
+training: none

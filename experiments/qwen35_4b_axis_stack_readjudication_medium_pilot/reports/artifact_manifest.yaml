@@ -1,0 +1,33 @@
+schema_version: 1
+experiment_id: "qwen35_4b_axis_stack_readjudication_medium_pilot"
+external_artifacts:
+  - name: replay_parent composite
+    storage: large_artifacts/qwen35_4b_goal_gap_axis_curriculum_target_match/merged/replay_repeat
+    required_for: gate baseline arm and pilot arm
+    checksum: 3df45004fcf42519ce28cdcfedcbb39b0907662f8ecfb8a87b13b416087d0072
+    regenerate: experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/runs/merges/replay_repeat.json
+  - name: replay_squared composite
+    storage: large_artifacts/qwen35_4b_axis_replay_stack_medium_target_match/merged/replay_squared
+    required_for: gate control arm and pilot arm
+    checksum: e43b885c47ecc7046c3c741b48afd53dd1cb96d2d98426b714714d5ac271069e
+    regenerate: experiments/qwen35_4b_axis_replay_stack_medium_target_match/runs/merges/replay_squared.json
+  - name: axis_on_replay candidate composite
+    storage: large_artifacts/qwen35_4b_axis_replay_stack_medium_target_match/merged/axis_on_replay
+    required_for: gate candidate arm and pilot candidate arm
+    checksum: 7ebcad397c820196fb2271fe4c608a62a578465152b48e3fcee2c8d3b46fd0e4
+    regenerate: experiments/qwen35_4b_axis_replay_stack_medium_target_match/runs/merges/axis_on_replay.json
+  - name: reserialized base composite
+    storage: large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized
+    required_for: pilot base arm
+    checksum: b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db
+    regenerate: experiments/qwen35_4b_universal_curriculum/runs/merges/base_reserialized.json
+omitted_artifacts: []
+reproducibility:
+  smoke_command: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/scripts/run.py --smoke
+  full_command: checkpointed scripts/run.py stages only
+  required_external_artifacts:
+    - replay_parent composite
+    - replay_squared composite
+    - axis_on_replay candidate composite
+    - reserialized base composite
+notes: Training-free re-adjudication; the frozen gate and receipts are tracked in-repo; all model weights are inherited published composites pinned above. No local result or benchmark result exists yet.

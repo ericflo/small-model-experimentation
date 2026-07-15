@@ -48754,6 +48754,41 @@
      "source": "experiments/qwen35_4b_axis_replay_stack_medium_target_match/reports/report.md"
     }
    ]
+  },
+  "qwen35_4b_axis_stack_readjudication_medium_pilot": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered stage completion",
+     "categories": [
+      "intake",
+      "inherited pins",
+      "fresh gate design",
+      "design review",
+      "gate event",
+      "medium pilot"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "Training-free re-adjudication of the published axis-stack composites with a detectability-corrected breadth bar; conditional medium pilot at sealed seed 78,146. Both predecessor failures remain recorded.",
+     "source": "experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/reports/preregistration.md"
+    }
+   ]
   }
  }
 }
