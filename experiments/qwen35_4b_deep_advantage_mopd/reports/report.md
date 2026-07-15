@@ -259,6 +259,14 @@ The block-1 quick source then scores direct item means `0.529900` deep and
 on both strata in both blocks. Every treatment seed beats quick here, but that
 only places the updates between or near their sources; it does not satisfy the
 registered requirement to improve on the better source.
+The immutable 40/60 soup scores direct item means `0.569971` deep and
+`0.800865` quick from 4,363,638 sampled tokens. Its equal-cell macros are
+`0.589461` deep, `0.800865` quick, and `0.695163` joint, trailing deep by
+`−0.010726`, `−0.010158`, and `−0.010442`. All three treatment seeds beat the
+initialization on both block-1 strata, with joint gains of `+0.004394`,
+`+0.009185`, and `+0.003859` for seeds 42/43/44. That is a real block-local
+update signal, but it reverses the block-0 comparison—no treatment dominated
+soup there—and still does not cross the better-source frontier.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

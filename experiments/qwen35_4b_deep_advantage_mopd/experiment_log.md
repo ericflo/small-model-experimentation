@@ -835,3 +835,22 @@
   sources rather than beyond the source frontier.
 - The immutable 40/60 soup started next with external journal hash
   `8b6f61cdf306d8d74ff73bf7960fe7f043a1fa5016c625543f91ea976c379b8f`.
+
+## 2026-07-15 — treatment beats initialization locally but not across blocks
+
+- The immutable soup completed sealed generation and strict validation.
+  `GENERATED.json` and `COMPLETE.json` hash to
+  `a4d7ecd6f0fee02e30e6e844f223cf8f1b3b6ed6d63ecd1cf79d1bac2923fae3`
+  and `46768d2d95411f2831623803eaf84dd2ab8783b1432bab36fde3dae4a3995097`;
+  the score hashes to
+  `cefed360bea80ec79731ca3b891d49ea391bfa2a9a3130a020e95185dcaa6536`.
+- Direct item-weighted means are `0.569971` deep and `0.800865` quick, using
+  4,363,638 sampled tokens. Equal-cell macros are `0.589461` deep, `0.800865`
+  quick, and `0.695163` joint, respectively `−0.010726`, `−0.010158`, and
+  `−0.010442` versus deep.
+- Seeds 42/43/44 beat soup on both block-1 strata, with joint gains
+  `+0.004394`/`+0.009185`/`+0.003859`. This block-local update signal does not
+  replicate block 0, where no treatment dominated soup, and it remains below
+  the better-source frontier.
+- Soup25 started next with external journal hash
+  `8dfbec59f535168b34097f2f56ea25237dc5f19f9a1bdbfddb6aea8c13f6d698`.
