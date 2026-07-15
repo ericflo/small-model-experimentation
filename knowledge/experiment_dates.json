@@ -1471,6 +1471,14 @@
     "experiments/qwen35_4b_universal_low_density_token_match/experiment_log.md: dated design-freeze entry"
    ]
   },
+  "qwen35_4b_universal_medium_tier_measurement": {
+   "start": "2026-07-15",
+   "end": "2026-07-15",
+   "confidence": "high",
+   "sources": [
+    "dated experiment_log.md heading (2026-07-15 design freeze)"
+   ]
+  },
   "qwen35_4b_universal_mid_density_token_match": {
    "start": "2026-07-13",
    "end": "2026-07-13",

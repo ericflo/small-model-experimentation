@@ -1,0 +1,13 @@
+experiment_id: qwen35_4b_universal_medium_tier_measurement
+status: model_free_construction
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+arms: [base, designed_fresh, replay_repeat, hygiene_explore]
+event:
+  tier: medium
+  think_budget: 1024
+  seed: 78150
+readings: [aggregate_ordering_vs_quick, recorded_goal_gate, base_sanity_envelope, blocking_families]
+training: none
+promotion: none

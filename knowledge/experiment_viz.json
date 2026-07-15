@@ -49119,6 +49119,37 @@
      "source": "experiments/qwen35_4b_menders_sirens_tier_forensics/runs/constants_analysis.json"
     }
    ]
+  },
+  "qwen35_4b_universal_medium_tier_measurement": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered stage completion",
+     "categories": [
+      "intake",
+      "design receipt frozen",
+      "adversarial review",
+      "4-model medium event"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "Eval-only measurement intake: base, designed_fresh, replay_repeat, and hygiene_explore (explicit merges, tree-hash bound) on sealed medium seed 78150 at think budget 1024; readings are the aggregate ordering vs quick, the recorded all-ten-families goal gate, the base sanity envelope from the tier forensics, and the blocking families. Nothing trains.",
+     "source": "experiments/qwen35_4b_universal_medium_tier_measurement/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

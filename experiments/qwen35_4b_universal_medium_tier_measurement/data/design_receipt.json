@@ -1,0 +1,169 @@
+{
+ "checkpoint_policy": {
+  "benchmark_review_verdict_required": "PASS_BENCHMARK_EVENT",
+  "clean_pushed_main_required": true,
+  "design_receipt_committed_at_head_required": true,
+  "next_authorized_stage": "benchmark",
+  "one_stage_per_invocation": true
+ },
+ "code": {
+  "check_benchmark_sha256": "5fe161307d3d51b910699dfe3a46353cbdc4c5b4b3acb37123def3c6bb3dcc63",
+  "gen_design_receipt_sha256": "4bc65ed8a03f9b0220d14176d14b358fa5ab9a6199e69549e1fb39757e0318c3",
+  "harness_sha256": "6409d71bf241fc0696f62ffbc486fb76db63194a3d1c449d427f85b4b94da320",
+  "run_benchmark_sha256": "76aa049e3d023f0baf38670f6a2ced6213443a5a77b9d51d304c22571f163f35"
+ },
+ "event": {
+  "ledger_refuses_any_prior_entry": true,
+  "model_order": [
+   "base",
+   "designed_fresh",
+   "replay_repeat",
+   "hygiene_explore"
+  ],
+  "name": "measurement",
+  "one_seed_ledger": "runs/benchmark_events.jsonl",
+  "seed": 78150,
+  "sequential_same_seed_runs": true,
+  "single_event_only": true,
+  "think_budget": 1024,
+  "tier": "medium"
+ },
+ "experiment_id": "qwen35_4b_universal_medium_tier_measurement",
+ "firewall": {
+  "benchmark_data_read": false,
+  "gateway_receipts_only": true
+ },
+ "forensics_envelope": {
+  "field": "base_profile.medium.families.<family>.{min,max}",
+  "inside_is_inclusive": true,
+  "path": "experiments/qwen35_4b_menders_sirens_tier_forensics/runs/constants_analysis.json",
+  "sha256": "62aaa80cf71ebfb0510b5a7c892d4bcf04d6b81b6fa559c401f2ee82a9d8868f"
+ },
+ "frozen_quick_reference": {
+  "aggregates": {
+   "base": 0.10851063829787233,
+   "designed_fresh": 0.46443720816263595,
+   "hygiene_explore": null,
+   "replay_repeat": 0.508134008201943
+  },
+  "quick_labels": {
+   "base": "base",
+   "designed_fresh": "designed_fresh_parent",
+   "hygiene_explore": null,
+   "replay_repeat": "replay_repeat"
+  },
+  "seed": 78144,
+  "summary": "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/runs/benchmark/quick_tb1024_seed78144_pilot/summary.json",
+  "summary_sha256": "4e28ba21a0c25e7bf46cabd42152a011fc86f3c0f4ba24c23ec1bf18beb78f23",
+  "think_budget": 1024,
+  "tier": "quick"
+ },
+ "gateway": {
+  "path": "scripts/run_benchmark_aggregate.py",
+  "sha256": "53cf6533dbd710eb167503363c39f73dbf7559a0d91f40a00436a3c218a01c17"
+ },
+ "measurement_intake": {
+  "adapters": null,
+  "exit_zero_on_any_complete_event": true,
+  "local_gate": null,
+  "promotion": null,
+  "training": null
+ },
+ "model": {
+  "calls": 0,
+  "id": "Qwen/Qwen3.5-4B",
+  "loaded": false,
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+ },
+ "models": {
+  "base": {
+   "deployment": "explicit_merged_composite",
+   "merge_receipt": {
+    "committed": false,
+    "path": "large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized/merge_receipt.json",
+    "sha256": "25aee794cfffe4d58110defc61177edef1f5324e47deb28fbd3cb7ccd61ae54f"
+   },
+   "path": "large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized",
+   "runtime_lora_forbidden": true,
+   "tree_recomputed_at_event_time": true,
+   "tree_sha256": "26d8ee48583adb0fb557d0ff668664949adff0068fa5baafe6f0af68e22fb677",
+   "weights_sha256": "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db",
+   "weights_size_bytes": 9078620536
+  },
+  "designed_fresh": {
+   "deployment": "explicit_merged_composite",
+   "merge_receipt": {
+    "committed": true,
+    "path": "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/runs/merges/designed_fresh.json",
+    "sha256": "ab3f20cc93d3fe21ead7a1d573edbca2903d59d6f9fe3d2af0c93e823676acc2"
+   },
+   "path": "large_artifacts/qwen35_4b_universal_fresh_surface_budget_commit_target_match/merged/designed_fresh",
+   "runtime_lora_forbidden": true,
+   "tree_recomputed_at_event_time": true,
+   "tree_sha256": "93433aa2d5f3f0d6d4540126579c09feee1d8502df702c1563bae28eb7f60255",
+   "weights_sha256": "0a3b89cdf57ed8a73590580489d744319c12b44b60991db55b5baba6f7c27979",
+   "weights_size_bytes": 9078620536
+  },
+  "hygiene_explore": {
+   "deployment": "explicit_merged_composite",
+   "merge_receipt": {
+    "committed": true,
+    "path": "experiments/qwen35_4b_hygiene_explore_destack_medium/runs/merges/hygiene_explore.json",
+    "sha256": "22a22a68234de68314064b809352e7449c59ef821235402b66ecb6e5ebcc486a"
+   },
+   "path": "large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore",
+   "runtime_lora_forbidden": true,
+   "tree_recomputed_at_event_time": true,
+   "tree_sha256": "9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971",
+   "weights_sha256": "e21123443a230ada2c73ded411e0b5b7c2b1459856b2c38e4f1beea8958dc02f",
+   "weights_size_bytes": 9078620536
+  },
+  "replay_repeat": {
+   "deployment": "explicit_merged_composite",
+   "merge_receipt": {
+    "committed": true,
+    "path": "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/runs/merges/replay_repeat.json",
+    "sha256": "22384463d7825ec2a0b95faeaeb273264d7331f4584f8b7e9e58a60545398af1"
+   },
+   "path": "large_artifacts/qwen35_4b_goal_gap_axis_curriculum_target_match/merged/replay_repeat",
+   "runtime_lora_forbidden": true,
+   "tree_recomputed_at_event_time": true,
+   "tree_sha256": "4c4f3561efbcafe1b9f777f4bd21bf4949ff89177f77946d0fa0f88cafafacd7",
+   "weights_sha256": "3df45004fcf42519ce28cdcfedcbb39b0907662f8ecfb8a87b13b416087d0072",
+   "weights_size_bytes": 9078620536
+  }
+ },
+ "public_families": [
+  "chronicle",
+  "lockpick",
+  "menders",
+  "mirage",
+  "rites",
+  "siftstack",
+  "sirens",
+  "stockade",
+  "toolsmith",
+  "warren"
+ ],
+ "readings": {
+  "aggregate_ordering_vs_quick": "medium aggregate per arm; ranking compared against the frozen quick ordering on the three quick-measured arms; hygiene_explore quick aggregate recorded as null",
+  "base_sanity_envelope": "per family, base medium score inside the historical base [min, max] from the pinned forensics analysis",
+  "blocking_families": "per arm, the families not strictly won",
+  "recorded_goal_gate": "per treated arm: strict wins/ties/losses vs base across the ten public families; pass = ten strict wins; recorded, never gated on"
+ },
+ "schema_version": 1,
+ "seed_freshness_audit": {
+  "disallowed_matches": [],
+  "fresh": true,
+  "pattern": "seed[^0-9]{0,3}78150|78150[^0-9]{0,3}seed",
+  "roots": [
+   "experiments",
+   "knowledge",
+   "research_programs"
+  ],
+  "seed": 78150,
+  "self_directory_excluded": "experiments/qwen35_4b_universal_medium_tier_measurement",
+  "self_reference_line_window": 3
+ },
+ "stage": "medium_tier_measurement_design"
+}

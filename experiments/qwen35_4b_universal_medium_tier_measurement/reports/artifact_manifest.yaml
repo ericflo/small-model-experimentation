@@ -1,0 +1,33 @@
+schema_version: 1
+experiment_id: "qwen35_4b_universal_medium_tier_measurement"
+external_artifacts:
+  - name: base_reserialized composite
+    storage: large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized
+    required_for: benchmark arm
+    checksum: 26d8ee48583adb0fb557d0ff668664949adff0068fa5baafe6f0af68e22fb677
+    regenerate: reserialization of the pinned base model revision (see qwen35_4b_universal_curriculum); weights pin b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db
+  - name: designed_fresh composite
+    storage: large_artifacts/qwen35_4b_universal_fresh_surface_budget_commit_target_match/merged/designed_fresh
+    required_for: benchmark arm
+    checksum: 93433aa2d5f3f0d6d4540126579c09feee1d8502df702c1563bae28eb7f60255
+    regenerate: experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/runs/merges/designed_fresh.json (output_tree_sha256)
+  - name: replay_repeat composite
+    storage: large_artifacts/qwen35_4b_goal_gap_axis_curriculum_target_match/merged/replay_repeat
+    required_for: benchmark arm
+    checksum: 4c4f3561efbcafe1b9f777f4bd21bf4949ff89177f77946d0fa0f88cafafacd7
+    regenerate: experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/runs/merges/replay_repeat.json (output_tree_sha256)
+  - name: hygiene_explore composite
+    storage: large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore
+    required_for: benchmark arm
+    checksum: 9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971
+    regenerate: experiments/qwen35_4b_hygiene_explore_destack_medium/runs/merges/hygiene_explore.json (output_tree_sha256)
+omitted_artifacts: []
+reproducibility:
+  smoke_command: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_universal_medium_tier_measurement/scripts/run.py --smoke
+  full_command: checkpointed scripts/run.py --stage benchmark only
+  required_external_artifacts:
+    - base_reserialized composite
+    - designed_fresh composite
+    - replay_repeat composite
+    - hygiene_explore composite
+notes: Eval-only measurement intake; every checksum is the composite's on-disk tree sha256, recomputed and required to match before the sealed seed is consumed; one-seed ledger; no training and no promotion exist in this cell.

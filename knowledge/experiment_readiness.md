@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 271
-- Anchor-ready: 255
-- Human-authored READMEs: 258
+- Experiments: 272
+- Anchor-ready: 256
+- Human-authored READMEs: 259
 - Generated README stubs: 13
-- Primary reports: 270
-- Experiment logs: 174
-- Smoke commands: 139
-- Artifact manifests: 243
+- Primary reports: 271
+- Experiment logs: 175
+- Smoke commands: 140
+- Artifact manifests: 244
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 158 |
+| `documented-scripts` | 159 |
 | `scripts-undocumented` | 22 |
 | `source-or-analysis` | 53 |
 
@@ -206,6 +206,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_universal_failure_selected_restart_target_match`](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/README.md) | agentic_breadth_installation, benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen35_4b_universal_fresh_surface_budget_commit_target_match`](../experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/README.md) | agentic_breadth_installation, benchmark_generalization | `human-authored` | [report](../experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen35_4b_universal_low_density_token_match`](../experiments/qwen35_4b_universal_low_density_token_match/README.md) | agentic_breadth_installation, benchmark_generalization, evidence_conditioned_selection, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_universal_low_density_token_match/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
+| yes | [`qwen35_4b_universal_medium_tier_measurement`](../experiments/qwen35_4b_universal_medium_tier_measurement/README.md) | agentic_breadth_installation | `human-authored` | [report](../experiments/qwen35_4b_universal_medium_tier_measurement/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_universal_mid_density_token_match`](../experiments/qwen35_4b_universal_mid_density_token_match/README.md) | agentic_breadth_installation, benchmark_generalization, posttraining_and_adaptation, process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_universal_mid_density_token_match/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen35_4b_universal_on_policy_prefix_repair_token_match`](../experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/README.md) | agentic_breadth_installation, benchmark_generalization, posttraining_and_adaptation, process_control_and_tool_use | `human-authored` | [report](../experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen35_4b_universal_replay_anchor`](../experiments/qwen35_4b_universal_replay_anchor/README.md) | agentic_breadth_installation, benchmark_generalization, posttraining_and_adaptation, process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_universal_replay_anchor/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |

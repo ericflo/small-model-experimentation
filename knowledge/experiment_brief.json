@@ -14303,6 +14303,44 @@
      "chart_takeaway": "Medium-tier comparisons cluster at eight and nine family wins with nine full passes; quick-tier ones cluster at six and seven with one pass."
     }
    ]
+  },
+  "qwen35_4b_universal_medium_tier_measurement": {
+   "verdict_tag": "Design under construction; the single benchmark event has not run",
+   "concept_primer": "The receipt forensics showed the program's all-families goal has been judged on the wrong benchmark tier: the quick tier's coarse scoring manufactures unbeatable ties, while the bigger medium tier has seen the goal pass nine times historically. But this program's own clean-trained models — the ones forbidden from ever seeing benchmark-like data — have never been measured on medium at all. This experiment runs that measurement: four already-built models, one fresh sealed seed, no training.",
+   "plain_question": "Where do the line's best clean models actually stand on the medium benchmark tier, and which families still block the all-families goal there?",
+   "plain_answer": "Nothing has run yet. The frozen plan: four published models (the untouched base, the two best lineage parents, and the install carrier) each take the full medium-tier benchmark once on the same fresh seed; the readings are the aggregate ranking, a recorded verdict on the all-ten-families goal, a sanity check that the base scores inside its historical range, and the exact families that block each model.",
+   "why_it_matters": "The program goal — one trained model beating base on every family at once — needs the right courtroom. This is the first time the clean line gets judged in it, and whatever happens, the next training dose inherits exact per-family targets instead of two fake walls.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Training runs",
+     "value": "0",
+     "sub": "measurement of published models"
+    },
+    {
+     "label": "Benchmark events",
+     "value": "4",
+     "sub": "one per model, same sealed seed"
+    },
+    {
+     "label": "Historical goal passes at medium",
+     "value": "9/94",
+     "sub": "vs 1/84 at quick (forensics)"
+    },
+    {
+     "label": "Best quick aggregate",
+     "value": "0.5081",
+     "sub": "replay_repeat, never measured at medium"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Where the experiment stands",
+     "chart_read": "Each bar is a preregistered stage; one means complete.",
+     "chart_takeaway": "The contract and model pins are frozen; the four-model medium-tier event remains."
+    }
+   ]
   }
  }
 }

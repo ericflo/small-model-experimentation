@@ -740,6 +740,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_universal_failure_selected_restart_target_match` (new): [README](../experiments/qwen35_4b_universal_failure_selected_restart_target_match/README.md)
 - `qwen35_4b_universal_fresh_surface_budget_commit_target_match` (new): [README](../experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/README.md)
 - `qwen35_4b_universal_low_density_token_match` (new): [README](../experiments/qwen35_4b_universal_low_density_token_match/README.md)
+- `qwen35_4b_universal_medium_tier_measurement` (new): [README](../experiments/qwen35_4b_universal_medium_tier_measurement/README.md)
 - `qwen35_4b_universal_mid_density_token_match` (new): [README](../experiments/qwen35_4b_universal_mid_density_token_match/README.md)
 - `qwen35_4b_universal_on_policy_prefix_repair_token_match` (new): [README](../experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/README.md)
 - `qwen35_4b_universal_replay_anchor` (new): [README](../experiments/qwen35_4b_universal_replay_anchor/README.md)
