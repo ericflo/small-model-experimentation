@@ -1,0 +1,27 @@
+experiment_id: qwen35_4b_interleaved_replay_dose_medium
+status: model_free_construction
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+parent:
+  experiment: qwen35_4b_hygiene_explore_destack_medium
+  arm: replay_clean
+  weight_sha256: 2cef3e5e7ddfbee5d2d2c3a878d64f360dc6994764b9856be7e319ce5187d0b4
+  warm_start_adapter_sha256: f6f910ed1c1dcc843f43e09a562556b8e76ee40096aa7123fd70800d94fc6bb8
+seeds:
+  corpus_construction_inherited: 77119
+  slot_match: 55122
+  training: 56
+  gate: 88019
+  conditional_aggregate: 78149
+corpus:
+  inherited: true
+  rows: 80
+  kinds: {u_hygiene: 40, u_explore: 40}
+arms: [replay_interleaved2, dose_after_replay]
+gate:
+  both_kinds_must_win: true
+  recovery_flags: unconditional
+conditional_pilot:
+  tier: medium
+  think_budget: 1024

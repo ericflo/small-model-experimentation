@@ -48901,6 +48901,43 @@
      "source": "experiments/qwen35_4b_hygiene_explore_destack_medium/reports/report.md"
     }
    ]
+  },
+  "qwen35_4b_interleaved_replay_dose_medium": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered stage completion",
+     "categories": [
+      "intake",
+      "inherited corpus",
+      "exposure match",
+      "design review",
+      "train 2 arms",
+      "gate event",
+      "medium pilot"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "The retention-safe recipe reproduced exactly: the verified hygiene+explore corpus warm-started from the receipted interleaving replay round; both-must-win gate with unchanged retention bands; conditional medium pilot at sealed seed 78,149.",
+     "source": "experiments/qwen35_4b_interleaved_replay_dose_medium/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

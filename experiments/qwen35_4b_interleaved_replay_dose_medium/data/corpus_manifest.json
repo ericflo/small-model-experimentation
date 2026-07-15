@@ -1,0 +1,41 @@
+{
+  "balance": {
+    "bugfind_early_bugs": 0,
+    "bugfind_rows": 0,
+    "hygiene_colocated": 17,
+    "hygiene_injected": 27
+  },
+  "banned_vocabulary_checked": true,
+  "benchmark_data_read": false,
+  "construction_seed": 77119,
+  "corpus": {
+    "kinds": {
+      "u_explore": 40,
+      "u_hygiene": 40
+    },
+    "max_estimated_think_tokens": 87,
+    "path": "data/sft_hygiene_explore.jsonl",
+    "rows": 80,
+    "sha256": "8b3e97919c62cbb0893add281dc1d3ae881aa0138d0d1721043fec26b0c22cf1",
+    "surfaces": {
+      "grove": 40,
+      "harbor": 40
+    }
+  },
+  "experiment_id": "qwen35_4b_hygiene_explore_destack_medium",
+  "generator": "scripts/gen_axis_v2.py",
+  "generator_sha256": "7771e7c190585a949d979997137fd539c9483a7ea0c3601249f54b2ee79ddd40",
+  "mix": "hygiene=40,explore=40",
+  "model_loaded": false,
+  "replay": {
+    "inheritance": {
+      "byte_identical": true,
+      "from_experiment": "qwen35_4b_universal_fresh_surface_budget_commit_target_match"
+    },
+    "path": "data/sft_blend.jsonl",
+    "rows": 2240,
+    "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+  },
+  "schema_version": 1,
+  "stage": "hygiene_explore_corpus_freeze"
+}

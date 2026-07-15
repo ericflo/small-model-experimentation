@@ -3124,6 +3124,45 @@
   },
   {
     "file_counts": {
+      ".json": 6,
+      ".jsonl": 6,
+      ".md": 9,
+      ".py": 20,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_interleaved_replay_dose_medium",
+    "path": "experiments/qwen35_4b_interleaved_replay_dose_medium",
+    "primary_readme": "experiments/qwen35_4b_interleaved_replay_dose_medium/README.md",
+    "primary_report": "experiments/qwen35_4b_interleaved_replay_dose_medium/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "reliability_and_safety"
+    ],
+    "source_track": "new",
+    "summary": "The direct test of the replay-interleaving retention law: the same verified two-lesson dose that just recovered its installs (but paid ten retention points when dosed directly), now warm-started from the already-built interleaving replay round \u2014 reproducing the only retention-safe dose recipe the line has measured, with the conditional pilot at the medium tier.",
+    "tags": [
+      "policy",
+      "small-model",
+      "verification"
+    ],
+    "title": "Interleaved-Replay Dose with Medium Pilot",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 44,
+    "total_size_bytes": 18136311
+  },
+  {
+    "file_counts": {
       ".csv": 3,
       ".json": 5,
       ".jsonl": 4,

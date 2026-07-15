@@ -14113,6 +14113,44 @@
      "chart_takeaway": "The trimmed dose wins the skill test decisively but forgets too much without a review round between doses — the screen refused it, and the fix is already queued."
     }
    ]
+  },
+  "qwen35_4b_interleaved_replay_dose_medium": {
+   "verdict_tag": "Design under construction; nothing trained",
+   "concept_primer": "The last trial proved the two reliable lessons come back on a fresh start but cost the model ten retained answers when taught directly. Cross-checking every receipt isolated the fix: the one dose that never caused forgetting had a review round between practice doses. That review-round model is already built — this trial teaches the same verified lessons starting from it.",
+   "plain_question": "Does a review round at the dose boundary let the lessons land without forgetting — completing a deployable recipe — and does the bigger benchmark tier then credit it?",
+   "plain_answer": "Nothing is trained yet. The corpus is inherited unchanged (already independently verified), the review-round starting model exists with receipts, and the screen is identical to last time: both lessons must win AND nothing may be forgotten beyond the bands.",
+   "why_it_matters": "This is the session's highest-confidence trial: the lessons install (five straight category wins for hygiene), the forgetting mechanism is understood, and this recipe is its measured fix.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Design changes",
+     "value": "1",
+     "sub": "the starting model — everything else identical"
+    },
+    {
+     "label": "Corpus",
+     "value": "inherited",
+     "sub": "80 rows, 100/100 independently verified"
+    },
+    {
+     "label": "Recipe precedent",
+     "value": "retention-safe",
+     "sub": "the only dose that never forgot used it"
+    },
+    {
+     "label": "Benchmark seed",
+     "value": "78,149 sealed",
+     "sub": "medium tier, conditional"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Where the experiment stands",
+     "chart_read": "Each bar is a preregistered stage; one means complete.",
+     "chart_takeaway": "The contract and inherited corpus are frozen; training, the screen, and the medium benchmark remain."
+    }
+   ]
   }
  }
 }

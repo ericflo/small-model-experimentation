@@ -1,0 +1,140 @@
+{
+  "absolute_loss_mass_x5_per_arm": 633716,
+  "aggregate_seed_open": false,
+  "benchmark_data_read": false,
+  "deltas": {
+    "dose_after_replay_minus_replay_interleaved2": {
+      "absolute_loss_mass_x5": 0,
+      "answer_target": 0,
+      "close_target": 0,
+      "forward": 0,
+      "masked_context": -14366,
+      "nonzero_target": 0,
+      "parent_prefix": 0,
+      "prompt": -14366,
+      "target_span": 14366,
+      "think_target": 14366
+    }
+  },
+  "encoder": "scripts/train_think.py:encode_row",
+  "encoder_sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4",
+  "experiment_id": "qwen35_4b_interleaved_replay_dose_medium",
+  "files": {
+    "dose_after_replay": {
+      "absolute_loss_mass": 126743.2,
+      "encoded_rows": 1520,
+      "families": {
+        "burrowmaze": 167,
+        "caravan": 25,
+        "ferrier": 348,
+        "foundry_ledger": 25,
+        "gatepost": 93,
+        "glyphgate": 179,
+        "kilnrite": 336,
+        "loomfix": 112,
+        "packhouse": 34,
+        "patchwheel": 49,
+        "runeward": 15,
+        "stallwright": 57,
+        "universal": 80
+      },
+      "kinds": {
+        "atom": 88,
+        "atom_fc": 135,
+        "episode": 957,
+        "oracle_trace": 260,
+        "u_explore": 40,
+        "u_hygiene": 40
+      },
+      "max_sequence_tokens": 3193,
+      "min_sequence_tokens": 181,
+      "path": "data/dose_after_replay.jsonl",
+      "rows": 1520,
+      "sha256": "9c91383bfa75a606f02426b2f0f92ec1580b62017617cc162c3720b6d82e77ee",
+      "skipped": [],
+      "skipped_rows": 0,
+      "spans_per_epoch": {
+        "absolute_loss_mass_x5": 633716,
+        "answer_target": 13523,
+        "close_target": 3040,
+        "forward": 1373106,
+        "masked_context": 538710,
+        "nonzero_target": 579624,
+        "parent_prefix": 0,
+        "prompt": 538710,
+        "target_span": 834396,
+        "think_target": 817833
+      }
+    },
+    "replay_interleaved2": {
+      "absolute_loss_mass": 126743.2,
+      "encoded_rows": 1520,
+      "families": {
+        "burrowmaze": 160,
+        "caravan": 24,
+        "ferrier": 417,
+        "foundry_ledger": 23,
+        "gatepost": 79,
+        "glyphgate": 201,
+        "kilnrite": 350,
+        "loomfix": 112,
+        "packhouse": 34,
+        "patchwheel": 50,
+        "runeward": 15,
+        "stallwright": 55
+      },
+      "kinds": {
+        "atom": 78,
+        "atom_fc": 129,
+        "episode": 1048,
+        "oracle_trace": 265
+      },
+      "max_sequence_tokens": 3172,
+      "min_sequence_tokens": 299,
+      "path": "data/replay_interleaved2.jsonl",
+      "rows": 1520,
+      "sha256": "0918144f9eb5c22269e4c7b485b746b5878405e642784fac92a8ca1ec93f8d75",
+      "skipped": [],
+      "skipped_rows": 0,
+      "spans_per_epoch": {
+        "absolute_loss_mass_x5": 633716,
+        "answer_target": 13523,
+        "close_target": 3040,
+        "forward": 1373106,
+        "masked_context": 553076,
+        "nonzero_target": 579624,
+        "parent_prefix": 0,
+        "prompt": 553076,
+        "target_span": 820030,
+        "think_target": 803467
+      }
+    }
+  },
+  "forward_tokens_per_arm": 1373106,
+  "match_axes": [
+    "forward",
+    "nonzero_target",
+    "absolute_loss_mass_x5"
+  ],
+  "max_length": 4096,
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "nonzero_target_tokens_per_arm": 579624,
+  "rows_duplicated_for_matching": false,
+  "rows_per_arm": 1520,
+  "rows_truncated_for_matching": false,
+  "schema_version": 1,
+  "shared_position_aligned_rows": 1280,
+  "skipped_rows": 0,
+  "stage": "independent_exact_exposure_validation",
+  "stream_manifest": "data/stream_manifest.json",
+  "stream_manifest_sha256": "cb61749016464040abc981934cbf0a1a9dc5dbcdc7f2810520e1ed5e66790138",
+  "targets_modified_for_matching": false,
+  "tokenizer": {
+    "class": "Qwen2Tokenizer",
+    "eos_token_id": 248046,
+    "think_close_token_id": 248069,
+    "vocab_size": 248077
+  },
+  "training_authorized": false
+}

@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 238
-- Manifest files: 568
+- Experiments with manifests: 239
+- Manifest files: 571
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 91 |
+| `other` | 93 |
 | `run-data` | 101 |
-| `standard-artifact` | 111 |
+| `standard-artifact` | 112 |
 
 ## Manifests
 
@@ -143,6 +143,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_independent_retrieval_consensus` | `run-data` | [manifest](../experiments/qwen35_4b_independent_retrieval_consensus/data/retrieval_adapt_same_neighborhood_top6_records.manifest.json) |
 | `qwen35_4b_independent_retrieval_consensus` | `large-artifact` | [manifest](../experiments/qwen35_4b_independent_retrieval_consensus/large_artifacts_manifest.md) |
 | `qwen35_4b_interactive_policy_curriculum` | `standard-artifact` | [manifest](../experiments/qwen35_4b_interactive_policy_curriculum/reports/artifact_manifest.yaml) |
+| `qwen35_4b_interleaved_replay_dose_medium` | `other` | [manifest](../experiments/qwen35_4b_interleaved_replay_dose_medium/data/corpus_manifest.json) |
+| `qwen35_4b_interleaved_replay_dose_medium` | `other` | [manifest](../experiments/qwen35_4b_interleaved_replay_dose_medium/data/stream_manifest.json) |
+| `qwen35_4b_interleaved_replay_dose_medium` | `standard-artifact` | [manifest](../experiments/qwen35_4b_interleaved_replay_dose_medium/reports/artifact_manifest.yaml) |
 | `qwen35_4b_inventory_shortlister_training` | `dataset` | [manifest](../experiments/qwen35_4b_inventory_shortlister_training/data/dataset_manifest.json) |
 | `qwen35_4b_inventory_shortlister_training` | `large-artifact` | [manifest](../experiments/qwen35_4b_inventory_shortlister_training/large_artifacts_manifest.md) |
 | `qwen35_4b_jacobian_counterfactual_branching` | `standard-artifact` | [manifest](../experiments/qwen35_4b_jacobian_counterfactual_branching/reports/artifact_manifest.yaml) |
