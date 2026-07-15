@@ -97,10 +97,16 @@ mapping set. The 92-test/23-subtest model-free suite and a real 4,915-lease plus
 34-read-only-mount guard audit pass. This remains non-authorizing implementation
 evidence pending exact-SHA review and detached launcher/bootstrap seals.
 
+The exact-SHA detached seals subsequently passed at
+`da80b2b314b44140f305e3b84bf727583486e882`: training protected 33,178 leased files
+and vLLM protected 73,330; each admitted only the 34 exact read-only NVIDIA mounts and
+authenticated 17 loaded mappings. vLLM also proved CUTLASS discovery without model
+import. Both exact-SHA CI workflows passed, and the clean detached worktree was
+removed. Review 12 remains the independent gate.
+
 ## Next Experiments
 
-Publish the Review-11 remediation, run both real detached static-launcher/bootstrap
-seals at that exact SHA, and obtain a fresh independent Review 12 verdict before
+Obtain a fresh independent Review 12 verdict on the exact published remediation before
 changing authorization. Nothing beyond tokenizer-only work is authorized yet.
 
 ## Artifact Manifest

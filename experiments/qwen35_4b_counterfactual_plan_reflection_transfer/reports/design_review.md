@@ -736,3 +736,12 @@ rebuild byte-identically as stripped static x86-64 ELF files without an interpre
 No tokenizer/model/GPU/training/evaluation/Jacobian/benchmark event occurred.
 Authorization remains unchanged. Exact-SHA detached launcher/bootstrap seals and a
 fresh Review 12 are required before any execution flag can change.
+
+The required detached audits passed at exact pushed commit
+`da80b2b314b44140f305e3b84bf727583486e882`. The training launcher sealed a guard with
+33,178 leased files, 34 exact read-only file mounts, and 17 loaded native mappings. The
+vLLM launcher sealed 73,330 leased files, the same 34 mounts and 17 mappings, and made
+the authenticated CUTLASS path discoverable without model import. Validate Repository
+run `29380316080` and Publish Research Site run `29380316110` both succeeded. The
+detached worktree remained clean and was removed. Zero tokenizer/model/GPU/training/
+evaluation/Jacobian/benchmark events occurred. Review 12 remains required.

@@ -322,6 +322,15 @@ and loaded-native replay must contain every pinned initial mapping. The model-fr
 suite passes 92 tests and 23 subtests. Authorization remains unchanged pending a fresh
 exact-SHA Review 12.
 
+Both fixed audit stages then passed from a clean detached worktree at exact pushed
+commit `da80b2b314b44140f305e3b84bf727583486e882`. Training sealed 33,178 leased files,
+34 exact read-only mounts, and 17 loaded native mappings. vLLM sealed 73,330 leased
+files, the same 34 mounts and 17 mappings, and discovered the authenticated CUTLASS
+path without importing a model. Validate Repository run `29380316080` and Publish
+Research Site run `29380316110` both passed. The detached worktree stayed clean and was
+removed. These remain model-free implementation facts; Review 12 and all execution
+authorization are still pending.
+
 ## Interpretation
 
 The paper unlocks a training hypothesis, not an already-demonstrated Qwen capability.

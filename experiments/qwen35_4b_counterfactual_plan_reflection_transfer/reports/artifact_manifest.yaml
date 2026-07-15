@@ -28,6 +28,8 @@ notes: >-
   Full CPU construction and a fresh tokenizer-only receipt are authorized, but all model,
   GPU, training, evaluation, J-space, and benchmark work remains on adversarial HOLD
   while the model-free Review-11 remediation awaits exact-SHA Review 12.
+  Both static-launcher runtime audits passed at da80b2b3 with no external output
+  artifact; their terminal summaries are recorded in the design review and log.
   Qwen/Qwen3.5-4B revision 851bf6e8...d0a is the sole permitted future
   model. Reserved construction/shuffle/schedule/retention/training/evaluation seeds
   are committed in configs/default.yaml. The historical tokenizer receipt records

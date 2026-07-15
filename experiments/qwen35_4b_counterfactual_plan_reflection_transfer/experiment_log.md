@@ -308,3 +308,10 @@
   the real guard protects 4,915 leased files plus exactly 34 read-only NVIDIA mounts.
   Zero tokenizer/model/GPU/training/evaluation/Jacobian/benchmark events occurred.
   Authorization remains unchanged pending exact-SHA detached seals and Review 12.
+- Published the fixed model-free boundary audit at exact commit
+  `da80b2b314b44140f305e3b84bf727583486e882`. Training sealed 33,178 leased files,
+  34 exact read-only NVIDIA mounts, and 17 loaded native mappings; vLLM sealed 73,330
+  leased files, the same mount/mapping closures, and discovered authenticated CUTLASS.
+  Exact-SHA Validate Repository `29380316080` and Publish Research Site `29380316110`
+  passed. The detached worktree stayed clean and was removed. No tokenizer/model/GPU/
+  training/evaluation/Jacobian/benchmark event occurred; Review 12 remains required.
