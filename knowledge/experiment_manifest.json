@@ -801,6 +801,40 @@
   },
   {
     "file_counts": {
+      ".json": 7,
+      ".jsonl": 6,
+      ".log": 1,
+      ".md": 9,
+      ".py": 20,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_axis_replay_stack_medium_target_match",
+    "path": "experiments/qwen35_4b_axis_replay_stack_medium_target_match",
+    "primary_readme": "experiments/qwen35_4b_axis_replay_stack_medium_target_match/README.md",
+    "primary_report": "experiments/qwen35_4b_axis_replay_stack_medium_target_match/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation"
+    ],
+    "source_track": "new",
+    "summary": "Stack the proven axis-atom install on the strongest replay-compounded parent (the 0.5081 composite), against a replay-squared control that simultaneously measures whether replay compounding continues at round two \u2014 with the conditional pilot at the MEDIUM tier, where the all-families goal is empirically reachable.",
+    "tags": [
+      "small-model"
+    ],
+    "title": "Axis-on-Replay Stack with Medium Pilot",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 46,
+    "total_size_bytes": 18276306
+  },
+  {
+    "file_counts": {
       ".json": 14,
       ".jsonl": 7,
       ".md": 7,

@@ -12,3 +12,11 @@
   `55119/53/88015/78145`; pilot preregistered at the MEDIUM tier, where the
   all-families goal has passed 8 of 92 historical events.
 - No model, GPU, training, local, or benchmark event has run.
+
+## 2026-07-14 — Authenticated control training
+
+- `train-control` ran only after freeze commit `bcce7472` matched `origin/main`
+  with both workflows green and a clean worktree.
+- `replay_squared` trained 1,520/1,520 rows with 0 skipped over 190 updates;
+  receipt/log published and pinned fail-closed. The candidate arm remains
+  untrained until this checkpoint publishes green.
