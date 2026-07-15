@@ -1,0 +1,38 @@
+[merge] loading composite Qwen/Qwen3.5-4B bf16 ...
+
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]
+Loading weights:   4%|▍         | 31/723 [00:00<00:02, 287.24it/s]
+Loading weights:   8%|▊         | 60/723 [00:00<00:02, 282.73it/s]
+Loading weights:  12%|█▏        | 89/723 [00:00<00:02, 254.74it/s]
+Loading weights:  19%|█▉        | 136/723 [00:00<00:01, 324.99it/s]
+Loading weights:  24%|██▎       | 170/723 [00:00<00:02, 265.65it/s]
+Loading weights:  28%|██▊       | 199/723 [00:00<00:02, 219.35it/s]
+Loading weights:  31%|███       | 223/723 [00:00<00:02, 220.02it/s]
+Loading weights:  34%|███▍      | 247/723 [00:01<00:02, 195.51it/s]
+Loading weights:  37%|███▋      | 268/723 [00:01<00:02, 197.51it/s]
+Loading weights:  40%|███▉      | 289/723 [00:01<00:02, 173.17it/s]
+Loading weights:  43%|████▎     | 308/723 [00:01<00:02, 164.42it/s]
+Loading weights:  47%|████▋     | 340/723 [00:01<00:01, 195.50it/s]
+Loading weights:  52%|█████▏    | 377/723 [00:01<00:01, 236.15it/s]
+Loading weights:  60%|█████▉    | 432/723 [00:01<00:00, 313.30it/s]
+Loading weights:  64%|██████▍   | 466/723 [00:01<00:00, 299.93it/s]
+Loading weights:  71%|███████   | 512/723 [00:02<00:00, 337.90it/s]
+Loading weights:  77%|███████▋  | 560/723 [00:02<00:00, 374.60it/s]
+Loading weights:  83%|████████▎ | 603/723 [00:02<00:00, 386.34it/s]
+Loading weights:  91%|█████████ | 655/723 [00:02<00:00, 421.62it/s]
+Loading weights: 100%|██████████| 723/723 [00:02<00:00, 298.27it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[merge] LoRA products use cuda with FP32 matmul
+[merge] example composite tail: '0.linear_attn.conv1d' -> ['model.language_model.layers.0.linear_attn.conv1d']
+[merge] applied 128 LoRA deltas (expected 7 modules x layers)
+[merge] saving composite merged model to /home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_goal_gap_axis_curriculum_target_match/merged/axis_curriculum ...
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:05<00:00,  5.89s/it]
+Writing model shards: 100%|██████████| 1/1 [00:05<00:00,  5.89s/it]
+[merge] processor save skipped:
+Qwen3VLVideoProcessor requires the Torchvision library but it was not found in your environment. Check out the instructions on the
+installation page: https://pytorch.org/get-started/locally/ and follow the ones that match your environment.
+Please note that you may need to restart your runtime after installation.
+
+[merge] done

@@ -40,3 +40,13 @@
 - `axis_curriculum` trained 1,520/1,520 rows with 0 skipped over 190 updates
   (train loss 0.4884, 1,366 wrapper seconds); receipt/log published and pinned
   fail-closed. Merges are the only next stage.
+
+## 2026-07-14 — Authenticated explicit composites
+
+- `merge-arms` ran only after the candidate checkpoint `aedc1770` matched
+  `origin/main` with both workflows green; PASS_CONTROL_MERGE and the merge
+  self-pin were required and verified.
+- Both arms merged through the pinned external merger (scale 2.0, 128/128
+  nonzero modules, fingerprint-verified); receipts and logs under
+  `runs/merges/`; both merged-tree pins now filled fail-closed in the local
+  evaluator. The one frozen 144-task gate event is the only next stage.

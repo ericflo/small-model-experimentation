@@ -1,0 +1,81 @@
+{
+  "adapter": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_goal_gap_axis_curriculum_target_match/adapters/replay_repeat",
+  "adapter_config_sha256": "bf5ade0b3328489d5ba676aa497e311d9883f70908cf56bda69f73882e232bac",
+  "adapter_weights_sha256": "20be87b5c7a7969d006b2825d3937b10fd0627ea2358af02879451039a07cd36",
+  "aggregate_seed_open": false,
+  "applied_lora_modules": 128,
+  "benchmark_data_read": false,
+  "command": [
+    "/home/ericflo/Development/small-model-experimentation/.venv/bin/python",
+    "-B",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/scripts/merge_adapter.py",
+    "--adapter",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_goal_gap_axis_curriculum_target_match/adapters/replay_repeat",
+    "--out",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_goal_gap_axis_curriculum_target_match/merged/replay_repeat"
+  ],
+  "experiment_id": "qwen35_4b_goal_gap_axis_curriculum_target_match",
+  "local_design_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/local_design_receipt.json",
+  "local_design_receipt_sha256": "0c4d18bfdfc4a4b2b0ba3f15ebffe8108fb31522b6e8e85053a371ecfe30161f",
+  "log": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/runs/merges/replay_repeat.log",
+  "log_sha256": "c9b8b89c88720ed172a7fe65f558c37d8373962f2d1d266390b90067f119af2d",
+  "merge_receipt_sha256": "d3b184010f0470078e77e25796c572f41c177451f0157ced35d4e4d818a11b5b",
+  "merged": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_goal_gap_axis_curriculum_target_match/merged/replay_repeat",
+  "merger": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/scripts/merge_adapter.py",
+  "merger_sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "name": "replay_repeat",
+  "nonzero_lora_modules": 128,
+  "output_files": [
+    {
+      "name": "chat_template.jinja",
+      "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+      "size": 7756
+    },
+    {
+      "name": "config.json",
+      "sha256": "a1c80f0efa6f83f631eaa9c25ffa166e3b1f9db395cc3b14374dfc0962261f60",
+      "size": 2829
+    },
+    {
+      "name": "generation_config.json",
+      "sha256": "0c46d8aa4f0ae5e611c961f70b87c83fb696043c1e319337708e96f882180de1",
+      "size": 116
+    },
+    {
+      "name": "merge_receipt.json",
+      "sha256": "d3b184010f0470078e77e25796c572f41c177451f0157ced35d4e4d818a11b5b",
+      "size": 883
+    },
+    {
+      "name": "model.safetensors",
+      "sha256": "3df45004fcf42519ce28cdcfedcbb39b0907662f8ecfb8a87b13b416087d0072",
+      "size": 9078620536
+    },
+    {
+      "name": "tokenizer.json",
+      "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+      "size": 19989325
+    },
+    {
+      "name": "tokenizer_config.json",
+      "sha256": "9cf04fffe3d8c3b85e439fb35c7acad0761ab51c422a8c4256d9f887c3a0be7d",
+      "size": 1125
+    }
+  ],
+  "output_tree_sha256": "4c4f3561efbcafe1b9f777f4bd21bf4949ff89177f77946d0fa0f88cafafacd7",
+  "preflight_git_branch": "main",
+  "preflight_git_head": "aedc17702538665de481a3964463a38233daaeab",
+  "preflight_git_status": "",
+  "preflight_origin_main": "aedc17702538665de481a3964463a38233daaeab",
+  "schema_version": 2,
+  "training_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/runs/training/replay_repeat.json",
+  "training_receipt_sha256": "1dc23ad9a2845958c36b5351bafbb6f9b4d125d46ef0d51690c524f02032311f",
+  "weight_files": [
+    {
+      "name": "model.safetensors",
+      "sha256": "3df45004fcf42519ce28cdcfedcbb39b0907662f8ecfb8a87b13b416087d0072"
+    }
+  ]
+}
