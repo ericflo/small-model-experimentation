@@ -14227,6 +14227,44 @@
      "chart_takeaway": "The known forgetting case failed to reproduce, so no capacity conclusion was drawn — the measuring stick gets calibrated next, at zero training cost."
     }
    ]
+  },
+  "qwen35_4b_retention_screen_calibration": {
+   "verdict_tag": "Design under construction; nothing trains",
+   "concept_primer": "The guard on the last trial caught the measuring stick wobbling: the same model's forgetting score moved four points between two fresh screens, as much as the pass/fail rule itself. Before any more training conclusions, this study re-measures five already-built models on four brand-new screens to size the wobble directly.",
+   "plain_question": "How much does a model's forgetting gap versus its parent wobble between fresh screens, what pass/fail margin does that imply, and which past readings survive?",
+   "plain_answer": "Nothing trains here. Twenty measurement runs — five built models by four fresh screens — size the wobble of the gap-to-parent (the number every pass/fail rule actually judges; the review caught and fixed a draft that measured raw-score wobble instead), yielding a margin, a rule for how many screens future trials must average, and a verdict on which historical readings were real.",
+   "why_it_matters": "Every forgetting conclusion this program makes — including the priced tax law and the paused capacity question — inherits its trustworthiness from this calibration.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Training runs",
+     "value": "0",
+     "sub": "pure measurement — five built models"
+    },
+    {
+     "label": "Fresh screens",
+     "value": "4",
+     "sub": "104 tasks each, seeds 88,022-88,025"
+    },
+    {
+     "label": "Measurement runs",
+     "value": "20",
+     "sub": "every model on every screen"
+    },
+    {
+     "label": "Known wobble hint",
+     "value": "±3-4",
+     "sub": "same model across recent screens"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Where the experiment stands",
+     "chart_read": "Each bar is a preregistered stage; one means complete.",
+     "chart_takeaway": "The four screens and the contract are frozen; the twenty measurement runs remain."
+    }
+   ]
   }
  }
 }

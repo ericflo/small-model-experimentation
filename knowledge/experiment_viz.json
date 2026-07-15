@@ -49015,6 +49015,37 @@
      "source": "experiments/qwen35_4b_rank_capacity_vehicle_cell/reports/report.md"
     }
    ]
+  },
+  "qwen35_4b_retention_screen_calibration": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered stage completion",
+     "categories": [
+      "intake",
+      "four screens frozen",
+      "design review",
+      "20-run calibration event"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "Eval-only instrument calibration: five published composites across four fresh retention screens; outputs are the measured screen-to-screen SD of the delta versus parent (the governing estimand, corrected from level SD by adversarial review), a derived band, the adjudication protocol, and historical stability flags. Nothing trains.",
+     "source": "experiments/qwen35_4b_retention_screen_calibration/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

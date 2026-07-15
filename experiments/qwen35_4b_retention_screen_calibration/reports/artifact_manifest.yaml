@@ -1,0 +1,39 @@
+schema_version: 1
+experiment_id: "qwen35_4b_retention_screen_calibration"
+external_artifacts:
+  - name: clean_parent composite (designed_fresh)
+    storage: large_artifacts/qwen35_4b_universal_fresh_surface_budget_commit_target_match/merged/designed_fresh
+    required_for: calibration arm
+    checksum: 93433aa2d5f3f0d6d4540126579c09feee1d8502df702c1563bae28eb7f60255
+    regenerate: experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/runs/merges/designed_fresh.json (output_tree_sha256)
+  - name: replay_clean composite
+    storage: large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/replay_clean
+    required_for: calibration arm
+    checksum: 19759e12b1301a15a2f9b2db311ffff7c08e3d8b0d3237c9e7cd718fa8dc7f67
+    regenerate: experiments/qwen35_4b_hygiene_explore_destack_medium/runs/merges/replay_clean.json (output_tree_sha256)
+  - name: hygiene_explore_direct composite
+    storage: large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore
+    required_for: calibration arm
+    checksum: 9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971
+    regenerate: experiments/qwen35_4b_hygiene_explore_destack_medium/runs/merges/hygiene_explore.json (output_tree_sha256)
+  - name: axis160_direct composite
+    storage: large_artifacts/qwen35_4b_dose_diversity_mechanism_cell/merged/axis160_direct
+    required_for: calibration arm
+    checksum: b773fd439eca753e70d3b16862497ee0ba9783cdb024ddff84b4595d10b7da61
+    regenerate: experiments/qwen35_4b_dose_diversity_mechanism_cell/runs/merges/axis160_direct.json (output_tree_sha256)
+  - name: axis160_r64 composite
+    storage: large_artifacts/qwen35_4b_rank_capacity_vehicle_cell/merged/axis160_r64
+    required_for: calibration arm
+    checksum: ebfa63d9a9fcd93149e81c0d443dcfc80ed67690eb8a9593de5f62131a7a3074
+    regenerate: experiments/qwen35_4b_rank_capacity_vehicle_cell/runs/merges/axis160_r64.json (output_tree_sha256)
+omitted_artifacts: []
+reproducibility:
+  smoke_command: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_retention_screen_calibration/scripts/run.py --smoke
+  full_command: checkpointed scripts/run.py --stage local only
+  required_external_artifacts:
+    - clean_parent composite (designed_fresh)
+    - replay_clean composite
+    - hygiene_explore_direct composite
+    - axis160_direct composite
+    - axis160_r64 composite
+notes: Eval-only calibration; the four frozen screens and all receipts are tracked in-repo; nothing trains; no benchmark stage exists; every checksum is the composite's output_tree_sha256, recomputed and required to match at event time.

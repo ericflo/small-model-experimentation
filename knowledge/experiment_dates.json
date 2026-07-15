@@ -213,6 +213,30 @@
     "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
+  "qwen35_4b_axis_corpus_v2_staged_repair": {
+   "start": "2026-07-15",
+   "end": "2026-07-15",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
+  "qwen35_4b_axis_replay_stack_medium_target_match": {
+   "start": "2026-07-14",
+   "end": "2026-07-15",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
+  "qwen35_4b_axis_stack_readjudication_medium_pilot": {
+   "start": "2026-07-15",
+   "end": "2026-07-15",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_balanced_core_answer_potential_sft": {
    "start": "2026-07-12",
    "end": "2026-07-12",
@@ -374,6 +398,14 @@
    ],
    "caveat": "Qualification was still sealed at this design-boundary date."
   },
+  "qwen35_4b_counterfactual_plan_reflection_transfer": {
+   "start": "2026-07-14",
+   "end": "2026-07-15",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_coverage_banking": {
    "start": "2026-07-03",
    "end": "2026-07-03",
@@ -465,6 +497,14 @@
     "logs/experiment_log.md:3: 'Date: 2026-06-25'",
     "configs/experiment.json:3: \"date\": \"2026-06-25\"",
     "reports/qwen35_4b_diversity_keyed_coverage_gate_report.md:3: 'Date: 2026-06-25' (also hardcoded in scripts/make_report.py:275)"
+   ]
+  },
+  "qwen35_4b_dose_diversity_mechanism_cell": {
+   "start": "2026-07-15",
+   "end": "2026-07-15",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
   "qwen35_4b_early_text_hypothesis_forking": {
@@ -614,6 +654,14 @@
     "git commit cd7093e 2026-06-30 21:34:47 -0700 'Add generator-verifier gap' (upper bound; dir first appears post-import)"
    ]
   },
+  "qwen35_4b_goal_gap_axis_curriculum_target_match": {
+   "start": "2026-07-14",
+   "end": "2026-07-15",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_graphir_self_repair": {
    "start": "",
    "end": "",
@@ -688,6 +736,14 @@
   "qwen35_4b_interactive_policy_curriculum": {
    "start": "2026-07-11",
    "end": "2026-07-11",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
+  "qwen35_4b_interleaved_replay_dose_medium": {
+   "start": "2026-07-15",
+   "end": "2026-07-15",
    "confidence": "high",
    "sources": [
     "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
@@ -1004,6 +1060,14 @@
     "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
+  "qwen35_4b_rank_capacity_vehicle_cell": {
+   "start": "2026-07-15",
+   "end": "2026-07-15",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_real_sample_verify_commit": {
    "start": "2026-06-25",
    "end": "2026-06-25",
@@ -1053,6 +1117,14 @@
    "confidence": "high",
    "sources": [
     "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
+  "qwen35_4b_retention_screen_calibration": {
+   "start": "2026-07-15",
+   "end": "2026-07-15",
+   "confidence": "high",
+   "sources": [
+    "dated experiment_log.md headings (2026-07-15 design freeze and review entries)"
    ]
   },
   "qwen35_4b_retrieval_adapt_verify_scale": {
@@ -1366,6 +1438,22 @@
     "git commit history for the completed run evidence (post-import, trustworthy)"
    ]
   },
+  "qwen35_4b_universal_failure_selected_restart_target_match": {
+   "start": "2026-07-14",
+   "end": "2026-07-14",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
+  "qwen35_4b_universal_fresh_surface_budget_commit_target_match": {
+   "start": "2026-07-14",
+   "end": "2026-07-15",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_universal_low_density_token_match": {
    "start": "2026-07-13",
    "end": "2026-07-13",
@@ -1385,9 +1473,25 @@
    ],
    "caveat": "Training and result-bearing evaluation had not started at this design boundary."
   },
+  "qwen35_4b_universal_on_policy_prefix_repair_token_match": {
+   "start": "2026-07-14",
+   "end": "2026-07-14",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_universal_replay_anchor": {
    "start": "2026-07-13",
    "end": "2026-07-13",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
+  "qwen35_4b_universal_residual_successful_sibling_target_match": {
+   "start": "2026-07-14",
+   "end": "2026-07-14",
    "confidence": "high",
    "sources": [
     "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
@@ -1401,6 +1505,22 @@
     "experiments/qwen35_4b_universal_search_scaffold_token_match/experiment_log.md: dated intake heading"
    ],
    "caveat": "Only intake and CPU design smoke exist at this boundary; no scientific model run has started."
+  },
+  "qwen35_4b_universal_state_table_compiler_token_match": {
+   "start": "2026-07-14",
+   "end": "2026-07-14",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
+  "qwen35_4b_universal_successful_sibling_target_match": {
+   "start": "2026-07-14",
+   "end": "2026-07-14",
+   "confidence": "high",
+   "sources": [
+    "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
   },
   "qwen35_4b_unsaturated_frontier_active_bridge": {
    "start": "2026-06-22",

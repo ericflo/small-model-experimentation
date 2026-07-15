@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 241
-- Manifest files: 577
+- Experiments with manifests: 242
+- Manifest files: 578
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 97 |
 | `run-data` | 101 |
-| `standard-artifact` | 114 |
+| `standard-artifact` | 115 |
 
 ## Manifests
 
@@ -216,6 +216,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_reliability_exec_opsd_audit` | `run-data` | [manifest](../experiments/qwen35_4b_reliability_exec_opsd_audit/data/retrieval_adapt_semantic_t0p1_top3_records.manifest.json) |
 | `qwen35_4b_reliability_exec_opsd_audit` | `large-artifact` | [manifest](../experiments/qwen35_4b_reliability_exec_opsd_audit/large_artifacts_manifest.md) |
 | `qwen35_4b_repo_search_compress_bank` | `standard-artifact` | [manifest](../experiments/qwen35_4b_repo_search_compress_bank/reports/artifact_manifest.yaml) |
+| `qwen35_4b_retention_screen_calibration` | `standard-artifact` | [manifest](../experiments/qwen35_4b_retention_screen_calibration/reports/artifact_manifest.yaml) |
 | `qwen35_4b_retrieval_adapt_verify_scale` | `run-data` | [manifest](../experiments/qwen35_4b_retrieval_adapt_verify_scale/data/base_direct_k4_records.manifest.json) |
 | `qwen35_4b_retrieval_adapt_verify_scale` | `run-data` | [manifest](../experiments/qwen35_4b_retrieval_adapt_verify_scale/data/qwen_rerank_copy_semantic_records.manifest.json) |
 | `qwen35_4b_retrieval_adapt_verify_scale` | `run-data` | [manifest](../experiments/qwen35_4b_retrieval_adapt_verify_scale/data/retrieval_adapt_random_top3_records.manifest.json) |

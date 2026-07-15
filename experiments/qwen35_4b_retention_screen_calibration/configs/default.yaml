@@ -1,0 +1,11 @@
+experiment_id: qwen35_4b_retention_screen_calibration
+status: model_free_construction
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+arms: [clean_parent, replay_clean, hygiene_explore_direct, axis160_direct, axis160_r64]
+screens: [88022, 88023, 88024, 88025]
+outputs: [delta_sd_pooled, screen_sd_pooled, recommended_band, adjudication_protocol, historical_stability_flags]
+band_and_protocol_basis: delta_sd_pooled
+training: none
+benchmark_stage: none

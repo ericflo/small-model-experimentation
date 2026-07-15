@@ -4849,6 +4849,40 @@
   },
   {
     "file_counts": {
+      ".json": 1,
+      ".jsonl": 8,
+      ".md": 8,
+      ".py": 10,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_retention_screen_calibration",
+    "path": "experiments/qwen35_4b_retention_screen_calibration",
+    "primary_readme": "experiments/qwen35_4b_retention_screen_calibration/README.md",
+    "primary_report": "experiments/qwen35_4b_retention_screen_calibration/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety"
+    ],
+    "source_track": "new",
+    "summary": "Measure the measuring stick: five published composites re-run across four fresh 104-task retention screens (20 authenticated eval events, zero training) to size the screen's seed-to-seed variance directly, derive the band that separates real retention effects from draws, and freeze the adjudication protocol every future dose and vehicle cell will use.",
+    "tags": [
+      "small-model"
+    ],
+    "title": "Retention-Screen Calibration Study",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 30,
+    "total_size_bytes": 1141484
+  },
+  {
+    "file_counts": {
       ".json": 19,
       ".jsonl": 12,
       ".log": 11,

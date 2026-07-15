@@ -699,6 +699,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_recovery_verifier_branch_tournament` (new): [README](../experiments/qwen35_4b_recovery_verifier_branch_tournament/README.md)
 - `qwen35_4b_reliability_exec_opsd_audit` (track-z): [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md)
 - `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
+- `qwen35_4b_retention_screen_calibration` (new): [README](../experiments/qwen35_4b_retention_screen_calibration/README.md)
 - `qwen35_4b_retrieval_adapt_verify_scale` (track-z): [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)
 - `qwen35_4b_same_prefix_advantage_routing` (new): [README](../experiments/qwen35_4b_same_prefix_advantage_routing/README.md)
 - `qwen35_4b_sampler_portfolio_scheduler` (track-z): [README](../experiments/qwen35_4b_sampler_portfolio_scheduler/README.md)
