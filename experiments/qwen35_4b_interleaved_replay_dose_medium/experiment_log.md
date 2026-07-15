@@ -74,3 +74,10 @@
   `origin/main` with both workflows green and a clean worktree.
 - `dose_after_replay` trained 1,520/1,520 rows with 0 skipped over 190
   updates; receipt/log published and pinned fail-closed. Merges are next.
+
+## 2026-07-15 — Authenticated explicit composites
+
+- `merge-arms` ran only after candidate checkpoint `b5b9b39b` matched
+  `origin/main` with both workflows green; both arms merged (128/128 modules,
+  fingerprint-verified); tree pins filled fail-closed. The one frozen 124-task
+  gate event at seed 88,019 is the only next stage.

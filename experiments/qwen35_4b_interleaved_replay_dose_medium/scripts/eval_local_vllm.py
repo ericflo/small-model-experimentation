@@ -99,8 +99,8 @@ MERGED = {
 # publishes the corresponding merged composite; the eval refuses to run while
 # any pin is still None.
 EXPECTED_TREE_SHA256: dict[str, str | None] = {
-    "replay_interleaved2": None,
-    "dose_after_replay": None,
+    "replay_interleaved2": "6d5cc80a701a0daf5580c8711444f08c9b37f0a9f1af6ded8c79a407693ec582",
+    "dose_after_replay": "0a6a22825c7d2628b58425e8816f70912ae3d061b72bb94cab525030557f9714",
 }
 ANSWER_RE = re.compile(r"(?:^|\n)ANSWER:\s*(.*?)(?=\n|<\||</|$)", re.DOTALL)
 

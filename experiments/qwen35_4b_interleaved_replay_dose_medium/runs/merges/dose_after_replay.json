@@ -1,0 +1,81 @@
+{
+  "adapter": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_interleaved_replay_dose_medium/adapters/dose_after_replay",
+  "adapter_config_sha256": "aef0b4c8698c4164c3ecc2045aa42ec7ae4724c8d69d9c2548f2a57474582cf5",
+  "adapter_weights_sha256": "642ce7aa3d2caaf0cd85dda9be1d8b7491d26f8f7a51422baf72fe9968f83f65",
+  "aggregate_seed_open": false,
+  "applied_lora_modules": 128,
+  "benchmark_data_read": false,
+  "command": [
+    "/home/ericflo/Development/small-model-experimentation/.venv/bin/python",
+    "-B",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/scripts/merge_adapter.py",
+    "--adapter",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_interleaved_replay_dose_medium/adapters/dose_after_replay",
+    "--out",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_interleaved_replay_dose_medium/merged/dose_after_replay"
+  ],
+  "experiment_id": "qwen35_4b_interleaved_replay_dose_medium",
+  "local_design_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_interleaved_replay_dose_medium/data/local_design_receipt.json",
+  "local_design_receipt_sha256": "d4aeb7fdb9bf054ebc4a32756cafd758163fdd789aa4f48ccab97978074a5624",
+  "log": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_interleaved_replay_dose_medium/runs/merges/dose_after_replay.log",
+  "log_sha256": "7a8245f7774dc4144b2812430585b6ce63067c8079224a206a32011344c30d14",
+  "merge_receipt_sha256": "86a0347ee679192232b31222f56f187ebccb837f4da73fc8287608c9e8b8eee4",
+  "merged": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_interleaved_replay_dose_medium/merged/dose_after_replay",
+  "merger": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/scripts/merge_adapter.py",
+  "merger_sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "name": "dose_after_replay",
+  "nonzero_lora_modules": 128,
+  "output_files": [
+    {
+      "name": "chat_template.jinja",
+      "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+      "size": 7756
+    },
+    {
+      "name": "config.json",
+      "sha256": "a1c80f0efa6f83f631eaa9c25ffa166e3b1f9db395cc3b14374dfc0962261f60",
+      "size": 2829
+    },
+    {
+      "name": "generation_config.json",
+      "sha256": "0c46d8aa4f0ae5e611c961f70b87c83fb696043c1e319337708e96f882180de1",
+      "size": 116
+    },
+    {
+      "name": "merge_receipt.json",
+      "sha256": "86a0347ee679192232b31222f56f187ebccb837f4da73fc8287608c9e8b8eee4",
+      "size": 879
+    },
+    {
+      "name": "model.safetensors",
+      "sha256": "f88a85b2dbfdb566a0f12328fbb47139068b0e48541628e46c95fb8c00aa2b9c",
+      "size": 9078620536
+    },
+    {
+      "name": "tokenizer.json",
+      "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+      "size": 19989325
+    },
+    {
+      "name": "tokenizer_config.json",
+      "sha256": "9cf04fffe3d8c3b85e439fb35c7acad0761ab51c422a8c4256d9f887c3a0be7d",
+      "size": 1125
+    }
+  ],
+  "output_tree_sha256": "0a6a22825c7d2628b58425e8816f70912ae3d061b72bb94cab525030557f9714",
+  "preflight_git_branch": "main",
+  "preflight_git_head": "b5b9b39b5e555778a945e75110b209018b0daf5b",
+  "preflight_git_status": "?? experiments/qwen35_4b_interleaved_replay_dose_medium/runs/merges/",
+  "preflight_origin_main": "b5b9b39b5e555778a945e75110b209018b0daf5b",
+  "schema_version": 2,
+  "training_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_interleaved_replay_dose_medium/runs/training/dose_after_replay.json",
+  "training_receipt_sha256": "7225f22f80c2dc03de85b0e194ba5b08914783207a828ce068d9ddcb93b9b4d3",
+  "weight_files": [
+    {
+      "name": "model.safetensors",
+      "sha256": "f88a85b2dbfdb566a0f12328fbb47139068b0e48541628e46c95fb8c00aa2b9c"
+    }
+  ]
+}
