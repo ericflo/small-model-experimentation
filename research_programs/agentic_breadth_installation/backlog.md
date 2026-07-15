@@ -207,13 +207,21 @@
   refused it; seed 78148 sealed. New law: replay interleaving between doses
   protects retention (the retention-safe dose-two precedent had a dedicated
   replay round at the dose boundary; this trial did not).
-- Queued NEXT (calibrated; the session's highest gate probability): the
-  interleaved-replay dose — hygiene+explore at the same proven dose,
-  warm-started from the de-stack experiment's published replay_clean adapter
-  (the interleaving round already exists with receipts), matched replay
-  control from the same parent, the same two-kind both-must-win gate plus
-  unchanged retention bands at fresh seeds, conditional MEDIUM pilot. This
-  exactly reproduces the retention-safe precedent with proven-install content.
+- Completed interleaved-dose direct test (interleaving REFUTED; escalation
+  fired): `qwen35_4b_interleaved_replay_dose_medium` — hygiene won its sixth
+  consecutive event (7/2/3) but explore lost (4/5/3) and retention broke
+  against both controls (59 vs 68/69) despite the interleaved parent,
+  reproducing the direct dose's cost. Seed 78149 sealed. The replay-
+  interleaving law is refuted by direct test; the dose-recipe search is CLOSED
+  by the frozen escalation rule. The retention-safe precedent's true cause is
+  unidentified (corpus composition 160/4-kinds vs 80/2, lineage depth, or
+  screen fortune).
+- Funded successor (mechanism study, own intake required): why does an 80-row
+  two-kind dose cost ~10 retention points where the 160-row four-kind dose
+  once cost zero? First variables: corpus size/diversity at matched per-kind
+  dose, adapter rank, loss weighting, dose row count. Design constraint: the
+  study must vary ONE candidate mechanism per arm against the same gate
+  design, and hygiene (six-for-six) rides along as the install probe.
 - Standing queued directions (unchanged): medium-native measurement intake for
   existing artifacts; mechanism-diverse attacks on menders/sirens (needs new
   mechanism evidence first).

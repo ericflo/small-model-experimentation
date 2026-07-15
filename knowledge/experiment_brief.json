@@ -14115,40 +14115,40 @@
    ]
   },
   "qwen35_4b_interleaved_replay_dose_medium": {
-   "verdict_tag": "Design under construction; nothing trained",
+   "verdict_tag": "Review-round theory refuted; search closed",
    "concept_primer": "The last trial proved the two reliable lessons come back on a fresh start but cost the model ten retained answers when taught directly. Cross-checking every receipt isolated the fix: the one dose that never caused forgetting had a review round between practice doses. That review-round model is already built — this trial teaches the same verified lessons starting from it.",
    "plain_question": "Does a review round at the dose boundary let the lessons land without forgetting — completing a deployable recipe — and does the bigger benchmark tier then credit it?",
-   "plain_answer": "Nothing is trained yet. The corpus is inherited unchanged (already independently verified), the review-round starting model exists with receipts, and the screen is identical to last time: both lessons must win AND nothing may be forgotten beyond the bands.",
-   "why_it_matters": "This is the session's highest-confidence trial: the lessons install (five straight category wins for hygiene), the forgetting mechanism is understood, and this recipe is its measured fix.",
-   "verdict_tone": "neutral",
+   "plain_answer": "The review round did not prevent forgetting: the dosed model lost nine to ten retained answers against both comparisons — almost exactly the cost of dosing directly — so the theory drawn from comparing old receipts is refuted by this direct test. The hygiene lesson won its category for the sixth straight measurement; the route-finding lesson lost this time. Per the preregistered escalation rule, the recipe search is closed: the next step is a mechanics study of WHY doses cost retention, not another schedule shuffle.",
+   "why_it_matters": "A theory built from comparing receipts across trials died the moment it met a controlled test — which is precisely what preregistered direct tests are for. The program keeps the refutation, the six-for-six hygiene result, and a sharply-posed mechanics question, instead of an endless recipe hunt.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Design changes",
-     "value": "1",
-     "sub": "the starting model — everything else identical"
+     "label": "Retention cost",
+     "value": "-9 / -10",
+     "sub": "same as dosing directly — theory refuted"
     },
     {
-     "label": "Corpus",
-     "value": "inherited",
-     "sub": "80 rows, 100/100 independently verified"
+     "label": "Hygiene lesson",
+     "value": "6 / 6",
+     "sub": "won its category in every measurement ever"
     },
     {
-     "label": "Recipe precedent",
-     "value": "retention-safe",
-     "sub": "the only dose that never forgot used it"
+     "label": "Escalation rule",
+     "value": "fired",
+     "sub": "recipe search closed; mechanics study next"
     },
     {
-     "label": "Benchmark seed",
-     "value": "78,149 sealed",
-     "sub": "medium tier, conditional"
+     "label": "Benchmark",
+     "value": "never opened",
+     "sub": "seed 78,149 sealed by the frozen rule"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Where the experiment stands",
-     "chart_read": "Each bar is a preregistered stage; one means complete.",
-     "chart_takeaway": "The contract and inherited corpus are frozen; training, the screen, and the medium benchmark remain."
+     "chart_plain_title": "The review round did not stop the forgetting",
+     "chart_read": "Bars per model: unseen skill-test total (of 20) and retained-skill total (of 104).",
+     "chart_takeaway": "The dosed model leads on new skills but pays the same retention cost as before — the schedule was not the cause, and the preregistered rule closes the recipe hunt."
     }
    ]
   }

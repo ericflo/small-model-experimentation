@@ -48907,35 +48907,35 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Preregistered stage completion",
+     "title": "Seed-88019 gate: axis holdout and retention by arm",
      "categories": [
-      "intake",
-      "inherited corpus",
-      "exposure match",
-      "design review",
-      "train 2 arms",
-      "gate event",
-      "medium pilot"
+      "interleaved_parent",
+      "replay_interleaved2",
+      "dose_after_replay"
      ],
      "series": [
       {
-       "label": "completed checkpoint",
+       "label": "axis holdout correct (of 20)",
        "values": [
-        1,
-        1,
-        1,
-        0,
-        0,
-        0,
-        0
+        7,
+        6,
+        11
+       ]
+      },
+      {
+       "label": "retention correct (of 104)",
+       "values": [
+        68,
+        69,
+        59
        ]
       }
      ],
-     "x_label": "preregistered experiment stage",
-     "y_label": "completion indicator",
+     "x_label": "explicit merged composite",
+     "y_label": "count",
      "y_format": "integer",
-     "note": "The retention-safe recipe reproduced exactly: the verified hygiene+explore corpus warm-started from the receipted interleaving replay round; both-must-win gate with unchanged retention bands; conditional medium pilot at sealed seed 78,149.",
-     "source": "experiments/qwen35_4b_interleaved_replay_dose_medium/reports/preregistration.md"
+     "note": "The direct test refutes the replay-interleaving retention law: the dosed candidate paid the same ~10-point retention cost despite the interleaved parent (hygiene won its sixth consecutive event; explore lost). The frozen escalation rule closes the dose-recipe search; seed 78,149 sealed.",
+     "source": "experiments/qwen35_4b_interleaved_replay_dose_medium/reports/report.md"
     }
    ]
   }

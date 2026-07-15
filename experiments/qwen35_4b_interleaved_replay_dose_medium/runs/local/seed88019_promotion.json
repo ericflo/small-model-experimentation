@@ -1,0 +1,128 @@
+{
+  "aggregate_seed": 78149,
+  "aggregate_seed_open": false,
+  "answer_normalization": {
+    "applied_to": "both the parsed and the expected answer, every arm, both instruments",
+    "definition": "re.sub(r'\\s+', ' ', s).strip(), then re.sub(r'\\s*>\\s*', '>', s), then re.sub(r'\\s*;\\s*', ';', s)",
+    "function": "check_local.normalize_answer",
+    "prospective": true,
+    "rationale": "21 correct-but-rejected whitespace rows across the three prior gate events (seeds 88014/88015/88016), recorded in experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/analysis/three_event_failure_forensics.md"
+  },
+  "axis_kind_wins": 1,
+  "axis_kind_wins_required": 2,
+  "axis_kinds": [
+    "u_explore",
+    "u_hygiene"
+  ],
+  "axis_rows": 20,
+  "backend": "vllm_merged_composite",
+  "benchmark_data_read": false,
+  "breadth_rule": "ceil(2/3 * detectable_kinds); ties never count as wins",
+  "candidates": [
+    "dose_after_replay"
+  ],
+  "checks": {
+    "at_least_one_axis_kind_detectable": true,
+    "axis_kind_wins_meet_required_breadth": false,
+    "axis_total_strictly_beats_parent": true,
+    "axis_total_strictly_beats_replay": true,
+    "retention_cap_contacts_within_3_of_parent": true,
+    "retention_cap_contacts_within_3_of_replay": true,
+    "retention_correct_within_5_of_parent": false,
+    "retention_correct_within_5_of_replay": false,
+    "retention_parsed_within_3_of_parent": true,
+    "retention_parsed_within_3_of_replay": true,
+    "route_abstentions_at_most_4_of_8": true
+  },
+  "controls": [
+    "replay_interleaved2",
+    "interleaved_parent"
+  ],
+  "design_receipt_sha256": "d4aeb7fdb9bf054ebc4a32756cafd758163fdd789aa4f48ccab97978074a5624",
+  "detectability_ceiling": 9,
+  "detectable_kinds": [
+    "u_explore",
+    "u_hygiene"
+  ],
+  "eligible": [],
+  "experiment_id": "qwen35_4b_interleaved_replay_dose_medium",
+  "kind_wins": {
+    "u_explore": false,
+    "u_hygiene": true
+  },
+  "local_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_interleaved_replay_dose_medium/runs/local/seed88019.json",
+  "local_receipt_sha256": "5c3181c3607ab6241086dc8d517390405a9deb8fb2e129a5f8dda1687ff556d6",
+  "no_absolute_per_kind_floors": true,
+  "not_detectable": [],
+  "outcome": "NOT_PROMOTED",
+  "promoted": null,
+  "recovery": {
+    "explore_win": false,
+    "hygiene_win": true
+  },
+  "retention_rows": 104,
+  "schema_version": 1,
+  "seed": 88019,
+  "summaries": {
+    "dose_after_replay": {
+      "adapter": "dose_after_replay",
+      "axis": {
+        "correct": 11,
+        "per_kind_correct": {
+          "u_explore": 4,
+          "u_hygiene": 7
+        },
+        "rows": 20
+      },
+      "cap_contacts": 11,
+      "retention": {
+        "cap_contacts": 8,
+        "correct": 59,
+        "parsed": 96,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "total_correct": 70
+    },
+    "interleaved_parent": {
+      "adapter": "interleaved_parent",
+      "axis": {
+        "correct": 7,
+        "per_kind_correct": {
+          "u_explore": 5,
+          "u_hygiene": 2
+        },
+        "rows": 20
+      },
+      "cap_contacts": 16,
+      "retention": {
+        "cap_contacts": 8,
+        "correct": 68,
+        "parsed": 96,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "total_correct": 75
+    },
+    "replay_interleaved2": {
+      "adapter": "replay_interleaved2",
+      "axis": {
+        "correct": 6,
+        "per_kind_correct": {
+          "u_explore": 3,
+          "u_hygiene": 3
+        },
+        "rows": 20
+      },
+      "cap_contacts": 13,
+      "retention": {
+        "cap_contacts": 6,
+        "correct": 69,
+        "parsed": 98,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "total_correct": 75
+    }
+  }
+}

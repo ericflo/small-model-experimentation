@@ -918,3 +918,31 @@ warm-started from this experiment's OWN replay_clean adapter (the replay round
 already exists with receipts), same gate design at fresh seeds. That recipe
 exactly reproduces the retention-safe precedent with the proven-install
 content; honest gate probability is the session's highest yet.
+
+## qwen35_4b_interleaved_replay_dose_medium (2026-07-15 — Interleaving refuted; escalation fired; dose-recipe search closed)
+
+The direct test of the replay-interleaving retention law trained the verified
+hygiene+explore corpus from the receipted interleaving replay round. At the
+frozen 124-task gate (seed 88,019): axis candidate 11/20 vs parent 7 and
+replay 6 — hygiene won its SIXTH consecutive event (7/2/3) — but explore lost
+(4/5/3) and retention broke against both controls (59 vs 68/69; −9/−10 against
+a −5 band), reproducing the direct dose's cost almost exactly DESPITE the
+interleaved parent. Not promoted; seed 78,149 sealed.
+
+Laws updated, one by refutation:
+
+1. REPLAY-INTERLEAVING LAW REFUTED. Replay at the dose boundary does not
+   protect retention. The single retention-safe dose event (axis_on_replay)
+   owes its safety to something else — corpus composition (160 rows/4 kinds),
+   lineage depth, or screen-seed fortune. Cross-receipt inference proposed the
+   law; the preregistered direct test killed it. Record both.
+2. HYGIENE IS UNCONDITIONAL. Six consecutive kind wins across every parent,
+   dose size, and recipe — the single most robust installed lesson the program
+   has produced.
+3. ESCALATION FIRED. Per the frozen rule, the dose-recipe search is closed:
+   the ~10-point retention cost of this two-lesson dose is not a scheduling
+   artifact. The only funded successor in this line is a dose-vehicle
+   mechanism study (adapter rank/capacity, loss weighting, dose size, or
+   optimizer dynamics), with its own intake. The 160-row/4-kind composition
+   difference from the retention-safe precedent is that study's first
+   variable.

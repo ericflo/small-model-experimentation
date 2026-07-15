@@ -81,3 +81,16 @@
   `origin/main` with both workflows green; both arms merged (128/128 modules,
   fingerprint-verified); tree pins filled fail-closed. The one frozen 124-task
   gate event at seed 88,019 is the only next stage.
+
+## 2026-07-15 — Gate event: interleaving refuted; escalation rule fired; closed
+
+- The gate ran from merge checkpoint `dd225d33`: three authenticated engine
+  runs over the 124-row input at seed 88,019.
+- Axis holdout of 20: candidate 11, parent 7, replay 6; hygiene 7/2/3 (sixth
+  consecutive win), explore 4/5/3 (loss). Retention 59/96/8 vs 68/96/8 and
+  69/98/6 — the correct band broke against both controls (−9/−10), matching
+  the direct dose's cost despite the interleaved parent.
+- The replay-interleaving retention law is REFUTED by this direct test; the
+  frozen escalation rule fires: the dose-recipe search closes and only a
+  dose-vehicle mechanism study may follow. No promotion; seed 78,149
+  permanently sealed.
