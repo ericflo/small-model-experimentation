@@ -13,3 +13,17 @@
   exists anywhere in the cell.
 
 **Verdict:** `PASS_CONTROL_MERGE`.
+
+## Local event authorization
+
+- Merge receipts published for both arms (replay_ctl tree 8de87333…,
+  feedloop_state tree 1dfa2ec1…) and self-pinned; the eval's trained-tree
+  pins are filled fail-closed and the boundary re-authenticates parent and
+  both merges before each engine run.
+- The event: three arms × four frozen oracle-free inputs (axis holdout
+  88,026; retention screens 88,027/88,028/88,030) in sequential
+  authenticated engine runs; promotion logic and pooled_k3 bands are the
+  frozen preregistration's, unit-pinned; no seed can be opened by this
+  event.
+
+**Verdict:** `PASS_LOCAL_EVENT`.

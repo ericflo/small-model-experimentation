@@ -1,0 +1,32 @@
+[merge] loading composite /home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore bf16 ...
+
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]
+Loading weights:   3%|▎         | 20/723 [00:00<00:03, 199.67it/s]
+Loading weights:   6%|▌         | 40/723 [00:00<00:04, 138.97it/s]
+Loading weights:   8%|▊         | 59/723 [00:00<00:04, 149.02it/s]
+Loading weights:  10%|█         | 75/723 [00:00<00:06, 107.44it/s]
+Loading weights:  12%|█▏        | 90/723 [00:00<00:05, 115.88it/s]
+Loading weights:  14%|█▍        | 103/723 [00:00<00:06, 90.09it/s]
+Loading weights:  17%|█▋        | 120/723 [00:01<00:06, 96.39it/s]
+Loading weights:  21%|██        | 149/723 [00:01<00:04, 129.68it/s]
+Loading weights:  26%|██▌       | 186/723 [00:01<00:02, 180.08it/s]
+Loading weights:  31%|███▏      | 227/723 [00:01<00:02, 235.08it/s]
+Loading weights:  35%|███▌      | 255/723 [00:01<00:01, 240.47it/s]
+Loading weights:  46%|████▋     | 336/723 [00:01<00:01, 386.79it/s]
+Loading weights:  52%|█████▏    | 379/723 [00:01<00:01, 289.69it/s]
+Loading weights:  57%|█████▋    | 414/723 [00:02<00:01, 281.97it/s]
+Loading weights:  64%|██████▍   | 464/723 [00:02<00:00, 330.76it/s]
+Loading weights:  71%|███████   | 512/723 [00:02<00:00, 361.82it/s]
+Loading weights:  77%|███████▋  | 558/723 [00:02<00:00, 386.29it/s]
+Loading weights:  85%|████████▍ | 613/723 [00:02<00:00, 422.75it/s]
+Loading weights: 100%|██████████| 723/723 [00:02<00:00, 291.48it/s]
+[merge] LoRA products use cuda with FP32 matmul
+[merge] example composite tail: '0.linear_attn.conv1d' -> ['model.language_model.layers.0.linear_attn.conv1d']
+[merge] applied 128 LoRA deltas (expected 7 modules x layers)
+[merge] saving composite merged model to /home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_feedback_loop_state_chain_install/merged/feedloop_state ...
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:05<00:00,  5.72s/it]
+Writing model shards: 100%|██████████| 1/1 [00:05<00:00,  5.72s/it]
+[merge] processor save skipped: Can't load image processor for '/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure '/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore' is the correct path to a directory containing a preprocessor_config.json file
+[merge] done
