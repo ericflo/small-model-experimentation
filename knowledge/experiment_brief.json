@@ -14037,6 +14037,44 @@
      "chart_takeaway": "Hygiene and route-finding practice beat both comparisons; program-repair and procedure practice do not — the practice set needs a content revision, not another measurement."
     }
    ]
+  },
+  "qwen35_4b_axis_corpus_v2_staged_repair": {
+   "verdict_tag": "Design under construction; nothing trained",
+   "concept_primer": "Last round's autopsy showed exactly why two of four practice blocks failed: the repair lessons stated their conclusion instead of showing the search, and the procedure lessons taught something the model already knew. This round rebuilds those blocks — the lessons now walk through the search, rejected attempts included — and fixes a grading quirk that had thrown away 21 correct answers for spacing.",
+   "plain_question": "Does showing the search — instead of asserting its result — finally install the repair skill, without disturbing the blocks that already work?",
+   "plain_answer": "Nothing is trained yet. The rebuilt 160-exercise set is frozen with its balance verified; a kill rule is preregistered: if the repair lessons still do not stick, this whole approach closes rather than getting a third rewrite.",
+   "why_it_matters": "This is the first practice set in the program designed from a quantified autopsy of its predecessors' actual mistakes — the difference between guessing at better lessons and engineering them.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Rebuilt blocks",
+     "value": "3 of 5",
+     "sub": "repair staged into find/fix/audit lessons"
+    },
+    {
+     "label": "Design basis",
+     "value": "1,296 completions",
+     "sub": "quantified failure classes from 3 events"
+    },
+    {
+     "label": "Grading fix",
+     "value": "21 rows",
+     "sub": "correct answers previously lost to spacing"
+    },
+    {
+     "label": "Kill rule",
+     "value": "frozen",
+     "sub": "no third rewrite if repair still fails"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Where the experiment stands",
+     "chart_read": "Each bar is a preregistered stage; one means complete.",
+     "chart_takeaway": "The rebuilt practice set is frozen; matching, review, training, the screen, and the medium benchmark remain."
+    }
+   ]
   }
  }
 }

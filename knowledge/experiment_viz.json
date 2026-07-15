@@ -48803,6 +48803,43 @@
      "source": "experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/reports/report.md"
     }
    ]
+  },
+  "qwen35_4b_axis_corpus_v2_staged_repair": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered stage completion",
+     "categories": [
+      "intake",
+      "v2 corpus",
+      "exposure match",
+      "design review",
+      "train 2 arms",
+      "gate event",
+      "medium pilot"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "The forensics-driven v2 corpus is frozen (staged demonstrated-search repair lessons; co-location-hardened hygiene; unchanged explore). The corrected gate carries documented answer normalization; seed 78,147 sealed; the trace-repair kill rule is frozen.",
+     "source": "experiments/qwen35_4b_axis_corpus_v2_staged_repair/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

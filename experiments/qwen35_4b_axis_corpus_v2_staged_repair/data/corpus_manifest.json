@@ -1,0 +1,45 @@
+{
+  "balance": {
+    "bugfind_early_bugs": 25,
+    "bugfind_rows": 30,
+    "hygiene_colocated": 17,
+    "hygiene_injected": 31
+  },
+  "banned_vocabulary_checked": true,
+  "benchmark_data_read": false,
+  "construction_seed": 77118,
+  "corpus": {
+    "kinds": {
+      "u_bugfind": 30,
+      "u_bugmend": 25,
+      "u_explore": 40,
+      "u_hygiene": 40,
+      "u_retrace": 25
+    },
+    "max_estimated_think_tokens": 458,
+    "path": "data/sft_axis_v2.jsonl",
+    "rows": 160,
+    "sha256": "28d9be20180b017e64eab4749d79eb659089b2bcc12985efbb753f4a66479e79",
+    "surfaces": {
+      "grove": 40,
+      "harbor": 40,
+      "line": 80
+    }
+  },
+  "experiment_id": "qwen35_4b_axis_corpus_v2_staged_repair",
+  "generator": "scripts/gen_axis_v2.py",
+  "generator_sha256": "7771e7c190585a949d979997137fd539c9483a7ea0c3601249f54b2ee79ddd40",
+  "mix": "bugfind=30,bugmend=25,retrace=25,explore=40,hygiene=40",
+  "model_loaded": false,
+  "replay": {
+    "inheritance": {
+      "byte_identical": true,
+      "from_experiment": "qwen35_4b_axis_replay_stack_medium_target_match"
+    },
+    "path": "data/sft_blend.jsonl",
+    "rows": 2240,
+    "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+  },
+  "schema_version": 1,
+  "stage": "axis_v2_corpus_freeze"
+}

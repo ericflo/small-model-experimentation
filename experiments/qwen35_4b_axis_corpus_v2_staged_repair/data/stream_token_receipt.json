@@ -1,0 +1,143 @@
+{
+  "absolute_loss_mass_x5_per_arm": 621987,
+  "aggregate_seed_open": false,
+  "benchmark_data_read": false,
+  "deltas": {
+    "axis_v2_minus_replay_repeat3": {
+      "absolute_loss_mass_x5": 0,
+      "answer_target": 0,
+      "close_target": 0,
+      "forward": 0,
+      "masked_context": -7818,
+      "nonzero_target": 0,
+      "parent_prefix": 0,
+      "prompt": -7818,
+      "target_span": 7818,
+      "think_target": 7818
+    }
+  },
+  "encoder": "scripts/train_think.py:encode_row",
+  "encoder_sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4",
+  "experiment_id": "qwen35_4b_axis_corpus_v2_staged_repair",
+  "files": {
+    "axis_v2": {
+      "absolute_loss_mass": 124397.4,
+      "encoded_rows": 1520,
+      "families": {
+        "burrowmaze": 151,
+        "caravan": 22,
+        "ferrier": 316,
+        "foundry_ledger": 23,
+        "gatepost": 83,
+        "glyphgate": 171,
+        "kilnrite": 329,
+        "loomfix": 110,
+        "packhouse": 37,
+        "patchwheel": 49,
+        "runeward": 15,
+        "stallwright": 54,
+        "universal": 160
+      },
+      "kinds": {
+        "atom": 79,
+        "atom_fc": 133,
+        "episode": 896,
+        "oracle_trace": 252,
+        "u_bugfind": 30,
+        "u_bugmend": 25,
+        "u_explore": 40,
+        "u_hygiene": 40,
+        "u_retrace": 25
+      },
+      "max_sequence_tokens": 3172,
+      "min_sequence_tokens": 180,
+      "path": "data/axis_v2.jsonl",
+      "rows": 1520,
+      "sha256": "1da40090cac9d2f8a27a2efbe551f10bcdae05c94bcc121097dd73e63da27a01",
+      "skipped": [],
+      "skipped_rows": 0,
+      "spans_per_epoch": {
+        "absolute_loss_mass_x5": 621987,
+        "answer_target": 13968,
+        "close_target": 3040,
+        "forward": 1357677,
+        "masked_context": 538415,
+        "nonzero_target": 566115,
+        "parent_prefix": 0,
+        "prompt": 538415,
+        "target_span": 819262,
+        "think_target": 802254
+      }
+    },
+    "replay_repeat3": {
+      "absolute_loss_mass": 124397.4,
+      "encoded_rows": 1520,
+      "families": {
+        "burrowmaze": 154,
+        "caravan": 24,
+        "ferrier": 436,
+        "foundry_ledger": 22,
+        "gatepost": 86,
+        "glyphgate": 195,
+        "kilnrite": 329,
+        "loomfix": 107,
+        "packhouse": 42,
+        "patchwheel": 49,
+        "runeward": 15,
+        "stallwright": 61
+      },
+      "kinds": {
+        "atom": 73,
+        "atom_fc": 128,
+        "episode": 1035,
+        "oracle_trace": 284
+      },
+      "max_sequence_tokens": 3150,
+      "min_sequence_tokens": 299,
+      "path": "data/replay_repeat3.jsonl",
+      "rows": 1520,
+      "sha256": "793603ebacc91adc117b4c8fa5e83403b62b903d3b6074aae0ea02273d7d19b6",
+      "skipped": [],
+      "skipped_rows": 0,
+      "spans_per_epoch": {
+        "absolute_loss_mass_x5": 621987,
+        "answer_target": 13968,
+        "close_target": 3040,
+        "forward": 1357677,
+        "masked_context": 546233,
+        "nonzero_target": 566115,
+        "parent_prefix": 0,
+        "prompt": 546233,
+        "target_span": 811444,
+        "think_target": 794436
+      }
+    }
+  },
+  "forward_tokens_per_arm": 1357677,
+  "match_axes": [
+    "forward",
+    "nonzero_target",
+    "absolute_loss_mass_x5"
+  ],
+  "max_length": 4096,
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "nonzero_target_tokens_per_arm": 566115,
+  "rows_duplicated_for_matching": false,
+  "rows_per_arm": 1520,
+  "rows_truncated_for_matching": false,
+  "schema_version": 1,
+  "shared_position_aligned_rows": 1280,
+  "skipped_rows": 0,
+  "stage": "independent_exact_exposure_validation",
+  "stream_manifest": "data/stream_manifest.json",
+  "stream_manifest_sha256": "156649d004fb883488b435ba84088256712f3470a919ae621507e8bd6fb769d2",
+  "targets_modified_for_matching": false,
+  "tokenizer": {
+    "class": "Qwen2Tokenizer",
+    "eos_token_id": 248046,
+    "think_close_token_id": 248069,
+    "vocab_size": 248077
+  },
+  "training_authorized": false
+}

@@ -1,0 +1,26 @@
+experiment_id: qwen35_4b_axis_corpus_v2_staged_repair
+status: model_free_construction
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+parent:
+  experiment: qwen35_4b_axis_replay_stack_medium_target_match
+  arm: axis_on_replay
+  weight_sha256: 7ebcad397c820196fb2271fe4c608a62a578465152b48e3fcee2c8d3b46fd0e4
+  warm_start_adapter_sha256: 87cdebde17d6151f440dd5c8fe28abc69ff074036c889eb1e4732775a76f3801
+seeds:
+  construction: 77118
+  slot_match: 55120
+  training: 54
+  gate: 88017
+  conditional_aggregate: 78147
+corpus:
+  rows: 160
+  kinds: {u_bugfind: 30, u_bugmend: 25, u_retrace: 25, u_explore: 40, u_hygiene: 40}
+arms: [replay_repeat3, axis_v2]
+gate:
+  answer_normalization: whitespace collapsed; spaces adjacent to '>' and ';' removed; identical for all arms
+  promotion: corrected detectability bar; kill rule frozen for the trace-repair axis
+conditional_pilot:
+  tier: medium
+  think_budget: 1024

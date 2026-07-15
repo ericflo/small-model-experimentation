@@ -1,0 +1,33 @@
+schema_version: 1
+experiment_id: "qwen35_4b_axis_corpus_v2_staged_repair"
+external_artifacts:
+  - name: axis_on_replay parent composite (best local artifact)
+    storage: large_artifacts/qwen35_4b_axis_replay_stack_medium_target_match/merged/axis_on_replay
+    required_for: gate baseline arm and pilot arm
+    checksum: 7ebcad397c820196fb2271fe4c608a62a578465152b48e3fcee2c8d3b46fd0e4
+    regenerate: experiments/qwen35_4b_axis_replay_stack_medium_target_match/runs/merges/axis_on_replay.json
+  - name: axis_on_replay parent adapter (warm start)
+    storage: large_artifacts/qwen35_4b_axis_replay_stack_medium_target_match/adapters/axis_on_replay
+    required_for: warm-starting both training arms
+    checksum: 87cdebde17d6151f440dd5c8fe28abc69ff074036c889eb1e4732775a76f3801
+    regenerate: experiments/qwen35_4b_axis_replay_stack_medium_target_match/runs/training/axis_on_replay.json
+  - name: reserialized base composite
+    storage: large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized
+    required_for: conditional pilot base arm
+    checksum: b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db
+    regenerate: experiments/qwen35_4b_universal_curriculum/runs/merges/base_reserialized.json
+  - name: future arm adapters and explicit composites
+    storage: large_artifacts/qwen35_4b_axis_corpus_v2_staged_repair
+    required_for: paired training, the gate event, and the conditional pilot
+    checksum: pending; training has not run
+    regenerate: checkpointed scripts/run.py stages after the design review passes
+omitted_artifacts:
+  - path: large_artifacts/qwen35_4b_axis_corpus_v2_staged_repair
+    reason: model weights exceed repository limits and carry tracked cryptographic receipts instead
+reproducibility:
+  smoke_command: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_axis_corpus_v2_staged_repair/scripts/run.py --smoke
+  full_command: checkpointed scripts/run.py stages only
+  required_external_artifacts:
+    - axis_on_replay parent composite (best local artifact)
+    - axis_on_replay parent adapter (warm start)
+notes: Frozen v2 corpus, replay pool, exposure receipts, and the frozen gate are tracked in-repo. No adapter, composite, training receipt, local result, or benchmark result exists yet.

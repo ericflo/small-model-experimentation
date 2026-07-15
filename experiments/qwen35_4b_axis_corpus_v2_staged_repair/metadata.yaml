@@ -1,0 +1,20 @@
+# Generated starter metadata. Run make check after adding artifacts.
+id: "qwen35_4b_axis_corpus_v2_staged_repair"
+title: "Axis Corpus V2 with Staged Repair"
+source_track: "new"
+path: "experiments/qwen35_4b_axis_corpus_v2_staged_repair"
+primary_readme: "experiments/qwen35_4b_axis_corpus_v2_staged_repair/README.md"
+primary_report: "experiments/qwen35_4b_axis_corpus_v2_staged_repair/reports/report.md"
+summary: "New experiment scaffold. Fill this before running full experiments."
+tags:
+  - "experiment"
+research_programs:
+  - "agentic_breadth_installation"
+top_level_dirs:
+  - "configs"
+  - "reports"
+  - "scripts"
+  - "src"
+file_counts: {}
+total_files: 0
+total_size_bytes: 0
