@@ -154,6 +154,9 @@ TRAINING_LAUNCHER=$PWD/experiments/qwen35_4b_counterfactual_plan_reflection_tran
 VLLM_LAUNCHER=$PWD/experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/vllm_launcher
 # GPU commands pass exactly one physical UUID to the launcher, never an index:
 # $VLLM_LAUNCHER --cuda-visible-devices=GPU-<uuid> vllm_runner <arguments>
+# Model-free boundary audit (no device selector, tokenizer, model, or writes):
+# $TRAINING_LAUNCHER runtime_audit
+# $VLLM_LAUNCHER runtime_audit
 # Invoke only the stages enabled by that exact committed config, writing outputs
 # outside this worktree so it remains clean for the entire staged pipeline.
 ```
@@ -350,6 +353,7 @@ additional sampling. No scientific result exists yet.
 - `scripts/run.py`
 - `scripts/runtime_launcher.S`
 - `scripts/runtime_entry.py`
+- `scripts/runtime_audit.py`
 - `scripts/training_launcher`
 - `scripts/vllm_launcher`
 - `scripts/tokenizer_receipt.py`

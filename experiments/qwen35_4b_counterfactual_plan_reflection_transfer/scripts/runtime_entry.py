@@ -37,6 +37,7 @@ STAGES = {
         "matched_compute_gate": EXP / "scripts" / "matched_compute_gate.py",
         "merge_adapter": EXP / "scripts" / "merge_adapter.py",
         "retention_gate": EXP / "scripts" / "retention_gate.py",
+        "runtime_audit": EXP / "scripts" / "runtime_audit.py",
         "score": EXP / "scripts" / "score.py",
         "score_literal": EXP / "scripts" / "score_literal.py",
         "tokenizer_receipt": EXP / "scripts" / "tokenizer_receipt.py",
@@ -44,6 +45,7 @@ STAGES = {
     },
     "vllm": {
         "run_frozen_reservoir": EXP / "scripts" / "run_frozen_reservoir.py",
+        "runtime_audit": EXP / "scripts" / "runtime_audit.py",
         "vllm_runner": EXP / "src" / "vllm_runner.py",
     },
 }
