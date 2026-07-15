@@ -133,6 +133,10 @@ CODE_FILES = {
     "gate": EXP / "scripts" / "check_local.py",
     "harness": EXP / "scripts" / "run.py",
     "runner": EXP / "src" / "vllm_runner.py",
+    # merge_trained_arm.py carries no orchestrator-filled constants, so it is
+    # pinned here and demands this exact pin back (code_sha256.merge) before
+    # any composite is produced.
+    "merge": EXP / "scripts" / "merge_trained_arm.py",
     "external_merger": (
         ROOT
         / "experiments"
@@ -146,7 +150,6 @@ CODE_PINS_DEFERRED = [
     "scripts/run_benchmark.py",
     "scripts/materialize_streams.py",
     "scripts/train_trial.py",
-    "scripts/merge_trained_arm.py",
 ]
 
 

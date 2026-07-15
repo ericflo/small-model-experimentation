@@ -49,3 +49,15 @@
 - `budget_commit` trained 1,520/1,520 rows with 0 skipped over 190 updates
   (train loss 0.5106, 1,393.4 wrapper seconds); receipt/log published and pinned.
 - All three arms are trained; merges are the only next stage.
+
+## 2026-07-15 — Merge-gate pin amendment (model-free)
+
+- The merge stage refused to open: `merge_trained_arm.py` demands its own hash
+  under the receipt's `code_sha256.merge`, but the receipt generator had listed
+  it as pin-deferred — an implementation inconsistency between two harness
+  files, caught by the gate itself failing closed. No composite was produced.
+- `merge_trained_arm.py` carries no orchestrator-filled constants, so it is now
+  pinned at receipt level; the receipt regenerated with the frozen local tasks
+  and oracle-free input byte-identical (`be817bd0...`, `7cba75dc...`). Bars,
+  seeds, and every other frozen field are unchanged.
+- No model, GPU, or evaluation event ran during the amendment.

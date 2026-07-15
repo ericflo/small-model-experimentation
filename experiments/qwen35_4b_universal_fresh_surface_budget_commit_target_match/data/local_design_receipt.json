@@ -34,8 +34,7 @@
       "scripts/eval_local_vllm.py",
       "scripts/run_benchmark.py",
       "scripts/materialize_streams.py",
-      "scripts/train_trial.py",
-      "scripts/merge_trained_arm.py"
+      "scripts/train_trial.py"
     ],
     "reason": "these files carry orchestrator-filled TODO-PIN constants or do not exist at design freeze; each is authenticated by hash inside its own run receipt"
   },
@@ -43,8 +42,9 @@
     "curriculum": "70fc722a6a69f4f8a64ae4356058421ea44117c7e86d3350abfd72b047ccf080",
     "external_merger": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
     "gate": "a1754ca4ad4e7d8aa0ad917e149992dd4339801ebe5eae005f44bdecdec6ba47",
-    "generator": "b33dd706998b5363f2124be185b3b1df197fa5db4a4e6f475f2770917a74e181",
+    "generator": "0cda5c3f62d3ef270f299393f0b2e5914b83efd5dc53cc08c49060995c932a3d",
     "harness": "ad900e89124945ef1759f9b1045f3ee99f10c813613e1dd3decf0aac2813a325",
+    "merge": "8c798393eec383ce7d00cbba18fb0538488998b60ea193233aa1d5acfddede58",
     "runner": "cf1a766a70df8e3aacae18fc52a1a2186f2f8fc20161a6ef679b3dd51f60fcd2"
   },
   "experiment_id": "qwen35_4b_universal_fresh_surface_budget_commit_target_match",
