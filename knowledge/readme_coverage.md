@@ -78,6 +78,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_depth_scaling_controls` | [README](../experiments/qwen35_4b_depth_scaling_controls/README.md) | [report](../experiments/qwen35_4b_depth_scaling_controls/reports/report.md) |
 | `qwen35_4b_depth_wall_anatomy` | [README](../experiments/qwen35_4b_depth_wall_anatomy/README.md) | [report](../experiments/qwen35_4b_depth_wall_anatomy/reports/report.md) |
 | `qwen35_4b_diversity_keyed_coverage_gate` | [README](../experiments/qwen35_4b_diversity_keyed_coverage_gate/README.md) | [report](../experiments/qwen35_4b_diversity_keyed_coverage_gate/reports/qwen35_4b_diversity_keyed_coverage_gate_report.md) |
+| `qwen35_4b_dose_diversity_mechanism_cell` | [README](../experiments/qwen35_4b_dose_diversity_mechanism_cell/README.md) | [report](../experiments/qwen35_4b_dose_diversity_mechanism_cell/reports/report.md) |
 | `qwen35_4b_early_text_hypothesis_forking` | [README](../experiments/qwen35_4b_early_text_hypothesis_forking/README.md) | [report](../experiments/qwen35_4b_early_text_hypothesis_forking/reports/report.md) |
 | `qwen35_4b_error_localization` | [README](../experiments/qwen35_4b_error_localization/README.md) | [report](../experiments/qwen35_4b_error_localization/reports/report.md) |
 | `qwen35_4b_executable_program_posttraining` | [README](../experiments/qwen35_4b_executable_program_posttraining/README.md) | [report](../experiments/qwen35_4b_executable_program_posttraining/reports/qwen35_4b_executable_program_posttraining_report.md) |

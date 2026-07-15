@@ -19,14 +19,14 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Directory | Experiments |
 | --- | ---: |
-| `reports/` | 267 |
-| `src/` | 253 |
+| `reports/` | 268 |
+| `src/` | 254 |
 | `runs/` | 194 |
-| `scripts/` | 176 |
-| `configs/` | 171 |
+| `scripts/` | 177 |
+| `configs/` | 172 |
 | `analysis/` | 165 |
-| `data/` | 155 |
-| `tests/` | 67 |
+| `data/` | 156 |
+| `tests/` | 68 |
 | `logs/` | 64 |
 | `run_logs/` | 55 |
 | `figures/` | 10 |
@@ -39,14 +39,14 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Extension | Files |
 | --- | ---: |
-| `.json` | 3465 |
-| `.py` | 2505 |
+| `.json` | 3471 |
+| `.py` | 2524 |
 | `.csv` | 2144 |
-| `.md` | 1375 |
-| `.jsonl` | 1066 |
+| `.md` | 1384 |
+| `.jsonl` | 1071 |
 | `.png` | 848 |
 | `.log` | 635 |
-| `.yaml` | 502 |
+| `.yaml` | 505 |
 | `.gz` | 169 |
 | `.html` | 90 |
 | `.sh` | 31 |
