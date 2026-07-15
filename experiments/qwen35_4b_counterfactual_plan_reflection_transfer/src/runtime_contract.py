@@ -22,7 +22,20 @@ RUNTIME_PIN = Path(__file__).resolve().parents[1] / "configs" / "pinned_runtime_
 _BOOTSTRAP_RECEIPT: dict[str, Any] | None = None
 _RUNTIME_IMPORT_GUARD: Any | None = None
 _RUNTIME_IMPORT_CONTENT: dict[str, Any] | None = None
+_RUNTIME_PREFLIGHT_GUARD: Any | None = None
+_RUNTIME_PREFLIGHT_CONTENT: dict[str, Any] | None = None
+_PREAUTH_GIT_FD = 192
+_PREAUTH_LOADER_FD = 193
+_PREAUTH_MANIFEST_FD = 194
+_PREAUTH_RUNTIME_CONTRACT_FD = 195
+_PREAUTH_LOAD_GUARD_FD = 196
+_PREAUTH_STAGE_FD = 197
 _STATIC_LAUNCHER_PROOF_FD = 198
+_PREAUTH_INTERPRETER_FD = 199
+_SNAPSHOT_ROOT = Path("/workspace/sme-reflection-runtime")
+_SNAPSHOT_LIBRARY_PATH = (
+    "/workspace/sme-reflection-runtime/runtime-libs:/usr/local/cuda/lib64"
+)
 
 
 def _sha256_fd(descriptor: int) -> str:
@@ -47,10 +60,9 @@ def require_detached_execution_worktree(repo_root: Path) -> dict[str, str]:
         raise ValueError("execution interpreter must be provisioned outside the worktree")
     if sys.flags.isolated != 1 or not sys.dont_write_bytecode or sys.flags.no_site != 1:
         raise ValueError("execution requires an isolated -I -B -S Python interpreter")
-    top = run_pinned_executable("git", ["rev-parse", "--show-toplevel"], cwd=repo_root)
-    head = run_pinned_executable("git", ["rev-parse", "HEAD"], cwd=repo_root)
-    status = run_pinned_executable(
-        "git",
+    top = _run_preauthenticated_git(["rev-parse", "--show-toplevel"], cwd=repo_root)
+    head = _run_preauthenticated_git(["rev-parse", "HEAD"], cwd=repo_root)
+    status = _run_preauthenticated_git(
         [
             "status",
             "--porcelain=v1",
@@ -59,9 +71,7 @@ def require_detached_execution_worktree(repo_root: Path) -> dict[str, str]:
         ],
         cwd=repo_root,
     )
-    branch = run_pinned_executable(
-        "git", ["symbolic-ref", "-q", "HEAD"], cwd=repo_root
-    )
+    branch = _run_preauthenticated_git(["symbolic-ref", "-q", "HEAD"], cwd=repo_root)
     if (
         top.returncode != 0
         or Path(top.stdout.strip()).resolve() != repo_root
@@ -94,7 +104,7 @@ def _runtime_pin(backend: str) -> dict[str, Any]:
     value = json.loads(RUNTIME_PIN.read_text())
     if (
         set(value) != {"schema_version", "system", "training", "vllm"}
-        or value["schema_version"] != 3
+        or value["schema_version"] != 4
     ):
         raise ValueError("runtime environment pin schema changed")
     if backend not in {"training", "vllm"}:
@@ -134,7 +144,8 @@ def _system_pin() -> dict[str, Any]:
         "native_library_roots",
         "native_mappings",
         "executables",
-        "runtime_dispatcher",
+        "pre_python_manifest",
+        "stage_entrypoints",
         "launchers",
     }
     if (
@@ -150,8 +161,22 @@ def _system_pin() -> dict[str, Any]:
             not isinstance(item, dict) or set(item) != {"path", "sha256"}
             for item in value["executables"].values()
         )
-        or not isinstance(value.get("runtime_dispatcher"), dict)
-        or set(value["runtime_dispatcher"]) != {"path", "sha256"}
+        or not isinstance(value.get("pre_python_manifest"), dict)
+        or set(value["pre_python_manifest"]) != {"path", "sha256"}
+        or not isinstance(value.get("stage_entrypoints"), dict)
+        or set(value["stage_entrypoints"]) != {"training", "vllm"}
+        or any(
+            not isinstance(stages, dict)
+            or not stages
+            or any(
+                not isinstance(name, str)
+                or not name
+                or not isinstance(item, dict)
+                or set(item) != {"path", "sha256"}
+                for name, item in stages.items()
+            )
+            for stages in value["stage_entrypoints"].values()
+        )
         or not isinstance(value.get("launchers"), dict)
         or set(value["launchers"]) != {"training", "vllm"}
         or any(
@@ -163,12 +188,17 @@ def _system_pin() -> dict[str, Any]:
     return value
 
 
-def _launcher_environment(backend: str) -> dict[str, str]:
-    environment_root = Path(_runtime_pin(backend)["environment_root"])
+def _launcher_environment(backend: str, stage: str) -> dict[str, str]:
+    environment_root = Path(
+        "/workspace/small-model-experimentation/.venv"
+        if backend == "training"
+        else "/workspace/small-model-experimentation/.venv-vllm"
+    )
     return {
         "HOME": "/root",
         "PATH": (
-            f"{environment_root}/bin:/usr/local/cuda-12.8/bin:/usr/bin:/bin"
+            f"{environment_root}/bin:/usr/local/cuda-12.8/bin:"
+            "/workspace/sme-reflection-runtime/tools"
         ),
         "LANG": "C.UTF-8",
         "LC_ALL": "C.UTF-8",
@@ -177,64 +207,114 @@ def _launcher_environment(backend: str) -> dict[str, str]:
         "GIT_CONFIG_NOSYSTEM": "1",
         "GIT_CONFIG_GLOBAL": "/dev/null",
         "GIT_TERMINAL_PROMPT": "0",
-        "LD_LIBRARY_PATH": "/usr/local/cuda/lib64",
+        "GIT_OPTIONAL_LOCKS": "0",
+        "GIT_EXEC_PATH": "/workspace/sme-reflection-runtime/lib/git-core",
+        "LD_LIBRARY_PATH": _SNAPSHOT_LIBRARY_PATH,
+        "LOCPATH": "/workspace/sme-reflection-runtime/lib/locale",
+        "GCONV_PATH": "/workspace/sme-reflection-runtime/runtime-libs/gconv",
         "CUDA_DEVICE_ORDER": "PCI_BUS_ID",
         "VLLM_ENABLE_V1_MULTIPROCESSING": "0",
         "TOKENIZERS_PARALLELISM": "false",
         "HF_HUB_OFFLINE": "1",
         "TRANSFORMERS_OFFLINE": "1",
+        "SME_RUNTIME_BACKEND": backend,
+        "SME_RUNTIME_STAGE": stage,
     }
 
 
+def _descriptor_authentication(descriptor: int) -> dict[str, Any]:
+    if not os.get_inheritable(descriptor):
+        raise RuntimeError("pre-Python proof descriptor is not inheritable")
+    before = os.fstat(descriptor)
+    if not stat.S_ISREG(before.st_mode):
+        raise RuntimeError("pre-Python proof descriptor is not a regular file")
+    path = Path(os.readlink(f"/proc/self/fd/{descriptor}")).resolve(strict=True)
+    path_stat = os.stat(path, follow_symlinks=False)
+    digest = _sha256_fd(descriptor)
+    after = os.fstat(descriptor)
+    stable = ("st_dev", "st_ino", "st_mode", "st_size", "st_mtime_ns")
+    if (
+        path.is_symlink()
+        or (before.st_dev, before.st_ino) != (path_stat.st_dev, path_stat.st_ino)
+        or any(getattr(before, field) != getattr(after, field) for field in stable)
+    ):
+        raise RuntimeError("pre-Python proof inode changed or differs from its path")
+    return {
+        "fd": descriptor,
+        "path": str(path),
+        "sha256": digest,
+        "device": before.st_dev,
+        "inode": before.st_ino,
+        "size": before.st_size,
+    }
+
+
+def _manifest_rows(descriptor: int) -> tuple[dict[str, dict[str, str]], dict[str, Any]]:
+    payload = os.pread(descriptor, os.fstat(descriptor).st_size, 0).decode()
+    lines = payload.splitlines()
+    if not lines or lines[0] != "schema\t1":
+        raise RuntimeError("pre-Python manifest schema changed")
+    roles: dict[str, dict[str, str]] = {}
+    stages: dict[str, dict[str, dict[str, str]]] = {"training": {}, "vllm": {}}
+    for line in lines[1:]:
+        fields = line.split("\t")
+        if len(fields) == 4 and fields[0] == "file":
+            _kind, role, path, digest = fields
+            if role != "preauth":
+                if role in roles:
+                    raise RuntimeError("pre-Python manifest duplicated a proof role")
+                roles[role] = {"path": path, "sha256": digest}
+        elif len(fields) == 5 and fields[0] == "stage":
+            _kind, backend, name, path, digest = fields
+            if backend not in stages or name in stages[backend]:
+                raise RuntimeError("pre-Python manifest stage table changed")
+            stages[backend][name] = {"path": path, "sha256": digest}
+        else:
+            raise RuntimeError("pre-Python manifest row changed")
+    return roles, stages
+
+
 def authenticate_static_launcher(repo_root: Path, backend: str) -> dict[str, Any]:
-    """Prove entry through the pinned live static parent and replacement environment."""
+    """Authenticate the live static parent and every inherited pre-Python inode."""
     repo_root = Path(repo_root).resolve()
-    system_pin = _system_pin()
-    launcher_pin = system_pin["launchers"].get(backend)
-    if not isinstance(launcher_pin, dict):
-        raise RuntimeError("runtime launcher backend is not pinned")
-    launcher = repo_root / launcher_pin["path"]
-    dispatcher_pin = system_pin["runtime_dispatcher"]
-    dispatcher = repo_root / dispatcher_pin["path"]
-    expected_environment = _launcher_environment(backend)
+    if backend not in {"training", "vllm"}:
+        raise RuntimeError("runtime launcher backend is invalid")
+    stage = os.environ.get("SME_RUNTIME_STAGE", "")
+    if os.environ.get("SME_RUNTIME_BACKEND") != backend or not stage:
+        raise RuntimeError("runtime launcher backend/stage environment is absent")
+    expected_environment = _launcher_environment(backend, stage)
     observed_environment = dict(os.environ)
     selector = observed_environment.pop("CUDA_VISIBLE_DEVICES", None)
     if selector is not None and re.fullmatch(r"GPU-[A-Za-z0-9-]+", selector) is None:
         raise RuntimeError("runtime launcher supplied an invalid physical GPU UUID")
     if observed_environment != expected_environment:
         raise RuntimeError("runtime launcher replacement environment differs from its pin")
-    if (
-        not dispatcher.is_file()
-        or dispatcher.is_symlink()
-        or _sha256_file(dispatcher) != dispatcher_pin["sha256"]
-    ):
-        raise RuntimeError("runtime dispatcher differs from its committed pin")
+    if sys.argv[0] != f"/proc/self/fd/{_PREAUTH_STAGE_FD}":
+        raise RuntimeError("runtime stage was not entered through its proof descriptor")
+    launcher = (
+        repo_root
+        / "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts"
+        / f"{backend}_launcher"
+    )
     parent_descriptor: int | None = None
     try:
         parent_pid = os.getppid()
         if parent_pid <= 1:
             raise RuntimeError("static runtime-launcher parent is absent")
         parent_descriptor = os.open(f"/proc/{parent_pid}/exe", os.O_RDONLY)
-        if not os.get_inheritable(_STATIC_LAUNCHER_PROOF_FD):
-            raise RuntimeError("runtime-launcher proof descriptor is not inheritable")
         parent_before = os.fstat(parent_descriptor)
-        proof_before = os.fstat(_STATIC_LAUNCHER_PROOF_FD)
-        path_before = os.stat(launcher, follow_symlinks=False)
+        proof = _descriptor_authentication(_STATIC_LAUNCHER_PROOF_FD)
+        path_stat = os.stat(launcher, follow_symlinks=False)
         if (
             launcher.is_symlink()
             or not stat.S_ISREG(parent_before.st_mode)
-            or not stat.S_ISREG(proof_before.st_mode)
-            or not stat.S_ISREG(path_before.st_mode)
             or (parent_before.st_dev, parent_before.st_ino)
-            != (path_before.st_dev, path_before.st_ino)
-            or (proof_before.st_dev, proof_before.st_ino)
-            != (path_before.st_dev, path_before.st_ino)
+            != (proof["device"], proof["inode"])
+            or (path_stat.st_dev, path_stat.st_ino)
+            != (proof["device"], proof["inode"])
         ):
             raise RuntimeError("runtime-launcher proof names different executable bytes")
-        launcher_sha256 = _sha256_fd(_STATIC_LAUNCHER_PROOF_FD)
         parent_after = os.fstat(parent_descriptor)
-        proof_after = os.fstat(_STATIC_LAUNCHER_PROOF_FD)
-        path_after = os.stat(launcher, follow_symlinks=False)
     except OSError as error:
         raise RuntimeError(
             "runtime stage requires a live pinned static-launcher parent"
@@ -242,38 +322,81 @@ def authenticate_static_launcher(repo_root: Path, backend: str) -> dict[str, Any
     finally:
         if parent_descriptor is not None:
             os.close(parent_descriptor)
-    stable_fields = ("st_dev", "st_ino", "st_mode", "st_size", "st_mtime_ns")
-    if (
-        any(
-            getattr(parent_before, field) != getattr(parent_after, field)
-            for field in stable_fields
-        )
-        or any(
-            getattr(proof_before, field) != getattr(proof_after, field)
-            for field in stable_fields
-        )
-        or any(
-            getattr(path_before, field) != getattr(path_after, field)
-            for field in stable_fields
-        )
-        or (proof_after.st_dev, proof_after.st_ino)
-        != (path_after.st_dev, path_after.st_ino)
-        or launcher_sha256 != launcher_pin["sha256"]
+    if any(
+        getattr(parent_before, field) != getattr(parent_after, field)
+        for field in ("st_dev", "st_ino", "st_mode", "st_size", "st_mtime_ns")
     ):
-        raise RuntimeError("runtime-launcher proof bytes changed or differ from their pin")
+        raise RuntimeError("runtime-launcher parent changed during authentication")
+    descriptors = {
+        "git": _descriptor_authentication(_PREAUTH_GIT_FD),
+        "loader": _descriptor_authentication(_PREAUTH_LOADER_FD),
+        "manifest": _descriptor_authentication(_PREAUTH_MANIFEST_FD),
+        "runtime_contract": _descriptor_authentication(_PREAUTH_RUNTIME_CONTRACT_FD),
+        "load_window_guard": _descriptor_authentication(_PREAUTH_LOAD_GUARD_FD),
+        "stage": _descriptor_authentication(_PREAUTH_STAGE_FD),
+        "interpreter": _descriptor_authentication(_PREAUTH_INTERPRETER_FD),
+    }
+    roles, stages = _manifest_rows(_PREAUTH_MANIFEST_FD)
+    selected = stages.get(backend, {}).get(stage)
+    required_roles = {"git", "loader", "runtime_contract", "load_window_guard", "interpreter"}
+    if (
+        set(roles) != required_roles
+        or selected is None
+        or any(
+            descriptors[name]["path"] != roles[name]["path"]
+            or descriptors[name]["sha256"] != roles[name]["sha256"]
+            for name in required_roles
+        )
+        or descriptors["stage"]["path"] != selected["path"]
+        or descriptors["stage"]["sha256"] != selected["sha256"]
+        or descriptors["runtime_contract"]["path"] != str(Path(__file__).resolve())
+        or descriptors["load_window_guard"]["path"]
+        != str(Path(__file__).resolve().parent / "load_window_guard.py")
+        or Path(sys.executable) != _SNAPSHOT_ROOT / "bin/python3.12"
+        or Path(sys.executable).resolve() != Path(descriptors["interpreter"]["path"])
+    ):
+        raise RuntimeError("pre-Python proof descriptors differ from their manifest")
     return {
         "backend": backend,
+        "stage": stage,
         "path": str(launcher),
-        "sha256": launcher_sha256,
+        "sha256": proof["sha256"],
         "parent_pid": parent_pid,
         "proof_fd": _STATIC_LAUNCHER_PROOF_FD,
-        "dispatcher_path": str(dispatcher),
-        "dispatcher_sha256": dispatcher_pin["sha256"],
         "cuda_visible_devices": selector,
         "environment_sha256": hashlib.sha256(
             json.dumps(dict(os.environ), sort_keys=True, separators=(",", ":")).encode()
         ).hexdigest(),
+        "pre_python_descriptors": descriptors,
     }
+
+
+def _run_preauthenticated_git(
+    arguments: list[str], *, cwd: Path
+) -> subprocess.CompletedProcess[str]:
+    """Run the launcher-authenticated Git inode through its authenticated loader."""
+    fixed = [
+        "-c", "core.fsmonitor=false",
+        "-c", "core.untrackedCache=false",
+        "-c", "core.hooksPath=/dev/null",
+        "-c", "core.pager=cat",
+    ]
+    return subprocess.run(
+        [
+            f"/proc/self/fd/{_PREAUTH_LOADER_FD}",
+            "--library-path", _SNAPSHOT_LIBRARY_PATH,
+            "--argv0", "/workspace/sme-reflection-runtime/tools/git",
+            f"/proc/self/fd/{_PREAUTH_GIT_FD}",
+            *fixed,
+            *arguments,
+        ],
+        cwd=cwd,
+        capture_output=True,
+        text=True,
+        check=False,
+        env=dict(os.environ),
+        pass_fds=(_PREAUTH_GIT_FD, _PREAUTH_LOADER_FD),
+    )
 
 
 def _pinned_executable(name: str) -> tuple[Path, str]:
@@ -321,19 +444,31 @@ def run_pinned_executable(
         try:
             fcntl.fcntl(descriptor, fcntl.F_SETLEASE, fcntl.F_RDLCK)
             leased = True
-        except OSError:
-            from load_window_guard import read_only_file_mount_identity
-
-            if read_only_file_mount_identity(path) is None:
-                raise
+        except OSError as error:
+            raise RuntimeError(
+                f"mandatory read lease denied for pinned executable: {name}"
+            ) from error
+        command = [f"/proc/self/fd/{descriptor}", *arguments]
+        pass_descriptors = (descriptor,)
+        if name != "uv":
+            command = [
+                f"/proc/self/fd/{_PREAUTH_LOADER_FD}",
+                "--library-path",
+                _SNAPSHOT_LIBRARY_PATH,
+                "--argv0",
+                str(path),
+                f"/proc/self/fd/{descriptor}",
+                *arguments,
+            ]
+            pass_descriptors = (descriptor, _PREAUTH_LOADER_FD)
         result = subprocess.run(
-            [f"/proc/self/fd/{descriptor}", *arguments],
+            command,
             cwd=cwd,
             capture_output=True,
             text=True,
             check=False,
             env=env,
-            pass_fds=(descriptor,),
+            pass_fds=pass_descriptors,
         )
         after_stat = os.fstat(descriptor)
         after_path_stat = os.stat(path, follow_symlinks=False)
@@ -610,31 +745,73 @@ def _authenticate_loaded_native_closure(
 
 def _initial_import_path_allowed(value: str) -> bool:
     source_root = str(Path(__file__).resolve().parent)
+    snapshot_stdlib = str(_SNAPSHOT_ROOT / f"lib/python{sys.version_info.major}.{sys.version_info.minor}")
     return (
         value == source_root
-        or value == f"/usr/lib/python{sys.version_info.major}{sys.version_info.minor}.zip"
-        or value == f"/usr/lib/python{sys.version_info.major}.{sys.version_info.minor}"
-        or value.startswith(
-            f"/usr/lib/python{sys.version_info.major}.{sys.version_info.minor}/"
-        )
+        or value == str(_SNAPSHOT_ROOT / f"lib/python{sys.version_info.major}{sys.version_info.minor}.zip")
+        or value == snapshot_stdlib
+        or value.startswith(f"{snapshot_stdlib}/")
     )
+
+
+def _validate_pinned_launcher_authentication(
+    repo_root: Path, backend: str, authentication: dict[str, Any]
+) -> None:
+    system_pin = _system_pin()
+    launcher_pin = system_pin["launchers"][backend]
+    manifest_pin = system_pin["pre_python_manifest"]
+    stage = authentication["stage"]
+    stage_pin = system_pin["stage_entrypoints"][backend].get(stage)
+    descriptors = authentication["pre_python_descriptors"]
+    if (
+        authentication["path"] != str(repo_root / launcher_pin["path"])
+        or authentication["sha256"] != launcher_pin["sha256"]
+        or descriptors["manifest"]["path"] != str(repo_root / manifest_pin["path"])
+        or descriptors["manifest"]["sha256"] != manifest_pin["sha256"]
+        or stage_pin is None
+        or descriptors["stage"]["path"] != str(repo_root / stage_pin["path"])
+        or descriptors["stage"]["sha256"] != stage_pin["sha256"]
+    ):
+        raise ValueError("live pre-Python launcher proof differs from the committed pin")
 
 
 def bootstrap_runtime_environment(repo_root: Path, backend: str) -> dict[str, Any]:
     """Authenticate and guard stdlib/site bytes before enabling third-party imports."""
     global _BOOTSTRAP_RECEIPT, _RUNTIME_IMPORT_CONTENT, _RUNTIME_IMPORT_GUARD
+    global _RUNTIME_PREFLIGHT_CONTENT, _RUNTIME_PREFLIGHT_GUARD
     if _BOOTSTRAP_RECEIPT is not None:
         if _BOOTSTRAP_RECEIPT.get("backend") != backend:
             raise ValueError("process already bootstrapped for a different runtime backend")
         return dict(_BOOTSTRAP_RECEIPT)
+    repo_root = repo_root.resolve()
     launcher_authentication = authenticate_static_launcher(repo_root, backend)
-    worktree = require_detached_execution_worktree(repo_root)
-    pin = _runtime_pin(backend)
-    system_pin = _system_pin()
-    system_authentication = _authenticate_system_runtime()
+    from load_window_guard import LoadWindowGuard, root_commitments
+
+    experiment = repo_root / "experiments/qwen35_4b_counterfactual_plan_reflection_transfer"
+    preflight_roots = [experiment / "src", experiment / "scripts", experiment / "configs"]
+    preflight_content = {"worktree_code_surface": root_commitments(preflight_roots)}
+    preflight_guard = LoadWindowGuard(
+        preflight_roots,
+        expected_content=preflight_content,
+    )
+    preflight_guard.__enter__()
+    try:
+        worktree = require_detached_execution_worktree(repo_root)
+        preflight_after = {"worktree_code_surface": root_commitments(preflight_roots)}
+        if preflight_after != preflight_content:
+            raise RuntimeError("worktree code surface changed during Git preflight")
+        pin = _runtime_pin(backend)
+        system_pin = _system_pin()
+        _validate_pinned_launcher_authentication(
+            repo_root, backend, launcher_authentication
+        )
+        system_authentication = _authenticate_system_runtime()
+    except BaseException as error:
+        preflight_guard.__exit__(type(error), error, error.__traceback__)
+        raise
     environment_root = Path(pin["environment_root"])
     bin_root = environment_root / "bin"
-    invoked_python = environment_root / "bin" / "python"
+    invoked_python = _SNAPSHOT_ROOT / "bin/python3.12"
     if Path(sys.executable) != invoked_python or not invoked_python.is_file():
         raise ValueError("stage used the wrong pinned runtime interpreter path")
     site_packages = (
@@ -681,14 +858,15 @@ def bootstrap_runtime_environment(repo_root: Path, backend: str) -> dict[str, An
         "bin_surface_sha256": pin["bin_surface_sha256"],
         "native_library_surfaces": system_pin["native_library_roots"],
     }
-    from load_window_guard import LoadWindowGuard
-
     import_guard = LoadWindowGuard(
         [bin_root, site_packages, stdlib_root, *native_roots],
         expected_content={"runtime_environment": expected_content},
-        unleased_roots=[stdlib_root, *native_roots],
     )
-    import_guard.__enter__()
+    try:
+        import_guard.__enter__()
+    except BaseException as error:
+        preflight_guard.__exit__(type(error), error, error.__traceback__)
+        raise
     before = list(sys.path)
     try:
         environment_authentication = authenticate_site_packages(
@@ -738,11 +916,14 @@ def bootstrap_runtime_environment(repo_root: Path, backend: str) -> dict[str, An
             activated_extensions.append(str(extension))
     except BaseException as error:
         import_guard.__exit__(type(error), error, error.__traceback__)
+        preflight_guard.__exit__(type(error), error, error.__traceback__)
         raise
     _RUNTIME_IMPORT_GUARD = import_guard
     _RUNTIME_IMPORT_CONTENT = {"runtime_environment": content}
+    _RUNTIME_PREFLIGHT_GUARD = preflight_guard
+    _RUNTIME_PREFLIGHT_CONTENT = preflight_content
     _BOOTSTRAP_RECEIPT = {
-        "schema_version": 3,
+        "schema_version": 4,
         "backend": backend,
         "launcher_authentication": launcher_authentication,
         "worktree": worktree,
@@ -773,6 +954,7 @@ def bootstrap_runtime_environment(repo_root: Path, backend: str) -> dict[str, An
 def seal_runtime_environment(repo_root: Path, expected_backend: str) -> dict[str, Any]:
     """Reauthenticate and close the immutable environment import window."""
     global _RUNTIME_IMPORT_CONTENT, _RUNTIME_IMPORT_GUARD
+    global _RUNTIME_PREFLIGHT_CONTENT, _RUNTIME_PREFLIGHT_GUARD
     if _BOOTSTRAP_RECEIPT is None or _BOOTSTRAP_RECEIPT.get("backend") != expected_backend:
         raise ValueError("runtime bootstrap is absent or belongs to another backend")
     if _RUNTIME_IMPORT_GUARD is None:
@@ -781,6 +963,8 @@ def seal_runtime_environment(repo_root: Path, expected_backend: str) -> dict[str
         return dict(_BOOTSTRAP_RECEIPT)
     if _RUNTIME_IMPORT_CONTENT is None:
         raise ValueError("runtime import content commitment is absent")
+    if _RUNTIME_PREFLIGHT_GUARD is None or _RUNTIME_PREFLIGHT_CONTENT is None:
+        raise ValueError("runtime preflight guard disappeared before sealing")
     pin = _runtime_pin(expected_backend)
     system_pin = _system_pin()
     environment_root = Path(pin["environment_root"])
@@ -835,8 +1019,21 @@ def seal_runtime_environment(repo_root: Path, expected_backend: str) -> dict[str
             _RUNTIME_IMPORT_CONTENT, after_content
         )
         guard_receipt = _RUNTIME_IMPORT_GUARD.verify()
+        experiment = repo_root.resolve() / "experiments/qwen35_4b_counterfactual_plan_reflection_transfer"
+        from load_window_guard import root_commitments
+
+        preflight_roots = [
+            experiment / "src", experiment / "scripts", experiment / "configs"
+        ]
+        preflight_after = {"worktree_code_surface": root_commitments(preflight_roots)}
+        _RUNTIME_PREFLIGHT_GUARD.bind_authenticated_content(
+            _RUNTIME_PREFLIGHT_CONTENT, preflight_after
+        )
+        preflight_guard_receipt = _RUNTIME_PREFLIGHT_GUARD.verify()
     except BaseException as error:
         _RUNTIME_IMPORT_GUARD.__exit__(type(error), error, error.__traceback__)
+        if _RUNTIME_PREFLIGHT_GUARD is not None:
+            _RUNTIME_PREFLIGHT_GUARD.__exit__(type(error), error, error.__traceback__)
         raise
     _BOOTSTRAP_RECEIPT["post_import_environment_authentication"] = (
         environment_authentication
@@ -848,8 +1045,11 @@ def seal_runtime_environment(repo_root: Path, expected_backend: str) -> dict[str
     )
     _BOOTSTRAP_RECEIPT["post_import_loaded_native_closure"] = loaded_native_closure
     _BOOTSTRAP_RECEIPT["import_window_guard"] = guard_receipt
+    _BOOTSTRAP_RECEIPT["preflight_window_guard"] = preflight_guard_receipt
     _RUNTIME_IMPORT_GUARD = None
     _RUNTIME_IMPORT_CONTENT = None
+    _RUNTIME_PREFLIGHT_GUARD = None
+    _RUNTIME_PREFLIGHT_CONTENT = None
     return dict(_BOOTSTRAP_RECEIPT)
 
 
@@ -858,7 +1058,9 @@ def runtime_bootstrap_receipt(expected_backend: str) -> dict[str, Any]:
         _BOOTSTRAP_RECEIPT is None
         or _BOOTSTRAP_RECEIPT.get("backend") != expected_backend
         or _RUNTIME_IMPORT_GUARD is not None
+        or _RUNTIME_PREFLIGHT_GUARD is not None
         or "import_window_guard" not in _BOOTSTRAP_RECEIPT
+        or "preflight_window_guard" not in _BOOTSTRAP_RECEIPT
     ):
         raise ValueError("runtime import window was not sealed")
     return dict(_BOOTSTRAP_RECEIPT)
@@ -889,7 +1091,7 @@ def selected_gpu_identity(repo_root: Path) -> dict[str, Any]:
         env={
             "LANG": "C",
             "LC_ALL": "C",
-            "PATH": "/usr/bin:/bin",
+            "PATH": "/workspace/sme-reflection-runtime/tools",
             "LD_LIBRARY_PATH": _system_pin()["ld_library_path"],
         },
     )
@@ -976,17 +1178,20 @@ def runtime_metadata(
     worktree = require_detached_execution_worktree(repo_root)
     nvcc = run_pinned_executable("nvcc", ["--version"], cwd=repo_root)
     packages = installed_packages()
+    python_version = platform.python_version()
+    platform_value = platform.platform()
+    bootstrap = seal_runtime_environment(repo_root, "training")
     value = {
         "schema_version": 4,
-        "bootstrap": runtime_bootstrap_receipt("training"),
+        "bootstrap": bootstrap,
         "worktree": worktree,
-        "python": platform.python_version(),
+        "python": python_version,
         "python_executable": str(Path(sys.executable).resolve()),
         "python_executable_sha256": _sha256_file(Path(sys.executable).resolve()),
         "python_isolated": sys.flags.isolated == 1,
         "python_dont_write_bytecode": bool(sys.dont_write_bytecode),
         "python_no_site": sys.flags.no_site == 1,
-        "platform": platform.platform(),
+        "platform": platform_value,
         "packages": packages,
         "packages_sha256": hashlib.sha256(
             json.dumps(packages, sort_keys=True, separators=(",", ":")).encode()

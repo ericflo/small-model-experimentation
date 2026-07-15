@@ -361,6 +361,11 @@ class EvalInputTests(unittest.TestCase):
                 "provenance.validate_interpreter_runtime"
             ), mock.patch(
                 "provenance.validate_runtime_bootstrap"
+            ), mock.patch(
+                "runtime_contract._run_preauthenticated_git",
+                return_value=subprocess.CompletedProcess(
+                    args=[], returncode=0, stdout=commit + "\n", stderr=""
+                ),
             ):
                 protocol = P.validate_generation_protocol(
                     metadata=metadata,

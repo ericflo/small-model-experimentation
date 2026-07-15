@@ -1,6 +1,6 @@
 # Qwen3.5-4B Counterfactual Plan Reflection Transfer
 
-**Status:** in-progress · since 2026-07-14 · exact-SHA Review 12 returned HOLD on pre-Python code trust and lease-denied mount immutability; model/GPU/training/evaluation remain unauthorized
+**Status:** in-progress · since 2026-07-14 · exact-SHA Review 12 returned HOLD; a lease-only pre-Python remediation is implemented model-free and awaits detached audit plus Review 13; model/GPU/training/evaluation remain unauthorized
 
 This experiment tests the paper's most actionable claim without relying on its
 consciousness framing: can supervision on what the model would say on a later
@@ -373,8 +373,9 @@ additional sampling. No scientific result exists yet.
 - `src/load_window_guard.py`
 - `src/tokenizer_lineage.py`
 - `scripts/run.py`
-- `scripts/runtime_launcher.S`
-- `scripts/runtime_entry.py`
+- `scripts/runtime_launcher.c`
+- `scripts/runtime_manifest.tsv`
+- `scripts/build_runtime_manifest.py`
 - `scripts/runtime_audit.py`
 - `scripts/training_launcher`
 - `scripts/vllm_launcher`

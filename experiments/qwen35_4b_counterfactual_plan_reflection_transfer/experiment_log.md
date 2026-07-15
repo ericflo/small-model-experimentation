@@ -1,5 +1,26 @@
 # Counterfactual Plan Reflection Transfer Experiment Log
 
+## 2026-07-15 — Review-12 lease-only remediation candidate
+
+- Replaced the path-executing assembly launcher and Python dispatcher with two
+  byte-reproducible static C launchers. Before forking, each verifies a committed
+  manifest, acquires mandatory read leases, and retains exact descriptors for the
+  runtime snapshot interpreter/loader/stdlib/native closure, Git dependency surface,
+  runtime contract, load guard, lock files, and selected fixed stage.
+- The child enters the selected stage directly through inherited descriptors under
+  `-I -B -S`. A fixed worktree source/script/config guard starts before authenticated
+  Git preflight. The runtime guard now has one mode: every file must hold a read lease;
+  there is no read-only-mount fallback.
+- Provisioned `/workspace/sme-reflection-runtime` with dereferenced, leaseable byte
+  copies and pinned its exact stdlib, locale, Git-helper, selected-tool, system-library,
+  CUDA, and environment surfaces. Explicit Git, `uv`, and `nvcc` metadata work now
+  finishes before the guards seal.
+- Added deterministic manifest/launcher rebuild tests and a real kernel regression in
+  which a pre-existing shared writable mapping makes guard entry fail closed. The
+  focused suite passes 94 tests and 23 subtests. No tokenizer/model/GPU/training/
+  evaluation/Jacobian/benchmark event occurred. Authorization remains unchanged
+  pending detached exact-SHA audits and Review 13.
+
 ## 2026-07-14 — Review-10 remediation, pending Review 11
 
 - Extended one authenticated runtime window from pre-import verification through the

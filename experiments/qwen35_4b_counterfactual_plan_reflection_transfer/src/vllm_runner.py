@@ -598,11 +598,13 @@ def _validate_model_override(path: Path | None) -> dict[str, Any] | None:
 def _run_text(command: Sequence[str]) -> str:
     if not command or command[0] not in {"git", "uv", "nvcc"}:
         raise ValueError("runner subprocess is not an allowlisted pinned executable")
-    from runtime_contract import run_pinned_executable
+    from runtime_contract import _run_preauthenticated_git, run_pinned_executable
 
     try:
-        result = run_pinned_executable(
-            command[0], list(command[1:]), cwd=Path.cwd()
+        result = (
+            _run_preauthenticated_git(list(command[1:]), cwd=Path.cwd())
+            if command[0] == "git"
+            else run_pinned_executable(command[0], list(command[1:]), cwd=Path.cwd())
         )
         return result.stdout.strip() if result.returncode == 0 else ""
     except OSError:
@@ -2010,6 +2012,11 @@ class VLLMRunner:
             ]
         ) if git_root else ""
         git_branch = _run_text(["git", "symbolic-ref", "-q", "HEAD"]) if git_root else ""
+        uv_version = _run_text(["uv", "--version"])
+        cuda_toolkit = _run_text(["nvcc", "--version"])
+        python_version = platform.python_version()
+        platform_value = platform.platform()
+        environment_lock = _environment_lock_metadata()
         from runtime_contract import (
             runtime_bootstrap_receipt,
             seal_runtime_environment,
@@ -2019,22 +2026,22 @@ class VLLMRunner:
         return {
             "schema_version": 4,
             "bootstrap": runtime_bootstrap_receipt("vllm"),
-            "python": platform.python_version(),
+            "python": python_version,
             "python_executable": str(Path(sys.executable).resolve()),
             "python_executable_sha256": _sha256_file(Path(sys.executable).resolve()),
             "python_isolated": sys.flags.isolated == 1,
             "python_dont_write_bytecode": bool(sys.dont_write_bytecode),
             "python_no_site": sys.flags.no_site == 1,
-            "platform": platform.platform(),
+            "platform": platform_value,
             "packages": dict(_INITIAL_PACKAGES),
             "packages_sha256": _sha256_bytes(
                 json.dumps(
                     dict(_INITIAL_PACKAGES), sort_keys=True, separators=(",", ":")
                 ).encode()
             ),
-            "environment_lock": _environment_lock_metadata(),
-            "uv": _run_text(["uv", "--version"]),
-            "cuda_toolkit": _run_text(["nvcc", "--version"]),
+            "environment_lock": environment_lock,
+            "uv": uv_version,
+            "cuda_toolkit": cuda_toolkit,
             "gpu": dict(self.gpu_identity),
             "vllm_enable_v1_multiprocessing": os.environ.get(
                 "VLLM_ENABLE_V1_MULTIPROCESSING"

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -25,13 +26,22 @@ class StageReceiptTests(unittest.TestCase):
         cls.config = yaml.safe_load(cls.config_path.read_text())
         cls.screen = int(cls.config["training"]["staged_seeds"]["screen"])
         cls.replication = int(cls.config["training"]["staged_seeds"]["replication"])
+        cls.commit = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
 
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name)
         self.counter = 0
+        self.git_patcher = mock.patch.object(S, "git_commit", return_value=self.commit)
+        self.git_patcher.start()
 
     def tearDown(self) -> None:
+        self.git_patcher.stop()
         self.temporary.cleanup()
 
     def receipt(self, stage: str, claims: list[dict]) -> dict:
@@ -40,7 +50,7 @@ class StageReceiptTests(unittest.TestCase):
             "experiment_id": self.config["experiment_id"],
             "authorized_stage": stage,
             "config_sha256": hashlib.sha256(self.config_path.read_bytes()).hexdigest(),
-            "issuer_git_commit": S.git_commit(),
+            "issuer_git_commit": self.commit,
             "issuer_script_sha256": S.sha256_file(EXP / "scripts" / "authorize_stage.py"),
             "prerequisites": claims,
         }

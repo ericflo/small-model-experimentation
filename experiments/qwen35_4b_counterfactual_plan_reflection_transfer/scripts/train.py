@@ -23,7 +23,6 @@ from runtime_contract import (  # noqa: E402
     bootstrap_runtime_environment,
     require_detached_execution_worktree,
     runtime_metadata,
-    seal_runtime_environment,
 )
 
 bootstrap_runtime_environment(EXP.parents[1], "training")
@@ -430,7 +429,6 @@ def main() -> int:
         raise ValueError(f"expected {expected_steps} optimizer steps, got {outcome.global_step}")
     model.save_pretrained(str(args.output))
     tokenizer.save_pretrained(str(args.output))
-    seal_runtime_environment(EXP.parents[1], "training")
     training_runtime = runtime_metadata(
         EXP.parents[1], lock_path, active_gpu_identity
     )

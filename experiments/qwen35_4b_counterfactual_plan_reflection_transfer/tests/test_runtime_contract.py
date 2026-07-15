@@ -41,6 +41,16 @@ def _require(root: Path, *, executable: Path | None = None) -> dict[str, str]:
         R.sys, "dont_write_bytecode", True
     ), mock.patch.object(
         R.sys, "executable", str(executable or Path(sys.executable).resolve())
+    ), mock.patch.object(
+        R,
+        "_run_preauthenticated_git",
+        side_effect=lambda arguments, *, cwd: subprocess.run(
+            ["git", *arguments],
+            cwd=cwd,
+            check=False,
+            capture_output=True,
+            text=True,
+        ),
     ):
         return R.require_detached_execution_worktree(root)
 
@@ -48,15 +58,34 @@ def _require(root: Path, *, executable: Path | None = None) -> dict[str, str]:
 class RuntimeContractTests(unittest.TestCase):
     def test_static_launchers_rebuild_exactly_and_direct_entry_is_rejected(self) -> None:
         pin = json.loads(R.RUNTIME_PIN.read_text())
-        source = EXP / "scripts" / "runtime_launcher.S"
+        source = EXP / "scripts" / "runtime_launcher.c"
+        manifest = EXP / "scripts" / "runtime_manifest.tsv"
+        manifest_sha256 = hashlib.sha256(manifest.read_bytes()).hexdigest()
+        descriptor = os.open(manifest, os.O_RDONLY)
+        try:
+            _roles, manifest_stages = R._manifest_rows(descriptor)
+        finally:
+            os.close(descriptor)
+        for backend, stages in pin["system"]["stage_entrypoints"].items():
+            self.assertEqual(
+                manifest_stages[backend],
+                {
+                    name: {
+                        "path": str(Path("/workspace/sme-reflection-exec") / item["path"]),
+                        "sha256": item["sha256"],
+                    }
+                    for name, item in stages.items()
+                },
+            )
         with tempfile.TemporaryDirectory() as temporary:
             for backend, define in (("training", "TRAINING"), ("vllm", "VLLM")):
                 output = Path(temporary) / f"{backend}_launcher"
                 subprocess.run(
                     [
-                        "/usr/bin/gcc", "-nostdlib", "-static", "-no-pie", "-s",
-                        "-Wl,--build-id=none", f"-D{define}=1", "-o", str(output),
-                        str(source),
+                        "/usr/bin/gcc", "-static", "-Os", "-s",
+                        "-Wl,--build-id=none", f"-D{define}=1",
+                        f'-DMANIFEST_SHA256="{manifest_sha256}"',
+                        "-o", str(output), str(source), "-lcrypto", "-ldl", "-pthread",
                     ],
                     check=True,
                 )
@@ -64,11 +93,34 @@ class RuntimeContractTests(unittest.TestCase):
                     hashlib.sha256(output.read_bytes()).hexdigest(),
                     pin["system"]["launchers"][backend]["sha256"],
                 )
-        environment = R._launcher_environment("training")
-        with mock.patch.dict(os.environ, environment, clear=True), self.assertRaisesRegex(
-            RuntimeError, "live pinned static-launcher parent"
+        environment = R._launcher_environment("training", "runtime_audit")
+        with mock.patch.dict(os.environ, environment, clear=True), self.assertRaises(
+            RuntimeError
         ):
             R.authenticate_static_launcher(EXP.parents[1], "training")
+
+    def test_runtime_manifest_rebuilds_exactly_when_snapshot_is_present(self) -> None:
+        snapshot = Path("/workspace/sme-reflection-runtime")
+        if not snapshot.is_dir():
+            self.skipTest("external immutable runtime snapshot is not provisioned")
+        script = EXP / "scripts" / "build_runtime_manifest.py"
+        expected = EXP / "scripts" / "runtime_manifest.tsv"
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary) / "runtime_manifest.tsv"
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(script),
+                    "--source-root",
+                    str(EXP.parents[1]),
+                    "--output",
+                    str(output),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(output.read_bytes(), expected.read_bytes())
 
     def test_pinned_git_execution_ignores_path_shadow(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -77,9 +129,17 @@ class RuntimeContractTests(unittest.TestCase):
             shadow = root / "git"
             shadow.write_text(f"#!/bin/sh\ntouch {marker}\nexit 99\n")
             shadow.chmod(0o755)
-            result = R.run_pinned_executable(
-                "git", ["--version"], cwd=EXP.parents[1], env={"PATH": str(root)}
+            loader = os.open(
+                "/workspace/sme-reflection-runtime/runtime-libs/ld-linux-x86-64.so.2",
+                os.O_RDONLY,
             )
+            try:
+                with mock.patch.object(R, "_PREAUTH_LOADER_FD", loader):
+                    result = R.run_pinned_executable(
+                        "git", ["--version"], cwd=EXP.parents[1], env={"PATH": str(root)}
+                    )
+            finally:
+                os.close(loader)
             self.assertEqual(result.returncode, 0)
             self.assertIn("git version", result.stdout)
             self.assertFalse(marker.exists())
@@ -205,7 +265,10 @@ class RuntimeContractTests(unittest.TestCase):
         self.assertEqual(identity["physical_index"], 1)
         self.assertEqual(run.call_args.args[0], "nvidia_smi")
         self.assertEqual(run.call_args.args[1][0], "--query-gpu=index,name,uuid,driver_version,memory.total")
-        self.assertEqual(run.call_args.kwargs["env"]["PATH"], "/usr/bin:/bin")
+        self.assertEqual(
+            run.call_args.kwargs["env"]["PATH"],
+            "/workspace/sme-reflection-runtime/tools",
+        )
         with mock.patch.object(
             R, "run_pinned_executable", return_value=inventory
         ), mock.patch.dict(

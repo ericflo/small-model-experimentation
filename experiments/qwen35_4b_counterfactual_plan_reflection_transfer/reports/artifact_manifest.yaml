@@ -1,6 +1,15 @@
 schema_version: 1
 experiment_id: "qwen35_4b_counterfactual_plan_reflection_transfer"
 external_artifacts:
+  - name: "leaseable pre-Python runtime snapshot"
+    storage: "/workspace/sme-reflection-runtime"
+    status: "locally provisioned; exact subtree commitments pinned; pending detached audit and Review 13"
+    required_for: "all static-launcher training and vLLM stages"
+    size_bytes: 3330187966
+    regenerate: >-
+      Copy Qwen experiment host Python 3.12, locale, Git helpers, selected tools, and
+      dereferenced x86-64 runtime libraries into /workspace/sme-reflection-runtime;
+      regenerate scripts/runtime_manifest.tsv and require exact pinned tree hashes.
   - name: "tokenizer and target-mask parity receipt"
     storage: "large_artifacts/qwen35_4b_counterfactual_plan_reflection_transfer/tokenizer_receipt.json"
     status: "historical; invalidated by Review-7 schema/config/provenance remediation"
@@ -26,9 +35,9 @@ reproducibility:
     - "none until a fresh exact-SHA tokenizer receipt is independently authorized"
 notes: >-
   Full CPU construction and a fresh tokenizer-only receipt are authorized, but all model,
-  GPU, training, evaluation, J-space, and benchmark work remains on adversarial HOLD
-  after exact-SHA Review 12 returned HOLD on pre-Python code trust and immutable-byte
-  closure for lease-denied read-only bind mounts.
+  GPU, training, evaluation, J-space, and benchmark work remains on adversarial HOLD.
+  Review 12's pre-Python and lease-denial findings have a model-free lease-only candidate
+  pending detached exact-SHA audits and Review 13.
   Both static-launcher runtime audits passed at da80b2b3 with no external output
   artifact; their terminal summaries are recorded in the design review and log.
   Qwen/Qwen3.5-4B revision 851bf6e8...d0a is the sole permitted future

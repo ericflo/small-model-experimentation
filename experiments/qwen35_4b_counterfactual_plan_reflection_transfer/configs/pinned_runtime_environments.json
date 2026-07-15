@@ -1,43 +1,43 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "system": {
-    "resolved_python": "/usr/bin/python3.12",
+    "resolved_python": "/workspace/sme-reflection-runtime/bin/python3.12",
     "resolved_python_sha256": "1d3cf64f97cadc79fdc6fe2496a21b7b456cb94211978cfef5a65f616af74fd5",
-    "stdlib_root": "/usr/lib/python3.12",
-    "stdlib_surface_sha256": "b5c0ff246ec5adb43e98495a498c4f93516556c710d8bfd9a503a79602974d3f",
-    "ld_library_path": "/usr/local/cuda/lib64",
+    "stdlib_root": "/workspace/sme-reflection-runtime/lib/python3.12",
+    "stdlib_surface_sha256": "98295deff70c7ebe9533232fd9188f28f5797c96baa272da5e341c083455016a",
+    "ld_library_path": "/workspace/sme-reflection-runtime/runtime-libs:/usr/local/cuda/lib64",
     "native_library_roots": {
-      "/usr/bin": "bedfe79764c32445c8585de1d962c4a5788c3f720b9dc52372abd8fccdd6db44",
-      "/usr/lib/locale": "f7492e2a88867e32c21476cf2895b4cf2df7ea4bb1aba32fc5116f6280a620ef",
-      "/usr/lib/x86_64-linux-gnu": "d952a04538516614458d65b143b8dca1532c347b3fede5970774d615d06502d3",
+      "/workspace/sme-reflection-runtime/lib/git-core": "136abd784c856eeb54ac6e0320e26f04286789c3b2e9e163eb5c99ac30ff6888",
+      "/workspace/sme-reflection-runtime/lib/locale": "f7492e2a88867e32c21476cf2895b4cf2df7ea4bb1aba32fc5116f6280a620ef",
+      "/workspace/sme-reflection-runtime/runtime-libs": "cd6e9f92b30f5a1861393a3ddf56c67730f40d43e12d977bff70157792e8022d",
+      "/workspace/sme-reflection-runtime/tools": "002f8957d8773e5edeb477cecb833f8000edc81fdf96b5382fe3825dad6648a6",
       "/usr/local/bin": "219d0b7b594b054c17c0171bd2aaa60805294ec915ce85528a9212d5b3032a2f",
       "/usr/local/cuda/bin": "4e39b2aaca1d7785cabf8c447d5c088c1f538010d2500d17a66d62b87ef4828e",
       "/usr/local/cuda/lib64": "dc7e063d3f5553febade13ee2541fb8dd32d4e4947d72df06ba15e17712d2740"
     },
     "native_mappings": {
-      "/usr/bin/python3.12": "1d3cf64f97cadc79fdc6fe2496a21b7b456cb94211978cfef5a65f616af74fd5",
-      "/usr/lib/locale/C.utf8/LC_CTYPE": "59015993b1b671273461ef1167d7a9ad76dc090d521c91102e962217ed6b6dba",
-      "/usr/lib/python3.12/lib-dynload/_bz2.cpython-312-x86_64-linux-gnu.so": "5bccbbb9dc55210d519bdcbab48caddfab44a3af5f632b1dac9dfffc2bc32260",
-      "/usr/lib/python3.12/lib-dynload/_hashlib.cpython-312-x86_64-linux-gnu.so": "78f06b9e16ed0518c44a7ee0d4973037ac7608c2e469165308236bbc8dde7aaa",
-      "/usr/lib/python3.12/lib-dynload/_json.cpython-312-x86_64-linux-gnu.so": "de1fdfa616ae2f72cb80a1dad76bf7143463d9a34600e0daf37109523abcf5d6",
-      "/usr/lib/python3.12/lib-dynload/_lzma.cpython-312-x86_64-linux-gnu.so": "e3f0237f9d36a2c45e4b10ffe92bb4c29ad049d5e8642a1f9ce555c8edc6a12a",
-      "/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache": "52c227df9d53248238602c1ddaccd2c8ddc4cc6a61aa45d7c425af590b8806a5",
-      "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2": "6222a16be7f2d458d6870efe6e715fc0c8d45766fb79cf7dcc3125538d703e28",
-      "/usr/lib/x86_64-linux-gnu/libbz2.so.1.0.4": "218c4abdabce31161f3c2778762986d1fe06633705c7eb004a740946a5ccdfff",
-      "/usr/lib/x86_64-linux-gnu/libc.so.6": "511f825ee075610ac9c0f7f91e2c13de2000d0f7b859f6461137e809a0a009d0",
-      "/usr/lib/x86_64-linux-gnu/libcrypto.so.3": "c19c2cf8d7cf91c4f273b1d3bbc56a9d19c91a739bfe57ad630756ee8ede7b77",
-      "/usr/lib/x86_64-linux-gnu/libexpat.so.1.9.1": "7ae38be4b2f909d25c5ca3107ed04bc3128a8a24ea7adfe30102c3f04089c9c3",
-      "/usr/lib/x86_64-linux-gnu/liblzma.so.5.4.5": "a9793942a8a5f6f4d0f523ef9e0a5be4f0033f2c6c28520cd2b4e706d53c6e17",
-      "/usr/lib/x86_64-linux-gnu/libm.so.6": "f06f2ce1f1833df5f41cf13b6447ff07bea993ad9b27297d3428c2f70ab3f0e7",
-      "/usr/lib/x86_64-linux-gnu/libz.so.1.3": "9b64150b28505a33d6bc3ecf709c279f6de97a1c184dbda65d06ee4537f6d286"
+      "/workspace/sme-reflection-runtime/bin/python3.12": "1d3cf64f97cadc79fdc6fe2496a21b7b456cb94211978cfef5a65f616af74fd5",
+      "/workspace/sme-reflection-runtime/lib/locale/C.utf8/LC_CTYPE": "59015993b1b671273461ef1167d7a9ad76dc090d521c91102e962217ed6b6dba",
+      "/workspace/sme-reflection-runtime/lib/python3.12/lib-dynload/_bz2.cpython-312-x86_64-linux-gnu.so": "5bccbbb9dc55210d519bdcbab48caddfab44a3af5f632b1dac9dfffc2bc32260",
+      "/workspace/sme-reflection-runtime/lib/python3.12/lib-dynload/_hashlib.cpython-312-x86_64-linux-gnu.so": "78f06b9e16ed0518c44a7ee0d4973037ac7608c2e469165308236bbc8dde7aaa",
+      "/workspace/sme-reflection-runtime/lib/python3.12/lib-dynload/_json.cpython-312-x86_64-linux-gnu.so": "de1fdfa616ae2f72cb80a1dad76bf7143463d9a34600e0daf37109523abcf5d6",
+      "/workspace/sme-reflection-runtime/lib/python3.12/lib-dynload/_lzma.cpython-312-x86_64-linux-gnu.so": "e3f0237f9d36a2c45e4b10ffe92bb4c29ad049d5e8642a1f9ce555c8edc6a12a",
+      "/workspace/sme-reflection-runtime/runtime-libs/ld-linux-x86-64.so.2": "6222a16be7f2d458d6870efe6e715fc0c8d45766fb79cf7dcc3125538d703e28",
+      "/workspace/sme-reflection-runtime/runtime-libs/libbz2.so.1.0": "218c4abdabce31161f3c2778762986d1fe06633705c7eb004a740946a5ccdfff",
+      "/workspace/sme-reflection-runtime/runtime-libs/libc.so.6": "511f825ee075610ac9c0f7f91e2c13de2000d0f7b859f6461137e809a0a009d0",
+      "/workspace/sme-reflection-runtime/runtime-libs/libcrypto.so.3": "c19c2cf8d7cf91c4f273b1d3bbc56a9d19c91a739bfe57ad630756ee8ede7b77",
+      "/workspace/sme-reflection-runtime/runtime-libs/libexpat.so.1": "7ae38be4b2f909d25c5ca3107ed04bc3128a8a24ea7adfe30102c3f04089c9c3",
+      "/workspace/sme-reflection-runtime/runtime-libs/liblzma.so.5": "a9793942a8a5f6f4d0f523ef9e0a5be4f0033f2c6c28520cd2b4e706d53c6e17",
+      "/workspace/sme-reflection-runtime/runtime-libs/libm.so.6": "f06f2ce1f1833df5f41cf13b6447ff07bea993ad9b27297d3428c2f70ab3f0e7",
+      "/workspace/sme-reflection-runtime/runtime-libs/libz.so.1": "9b64150b28505a33d6bc3ecf709c279f6de97a1c184dbda65d06ee4537f6d286"
     },
     "executables": {
       "git": {
-        "path": "/usr/bin/git",
+        "path": "/workspace/sme-reflection-runtime/tools/git",
         "sha256": "2a8c18fbf43da9f692d75474c72bea9dfd796c260b0f3dfe456376abc3bbd668"
       },
       "nvidia_smi": {
-        "path": "/usr/bin/nvidia-smi",
+        "path": "/workspace/sme-reflection-runtime/tools/nvidia-smi",
         "sha256": "d786f46940a9de79f31971d8b211fd4f25336ea19427478c7f7189bfced32a71"
       },
       "nvcc": {
@@ -45,22 +45,100 @@
         "sha256": "59e4e55f9a38b78c590df1e28a69dad91052958f18a03868ca4a547c043fbba7"
       },
       "uv": {
-        "path": "/usr/bin/uv",
+        "path": "/workspace/sme-reflection-runtime/tools/uv",
         "sha256": "f024ae4c9d3c885ecd27e91db540a50f5a3c16a6d18351576122e47a2598f5e7"
       }
     },
-    "runtime_dispatcher": {
-      "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/runtime_entry.py",
-      "sha256": "5ddc4135d297b1ec1c3827df6e69680b86c4424d976b64d08c7f6d56489f9464"
+    "pre_python_manifest": {
+      "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/runtime_manifest.tsv",
+      "sha256": "a4918269ca7230870ac6fe33e1a6db24831c69b6e4f34e54a60e31c9d2a12838"
+    },
+    "stage_entrypoints": {
+      "training": {
+        "adapter_behavior_gate": {
+          "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/adapter_behavior_gate.py",
+          "sha256": "3b0a377401a23528a5890f506b9777eec89f377492f76deb4cfcbe16e1d1c352"
+        },
+        "analyze": {
+          "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/analyze.py",
+          "sha256": "537b6f0b36215d1c679182ac5eaf12a0fe4883b6cf5ba7be753d246d5aeccb6a"
+        },
+        "authorize_stage": {
+          "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/authorize_stage.py",
+          "sha256": "cd1d46e1afa0705f02f8b026f1d02a7dd5cf0c95a9066cbde8084766540050ad"
+        },
+        "build_eval_inputs": {
+          "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/build_eval_inputs.py",
+          "sha256": "4a44a97b87135aaec1e504d28d28e5d58d732bf680ff695b3102eb43fc063f65"
+        },
+        "build_literal_action_inputs": {
+          "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/build_literal_action_inputs.py",
+          "sha256": "1df000fa4b20b93752f628a576e8cfb4ba88b181b7f4ebb01bf3b4c9226b6fcf"
+        },
+        "build_literal_reflection_inputs": {
+          "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/build_literal_reflection_inputs.py",
+          "sha256": "7d561fad5f8c89fc22384f00dd0a18145f3427362cba1ba1029059de101953d5"
+        },
+        "calibration_gate": {
+          "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/calibration_gate.py",
+          "sha256": "68ddc09af8dbbbdf8c12fb200fad1636d7a3bc5d5961b4e3b545082fa792b54e"
+        },
+        "matched_compute_gate": {
+          "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/matched_compute_gate.py",
+          "sha256": "fedccf71c55640ccdace4a6f5c3c62719a941f129ccc5726ce5c4fd6d4ed692d"
+        },
+        "merge_adapter": {
+          "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/merge_adapter.py",
+          "sha256": "15b0cde18de2088989160f3b992edc98aae2ded19334dc84fec93a0896c7a91c"
+        },
+        "retention_gate": {
+          "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/retention_gate.py",
+          "sha256": "c6760d2485078ce2e574781ff2a27d4f0f7499521c6ab85e2ebb1877f863fae4"
+        },
+        "runtime_audit": {
+          "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/runtime_audit.py",
+          "sha256": "f855da32cfef12080deaf694d6859f820b4709b3fc77d316815e7eca7c6832ab"
+        },
+        "score": {
+          "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/score.py",
+          "sha256": "385ceacd23d7736f18f86ffb4ae43fd8220211aae2c6c5fcfe3ac7d1fcc31723"
+        },
+        "score_literal": {
+          "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/score_literal.py",
+          "sha256": "7c0ce26cae12bb5a430b7ada37a4499e12853bf806d7d43a48192e235a51d4b3"
+        },
+        "tokenizer_receipt": {
+          "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/tokenizer_receipt.py",
+          "sha256": "fd28fdc915d9d6184903d1e14afdb6a2bbefffd6c2d64229e4c41987f5cca161"
+        },
+        "train": {
+          "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/train.py",
+          "sha256": "30d1fdb402d4459616e27d0f7e2b6863a30cb095df1f303432fb45b002f7a1e2"
+        }
+      },
+      "vllm": {
+        "run_frozen_reservoir": {
+          "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/run_frozen_reservoir.py",
+          "sha256": "afebfaccbcec774b6f300c1a310149716b87adb0b287716c6f0cc0c1bf955caf"
+        },
+        "runtime_audit": {
+          "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/runtime_audit.py",
+          "sha256": "f855da32cfef12080deaf694d6859f820b4709b3fc77d316815e7eca7c6832ab"
+        },
+        "vllm_runner": {
+          "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/src/vllm_runner.py",
+          "sha256": "fa098d280538c10c187ef7381232d71cdbb6de55f27338facf057aa534457bc3"
+        }
+      }
     },
     "launchers": {
       "training": {
         "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/training_launcher",
-        "sha256": "2d4e2063aa7a6526cc7f1b2bab5952c43e92219283b28d05788e0bd8d3e6e828"
+        "sha256": "20f205a9962d9d1cd8b548c43f68222e994393c582ac53487f4bdeb1437158aa"
       },
       "vllm": {
         "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/vllm_launcher",
-        "sha256": "b43044e9a59b4a57fa51330b5217e500c27c6fb681500e60fec1dfcaf74fd737"
+        "sha256": "fa47d705a22e554b4f65f7ecae2efc21c95ef5e4953ab51e9a838e13527df566"
       }
     }
   },

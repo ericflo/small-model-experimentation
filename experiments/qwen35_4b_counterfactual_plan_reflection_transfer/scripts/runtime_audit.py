@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -24,15 +25,10 @@ from runtime_contract import (  # noqa: E402
 
 
 def main() -> int:
-    invoked = Path(sys.executable)
-    matches = [
-        backend
-        for backend in ("training", "vllm")
-        if invoked == Path(_runtime_pin(backend)["environment_root"]) / "bin" / "python"
-    ]
-    if len(matches) != 1:
+    backend = os.environ.get("SME_RUNTIME_BACKEND")
+    if backend not in {"training", "vllm"}:
         raise RuntimeError("runtime audit cannot identify one pinned launcher backend")
-    backend = matches[0]
+    _runtime_pin(backend)
     bootstrap_runtime_environment(ROOT, backend)
     cutlass_discoverable = None
     if backend == "vllm":
@@ -48,7 +44,10 @@ def main() -> int:
         "guard_schema_version": guard["schema_version"],
         "guard_decision": guard["decision"],
         "protected_files": guard["protected_files"],
-        "read_only_file_mounts": guard.get("unleased_files", 0),
+        "unleased_files": 0,
+        "preflight_protected_files": receipt["preflight_window_guard"][
+            "protected_files"
+        ],
         "loaded_native_mappings": len(
             receipt["post_import_loaded_native_closure"]["mappings"]
         ),

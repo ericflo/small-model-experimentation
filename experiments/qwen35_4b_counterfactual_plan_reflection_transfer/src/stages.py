@@ -22,19 +22,15 @@ def sha256_file(path: Path) -> str:
 
 
 def git_commit() -> str:
-    from runtime_contract import run_pinned_executable
+    from runtime_contract import _run_preauthenticated_git
 
-    return run_pinned_executable(
-        "git", ["rev-parse", "HEAD"], cwd=Path.cwd()
-    ).stdout.strip()
+    return _run_preauthenticated_git(["rev-parse", "HEAD"], cwd=Path.cwd()).stdout.strip()
 
 
 def require_clean_worktree() -> None:
-    from runtime_contract import run_pinned_executable
+    from runtime_contract import _run_preauthenticated_git
 
-    if run_pinned_executable(
-        "git", ["status", "--porcelain"], cwd=Path.cwd()
-    ).stdout:
+    if _run_preauthenticated_git(["status", "--porcelain"], cwd=Path.cwd()).stdout:
         raise ValueError("stage consumption requires a clean worktree")
 
 

@@ -229,6 +229,7 @@ def validate_runtime_bootstrap(
         "post_import_native_library_authentication",
         "post_import_loaded_native_closure",
         "import_window_guard",
+        "preflight_window_guard",
         "lock_file",
         "lock_sha256",
         "python_isolated",
@@ -239,7 +240,7 @@ def validate_runtime_bootstrap(
     system_pin = _system_pin()
     environment_root = Path(pin["environment_root"])
     bin_root = environment_root / "bin"
-    invoked_python = environment_root / "bin" / "python"
+    invoked_python = Path("/workspace/sme-reflection-runtime/bin/python3.12")
     site_packages = (
         environment_root
         / "lib"
@@ -329,23 +330,37 @@ def validate_runtime_bootstrap(
     )
     launcher_pin = system_pin["launchers"][expected_backend]
     launcher_path = repo_root / launcher_pin["path"]
-    dispatcher_pin = system_pin["runtime_dispatcher"]
-    dispatcher_path = repo_root / dispatcher_pin["path"]
+    manifest_pin = system_pin["pre_python_manifest"]
+    manifest_path = repo_root / manifest_pin["path"]
+    stage_name = (
+        launcher_authentication.get("stage")
+        if isinstance(launcher_authentication, dict)
+        else None
+    )
+    stage_pin = (
+        system_pin["stage_entrypoints"][expected_backend].get(stage_name)
+        if isinstance(stage_name, str)
+        else None
+    )
+    descriptor_authentication = (
+        launcher_authentication.get("pre_python_descriptors")
+        if isinstance(launcher_authentication, dict)
+        else None
+    )
     launcher_selector = (
         launcher_authentication.get("cuda_visible_devices")
         if isinstance(launcher_authentication, dict)
         else None
     )
-    expected_launcher_environment = _launcher_environment(expected_backend)
+    expected_launcher_environment = _launcher_environment(expected_backend, stage_name or "")
     if launcher_selector is not None:
         expected_launcher_environment["CUDA_VISIBLE_DEVICES"] = launcher_selector
     valid_launcher = (
         isinstance(launcher_authentication, dict)
         and set(launcher_authentication)
         == {
-            "backend", "path", "sha256", "parent_pid", "proof_fd",
-            "dispatcher_path", "dispatcher_sha256", "cuda_visible_devices",
-            "environment_sha256",
+            "backend", "stage", "path", "sha256", "parent_pid", "proof_fd",
+            "cuda_visible_devices", "environment_sha256", "pre_python_descriptors",
         }
         and launcher_authentication.get("backend") == expected_backend
         and launcher_authentication.get("path") == str(launcher_path)
@@ -356,11 +371,48 @@ def validate_runtime_bootstrap(
         and type(launcher_authentication.get("parent_pid")) is int
         and launcher_authentication["parent_pid"] > 1
         and launcher_authentication.get("proof_fd") == 198
-        and launcher_authentication.get("dispatcher_path") == str(dispatcher_path)
-        and launcher_authentication.get("dispatcher_sha256") == dispatcher_pin["sha256"]
-        and dispatcher_path.is_file()
-        and not dispatcher_path.is_symlink()
-        and _sha256_file(dispatcher_path) == dispatcher_pin["sha256"]
+        and isinstance(stage_pin, dict)
+        and isinstance(descriptor_authentication, dict)
+        and set(descriptor_authentication)
+        == {"git", "loader", "manifest", "runtime_contract", "load_window_guard", "stage", "interpreter"}
+        and all(
+            isinstance(item, dict)
+            and set(item) == {"fd", "path", "sha256", "device", "inode", "size"}
+            and type(item["fd"]) is int
+            and type(item["device"]) is int
+            and type(item["inode"]) is int
+            and type(item["size"]) is int
+            and item["size"] >= 0
+            and isinstance(item["path"], str)
+            and isinstance(item["sha256"], str)
+            and len(item["sha256"]) == 64
+            for item in descriptor_authentication.values()
+        )
+        and descriptor_authentication["git"]["fd"] == 192
+        and descriptor_authentication["loader"]["fd"] == 193
+        and descriptor_authentication["manifest"]["fd"] == 194
+        and descriptor_authentication["runtime_contract"]["fd"] == 195
+        and descriptor_authentication["load_window_guard"]["fd"] == 196
+        and descriptor_authentication["stage"]["fd"] == 197
+        and descriptor_authentication["interpreter"]["fd"] == 199
+        and descriptor_authentication["manifest"]["path"] == str(manifest_path)
+        and descriptor_authentication["manifest"]["sha256"] == manifest_pin["sha256"]
+        and manifest_path.is_file()
+        and not manifest_path.is_symlink()
+        and _sha256_file(manifest_path) == manifest_pin["sha256"]
+        and descriptor_authentication["stage"]["path"] == str(repo_root / stage_pin["path"])
+        and descriptor_authentication["stage"]["sha256"] == stage_pin["sha256"]
+        and descriptor_authentication["runtime_contract"]["path"]
+        == str(repo_root / "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/src/runtime_contract.py")
+        and descriptor_authentication["load_window_guard"]["path"]
+        == str(repo_root / "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/src/load_window_guard.py")
+        and descriptor_authentication["interpreter"]["path"] == system_pin["resolved_python"]
+        and descriptor_authentication["interpreter"]["sha256"]
+        == system_pin["resolved_python_sha256"]
+        and descriptor_authentication["git"]["path"]
+        == system_pin["executables"]["git"]["path"]
+        and descriptor_authentication["git"]["sha256"]
+        == system_pin["executables"]["git"]["sha256"]
         and (
             launcher_selector is None
             or (
@@ -382,7 +434,7 @@ def validate_runtime_bootstrap(
     if (
         not isinstance(bootstrap, dict)
         or set(bootstrap) != required
-        or bootstrap.get("schema_version") != 3
+        or bootstrap.get("schema_version") != 4
         or bootstrap.get("backend") != expected_backend
         or not valid_launcher
         or bootstrap.get("worktree") != expected_worktree
@@ -444,7 +496,15 @@ def validate_runtime_bootstrap(
         bootstrap["import_window_guard"],
         [bin_root, site_packages, stdlib_root, *native_roots],
         expected_content=expected_content,
-        unleased_roots=[stdlib_root, *native_roots],
+    )
+    from load_window_guard import root_commitments
+
+    experiment = repo_root / "experiments/qwen35_4b_counterfactual_plan_reflection_transfer"
+    preflight_roots = [experiment / "src", experiment / "scripts", experiment / "configs"]
+    validate_load_window_receipt(
+        bootstrap["preflight_window_guard"],
+        preflight_roots,
+        expected_content={"worktree_code_surface": root_commitments(preflight_roots)},
     )
 
 
@@ -674,10 +734,10 @@ def validate_generation_protocol(
         raise ValueError("trained generation hardware differs from its training hardware")
     validate_interpreter_runtime(runtime, repo_root)
     validate_runtime_bootstrap(runtime, repo_root, "vllm")
-    from runtime_contract import run_pinned_executable
+    from runtime_contract import _run_preauthenticated_git
 
-    current_commit = run_pinned_executable(
-        "git", ["rev-parse", "HEAD"], cwd=repo_root
+    current_commit = _run_preauthenticated_git(
+        ["rev-parse", "HEAD"], cwd=repo_root
     ).stdout.strip()
     if runtime.get("git_commit") != current_commit:
         raise ValueError("generation Git commit differs from the scoring checkout")

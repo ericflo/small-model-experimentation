@@ -1538,10 +1538,11 @@
   },
   {
     "file_counts": {
+      ".c": 1,
       ".json": 3,
       ".md": 7,
       ".py": 48,
-      ".s": 1,
+      ".tsv": 1,
       ".yaml": 3,
       "[none]": 2
     },
@@ -1568,8 +1569,8 @@
       "src",
       "tests"
     ],
-    "total_files": 64,
-    "total_size_bytes": 800524
+    "total_files": 65,
+    "total_size_bytes": 2529109
   },
   {
     "file_counts": {

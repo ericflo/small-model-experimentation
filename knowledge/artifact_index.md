@@ -52,10 +52,12 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | `.sh` | 31 |
 | `[none]` | 21 |
 | `.pt` | 11 |
-| `.s` | 5 |
 | `.txt` | 5 |
+| `.s` | 4 |
 | `.aesgcm` | 2 |
+| `.c` | 1 |
 | `.npy` | 1 |
+| `.tsv` | 1 |
 
 ## Largest Files
 

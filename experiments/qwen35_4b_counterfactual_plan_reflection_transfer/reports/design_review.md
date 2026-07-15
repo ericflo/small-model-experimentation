@@ -780,3 +780,28 @@ The review made zero tokenizer/model/GPU/CUDA/training/evaluation/Jacobian/bench
 calls; read no benchmark, run, protected, prepared-data, qualification, confirmation,
 cache, artifact, weight, or secret payload; changed no tracked file; and removed all
 temporary residue. Authorization remains unchanged.
+
+### Review 12 remediation implemented, pending Review 13
+
+1. The static C launcher is now the only dispatcher. It authenticates a committed
+   tabular manifest, acquires mandatory read leases, and retains the interpreter,
+   loader, standard library, initial native mappings, Git/dependencies/helpers,
+   runtime contract, load guard, lock files, and selected stage before it forks. The
+   child directly executes the selected stage and every critical inode remains open in
+   the live parent. The former Python dispatcher and pathname stage re-exec are gone.
+2. A source/script/config `LoadWindowGuard` starts before the launcher-authenticated
+   Git preflight. The preflight disables filesystem monitors, untracked caches, hooks,
+   and pagers. Only after Git proves a clean detached exact-SHA checkout does the
+   runtime contract consume the committed environment pins.
+3. The host's lease-denied read-only files are no longer accepted. A self-contained
+   external runtime snapshot holds dereferenced, leaseable copies, its exact tree
+   surfaces are pinned, and both guard creation and receipt replay require schema-2
+   all-lease evidence. A real shared-writable-`mmap` regression fails at guard entry.
+4. Pinned dynamic executables enter through the retained snapshot loader while the
+   authenticated runtime tree remains guarded. Explicit Git, `uv`, and `nvcc`
+   provenance queries complete before seal. Git after seal uses the parent-retained
+   preauthenticated Git/loader closure.
+5. Deterministic rebuild tests replay the manifest and both static launcher binaries.
+   The local model-free suite passes 94 tests and 23 subtests. This remains a HOLD
+   candidate: exact-SHA detached runtime audits and independent Review 13 are mandatory
+   before any tokenizer/model/GPU/training/evaluation authorization changes.

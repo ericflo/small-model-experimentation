@@ -4,13 +4,12 @@
 
 The experiment remains without model forward passes under a full-implementation
 adversarial HOLD. Full CPU construction succeeds and the historical tokenizer receipt
-is invalid as a training prerequisite. Review 9's five load, counter, runtime,
-environment, and selected-hardware gaps were remediated model-free. Review 10 then
-reproduced four narrower runtime/import/re-exec/device-auth blockers. Their model-free
-remediations were published, but exact-SHA Review 11 returned HOLD with five concrete
-runtime/provenance counterexamples. Those findings now have model-free remediations
-awaiting exact-SHA Review 12. No Qwen
-generation, GPU, training, capability measurement, or Jacobian event exists.
+is invalid as a training prerequisite. Exact-SHA Review 12 accepted the venv/CUTLASS,
+active-UUID, and initial-mapping closures but returned HOLD on pre-Python code trust,
+subprocess dependency closure, and lease-denied read-only mounts. A model-free
+lease-only remediation is now implemented and awaits a clean detached audit plus
+exact-SHA Review 13. No Qwen generation, GPU, training, capability measurement, or
+Jacobian event exists.
 
 ## Research Program Fit
 
@@ -108,13 +107,26 @@ dispatcher/runtime/config/stage execute or influence execution before descriptor
 authentication and that read-only bind mounts do not exclude pre-existing writable
 mappings of their backing inodes.
 
+## Review-12 Remediation Candidate
+
+The replacement static C launchers authenticate and retain a committed manifest before
+forking. Mandatory read leases cover the exact snapshot interpreter and dynamic loader,
+the standard library, initial native closure, Git plus its dependencies and helpers,
+the runtime contract, load guard, lock files, and selected stage. The child executes the
+stage directly through inherited descriptors; there is no Python dispatcher. A fixed
+worktree code/config guard starts before authenticated Git preflight, and the complete
+runtime/site/native guard admits no unleased files. A pre-existing shared writable
+mapping is an explicit kernel-level rejection test. Explicit Git, `uv`, and `nvcc`
+metadata calls complete before guard seal. The external runtime snapshot contains only
+byte copies whose exact tree surfaces are pinned in the repository. This is implementation
+evidence, not authorization; Review 13 must independently attack an exact clean commit.
+
 ## Next Experiments
 
-Make the launcher authenticate and retain the interpreter/bootstrap/config/stage bytes
-before Python interprets repository code, close the complete subprocess dependency
-boundary, and replace lease-denied backing files with an immutable-byte mechanism.
-Then obtain a fresh exact-SHA review before changing authorization. Nothing beyond
-tokenizer-only work is authorized yet.
+Run both model-free detached runtime audits at the exact committed SHA, replay the
+manifest and launcher builds, obtain Review 13, and remediate any reproduced
+counterexample before changing authorization. Nothing beyond tokenizer-only work is
+authorized yet.
 
 ## Artifact Manifest
 
