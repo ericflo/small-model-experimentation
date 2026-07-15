@@ -53,8 +53,12 @@ same fresh screen):
 - `= SCREEN_FORTUNE_SUSPECT` iff `hygiene_explore_direct` ≥ −5 (the −10 fails
   to reproduce) → successor: retention-band re-calibration across seeds before
   any further dose inference.
-- Any other combination is reported verbatim as `MIXED` with no successor
-  auto-selected.
+- The three branches form a total partition evaluated in this order:
+  SCREEN_FORTUNE_SUSPECT takes precedence (if the known −10 fails to
+  reproduce, no dose inference from this screen is trustworthy), then
+  SUPPORTED, then REFUTED_INTRINSIC. (Amended pre-GPU to match the
+  implemented, unit-tested partition; an earlier draft named an unreachable
+  MIXED case.)
 
 Secondary readings: hygiene per-kind counts across all four arms (the install
 probe); axis totals; caps/parse per arm.
