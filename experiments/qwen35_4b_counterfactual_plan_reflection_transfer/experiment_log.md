@@ -315,3 +315,11 @@
   Exact-SHA Validate Repository `29380316080` and Publish Research Site `29380316110`
   passed. The detached worktree stayed clean and was removed. No tokenizer/model/GPU/
   training/evaluation/Jacobian/benchmark event occurred; Review 12 remains required.
+- Independent Review 12 of exact commit
+  `26b9c42bf8e026153c6af66841fbaca5202d8bca` returned HOLD despite 92 tests, 23
+  subtests, byte-identical launcher rebuilds, both detached runtime seals, and both
+  green CI workflows. It accepted raw venv/CUTLASS/frozen geometry, active-UUID
+  structure, and complete initial-mapping replay. It rejected the circular pre-Python
+  dispatcher/runtime/config/stage trust boundary, incomplete dynamic subprocess
+  closure, and read-only-bind fallback because an older writable backing-inode mapping
+  is not excluded. Zero prohibited calls or reads occurred; authorization is unchanged.

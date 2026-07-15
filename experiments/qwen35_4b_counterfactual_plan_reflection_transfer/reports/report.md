@@ -102,12 +102,19 @@ The exact-SHA detached seals subsequently passed at
 and vLLM protected 73,330; each admitted only the 34 exact read-only NVIDIA mounts and
 authenticated 17 loaded mappings. vLLM also proved CUTLASS discovery without model
 import. Both exact-SHA CI workflows passed, and the clean detached worktree was
-removed. Review 12 remains the independent gate.
+removed. Review 12 subsequently returned HOLD. It accepted venv/CUTLASS/geometry,
+active-UUID, and initial-mapping replay closures, but found that the
+dispatcher/runtime/config/stage execute or influence execution before descriptor
+authentication and that read-only bind mounts do not exclude pre-existing writable
+mappings of their backing inodes.
 
 ## Next Experiments
 
-Obtain a fresh independent Review 12 verdict on the exact published remediation before
-changing authorization. Nothing beyond tokenizer-only work is authorized yet.
+Make the launcher authenticate and retain the interpreter/bootstrap/config/stage bytes
+before Python interprets repository code, close the complete subprocess dependency
+boundary, and replace lease-denied backing files with an immutable-byte mechanism.
+Then obtain a fresh exact-SHA review before changing authorization. Nothing beyond
+tokenizer-only work is authorized yet.
 
 ## Artifact Manifest
 

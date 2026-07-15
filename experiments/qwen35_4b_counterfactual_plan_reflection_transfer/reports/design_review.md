@@ -745,3 +745,38 @@ the authenticated CUTLASS path discoverable without model import. Validate Repos
 run `29380316080` and Publish Research Site run `29380316110` both succeeded. The
 detached worktree remained clean and was removed. Zero tokenizer/model/GPU/training/
 evaluation/Jacobian/benchmark events occurred. Review 12 remains required.
+
+## Review 12 — 2026-07-15
+
+**Reviewed commit:** `26b9c42bf8e026153c6af66841fbaca5202d8bca`
+
+**Verdict:** **HOLD full implementation.**
+
+Exact-SHA Validate Repository run `29380577827` and Publish Research Site run
+`29380577748` passed. The independent sparse detached suite passed 92 tests and 23
+subtests; both static launchers rebuilt byte-identically; and the independent training
+and vLLM runtime audits reproduced the recorded seal counts. Five-blocker disposition:
+
+1. **Critical, open:** the launcher authenticates its own inode but executes the venv
+   interpreter and dispatcher by path. The dispatcher imports the runtime contract
+   before launcher authentication, and the selected stage is only existence/symlink
+   checked before another path exec. Interpreter symlink, dispatcher, runtime contract,
+   pin/config, and stage bytes can therefore execute or influence execution before
+   they are guarded or descriptor-authenticated.
+2. **Critical, open:** per-tool descriptor authentication closes PATH shadowing but not
+   the dynamic dependency and configured-helper closure of the initial Git preflight
+   or later Git/`uv`/`nvcc` work around guard sealing.
+3. **High, open:** a read-only bind mount does not exclude a writable shared mapping of
+   its underlying inode created earlier. Such writes need not emit inotify events. The
+   accepted mount receipt also omits mount-namespace identity, and per-tool fallback
+   does not retain/replay its mount identity.
+4. **Closed model-free:** raw invoked venv bin, explicit CUTLASS path, frozen geometry,
+   and absence of adaptive re-exec behave as preregistered.
+5. **Closed as scoped:** active CUDA UUID is compared and recorded structurally, and
+   loaded-native creation/replay requires every pinned initial mapping. Hardware was
+   intentionally not exercised.
+
+The review made zero tokenizer/model/GPU/CUDA/training/evaluation/Jacobian/benchmark
+calls; read no benchmark, run, protected, prepared-data, qualification, confirmation,
+cache, artifact, weight, or secret payload; changed no tracked file; and removed all
+temporary residue. Authorization remains unchanged.

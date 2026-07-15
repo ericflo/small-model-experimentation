@@ -1,6 +1,6 @@
 # Qwen3.5-4B Counterfactual Plan Reflection Transfer
 
-**Status:** in-progress · since 2026-07-14 · Review 11 blockers are remediated model-free and awaiting exact-SHA Review 12; model/GPU/training/evaluation remain unauthorized
+**Status:** in-progress · since 2026-07-14 · exact-SHA Review 12 returned HOLD on pre-Python code trust and lease-denied mount immutability; model/GPU/training/evaluation remain unauthorized
 
 This experiment tests the paper's most actionable claim without relying on its
 consciousness framing: can supervision on what the model would say on a later
@@ -330,6 +330,19 @@ path without importing a model. Validate Repository run `29380316080` and Publis
 Research Site run `29380316110` both passed. The detached worktree stayed clean and was
 removed. These remain model-free implementation facts; Review 12 and all execution
 authorization are still pending.
+
+Independent Review 12 audited exact commit
+`26b9c42bf8e026153c6af66841fbaca5202d8bca` and returned HOLD. It accepted the raw
+venv-bin/CUTLASS/frozen-geometry closure, structural active-CUDA UUID binding, and
+mandatory initial-mapping replay. It rejected two broader claims. First, the static
+launcher authenticates itself but opens the dispatcher by path; the dispatcher,
+runtime contract, pin/config, and selected stage can execute or influence execution
+before they are descriptor-authenticated. Per-tool inode authentication likewise does
+not close dynamic dependency/helper execution before or after the tree guard. Second,
+an exact read-only bind mount does not exclude a writable shared mapping of the same
+underlying inode created before the mount became read-only, and the current mount
+receipt lacks mount-namespace identity. Authorization remains unchanged while these
+counterexamples are remediated model-free.
 
 ## Interpretation
 
