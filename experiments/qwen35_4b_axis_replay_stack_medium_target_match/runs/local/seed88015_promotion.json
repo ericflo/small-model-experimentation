@@ -1,0 +1,117 @@
+{
+  "aggregate_seed": 78145,
+  "aggregate_seed_open": false,
+  "axis_kind_wins": 2,
+  "axis_kinds": [
+    "u_explore",
+    "u_hygiene",
+    "u_protocol",
+    "u_tracefix"
+  ],
+  "axis_rows": 40,
+  "backend": "vllm_merged_composite",
+  "benchmark_data_read": false,
+  "candidates": [
+    "axis_on_replay"
+  ],
+  "checks": {
+    "axis_kind_wins_at_least_3_of_4": false,
+    "axis_total_strictly_beats_parent": true,
+    "axis_total_strictly_beats_replay": true,
+    "retention_cap_contacts_within_3_of_parent": true,
+    "retention_cap_contacts_within_3_of_replay": true,
+    "retention_correct_within_5_of_parent": true,
+    "retention_correct_within_5_of_replay": true,
+    "retention_parsed_within_3_of_parent": true,
+    "retention_parsed_within_3_of_replay": true,
+    "route_abstentions_at_most_4_of_8": true
+  },
+  "controls": [
+    "replay_squared",
+    "replay_parent"
+  ],
+  "design_receipt_sha256": "cbb7eccd512e715dc5d25eb18153f72975de66ece5054c0a8716eb14a4211fb6",
+  "eligible": [],
+  "experiment_id": "qwen35_4b_axis_replay_stack_medium_target_match",
+  "kind_wins": {
+    "u_explore": false,
+    "u_hygiene": true,
+    "u_protocol": false,
+    "u_tracefix": true
+  },
+  "local_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_axis_replay_stack_medium_target_match/runs/local/seed88015.json",
+  "local_receipt_sha256": "7df018e0809e32b1b6c73d781d446f59ded484fb050d3225158a32e1b74ff5a1",
+  "no_absolute_per_kind_floors": true,
+  "promoted": null,
+  "retention_rows": 104,
+  "schema_version": 1,
+  "seed": 88015,
+  "summaries": {
+    "axis_on_replay": {
+      "adapter": "axis_on_replay",
+      "axis": {
+        "correct": 24,
+        "per_kind_correct": {
+          "u_explore": 5,
+          "u_hygiene": 9,
+          "u_protocol": 8,
+          "u_tracefix": 2
+        },
+        "rows": 40
+      },
+      "cap_contacts": 9,
+      "retention": {
+        "cap_contacts": 6,
+        "correct": 64,
+        "parsed": 98,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "total_correct": 88
+    },
+    "replay_parent": {
+      "adapter": "replay_parent",
+      "axis": {
+        "correct": 18,
+        "per_kind_correct": {
+          "u_explore": 4,
+          "u_hygiene": 5,
+          "u_protocol": 8,
+          "u_tracefix": 1
+        },
+        "rows": 40
+      },
+      "cap_contacts": 20,
+      "retention": {
+        "cap_contacts": 12,
+        "correct": 65,
+        "parsed": 92,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "total_correct": 83
+    },
+    "replay_squared": {
+      "adapter": "replay_squared",
+      "axis": {
+        "correct": 15,
+        "per_kind_correct": {
+          "u_explore": 7,
+          "u_hygiene": 5,
+          "u_protocol": 3,
+          "u_tracefix": 0
+        },
+        "rows": 40
+      },
+      "cap_contacts": 31,
+      "retention": {
+        "cap_contacts": 18,
+        "correct": 64,
+        "parsed": 86,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "total_correct": 79
+    }
+  }
+}

@@ -14,7 +14,9 @@ Identical machinery to the predecessor with three deltas: parent (the 0.5081 com
 
 ## Results
 
-No capability result exists.
+- Training (1,520 rows, 0 skips, 190 updates each): control 0.3468, candidate 0.4547 train loss.
+- Gate (seed 88,015), axis holdout of 40: candidate 24, parent 18, replay_squared 15; per-kind candidate/parent/squared: explore 5/4/7, hygiene 9/5/5, protocol 8/8/3, tracefix 2/1/0. Retention of 104: 64/98/6 vs 65/92/12 vs 64/86/18 (correct/parsed/caps).
+- Nine of ten checks passed; the 3-of-4 kind-breadth bar alone failed (protocol ceiling tie — second consecutive experiment — plus the control's explore 7/10). No promotion; seed 78,145 permanently sealed; the medium pilot never ran.
 
 ## Controls
 
@@ -26,7 +28,7 @@ Executable truth grades outputs only; `benchmarks/` remains unread.
 
 ## Next Stage
 
-Design review; then, behind clean pushed green checkpoints: train-control, train-candidate, merge-arms, the gate event, and the conditional medium pilot.
+None. Closed per the frozen contract. The queued successor is a training-free fresh-instrument re-adjudication of the published composites with a prospectively detectability-corrected breadth bar and a conditional medium pilot.
 
 ## Artifact Manifest
 

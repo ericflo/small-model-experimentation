@@ -2,7 +2,7 @@
 
 Stack the proven axis-atom install on the strongest replay-compounded parent (the 0.5081 composite), against a replay-squared control that simultaneously measures whether replay compounding continues at round two — with the conditional pilot at the MEDIUM tier, where the all-families goal is empirically reachable.
 
-**Status:** in-progress · since 2026-07-14 · model-free construction under way; no model event has run
+**Status:** finished · 2026-07-15 · local negative on the kind-breadth bar alone; axis install replicated on the new parent (+6 total, hygiene and tracefix wins, best termination); replay round two showed local drift; seed 78,145 permanently sealed
 
 ## Research Program
 
@@ -48,16 +48,20 @@ Checkpointed stages (each requires its prerequisite committed at a clean, pushed
 
 ## Results
 
-No model event has run. Model-free construction is in progress.
+Both arms trained cleanly (control 0.3468, candidate 0.4547 train loss; 0 skips) and merged. The frozen 144-task gate event at seed 88,015: axis holdout of 40 — candidate 24, parent 18, replay_squared 15; per-kind candidate/parent/squared: explore 5/4/7, hygiene 9/5/5, protocol 8/8/3, tracefix 2/1/0. Retention of 104: candidate 64/98/6 (correct/parsed/caps), parent 65/92/12, squared 64/86/18. Nine of ten checks passed; the single failure was the 3-of-4 kind-breadth bar (hygiene and tracefix won; protocol tied at the parent's 8 — the second consecutive experiment where protocol ties at that ceiling; explore lost to the control's 7/10). No promotion; seed 78,145 permanently sealed; no benchmark event ran.
 
 ## Interpretation
 
-None yet.
+Three frozen readings land clearly. (1) Stack survival: the axis install transfers across parents — total +6 over parent for the second time, hygiene at 9/10 twice, with the best termination in the event (6 caps versus 12 and 18) and retention inside every band. (2) Replay compounding: round two DRIFTED at the local instrument (parse 86, caps 18, axis 15/40 with wild kind variance including the 7/10 explore fluke that broke the breadth bar) — the aggregate compounding observed at seed 78,144 does not show up as local quality, so compounding is either aggregate-specific or seed-fortunate. (3) Instrument design: the protocol holdout has tied at the parent ceiling in two independent experiments (8/8/8 twice), making it undetectable and effectively converting the 3-of-4 bar into 3-of-3 on the remaining kinds — a measured design flaw for successors to fix prospectively, not a capability fact.
+
+## Terminal Disposition
+
+No later event is authorized here. Seed 78,145 was never opened and is spent-by-sealing. The published `axis_on_replay` composite carries the strongest local numbers of any artifact in the line (24/40 axis, 64/98/6 retention) and is the presumptive subject of a fresh-instrument re-adjudication with a detectability-corrected breadth bar; any such test is a new experiment with its own gate seed and lifecycle.
 
 ## Knowledgebase Update
 
-- Program evidence updated: pending the first result.
-- Program backlog updated: this trial claims both queued directions (replay compounding; axis conversion at medium).
+- Program evidence updated: stack survival, replay round-two drift, and the ceiling-tie instrument flaw recorded.
+- Program backlog updated: fresh-instrument re-adjudication of the published composites queued with calibration notes.
 - Claim ledger updated: no.
 
 ## Artifacts

@@ -174,6 +174,21 @@
   and replay); closed per contract. Standing facts for successors: menders is 0
   and sirens exactly 0.500 for EVERY arm at EVERY seed at quick/tb1024; replay
   continuation has now compounded aggregate three consecutive times.
+- Completed stack trial (local negative on the breadth bar alone):
+  `qwen35_4b_axis_replay_stack_medium_target_match` — axis install REPLICATED
+  on the new parent (24/40 vs 18/15; hygiene 9/10 twice across experiments;
+  best-in-event termination), replay round two DRIFTED locally (parse 86, caps
+  18), and the protocol holdout tied at the parent ceiling for the second
+  consecutive experiment, converting 3-of-4 into 3-of-3 and letting one control
+  kind-fluke (explore 7/10) veto promotion. Seed 78145 sealed; medium pilot
+  never ran.
+- Queued NEXT (calibrated, training-free): fresh-instrument re-adjudication of
+  the published composites (axis_on_replay 24/40-64/98/6, its parent, and
+  replay_squared) at a new gate seed with a prospectively detectability-
+  corrected breadth bar (kinds where any control scores >= 9/10 are excluded
+  from the win requirement and reported as not-detectable), conditional medium
+  pilot behind it. Cost: eval-only (~40 GPU-minutes). Rationale: the mechanism
+  evidence is replicated twice; the blocker is instrument noise, not content.
 - Queued (calibration notes attached): (a) replay-compounding line — measure
   whether iterated replay rounds keep gaining aggregate and where they saturate;
   the published `replay_repeat` composite (0.5081) is the presumptive parent;

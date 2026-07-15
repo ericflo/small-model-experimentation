@@ -36,3 +36,15 @@
 - Both arms merged (scale 2.0, 128/128 nonzero modules, fingerprint-verified);
   merged-tree pins filled fail-closed in the evaluator. The one frozen 144-task
   gate event at seed 88,015 is the only next stage.
+
+## 2026-07-15 — Gate event: no promotion; experiment closed
+
+- The frozen gate event ran from merge checkpoint `7183fa9e`: three
+  authenticated engine runs over the 144-row input at seed 88,015.
+- Axis holdout: candidate 24/40, parent 18, replay_squared 15. Per-kind
+  candidate/parent/squared: explore 5/4/7, hygiene 9/5/5, protocol 8/8/3,
+  tracefix 2/1/0. Retention: 64/98/6 vs 65/92/12 vs 64/86/18.
+- Nine of ten checks passed; the 3-of-4 kind-breadth bar failed (protocol tied
+  at the parent ceiling for the second consecutive experiment; explore lost to
+  the control's 7/10). No promotion; seed 78,145 permanently sealed per the
+  frozen contract; no benchmark event ran.

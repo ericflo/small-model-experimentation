@@ -812,3 +812,27 @@ must either explain those two constants (instrument-level forensics from
 public metadata and score behavior only) or find a mechanism that moves them;
 another same-shape axis dose is not a believable next step for menders after
 two failed transfer attempts (loomfix, tracefix).
+
+## qwen35_4b_axis_replay_stack_medium_target_match (2026-07-15 — Local negative on the breadth bar; stack survival and replay-drift readings)
+
+The stack trial retrained the inherited axis corpus from the 0.5081
+replay-compounded parent against a replay-squared exact-exposure control. At
+the frozen 144-task gate (seed 88,015): axis holdout candidate 24/40 vs parent
+18 vs replay_squared 15 (hygiene 9/5/5, tracefix 2/1/0, protocol 8/8/3 —
+tied at the parent ceiling for the second consecutive experiment — explore
+5/4/7); retention candidate 64/98/6 vs 65/92/12 vs 64/86/18. Nine of ten
+checks passed; the 3-of-4 kind-breadth bar alone failed, so seed 78,145 sealed
+and the medium-tier pilot never ran.
+
+Read: (1) STACK SURVIVAL — the axis install transfers across parents (+6 axis
+total twice, hygiene 9/10 twice, best-in-event termination both times);
+(2) REPLAY ROUND-TWO DRIFT — the second replay round degraded every local
+quality number (parse 86, caps 18, axis 15/40 with wild kind variance),
+so the aggregate compounding at seed 78,144 is aggregate-specific or
+seed-fortunate, not a general quality gain; (3) INSTRUMENT FLAW — the protocol
+holdout ties at the parent ceiling in two independent experiments, silently
+tightening 3-of-4 into 3-of-3; successors must handle undetectable kinds
+prospectively. Queued next (calibrated): a training-free fresh-instrument
+re-adjudication of the published composites with a detectability-corrected
+breadth bar and a conditional medium pilot — the mechanism evidence is
+replicated, the blocker is gate noise, and the cost is merge/eval only.

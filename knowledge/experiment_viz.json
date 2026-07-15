@@ -48715,35 +48715,43 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Preregistered stage completion",
+     "title": "Seed-88015 gate: axis holdout and retention by arm",
      "categories": [
-      "intake",
-      "inherited corpus",
-      "exposure match",
-      "design review",
-      "train 2 arms",
-      "gate event",
-      "medium pilot"
+      "replay_parent",
+      "replay_squared",
+      "axis_on_replay"
      ],
      "series": [
       {
-       "label": "completed checkpoint",
+       "label": "axis holdout correct (of 40)",
        "values": [
-        1,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0
+        18,
+        15,
+        24
+       ]
+      },
+      {
+       "label": "retention correct (of 104)",
+       "values": [
+        65,
+        64,
+        64
+       ]
+      },
+      {
+       "label": "cap contacts",
+       "values": [
+        12,
+        18,
+        6
        ]
       }
      ],
-     "x_label": "preregistered experiment stage",
-     "y_label": "completion indicator",
+     "x_label": "explicit merged composite",
+     "y_label": "count",
      "y_format": "integer",
-     "note": "The 160-row axis corpus is inherited byte-identically onto the 0.5081 replay-compounded parent; the replay-squared control doubles as the round-two compounding measurement; the pilot is preregistered at the medium tier (seed 78,145 sealed).",
-     "source": "experiments/qwen35_4b_axis_replay_stack_medium_target_match/reports/preregistration.md"
+     "note": "The axis install replicated on the new parent (+6 total; hygiene 9/10 twice across experiments; best termination), but the 3-of-4 kind-breadth bar failed on a ceiling tie plus a control kind-fluke, sealing seed 78145 before the medium pilot. Replay round two drifted locally.",
+     "source": "experiments/qwen35_4b_axis_replay_stack_medium_target_match/reports/report.md"
     }
    ]
   }
