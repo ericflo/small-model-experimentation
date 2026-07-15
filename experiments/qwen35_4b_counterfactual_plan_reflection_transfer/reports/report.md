@@ -6,8 +6,9 @@ The experiment remains without model forward passes under a full-implementation
 adversarial HOLD. Full CPU construction succeeds and the historical tokenizer receipt
 is invalid as a training prerequisite. Review 9's five load, counter, runtime,
 environment, and selected-hardware gaps were remediated model-free. Review 10 then
-reproduced four narrower runtime/import/re-exec/device-auth blockers; all four now
-have model-free fail-closed remediations awaiting exact-SHA Review 11. No Qwen
+reproduced four narrower runtime/import/re-exec/device-auth blockers. Their model-free
+remediations were published, but exact-SHA Review 11 returned HOLD with five concrete
+runtime/provenance counterexamples. No Qwen
 generation, GPU, training, capability measurement, or Jacobian event exists.
 
 ## Research Program Fit
@@ -71,17 +72,23 @@ Review 10 accepted those Review-9 closures but rejected the remaining auth→imp
 window, unpinned interpreter/stdlib/native boundary, broken `-S` venv/re-exec semantics,
 and PATH-resolved selected-device query.
 
-The pending Review-11 implementation closes those paths by retaining an authenticated
+The implementation submitted to Review 11 attempted to close those paths by retaining an authenticated
 inotify/lease/hash window across every artifact-relevant import, pinning the
 interpreter and complete stdlib/system/CUDA/site surfaces, explicitly activating the
 authenticated CUTLASS path under `-S`, removing adaptive Mamba re-exec, pinning the
 absolute device-query binary, and binding its physical UUID row to CUDA's sole active
 logical device after initialization. Real detached bootstrap/seal checks pass for
-both stage-specific environments. This remains implementation evidence only.
+both stage-specific environments. Review 11 nevertheless showed that an allowed
+unleased system file can change without an observed event; venv-bin derivation still
+resolves to `/usr/bin`; the active CUDA UUID is neither compared nor recorded;
+PATH-resolved Git, `uv`, and `nvcc` remain outside the authenticated executable
+boundary; and replay does not require a nonempty loaded-native closure. This remains
+implementation evidence only and all execution authorization stays unchanged.
 
 ## Next Experiments
 
-Publish the exact remediation and obtain a fresh independent Review 11 verdict before
+Convert all five Review-11 counterexamples into fail-closed tests, remediate them
+model-free, publish the exact revision, and obtain a fresh independent verdict before
 changing authorization. Nothing beyond tokenizer-only work is authorized yet.
 
 ## Artifact Manifest

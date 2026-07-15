@@ -672,3 +672,38 @@ vLLM audit also proves CUTLASS discovery without executing it. No tokenizer, mod
 GPU, training, evaluation, Jacobian, benchmark, protected-data, or weight event
 occurred. Authorization remains unchanged. Review 11 must audit the exact clean pushed
 SHA before any execution flag can change.
+
+## Review 11 — 2026-07-15
+
+**Reviewed commit:** `903842b09209044aa0a48c2f7f7fd59ef3681d2b`
+
+**Verdict:** **HOLD full implementation.**
+
+The reviewer verified that `HEAD` and `origin/main` matched the target and that the
+tree remained clean. Exact-SHA Validate Repository run `29376200635` and Publish
+Research Site run `29376200714` both passed. The archived model-free suite passed 87
+tests and 23 subtests, but five counterexamples remain:
+
+1. **Critical:** the scoped lease fallback can admit an unleased system file whose
+   content changes without an inotify event, yet the guard can still issue
+   `LOAD_WINDOW_IMMUTABLE`. The runtime import window is therefore not fail-closed.
+2. **High:** resolving `sys.executable` before taking its parent follows the venv
+   interpreter symlink to `/usr/bin`, so `.venv-vllm/bin` is still absent under `-S`
+   and an expected tool cannot be resolved. Explicit CUTLASS activation, removal of
+   adaptive re-exec/geometry mutation, terminal capacity failure, and frozen geometry
+   otherwise pass.
+3. **High:** active CUDA validation compares only name and memory. It neither compares
+   nor records the active device UUID, so a different same-spec device can satisfy the
+   selected physical row.
+4. **High:** later Git, `uv`, and `nvcc` invocations remain PATH-resolved, and some
+   stdlib/native bootstrap code executes before the complete tree guard is active.
+   The executable/runtime trust boundary is therefore incomplete.
+5. **Medium:** replay accepts an empty loaded-native-mapping dictionary because it
+   validates only supplied entries and requires no minimum closure membership.
+
+The review made zero tokenizer/model/GPU/training/evaluation/Jacobian/benchmark calls;
+read no benchmark, run, protected, cache, prepared-dataset, qualification,
+confirmation, large-artifact, weight, or secret payload; changed no tracked file; and
+removed all transient review material. Authorization remains unchanged. All five
+counterexamples require executable fail-closed regressions and model-free remediation
+before another exact-SHA review.

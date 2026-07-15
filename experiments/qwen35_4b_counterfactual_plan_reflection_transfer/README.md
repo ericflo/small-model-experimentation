@@ -1,6 +1,6 @@
 # Qwen3.5-4B Counterfactual Plan Reflection Transfer
 
-**Status:** in-progress · since 2026-07-14 · Review 10 blockers are remediated model-free and awaiting exact-SHA Review 11; model/GPU/training/evaluation remain unauthorized
+**Status:** in-progress · since 2026-07-14 · exact-SHA Review 11 returned HOLD on five runtime/provenance blockers; model/GPU/training/evaluation remain unauthorized
 
 This experiment tests the paper's most actionable claim without relying on its
 consciousness framing: can supervision on what the model would say on a later
@@ -294,7 +294,16 @@ sizes `[1, 2, 4, 8, 15]`. The selected-device query uses the pinned absolute
 active logical device's name and memory. Receipt schemas again invalidate every prior
 artifact. Both real detached training/vLLM bootstrap-seal audits and the model-free
 suite pass without tokenizer/model/GPU/training/evaluation/Jacobian/benchmark events.
-Authorization remains unchanged pending independent Review 11 of the pushed SHA.
+Independent Review 11 audited exact pushed commit
+`903842b09209044aa0a48c2f7f7fd59ef3681d2b` and returned HOLD despite 87 tests,
+23 subtests, and both exact-SHA CI workflows passing. It found that the scoped
+system-file lease fallback is not fail-closed against all mutation mechanisms; the
+resolved vLLM interpreter still collapses its bin directory to `/usr/bin` under
+`-S`; active CUDA validation compares name and memory but not UUID; later Git, `uv`,
+and `nvcc` calls remain PATH-resolved while some bootstrap code runs before the full
+tree guard; and replay accepts an empty loaded-native-mapping set. Authorization
+remains unchanged while these five counterexamples are converted into fail-closed
+regressions and remediated model-free.
 
 ## Interpretation
 

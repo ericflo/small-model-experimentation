@@ -287,3 +287,15 @@
   staged artifacts cannot survive an in-place commit/rebase; and malformed YAML joins
   two parity gates. No execution authorization changes until all seven counterexamples
   have executable fail-closed regressions and a fresh exact-commit review.
+- Published the model-free Review-10 remediation as exact commit
+  `903842b09209044aa0a48c2f7f7fd59ef3681d2b`. Exact-SHA Validate Repository run
+  `29376200635` and Publish Research Site run `29376200714` both passed; the deployed
+  experiment index reported the canonical four active experiments.
+- Independent Review 11 of that exact commit returned HOLD despite 87 passing tests
+  and 23 passing subtests. It reproduced an unobserved mutation path for explicitly
+  unleased system files, ineffective venv-bin derivation under `-S`, missing active
+  CUDA UUID comparison/recording, PATH-resolved executable attestation plus pre-guard
+  bootstrap exposure, and replay acceptance of an empty loaded-native closure. It
+  made zero tokenizer/model/GPU/training/evaluation/Jacobian/benchmark calls and left
+  the tree clean. Authorization remains unchanged while all five findings are made
+  fail-closed.
