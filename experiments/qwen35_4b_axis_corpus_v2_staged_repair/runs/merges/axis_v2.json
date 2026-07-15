@@ -1,0 +1,81 @@
+{
+  "adapter": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_axis_corpus_v2_staged_repair/adapters/axis_v2",
+  "adapter_config_sha256": "f042929692dcf96a51e3a2eeca7ee28169568d1b0e3e7353020cae1219cc79fb",
+  "adapter_weights_sha256": "f612deac28409e9350ae4aae866d4b5c07c2adfe33db9586f9a224fc3c37d067",
+  "aggregate_seed_open": false,
+  "applied_lora_modules": 128,
+  "benchmark_data_read": false,
+  "command": [
+    "/home/ericflo/Development/small-model-experimentation/.venv/bin/python",
+    "-B",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/scripts/merge_adapter.py",
+    "--adapter",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_axis_corpus_v2_staged_repair/adapters/axis_v2",
+    "--out",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_axis_corpus_v2_staged_repair/merged/axis_v2"
+  ],
+  "experiment_id": "qwen35_4b_axis_corpus_v2_staged_repair",
+  "local_design_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_axis_corpus_v2_staged_repair/data/local_design_receipt.json",
+  "local_design_receipt_sha256": "5bc41f4a67337cb6c84860b4a8902c0a950d4d3a38bf932ab10feaeab18442c0",
+  "log": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_axis_corpus_v2_staged_repair/runs/merges/axis_v2.log",
+  "log_sha256": "076865b981714916d2e46f98eb82b25482825e4446573539ce95869096ce8a2a",
+  "merge_receipt_sha256": "eaac05865a9ede240d7f7eebbd810a2a2a5ec56291aab99ca832dd27dd770305",
+  "merged": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_axis_corpus_v2_staged_repair/merged/axis_v2",
+  "merger": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/scripts/merge_adapter.py",
+  "merger_sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "name": "axis_v2",
+  "nonzero_lora_modules": 128,
+  "output_files": [
+    {
+      "name": "chat_template.jinja",
+      "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+      "size": 7756
+    },
+    {
+      "name": "config.json",
+      "sha256": "a1c80f0efa6f83f631eaa9c25ffa166e3b1f9db395cc3b14374dfc0962261f60",
+      "size": 2829
+    },
+    {
+      "name": "generation_config.json",
+      "sha256": "0c46d8aa4f0ae5e611c961f70b87c83fb696043c1e319337708e96f882180de1",
+      "size": 116
+    },
+    {
+      "name": "merge_receipt.json",
+      "sha256": "eaac05865a9ede240d7f7eebbd810a2a2a5ec56291aab99ca832dd27dd770305",
+      "size": 868
+    },
+    {
+      "name": "model.safetensors",
+      "sha256": "c2543bfa83d64f8d4d6531f679c5f2fc1f334023a6153d1ad43a072eff04b1cd",
+      "size": 9078620536
+    },
+    {
+      "name": "tokenizer.json",
+      "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+      "size": 19989325
+    },
+    {
+      "name": "tokenizer_config.json",
+      "sha256": "9cf04fffe3d8c3b85e439fb35c7acad0761ab51c422a8c4256d9f887c3a0be7d",
+      "size": 1125
+    }
+  ],
+  "output_tree_sha256": "d91608f9c847659ed9a56eccbe36c7bc4a050ba092a8623be99bf4bd3af1846b",
+  "preflight_git_branch": "main",
+  "preflight_git_head": "05c4468a0f1f138f1bfbf09f417ae70e8ab56d35",
+  "preflight_git_status": "?? experiments/qwen35_4b_axis_corpus_v2_staged_repair/runs/merges/",
+  "preflight_origin_main": "05c4468a0f1f138f1bfbf09f417ae70e8ab56d35",
+  "schema_version": 2,
+  "training_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_axis_corpus_v2_staged_repair/runs/training/axis_v2.json",
+  "training_receipt_sha256": "02e63078523a3961700a48e03404bfeb973a9b26c0a33df11772770ac3ddd1e3",
+  "weight_files": [
+    {
+      "name": "model.safetensors",
+      "sha256": "c2543bfa83d64f8d4d6531f679c5f2fc1f334023a6153d1ad43a072eff04b1cd"
+    }
+  ]
+}
