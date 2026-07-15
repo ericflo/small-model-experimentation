@@ -447,7 +447,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and other update mechanisms.
 
 - Charter: [posttraining_and_adaptation](../research_programs/posttraining_and_adaptation/charter.md)
-- Assigned experiments: 93
+- Assigned experiments: 94
 
 ### Seed Evidence
 
@@ -475,6 +475,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 - `qwen35_4b_counterfactual_evidence_acquisition_curriculum` (new): [README](../experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/README.md)
 - `qwen35_4b_counterfactual_plan_reflection_transfer` (new): [README](../experiments/qwen35_4b_counterfactual_plan_reflection_transfer/README.md)
 - `qwen35_4b_decompose_compose_frontier` (new): [README](../experiments/qwen35_4b_decompose_compose_frontier/README.md)
+- `qwen35_4b_deep_advantage_mopd` (new): [README](../experiments/qwen35_4b_deep_advantage_mopd/README.md)
 - `qwen35_4b_deployable_information_ceiling_sweep` (track-z): [README](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md)
 - `qwen35_4b_early_text_hypothesis_forking` (new): [README](../experiments/qwen35_4b_early_text_hypothesis_forking/README.md)
 - `qwen35_4b_gauntlet_breadth_round1` (new): [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md)

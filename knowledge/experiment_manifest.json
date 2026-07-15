@@ -1882,7 +1882,7 @@
   {
     "file_counts": {
       ".gz": 10,
-      ".json": 56,
+      ".json": 57,
       ".jsonl": 8,
       ".md": 10,
       ".py": 78,
@@ -1895,12 +1895,14 @@
     "research_programs": [
       "agentic_breadth_installation",
       "benchmark_generalization",
+      "posttraining_and_adaptation",
       "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "**Fresh qualification, exact-logit locality, three four-round integrations, and all control-construction gates passed, but sealed block 0 already rejects the capability claim. All three MOPD seeds trail the better source on the registered deep cell macro, ordinary interpolation matches their tradeoff, and seed 42 loses decisively to soup best-of-eight.** The remaining arm and second block continue only to complete the frozen terminal analysis and control ranking. This is a new result-bearing successor to `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal result.",
+    "summary": "**Fresh qualification, exact-logit locality, three four-round integrations, and all control-construction gates passed, but sealed block 0 already rejects the capability claim. All three MOPD seeds trail the better source on the registered deep cell macro, ordinary interpolation matches their tradeoff, and seed 42 loses decisively to soup best-of-eight on both sealed blocks.** The final wrong-teacher arm continues only to complete the frozen terminal analysis and control ranking. This is a new result-bearing successor to `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal result.",
     "tags": [
       "abi",
+      "distillation",
       "latent-state",
       "small-model"
     ],
@@ -1914,8 +1916,8 @@
       "src",
       "tests"
     ],
-    "total_files": 165,
-    "total_size_bytes": 53258622
+    "total_files": 166,
+    "total_size_bytes": 54386254
   },
   {
     "file_counts": {

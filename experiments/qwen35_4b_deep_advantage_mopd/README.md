@@ -1,6 +1,6 @@
 # Qwen3.5-4B Deep-Advantage MOPD
 
-**Status:** in-progress · since 2026-07-12 · Block 0 makes the frozen success rule unreachable and is complete; all three block-1 treatments also fail to dominate deep while the remaining controls run.
+**Status:** in-progress · since 2026-07-12 · Both sealed blocks reject the frozen capability rule, and matched-compute sampling wins decisively; the final wrong-teacher control is running for the terminal receipt.
 
 ## Status
 
@@ -8,9 +8,9 @@
 and all control-construction gates passed, but sealed block 0 already rejects
 the capability claim. All three MOPD seeds trail the better source on the
 registered deep cell macro, ordinary interpolation matches their tradeoff, and
-seed 42 loses decisively to soup best-of-eight.** The remaining arm and second
-block continue only to complete the frozen terminal analysis and control
-ranking. This is a new result-bearing successor to
+seed 42 loses decisively to soup best-of-eight on both sealed blocks.** The
+final wrong-teacher arm continues only to complete the frozen terminal analysis
+and control ranking. This is a new result-bearing successor to
 `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal
 result.
 
@@ -304,7 +304,14 @@ and every treatment on both strata. Soup75 then scored `0.595053` deep,
 `0.807503` quick, and `0.701278` joint. It beats seed 42 on both block-1
 strata and beats the immutable soup by `+0.006115` joint while remaining below
 deep. Ordinary interpolation therefore exceeds the primary MOPD checkpoint on
-both blocks' joint projections. Soup best-of-eight is running next.
+both blocks' joint projections. Soup best-of-eight then scored direct item
+means `0.780596` deep and `0.957211` quick from 35,135,000 sampled tokens. Its
+registered equal-cell macros are `0.787636` deep, `0.957211` quick, and
+`0.872423` joint, beating seed 42 by `+0.195249`, `+0.150482`, and `+0.172865`
+and the deep source by `+0.187449`, `+0.146187`, and `+0.166818`. Averaged
+across both sealed blocks, sample-more beats seed 42 by `+0.187748` deep,
+`+0.150731` quick, and `+0.169239` joint. This is a decisive replicated loss
+to the deployment-time baseline. The final wrong-teacher arm is running next.
 
 ## NF4/BF16 Interpretation Diagnostic
 

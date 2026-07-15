@@ -909,3 +909,24 @@
   versus seed 44.
 - Soup best-of-eight started next with external journal hash
   `092c63c98849093b209da1a9089aee7a0f805d978286f2c39bef30af730553fe`.
+
+## 2026-07-15 — block-1 sample-more decisively wins again
+
+- Soup best-of-eight completed its sealed transaction. `GENERATED.json` and
+  `COMPLETE.json` hash to
+  `a7b79d4bb34a98788c8d19272e9421ba74cbc12985de95d0a1f5f3f43dd89371`
+  and `386c0587218badb42833b3ede837a9795874985c1dda0fea2a1830c76e1e1e07`;
+  the score hashes to
+  `c74e6f2f4225b220f99567aa666f9281310d7e492d17ad2552c2cd18bfd6c75e`.
+- Direct item-weighted means are `0.780596` deep and `0.957211` quick, using
+  35,135,000 sampled tokens. Equal-cell macros are `0.787636` deep,
+  `0.957211` quick, and `0.872423` joint. These exceed seed 42 by
+  `+0.195249`, `+0.150482`, and `+0.172865`, and exceed the deep source by
+  `+0.187449`, `+0.146187`, and `+0.166818`.
+- Averaged across both sealed blocks, sample-more scores `0.779220` deep,
+  `0.951708` quick, and `0.865464` joint. It beats seed 42 by `+0.187748`,
+  `+0.150731`, and `+0.169239`, and the deep source by `+0.183607`,
+  `+0.141182`, and `+0.162394`. The matched-compute loss is therefore large,
+  replicated, and not a weighting artifact.
+- Wrong-teacher started as the final confirmation arm with external journal
+  hash `7f71ae4083bb45f1bda0c2148b0f9e061ce67dddd2446e7735bf222fb82959a5`.

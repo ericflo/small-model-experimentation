@@ -211,6 +211,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 
 - `dense_teacher_distillation` (track-y): [README](../experiments/dense_teacher_distillation/README.md)
 - `qwen35_4b_decompose_compose_frontier` (new): [README](../experiments/qwen35_4b_decompose_compose_frontier/README.md)
+- `qwen35_4b_deep_advantage_mopd` (new): [README](../experiments/qwen35_4b_deep_advantage_mopd/README.md)
 - `qwen35_4b_interactive_policy_curriculum` (new): [README](../experiments/qwen35_4b_interactive_policy_curriculum/README.md)
 - `qwen35_4b_live_tool_dagger` (track-z): [README](../experiments/qwen35_4b_live_tool_dagger/README.md)
 - `qwen35_4b_neurosymbolic_repl_substrate` (new): [README](../experiments/qwen35_4b_neurosymbolic_repl_substrate/README.md)

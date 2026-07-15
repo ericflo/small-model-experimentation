@@ -289,6 +289,16 @@ has a block-0 joint advantage over seed 42, ordinary interpolation is stronger
 than the registered primary on both sealed blocks without routed online
 updates. It remains below deep and therefore locates, rather than crosses, the
 source frontier.
+Block-1 soup best-of-eight then scores direct item means `0.780596` deep and
+`0.957211` quick from 35,135,000 sampled tokens. Its frozen equal-cell macros
+are `0.787636` deep, `0.957211` quick, and `0.872423` joint, exceeding seed 42
+by `+0.195249`, `+0.150482`, and `+0.172865` and the deep source by
+`+0.187449`, `+0.146187`, and `+0.166818`. Across both blocks, sample-more
+averages `0.779220` deep, `0.951708` quick, and `0.865464` joint, beating seed
+42 by `+0.187748`, `+0.150731`, and `+0.169239`. Thus the registered method
+does not merely miss a capability threshold: it is decisively dominated by
+matched-compute inference on both sealed blocks. The final wrong-teacher arm
+remains necessary only to finish the mechanism ranking and terminal receipt.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply
