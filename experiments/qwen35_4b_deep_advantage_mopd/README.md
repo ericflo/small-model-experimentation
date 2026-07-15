@@ -1,15 +1,16 @@
 # Qwen3.5-4B Deep-Advantage MOPD
 
-**Status:** in-progress · since 2026-07-12 · Fresh deep qualification, exact-logit locality, all three four-round integrations, and all controls pass; sealed confirmation is running.
+**Status:** in-progress · since 2026-07-12 · Block 0 makes the frozen success rule unreachable; its last control and the full second block are running for the terminal receipt.
 
 ## Status
 
-**Fresh deep qualification passes on both untouched blocks, the frozen
-five-update MOPD pilot passes exact-logit locality, and seeds 42, 43, and 44
-each complete all four integration rounds. All trained and parameter controls
-also pass their artifact/training gates; the first sealed source-arm anchor is
-complete, but no treatment comparison exists yet.** This is a new
-result-bearing successor to
+**Fresh qualification, exact-logit locality, three four-round integrations,
+and all control-construction gates passed, but sealed block 0 already rejects
+the capability claim. All three MOPD seeds trail the better source on the
+registered deep cell macro, ordinary interpolation matches their tradeoff, and
+seed 42 loses decisively to soup best-of-eight.** The remaining arm and second
+block continue only to complete the frozen terminal analysis and control
+ranking. This is a new result-bearing successor to
 `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal
 result.
 
@@ -211,6 +212,13 @@ binding corrected control inventory `690a5b5e345f7f4070f731eb69f7a6d9adf7f8148d4
 Fresh attempt-2 global admission subsequently passed from an empty live tree
 and hashes to
 `6424b68d01420154d10b7a999332eb4b9d44fca3cad63cf7266f098b9d9c990e`.
+The per-arm stratum means below are the score files' direct item-weighted
+summaries. The frozen terminal decision instead gives each registered cell
+equal weight. A read-only replay of that preregistered projection on the
+completed block-0 arms confirms the same stop: seed 42/43/44 trail deep by
+`−0.000481`/`−0.005426`/`−0.004869` on the deep cell macro, and seed 42 is
+`−0.007642` joint versus deep. Thus the unreachable success rule is not a
+row-weighting artifact.
 Block-0 deep then entered `STARTED`; its external journal hashes to
 `ca44441a2784a79d314b7c359dde6f136617d6bf68301b9dd0741fe3325b8d38`.
 It completed all 4,032 atom rows and 384 18-turn episodes, passed the unchanged
@@ -262,7 +270,13 @@ and `−0.002897` versus the deep source, using 4,332,931 sampled tokens. It
 dominates MOPD seeds 43 and 44 on both strata; seed 42 is merely `+0.000219`
 deep and `−0.011906` quick versus soup75. Ordinary interpolation therefore
 matches or exceeds the treatment tradeoff. The registered soup best-of-eight
-sample-more comparator is running next.
+sample-more comparator then scored `0.770908` deep and `0.946205` quick, using
+35,600,602 sampled tokens. On the registered equal-cell projection it scores
+`0.770805` deep, `0.946205` quick, and `0.858505` joint; seed 42 trails it by
+`−0.180246`, `−0.150980`, and `−0.165613`, respectively. Matched-compute
+sampling therefore wins decisively on block 0. The wrong-teacher arm is the
+last running block-0 comparator; full block 1 remains mandatory for the sealed
+terminal receipt.
 
 ## NF4/BF16 Interpretation Diagnostic
 

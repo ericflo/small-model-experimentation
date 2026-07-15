@@ -199,6 +199,18 @@ Soup75 then scores `0.576786` deep and `0.807131` quick, `−0.003282` and
 MOPD seeds 43 and 44 on both strata. Seed 42 exceeds it by only `0.000219` deep
 while losing `0.011906` quick. Thus a registered parameter interpolation matches
 or exceeds the treatment's block-0 tradeoff without online advantage updates.
+The registered soup best-of-eight baseline then scores `0.770908` deep and
+`0.946205` quick from 35,600,602 sampled tokens. Under the terminal analyzer's
+equal-cell projection it is `0.770805` deep, `0.946205` quick, and `0.858505`
+joint; seed 42 trails by `−0.180246`, `−0.150980`, and `−0.165613`. Thus the
+single-checkpoint treatment does not beat matched-compute sampling on block 0.
+
+For clarity, the preceding per-arm values are the score files' item-weighted
+stratum summaries. The frozen decision projection equal-weights registered
+cells. That projection independently confirms the earlier stop: seed 42/43/44
+trail deep by `−0.000481`/`−0.005426`/`−0.004869` on the block-0 deep macro,
+and seed 42 is `−0.007642` joint versus deep. The conclusion is therefore not
+an artifact of the interim display weighting.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

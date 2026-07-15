@@ -680,3 +680,23 @@
 - The 40/60 soup best-of-eight sample-more comparator started next with external
   journal hash
   `f085310f00e629c80f4fd387aa44a077b9e6ae34dac133136029ed866d6d1745`.
+
+## 2026-07-15 — block-0 sample-more decisively beats MOPD
+
+- Soup best-of-eight completed its sealed 4,032-atom/384-episode transaction.
+  `GENERATED.json` and `COMPLETE.json` hash to
+  `64f2c7b8d15bce5911308f8662d2d884252fa4351fe9b46b6b285ffcdcc74740`
+  and `1c6c4656d1ed7f85c9551e3c534bfd82f2cedaee1ab762ad40ab9eb17822f4af`;
+  the score hashes to
+  `d2270cde58d691ba19ec80f7c0796438805b117589755cc8a796afb9abc34a80`.
+- Direct item-weighted means are `0.770908` deep and `0.946205` quick, using
+  35,600,602 sampled tokens. The frozen equal-cell projection is `0.770805`
+  deep, `0.946205` quick, and `0.858505` joint. Seed 42 trails by `−0.180246`,
+  `−0.150980`, and `−0.165613`, respectively.
+- The interim values recorded for earlier arms are direct score-file summaries;
+  the terminal analyzer uses equal cell macros. Replaying that frozen
+  projection confirms seeds 42/43/44 trail deep on the block-0 deep macro by
+  `−0.000481`/`−0.005426`/`−0.004869`, so the already-unreachable success rule
+  is not caused by row weighting.
+- Wrong-teacher started as the last block-0 arm with external journal hash
+  `13913bd80710ef29a2b141718bf1fa71c4395bd54c92981fea6a6151c0d5125b`.
