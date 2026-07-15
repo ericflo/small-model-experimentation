@@ -61,3 +61,15 @@
   and oracle-free input byte-identical (`be817bd0...`, `7cba75dc...`). Bars,
   seeds, and every other frozen field are unchanged.
 - No model, GPU, or evaluation event ran during the amendment.
+
+## 2026-07-15 — Authenticated explicit composites
+
+- `merge-arms` ran only after the amendment checkpoint `6a6f7ee7` matched
+  `origin/main` with both workflows green; the PASS_CONTROL_MERGE verdict and
+  the merge self-pin were both required and verified.
+- All three arms merged through the pinned external merger (scale 2.0, 128/128
+  nonzero modules, fingerprint-verified): tree hashes `f2aa4a76...2523`
+  (replay_repeat), `93433aa2...0255` (designed_fresh), `8faf6f68...ff18`
+  (budget_commit); receipts and logs under `runs/merges/`.
+- The three merged-tree pins are now filled fail-closed in the local evaluator.
+  The one frozen local gate event is the only next stage.
