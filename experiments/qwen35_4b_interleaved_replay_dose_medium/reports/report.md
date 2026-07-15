@@ -2,7 +2,10 @@
 
 ## Summary
 
-Model-free construction under way: the retention-safe dose recipe reproduced exactly — the verified two-lesson corpus warm-started from the receipted interleaving replay round — with the two-kind both-must-win gate, unchanged retention bands, unconditional recovery flags, a frozen escalation rule, and the conditional medium pilot. No model event has run; seed 78,149 sealed.
+Terminal negative: replay at the dose boundary did not protect retention. The
+candidate won hygiene but lost explore and fell nine/ten correct answers below
+the parent/replay retention controls. The replay-interleaving law is refuted,
+the dose-recipe search is closed, and conditional seed 78,149 remains sealed.
 
 ## Research Program Fit
 

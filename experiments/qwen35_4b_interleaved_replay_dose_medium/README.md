@@ -2,7 +2,7 @@
 
 The direct test of the replay-interleaving retention law: the same verified two-lesson dose that just recovered its installs (but paid ten retention points when dosed directly), now warm-started from the already-built interleaving replay round — reproducing the only retention-safe dose recipe the line has measured, with the conditional pilot at the medium tier.
 
-**Status:** in-progress · since 2026-07-15 · model-free construction complete and smoke-green; no model event has run
+**Status:** finished · 2026-07-15 · the direct gate refuted the replay-interleaving retention law; the conditional medium pilot remains sealed
 
 ## Research Program
 
@@ -48,16 +48,27 @@ Checkpointed stages:
 
 ## Results
 
-No model event has run. Model-free construction is complete: the inherited corpus authenticated by byte-identical re-derivation; the exact three-axis MILP solved optimally (both 240-row variable blocks at forward 147,792 / nonzero 63,001 / mass×5 71,525; arm totals 1,373,106 / 579,624 / 633,716; 1,280 aligned shared rows; zero skips); the 124-task gate frozen at seed 88,019 with zero prompt overlap against all six predecessor gates (88,013–88,018), the donor's corpora and streams, and both fresh training streams.
+Both 1,520-row arms trained for 190 updates and merged into authenticated
+composites. At the sole fresh gate (seed 88,019), the candidate beat parent and
+replay on the 20-item axis holdout (`11/7/6`) and won hygiene (`7/2/3`), but
+lost explore (`4/5/3`). More importantly, retention fell to `59/96/8` versus
+`68/96/8` for the parent and `69/98/6` for replay, breaking the frozen correct
+band against both controls by nine and ten points. The candidate was not
+promoted and conditional benchmark seed 78,149 is permanently sealed.
 
 ## Interpretation
 
-None yet.
+Replay at the dose boundary did not protect retention: the candidate paid the
+same roughly ten-point cost measured for direct dosing. This direct test
+refutes the replay-interleaving retention law and closes the dose-recipe search.
+Per the frozen escalation rule, only the separately registered dose-vehicle
+mechanism study may continue this line.
 
 ## Knowledgebase Update
 
-- Program evidence updated: pending.
-- Program backlog updated: this trial claims the queued interleaved-dose slot.
+- Program evidence updated: yes.
+- Program backlog updated: yes; the recipe search is closed and the mechanism
+  study owns the successor slot.
 - Claim ledger updated: no.
 
 ## Artifacts
