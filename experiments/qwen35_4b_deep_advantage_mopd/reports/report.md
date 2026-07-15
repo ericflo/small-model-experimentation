@@ -273,6 +273,13 @@ Soup25 then scores direct item means `0.543777` deep and `0.792800` quick from
 `−0.026693`, `−0.008066`, and `−0.017379`. The 25%-deep interpolation is
 dominated by the initialization on both sealed blocks and cannot explain the
 treatment checkpoints; all three block-1 treatment seeds dominate it as well.
+Soup50 then scores direct item means `0.565327` deep and `0.795188` quick from
+4,451,128 sampled tokens. Its equal-cell macros are `0.586316` deep,
+`0.795188` quick, and `0.690752` joint, trailing the immutable soup by
+`−0.003145`, `−0.005677`, and `−0.004411`. It is also dominated by every
+block-1 treatment on both strata. Thus the 50%-deep interpolation is a Pareto
+trade on block 0 but strictly dominated on block 1; it does not explain a
+stable beyond-initialization effect.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

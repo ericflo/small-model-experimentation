@@ -290,8 +290,17 @@ deep by `−0.003232` deep, `−0.015965` quick, and `−0.009599` joint,
 replicating the block-0 control ordering. Off-policy SFT then scored `0.583994`
 deep and `0.800776` quick from 4,282,251 sampled tokens. Its equal-cell
 projection is `+0.003614` deep, `−0.010247` quick, and `−0.003316` joint
-versus deep: another Pareto trade, not source domination. Primary seed 42 is
-running next.
+versus deep: another Pareto trade, not source domination. Seeds 42/43/44 then
+landed at equal-cell joint macros `0.699558`/`0.704349`/`0.699022`, trailing
+deep by `−0.006047`/`−0.001256`/`−0.006583`. Seed 43's small deep-cell
+gain is paid for by quick loss; the other two seeds trail deep on both strata.
+Quick scored `0.664595` joint, confirming that deep is the better source on
+both strata in both blocks. The immutable soup scored `0.695163`; all three
+treatments beat it locally on block 1, but that signal reverses block 0 and
+does not cross the deep-source frontier. Soup25 was dominated by the soup and
+all treatments. Soup50 now scores `0.586316` deep, `0.795188` quick, and
+`0.690752` joint, trailing the soup by `−0.003145`/`−0.005677`/`−0.004411`
+and every treatment on both strata. Soup75 is running next.
 
 ## NF4/BF16 Interpretation Diagnostic
 

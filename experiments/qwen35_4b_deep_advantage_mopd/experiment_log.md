@@ -871,3 +871,21 @@
   explain the treatment checkpoints; every block-1 treatment dominates it.
 - Soup50 started next with external journal hash
   `fd036a60b739b9b3bf484956de8f0ab01d657bbe563824412ea8989cc3203afe`.
+
+## 2026-07-15 — soup50 is dominated on block 1
+
+- Soup50 completed sealed generation and strict validation. `GENERATED.json`
+  and `COMPLETE.json` hash to
+  `4e57dcf508c7216435eecc074aee79a8657b7f48d987a5e65a7756b13fa0a47e`
+  and `2158d5451c2df2412c9b2431ad76b97b3e6a19633644c6162774fef309e5803d`;
+  the score hashes to
+  `58674e67b7bfa0ddd9d7fb65668bb9ae0e8565c3573832311a2b2673b016eded`.
+- Direct item-weighted means are `0.565327` deep and `0.795188` quick, using
+  4,451,128 sampled tokens. Equal-cell macros are `0.586316` deep, `0.795188`
+  quick, and `0.690752` joint, respectively `−0.003145`, `−0.005677`, and
+  `−0.004411` versus the immutable soup.
+- Soup50 is dominated by the initialization and by all three treatments on
+  both block-1 strata. Unlike block 0's soup50 Pareto trade, this point adds no
+  frontier explanation for the treatment checkpoints.
+- Soup75 started next with external journal hash
+  `c9ff00e7325bff53b964cfd2ce556336a187e2e3036fc80aa75e5cb5a0395460`.
