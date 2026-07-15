@@ -55,7 +55,7 @@ def mapped_native_files(source_root: Path) -> set[Path]:
     probe = (
         "import pathlib,sys;"
         f"sys.path.insert(0,{str(experiment / 'src')!r});"
-        "import runtime_contract;"
+        "import runtime_contract,load_window_guard;"
         "print('\\n'.join(sorted({f[-1] for l in "
         "pathlib.Path('/proc/self/maps').read_text().splitlines() "
         "if (f:=l.split()) and f[-1].startswith('/')})))"

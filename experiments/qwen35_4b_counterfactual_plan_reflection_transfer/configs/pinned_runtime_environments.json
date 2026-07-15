@@ -19,6 +19,7 @@
       "/workspace/sme-reflection-runtime/bin/python3.12": "1d3cf64f97cadc79fdc6fe2496a21b7b456cb94211978cfef5a65f616af74fd5",
       "/workspace/sme-reflection-runtime/lib/locale/C.utf8/LC_CTYPE": "59015993b1b671273461ef1167d7a9ad76dc090d521c91102e962217ed6b6dba",
       "/workspace/sme-reflection-runtime/lib/python3.12/lib-dynload/_bz2.cpython-312-x86_64-linux-gnu.so": "5bccbbb9dc55210d519bdcbab48caddfab44a3af5f632b1dac9dfffc2bc32260",
+      "/workspace/sme-reflection-runtime/lib/python3.12/lib-dynload/_ctypes.cpython-312-x86_64-linux-gnu.so": "448504ee777c5e9366e9ac741be127c50787345dd04ec27a58d1d0514b3589c7",
       "/workspace/sme-reflection-runtime/lib/python3.12/lib-dynload/_hashlib.cpython-312-x86_64-linux-gnu.so": "78f06b9e16ed0518c44a7ee0d4973037ac7608c2e469165308236bbc8dde7aaa",
       "/workspace/sme-reflection-runtime/lib/python3.12/lib-dynload/_json.cpython-312-x86_64-linux-gnu.so": "de1fdfa616ae2f72cb80a1dad76bf7143463d9a34600e0daf37109523abcf5d6",
       "/workspace/sme-reflection-runtime/lib/python3.12/lib-dynload/_lzma.cpython-312-x86_64-linux-gnu.so": "e3f0237f9d36a2c45e4b10ffe92bb4c29ad049d5e8642a1f9ce555c8edc6a12a",
@@ -27,6 +28,7 @@
       "/workspace/sme-reflection-runtime/runtime-libs/libc.so.6": "511f825ee075610ac9c0f7f91e2c13de2000d0f7b859f6461137e809a0a009d0",
       "/workspace/sme-reflection-runtime/runtime-libs/libcrypto.so.3": "c19c2cf8d7cf91c4f273b1d3bbc56a9d19c91a739bfe57ad630756ee8ede7b77",
       "/workspace/sme-reflection-runtime/runtime-libs/libexpat.so.1": "7ae38be4b2f909d25c5ca3107ed04bc3128a8a24ea7adfe30102c3f04089c9c3",
+      "/workspace/sme-reflection-runtime/runtime-libs/libffi.so.8": "00f593fe192f2851b8ce23b25cec2488d769beb5a8f63e8c9e563071e1075153",
       "/workspace/sme-reflection-runtime/runtime-libs/liblzma.so.5": "a9793942a8a5f6f4d0f523ef9e0a5be4f0033f2c6c28520cd2b4e706d53c6e17",
       "/workspace/sme-reflection-runtime/runtime-libs/libm.so.6": "f06f2ce1f1833df5f41cf13b6447ff07bea993ad9b27297d3428c2f70ab3f0e7",
       "/workspace/sme-reflection-runtime/runtime-libs/libz.so.1": "9b64150b28505a33d6bc3ecf709c279f6de97a1c184dbda65d06ee4537f6d286"
@@ -51,7 +53,7 @@
     },
     "pre_python_manifest": {
       "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/runtime_manifest.tsv",
-      "sha256": "da2df9a66260e818cb16a3038e3686f888f9d5a63f4e0227ecce534772d9d5b9"
+      "sha256": "6a8e317ba14acad4de3a484698666b769f28a78082f05d2eb1f05d34928f43f7"
     },
     "stage_entrypoints": {
       "training": {
@@ -134,11 +136,11 @@
     "launchers": {
       "training": {
         "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/training_launcher",
-        "sha256": "48b785b99365dfbaadd6698c8f2ee305a712b898bbf07ddddd496b4ce69bed81"
+        "sha256": "b529ba42b8bad803fd43e59417c1b2475b4cc5657469f94fe8981b6581427ae8"
       },
       "vllm": {
         "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/vllm_launcher",
-        "sha256": "baba497012b45e71f0b1f41facc779ab6d882a6e72e48be823dc08693ee8bb62"
+        "sha256": "d8cdf558d20b38edf893ad6a9dbb11004b65a987a461e6c4485d4753bb6b1f3a"
       }
     }
   },
