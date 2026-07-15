@@ -19,3 +19,11 @@
   with both workflows green; the fresh rank-64/alpha-128 adapter trained on
   the pinned clean-parent composite (full-weights preflight) with 1,520/1,520
   rows, 0 skipped, 190 updates; receipt/log published and pinned fail-closed.
+
+## 2026-07-15 — Authenticated rank-64 composite
+
+- `merge-candidate` ran only after the training checkpoint matched
+  `origin/main` with both workflows green; the rank-64 adapter merged onto the
+  clean-parent composite (scale 2.0, 128/128 modules, fingerprint-verified);
+  the tree pin filled fail-closed. The one frozen three-arm verdict gate at
+  seed 88,021 is the only next stage.

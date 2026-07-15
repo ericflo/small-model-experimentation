@@ -81,7 +81,7 @@ MERGED = {
 # merge_trained_arm.py publishes the merged composite; the eval refuses to run
 # while the pin is still None.
 EXPECTED_CANDIDATE_TREE_SHA256: dict[str, str | None] = {
-    "axis160_r64": None,
+    "axis160_r64": "ebfa63d9a9fcd93149e81c0d443dcfc80ed67690eb8a9593de5f62131a7a3074",
 }
 ANSWER_RE = re.compile(r"(?:^|\n)ANSWER:\s*(.*?)(?=\n|<\||</|$)", re.DOTALL)
 

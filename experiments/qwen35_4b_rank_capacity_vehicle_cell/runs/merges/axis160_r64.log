@@ -1,0 +1,19 @@
+[merge] loading composite /home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_fresh_surface_budget_commit_target_match/merged/designed_fresh bf16 ...
+
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]
+Loading weights:  19%|█▉        | 140/723 [00:00<00:00, 1390.41it/s]
+Loading weights:  39%|███▊      | 280/723 [00:00<00:00, 1393.69it/s]
+Loading weights:  58%|█████▊    | 420/723 [00:00<00:00, 799.66it/s]
+Loading weights:  72%|███████▏  | 520/723 [00:00<00:00, 609.35it/s]
+Loading weights:  83%|████████▎ | 597/723 [00:00<00:00, 495.32it/s]
+Loading weights: 100%|██████████| 723/723 [00:01<00:00, 708.09it/s]
+[merge] LoRA products use cuda with FP32 matmul
+[merge] example composite tail: '0.linear_attn.conv1d' -> ['model.language_model.layers.0.linear_attn.conv1d']
+[merge] applied 128 LoRA deltas (expected 7 modules x layers)
+[merge] saving composite merged model to /home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_rank_capacity_vehicle_cell/merged/axis160_r64 ...
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:06<00:00,  6.92s/it]
+Writing model shards: 100%|██████████| 1/1 [00:06<00:00,  6.93s/it]
+[merge] processor save skipped: Can't load image processor for '/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_fresh_surface_budget_commit_target_match/merged/designed_fresh'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure '/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_fresh_surface_budget_commit_target_match/merged/designed_fresh' is the correct path to a directory containing a preprocessor_config.json file
+[merge] done
