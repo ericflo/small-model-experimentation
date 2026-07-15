@@ -164,19 +164,26 @@
   CLOSES here: its local gate cannot promote any continuation of this lineage
   (0/8 induct is the C38/C39 wall made exact at n=8). Do not reopen with lowered
   floors in an existing directory.
-- Active goal-gap axis-curriculum successor: `qwen35_4b_goal_gap_axis_curriculum_target_match` targets the
-  benchmark's actual stuck families — menders (trace-repair across MANY invented
-  executable formalisms), warren (think-budget-efficient exploration notation),
-  sirens (instruction-hygiene with verifiers that score injection non-compliance
-  directly), rites (surface-diverse procedure grammars with interacting flags) —
-  as designed single-turn-atom-heavy content from public axis descriptions only.
-  Historical forensics (65 quick + 92 medium paired events): the all-families goal
-  passed exactly once; failures concentrate on those four families; every one has a
-  gym analogue that near-mastered internally without transferring, so the levers
-  are formalism/surface diversity, verifier design, and think compression — not
-  coverage. Parent candidate: the published designed_fresh composite
-  (`93433aa2...0255`), the strongest local artifact with receipts. Gates must be
-  preregistered with floors achievable under the known induction wall.
+- Completed goal-gap axis-curriculum successor (first local promotion; pilot
+  negative): `qwen35_4b_goal_gap_axis_curriculum_target_match` installed its
+  axis atoms (holdout 28/40 vs parent 22 / replay 18, retention byte-equal to
+  parent) and consumed aggregate seed 78144: base 0.1085, axis 0.4223, parent
+  0.4644, replay_repeat 0.5081. Candidate vs base: +0.3138, 7 positive / 3 tie
+  / 0 negative families, warren flipped; replay flipped rites and posted the
+  line's best recorded aggregate. Pilot gate failed (lost aggregate to parent
+  and replay); closed per contract. Standing facts for successors: menders is 0
+  and sirens exactly 0.500 for EVERY arm at EVERY seed at quick/tb1024; replay
+  continuation has now compounded aggregate three consecutive times.
+- Queued (calibration notes attached): (a) replay-compounding line — measure
+  whether iterated replay rounds keep gaining aggregate and where they saturate;
+  the published `replay_repeat` composite (0.5081) is the presumptive parent;
+  cheap, believable, but cannot flip menders/sirens on current evidence.
+  (b) menders/sirens forensics — explain the two frozen constants from public
+  metadata and score behavior only (e.g., whether sirens' 0.500 is a fixed
+  solvable/unsolvable item split at tb1024 and whether any config has ever
+  scored menders > 0 at quick), BEFORE designing another treatment; two
+  same-shape transfer attempts at menders (loomfix, tracefix) have failed, so a
+  third is not believable without new mechanism evidence.
 - Completed staged-search mechanism negative: `qwen35_4b_universal_search_scaffold_token_match` decomposed
   two-step search into five independently scored executable lesson stages before a
   bounded full-search ledger. It starts from the authenticated

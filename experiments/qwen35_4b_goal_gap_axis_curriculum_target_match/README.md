@@ -2,7 +2,7 @@
 
 Attack the benchmark's four empirically stuck families directly: designed, contamination-free, single-turn atom curricula built only from public axis descriptions — multi-formalism program repair, budgeted unique-shortest route search, instruction hygiene with parseable-wrong decoys, and branch-balanced protocol execution — trained on the surface-general `designed_fresh` parent against a three-axis exact-exposure replay control, with a prospectively achievable two-instrument gate.
 
-**Status:** in-progress · since 2026-07-14 · model-free construction under way; no model event has run
+**Status:** finished · 2026-07-15 · local gate PROMOTED (first in the line); aggregate pilot negative — candidate beat base +0.314 with 7 positive and 0 negative families but lost the aggregate to parent and replay; seed 78,144 consumed
 
 ## Research Program
 
@@ -49,17 +49,23 @@ Checkpointed stages (each requires its prerequisite committed at a clean, pushed
 
 ## Results
 
-No model event has run. Model-free construction is in progress.
+Both arms trained cleanly (replay 0.3776, axis 0.4884 train loss; 0 skips each) and merged; the frozen 144-task gate event PROMOTED `axis_curriculum` — the first promotion in this program's universal line: axis holdout 28/40 versus parent 22 and replay 18 (kind wins on hygiene 9-vs-5/5, explore 7-vs-6/3, tracefix 4-vs-3/2; protocol tied at the preregistered control ceiling), with retention byte-equal to the parent (71/95/9) while replay drifted (65/89/15).
+
+The conditional aggregate pilot at seed 78,144 (quick, think budget 1,024) then ran all four composites: base 0.1085, axis_curriculum 0.4223, parent 0.4644, replay_repeat 0.5081. The candidate beat base by +0.3138 with SEVEN strictly positive families, three ties, and zero negatives — including flipping warren (0 → 0.125), one of the historically stuck families — but lost the aggregate to both its parent (−0.042) and the replay control (−0.086), so the pilot gate fails. Notably the replay control flipped rites (0 → 0.125) and posted the highest aggregate this line has recorded at any seed, and menders (0 for every arm) and sirens (exactly 0.500 for every arm) did not move for anyone.
 
 ## Interpretation
 
-None yet.
+Three separable findings. (1) The axis-atom mechanism installs: first-ever local promotion, +6/+10 on held-out axis tasks with zero retention cost. (2) Local axis wins under-convert at quick tier: hygiene's near-doubling locally left sirens pinned at 0.500, and tracefix's win left menders at zero — though warren did flip, consistent with the explore lesson (or 1/8-granularity noise; single seed). (3) Replay continuation compounds again: one more replay round beat everything on aggregate while flipping rites, replicating the line's replay-is-active-intervention law. Per the frozen drift-versus-content reading, the candidate's aggregate loss to replay is a content-opportunity-cost result at matched exposure, not retention damage (retention was byte-equal to the parent). The goal's wall is now precisely two families wide: menders and sirens are frozen for every arm at every seed at this tier configuration.
+
+## Terminal Disposition
+
+No later event is authorized here. Seed 78,144 is consumed and recorded; do not re-run any stage or benchmark the composites from this directory. The published `replay_repeat` composite (aggregate 0.5081, receipts under `runs/`) is the strongest known artifact and the presumptive parent for successors; `axis_curriculum` remains the only artifact with a positive axis-installability reading.
 
 ## Knowledgebase Update
 
-- Program evidence updated: pending the first result.
-- Program backlog updated: this trial claims the queued goal-gap successor slot.
-- Claim ledger updated: no; no capability result exists.
+- Program evidence updated: local promotion, pilot negative, per-family record, and the replay-compounding observation recorded.
+- Program backlog updated: the menders/sirens wall and the replay-compounding line are queued with calibration notes.
+- Claim ledger updated: no; single-seed pilot events do not mint claims.
 
 ## Artifacts
 

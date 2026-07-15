@@ -779,3 +779,36 @@ or preregister floors that are achievable given the known wall — and the
 program's goal-gap forensics (menders/warren/sirens/rites, recorded in the
 successor intake) point the next attack at the benchmark's actual bottleneck
 rather than the local gate's hardest kind.
+
+## qwen35_4b_goal_gap_axis_curriculum_target_match (2026-07-15 — First local promotion; aggregate pilot negative)
+
+The goal-gap successor trained a 160-row designed axis corpus (four stuck-family
+axes, public descriptions only, fresh vocabulary, executable truth) against a
+three-axis exact-exposure replay control from the `designed_fresh` parent, and
+became the first universal-line experiment to PASS its local gate: axis holdout
+28/40 versus parent 22 and replay 18 (hygiene 9 vs 5/5, explore 7 vs 6/3,
+tracefix 4 vs 3/2, protocol tied at the control ceiling), with retention
+byte-equal to the parent (71/95/9 of 104) while replay drifted (65/89/15).
+
+The conditional aggregate pilot then consumed seed 78,144 (quick, tb 1,024,
+four weight-authenticated composites): base 0.1085, axis_curriculum 0.4223,
+parent 0.4644, replay_repeat 0.5081. The candidate beat base +0.3138 with 7
+strictly positive families, 3 ties, 0 negatives — flipping warren — but lost
+the aggregate to parent and replay, so the pilot gate fails and the experiment
+closed per contract. The replay control flipped rites and posted the line's
+highest recorded aggregate at any seed.
+
+Read: (1) designed axis atoms INSTALL (first promotion ever; zero retention
+cost) but under-convert to the corresponding quick-tier families — task-level
+capability and family-level scoring are separated by more than surface
+(sirens stayed exactly 0.500 despite hygiene nearly doubling locally; menders
+stayed 0 despite the tracefix win). (2) Replay continuation compounds
+aggregate a third consecutive time (0.4410→0.4851 at 78133; 0.4644→0.5081
+here); it is the strongest single intervention this line has measured and the
+presumptive parent for successors. (3) The all-families goal is now blocked by
+exactly two families frozen for every arm at every seed at this tier
+configuration: menders (0 everywhere) and sirens (0.500 everywhere). Successors
+must either explain those two constants (instrument-level forensics from
+public metadata and score behavior only) or find a mechanism that moves them;
+another same-shape axis dose is not a believable next step for menders after
+two failed transfer attempts (loomfix, tracefix).

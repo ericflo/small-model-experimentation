@@ -20,7 +20,10 @@ Goal-gap forensics over 65 quick-tier and 92 medium-tier historical paired event
 
 ## Results
 
-No capability result exists. Corpus hash `e7a95d73...686e`; corpus balance: tracefix formalisms 13/13/9/5, protocol branches 15/14/11, hygiene 30 injected / 10 clean.
+- Training (1,520 rows, 0 skips, 190 updates each): replay 0.3776, axis 0.4884 train loss.
+- Local gate (seed 88,014): axis holdout of 40 — candidate 28, parent 22, replay 18; per-kind candidate/parent/replay: explore 7/6/3, hygiene 9/5/5, protocol 8/8/8 (control-ceiling tie), tracefix 4/3/2. Retention of 104: candidate 71/95/9 (correct/parsed/caps) = parent exactly; replay 65/89/15. All ten checks passed; PROMOTED.
+- Aggregate pilot (seed 78,144, quick, tb 1,024): base 0.1085, axis_curriculum 0.4223, parent 0.4644, replay_repeat 0.5081. Candidate vs base +0.3138: 7 families strictly positive, 3 ties (menders 0=0, rites 0=0, sirens 0.5=0.5), 0 negative; warren flipped 0→0.125. Replay vs base: 7 positive with rites flipped and ties at menders/sirens/warren. Pilot gate failed on both aggregate comparisons.
+- Corpus hash `e7a95d73...686e`; balance: tracefix formalisms 13/13/9/5, protocol branches 15/14/11, hygiene 30 injected / 10 clean.
 
 ## Controls
 
@@ -32,7 +35,7 @@ Executable truth grades outputs only and is stripped from every model-facing byt
 
 ## Next Stage
 
-Adversarial design review; then, behind clean pushed green checkpoints: train-control, train-candidate, merge-arms, the one local gate event, and the conditional aggregate pilot.
+None. Closed per the frozen contract after the pilot negative; seed 78,144 is consumed and recorded. The published replay_repeat composite is the presumptive successor parent; the queued next steps (replay-compounding measurement; menders/sirens instrument forensics) carry calibration notes in the program backlog.
 
 ## Artifact Manifest
 

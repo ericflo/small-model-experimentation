@@ -13925,40 +13925,40 @@
    ]
   },
   "qwen35_4b_goal_gap_axis_curriculum_target_match": {
-   "verdict_tag": "Design under construction; nothing trained",
+   "verdict_tag": "Skills installed; benchmark chose review",
    "concept_primer": "Instead of teaching everything at once, teach exactly the four abilities where the held-out benchmark has been stuck for months: fixing a buggy program from its wrong output, finding a route under a strict step budget, ignoring instructions smuggled inside documents, and following a freshly written procedure with interacting switches.",
    "plain_question": "Can four purpose-built practice sets — each varied across many invented styles — install the four abilities every previous model failed on, without damaging anything else?",
-   "plain_answer": "Nothing is trained yet. The 160-exercise practice set is frozen: forty exercises for each stuck ability, every answer machine-verified, and every exercise written in vocabulary never used by any earlier training set or the benchmark.",
-   "why_it_matters": "History shows the goal — beat the base model everywhere at once — was reached exactly once in 65 attempts, always blocked by the same four abilities. Purpose-built practice that varies its style is the first attack aimed at exactly that bottleneck.",
-   "verdict_tone": "neutral",
+   "plain_answer": "The targeted practice worked on its own terms — the first screen pass in this program's history (28 vs 22 and 18 of 40 on unseen tasks, with zero forgetting). On the held-out benchmark it beat the untrained model by a wide margin (0.42 vs 0.11) with seven families up, none down, and one stuck family flipped. But plain review of old material scored even higher (0.51), so the frozen rule closed the experiment. Two families never moved for anyone: program repair stayed at zero and injection resistance at exactly one-half, for every model.",
+   "why_it_matters": "Targeted practice installs skills without forgetting, but installed skills and benchmark family scores are separated by more than vocabulary. And the cheapest interventionre-practicing old material — keeps compounding the total score. The goal is now blocked by exactly two frozen families, which is a much sharper question than it was yesterday.",
+   "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "Stuck abilities targeted",
-     "value": "4",
-     "sub": "program repair, budgeted search, injection hygiene, procedure compliance"
+     "label": "Screen result",
+     "value": "28 vs 22 / 18",
+     "sub": "first promotion in this line; zero forgetting"
     },
     {
-     "label": "Practice exercises",
-     "value": "160",
-     "sub": "40 per ability, all machine-verified"
+     "label": "Benchmark vs base",
+     "value": "+0.31",
+     "sub": "7 families up, 0 down, warren flipped"
     },
     {
-     "label": "Historical goal passes",
-     "value": "1 / 65",
-     "sub": "quick-tier paired events, ever"
+     "label": "But plain review",
+     "value": "0.51",
+     "sub": "beat the candidate's 0.42 — rule closed the trial"
     },
     {
-     "label": "Model events so far",
-     "value": "0",
-     "sub": "benchmark seed 78,144 sealed"
+     "label": "Frozen families",
+     "value": "2",
+     "sub": "program repair at 0; injection resistance at exactly 0.5"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Where the experiment stands",
-     "chart_read": "Each bar is a preregistered stage; a bar at one means that stage is complete.",
-     "chart_takeaway": "The practice set is frozen; matching, review, training, the two-part screen, and the benchmark have not started."
+     "chart_plain_title": "Benchmark totals: practice beat base widely, review beat practice",
+     "chart_read": "One bar per model: the untrained base, the axis-practice model, its parent, and the plain-review model.",
+     "chart_takeaway": "Every trained model crushes base; plain review of old material tops the table, so the targeted-practice model did not advance."
     }
    ]
   }

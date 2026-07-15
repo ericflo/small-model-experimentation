@@ -63,3 +63,23 @@
   byte-equal to the parent's totals; replay drifted to 65/89/15.
 - All ten preregistered checks pass; `axis_curriculum` is promoted. The
   conditional aggregate at sealed seed 78,144 is the only next stage.
+
+## 2026-07-15 — Conditional aggregate pilot: negative; experiment closed
+
+- The benchmark stage ran from promotion checkpoint `4adf6b7a` (clean synced
+  green main): weight-recomputation binding for all four composites, then four
+  gateway events on never-touched seed 78,144 (quick, think budget 1,024,
+  identical source inventory across arms; seed recorded in the ledger).
+- Aggregates: base 0.1085; axis_curriculum 0.4223; designed_fresh_parent
+  0.4644; replay_repeat 0.5081.
+- Candidate versus base: +0.3138 aggregate; per family 7 strictly positive,
+  3 ties (menders 0=0, rites 0=0, sirens 0.5=0.5), 0 negative; warren flipped
+  (0 → 0.125). Replay versus base: 7 positive, ties menders/sirens/warren;
+  rites flipped (0 → 0.125).
+- Pilot gate FAILS: the candidate lost the aggregate to parent (−0.042) and
+  replay (−0.086). Per the frozen contract the experiment closes; per the
+  frozen readings, the loss is content-opportunity-cost at matched exposure
+  (retention was byte-equal to parent locally), and the every-family-vs-base
+  record (7/3/0) is reported under the quick-tier power statement.
+- menders scored 0 and sirens exactly 0.500 for every arm — the goal's wall is
+  now two families wide and precisely localized.

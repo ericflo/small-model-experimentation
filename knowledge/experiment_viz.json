@@ -48684,35 +48684,29 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Preregistered stage completion",
+     "title": "Seed-78144 quick aggregate by arm (tb 1024)",
      "categories": [
-      "intake",
-      "axis corpus",
-      "exposure match",
-      "design review",
-      "train 2 arms",
-      "two-instrument gate",
-      "conditional aggregate"
+      "base",
+      "axis_curriculum",
+      "designed_fresh_parent",
+      "replay_repeat"
      ],
      "series": [
       {
-       "label": "completed checkpoint",
+       "label": "menagerie quick aggregate",
        "values": [
-        1,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0
+        0.1085,
+        0.4223,
+        0.4644,
+        0.5081
        ]
       }
      ],
-     "x_label": "preregistered experiment stage",
-     "y_label": "completion indicator",
-     "y_format": "integer",
-     "note": "The 160-row axis corpus is frozen (40 rows per stuck-family axis, executable truth, banned-vocabulary audited). Exposure matching, review, training, the 144-task gate, and the sealed-seed aggregate remain.",
-     "source": "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/reports/preregistration.md"
+     "x_label": "explicit merged composite",
+     "y_label": "aggregate score",
+     "y_format": "float",
+     "note": "The axis candidate beat base +0.3138 with 7 positive / 0 negative families (warren flipped) but lost the aggregate to its parent and to the replay control, which flipped rites and posted the line's best recorded aggregate. menders (0) and sirens (0.500) were identical for every arm.",
+     "source": "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/reports/report.md"
     }
    ]
   }

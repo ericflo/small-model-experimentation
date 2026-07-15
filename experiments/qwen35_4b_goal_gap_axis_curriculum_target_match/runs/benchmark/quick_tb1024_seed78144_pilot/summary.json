@@ -1,0 +1,193 @@
+{
+  "candidate": "axis_curriculum",
+  "candidate_comparisons": {
+    "axis_curriculum": {
+      "axis_curriculum_minus_designed_fresh_parent": {
+        "aggregate_delta": -0.04213195453944757,
+        "per_family_delta": {
+          "chronicle": -0.125,
+          "lockpick": -0.375,
+          "menders": 0.0,
+          "mirage": 0.25,
+          "rites": 0.0,
+          "siftstack": -0.125,
+          "sirens": 0.0,
+          "stockade": 0.07868045460552398,
+          "toolsmith": -0.125,
+          "warren": 0.0
+        }
+      },
+      "axis_curriculum_minus_replay_repeat": {
+        "aggregate_delta": -0.0858287545787546,
+        "per_family_delta": {
+          "chronicle": -0.125,
+          "lockpick": -0.375,
+          "menders": 0.0,
+          "mirage": -0.125,
+          "rites": -0.125,
+          "siftstack": -0.125,
+          "sirens": 0.0,
+          "stockade": 0.016712454212454153,
+          "toolsmith": -0.125,
+          "warren": 0.125
+        }
+      }
+    }
+  },
+  "comparisons": {
+    "axis_curriculum_minus_base": {
+      "aggregate_delta": 0.31379461532531605,
+      "minimum_family_delta": 0.0,
+      "nonnegative_families": 10,
+      "per_family_delta": {
+        "chronicle": 0.625,
+        "lockpick": 0.125,
+        "menders": 0.0,
+        "mirage": 0.75,
+        "rites": 0.0,
+        "siftstack": 0.625,
+        "sirens": 0.0,
+        "stockade": 0.3879461532531606,
+        "toolsmith": 0.5,
+        "warren": 0.125
+      },
+      "positive_families": 7
+    },
+    "designed_fresh_parent_minus_base": {
+      "aggregate_delta": 0.3559265698647636,
+      "minimum_family_delta": 0.0,
+      "nonnegative_families": 10,
+      "per_family_delta": {
+        "chronicle": 0.75,
+        "lockpick": 0.5,
+        "menders": 0.0,
+        "mirage": 0.5,
+        "rites": 0.0,
+        "siftstack": 0.75,
+        "sirens": 0.0,
+        "stockade": 0.30926569864763664,
+        "toolsmith": 0.625,
+        "warren": 0.125
+      },
+      "positive_families": 7
+    },
+    "replay_repeat_minus_base": {
+      "aggregate_delta": 0.39962336990407066,
+      "minimum_family_delta": 0.0,
+      "nonnegative_families": 10,
+      "per_family_delta": {
+        "chronicle": 0.75,
+        "lockpick": 0.5,
+        "menders": 0.0,
+        "mirage": 0.875,
+        "rites": 0.125,
+        "siftstack": 0.75,
+        "sirens": 0.0,
+        "stockade": 0.37123369904070647,
+        "toolsmith": 0.625,
+        "warren": 0.0
+      },
+      "positive_families": 7
+    }
+  },
+  "gateway_sha256": "53cf6533dbd710eb167503363c39f73dbf7559a0d91f40a00436a3c218a01c17",
+  "goal_gate": {
+    "axis_curriculum": {
+      "family_count": 10,
+      "included_in_pilot_gate": false,
+      "positive_families_vs_base": 7,
+      "power_statement": "quick-tier family scores are ~1/8-step granular with base at zero on several families; a FAIL here is the expected outcome even under the hypothesis and reads as 'not confirmed at quick-tier granularity', never as evidence against the mechanism",
+      "strictly_positive_every_family_vs_base": false
+    }
+  },
+  "local_promotion_promoted": "axis_curriculum",
+  "local_promotion_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/runs/local/seed88014_promotion.json",
+  "local_promotion_receipt_sha256": "161d0597e71ef556a328a8c926c9a8933630669040e23793242c0a66c45d67ef",
+  "model_weight_sha256s": {
+    "axis_curriculum": "0dfc18d281298aeb5a858f00fd26e29c2a4b9ece2de19f978ac05b86fc5d8122",
+    "base": "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db",
+    "designed_fresh_parent": "0a3b89cdf57ed8a73590580489d744319c12b44b60991db55b5baba6f7c27979",
+    "replay_repeat": "3df45004fcf42519ce28cdcfedcbb39b0907662f8ecfb8a87b13b416087d0072"
+  },
+  "models": {
+    "axis_curriculum": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_goal_gap_axis_curriculum_target_match/merged/axis_curriculum",
+    "base": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized",
+    "designed_fresh_parent": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_fresh_surface_budget_commit_target_match/merged/designed_fresh",
+    "replay_repeat": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_goal_gap_axis_curriculum_target_match/merged/replay_repeat"
+  },
+  "name": "pilot",
+  "promotions": {
+    "axis_curriculum": {
+      "beats_immediate_parent_aggregate": false,
+      "beats_replay_control_aggregate": false,
+      "passes_pilot_gate": false,
+      "strictly_positive_aggregate_vs_base": true
+    }
+  },
+  "schema_version": 1,
+  "scores": {
+    "axis_curriculum": {
+      "aggregate": 0.4223052536231884,
+      "per_family": {
+        "chronicle": 0.75,
+        "lockpick": 0.125,
+        "menders": 0.0,
+        "mirage": 0.75,
+        "rites": 0.0,
+        "siftstack": 0.625,
+        "sirens": 0.5,
+        "stockade": 0.47305253623188404,
+        "toolsmith": 0.875,
+        "warren": 0.125
+      }
+    },
+    "base": {
+      "aggregate": 0.10851063829787233,
+      "per_family": {
+        "chronicle": 0.125,
+        "lockpick": 0.0,
+        "menders": 0.0,
+        "mirage": 0.0,
+        "rites": 0.0,
+        "siftstack": 0.0,
+        "sirens": 0.5,
+        "stockade": 0.0851063829787234,
+        "toolsmith": 0.375,
+        "warren": 0.0
+      }
+    },
+    "designed_fresh_parent": {
+      "aggregate": 0.46443720816263595,
+      "per_family": {
+        "chronicle": 0.875,
+        "lockpick": 0.5,
+        "menders": 0.0,
+        "mirage": 0.5,
+        "rites": 0.0,
+        "siftstack": 0.75,
+        "sirens": 0.5,
+        "stockade": 0.39437208162636006,
+        "toolsmith": 1.0,
+        "warren": 0.125
+      }
+    },
+    "replay_repeat": {
+      "aggregate": 0.508134008201943,
+      "per_family": {
+        "chronicle": 0.875,
+        "lockpick": 0.5,
+        "menders": 0.0,
+        "mirage": 0.875,
+        "rites": 0.125,
+        "siftstack": 0.75,
+        "sirens": 0.5,
+        "stockade": 0.4563400820194299,
+        "toolsmith": 1.0,
+        "warren": 0.0
+      }
+    }
+  },
+  "seed": 78144,
+  "think_budget": 1024,
+  "tier": "quick"
+}
