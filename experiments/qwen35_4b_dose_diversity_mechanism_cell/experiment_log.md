@@ -10,3 +10,10 @@
   successor selection.
 - Seeds `55123/57/88020`; no aggregate seed exists for this cell.
 - No model, GPU, training, local, or benchmark event has run.
+
+## 2026-07-15 — Authenticated candidate training
+
+- `train-candidate` ran only after the amended freeze checkpoint matched
+  `origin/main` with both workflows green and a clean worktree.
+- `axis160_direct` trained 1,520/1,520 rows with 0 skipped over 190 updates;
+  receipt/log published and pinned fail-closed. The single merge is next.

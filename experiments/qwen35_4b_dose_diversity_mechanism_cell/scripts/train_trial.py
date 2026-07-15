@@ -50,7 +50,12 @@ PUBLISHED_ARM_HASHES = {
     # TODO-PIN: after the arm trains and its receipt/log/adapter are published,
     # the orchestrator replaces the None with the four published sha256 values
     # {"receipt": ..., "log": ..., "adapter_config": ..., "adapter_weights": ...}.
-    "axis160_direct": None,
+    "axis160_direct": {
+        "receipt": "7aeab837805ee2f866f4b192dba6c4439d2910f35e57efd443330e4c72c1eb9a",
+        "log": "07ad1c2cb2838facf3cdd951f2ec9d21093ffb62b53f75be0490adca788ec26f",
+        "adapter_config": "64c0484dcc48ab781264d4cd8ec6ae1a430cb2edba8ae26066799b8773efa661",
+        "adapter_weights": "d5cf1273d11b9e23ae95f319a9f1b7d08e1ce6bba34813269444345ce745ed1d",
+    },
 }
 ADAPTER_ROOT = ROOT / "large_artifacts" / EXP.name / "adapters"
 
