@@ -27,3 +27,12 @@
   `origin/main` with both workflows green and a clean worktree.
 - `axis_on_replay` trained 1,520/1,520 rows with 0 skipped over 190 updates;
   receipt/log published and pinned fail-closed. Merges are the only next stage.
+
+## 2026-07-15 — Authenticated explicit composites
+
+- `merge-arms` ran only after candidate checkpoint `02155e08` matched
+  `origin/main` with both workflows green; PASS_CONTROL_MERGE and the merge
+  self-pin were required and verified.
+- Both arms merged (scale 2.0, 128/128 nonzero modules, fingerprint-verified);
+  merged-tree pins filled fail-closed in the evaluator. The one frozen 144-task
+  gate event at seed 88,015 is the only next stage.

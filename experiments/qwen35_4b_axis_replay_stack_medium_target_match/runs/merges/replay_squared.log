@@ -1,0 +1,30 @@
+[merge] loading composite Qwen/Qwen3.5-4B bf16 ...
+
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]
+Loading weights:   3%|▎         | 23/723 [00:00<00:03, 199.86it/s]
+Loading weights:   6%|▌         | 43/723 [00:00<00:04, 145.80it/s]
+Loading weights:  19%|█▉        | 140/723 [00:00<00:01, 437.12it/s]
+Loading weights:  26%|██▋       | 190/723 [00:00<00:01, 420.29it/s]
+Loading weights:  33%|███▎      | 236/723 [00:00<00:01, 305.95it/s]
+Loading weights:  51%|█████     | 366/723 [00:00<00:00, 540.35it/s]
+Loading weights:  60%|██████    | 437/723 [00:00<00:00, 574.06it/s]
+Loading weights:  70%|██████▉   | 505/723 [00:01<00:00, 481.67it/s]
+Loading weights:  78%|███████▊  | 563/723 [00:01<00:00, 462.14it/s]
+Loading weights:  85%|████████▌ | 616/723 [00:01<00:00, 441.79it/s]
+Loading weights:  92%|█████████▏| 665/723 [00:01<00:00, 438.19it/s]
+Loading weights: 100%|██████████| 723/723 [00:01<00:00, 450.94it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[merge] LoRA products use cuda with FP32 matmul
+[merge] example composite tail: '0.linear_attn.conv1d' -> ['model.language_model.layers.0.linear_attn.conv1d']
+[merge] applied 128 LoRA deltas (expected 7 modules x layers)
+[merge] saving composite merged model to /home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_axis_replay_stack_medium_target_match/merged/replay_squared ...
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:06<00:00,  6.46s/it]
+Writing model shards: 100%|██████████| 1/1 [00:06<00:00,  6.47s/it]
+[merge] processor save skipped:
+Qwen3VLVideoProcessor requires the Torchvision library but it was not found in your environment. Check out the instructions on the
+installation page: https://pytorch.org/get-started/locally/ and follow the ones that match your environment.
+Please note that you may need to restart your runtime after installation.
+
+[merge] done
