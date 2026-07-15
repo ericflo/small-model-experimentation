@@ -1,6 +1,6 @@
 # Qwen3.5-4B Counterfactual Plan Reflection Transfer
 
-**Status:** in-progress · since 2026-07-14 · exact-SHA Review 12 returned HOLD; a lease-only pre-Python remediation is implemented model-free and awaits detached audit plus Review 13; model/GPU/training/evaluation remain unauthorized
+**Status:** in-progress · since 2026-07-14 · exact-SHA Review 12 returned HOLD; the lease-only pre-Python remediation passed detached model-free audits and awaits Review 13; model/GPU/training/evaluation remain unauthorized
 
 This experiment tests the paper's most actionable claim without relying on its
 consciousness framing: can supervision on what the model would say on a later
@@ -343,6 +343,18 @@ an exact read-only bind mount does not exclude a writable shared mapping of the 
 underlying inode created before the mount became read-only, and the current mount
 receipt lacks mount-namespace identity. Authorization remains unchanged while these
 counterexamples are remediated model-free.
+
+The first remediated exact-SHA audit failed closed on two genuinely omitted initial
+native mappings, and the next failed closed on one copied NVIDIA-library file whose
+source ownership prevented a read lease. The deterministic manifest probe now imports
+the complete preflight closure, the snapshot is root-owned, and an exhaustive check
+proved all 5,033 files in the relevant external snapshot roots leaseable. At exact
+commit `c8ff609ba9c0abb8eaa9be1775ec39e61f2a4f59`, training then sealed 33,344
+files and vLLM sealed 73,496, each with 46 preflight files, 16 loaded native mappings,
+and zero unleased files. Both launcher rebuilds, 94 tests plus 23 subtests, and exact-
+SHA Validate Repository run `29383229204` and Publish Research Site run
+`29383229174` passed. These remain model-free implementation facts; authorization is
+unchanged pending independent Review 13.
 
 ## Interpretation
 

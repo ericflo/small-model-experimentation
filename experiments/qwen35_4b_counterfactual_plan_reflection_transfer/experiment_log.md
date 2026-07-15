@@ -25,9 +25,20 @@
   finishes before the guards seal.
 - Added deterministic manifest/launcher rebuild tests and a real kernel regression in
   which a pre-existing shared writable mapping makes guard entry fail closed. The
-  focused suite passes 94 tests and 23 subtests. No tokenizer/model/GPU/training/
+  focused suite initially passed 94 tests and 23 subtests.
+- A detached audit then failed closed when one copied NVIDIA runtime file retained
+  source ownership that denied `F_SETLEASE`. The snapshot was normalized to root
+  ownership, an exhaustive probe proved all 5,033 files in its configured stdlib and
+  native roots leaseable, and a repository regression now checks every such file. The
+  resulting local suite passes 95 tests plus 23 subtests.
+- Both detached audits passed at exact commit
+  `c8ff609ba9c0abb8eaa9be1775ec39e61f2a4f59`. Training protected 33,344 files;
+  vLLM protected 73,496 and discovered CUTLASS without importing it. Each protected
+  46 preflight files and 16 loaded native mappings with zero unleased files. The full
+  94-test/23-subtest suite and exact-SHA Validate Repository run `29383229204` and
+  Publish Research Site run `29383229174` passed. No tokenizer/model/GPU/training/
   evaluation/Jacobian/benchmark event occurred. Authorization remains unchanged
-  pending detached exact-SHA audits and Review 13.
+  pending Review 13.
 
 ## 2026-07-14 — Review-10 remediation, pending Review 11
 

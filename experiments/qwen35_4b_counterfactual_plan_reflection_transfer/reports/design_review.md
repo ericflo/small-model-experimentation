@@ -805,3 +805,20 @@ temporary residue. Authorization remains unchanged.
    The local model-free suite passes 94 tests and 23 subtests. This remains a HOLD
    candidate: exact-SHA detached runtime audits and independent Review 13 are mandatory
    before any tokenizer/model/GPU/training/evaluation authorization changes.
+
+The detached audits passed at exact commit
+`c8ff609ba9c0abb8eaa9be1775ec39e61f2a4f59`. Training protected 33,344 files and
+vLLM protected 73,496, with 46 preflight files, 16 loaded native mappings, and zero
+unleased files in each seal. vLLM discovered the authenticated CUTLASS path without
+importing a model. Two preceding fail-closed attempts exposed omitted `_ctypes`/
+`libffi` mappings and an unleaseable copied NVIDIA runtime file; the probe now includes
+the preflight closure, the snapshot is root-owned, and all 5,033 configured external
+files pass an exhaustive read-lease check. The exact-SHA 94-test/23-subtest suite,
+launcher/manifest rebuilds, Validate Repository run `29383229204`, and Publish
+Research Site run `29383229174` passed. No tokenizer/model/GPU/CUDA/training/
+evaluation/Jacobian/benchmark event occurred. Authorization remains unchanged pending
+independent Review 13.
+
+The descendant audit-record revision adds the exhaustive ownership/lease regression
+and passes 95 tests plus 23 subtests. It does not change any launcher, manifest,
+runtime, stage, or authorization byte.

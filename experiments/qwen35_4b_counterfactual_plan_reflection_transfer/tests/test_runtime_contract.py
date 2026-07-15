@@ -122,6 +122,36 @@ class RuntimeContractTests(unittest.TestCase):
             )
             self.assertEqual(output.read_bytes(), expected.read_bytes())
 
+    def test_every_external_runtime_snapshot_file_accepts_a_read_lease(self) -> None:
+        snapshot = Path("/workspace/sme-reflection-runtime")
+        if not snapshot.is_dir():
+            self.skipTest("external immutable runtime snapshot is not provisioned")
+        system = json.loads(R.RUNTIME_PIN.read_text())["system"]
+        roots = [
+            Path(system["stdlib_root"]),
+            *(
+                Path(path)
+                for path in system["native_library_roots"]
+                if path.startswith(str(snapshot))
+            ),
+        ]
+        paths = sorted(
+            {
+                path.resolve(strict=True)
+                for root in roots
+                for path in root.rglob("*")
+                if path.is_file()
+            }
+        )
+        self.assertTrue(paths)
+        for path in paths:
+            descriptor = os.open(path, os.O_RDONLY | os.O_CLOEXEC)
+            try:
+                R.fcntl.fcntl(descriptor, R.fcntl.F_SETLEASE, R.fcntl.F_RDLCK)
+                R.fcntl.fcntl(descriptor, R.fcntl.F_SETLEASE, R.fcntl.F_UNLCK)
+            finally:
+                os.close(descriptor)
+
     def test_pinned_git_execution_ignores_path_shadow(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

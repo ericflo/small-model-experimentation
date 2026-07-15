@@ -7,9 +7,9 @@ adversarial HOLD. Full CPU construction succeeds and the historical tokenizer re
 is invalid as a training prerequisite. Exact-SHA Review 12 accepted the venv/CUTLASS,
 active-UUID, and initial-mapping closures but returned HOLD on pre-Python code trust,
 subprocess dependency closure, and lease-denied read-only mounts. A model-free
-lease-only remediation is now implemented and awaits a clean detached audit plus
-exact-SHA Review 13. No Qwen generation, GPU, training, capability measurement, or
-Jacobian event exists.
+lease-only remediation is now implemented, its detached audits have passed, and
+exact-SHA Review 13 remains required. No Qwen generation, GPU, training, capability
+measurement, or Jacobian event exists.
 
 ## Research Program Fit
 
@@ -121,10 +121,18 @@ metadata calls complete before guard seal. The external runtime snapshot contain
 byte copies whose exact tree surfaces are pinned in the repository. This is implementation
 evidence, not authorization; Review 13 must independently attack an exact clean commit.
 
+At exact commit `c8ff609ba9c0abb8eaa9be1775ec39e61f2a4f59`, training sealed
+33,344 files and vLLM sealed 73,496, each with 46 preflight files, 16 initial native
+mappings, and zero unleased files. Before that pass, the audit correctly rejected two
+omitted preflight-native mappings and one copied runtime file with unleaseable source
+ownership. The manifest probe and snapshot procedure were repaired, all 5,033 files
+in the configured external roots accepted a read lease, and that property is now an
+exhaustive regression. Both exact-SHA CI workflows and the full 94-test/23-subtest
+model-free suite passed.
+
 ## Next Experiments
 
-Run both model-free detached runtime audits at the exact committed SHA, replay the
-manifest and launcher builds, obtain Review 13, and remediate any reproduced
+Obtain independent Review 13 of the exact committed SHA and remediate any reproduced
 counterexample before changing authorization. Nothing beyond tokenizer-only work is
 authorized yet.
 
