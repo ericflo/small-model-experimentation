@@ -141,6 +141,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 ## coverage
 
 - `feature_factorized_rule_diversity` (track-z): [README](../experiments/feature_factorized_rule_diversity/README.md)
+- `qwen35_4b_axis_stack_readjudication_medium_pilot` (new): [README](../experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/README.md)
 - `qwen35_4b_balanced_discriminative_bridge` (track-z): [README](../experiments/qwen35_4b_balanced_discriminative_bridge/README.md)
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
 - `qwen35_4b_constrained_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_constrained_coverage_dpo/README.md)
@@ -588,6 +589,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_adaptive_tool_controller` (track-z): [README](../experiments/qwen35_4b_adaptive_tool_controller/README.md)
 - `qwen35_4b_answer_potential_trace_sft` (new): [README](../experiments/qwen35_4b_answer_potential_trace_sft/README.md)
 - `qwen35_4b_axis_replay_stack_medium_target_match` (new): [README](../experiments/qwen35_4b_axis_replay_stack_medium_target_match/README.md)
+- `qwen35_4b_axis_stack_readjudication_medium_pilot` (new): [README](../experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/README.md)
 - `qwen35_4b_balanced_core_answer_potential_sft` (new): [README](../experiments/qwen35_4b_balanced_core_answer_potential_sft/README.md)
 - `qwen35_4b_balanced_discriminative_bridge` (track-z): [README](../experiments/qwen35_4b_balanced_discriminative_bridge/README.md)
 - `qwen35_4b_bank_the_thoughts` (new): [README](../experiments/qwen35_4b_bank_the_thoughts/README.md)
@@ -826,6 +828,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 
 - `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
 - `qwen35_4b_adaptive_tool_controller` (track-z): [README](../experiments/qwen35_4b_adaptive_tool_controller/README.md)
+- `qwen35_4b_axis_stack_readjudication_medium_pilot` (new): [README](../experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/README.md)
 - `qwen35_4b_counterexample_directed_dsl` (track-z): [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md)
 - `qwen35_4b_executable_program_posttraining` (track-z): [README](../experiments/qwen35_4b_executable_program_posttraining/README.md)
 - `qwen35_4b_foofah_adaptive_program_budget_router` (track-z): [README](../experiments/qwen35_4b_foofah_adaptive_program_budget_router/README.md)
@@ -909,6 +912,7 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 ## verification
 
 - `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
+- `qwen35_4b_axis_stack_readjudication_medium_pilot` (new): [README](../experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/README.md)
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
 - `qwen35_4b_code_confidence` (new): [README](../experiments/qwen35_4b_code_confidence/README.md)
 - `qwen35_4b_confidence_policy` (new): [README](../experiments/qwen35_4b_confidence_policy/README.md)

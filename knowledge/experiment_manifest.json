@@ -835,6 +835,47 @@
   },
   {
     "file_counts": {
+      ".json": 7,
+      ".jsonl": 7,
+      ".log": 3,
+      ".md": 8,
+      ".py": 13,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_axis_stack_readjudication_medium_pilot",
+    "path": "experiments/qwen35_4b_axis_stack_readjudication_medium_pilot",
+    "primary_readme": "experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/README.md",
+    "primary_report": "experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety"
+    ],
+    "source_track": "new",
+    "summary": "Re-judge the published axis-stack composites on a fresh instrument with the measured ceiling-tie flaw corrected prospectively \u2014 control-ceiling kinds excluded and reported as not-detectable, wins required on two-thirds of detectable kinds \u2014 then fund the medium-tier pilot conditionally. Training-free; both prior failures remain recorded and their seeds sealed.",
+    "tags": [
+      "coverage",
+      "small-model",
+      "table-transform",
+      "verification"
+    ],
+    "title": "Axis Stack Re-adjudication with Medium Pilot",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 41,
+    "total_size_bytes": 10694104
+  },
+  {
+    "file_counts": {
       ".json": 14,
       ".jsonl": 7,
       ".md": 7,

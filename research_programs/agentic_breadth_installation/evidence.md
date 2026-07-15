@@ -836,3 +836,28 @@ prospectively. Queued next (calibrated): a training-free fresh-instrument
 re-adjudication of the published composites with a detectability-corrected
 breadth bar and a conditional medium pilot — the mechanism evidence is
 replicated, the blocker is gate noise, and the cost is merge/eval only.
+
+## qwen35_4b_axis_stack_readjudication_medium_pilot (2026-07-15 — Corrected-bar negative; the three-replication mechanism map)
+
+The training-free re-adjudication judged the published stack composites on a
+third fresh instrument (seed 88,016) with the detectability-corrected bar. All
+four kinds were detectable; required wins 3. Candidate 22/40 vs parent 15 and
+replay_squared 18 — the axis-total win's third replication — with kind wins on
+explore (7/3/6) and hygiene (7/5/5), a third consecutive protocol tie with the
+parent (7/7/5), and a tracefix loss (1/0/2). Retention 65/98/5 vs 61/92/12 and
+66/91/13. Two wins < 3: NOT_PROMOTED; seed 78,146 sealed; the medium pilot
+never ran.
+
+Read — the mechanism map across three preregistered fresh instruments:
+INSTALLED: hygiene (won all three events), explore (two of three), and
+think-economy/termination (caps halved in every event); the axis TOTAL won all
+three events (+7, +6, +6). NOT INSTALLED: tracefix (4/10 → 2/10 → 1/10,
+trending to chance — multi-formalism program repair does not take at this dose
+from these parents) and protocol (tied the parent every time — the parent
+already carries the skill, so the lesson is redundant dose). The corrected bar
+worked as designed and the remaining deficit is CONTENT, not measurement.
+Queued successor (calibrated): axis corpus v2 that keeps hygiene/explore,
+replaces protocol with a lesson targeting capability the parent lacks, and
+redesigns trace-repair from this line's own 432-completion-per-arm raw failure
+outputs (own-experiment data, no benchmark exposure). Do not re-measure the
+existing composites again; do not reuse sealed seeds.

@@ -14,7 +14,10 @@ Three inherited composites (weight- and tree-pinned), one fresh two-instrument g
 
 ## Results
 
-No capability result exists.
+- Gate (seed 88,016; all arms weight-authenticated): all four kinds detectable; required wins 3.
+- Axis holdout of 40: candidate 22, parent 15, replay_squared 18. Per-kind candidate/parent/squared: explore 7/3/6 (win), hygiene 7/5/5 (win), protocol 7/7/5 (tie — third consecutive event), tracefix 1/0/2 (loss).
+- Retention of 104: 65/98/5 vs 61/92/12 vs 66/91/13 (correct/parsed/caps) — bands all passed; best termination of the event.
+- Two kind wins < 3: NOT_PROMOTED; seed 78,146 permanently sealed; the medium pilot never ran.
 
 ## Controls
 
@@ -26,7 +29,7 @@ Executable truth grades outputs only; `benchmarks/` remains unread.
 
 ## Next Stage
 
-Design review; then the one gate event; then the conditional medium pilot.
+None. Closed per contract. The queued successor is axis corpus v2: keep hygiene/explore, replace the redundant protocol block, redesign trace-repair from this line's own raw failure outputs.
 
 ## Artifact Manifest
 

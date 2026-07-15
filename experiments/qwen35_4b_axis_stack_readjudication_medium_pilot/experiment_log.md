@@ -14,3 +14,16 @@
 - The conditional pilot is preregistered at the MEDIUM tier, sealed seed
   78,146. Both prior failures remain recorded; their seeds remain sealed.
 - No model, GPU, or benchmark event has run.
+
+## 2026-07-15 — Corrected gate event: not promoted; experiment closed
+
+- The gate event ran from freeze commit `3fc5fb6c`: three authenticated engine
+  runs over the fresh 144-row input at seed 88,016.
+- All four kinds detectable (no control ceiling); required wins 3. Candidate
+  axis 22/40 vs parent 15 and squared 18 (third consecutive axis-total win);
+  kind wins: explore and hygiene (2 of 3 required); protocol tied the parent
+  for the third consecutive event; tracefix lost (1/10). Retention bands all
+  passed with the best termination of the event (caps 5 vs 12/13).
+- NOT_PROMOTED under the corrected bar; seed 78,146 permanently sealed; the
+  medium pilot never ran. The three-replication mechanism map is recorded:
+  hygiene/explore/termination install; tracefix/protocol do not.

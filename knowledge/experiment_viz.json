@@ -48760,33 +48760,47 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Preregistered stage completion",
+     "title": "Seed-88016 corrected gate: per-kind axis correct (of 10)",
      "categories": [
-      "intake",
-      "inherited pins",
-      "fresh gate design",
-      "design review",
-      "gate event",
-      "medium pilot"
+      "explore",
+      "hygiene",
+      "protocol",
+      "tracefix"
      ],
      "series": [
       {
-       "label": "completed checkpoint",
+       "label": "axis_on_replay",
        "values": [
-        1,
-        1,
-        0,
-        0,
-        0,
+        7,
+        7,
+        7,
+        1
+       ]
+      },
+      {
+       "label": "replay_parent",
+       "values": [
+        3,
+        5,
+        7,
         0
+       ]
+      },
+      {
+       "label": "replay_squared",
+       "values": [
+        6,
+        5,
+        5,
+        2
        ]
       }
      ],
-     "x_label": "preregistered experiment stage",
-     "y_label": "completion indicator",
+     "x_label": "axis lesson kind",
+     "y_label": "correct of 10",
      "y_format": "integer",
-     "note": "Training-free re-adjudication of the published axis-stack composites with a detectability-corrected breadth bar; conditional medium pilot at sealed seed 78,146. Both predecessor failures remain recorded.",
-     "source": "experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/reports/preregistration.md"
+     "note": "Third fresh-instrument replication: hygiene and explore install (candidate wins), protocol ties the parent for the third time (redundant dose), tracefix trends to chance. Axis total 22 vs 15/18; retention 65/98/5 — best termination again. Two kind wins < 3 required: not promoted; seed 78,146 sealed.",
+     "source": "experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/reports/report.md"
     }
    ]
   }

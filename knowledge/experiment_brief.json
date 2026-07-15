@@ -14001,40 +14001,40 @@
    ]
   },
   "qwen35_4b_axis_stack_readjudication_medium_pilot": {
-   "verdict_tag": "Design under construction; re-judging built models",
+   "verdict_tag": "Fair screen; half the practice set is dead weight",
    "concept_primer": "The skill-stacked model already exists and has twice shown its skills are real; both times a measurement quirk — one comparison category stuck at a ceiling where wins are impossible — blocked its advance. This trial re-judges the same three built models on brand-new tasks with that quirk handled explicitly, at zero training cost.",
    "plain_question": "Judged fairly on new tasks, does the skill-stacked model clear the program's bars — and does the bigger benchmark tier then credit its skills?",
-   "plain_answer": "Nothing has run yet. The three models are inherited unchanged with their fingerprints re-verified; the new screen excludes categories where a comparison model is at the ceiling (reporting them instead of silently requiring the impossible) and fails closed if nothing is measurable.",
-   "why_it_matters": "Erasing past failures by re-rolling the dice is bad science; fixing a documented measurement flaw and saying so is how instruments improve. Both earlier failures stay on the record; this simply asks the question the flawed screen could not.",
-   "verdict_tone": "neutral",
+   "plain_answer": "Judged fairly on brand-new tasks — with the ceiling quirk handled — the stacked model won the overall skill test for the third straight time (22 vs 15 and 18 of 40) with the cleanest finishing behavior again. But it won only two of the four skill categories: document-hygiene and route-finding practice stick every time, while program-repair practice never took (down to 1 of 10) and procedure-following practice teaches nothing the starting model didn't already know. Two wins fell short of the required three, so the bigger benchmark stayed sealed.",
+   "why_it_matters": "Three independent screens now agree: the question is no longer whether designed practice installs skills (it does, without forgetting), but which lessons carry weight. Half this set needs rewriting from the recorded failures — a content problem, not a measurement problem.",
+   "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "Training cost",
-     "value": "0",
-     "sub": "all three models inherited unchanged"
+     "label": "Overall skill test",
+     "value": "22 vs 15 / 18",
+     "sub": "third straight win for the stacked model"
     },
     {
-     "label": "Prior evidence",
-     "value": "2 trials",
-     "sub": "skills replicated; ceiling tie both times"
+     "label": "Category wins",
+     "value": "2 of 3 needed",
+     "sub": "hygiene and routes; repair and procedure failed"
     },
     {
-     "label": "New fail-closed outcome",
-     "value": "1",
-     "sub": "gate fails if nothing is measurable"
+     "label": "Repair practice trend",
+     "value": "4 -> 2 -> 1",
+     "sub": "of 10 — never installed"
     },
     {
-     "label": "Benchmark seed",
-     "value": "78,146 sealed",
-     "sub": "medium tier, conditional"
+     "label": "Finishing behavior",
+     "value": "5 run-ons",
+     "sub": "vs 12 and 13 — cleanest again"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Where the experiment stands",
-     "chart_read": "Each bar is a preregistered stage; one means complete.",
-     "chart_takeaway": "Contract and inherited models are frozen; the fresh screen and the conditional medium benchmark remain."
+     "chart_plain_title": "Fair screen: two lesson types carry everything",
+     "chart_read": "Per-category right answers (of 10) for the stacked model and both comparisons.",
+     "chart_takeaway": "Hygiene and route-finding practice beat both comparisons; program-repair and procedure practice do not — the practice set needs a content revision, not another measurement."
     }
    ]
   }

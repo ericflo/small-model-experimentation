@@ -182,13 +182,21 @@
   consecutive experiment, converting 3-of-4 into 3-of-3 and letting one control
   kind-fluke (explore 7/10) veto promotion. Seed 78145 sealed; medium pilot
   never ran.
-- Queued NEXT (calibrated, training-free): fresh-instrument re-adjudication of
-  the published composites (axis_on_replay 24/40-64/98/6, its parent, and
-  replay_squared) at a new gate seed with a prospectively detectability-
-  corrected breadth bar (kinds where any control scores >= 9/10 are excluded
-  from the win requirement and reported as not-detectable), conditional medium
-  pilot behind it. Cost: eval-only (~40 GPU-minutes). Rationale: the mechanism
-  evidence is replicated twice; the blocker is instrument noise, not content.
+- Completed re-adjudication (corrected-bar negative; mechanism map final):
+  `qwen35_4b_axis_stack_readjudication_medium_pilot` — all four kinds
+  detectable, candidate 22/40 vs 15/18 (third consecutive axis-total win),
+  kind wins explore+hygiene only, protocol tied the parent a third time,
+  tracefix trended to chance (4->2->1 of 10). Seed 78146 sealed. The corrected
+  instrument worked; the deficit is CONTENT: hygiene/explore/termination
+  install, tracefix/protocol do not.
+- Queued NEXT (calibrated): axis corpus v2 — keep hygiene/explore blocks,
+  replace protocol (parent already has the skill; redundant dose) with a
+  lesson targeting measured parent deficits, and redesign trace-repair from
+  the line's own raw gate outputs (432 graded completions per arm across three
+  events; own-experiment data only). Fresh corpus/gate/aggregate seeds; the
+  same corrected detectability bar; medium pilot conditional. Believability:
+  the installable-lesson mechanism is replicated three times; the open
+  question is whether redesigned content can install the two dead blocks.
 - Queued (calibration notes attached): (a) replay-compounding line — measure
   whether iterated replay rounds keep gaining aggregate and where they saturate;
   the published `replay_repeat` composite (0.5081) is the presumptive parent;

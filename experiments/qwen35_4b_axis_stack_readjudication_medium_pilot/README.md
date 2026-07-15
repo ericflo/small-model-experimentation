@@ -2,7 +2,7 @@
 
 Re-judge the published axis-stack composites on a fresh instrument with the measured ceiling-tie flaw corrected prospectively — control-ceiling kinds excluded and reported as not-detectable, wins required on two-thirds of detectable kinds — then fund the medium-tier pilot conditionally. Training-free; both prior failures remain recorded and their seeds sealed.
 
-**Status:** in-progress · since 2026-07-15 · model-free construction under way; no model event has run
+**Status:** finished · 2026-07-15 · not promoted under the corrected bar (2 of 3 required kind wins); the three-replication mechanism map is now crisp: hygiene/explore/termination install, tracefix/protocol do not; seed 78,146 permanently sealed
 
 ## Research Program
 
@@ -43,16 +43,20 @@ Checkpointed stages:
 
 ## Results
 
-No model event has run.
+The corrected gate event ran at fresh seed 88,016 with all three inherited composites weight-authenticated. All four kinds were DETECTABLE (no control ceiling this time), so the corrected bar required 3 kind wins. Axis holdout of 40: candidate 22, parent 15, replay_squared 18 — the axis total win replicated for the THIRD time on a third fresh instrument. Per-kind candidate/parent/squared: explore 7/3/6 (win), hygiene 7/5/5 (win), protocol 7/7/5 (tie with parent — third consecutive event), tracefix 1/0/2 (loss). Retention: candidate 65/98/5 (correct/parsed/caps) vs 61/92/12 and 66/91/13 — best termination in every one of the three events. Two kind wins < 3 required: NOT_PROMOTED; seed 78,146 is permanently sealed; the medium pilot never ran.
 
 ## Interpretation
 
-None yet.
+Across three preregistered fresh-instrument events the mechanism map is no longer noise: the hygiene and explore lessons install reliably (hygiene beat both controls in all three events; explore in two), the termination benefit is unconditional (caps roughly halved every time), and the axis TOTAL always wins — but the tracefix lesson never installed (4/10, 2/10, 1/10 — trending to chance) and the protocol lesson adds nothing the parent lacks (tied in all three events). The corrected bar did exactly its job: with no ceiling excuse available, it exposed that the corpus installed half its content. The correct successor is a content revision — replace the two dead blocks using this line's own raw failure outputs — not another measurement.
+
+## Terminal Disposition
+
+No later event is authorized here. Seed 78,146 is spent-by-sealing. Three published composites and three gate events' raw outputs (432 graded completions per arm family) are preserved for the successor's failure forensics.
 
 ## Knowledgebase Update
 
-- Program evidence updated: pending the corrected-instrument reading.
-- Program backlog updated: this trial claims the queued re-adjudication slot.
+- Program evidence updated: the three-replication installable-lesson map recorded.
+- Program backlog updated: axis corpus v2 (tracefix/protocol blocks redesigned from failure forensics) queued with calibration notes.
 - Claim ledger updated: no.
 
 ## Artifacts

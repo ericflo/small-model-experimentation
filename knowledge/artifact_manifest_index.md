@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 235
-- Manifest files: 561
+- Experiments with manifests: 236
+- Manifest files: 562
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 87 |
 | `run-data` | 101 |
-| `standard-artifact` | 108 |
+| `standard-artifact` | 109 |
 
 ## Manifests
 
@@ -53,6 +53,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_axis_replay_stack_medium_target_match` | `other` | [manifest](../experiments/qwen35_4b_axis_replay_stack_medium_target_match/data/corpus_manifest.json) |
 | `qwen35_4b_axis_replay_stack_medium_target_match` | `other` | [manifest](../experiments/qwen35_4b_axis_replay_stack_medium_target_match/data/stream_manifest.json) |
 | `qwen35_4b_axis_replay_stack_medium_target_match` | `standard-artifact` | [manifest](../experiments/qwen35_4b_axis_replay_stack_medium_target_match/reports/artifact_manifest.yaml) |
+| `qwen35_4b_axis_stack_readjudication_medium_pilot` | `standard-artifact` | [manifest](../experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/reports/artifact_manifest.yaml) |
 | `qwen35_4b_balanced_core_answer_potential_sft` | `other` | [manifest](../experiments/qwen35_4b_balanced_core_answer_potential_sft/data/sft_manifest.json) |
 | `qwen35_4b_balanced_core_answer_potential_sft` | `standard-artifact` | [manifest](../experiments/qwen35_4b_balanced_core_answer_potential_sft/reports/artifact_manifest.yaml) |
 | `qwen35_4b_balanced_discriminative_bridge` | `dataset` | [manifest](../experiments/qwen35_4b_balanced_discriminative_bridge/data/dataset_manifest.json) |
