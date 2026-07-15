@@ -219,6 +219,10 @@ states, but this small mechanism signal does not approach the deficits to the
 source, initialization, interpolation, or matched-compute sampling baselines.
 Block 0 is therefore a complete recipe negative; block 1 remains required for
 the registered terminal receipt and cross-block control ranking.
+Block-1 deep establishes the second source anchor at direct item means
+`0.584024` deep and `0.811023` quick from 4,228,153 sampled tokens. Its frozen
+equal-cell projection is `0.600187` deep, `0.811023` quick, and `0.705605`
+joint. No treatment comparison follows until the paired block-1 arms complete.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

@@ -718,3 +718,17 @@
   immutable soup, soup75, and sample-more. This cannot rescue the frozen gate.
 - Block 1 began with the deep source; its external `STARTED` journal hashes to
   `20a2516780884ee672aa21f1e684ebe000770942e18d34f8954ac38ebcef07c8`.
+
+## 2026-07-15 — block-1 deep source anchor completes
+
+- Deep completed the second sealed block. `GENERATED.json` and `COMPLETE.json`
+  hash to
+  `565e023ab8854e70ea0de6093a80c13b0cf60688fe17bab1c121d2213238711e`
+  and `9db347c86f5de9a782a5f41425b11d061a7d8f88f423cbf0a3ede36c59553510`;
+  the score hashes to
+  `0a6c94de3f1a04126b4fa6c5d2d1e21ffa0e09636320093c7b71d36dc36a1678`.
+- Direct item-weighted means are `0.584024` deep and `0.811023` quick, using
+  4,228,153 sampled tokens. Equal-cell macros are `0.600187` deep, `0.811023`
+  quick, and `0.705605` joint. This is a source anchor only.
+- Block-1 non-advantage started next with external journal hash
+  `e3951bead0ccf17014cf1479f258dfd0b7e68f055eab5eb5419d737c7724d77f`.

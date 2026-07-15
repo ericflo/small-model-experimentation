@@ -1,6 +1,6 @@
 # Qwen3.5-4B Deep-Advantage MOPD
 
-**Status:** in-progress · since 2026-07-12 · Block 0 makes the frozen success rule unreachable and is complete; the full second block is running for the terminal receipt.
+**Status:** in-progress · since 2026-07-12 · Block 0 makes the frozen success rule unreachable and is complete; block 1 has its source anchor and is running the remaining arms.
 
 ## Status
 
@@ -280,6 +280,11 @@ beats it by only `+0.003054` deep, `+0.006392` quick, and `+0.004723` joint.
 Teacher identity therefore has a small favorable signal, but not enough to
 overcome the treatment's losses to deep, soup, soup75, or sample-more. Block 0
 is complete; full block 1 is running for the sealed terminal receipt.
+
+Block-1 deep then completed at `0.584024` deep and `0.811023` quick from
+4,228,153 sampled tokens. Its registered equal-cell macros are `0.600187` deep,
+`0.811023` quick, and `0.705605` joint. This is the second-block source anchor,
+not treatment evidence; non-advantage is running next.
 
 ## NF4/BF16 Interpretation Diagnostic
 
