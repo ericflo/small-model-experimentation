@@ -20,3 +20,10 @@
 - `replay_squared` trained 1,520/1,520 rows with 0 skipped over 190 updates;
   receipt/log published and pinned fail-closed. The candidate arm remains
   untrained until this checkpoint publishes green.
+
+## 2026-07-15 — Authenticated candidate training
+
+- `train-candidate` ran only after control checkpoint `f4fa0701` matched
+  `origin/main` with both workflows green and a clean worktree.
+- `axis_on_replay` trained 1,520/1,520 rows with 0 skipped over 190 updates;
+  receipt/log published and pinned fail-closed. Merges are the only next stage.
