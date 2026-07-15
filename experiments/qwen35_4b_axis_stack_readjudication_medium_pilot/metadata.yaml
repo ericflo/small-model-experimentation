@@ -18,6 +18,7 @@ research_programs:
   - "interpretability_and_diagnostics"
   - "reliability_and_safety"
 top_level_dirs:
+  - "analysis"
   - "configs"
   - "data"
   - "reports"
@@ -29,8 +30,8 @@ file_counts:
   json: 7
   jsonl: 7
   log: 3
-  md: 8
+  md: 9
   py: 13
   yaml: 3
-total_files: 41
-total_size_bytes: 10694104
+total_files: 42
+total_size_bytes: 10700058

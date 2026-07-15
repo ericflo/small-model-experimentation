@@ -189,14 +189,19 @@
   tracefix trended to chance (4->2->1 of 10). Seed 78146 sealed. The corrected
   instrument worked; the deficit is CONTENT: hygiene/explore/termination
   install, tracefix/protocol do not.
-- Queued NEXT (calibrated): axis corpus v2 — keep hygiene/explore blocks,
-  replace protocol (parent already has the skill; redundant dose) with a
-  lesson targeting measured parent deficits, and redesign trace-repair from
-  the line's own raw gate outputs (432 graded completions per arm across three
-  events; own-experiment data only). Fresh corpus/gate/aggregate seeds; the
-  same corrected detectability bar; medium pilot conditional. Believability:
-  the installable-lesson mechanism is replicated three times; the open
-  question is whether redesigned content can install the two dead blocks.
+- Queued NEXT (calibrated; forensics complete): axis corpus v2 per
+  experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/analysis/
+  three_event_failure_forensics.md — keep hygiene (raise injection/answer
+  co-location share) and explore; REPLACE protocol (parent competent; failures
+  are toggle-parity only, zero arithmetic slips in 300 rows) with an
+  execute- or repair-flavored block at measured parent headroom; REDESIGN
+  trace-repair as staged lessons (localize-only answer format first; single
+  formalism, line, quarantining gauges 0/12; DEMONSTRATED search with rejected
+  op-TYPE and write-target candidates; the two checkpoint rules; ~300-token
+  bounded thinks). Instrument fix, prospectively legal for a fresh gate:
+  normalize separator whitespace at grading (21 correct-but-rejected rows
+  across three events). Fresh corpus/gate/aggregate seeds; corrected
+  detectability bar; medium pilot conditional.
 - Queued (calibration notes attached): (a) replay-compounding line — measure
   whether iterated replay rounds keep gaining aggregate and where they saturate;
   the published `replay_repeat` composite (0.5081) is the presumptive parent;

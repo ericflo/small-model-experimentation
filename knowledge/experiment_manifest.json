@@ -838,7 +838,7 @@
       ".json": 7,
       ".jsonl": 7,
       ".log": 3,
-      ".md": 8,
+      ".md": 9,
       ".py": 13,
       ".yaml": 3
     },
@@ -863,6 +863,7 @@
     ],
     "title": "Axis Stack Re-adjudication with Medium Pilot",
     "top_level_dirs": [
+      "analysis",
       "configs",
       "data",
       "reports",
@@ -871,8 +872,8 @@
       "src",
       "tests"
     ],
-    "total_files": 41,
-    "total_size_bytes": 10694104
+    "total_files": 42,
+    "total_size_bytes": 10700058
   },
   {
     "file_counts": {
