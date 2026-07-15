@@ -239,6 +239,12 @@ are `0.592386` deep, `0.806729` quick, and `0.699558` joint, trailing deep by
 deep-cell sign is negative versus deep on both sealed blocks, and block 1 does
 not rescue the block-0 stop. The remaining seeds and controls are still needed
 for the terminal cross-block ranking, not to reopen the frozen success rule.
+Block-1 primary seed 43 then lands at direct item means `0.582282` deep and
+`0.806832` quick from 4,367,189 sampled tokens. Its equal-cell macros are
+`0.601865` deep, `0.806832` quick, and `0.704349` joint: `+0.001678`,
+`−0.004191`, and `−0.001256` versus deep. This is a tiny deep-cell trade paid
+for by quick loss, not checkpoint domination; it also misses the registered
+positive block-1 joint direction versus deep required of the replication seed.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

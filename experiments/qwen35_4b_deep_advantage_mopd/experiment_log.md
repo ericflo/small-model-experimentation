@@ -781,3 +781,21 @@
   arms continue for the terminal receipt and control ranking.
 - Primary seed 43 started next with external journal hash
   `62cca0f1c558cccff5f7a490aee4472188f167bbfd55f170b0aa989f638046a9`.
+
+## 2026-07-15 — block-1 seed 43 makes a tiny non-dominating trade
+
+- Primary seed 43 completed sealed generation and strict validation.
+  `GENERATED.json` and `COMPLETE.json` hash to
+  `22a67d4b264ac64a20a5ba9a38080f43c23ba29ea1402ad8798f939917c33b70`
+  and `58916aab2b52bfeee0ce44043a49b6a2f613f57406f115e485aa74a8086ce72a`;
+  the score hashes to
+  `af371468fef92b97cc931408722e8eac68152b052e5d1f6d875847633124d674`.
+- Direct item-weighted means are `0.582282` deep and `0.806832` quick, using
+  4,367,189 sampled tokens. Equal-cell macros are `0.601865` deep, `0.806832`
+  quick, and `0.704349` joint, respectively `+0.001678`, `−0.004191`, and
+  `−0.001256` versus deep.
+- The tiny deep-cell gain is paid for by quick loss and does not dominate the
+  source. It also misses the registered positive block-1 joint direction versus
+  deep required of the replication seed.
+- Primary seed 44 started next with external journal hash
+  `394c423432ad25f86e7270de2f896ce60b87bf8b6b2b2565eb72f477e832381f`.
