@@ -58,7 +58,12 @@ PUBLISHED_ARM_HASHES = {
     # TODO-PIN: after each arm trains and its receipt/log/adapter are published,
     # the orchestrator replaces the None with the four published sha256 values
     # {"receipt": ..., "log": ..., "adapter_config": ..., "adapter_weights": ...}.
-    "replay_clean": None,
+    "replay_clean": {
+        "receipt": "935bd6c5e6f8ef2fcb345c0c7ddcee535db3ba8b5b71f56841dd5efad7572816",
+        "log": "6726552b05676442f6d4debc16fcf96130ba969828c0c9a61ced2a4fdd68ddaa",
+        "adapter_config": "015bb13568c411c94d24460a9007e1f0d8fe3eb6c9749ad938958490de84d961",
+        "adapter_weights": "f6f910ed1c1dcc843f43e09a562556b8e76ee40096aa7123fd70800d94fc6bb8",
+    },
     "hygiene_explore": None,
 }
 ADAPTER_ROOT = ROOT / "large_artifacts" / EXP.name / "adapters"

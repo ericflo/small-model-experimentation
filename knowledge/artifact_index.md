@@ -21,7 +21,7 @@ This is a repository-level inventory. Each experiment remains the source of trut
 | --- | ---: |
 | `reports/` | 266 |
 | `src/` | 252 |
-| `runs/` | 192 |
+| `runs/` | 193 |
 | `scripts/` | 175 |
 | `configs/` | 170 |
 | `analysis/` | 165 |
@@ -39,18 +39,13 @@ This is a repository-level inventory. Each experiment remains the source of trut
 
 | Extension | Files |
 | --- | ---: |
-<<<<<<< HEAD
-| `.json` | 3432 |
-| `.py` | 2465 |
-=======
-| `.json` | 3437 |
+| `.json` | 3439 |
 | `.py` | 2485 |
->>>>>>> d890b010 (Freeze hygiene-explore de-stack design)
 | `.csv` | 2144 |
-| `.md` | 1363 |
+| `.md` | 1366 |
 | `.jsonl` | 1054 |
 | `.png` | 848 |
-| `.log` | 621 |
+| `.log` | 622 |
 | `.yaml` | 499 |
 | `.gz` | 169 |
 | `.html` | 90 |
