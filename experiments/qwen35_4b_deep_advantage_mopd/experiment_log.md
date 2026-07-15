@@ -799,3 +799,21 @@
   deep required of the replication seed.
 - Primary seed 44 started next with external journal hash
   `394c423432ad25f86e7270de2f896ce60b87bf8b6b2b2565eb72f477e832381f`.
+
+## 2026-07-15 — all block-1 treatment seeds fail source domination
+
+- Primary seed 44 completed sealed generation and strict validation.
+  `GENERATED.json` and `COMPLETE.json` hash to
+  `34ac9f0c0f804fc094f4aad024f6b239bceb5aca04fa09a28ad4c8342bd9daf2`
+  and `f71411e8742c022c9b000c7c7cbaba08e592770599fe1cb4eb8dc76fffc44b1f`;
+  the score hashes to
+  `b6e6e887e2cf3ae230a0ee6fbb4ddb8286f68a1fcb31681306af593a76260485`.
+- Direct item-weighted means are `0.571220` deep and `0.807583` quick, using
+  4,359,813 sampled tokens. Equal-cell macros are `0.590461` deep, `0.807583`
+  quick, and `0.699022` joint, respectively `−0.009726`, `−0.003440`, and
+  `−0.006583` versus deep.
+- All three treatments fail to dominate deep on block 1: seeds 42/44 trail on
+  both strata and seed 43 buys only a tiny deep-cell gain with quick and joint
+  losses. Remaining arms rank controls; they cannot reopen the frozen gate.
+- The quick source started next with external journal hash
+  `8f441c4df5e781a713415b6190ee181c865276a3b0e3e6ffe906c62ae4853ab6`.

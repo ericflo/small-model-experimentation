@@ -1,6 +1,6 @@
 # Qwen3.5-4B Deep-Advantage MOPD
 
-**Status:** in-progress · since 2026-07-12 · Block 0 makes the frozen success rule unreachable and is complete; block 1 rejects seed 42 and finds only a non-dominating seed-43 trade versus deep while remaining arms run.
+**Status:** in-progress · since 2026-07-12 · Block 0 makes the frozen success rule unreachable and is complete; all three block-1 treatments also fail to dominate deep while the remaining controls run.
 
 ## Status
 

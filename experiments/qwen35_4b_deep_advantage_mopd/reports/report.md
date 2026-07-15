@@ -245,6 +245,13 @@ Block-1 primary seed 43 then lands at direct item means `0.582282` deep and
 `−0.004191`, and `−0.001256` versus deep. This is a tiny deep-cell trade paid
 for by quick loss, not checkpoint domination; it also misses the registered
 positive block-1 joint direction versus deep required of the replication seed.
+Block-1 primary seed 44 scores direct item means `0.571220` deep and `0.807583`
+quick from 4,359,813 sampled tokens. Its equal-cell macros are `0.590461` deep,
+`0.807583` quick, and `0.699022` joint, trailing deep by `−0.009726`,
+`−0.003440`, and `−0.006583`. All three treatment seeds therefore fail to
+dominate deep on block 1 as well: two are below it on both strata and seed 43
+makes only a small deep-for-quick trade. The remaining controls can rank the
+failure mode but cannot restore the frozen success condition.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply
