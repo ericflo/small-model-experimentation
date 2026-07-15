@@ -70,3 +70,10 @@
 - `train-control` ran from freeze commit `e773ed5e` (clean synced green main):
   `replay_clean` trained 1,520/1,520 rows with 0 skipped over 190 updates;
   receipt/log published and pinned fail-closed.
+
+## 2026-07-15 — Authenticated candidate training
+
+- `train-candidate` ran only after control checkpoint `b063c9c6` matched
+  `origin/main` with both workflows green and a clean worktree.
+- `hygiene_explore` trained 1,520/1,520 rows with 0 skipped over 190 updates;
+  receipt/log published and pinned fail-closed. Merges are next.
