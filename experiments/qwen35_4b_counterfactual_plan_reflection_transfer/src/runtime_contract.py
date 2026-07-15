@@ -696,7 +696,18 @@ def _authenticate_system_runtime() -> dict[str, Any]:
         raise ValueError("interpreter or pre-Python native environment differs from its pin")
     mappings = _native_mapping_authentication()
     if mappings != pin["native_mappings"]:
-        raise ValueError("initial native mapping closure differs from its pin")
+        expected_mappings = pin["native_mappings"]
+        missing = sorted(set(expected_mappings) - set(mappings))
+        extra = sorted(set(mappings) - set(expected_mappings))
+        changed = sorted(
+            path
+            for path in set(mappings) & set(expected_mappings)
+            if mappings[path] != expected_mappings[path]
+        )
+        raise ValueError(
+            "initial native mapping closure differs from its pin: "
+            f"missing={missing}, extra={extra}, changed={changed}"
+        )
     return {
         "resolved_python": str(resolved_python),
         "resolved_python_sha256": _sha256_file(resolved_python),

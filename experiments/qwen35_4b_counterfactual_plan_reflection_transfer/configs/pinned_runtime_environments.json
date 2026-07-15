@@ -51,7 +51,7 @@
     },
     "pre_python_manifest": {
       "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/runtime_manifest.tsv",
-      "sha256": "a4918269ca7230870ac6fe33e1a6db24831c69b6e4f34e54a60e31c9d2a12838"
+      "sha256": "da2df9a66260e818cb16a3038e3686f888f9d5a63f4e0227ecce534772d9d5b9"
     },
     "stage_entrypoints": {
       "training": {
@@ -134,11 +134,11 @@
     "launchers": {
       "training": {
         "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/training_launcher",
-        "sha256": "20f205a9962d9d1cd8b548c43f68222e994393c582ac53487f4bdeb1437158aa"
+        "sha256": "48b785b99365dfbaadd6698c8f2ee305a712b898bbf07ddddd496b4ce69bed81"
       },
       "vllm": {
         "path": "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/scripts/vllm_launcher",
-        "sha256": "fa47d705a22e554b4f65f7ecae2efc21c95ef5e4953ab51e9a838e13527df566"
+        "sha256": "baba497012b45e71f0b1f41facc779ab6d882a6e72e48be823dc08693ee8bb62"
       }
     }
   },

@@ -2,6 +2,12 @@
 
 ## 2026-07-15 — Review-12 lease-only remediation candidate
 
+- The first exact-SHA training audit at `4fa9e1b80704a75c2b1a79e8c714293b25268a23`
+  failed closed at the initial native-mapping comparison before any third-party import.
+  No tokenizer/model/GPU/training/evaluation/Jacobian/benchmark event occurred. The
+  comparison now reports exact missing, extra, and changed paths so a detached rerun
+  can distinguish a boundary-definition error from changed bytes without weakening
+  the pin.
 - Replaced the path-executing assembly launcher and Python dispatcher with two
   byte-reproducible static C launchers. Before forking, each verifies a committed
   manifest, acquires mandatory read leases, and retains exact descriptors for the
