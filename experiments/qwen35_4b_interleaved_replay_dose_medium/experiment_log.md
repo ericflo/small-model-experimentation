@@ -60,3 +60,10 @@
   tests, py_compile); training remains sealed behind the pushed-checkpoint
   gates and the PASS_CONTROL_TRAINING / PASS_CONTROL_MERGE verdicts.
 - No model, GPU, training, local, or benchmark event has run.
+
+## 2026-07-15 — Authenticated control training
+
+- `train-control` ran only after freeze commit `04de32b5` matched `origin/main`
+  with both workflows green and a clean worktree.
+- `replay_interleaved2` trained 1,520/1,520 rows with 0 skipped over 190
+  updates; receipt/log published and pinned fail-closed.
