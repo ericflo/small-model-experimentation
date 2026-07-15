@@ -888,3 +888,33 @@ Two program laws:
    adapter lineage is saturated as a vehicle for further designed doses:
    future doses need a fresh adapter from a clean parent, and replay
    continuation remains the strongest single broad-instrument move.
+
+## qwen35_4b_hygiene_explore_destack_medium (2026-07-15 — Recovery confirmed; retention bands failed; the replay-interleaving law)
+
+The de-stacking test trained the two replicated installs (hygiene 40 co-location-
+hardened, explore 40) directly from the clean designed_fresh adapter against
+matched replay. At the frozen 124-task gate (seed 88,018): axis holdout 15/20
+vs replay 11 and parent 8, with BOTH preregistered recovery flags true (explore
+7/4/6, hygiene 8/4/5) — the strongest axis result of the session. Retention:
+58/93/11 vs 68/98/7 and 66/86/19 — the correct band failed against both
+controls (−10/−8 vs −5), caps and parse against the parent. Not promoted; seed
+78,148 sealed.
+
+Three laws sharpen:
+
+1. RECOVERY CONFIRMED. v2's stall was lineage interference, not content decay:
+   the same lessons at the same dose on a clean lineage reinstall decisively at
+   matched exposure. The escalation rule does not fire.
+2. REPLAY INTERLEAVING PROTECTS RETENTION. The only retention-safe dose-two
+   event (axis_on_replay: byte-equal retention) had a dedicated full replay
+   round between doses; this direct dose paid ten retention points. Combined
+   with every replay-refresh observation, the dose boundary is where replay
+   belongs.
+3. The gate architecture works as designed: it certified installs and refused
+   a forgetting candidate in one event.
+
+Queued successor (calibrated): the interleaved-replay dose — hygiene+explore
+warm-started from this experiment's OWN replay_clean adapter (the replay round
+already exists with receipts), same gate design at fresh seeds. That recipe
+exactly reproduces the retention-safe precedent with the proven-install
+content; honest gate probability is the session's highest yet.

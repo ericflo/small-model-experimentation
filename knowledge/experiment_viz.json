@@ -48862,35 +48862,43 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Preregistered stage completion",
+     "title": "Seed-88018 gate: axis holdout and retention by arm",
      "categories": [
-      "intake",
-      "80-row corpus",
-      "exposure match",
-      "design review",
-      "train 2 arms",
-      "gate event",
-      "medium pilot"
+      "clean_parent",
+      "replay_clean",
+      "hygiene_explore"
      ],
      "series": [
       {
-       "label": "completed checkpoint",
+       "label": "axis holdout correct (of 20)",
        "values": [
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
+        8,
+        11,
+        15
+       ]
+      },
+      {
+       "label": "retention correct (of 104)",
+       "values": [
+        68,
+        66,
+        58
+       ]
+      },
+      {
+       "label": "cap contacts",
+       "values": [
+        7,
+        19,
+        11
        ]
       }
      ],
-     "x_label": "preregistered experiment stage",
-     "y_label": "completion indicator",
+     "x_label": "explicit merged composite",
+     "y_label": "count",
      "y_format": "integer",
-     "note": "The de-stacking test: only the two replicated installs (hygiene, explore) at proven dose on the clean designed_fresh lineage; both kinds must win the fresh gate; conditional medium pilot at sealed seed 78,148.",
-     "source": "experiments/qwen35_4b_hygiene_explore_destack_medium/reports/preregistration.md"
+     "note": "Both recovery flags TRUE (interference confirmed; content decay refuted) with the session's best axis result, but the direct dose broke the retention bands (58 vs 68/66) and the gate refused promotion; seed 78,148 sealed. Cross-receipt isolation: replay interleaving at the dose boundary protects retention.",
+     "source": "experiments/qwen35_4b_hygiene_explore_destack_medium/reports/report.md"
     }
    ]
   }

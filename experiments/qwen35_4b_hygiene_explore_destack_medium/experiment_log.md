@@ -84,3 +84,18 @@
   `origin/main` with both workflows green; both arms merged (128/128 modules,
   fingerprint-verified); tree pins filled fail-closed. The one frozen 124-task
   gate event at seed 88,018 is the only next stage.
+
+## 2026-07-15 — Recovery gate: installs recovered; retention bands failed; closed
+
+- The gate ran from merge checkpoint `866f23ce`: three authenticated engine
+  runs over the 124-row input at seed 88,018 with normalized grading.
+- Axis holdout of 20: candidate 15, replay 11, parent 8; explore 7/4/6 (win),
+  hygiene 8/4/5 (win); RECOVERY both true — the de-stacking reading is
+  positive (interference confirmed; content decay refuted; the escalation rule
+  does not fire).
+- Retention: 58/93/11 vs parent 68/98/7 and replay 66/86/19 — the correct
+  band failed against both controls, the cap and parse bands against the
+  parent. No promotion; seed 78,148 permanently sealed.
+- Cross-receipt isolation: the retention-safe dose-two precedent had a full
+  replay round between doses; this direct dose did not — replay interleaving
+  protects retention.

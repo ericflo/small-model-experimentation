@@ -2,7 +2,7 @@
 
 The minimal proven-install dose: only the two lessons that installed in every prior measurement (injection hygiene, budgeted route search), at their replicated per-kind dose, trained on the CLEAN surface-general parent — testing whether v2's failure was lineage saturation rather than content decay — with a gate that requires both installs to recover and the conditional pilot at the medium tier.
 
-**Status:** in-progress · since 2026-07-15 · model-free construction under way; no model event has run
+**Status:** finished · 2026-07-15 · not promoted (retention bands); RECOVERY CONFIRMED — both installs returned on the clean lineage (interference, not content decay), and the receipts isolate replay interleaving as the retention protector; seed 78,148 permanently sealed
 
 ## Research Program
 
@@ -48,16 +48,20 @@ Checkpointed stages:
 
 ## Results
 
-No model event has run.
+Both arms trained cleanly (control 0.3831, candidate 0.4613 train loss; 0 skips) and merged. The frozen 124-task gate at seed 88,018 (normalized grading, both kinds detectable, both required to win): axis holdout of 20 — candidate 15, replay control 11, parent 8; per-kind candidate/parent/replay: explore 7/4/6 (win), hygiene 8/4/5 (win). RECOVERY FLAGS: `explore_win: true`, `hygiene_win: true` — the preregistered de-stacking reading is positive. Retention of 104: candidate 58/93/11 versus parent 68/98/7 and replay 66/86/19 — the candidate broke the correct band against both controls (−10/−8 vs the −5 band), the parent cap band (+4 vs +3), and the parent parse band (−5 vs −3). No promotion; seed 78,148 permanently sealed; the medium pilot never ran.
 
 ## Interpretation
 
-None yet.
+Three frozen readings. (1) RECOVERY CONFIRMED: both replicated installs returned decisively on the clean lineage at matched exposure — v2's failure was lineage interference, not content decay; the escalation rule does not fire. (2) The retention cost isolates a mechanism: the one prior dose-two event that was retention-byte-equal (axis_on_replay) had a dedicated full replay round between doses; this trial dosed directly and paid ten retention points. Replay interleaving between designed doses protects retention — consistent with every replay-refresh observation in the line, and now localized to the dose boundary. (3) The gate did its job precisely: the axis instrument certified the installs while the retention bands correctly refused a candidate that forgets — this is the strongest axis result of the session (15/20, +4 over the best control) on a model that must not be deployed.
+
+## Terminal Disposition
+
+No later event is authorized here. Seed 78,148 is spent-by-sealing. The published composites and receipts are preserved; the `replay_clean` composite (retention 66/86/19 at the gate) and its adapter provide the interleaved-replay parent that the retention law points to for any successor dose, which requires its own intake and lifecycle.
 
 ## Knowledgebase Update
 
-- Program evidence updated: pending.
-- Program backlog updated: this trial claims queued direction (a).
+- Program evidence updated: recovery confirmation and the replay-interleaving retention law recorded.
+- Program backlog updated: the interleaved-replay dose successor queued with calibration notes.
 - Claim ledger updated: no.
 
 ## Artifacts

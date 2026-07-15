@@ -199,18 +199,24 @@
   argument; (2) third-dose interference — this adapter lineage is saturated
   for designed doses; fresh adapters from clean parents are required for any
   future dose, and replay continuation remains the strongest broad move.
-- Queued directions (calibration notes; none funded without a fresh intake):
-  (a) fresh-adapter single-dose replication — the installed-lesson pair
-  (hygiene+explore) as ONE dose on a FRESH rank-32 adapter from the clean
-  designed_fresh or replay_repeat parent, testing whether de-stacking recovers
-  the installs without interference; cheap and believable given the map.
-  (b) medium-tier paired measurement of the EXISTING published composites
-  under a fresh intake whose gates are medium-native (the quick-tier gates
-  kept sealing medium pilots that the goal actually needs); requires care to
-  avoid gate-shopping framing — new instrument, new seeds, failures recorded.
-  (c) mechanism-diverse attacks on menders/sirens (the two families frozen for
-  every arm at every seed) — requires new mechanism evidence first, per the
-  kill-rule discipline.
+- Completed de-stack test (recovery confirmed; retention bands refused):
+  `qwen35_4b_hygiene_explore_destack_medium` — both recovery flags TRUE
+  (explore 7/4/6, hygiene 8/4/5; axis 15/20 vs 11/8, the session's strongest
+  axis result), so v2's stall was lineage interference, not content decay. The
+  direct dose paid ten retention points (58 vs 68/66) and the gate correctly
+  refused it; seed 78148 sealed. New law: replay interleaving between doses
+  protects retention (the retention-safe dose-two precedent had a dedicated
+  replay round at the dose boundary; this trial did not).
+- Queued NEXT (calibrated; the session's highest gate probability): the
+  interleaved-replay dose — hygiene+explore at the same proven dose,
+  warm-started from the de-stack experiment's published replay_clean adapter
+  (the interleaving round already exists with receipts), matched replay
+  control from the same parent, the same two-kind both-must-win gate plus
+  unchanged retention bands at fresh seeds, conditional MEDIUM pilot. This
+  exactly reproduces the retention-safe precedent with proven-install content.
+- Standing queued directions (unchanged): medium-native measurement intake for
+  existing artifacts; mechanism-diverse attacks on menders/sirens (needs new
+  mechanism evidence first).
 - Queued (calibration notes attached): (a) replay-compounding line — measure
   whether iterated replay rounds keep gaining aggregate and where they saturate;
   the published `replay_repeat` composite (0.5081) is the presumptive parent;

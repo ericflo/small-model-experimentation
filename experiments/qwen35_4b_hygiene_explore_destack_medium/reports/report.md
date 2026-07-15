@@ -14,7 +14,9 @@ See the preregistration.
 
 ## Results
 
-No capability result exists.
+- Training (1,520 rows, 0 skips, 190 updates each): control 0.3831, candidate 0.4613 train loss.
+- Gate (seed 88,018, normalized grading, both kinds detectable and required): axis holdout of 20 — candidate 15, replay 11, parent 8; explore 7/4/6 (win), hygiene 8/4/5 (win); RECOVERY both true.
+- Retention of 104: candidate 58/93/11 vs parent 68/98/7 and replay 66/86/19 — correct band failed vs both, caps and parse vs parent. Not promoted; seed 78,148 permanently sealed.
 
 ## Controls
 
@@ -26,7 +28,7 @@ Executable truth grades outputs only; `benchmarks/` remains unread.
 
 ## Next Stage
 
-Design review; then the checkpointed stages.
+None. Closed per contract with the recovery confirmation and the replay-interleaving retention law recorded; the interleaved-replay dose successor is queued in the program backlog.
 
 ## Artifact Manifest
 

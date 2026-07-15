@@ -1,0 +1,128 @@
+{
+  "aggregate_seed": 78148,
+  "aggregate_seed_open": false,
+  "answer_normalization": {
+    "applied_to": "both the parsed and the expected answer, every arm, both instruments",
+    "definition": "re.sub(r'\\s+', ' ', s).strip(), then re.sub(r'\\s*>\\s*', '>', s), then re.sub(r'\\s*;\\s*', ';', s)",
+    "function": "check_local.normalize_answer",
+    "prospective": true,
+    "rationale": "21 correct-but-rejected whitespace rows across the three prior gate events (seeds 88014/88015/88016), recorded in experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/analysis/three_event_failure_forensics.md"
+  },
+  "axis_kind_wins": 2,
+  "axis_kind_wins_required": 2,
+  "axis_kinds": [
+    "u_explore",
+    "u_hygiene"
+  ],
+  "axis_rows": 20,
+  "backend": "vllm_merged_composite",
+  "benchmark_data_read": false,
+  "breadth_rule": "ceil(2/3 * detectable_kinds); ties never count as wins",
+  "candidates": [
+    "hygiene_explore"
+  ],
+  "checks": {
+    "at_least_one_axis_kind_detectable": true,
+    "axis_kind_wins_meet_required_breadth": true,
+    "axis_total_strictly_beats_parent": true,
+    "axis_total_strictly_beats_replay": true,
+    "retention_cap_contacts_within_3_of_parent": false,
+    "retention_cap_contacts_within_3_of_replay": true,
+    "retention_correct_within_5_of_parent": false,
+    "retention_correct_within_5_of_replay": false,
+    "retention_parsed_within_3_of_parent": false,
+    "retention_parsed_within_3_of_replay": true,
+    "route_abstentions_at_most_4_of_8": true
+  },
+  "controls": [
+    "replay_clean",
+    "clean_parent"
+  ],
+  "design_receipt_sha256": "c4952ca9d312f962e3871ffca3cc9d0827b663258ebc18d71fae33c7e6a9b442",
+  "detectability_ceiling": 9,
+  "detectable_kinds": [
+    "u_explore",
+    "u_hygiene"
+  ],
+  "eligible": [],
+  "experiment_id": "qwen35_4b_hygiene_explore_destack_medium",
+  "kind_wins": {
+    "u_explore": true,
+    "u_hygiene": true
+  },
+  "local_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_hygiene_explore_destack_medium/runs/local/seed88018.json",
+  "local_receipt_sha256": "9f7e011e6687d89ed829439217ce2a2743dcb49e4c9dfc073886b22b5914d83e",
+  "no_absolute_per_kind_floors": true,
+  "not_detectable": [],
+  "outcome": "NOT_PROMOTED",
+  "promoted": null,
+  "recovery": {
+    "explore_win": true,
+    "hygiene_win": true
+  },
+  "retention_rows": 104,
+  "schema_version": 1,
+  "seed": 88018,
+  "summaries": {
+    "clean_parent": {
+      "adapter": "clean_parent",
+      "axis": {
+        "correct": 8,
+        "per_kind_correct": {
+          "u_explore": 4,
+          "u_hygiene": 4
+        },
+        "rows": 20
+      },
+      "cap_contacts": 12,
+      "retention": {
+        "cap_contacts": 7,
+        "correct": 68,
+        "parsed": 98,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "total_correct": 76
+    },
+    "hygiene_explore": {
+      "adapter": "hygiene_explore",
+      "axis": {
+        "correct": 15,
+        "per_kind_correct": {
+          "u_explore": 7,
+          "u_hygiene": 8
+        },
+        "rows": 20
+      },
+      "cap_contacts": 11,
+      "retention": {
+        "cap_contacts": 11,
+        "correct": 58,
+        "parsed": 93,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "total_correct": 73
+    },
+    "replay_clean": {
+      "adapter": "replay_clean",
+      "axis": {
+        "correct": 11,
+        "per_kind_correct": {
+          "u_explore": 6,
+          "u_hygiene": 5
+        },
+        "rows": 20
+      },
+      "cap_contacts": 22,
+      "retention": {
+        "cap_contacts": 19,
+        "correct": 66,
+        "parsed": 86,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "total_correct": 77
+    }
+  }
+}

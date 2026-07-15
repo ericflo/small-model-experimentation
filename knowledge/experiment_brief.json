@@ -14077,40 +14077,40 @@
    ]
   },
   "qwen35_4b_hygiene_explore_destack_medium": {
-   "verdict_tag": "Design under construction; nothing trained",
+   "verdict_tag": "Skills came back; forgetting blocked promotion",
    "concept_primer": "Strip the practice set down to the only two lessons that have stuck in every measurement — ignoring smuggled instructions, and route-finding under a step budget — and teach them to the cleanest earlier model, before the pile-up of later practice rounds that eventually stopped helping.",
    "plain_question": "Do the two reliable lessons come back cleanly on a fresh start — proving the recent stall was about over-stacking practice, not the lessons — and does the bigger benchmark tier then credit them?",
-   "plain_answer": "Nothing is trained yet. The 80-exercise set is frozen; the screen demands BOTH lessons win outright; an escalation rule is preregistered: if either reliable lesson fails to come back, the question becomes a mechanics study, not another practice shuffle.",
-   "why_it_matters": "This is the highest-confidence trial of the session (~40%): both lessons have never-or-rarely lost, the fresh start avoids the measured saturation, and a pass finally funds the benchmark tier where sweeping every family has actually happened.",
-   "verdict_tone": "neutral",
+   "plain_answer": "On the fresh start, both reliable lessons came back decisively — the best skill-test result of the whole session (15 vs 11 and 8 of 20) — proving the earlier stall was about over-stacking practice on one model, not about the lessons. But this direct dose made the model forget ten retained answers, and the screen correctly refused it. Comparing receipts across trials isolates the cause: the one dose that never forgot had a full review round between practice doses; this one skipped it.",
+   "why_it_matters": "Two questions became one law each: stalling = over-stacking (confirmed by recovery), and forgetting = skipping the review round at the dose boundary. The next recipe — review round, then dose — already has its review-round model built and receipted, making it the highest-probability trial yet.",
+   "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "Lessons kept",
-     "value": "2 of 5",
-     "sub": "the only ones that stuck in every event"
+     "label": "Recovery flags",
+     "value": "both TRUE",
+     "sub": "explore 7 vs 4/6; hygiene 8 vs 4/5"
     },
     {
-     "label": "Hygiene record",
-     "value": "4 / 4",
-     "sub": "won its category in every measurement"
+     "label": "Skill test",
+     "value": "15 / 20",
+     "sub": "session's best — vs 11 (review) and 8 (parent)"
     },
     {
-     "label": "Fresh-start rationale",
-     "value": "dose 2",
-     "sub": "saturation appeared at dose 3"
+     "label": "Retention cost",
+     "value": "-10",
+     "sub": "58 vs 68 — band was -5; screen refused"
     },
     {
-     "label": "Benchmark seed",
-     "value": "78,148 sealed",
-     "sub": "medium tier, conditional"
+     "label": "Isolated cause",
+     "value": "no review round",
+     "sub": "the never-forgot dose had one between doses"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Where the experiment stands",
-     "chart_read": "Each bar is a preregistered stage; one means complete.",
-     "chart_takeaway": "The trimmed practice set is frozen; training, the screen, and the medium benchmark remain."
+     "chart_plain_title": "Skills recovered on the fresh start; forgetting cost the promotion",
+     "chart_read": "Left: unseen skill-test results per model. Right: retained-skill results per model.",
+     "chart_takeaway": "The trimmed dose wins the skill test decisively but forgets too much without a review round between doses — the screen refused it, and the fix is already queued."
     }
    ]
   }
