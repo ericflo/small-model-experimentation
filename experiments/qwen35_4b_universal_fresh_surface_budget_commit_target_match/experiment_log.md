@@ -73,3 +73,22 @@
   (budget_commit); receipts and logs under `runs/merges/`.
 - The three merged-tree pins are now filled fail-closed in the local evaluator.
   The one frozen local gate event is the only next stage.
+
+## 2026-07-15 — Terminal local gate event and closure
+
+- The one frozen local event ran from merge checkpoint `e443682a` (clean synced
+  green `main`): four sequential authenticated vLLM engine runs over the frozen
+  104-task oracle-free input, greedy, natural thinking, 1,024-token cap.
+- Totals (correct/parsed/caps of 104): parent 63/87/18; replay 62/91/13;
+  designed_fresh 69/97/7; budget_commit 62/88/16. Mean generated tokens 515.8 /
+  534.0 / 357.2 / 396.2.
+- `designed_fresh` passed correct/parse/caps/abstention bars and all four strict
+  wins, failing only the execute (3/8) and induct (0/8) floors; `budget_commit`
+  failed broadly. Induct was 0/8 for every arm including the parent — the floor
+  was structurally unpassable in this event.
+- No candidate promoted. Aggregate seed 78,143 is permanently sealed; no
+  benchmark event ran; `runs/local/` holds the complete raw outputs, metadata,
+  logs, receipt, and promotion record.
+- Harness note: the eval and stage exit nonzero on no-promotion by design after
+  publishing complete receipts; the preserved traceback in the stage log is the
+  fail-closed signal, not an artifact loss.

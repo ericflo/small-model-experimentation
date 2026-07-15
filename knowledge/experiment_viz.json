@@ -48635,35 +48635,47 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Preregistered stage completion",
+     "title": "104-task local gate: totals by arm (seed 88013)",
      "categories": [
-      "intake",
-      "fresh corpora",
-      "exposure match",
-      "design review",
-      "train 3 arms",
-      "104-task local gate",
-      "conditional aggregate"
+      "parent",
+      "replay_repeat",
+      "designed_fresh",
+      "budget_commit"
      ],
      "series": [
       {
-       "label": "completed checkpoint",
+       "label": "correct (of 104)",
        "values": [
-        1,
-        1,
-        1,
-        0,
-        0,
-        0,
-        0
+        63,
+        62,
+        69,
+        62
+       ]
+      },
+      {
+       "label": "parsed (of 104)",
+       "values": [
+        87,
+        91,
+        97,
+        88
+       ]
+      },
+      {
+       "label": "cap contacts",
+       "values": [
+        18,
+        13,
+        7,
+        16
        ]
       }
      ],
-     "x_label": "preregistered experiment stage",
-     "y_label": "completion indicator",
+     "x_label": "explicit merged composite",
+     "y_label": "count",
      "y_format": "integer",
-     "note": "The two fresh-surface corpora are frozen (160 designed rows; 120+40 budget substitution). Exposure matching, the adversarial review, training, the quadrupled local gate, and the sealed-seed aggregate remain.",
-     "source": "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/reports/preregistration.md"
+     "note": "designed_fresh won all four preregistered strict comparisons on never-trained surfaces and cut generation 31%, but the induct floor (>=4/8) was 0/8 for every arm, so no candidate promoted and aggregate seed 78,143 stays sealed. budget_commit was at-or-below replay everywhere.",
+     "source": "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/reports/report.md"
     }
    ]
   }

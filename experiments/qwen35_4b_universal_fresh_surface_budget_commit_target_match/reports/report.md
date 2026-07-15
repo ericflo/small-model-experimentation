@@ -2,7 +2,7 @@
 
 ## Summary
 
-Model-free construction is complete and frozen: two fresh-surface treatment corpora, an exact three-axis exposure match against an active replay control, and a quadrupled 104-task original-surface local gate. No model, GPU, training, local, or benchmark event has run. Aggregate seed 78,143 remains sealed.
+The experiment is closed as a terminal local negative with a positive preregistered mechanism reading. All three exactly-matched arms trained and merged cleanly; in the one frozen 104-task surface-transfer gate event, `designed_fresh` won all four strict comparisons over parent and replay (69 vs 63/62 correct; 9 vs 6/7 on the 24 target rows) with 7 cap contacts and 97 parses, but the induct floor (≥4/8) was 0/8 for every arm — structurally unpassable — so no candidate promoted and aggregate seed 78,143 is permanently sealed. The budget-commit substitution was worse than replay across the board.
 
 ## Research Program Fit
 
@@ -20,7 +20,11 @@ This trial claims the program's queued bounded-computation plus canonical-answer
 
 ## Results
 
-No capability result exists. Frozen artifact hashes: corpora `e599f156...84d5` / `ecece8e2...9800`; stream manifest `7e7d0c38...e26a`; exposure receipt `c90873af...bb54`; local gate source/input `be817bd0...5c2b` / `7cba75dc...aabf`; design receipt `2bdcbdd4...afaa`.
+- Training (each 1,520 rows, 0 skipped, 190 updates, seed 51): replay 0.4063, designed 0.4634, budget 0.5106 train loss.
+- Local gate totals (correct/parsed/caps of 104): parent 63/87/18; replay 62/91/13; designed_fresh 69/97/7; budget_commit 62/88/16. Mean generated tokens 515.8/534.0/357.2/396.2.
+- designed_fresh strict wins: total 69>63 and 69>62; target24 9>6 and 9>7 — all four preregistered comparisons, on surfaces it never trained on.
+- Per-kind floors: designed_fresh execute 3/8, induct 0/8, probe 6/8. Induct was 0/8 in every arm including the parent.
+- No promotion; seed 78,143 sealed; no benchmark event. Frozen artifact hashes: corpora `e599f156...84d5` / `ecece8e2...9800`; exposure receipt `c90873af...bb54`; local receipt and promotion record under `runs/local/`.
 
 ## Controls
 
@@ -32,7 +36,7 @@ Executable truth grades outputs only and is stripped from every model-facing byt
 
 ## Next Stage
 
-Adversarial design review; then, only behind clean pushed green checkpoints: train-control, train-designed, train-budget, merge-arms, the one local gate event, and the conditional aggregate pilot.
+None. The experiment is closed terminally under the frozen no-promotion rule. The published `designed_fresh` adapter and composite may parent a successor with its own lifecycle; the program pivot (goal-gap axis curriculum) is recorded in the backlog.
 
 ## Artifact Manifest
 

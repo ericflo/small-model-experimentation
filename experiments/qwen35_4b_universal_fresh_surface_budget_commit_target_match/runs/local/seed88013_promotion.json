@@ -1,0 +1,156 @@
+{
+  "aggregate_seed": 78143,
+  "aggregate_seed_open": false,
+  "backend": "vllm_merged_composite",
+  "benchmark_data_read": false,
+  "candidates": [
+    "designed_fresh",
+    "budget_commit"
+  ],
+  "controls": [
+    "replay_repeat",
+    "replay_after_close_parent"
+  ],
+  "design_receipt_sha256": "2efc0b87a50c3584af7a269f7038683868ad26f7ee170f05f0a906593da1441e",
+  "eligible": [],
+  "experiment_id": "qwen35_4b_universal_fresh_surface_budget_commit_target_match",
+  "gates": {
+    "budget_commit": {
+      "adapter": "budget_commit",
+      "cap_contacts": 16,
+      "checks": {
+        "cap_contacts_at_most_8": false,
+        "correct_at_least_68_of_104": false,
+        "execute_correct_at_least_4_of_8": false,
+        "induct_correct_at_least_4_of_8": false,
+        "parsed_at_least_96_of_104": false,
+        "probe_correct_at_least_4_of_8": true,
+        "route_abstentions_at_most_4_of_8": true
+      },
+      "correct": 62,
+      "parsed": 88,
+      "passes": false,
+      "per_kind_correct": {
+        "u_execute": 1,
+        "u_induct": 0,
+        "u_probe": 4
+      },
+      "route_abstentions": 0,
+      "target_correct": 5
+    },
+    "designed_fresh": {
+      "adapter": "designed_fresh",
+      "cap_contacts": 7,
+      "checks": {
+        "cap_contacts_at_most_8": true,
+        "correct_at_least_68_of_104": true,
+        "execute_correct_at_least_4_of_8": false,
+        "induct_correct_at_least_4_of_8": false,
+        "parsed_at_least_96_of_104": true,
+        "probe_correct_at_least_4_of_8": true,
+        "route_abstentions_at_most_4_of_8": true
+      },
+      "correct": 69,
+      "parsed": 97,
+      "passes": false,
+      "per_kind_correct": {
+        "u_execute": 3,
+        "u_induct": 0,
+        "u_probe": 6
+      },
+      "route_abstentions": 0,
+      "target_correct": 9
+    },
+    "replay_after_close_parent": {
+      "adapter": "replay_after_close_parent",
+      "cap_contacts": 18,
+      "checks": {
+        "cap_contacts_at_most_8": false,
+        "correct_at_least_68_of_104": false,
+        "execute_correct_at_least_4_of_8": false,
+        "induct_correct_at_least_4_of_8": false,
+        "parsed_at_least_96_of_104": false,
+        "probe_correct_at_least_4_of_8": true,
+        "route_abstentions_at_most_4_of_8": true
+      },
+      "correct": 63,
+      "parsed": 87,
+      "passes": false,
+      "per_kind_correct": {
+        "u_execute": 1,
+        "u_induct": 0,
+        "u_probe": 5
+      },
+      "route_abstentions": 0,
+      "target_correct": 6
+    },
+    "replay_repeat": {
+      "adapter": "replay_repeat",
+      "cap_contacts": 13,
+      "checks": {
+        "cap_contacts_at_most_8": false,
+        "correct_at_least_68_of_104": false,
+        "execute_correct_at_least_4_of_8": false,
+        "induct_correct_at_least_4_of_8": false,
+        "parsed_at_least_96_of_104": false,
+        "probe_correct_at_least_4_of_8": true,
+        "route_abstentions_at_most_4_of_8": true
+      },
+      "correct": 62,
+      "parsed": 91,
+      "passes": false,
+      "per_kind_correct": {
+        "u_execute": 2,
+        "u_induct": 0,
+        "u_probe": 5
+      },
+      "route_abstentions": 0,
+      "target_correct": 7
+    }
+  },
+  "local_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/runs/local/seed88013.json",
+  "local_receipt_sha256": "9ca796abf459186489c08898cd30030dd259441329dfdc1011317f8e08cb847d",
+  "promoted": null,
+  "relative_checks": {
+    "budget_commit": {
+      "beats_parent_target_correct": false,
+      "beats_parent_total_correct": false,
+      "beats_replay_target_correct": false,
+      "beats_replay_total_correct": false
+    },
+    "designed_fresh": {
+      "beats_parent_target_correct": true,
+      "beats_parent_total_correct": true,
+      "beats_replay_target_correct": true,
+      "beats_replay_total_correct": true
+    }
+  },
+  "schema_version": 1,
+  "seed": 88013,
+  "selection": {
+    "budget_commit": {
+      "cap_contacts": 16,
+      "eligible": false,
+      "target24_correct": 5,
+      "total_correct": 62
+    },
+    "designed_fresh": {
+      "cap_contacts": 7,
+      "eligible": false,
+      "target24_correct": 9,
+      "total_correct": 69
+    }
+  },
+  "target_kinds": [
+    "u_execute",
+    "u_induct",
+    "u_probe"
+  ],
+  "target_rows": 24,
+  "tiebreak": [
+    "total_correct",
+    "target24_correct",
+    "fewer_cap_contacts",
+    "budget_commit"
+  ]
+}

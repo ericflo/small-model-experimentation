@@ -150,21 +150,33 @@
   close-span dose tuning: it did not improve parse/cap over ordinary training and
   both target arms remained 0/4 on execute/induct. Do not lower the gate, reuse
   seeds 88005/88006, or consume sealed seeds 78134/78135/78136.
-- Active bounded-computation successor:
-  `qwen35_4b_universal_fresh_surface_budget_commit_target_match` claims this slot
-  with a designed, non-harvested mechanism. It re-doses the frozen designed160
-  distribution on six fresh surfaces (construction seed 77116; arm sha
-  `e599f156...84d5`) and ablates 40 rows into a bounded-check budget-commit lesson
-  with a decoy planted past the allowance cutoff (arm sha `ecece8e2...9800`), both
-  from the authenticated `replay_after_close` parent against a three-axis
-  exact-exposure replay control (slot seed 55117). The local gate quadruples to 104
-  original-surface tasks at fresh seed 88013 (parsed >= 96, correct >= 68, caps <= 8,
-  strict wins over parent and replay on totals and the 24 execute+induct+probe rows),
-  so every local win is already a surface-transfer result. Training seed 51;
-  conditional aggregate seed 78143 sealed; promotion demands a strict lift of the
-  aggregate and every public family versus base plus aggregate wins over replay and
-  parent. Independent higher-tier confirmation and matched-compute sample-more remain
-  mandatory afterward.
+- Completed bounded-computation successor (terminal local negative, positive
+  mechanism reading): `qwen35_4b_universal_fresh_surface_budget_commit_target_match`
+  trained the fresh-surface designed160 re-dose and the budget-commit ablation
+  against a three-axis exact-exposure replay control and evaluated one frozen
+  104-task original-surface gate at seed 88013. designed_fresh 69/97/7
+  (correct/parsed/caps) beat parent 63/87/18 and replay 62/91/13 on all four
+  preregistered strict comparisons with 31% shorter generation — the designed dose
+  is surface-general and think-economical — but induct was 0/8 for every arm
+  including the parent, so the induct >= 4/8 floor was structurally unpassable; no
+  promotion, aggregate seed 78143 permanently sealed. budget_commit was at-or-below
+  replay everywhere; the bounded-scan lesson is retired. The generic-dose line
+  CLOSES here: its local gate cannot promote any continuation of this lineage
+  (0/8 induct is the C38/C39 wall made exact at n=8). Do not reopen with lowered
+  floors in an existing directory.
+- Queued goal-gap axis-curriculum successor (the program's next attack): target the
+  benchmark's actual stuck families — menders (trace-repair across MANY invented
+  executable formalisms), warren (think-budget-efficient exploration notation),
+  sirens (instruction-hygiene with verifiers that score injection non-compliance
+  directly), rites (surface-diverse procedure grammars with interacting flags) —
+  as designed single-turn-atom-heavy content from public axis descriptions only.
+  Historical forensics (65 quick + 92 medium paired events): the all-families goal
+  passed exactly once; failures concentrate on those four families; every one has a
+  gym analogue that near-mastered internally without transferring, so the levers
+  are formalism/surface diversity, verifier design, and think compression — not
+  coverage. Parent candidate: the published designed_fresh composite
+  (`93433aa2...0255`), the strongest local artifact with receipts. Gates must be
+  preregistered with floors achievable under the known induction wall.
 - Completed staged-search mechanism negative: `qwen35_4b_universal_search_scaffold_token_match` decomposed
   two-step search into five independently scored executable lesson stages before a
   bounded full-search ledger. It starts from the authenticated

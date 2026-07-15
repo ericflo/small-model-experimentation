@@ -2,7 +2,7 @@
 
 Re-dose the proven 160-row designed distribution on six disjoint fresh surfaces from the authenticated parent, and ablate 40 of those rows into a bounded-check budget-commit lesson, under a three-axis exact-exposure replay control and a quadrupled 104-task local gate.
 
-**Status:** in-progress · since 2026-07-14 · model-free construction under way; no model event has run
+**Status:** finished · 2026-07-15 · terminal local negative (unpassable induct floor); aggregate seed 78,143 permanently sealed; preregistered surface-generality reading positive; budget lesson negative
 
 ## Research Program
 
@@ -50,17 +50,29 @@ Checkpointed stages (each requires its prerequisite committed at a clean, pushed
 
 ## Results
 
-No model event has run. Model-free construction (corpora, exposure match, local gate design) is in progress.
+All three arms trained from green checkpoints with zero skipped rows and exactly matched exposure (losses: replay 0.4063, designed 0.4634, budget 0.5106), merged as authenticated explicit composites, and evaluated in the one frozen 104-task local gate event at seed 88,013.
+
+Totals (correct / parsed / cap contacts of 104): parent 63/87/18; replay_repeat 62/91/13; **designed_fresh 69/97/7**; budget_commit 62/88/16. Mean generated tokens: parent 515.8, replay 534.0, designed_fresh 357.2, budget_commit 396.2.
+
+`designed_fresh` passed the correct (≥68), parse (≥96), caps (≤8), and route-abstention bars and won ALL FOUR preregistered strict comparisons (total and the 24-row execute+induct+probe subtotal, versus both parent and replay). It failed only the per-kind floors: execute 3/8 and induct 0/8 (probe 6/8 passed). `budget_commit` failed broadly and was at-or-below replay on every headline number. Decisively: **induct was 0/8 for every arm including the parent**, so the induct ≥ 4/8 floor was structurally unpassable in this event. No candidate promoted; per the frozen contract, aggregate seed 78,143 is permanently sealed and no benchmark event ran.
 
 ## Interpretation
 
-None yet.
+Three separable findings.
+
+1. The preregistered surface-generality reading is POSITIVE: the designed dose, re-rendered on six entirely fresh surfaces, strictly beat both the parent and the exactly-matched replay control on total correct and on the target subtotal, on gate tasks whose surfaces it never saw — while also cutting cap contacts by 11, raising parses by 10, and shortening generation by 31% versus the parent. The designed-160 effect binds to structure, not to its original surface vocabulary. This is a single-seed local mechanism screen, not a capability claim.
+2. The budget lesson is falsified as designed: substituting 40 designed rows for bounded-scan lessons made termination WORSE (16 caps vs 7), not better — the stop-on-contract behavior did not leave its narrow format, and the lost designed rows cost semantics.
+3. The gate's per-kind induct floor (≥4/8) is unpassable by this lineage: at eight induction tasks the wall (C38/C39) shows as exactly zero for every arm. Under the 26-task predecessor gate the same floor (≥1/2) was occasionally passable by luck; quadrupling the screen exposed it as structural. Any successor must either treat induction with a fundamentally different mechanism or preregister a gate whose floors are achievable given the known wall.
+
+## Terminal Disposition
+
+No later event is authorized here. Aggregate seed 78,143 was never opened and is spent-by-sealing; do not lower the induct floor, re-run the local event, or benchmark the unpromoted composites from this directory. The `designed_fresh` adapter, composite, and receipts are published and may serve as a parent for successors with their own lifecycle.
 
 ## Knowledgebase Update
 
-- Program evidence updated: pending the first result.
-- Program backlog updated: this trial claims the queued bounded-computation successor slot.
-- Claim ledger updated: no; no capability result exists.
+- Program evidence updated: terminal local negative with the positive surface-generality mechanism reading and the budget-lesson negative recorded.
+- Program backlog updated: the generic-dose line closes; the goal-gap axis-curriculum successor is queued.
+- Claim ledger updated: no; local mechanism screens do not mint claims.
 
 ## Artifacts
 

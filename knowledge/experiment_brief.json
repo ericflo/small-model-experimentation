@@ -13887,40 +13887,40 @@
    ]
   },
   "qwen35_4b_universal_fresh_surface_budget_commit_target_match": {
-   "verdict_tag": "Design frozen; nothing trained yet",
+   "verdict_tag": "New words worked; rule-guessing wall stayed",
    "concept_primer": "Take the practice set that nearly worked before, rewrite every exercise with brand-new vocabulary, and add a new lesson that teaches working to a strict step budget and committing an answer the moment the budget says stop.",
    "plain_question": "Does the near-miss practice set still work when its vocabulary is completely replaced, and does budget-and-commit practice fix the run-on answers that kept failing the screen?",
-   "plain_answer": "Nothing is trained yet. The two practice sets are frozen: one with 160 rewritten exercises, one that swaps 40 of them for the new budget lessons. Both will be compared against pure review of old material with exactly equal training exposure, on a screen four times larger than before.",
-   "why_it_matters": "Every prior attempt failed either by copying answers the model could not have produced or by reusing the same vocabulary. This trial tests whether the designed practice binds to structure rather than words, and whether stopping-on-time is teachable as content.",
-   "verdict_tone": "neutral",
+   "plain_answer": "The rewritten practice set beat both comparison models on the big screen — more right answers (69 vs 63 and 62 of 104), many fewer run-on answers (7 vs 18 and 13), and 31 percent shorter output — on vocabulary it had never trained on. But the screen also required four of eight rule-guessing tasks right, and every model scored zero of eight there, so nothing advanced to the benchmark. The budget lesson made things worse, not better.",
+   "why_it_matters": "The practice set's benefit binds to structure, not to specific words — the first positive mechanism reading in this line. And the screen's rule-guessing requirement is now known to be impossible for this model family, so future tests must either attack rule-guessing differently or measure what can actually move.",
+   "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "Rewritten exercises",
-     "value": "160",
-     "sub": "six brand-new vocabularies, zero old words"
+     "label": "Right answers",
+     "value": "69 / 104",
+     "sub": "vs 63 (parent) and 62 (pure review) — all strict wins"
     },
     {
-     "label": "Budget lessons",
-     "value": "40",
-     "sub": "27 find-it cases, 13 stop-on-time cases"
+     "label": "Run-on answers",
+     "value": "7",
+     "sub": "vs 18 (parent) and 13 (review); output 31% shorter"
     },
     {
-     "label": "Screen size",
-     "value": "104 tasks",
-     "sub": "four times the old 26-task screen"
+     "label": "Rule-guessing",
+     "value": "0 / 8",
+     "sub": "every model, including both comparisons"
     },
     {
-     "label": "Model events so far",
-     "value": "0",
-     "sub": "benchmark seed 78,143 sealed"
+     "label": "Benchmark",
+     "value": "never opened",
+     "sub": "seed 78,143 sealed by the frozen rule"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Where the experiment stands",
-     "chart_read": "Each bar is a preregistered stage; a bar at one means that stage is complete.",
-     "chart_takeaway": "The practice sets and the contract are frozen; training, the big screen, and the benchmark have not started."
+     "chart_plain_title": "The rewritten practice set wins the screen; the rule-guessing floor blocks everyone",
+     "chart_read": "Grouped bars per model: right answers and cleanly finished answers (of 104), and run-on answers (fewer is better).",
+     "chart_takeaway": "The rewritten set beats both comparisons on every headline number, but the screen's rule-guessing requirement was zero-for-eight for every model, so nothing advanced."
     }
    ]
   }

@@ -745,3 +745,37 @@ re-sampling within a short-thinking budget cannot supply either. Curriculum sign
 for the wall must come from designed synthetic data that does not depend on parent
 policy support — per the queued bounded-computation plus canonical-answer-commitment
 successor spec — not from harvesting the parent's own successes.
+
+## qwen35_4b_universal_fresh_surface_budget_commit_target_match (2026-07-15 — Terminal local negative; positive surface-generality reading)
+
+The bounded-computation successor trained three exactly-matched arms from the
+authenticated `replay_after_close` parent (three-axis MILP: forward 1,356,964,
+nonzero targets 576,718, loss mass ×5 631,326 per arm; zero deltas, zero skips)
+and evaluated them in one frozen 104-task original-surface gate at seed 88,013 —
+training rendered only six fresh surfaces, so the gate doubled as a surface-
+transfer test.
+
+Totals (correct/parsed/caps of 104): parent 63/87/18; replay 62/91/13;
+designed_fresh 69/97/7; budget_commit 62/88/16. Mean generated tokens
+515.8/534.0/357.2/396.2. `designed_fresh` passed the correct/parse/caps/
+abstention bars and won ALL FOUR preregistered strict comparisons (total and the
+24-row execute+induct+probe subtotal versus both parent and replay) — the
+preregistered surface-generality reading is POSITIVE: the designed dose binds to
+structure, not surface vocabulary, and simultaneously repairs termination
+(−11 caps, +10 parses, −31% generation length vs parent). But induct was 0/8 for
+EVERY arm including the parent, so the induct ≥ 4/8 floor was structurally
+unpassable; no candidate promoted, and aggregate seed 78,143 is permanently
+sealed. `budget_commit` was at-or-below replay on every headline number: the
+bounded-scan lesson did not generalize to termination and its 40-row
+substitution cost semantics.
+
+Read: (1) the first positive mechanism reading in the universal line — the
+designed dose is surface-general and think-economical; (2) the budget-commit
+content lever is retired; (3) the per-kind induct floor is now known to be
+unpassable for this lineage at n=8 (the C38/C39 wall made exact), so the line's
+local gate can never promote a continuation regardless of treatment quality.
+Successors must either attack induction with a fundamentally different mechanism
+or preregister floors that are achievable given the known wall — and the
+program's goal-gap forensics (menders/warren/sirens/rites, recorded in the
+successor intake) point the next attack at the benchmark's actual bottleneck
+rather than the local gate's hardest kind.
