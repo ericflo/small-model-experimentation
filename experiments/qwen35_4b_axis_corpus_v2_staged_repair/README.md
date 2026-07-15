@@ -2,7 +2,7 @@
 
 Rebuild the axis curriculum's two dead blocks from quantified failure forensics of the line's own 1,296 graded completions: staged repair lessons whose think targets DEMONSTRATE the bounded search (localize-only, repair-given-step, and trace-audit formats on the best-measured formalism, with rejected op-TYPE candidates and explicit checkpoint rules), hygiene with the co-located-injection share raised, explore unchanged — trained on the line's best local artifact against an exact-exposure replay control, judged under the corrected detectability bar with a prospectively documented answer-normalization fix, medium pilot behind it.
 
-**Status:** in-progress · since 2026-07-15 · model-free construction under way; no model event has run
+**Status:** finished · 2026-07-15 · not promoted; the frozen kill rule FIRED (neither staged-repair lesson won) — the trace-repair axis is closed for this model at this dose; third-dose interference measured on the adapter lineage; seed 78,147 permanently sealed
 
 ## Research Program
 
@@ -48,16 +48,20 @@ Checkpointed stages:
 
 ## Results
 
-No model event has run.
+Both arms trained cleanly (control 0.3323, candidate 0.4647 train loss; 0 skips) and merged. The frozen 154-task gate event at seed 88,017 (normalized grading, four of five kinds detectable, required wins 3): axis holdout of 50 — candidate 19, parent 19, replay_repeat3 25. Per-kind candidate/parent/replay: bugfind 3/0/3 (tie), bugmend 3/4/2 (loss), retrace 1/2/5 (loss), explore 5/7/9 (loss), hygiene 7/6/6 (the only win). Retention: candidate 66/98/4 versus parent 71/98/3 and replay 69/95/8. Failed checks: the breadth bar AND both axis-total strict comparisons. KILL RULE: `u_bugfind_win: false`, `u_bugmend_win: false`. No promotion; seed 78,147 permanently sealed; the medium pilot never ran.
 
 ## Interpretation
 
-None yet.
+Two laws land, both preregistered readings. (1) The trace-repair kill rule fires cleanly: demonstrating the bounded search did not install what asserting it failed to install — two content designs, four measurement events, zero robust repair installs; the axis is closed for this model at this dose, and any future attack requires a genuinely different mechanism argument. (2) Third-dose interference: the candidate — the third consecutive designed dose continued in place on one rank-32 adapter lineage — tied its parent on the axis total, lost its previously-installed explore edge, and dropped retention by five, while the third replay round WON the whole axis holdout (25/50, explore 9/10, retrace 5/10). Content stacking on this adapter has hit diminishing-to-negative returns exactly where replay refreshing keeps gaining; the lineage looks saturated as a vehicle for further designed doses.
+
+## Terminal Disposition
+
+No later event is authorized here. Seed 78,147 is spent-by-sealing. The published composites and raw gate outputs are preserved. The trace-repair axis may not be reopened at this dose/mechanism family; any future designed dose should start from a fresh adapter on a clean parent rather than a fourth continuation of this lineage.
 
 ## Knowledgebase Update
 
-- Program evidence updated: pending.
-- Program backlog updated: this trial claims the queued v2 slot.
+- Program evidence updated: kill-rule closure and third-dose interference recorded.
+- Program backlog updated: the axis-dose line closes; successor directions carry calibration notes.
 - Claim ledger updated: no.
 
 ## Artifacts

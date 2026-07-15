@@ -14039,40 +14039,40 @@
    ]
   },
   "qwen35_4b_axis_corpus_v2_staged_repair": {
-   "verdict_tag": "Design under construction; nothing trained",
+   "verdict_tag": "Kill rule fired; repair axis closed",
    "concept_primer": "Last round's autopsy showed exactly why two of four practice blocks failed: the repair lessons stated their conclusion instead of showing the search, and the procedure lessons taught something the model already knew. This round rebuilds those blocks — the lessons now walk through the search, rejected attempts included — and fixes a grading quirk that had thrown away 21 correct answers for spacing.",
    "plain_question": "Does showing the search — instead of asserting its result — finally install the repair skill, without disturbing the blocks that already work?",
-   "plain_answer": "Nothing is trained yet. The rebuilt 160-exercise set is frozen with its balance verified; a kill rule is preregistered: if the repair lessons still do not stick, this whole approach closes rather than getting a third rewrite.",
-   "why_it_matters": "This is the first practice set in the program designed from a quantified autopsy of its predecessors' actual mistakes — the difference between guessing at better lessons and engineering them.",
-   "verdict_tone": "neutral",
+   "plain_answer": "Even with lessons rebuilt from the autopsy — walking through the search step by step instead of asserting the answer — the repair skills did not stick (a tie and a loss against the comparisons), so the preregistered kill rule closed this approach for good. The screen also revealed something bigger: after three consecutive practice doses on the same model lineage, new practice stopped helping (the practiced model tied its parent and forgot a little), while a third round of plain review won the whole skill test.",
+   "why_it_matters": "Two clean laws: this model cannot learn program-repair from small designed doses no matter how the lesson is written, and stacking practice rounds on one lineage saturates — future practice needs a fresh start from a clean model. Honest kill rules turned what could have been endless rewrites into settled knowledge.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Rebuilt blocks",
-     "value": "3 of 5",
-     "sub": "repair staged into find/fix/audit lessons"
-    },
-    {
-     "label": "Design basis",
-     "value": "1,296 completions",
-     "sub": "quantified failure classes from 3 events"
-    },
-    {
-     "label": "Grading fix",
-     "value": "21 rows",
-     "sub": "correct answers previously lost to spacing"
-    },
-    {
      "label": "Kill rule",
-     "value": "frozen",
-     "sub": "no third rewrite if repair still fails"
+     "value": "fired",
+     "sub": "repair lessons: one tie, one loss — axis closed"
+    },
+    {
+     "label": "Skill test",
+     "value": "19 vs 19 vs 25",
+     "sub": "third practice dose tied parent; plain review won"
+    },
+    {
+     "label": "Retention",
+     "value": "66 vs 71",
+     "sub": "third dose cost five retained answers"
+    },
+    {
+     "label": "Benchmark",
+     "value": "never opened",
+     "sub": "seed 78,147 sealed by the frozen rule"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Where the experiment stands",
-     "chart_read": "Each bar is a preregistered stage; one means complete.",
-     "chart_takeaway": "The rebuilt practice set is frozen; matching, review, training, the screen, and the medium benchmark remain."
+     "chart_plain_title": "Third practice dose stalls; plain review wins the skill test",
+     "chart_read": "Per-category right answers (of 10) for the practiced model, its parent, and the review model.",
+     "chart_takeaway": "Only hygiene still favors the practiced model; repair never installed and review now leads overall — the lineage is saturated for practice doses."
     }
    ]
   }

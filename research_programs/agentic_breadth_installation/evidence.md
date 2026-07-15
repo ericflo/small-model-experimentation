@@ -861,3 +861,30 @@ replaces protocol with a lesson targeting capability the parent lacks, and
 redesigns trace-repair from this line's own 432-completion-per-arm raw failure
 outputs (own-experiment data, no benchmark exposure). Do not re-measure the
 existing composites again; do not reuse sealed seeds.
+
+## qwen35_4b_axis_corpus_v2_staged_repair (2026-07-15 — Kill rule fired; third-dose interference)
+
+The forensics-driven v2 (staged repair lessons with demonstrated bounded
+search; co-location-hardened hygiene; unchanged explore) trained cleanly and
+met the frozen 154-task gate at seed 88,017 with normalized grading. Axis
+holdout of 50: candidate 19, parent 19, replay_repeat3 25; per-kind
+candidate/parent/replay: bugfind 3/0/3, bugmend 3/4/2, retrace 1/2/5, explore
+5/7/9, hygiene 7/6/6. Retention 66/98/4 vs 71/98/3 vs 69/95/8. The kill rule
+fired (`u_bugfind_win` and `u_bugmend_win` both false); seed 78,147 sealed.
+
+Two program laws:
+
+1. TRACE-REPAIR AXIS CLOSED. Two content designs (asserted search; demonstrated
+   staged search built from quantified forensics) across four fresh-instrument
+   events produced zero robust repair installs. The skill this axis needs is
+   not installable in this model by ~30-55-row designed doses at rank-32,
+   regardless of pedagogy. Any future attack requires a different mechanism
+   argument (per the frozen rule, not a v3).
+2. THIRD-DOSE INTERFERENCE. The third consecutive designed dose continued in
+   place on one adapter lineage tied its parent on the axis total, lost the
+   previously-installed explore edge, and dropped retention by five — while
+   the third replay round won the entire axis holdout (25/50, explore 9/10,
+   retrace 5/10). Combined with the stack trial's replay-drift reading, the
+   adapter lineage is saturated as a vehicle for further designed doses:
+   future doses need a fresh adapter from a clean parent, and replay
+   continuation remains the strongest single broad-instrument move.

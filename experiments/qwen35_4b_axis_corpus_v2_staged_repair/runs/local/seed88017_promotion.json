@@ -1,0 +1,146 @@
+{
+  "aggregate_seed": 78147,
+  "aggregate_seed_open": false,
+  "answer_normalization": {
+    "applied_to": "both the parsed and the expected answer, every arm, both instruments",
+    "definition": "re.sub(r'\\s+', ' ', s).strip(), then re.sub(r'\\s*>\\s*', '>', s), then re.sub(r'\\s*;\\s*', ';', s)",
+    "function": "check_local.normalize_answer",
+    "prospective": true,
+    "rationale": "21 correct-but-rejected whitespace rows across the three prior gate events (seeds 88014/88015/88016), recorded in experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/analysis/three_event_failure_forensics.md"
+  },
+  "axis_kind_wins": 1,
+  "axis_kind_wins_required": 3,
+  "axis_kinds": [
+    "u_bugfind",
+    "u_bugmend",
+    "u_explore",
+    "u_hygiene",
+    "u_retrace"
+  ],
+  "axis_rows": 50,
+  "backend": "vllm_merged_composite",
+  "benchmark_data_read": false,
+  "breadth_rule": "ceil(2/3 * detectable_kinds); ties never count as wins",
+  "candidates": [
+    "axis_v2"
+  ],
+  "checks": {
+    "at_least_one_axis_kind_detectable": true,
+    "axis_kind_wins_meet_required_breadth": false,
+    "axis_total_strictly_beats_parent": false,
+    "axis_total_strictly_beats_replay": false,
+    "retention_cap_contacts_within_3_of_parent": true,
+    "retention_cap_contacts_within_3_of_replay": true,
+    "retention_correct_within_5_of_parent": true,
+    "retention_correct_within_5_of_replay": true,
+    "retention_parsed_within_3_of_parent": true,
+    "retention_parsed_within_3_of_replay": true,
+    "route_abstentions_at_most_4_of_8": true
+  },
+  "controls": [
+    "replay_repeat3",
+    "axis_parent"
+  ],
+  "design_receipt_sha256": "5bc41f4a67337cb6c84860b4a8902c0a950d4d3a38bf932ab10feaeab18442c0",
+  "detectability_ceiling": 9,
+  "detectable_kinds": [
+    "u_bugfind",
+    "u_bugmend",
+    "u_hygiene",
+    "u_retrace"
+  ],
+  "eligible": [],
+  "experiment_id": "qwen35_4b_axis_corpus_v2_staged_repair",
+  "kill_rule": {
+    "u_bugfind_win": false,
+    "u_bugmend_win": false
+  },
+  "kind_wins": {
+    "u_bugfind": false,
+    "u_bugmend": false,
+    "u_hygiene": true,
+    "u_retrace": false
+  },
+  "local_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_axis_corpus_v2_staged_repair/runs/local/seed88017.json",
+  "local_receipt_sha256": "5440d3a7d126ed7c7d87bdd50f7997c79e35d4e36225248c35f2338ffc2c90ba",
+  "no_absolute_per_kind_floors": true,
+  "not_detectable": [
+    "u_explore"
+  ],
+  "outcome": "NOT_PROMOTED",
+  "promoted": null,
+  "retention_rows": 104,
+  "schema_version": 1,
+  "seed": 88017,
+  "summaries": {
+    "axis_parent": {
+      "adapter": "axis_parent",
+      "axis": {
+        "correct": 19,
+        "per_kind_correct": {
+          "u_bugfind": 0,
+          "u_bugmend": 4,
+          "u_explore": 7,
+          "u_hygiene": 6,
+          "u_retrace": 2
+        },
+        "rows": 50
+      },
+      "cap_contacts": 7,
+      "retention": {
+        "cap_contacts": 3,
+        "correct": 71,
+        "parsed": 98,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "total_correct": 90
+    },
+    "axis_v2": {
+      "adapter": "axis_v2",
+      "axis": {
+        "correct": 19,
+        "per_kind_correct": {
+          "u_bugfind": 3,
+          "u_bugmend": 3,
+          "u_explore": 5,
+          "u_hygiene": 7,
+          "u_retrace": 1
+        },
+        "rows": 50
+      },
+      "cap_contacts": 6,
+      "retention": {
+        "cap_contacts": 4,
+        "correct": 66,
+        "parsed": 98,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "total_correct": 85
+    },
+    "replay_repeat3": {
+      "adapter": "replay_repeat3",
+      "axis": {
+        "correct": 25,
+        "per_kind_correct": {
+          "u_bugfind": 3,
+          "u_bugmend": 2,
+          "u_explore": 9,
+          "u_hygiene": 6,
+          "u_retrace": 5
+        },
+        "rows": 50
+      },
+      "cap_contacts": 15,
+      "retention": {
+        "cap_contacts": 8,
+        "correct": 69,
+        "parsed": 95,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "total_correct": 94
+    }
+  }
+}

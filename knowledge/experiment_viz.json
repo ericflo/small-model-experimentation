@@ -48809,35 +48809,51 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Preregistered stage completion",
+     "title": "Seed-88017 gate: per-kind axis correct (of 10)",
      "categories": [
-      "intake",
-      "v2 corpus",
-      "exposure match",
-      "design review",
-      "train 2 arms",
-      "gate event",
-      "medium pilot"
+      "bugfind",
+      "bugmend",
+      "retrace",
+      "explore",
+      "hygiene"
      ],
      "series": [
       {
-       "label": "completed checkpoint",
+       "label": "axis_v2",
        "values": [
+        3,
+        3,
         1,
-        1,
+        5,
+        7
+       ]
+      },
+      {
+       "label": "axis_parent",
+       "values": [
         0,
-        0,
-        0,
-        0,
-        0
+        4,
+        2,
+        7,
+        6
+       ]
+      },
+      {
+       "label": "replay_repeat3",
+       "values": [
+        3,
+        2,
+        5,
+        9,
+        6
        ]
       }
      ],
-     "x_label": "preregistered experiment stage",
-     "y_label": "completion indicator",
+     "x_label": "axis lesson kind",
+     "y_label": "correct of 10",
      "y_format": "integer",
-     "note": "The forensics-driven v2 corpus is frozen (staged demonstrated-search repair lessons; co-location-hardened hygiene; unchanged explore). The corrected gate carries documented answer normalization; seed 78,147 sealed; the trace-repair kill rule is frozen.",
-     "source": "experiments/qwen35_4b_axis_corpus_v2_staged_repair/reports/preregistration.md"
+     "note": "The kill rule fired (bugfind tie, bugmend loss): the trace-repair axis is closed at this dose. The third designed dose tied its parent on the axis total (19/50) and lost retention (66 vs 71) while the third replay round won the holdout outright (25/50) — third-dose interference on the adapter lineage. Seed 78,147 sealed.",
+     "source": "experiments/qwen35_4b_axis_corpus_v2_staged_repair/reports/report.md"
     }
    ]
   }

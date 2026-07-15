@@ -14,7 +14,9 @@ See the preregistration: five lesson kinds (bugfind/bugmend/retrace/explore/hygi
 
 ## Results
 
-No capability result exists.
+- Training (1,520 rows, 0 skips, 190 updates each): control 0.3323, candidate 0.4647 train loss.
+- Gate (seed 88,017, normalized grading, 4 of 5 kinds detectable, 3 wins required): axis holdout of 50 — candidate 19, parent 19, replay_repeat3 25; per-kind candidate/parent/replay: bugfind 3/0/3, bugmend 3/4/2, retrace 1/2/5, explore 5/7/9, hygiene 7/6/6. Retention 66/98/4 vs 71/98/3 vs 69/95/8.
+- KILL RULE fired: u_bugfind_win false, u_bugmend_win false. Failed checks additionally include both axis-total strict comparisons. No promotion; seed 78,147 permanently sealed.
 
 ## Controls
 
@@ -26,7 +28,7 @@ Executable truth grades outputs only; `benchmarks/` remains unread.
 
 ## Next Stage
 
-Design review; then the checkpointed stages.
+None. Closed per contract; the trace-repair axis is closed per the frozen kill rule; third-dose interference on the adapter lineage is recorded; successor directions carry calibration notes in the program backlog.
 
 ## Artifact Manifest
 

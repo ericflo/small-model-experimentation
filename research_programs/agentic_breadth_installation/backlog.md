@@ -189,19 +189,28 @@
   tracefix trended to chance (4->2->1 of 10). Seed 78146 sealed. The corrected
   instrument worked; the deficit is CONTENT: hygiene/explore/termination
   install, tracefix/protocol do not.
-- Queued NEXT (calibrated; forensics complete): axis corpus v2 per
-  experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/analysis/
-  three_event_failure_forensics.md — keep hygiene (raise injection/answer
-  co-location share) and explore; REPLACE protocol (parent competent; failures
-  are toggle-parity only, zero arithmetic slips in 300 rows) with an
-  execute- or repair-flavored block at measured parent headroom; REDESIGN
-  trace-repair as staged lessons (localize-only answer format first; single
-  formalism, line, quarantining gauges 0/12; DEMONSTRATED search with rejected
-  op-TYPE and write-target candidates; the two checkpoint rules; ~300-token
-  bounded thinks). Instrument fix, prospectively legal for a fresh gate:
-  normalize separator whitespace at grading (21 correct-but-rejected rows
-  across three events). Fresh corpus/gate/aggregate seeds; corrected
-  detectability bar; medium pilot conditional.
+- Completed axis corpus v2 (kill rule fired; axis and dose-stacking closed):
+  `qwen35_4b_axis_corpus_v2_staged_repair` — demonstrated-search staged repair
+  lessons did not install (bugfind tie 3/0/3, bugmend loss 3/4/2 vs
+  parent/replay); the candidate tied its parent on the 50-row axis total (19)
+  while the THIRD replay round won it outright (25) and the candidate lost
+  retention (66 vs 71). Seed 78147 sealed. Standing laws: (1) the trace-repair
+  axis is closed for this model at this dose — no v3 without a new mechanism
+  argument; (2) third-dose interference — this adapter lineage is saturated
+  for designed doses; fresh adapters from clean parents are required for any
+  future dose, and replay continuation remains the strongest broad move.
+- Queued directions (calibration notes; none funded without a fresh intake):
+  (a) fresh-adapter single-dose replication — the installed-lesson pair
+  (hygiene+explore) as ONE dose on a FRESH rank-32 adapter from the clean
+  designed_fresh or replay_repeat parent, testing whether de-stacking recovers
+  the installs without interference; cheap and believable given the map.
+  (b) medium-tier paired measurement of the EXISTING published composites
+  under a fresh intake whose gates are medium-native (the quick-tier gates
+  kept sealing medium pilots that the goal actually needs); requires care to
+  avoid gate-shopping framing — new instrument, new seeds, failures recorded.
+  (c) mechanism-diverse attacks on menders/sirens (the two families frozen for
+  every arm at every seed) — requires new mechanism evidence first, per the
+  kill-rule discipline.
 - Queued (calibration notes attached): (a) replay-compounding line — measure
   whether iterated replay rounds keep gaining aggregate and where they saturate;
   the published `replay_repeat` composite (0.5081) is the presumptive parent;

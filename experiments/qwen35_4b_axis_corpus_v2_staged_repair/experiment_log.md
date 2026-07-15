@@ -78,3 +78,16 @@
   `origin/main` with both workflows green; both arms merged (128/128 modules,
   fingerprint-verified); tree pins filled fail-closed. The one frozen 154-task
   gate event at seed 88,017 is the only next stage.
+
+## 2026-07-15 — Gate event: kill rule fired; experiment and axis closed
+
+- The gate event ran from merge checkpoint `a252ff04`: three authenticated
+  engine runs over the 154-row input at seed 88,017 with normalized grading.
+- Axis holdout of 50: candidate 19, parent 19, replay_repeat3 25. Per-kind
+  candidate/parent/replay: bugfind 3/0/3, bugmend 3/4/2, retrace 1/2/5,
+  explore 5/7/9, hygiene 7/6/6. Retention 66/98/4 vs 71/98/3 vs 69/95/8.
+- KILL RULE fired (`u_bugfind_win` false, `u_bugmend_win` false): the
+  trace-repair axis closes for this model at this dose per the frozen rule.
+- Third-dose interference measured: the third designed dose on this adapter
+  lineage tied its parent and lost retention while the third replay round won
+  the axis holdout outright. No promotion; seed 78,147 permanently sealed.
