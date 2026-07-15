@@ -1,0 +1,26 @@
+# Generated starter metadata. Run make check after adding artifacts.
+id: "qwen35_4b_dose_diversity_mechanism_cell"
+title: "Dose-Diversity Mechanism Cell"
+source_track: "new"
+path: "experiments/qwen35_4b_dose_diversity_mechanism_cell"
+primary_readme: "experiments/qwen35_4b_dose_diversity_mechanism_cell/README.md"
+primary_report: "experiments/qwen35_4b_dose_diversity_mechanism_cell/reports/report.md"
+summary: "Single-variable mechanism cell for the direct-dose retention cost: the twice-verified 160-row four-kind axis corpus dosed directly from the clean parent, read on a fresh seed-88020 gate against three published composites (including the known ~-10 hygiene_explore direct dose re-measured on the same screen), with a preregistered three-way diversity_mechanism verdict, no promotion, and no benchmark stage."
+tags:
+  - "experiment"
+  - "mechanism"
+  - "small-model"
+research_programs:
+  - "agentic_breadth_installation"
+top_level_dirs:
+  - "analysis"
+  - "configs"
+  - "data"
+  - "reports"
+  - "runs"
+  - "scripts"
+  - "src"
+  - "tests"
+file_counts: {}
+total_files: 0
+total_size_bytes: 0

@@ -1,0 +1,95 @@
+{
+  "absolute_loss_mass_x5_per_arm": 633580,
+  "aggregate_seed_open": false,
+  "benchmark_data_read": false,
+  "encoder": "scripts/train_think.py:encode_row",
+  "encoder_sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4",
+  "experiment_id": "qwen35_4b_dose_diversity_mechanism_cell",
+  "files": {
+    "axis160_direct": {
+      "absolute_loss_mass": 126716.0,
+      "encoded_rows": 1520,
+      "families": {
+        "burrowmaze": 159,
+        "caravan": 22,
+        "ferrier": 316,
+        "foundry_ledger": 26,
+        "gatepost": 85,
+        "glyphgate": 170,
+        "kilnrite": 313,
+        "loomfix": 108,
+        "packhouse": 38,
+        "patchwheel": 49,
+        "runeward": 15,
+        "stallwright": 59,
+        "universal": 160
+      },
+      "kinds": {
+        "atom": 85,
+        "atom_fc": 135,
+        "episode": 888,
+        "oracle_trace": 252,
+        "u_explore": 40,
+        "u_hygiene": 40,
+        "u_protocol": 40,
+        "u_tracefix": 40
+      },
+      "max_sequence_tokens": 3193,
+      "min_sequence_tokens": 178,
+      "path": "data/axis160_direct.jsonl",
+      "rows": 1520,
+      "sha256": "0cbf3abf04781f3217189dd7b2bdf173d83772b0200b283a7c608dc3d386c1ee",
+      "skipped": [],
+      "skipped_rows": 0,
+      "spans_per_epoch": {
+        "absolute_loss_mass_x5": 633580,
+        "answer_target": 13921,
+        "close_target": 3040,
+        "forward": 1367325,
+        "masked_context": 530149,
+        "nonzero_target": 577896,
+        "parent_prefix": 0,
+        "prompt": 530149,
+        "target_span": 837176,
+        "think_target": 820215
+      }
+    }
+  },
+  "forward_tokens_per_arm": 1367325,
+  "match_axes": [
+    "forward",
+    "nonzero_target",
+    "absolute_loss_mass_x5"
+  ],
+  "max_length": 4096,
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "nonzero_target_tokens_per_arm": 577896,
+  "notional_control_block": {
+    "block_axis_sums": {
+      "absolute_loss_mass_x5": 68404,
+      "forward": 134958,
+      "nonzero_target": 58308
+    },
+    "control_rows": 240,
+    "equals_candidate_variable_block_on_match_axes": true,
+    "recomputed_from": "sources.source_token_receipt + selection indices",
+    "stream_materialized": false
+  },
+  "rows_duplicated_for_matching": false,
+  "rows_per_arm": 1520,
+  "rows_truncated_for_matching": false,
+  "schema_version": 1,
+  "skipped_rows": 0,
+  "stage": "independent_exact_exposure_validation",
+  "stream_manifest": "data/stream_manifest.json",
+  "stream_manifest_sha256": "49cbe33112bc2c671b527edbd63a667985c03abd18d6320643053be2e6f5421a",
+  "targets_modified_for_matching": false,
+  "tokenizer": {
+    "class": "Qwen2Tokenizer",
+    "eos_token_id": 248046,
+    "think_close_token_id": 248069,
+    "vocab_size": 248077
+  },
+  "training_authorized": false
+}

@@ -48938,6 +48938,41 @@
      "source": "experiments/qwen35_4b_interleaved_replay_dose_medium/reports/report.md"
     }
    ]
+  },
+  "qwen35_4b_dose_diversity_mechanism_cell": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered stage completion",
+     "categories": [
+      "intake",
+      "inherited corpus",
+      "exposure match",
+      "design review",
+      "train 1 arm",
+      "four-arm gate"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "The single-variable mechanism cell: the twice-verified 160-row corpus dosed directly from the clean parent, judged beside the known −10 arm, the replay round, and the parent, with a preregistered three-way retention verdict. No benchmark stage.",
+     "source": "experiments/qwen35_4b_dose_diversity_mechanism_cell/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

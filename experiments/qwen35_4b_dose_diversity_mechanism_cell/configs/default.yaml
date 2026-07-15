@@ -1,0 +1,18 @@
+experiment_id: qwen35_4b_dose_diversity_mechanism_cell
+status: model_free_construction
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+parent:
+  experiment: qwen35_4b_universal_fresh_surface_budget_commit_target_match
+  arm: designed_fresh
+  weight_sha256: 0a3b89cdf57ed8a73590580489d744319c12b44b60991db55b5baba6f7c27979
+seeds:
+  corpus_construction_inherited: 77117
+  slot_match: 55123
+  training: 57
+  gate: 88020
+arms_new: [axis160_direct]
+arms_published: [hygiene_explore_direct, replay_clean, clean_parent]
+verdict: three-way diversity_mechanism (SUPPORTED / REFUTED_INTRINSIC / SCREEN_FORTUNE_SUSPECT)
+benchmark_stage: none

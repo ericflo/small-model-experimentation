@@ -1,0 +1,249 @@
+{
+  "arms": {
+    "control_arm_trained": false,
+    "gate_arms": [
+      "clean_parent",
+      "hygiene_explore_direct",
+      "replay_clean",
+      "axis160_direct"
+    ],
+    "parent_eval_label": "clean_parent",
+    "trained_candidate": "axis160_direct"
+  },
+  "checkpoint_policy": {
+    "clean_pushed_main_required": true,
+    "full_check_rebase_push_two_workflow_gate_between_expensive_stages": true,
+    "next_authorized_stage": "train-candidate",
+    "one_stage_per_invocation": true,
+    "preceding_receipt_committed_at_head": true
+  },
+  "code": {
+    "axis_curriculum_generator_sha256": "11dc8df3c0b42ae7dc5449e7bb7627ea3aca645e0a3a3e6d335d22cccff877e5",
+    "corpus_builder_sha256": "729c2c95109833a266ba6ca1657bf0a45b78ebfba8a372a607e487a01c991b5a",
+    "curriculum_generator_sha256": "70fc722a6a69f4f8a64ae4356058421ea44117c7e86d3350abfd72b047ccf080",
+    "trainer_sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4"
+  },
+  "corpora": {
+    "banned_vocabulary": {
+      "checked_by_generator": true,
+      "sha256": "067a8dcfc8e405857bea4b46ec649b306996577e6844841c5695f1544a2db19e",
+      "tokens": 112
+    },
+    "manifest_sha256": "b029c71389ec98314bf5ee8c7e92c828ac996899beaeeb0e6cd469c6ed9eec1f",
+    "replay": {
+      "inheritance": {
+        "byte_identical": true,
+        "from_experiment": "qwen35_4b_goal_gap_axis_curriculum_target_match"
+      },
+      "path": "data/sft_blend.jsonl",
+      "rows": 2240,
+      "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+    },
+    "treatment": {
+      "balance": {
+        "hygiene_clean": 10,
+        "hygiene_injected": 30,
+        "protocol_branches": {
+          "a_only": 14,
+          "both": 15,
+          "neither": 11
+        },
+        "tracefix_formalisms": {
+          "chain": 5,
+          "gauges": 9,
+          "line": 13,
+          "pile": 13
+        }
+      },
+      "construction": {
+        "builder": "scripts/build_corpus.py",
+        "generator": "scripts/gen_axis_curriculum.py",
+        "mix": "tracefix=40,explore=40,hygiene=40,protocol=40",
+        "seed": 77117
+      },
+      "inheritance": {
+        "byte_identical": true,
+        "donor_manifest_sha256": "dd881023b4437211cf05936d29599e3cd8eee0ded07fd7dba07849c0cd1231e4",
+        "from_experiment": "qwen35_4b_goal_gap_axis_curriculum_target_match",
+        "rederived_from_copied_generator": true
+      },
+      "kinds": {
+        "u_explore": 40,
+        "u_hygiene": 40,
+        "u_protocol": 40,
+        "u_tracefix": 40
+      },
+      "path": "data/sft_axis160.jsonl",
+      "rows": 160,
+      "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e"
+    }
+  },
+  "experiment_id": "qwen35_4b_dose_diversity_mechanism_cell",
+  "firewall": {
+    "benchmark_data_read": false,
+    "benchmark_gateway_exposed": false,
+    "no_aggregate_seed_exists": true
+  },
+  "local_gate": {
+    "answer_normalization": {
+      "applied_to": "both the parsed and the expected answer, every arm, both instruments",
+      "definition": "re.sub(r'\\s+', ' ', s).strip(), then re.sub(r'\\s*>\\s*', '>', s), then re.sub(r'\\s*;\\s*', ';', s)",
+      "function": "check_local.normalize_answer",
+      "prospective": true,
+      "rationale": "21 correct-but-rejected whitespace rows across the three prior gate events (seeds 88014/88015/88016), recorded in experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/analysis/three_event_failure_forensics.md"
+    },
+    "arms": [
+      "clean_parent",
+      "hygiene_explore_direct",
+      "replay_clean",
+      "axis160_direct"
+    ],
+    "instruments": {
+      "axis_holdout": {
+        "generator": "scripts/gen_axis_curriculum.py",
+        "kinds": [
+          "u_explore",
+          "u_hygiene",
+          "u_protocol",
+          "u_tracefix"
+        ],
+        "per_kind": 10,
+        "rows": 40
+      },
+      "retention": {
+        "generator": "scripts/gen_curriculum.py",
+        "per_kind": 8,
+        "rows": 104,
+        "skills": 13
+      }
+    },
+    "mechanism_readout": {
+      "complete_event_always_exits_zero": true,
+      "diversity_mechanism_verdict": {
+        "REFUTED_INTRINSIC": "retention_delta_hygexp <= -6 and retention_delta_axis160 <= -6",
+        "SCREEN_FORTUNE_SUSPECT": "retention_delta_hygexp >= -5",
+        "SUPPORTED": "retention_delta_hygexp <= -6 and retention_delta_axis160 >= -5"
+      },
+      "no_promotion": true,
+      "retention_delta_axis160": "axis160_direct retention correct minus clean_parent retention correct",
+      "retention_delta_hygexp": "hygiene_explore_direct retention correct minus clean_parent retention correct (seed-88018 measured ~-10; re-measured fresh here)"
+    },
+    "rows": 144,
+    "seed": 88020
+  },
+  "mechanism_cell": true,
+  "mechanism_plan": {
+    "no_aggregate_seed_exists": true,
+    "no_benchmark_stage": true,
+    "stages": [
+      "train-candidate",
+      "merge-candidate",
+      "local"
+    ]
+  },
+  "model": {
+    "calls": 0,
+    "id": "Qwen/Qwen3.5-4B",
+    "loaded": false,
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+  },
+  "parent": {
+    "arm": "designed_fresh",
+    "deployment": "explicit_merged_composite",
+    "eval_label": "clean_parent",
+    "experiment": "qwen35_4b_universal_fresh_surface_budget_commit_target_match",
+    "external_receipt_sha256": "10b0de69bbda6edf8e216f45667b15f73557102f0661461fec620786e8a9170f",
+    "runtime_lora_forbidden": true,
+    "tracked_receipt_sha256": "ab3f20cc93d3fe21ead7a1d573edbca2903d59d6f9fe3d2af0c93e823676acc2",
+    "tree_sha256": "93433aa2d5f3f0d6d4540126579c09feee1d8502df702c1563bae28eb7f60255",
+    "warm_start_adapter": {
+      "config_sha256": "5966461bd9dbfe280b226940e79eec49030cc44e4131089147634df549dc4055",
+      "path": "large_artifacts/qwen35_4b_universal_fresh_surface_budget_commit_target_match/adapters/designed_fresh",
+      "weights_sha256": "36f41095c2d628e4706694e7d64d16aba815870a1d3660af0e24b14dc0e6b442"
+    },
+    "weights_sha256": "0a3b89cdf57ed8a73590580489d744319c12b44b60991db55b5baba6f7c27979",
+    "weights_size_bytes": 9078620536
+  },
+  "published_composite_arms": {
+    "hygiene_explore_direct": {
+      "composite": "large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore",
+      "experiment": "qwen35_4b_hygiene_explore_destack_medium",
+      "merge_receipt": "experiments/qwen35_4b_hygiene_explore_destack_medium/runs/merges/hygiene_explore.json",
+      "merge_receipt_sha256": "22a22a68234de68314064b809352e7449c59ef821235402b66ecb6e5ebcc486a",
+      "tree_sha256": "9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971",
+      "weights_sha256": "e21123443a230ada2c73ded411e0b5b7c2b1459856b2c38e4f1beea8958dc02f"
+    },
+    "replay_clean": {
+      "composite": "large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/replay_clean",
+      "experiment": "qwen35_4b_hygiene_explore_destack_medium",
+      "merge_receipt": "experiments/qwen35_4b_hygiene_explore_destack_medium/runs/merges/replay_clean.json",
+      "merge_receipt_sha256": "24367084da5415ec8c3f922202a2028cc2930c4b99d87ea5e32b93e5c3b90332",
+      "tree_sha256": "19759e12b1301a15a2f9b2db311ffff7c08e3d8b0d3237c9e7cd718fa8dc7f67",
+      "weights_sha256": "2cef3e5e7ddfbee5d2d2c3a878d64f360dc6994764b9856be7e319ce5187d0b4"
+    }
+  },
+  "schema_version": 1,
+  "seeds": {
+    "construction": 77117,
+    "local_gate": 88020,
+    "stream_slot_matching_namespace": 55123,
+    "training": 57
+  },
+  "stage": "dose_diversity_mechanism_design",
+  "stream_geometry": {
+    "blocks": {
+      "axis160_direct": {
+        "replay_filler_rows": 80,
+        "treatment_rows": 160
+      },
+      "notional_control": {
+        "materialized": false,
+        "recorded_in_manifest_for_exactness_bookkeeping": true,
+        "replay_rows": 240
+      }
+    },
+    "blocks_and_core_pairwise_disjoint_replay_indices": true,
+    "core_stratified_by": [
+      "family",
+      "kind"
+    ],
+    "exact_match_axes": [
+      "forward",
+      "nonzero_target",
+      "absolute_loss_mass_x5"
+    ],
+    "match_limit": 0,
+    "rows_per_arm": 1520,
+    "shared_core_replay_rows": 1280,
+    "slot_order_seed": 55123,
+    "solver": {
+      "backend": "highs",
+      "filler_and_control_solved_jointly": true,
+      "method": "scipy.optimize.milp",
+      "mip_rel_gap": 0,
+      "time_limit_seconds": 600
+    },
+    "variable_block_rows": 240
+  },
+  "training_plan": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "optimizer_steps": 190,
+    "rank": 32,
+    "required_before_training": [
+      "committed exact three-axis stream token receipt",
+      "second adversarial compute review with PASS_CONTROL_TRAINING"
+    ],
+    "rows_per_arm": 1520,
+    "seed": 57,
+    "training_authorized": false,
+    "w_close": 0.2,
+    "w_think": 0.2,
+    "warm_start": "designed_fresh",
+    "zero_skipped_rows_required": true
+  }
+}
