@@ -164,7 +164,7 @@
   CLOSES here: its local gate cannot promote any continuation of this lineage
   (0/8 induct is the C38/C39 wall made exact at n=8). Do not reopen with lowered
   floors in an existing directory.
-- Queued goal-gap axis-curriculum successor (the program's next attack): target the
+- Active goal-gap axis-curriculum successor: `qwen35_4b_goal_gap_axis_curriculum_target_match` targets the
   benchmark's actual stuck families — menders (trace-repair across MANY invented
   executable formalisms), warren (think-budget-efficient exploration notation),
   sirens (instruction-hygiene with verifiers that score injection non-compliance

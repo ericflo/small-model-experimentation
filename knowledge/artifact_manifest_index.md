@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 233
-- Manifest files: 555
+- Experiments with manifests: 234
+- Manifest files: 558
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 83 |
+| `other` | 85 |
 | `run-data` | 101 |
-| `standard-artifact` | 106 |
+| `standard-artifact` | 107 |
 
 ## Manifests
 
@@ -117,6 +117,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_gauntlet_breadth_round1` | `standard-artifact` | [manifest](../experiments/qwen35_4b_gauntlet_breadth_round1/reports/artifact_manifest.yaml) |
 | `qwen35_4b_gauntlet_frontier` | `standard-artifact` | [manifest](../experiments/qwen35_4b_gauntlet_frontier/reports/artifact_manifest.yaml) |
 | `qwen35_4b_generator_verifier_gap` | `standard-artifact` | [manifest](../experiments/qwen35_4b_generator_verifier_gap/reports/artifact_manifest.yaml) |
+| `qwen35_4b_goal_gap_axis_curriculum_target_match` | `other` | [manifest](../experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/corpus_manifest.json) |
+| `qwen35_4b_goal_gap_axis_curriculum_target_match` | `other` | [manifest](../experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/stream_manifest.json) |
+| `qwen35_4b_goal_gap_axis_curriculum_target_match` | `standard-artifact` | [manifest](../experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/reports/artifact_manifest.yaml) |
 | `qwen35_4b_graphir_self_repair` | `dataset` | [manifest](../experiments/qwen35_4b_graphir_self_repair/data/dataset_manifest.json) |
 | `qwen35_4b_graphir_self_repair` | `large-artifact` | [manifest](../experiments/qwen35_4b_graphir_self_repair/large_artifacts_manifest.md) |
 | `qwen35_4b_humaneval_adaptive_budget` | `dataset` | [manifest](../experiments/qwen35_4b_humaneval_adaptive_budget/data/dataset_manifest.json) |

@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 261
+- Experiments: 262
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 189
+- Assigned experiments: 190
 
 ### Seed Evidence
 
@@ -74,6 +74,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_foofah_selective_program_fallback` (track-z): [README](../experiments/qwen35_4b_foofah_selective_program_fallback/README.md)
 - `qwen35_4b_gauntlet_breadth_round1` (new): [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md)
 - `qwen35_4b_generator_verifier_gap` (new): [README](../experiments/qwen35_4b_generator_verifier_gap/README.md)
+- `qwen35_4b_goal_gap_axis_curriculum_target_match` (new): [README](../experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/README.md)
 - `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
 - `qwen35_4b_humaneval_adaptive_budget` (track-z): [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md)
 - `qwen35_4b_hypothesize_verify_wall` (new): [README](../experiments/qwen35_4b_hypothesize_verify_wall/README.md)
@@ -616,7 +617,7 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 Stress whether mechanisms transfer across substrates, families, lengths, distributions, and real tasks.
 
 - Charter: [benchmark_generalization](../research_programs/benchmark_generalization/charter.md)
-- Assigned experiments: 123
+- Assigned experiments: 124
 
 ### Seed Evidence
 
@@ -654,6 +655,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 - `qwen35_4b_foofah_program_strategy_portfolio` (track-z): [README](../experiments/qwen35_4b_foofah_program_strategy_portfolio/README.md)
 - `qwen35_4b_foofah_selective_program_fallback` (track-z): [README](../experiments/qwen35_4b_foofah_selective_program_fallback/README.md)
 - `qwen35_4b_foofah_strategy_discovery_live` (track-z): [README](../experiments/qwen35_4b_foofah_strategy_discovery_live/README.md)
+- `qwen35_4b_goal_gap_axis_curriculum_target_match` (new): [README](../experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/README.md)
 - `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
 - `qwen35_4b_humaneval_adaptive_budget` (track-z): [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md)
 - `qwen35_4b_humaneval_code_confidence` (new): [README](../experiments/qwen35_4b_humaneval_code_confidence/README.md)
@@ -999,7 +1001,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 Install general agentic capability in Qwen3.5-4B via breadth-first expert iteration on a firewall-clean multi-family gym, arbitrated by the blackbox menagerie instrument.
 
 - Charter: [agentic_breadth_installation](../research_programs/agentic_breadth_installation/charter.md)
-- Assigned experiments: 29
+- Assigned experiments: 30
 
 ### Assigned Experiments
 
@@ -1007,6 +1009,7 @@ Install general agentic capability in Qwen3.5-4B via breadth-first expert iterat
 - `qwen35_4b_deep_advantage_mopd` (new): [README](../experiments/qwen35_4b_deep_advantage_mopd/README.md)
 - `qwen35_4b_gauntlet_breadth_round1` (new): [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md)
 - `qwen35_4b_gauntlet_frontier` (new): [README](../experiments/qwen35_4b_gauntlet_frontier/README.md)
+- `qwen35_4b_goal_gap_axis_curriculum_target_match` (new): [README](../experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/README.md)
 - `qwen35_4b_interactive_policy_curriculum` (new): [README](../experiments/qwen35_4b_interactive_policy_curriculum/README.md)
 - `qwen35_4b_pareto_policy_integration` (new): [README](../experiments/qwen35_4b_pareto_policy_integration/README.md)
 - `qwen35_4b_recovery_payload_budget_harness` (new): [README](../experiments/qwen35_4b_recovery_payload_budget_harness/README.md)

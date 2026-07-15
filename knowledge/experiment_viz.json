@@ -48678,6 +48678,43 @@
      "source": "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/reports/report.md"
     }
    ]
+  },
+  "qwen35_4b_goal_gap_axis_curriculum_target_match": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered stage completion",
+     "categories": [
+      "intake",
+      "axis corpus",
+      "exposure match",
+      "design review",
+      "train 2 arms",
+      "two-instrument gate",
+      "conditional aggregate"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "The 160-row axis corpus is frozen (40 rows per stuck-family axis, executable truth, banned-vocabulary audited). Exposure matching, review, training, the 144-task gate, and the sealed-seed aggregate remain.",
+     "source": "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

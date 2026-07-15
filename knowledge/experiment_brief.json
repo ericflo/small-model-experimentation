@@ -13923,6 +13923,44 @@
      "chart_takeaway": "The rewritten set beats both comparisons on every headline number, but the screen's rule-guessing requirement was zero-for-eight for every model, so nothing advanced."
     }
    ]
+  },
+  "qwen35_4b_goal_gap_axis_curriculum_target_match": {
+   "verdict_tag": "Design under construction; nothing trained",
+   "concept_primer": "Instead of teaching everything at once, teach exactly the four abilities where the held-out benchmark has been stuck for months: fixing a buggy program from its wrong output, finding a route under a strict step budget, ignoring instructions smuggled inside documents, and following a freshly written procedure with interacting switches.",
+   "plain_question": "Can four purpose-built practice sets — each varied across many invented styles — install the four abilities every previous model failed on, without damaging anything else?",
+   "plain_answer": "Nothing is trained yet. The 160-exercise practice set is frozen: forty exercises for each stuck ability, every answer machine-verified, and every exercise written in vocabulary never used by any earlier training set or the benchmark.",
+   "why_it_matters": "History shows the goal — beat the base model everywhere at once — was reached exactly once in 65 attempts, always blocked by the same four abilities. Purpose-built practice that varies its style is the first attack aimed at exactly that bottleneck.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Stuck abilities targeted",
+     "value": "4",
+     "sub": "program repair, budgeted search, injection hygiene, procedure compliance"
+    },
+    {
+     "label": "Practice exercises",
+     "value": "160",
+     "sub": "40 per ability, all machine-verified"
+    },
+    {
+     "label": "Historical goal passes",
+     "value": "1 / 65",
+     "sub": "quick-tier paired events, ever"
+    },
+    {
+     "label": "Model events so far",
+     "value": "0",
+     "sub": "benchmark seed 78,144 sealed"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Where the experiment stands",
+     "chart_read": "Each bar is a preregistered stage; a bar at one means that stage is complete.",
+     "chart_takeaway": "The practice set is frozen; matching, review, training, the two-part screen, and the benchmark have not started."
+    }
+   ]
   }
  }
 }

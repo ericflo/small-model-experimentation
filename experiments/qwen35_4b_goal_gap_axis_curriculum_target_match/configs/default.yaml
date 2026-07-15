@@ -1,0 +1,46 @@
+experiment_id: qwen35_4b_goal_gap_axis_curriculum_target_match
+status: model_free_construction
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+parent:
+  experiment: qwen35_4b_universal_fresh_surface_budget_commit_target_match
+  arm: designed_fresh
+  deployment: explicit_merged_composite
+  weight_sha256: 0a3b89cdf57ed8a73590580489d744319c12b44b60991db55b5baba6f7c27979
+  warm_start_adapter_sha256: 36f41095c2d628e4706694e7d64d16aba815870a1d3660af0e24b14dc0e6b442
+seeds:
+  construction: 77117
+  slot_match: 55118
+  training: 52
+  gate: 88014
+  conditional_aggregate: 78144
+corpus:
+  completed: true
+  rows: 160
+  kinds: [u_tracefix, u_explore, u_hygiene, u_protocol]
+  sha256: e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e
+  banned_vocabulary_checked: true
+streams:
+  completed: false
+  shared_core_rows: 1280
+  variable_block_rows: 240
+  arms: [replay_repeat, axis_curriculum]
+  match_axes: [forward, nonzero_target, absolute_loss_mass_x5]
+  match_abs_limit: 0
+training:
+  completed: false
+  rows_per_arm: 1520
+  optimizer_steps: 190
+  learning_rate: 1.0e-5
+  seed: 52
+local_gate:
+  completed: false
+  axis_holdout_rows: 40
+  retention_rows: 104
+  promotion: relative wins plus non-inferiority bands; no absolute per-kind floors
+conditional_aggregate:
+  completed: false
+  tier: quick
+  think_budget: 1024
+  models: [base, designed_fresh_parent, replay_repeat, axis_curriculum]
