@@ -1,0 +1,20 @@
+# Generated starter metadata. Run make check after adding artifacts.
+id: "qwen35_4b_rank_capacity_vehicle_cell"
+title: "Rank-Capacity Vehicle Cell"
+source_track: "new"
+path: "experiments/qwen35_4b_rank_capacity_vehicle_cell"
+primary_readme: "experiments/qwen35_4b_rank_capacity_vehicle_cell/README.md"
+primary_report: "experiments/qwen35_4b_rank_capacity_vehicle_cell/reports/report.md"
+summary: "The vehicle study's sharpest single variable: a FRESH rank-64 adapter trained on the clean parent composite with the same twice-verified corpus and exposure, judged on a fresh screen beside the published rank-32 arm (known −9 retention) and the parent — asking whether capacity removes the intrinsic retention tax while preserving the install."
+tags:
+  - "experiment"
+research_programs:
+  - "agentic_breadth_installation"
+top_level_dirs:
+  - "configs"
+  - "reports"
+  - "scripts"
+  - "src"
+file_counts: {}
+total_files: 0
+total_size_bytes: 0

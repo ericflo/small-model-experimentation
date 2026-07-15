@@ -1,0 +1,43 @@
+{
+  "balance": {
+    "hygiene_clean": 10,
+    "hygiene_injected": 30,
+    "protocol_branches": {
+      "a_only": 14,
+      "both": 15,
+      "neither": 11
+    },
+    "tracefix_formalisms": {
+      "chain": 5,
+      "gauges": 9,
+      "line": 13,
+      "pile": 13
+    }
+  },
+  "banned_vocabulary_checked": true,
+  "construction_seed": 77117,
+  "corpus": {
+    "kinds": {
+      "u_explore": 40,
+      "u_hygiene": 40,
+      "u_protocol": 40,
+      "u_tracefix": 40
+    },
+    "mix": "tracefix=40,explore=40,hygiene=40,protocol=40",
+    "path": "data/sft_axis160.jsonl",
+    "rows": 160,
+    "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e",
+    "surfaces": {
+      "chain": 5,
+      "gauges": 9,
+      "grove": 40,
+      "harbor": 40,
+      "line": 13,
+      "pile": 13,
+      "surgeboard": 40
+    }
+  },
+  "experiment_id": "qwen35_4b_rank_capacity_vehicle_cell",
+  "generator": "scripts/gen_axis_curriculum.py",
+  "schema_version": 1
+}

@@ -14189,6 +14189,44 @@
      "chart_takeaway": "The parent keeps the most memory; every trained arm pays five to ten points for its gains — the trade is real, two-sided, and now priced."
     }
    ]
+  },
+  "qwen35_4b_rank_capacity_vehicle_cell": {
+   "verdict_tag": "Design under construction; nothing trained",
+   "concept_primer": "The forgetting tax is now a law: every practice dose costs five to ten retained answers on this training setup. The leading suspect is capacity — the small add-on module carries the whole training history, so new lessons must evict something. This trial doubles the module's size and gives the dose its own fresh module on a frozen base model.",
+   "plain_question": "Does a double-size, fresh add-on module absorb the practice dose without evicting retained skills — or is the forgetting tax deeper than capacity?",
+   "plain_answer": "Nothing is trained yet. One rank-64 module will be trained on the frozen best base model with the same verified practice set, then judged beside the known rank-32 case (which forgot nine) and the base — with a three-way verdict preregistered, including a guard for the screen itself being unstable.",
+   "why_it_matters": "If capacity is the answer, every future practice dose inherits the fix and the path to the benchmark pilot reopens with no forgetting tax. If not, the program moves to loss-weighting or accepts and prices the trade — both already specified.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Variable",
+     "value": "rank 64 vs 32",
+     "sub": "fresh module on a frozen base; all else fixed"
+    },
+    {
+     "label": "Known comparison",
+     "value": "-9",
+     "sub": "the rank-32 arm re-measured on the same screen"
+    },
+    {
+     "label": "Install probe",
+     "value": "7 / 7",
+     "sub": "hygiene has never lost its category"
+    },
+    {
+     "label": "Benchmark stage",
+     "value": "none",
+     "sub": "mechanism cells mint no claims"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Where the experiment stands",
+     "chart_read": "Each bar is a preregistered stage; one means complete.",
+     "chart_takeaway": "The contract and inherited practice set are frozen; one training run and the three-model screen remain."
+    }
+   ]
   }
  }
 }

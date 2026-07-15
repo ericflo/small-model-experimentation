@@ -1,0 +1,95 @@
+{
+  "absolute_loss_mass_x5_per_arm": 621352,
+  "aggregate_seed_open": false,
+  "benchmark_data_read": false,
+  "encoder": "scripts/train_think.py:encode_row",
+  "encoder_sha256": "e0eca2a230dae5d109d418dcb4cc19af05882a770af14350ffd741a8d5e90f01",
+  "experiment_id": "qwen35_4b_rank_capacity_vehicle_cell",
+  "files": {
+    "axis160_r64": {
+      "absolute_loss_mass": 124270.4,
+      "encoded_rows": 1520,
+      "families": {
+        "burrowmaze": 155,
+        "caravan": 24,
+        "ferrier": 312,
+        "foundry_ledger": 27,
+        "gatepost": 80,
+        "glyphgate": 173,
+        "kilnrite": 319,
+        "loomfix": 114,
+        "packhouse": 36,
+        "patchwheel": 48,
+        "runeward": 16,
+        "stallwright": 56,
+        "universal": 160
+      },
+      "kinds": {
+        "atom": 85,
+        "atom_fc": 134,
+        "episode": 883,
+        "oracle_trace": 258,
+        "u_explore": 40,
+        "u_hygiene": 40,
+        "u_protocol": 40,
+        "u_tracefix": 40
+      },
+      "max_sequence_tokens": 3193,
+      "min_sequence_tokens": 178,
+      "path": "data/axis160_r64.jsonl",
+      "rows": 1520,
+      "sha256": "336a044557cc6802aeffce497634528b844329d872f64d1c54ea4a63311c990c",
+      "skipped": [],
+      "skipped_rows": 0,
+      "spans_per_epoch": {
+        "absolute_loss_mass_x5": 621352,
+        "answer_target": 13827,
+        "close_target": 3040,
+        "forward": 1351265,
+        "masked_context": 531870,
+        "nonzero_target": 566044,
+        "parent_prefix": 0,
+        "prompt": 531870,
+        "target_span": 819395,
+        "think_target": 802528
+      }
+    }
+  },
+  "forward_tokens_per_arm": 1351265,
+  "match_axes": [
+    "forward",
+    "nonzero_target",
+    "absolute_loss_mass_x5"
+  ],
+  "max_length": 4096,
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "nonzero_target_tokens_per_arm": 566044,
+  "notional_control_block": {
+    "block_axis_sums": {
+      "absolute_loss_mass_x5": 65637,
+      "forward": 129814,
+      "nonzero_target": 55929
+    },
+    "control_rows": 240,
+    "equals_candidate_variable_block_on_match_axes": true,
+    "recomputed_from": "sources.source_token_receipt + selection indices",
+    "stream_materialized": false
+  },
+  "rows_duplicated_for_matching": false,
+  "rows_per_arm": 1520,
+  "rows_truncated_for_matching": false,
+  "schema_version": 1,
+  "skipped_rows": 0,
+  "stage": "independent_exact_exposure_validation",
+  "stream_manifest": "data/stream_manifest.json",
+  "stream_manifest_sha256": "981b179d53b9f4db7ab56ba8c3096e1a69778c8b486bb424de11f9385e7f970d",
+  "targets_modified_for_matching": false,
+  "tokenizer": {
+    "class": "Qwen2Tokenizer",
+    "eos_token_id": 248046,
+    "think_close_token_id": 248069,
+    "vocab_size": 248077
+  },
+  "training_authorized": false
+}

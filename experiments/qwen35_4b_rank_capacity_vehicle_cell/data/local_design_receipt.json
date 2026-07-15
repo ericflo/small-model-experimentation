@@ -1,0 +1,513 @@
+{
+  "answer_normalization": {
+    "applied_to": "both the parsed and the expected answer, every arm, both instruments",
+    "definition": "re.sub(r'\\s+', ' ', s).strip(), then re.sub(r'\\s*>\\s*', '>', s), then re.sub(r'\\s*;\\s*', ';', s)",
+    "function": "check_local.normalize_answer",
+    "prospective": true,
+    "rationale": "21 correct-but-rejected whitespace rows across the three prior gate events (seeds 88014/88015/88016), recorded in experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/analysis/three_event_failure_forensics.md"
+  },
+  "arms": [
+    "clean_parent",
+    "axis160_direct",
+    "axis160_r64"
+  ],
+  "backend": {
+    "cudagraph_capture_sizes": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ],
+    "greedy": true,
+    "max_model_len": 4096,
+    "max_num_batched_tokens": 8192,
+    "max_num_seqs": 16,
+    "max_tokens": 1024,
+    "name": "vllm_merged_composite",
+    "runtime_lora_forbidden": true,
+    "same_runner_and_geometry_for_every_arm": true,
+    "samples_per_task": 1,
+    "thinking": "natural"
+  },
+  "candidates": [
+    "axis160_r64"
+  ],
+  "code_pins_deferred": {
+    "files": [
+      "scripts/eval_local_vllm.py",
+      "scripts/materialize_streams.py",
+      "scripts/train_trial.py"
+    ],
+    "reason": "these files carry orchestrator-filled TODO-PIN constants or do not exist at design freeze; each is authenticated by hash inside its own run receipt"
+  },
+  "code_sha256": {
+    "axis_curriculum": "11dc8df3c0b42ae7dc5449e7bb7627ea3aca645e0a3a3e6d335d22cccff877e5",
+    "curriculum": "70fc722a6a69f4f8a64ae4356058421ea44117c7e86d3350abfd72b047ccf080",
+    "external_merger": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+    "gate": "c69d3de91a5abf836fd4d147425eb199fbaa700da880f998dfdb7e26dfbde00a",
+    "generator": "0bdefccef7f97ece1505fa3836a2a32eb486a9702cdfe383a9728995a017557d",
+    "harness": "85614f9010babdd31b798384f517f49ce9e810a5507058a54b69e49f26985b1b",
+    "merge": "7d91e8d49b198de0e85f75242bc075f40f44be32444e36ecae6c28d482144653",
+    "runner": "cf1a766a70df8e3aacae18fc52a1a2186f2f8fc20161a6ef679b3dd51f60fcd2"
+  },
+  "experiment_id": "qwen35_4b_rank_capacity_vehicle_cell",
+  "firewall": {
+    "benchmark_data_read": false,
+    "benchmark_gateway_exposed": false,
+    "no_aggregate_seed_exists": true
+  },
+  "freshness": {
+    "frozen_sources": {
+      "data/sft_axis160.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e"
+      },
+      "data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      }
+    },
+    "message_sha256s": [
+      "00b54133e3cd5ad1198fed24b77b4fd125bc410ba969906c8875b36295608ba8",
+      "01d81b92861505c319f6beafc40cbd7f5ef62c85b094a62f4c071ec6f8e4a4d1",
+      "0523f04b60757fd1b11db1804e5b2d89cc0384d872c7c10847d86815e6a33416",
+      "05c48068ed2ddffe15c1a134d2e242701820e973099d5377344c7da090f840d2",
+      "06a57d269ed0dae1a72078ae76f90ac9ee090c7f766a70dfce852d14007e53c5",
+      "07fbb8458fdd85eb97d86f5b19511568f76ec66ed2d253d454765521abe8acd4",
+      "0918145187021cbc43d5797b78ae857835a306328dd54321d6cea15d8151bd74",
+      "0955c05cdb7dec491ddcc9aad782e36df9761dd31774dd54f93e44123369f367",
+      "0f28a6979f05b5f9c1043a8d989d553a387acc2158c8bcbe1f0c824a479cbbda",
+      "0f5d1fa4c713d7a07848c36178efc76fd5cb82826c0b63b1e30b508b77e8f6f1",
+      "10aa8c216e753e86b19e3718fe84ea7e4cac709e40b29735331d11ed61db0e42",
+      "11fdedfd01859390354e427d9636854336ae37c2d77ac0f4157175c83cdb492f",
+      "13618ec0506e05a02071e2ec67e565ca5b326b7b55b077ade23f7124d75a599b",
+      "19d41aec1ea456fb6d2b03dca21a69933db57c452543e209053e7ab79e1f4508",
+      "1a08eaf762649c7a5cf3cee12a42924717e9b2a9501685fd4e6009dcd6bb530d",
+      "220566c1ac3b99b32cd1b9fdbb62d8f40c32be7e71babac8f433866291fb618d",
+      "230613c6a7c86a17ccb59086e4bb9aa1788678a36d31304647712a3febe3260e",
+      "233461949531e6fdc40266d90edc472b4ee566eb9026d73513187e7dbc204acf",
+      "2f1c551e35313bacd62b3577ac504c16a225529b50f5e3f0d3a78e98c4efb65d",
+      "2fbb61f96a9541ce8197f27a36d43aa52d0262759bd36cdcd76240ac289ad471",
+      "2fefb4e43ec2b68d783f20fc72bdc56acbaaf55bcdd8ee5ec8c560c0ea3fb2f3",
+      "3161d3f92bd6c7a5a8187a195fcfbbda2a8b5ef6bbe7c2c63f36a6c8935ddb09",
+      "36793950b6913f7936a3cb53035788fb783853717bbf722a55b1d39bcc0964b8",
+      "37b5d6fb1b7438e65d91c8258bc06fd24cd5d60045e25eac3c420574d24f1600",
+      "3b13c9cf68aeb4a6246b7065dc14a41038225a8add85f3ba608d1c990782d639",
+      "3ba9934efafb25e7be6865891891988da3b4f8e314b170468c13161dfc1e51e2",
+      "3d6869c08dfbfc97e4bf392e47da3293416f3b7543048426b0262663ee0bf666",
+      "3e03160132c02fb06f48e69894c72fda8aa76b2bb58120b2f2ffd3eda36ed778",
+      "3e46794329c8ab06d7178ff20b62c766c947f678a45045b85b5685180659d1b9",
+      "404fca61c8aa99830a7e69dd6bd696555f72c3a38063d19c59d477e42ab929ba",
+      "42701aad24997e9a3b60c0875536d2cd97cbef911bd56cbb6b32f853cdc54aee",
+      "457997ccf6fc77ea8d3f9ecca804f1cf05803b83db67cf28b25ece49a77edddf",
+      "465f3c311d70bec34fc96cee0fda898ce7361b93a324aed56ddf1bc4e8e7c0cb",
+      "473e4a84d3dec7966d433b9d2aa761e0087da0ed9f9ce63d7f70e68c22d1d126",
+      "4a9548f91a9bf6c554edf16966d0cb0b1b60da05cbb3e248a49ce4ad8f65d6c7",
+      "4bcdf870b39d711133b1cf3a9ff26f66cfe43fccf069d44b4c8413e349f4752a",
+      "4ec9e9e304b4f5f87e6d0af88a816ffb83a36039fb4bd0be0997f3022a1bd000",
+      "50137683869e407a9c1d1b0811da7b1f5c0ac6eca521124705d1824d4aee525c",
+      "535f2ed63c532b9d17a2d286e0cd17d52739bde11363cc6a5ab5fa761f1ada37",
+      "538a9fb294f10a4e6a5a94c0980c32488990d5bbc8dc5ca7ad4e69e7861ab50b",
+      "553bafea5d7478da7ecd0f1f2e45f4916b3d3bca941b64287c85c406ad8b2576",
+      "5b8ba165e0994caacba7e98618456013f80382e27c3720d6b1868e1ff122fb8f",
+      "5bccbb8ddf1298938b81109682af018963f154231ad52300a49d057eb991a9e9",
+      "5de8457423a1e68dddc0e9318ff068add6c11001712ddc36c0153e60ac2783af",
+      "5fc444602afb0aa52689941180b146f948caf4066911744b9f250df0ba85f28d",
+      "60437b8302921e6cd177cac6242b66bf4ed65ed7b51b86618e7d9422a952fff9",
+      "60575d061eeb6543c13132cf074ddadadaafa411fd2ece57842198c7e5e806b9",
+      "61e531c516b5ad5d774fc347a2422589bc4b30d474fffb442b96671245f85d4d",
+      "62230c217979963d9aaa55c5bd2f2efd095220cf453029c5c6ee69ac2f4a2a46",
+      "675498b5a1965488617fe942beadce6b8722923fc10e4188fe45cf0363ffb8b6",
+      "6b36bbd3b552b3e4e1ccdab7bbd87eada8fc28ba6b50980f07273363e074ccdd",
+      "6f771263079d7365a2b761855d4687dd352cc00e537ddc714109e9f1fda7e21a",
+      "75d00e3a80f2c60cb9d382a2b571c20b34288ce1a86607e895da38e0b99c393d",
+      "774bd424d76b1bb6f4d9dc154c307d97e5cb7c90a7801c18105d0c8f38218b3d",
+      "7b9fa35be25720a250103cbd88e1cd8b27d45db928aaff68445631377e1e22be",
+      "80b4a6e4a9310b3770ed6d19cd487b9d17979a0050227553a32e2db2b0394114",
+      "80da27dadc6f302112a16a7cca0729b47fbc5c3172f77aa43063bcefa9d9fcc4",
+      "8548539949ff5d14290c2dea1e210ed145d26b585b39e3cfca23055f6ba6a51a",
+      "855b8ac3564bff3a79026215d7a234c2c305d29bdad95d5b80df47357c8b225b",
+      "868e8f151948841ae816d8f522958546e6a03eedfb5bbd38032fb127fe8d56b3",
+      "883e60252a5e8f039e1179441e511a347a95fd4b545d5a596a7a09413c5c29bc",
+      "884503501d40085b236e14057ac30e904194586e5f5614b718971e0bb08b2fb1",
+      "8aeb7c5a176abe7a0bc2e4761c8e1ff67cb63157f88b4b3efd099e471bdb5d1c",
+      "8c93a426fd0deed1b912a3352e174889864b66f305b59e997df0591539981d99",
+      "8e45d8a45db543cf042d1b84d29b1fda79b31e4370468e7f9360b339f1409dc4",
+      "8f45e98c1e4853a444b2056119e4cae18bed4a54c6a688b8088303e9fd5219a7",
+      "9004cffedb588908a0157be95bd951ee02bcace982f465546540273a663b7f8b",
+      "926ea80ead393674259b71b3a62fed8d878dc6fffc18008cebe70cef393787e7",
+      "937b410baa2e78d3d3a75746343747a5a62496095bae9e203afffe1a6e819849",
+      "945125fb848175c54edf3a5d28cdd001f2f3ff97938ac4adb131b55b9879ccce",
+      "9612d6c7c013e33b22aa9aeaf10d596432fd34995ca8ae4b46678f810cc5a2d9",
+      "969f9e2241dd5a0eef69cc9a5347a807cdcec54c913f49dc380fb71f22be4598",
+      "971087375ba570de6bc63f077e92ec536bc37c381164d03d934c591ed4402822",
+      "98bfc1408a96ff2cb4f3b45d15aaaf9f610e8c3bd84e3b490c105c31f23924ae",
+      "98d2d51afb501afb952773b34489274514cc3e3037e5ec59c53748364b341bf3",
+      "98ede6c9b78c1c6819b04ddb8f31e6059be46f77f7ba102b5c09bc281bb0c274",
+      "9c293ce7c817ea8666b503226360f65afc184405ba0c8982ede5e8db13477b9c",
+      "9c71da6d2c576181534ad9afb2e09a32e28b441b8af16c4879a053cb2d27408e",
+      "a2a16024a089459c54c12456a0588a42bb8ce400ed6455b55f5b3cd7ea766f51",
+      "a3113e6d82f2524867cfe59392af2fb509c4f3aae4c2987f456265e1c5e51efb",
+      "a800de8f97e54a4be00e0b5d4d2f0de31d66007dd46e1f46722b4e82d05d686d",
+      "a870da262e2f989a91f284c6f1a76eef1e3a1f1c8ccfc6be7a8ffbf12f0bae0c",
+      "a9234680f004c2c25d28d8c02fb7edbd250e3d958fe0e09ecb97f0d75d8981d3",
+      "a9a330209fa76f7463ce1fa8e504dbf7113009d6c56958fee973a873ee8b2a6a",
+      "ac7c3d9785bcb8875b596a44bf1e0e79c401116c8c5706a04ab39fa0296554ab",
+      "ad26608d6378a31e311231c8258ef80bfa83c8f3b2e3bb362537ed0d9eb24fe4",
+      "add04b9420fc358e25ab41efeda532a796e2e337353496e911db16054376feb3",
+      "ae54b9faffb97e08ee47c9c8042b8484e04af33441d1a4e8eb094e2dffcfac22",
+      "b112589e55fd4287ab8858cbad5616be755c929abb3007f28afcda85bc8c6a7b",
+      "b122d1bc773ee56f7deae2522333885a3d4b9f367271228be53312c1af908239",
+      "b1903b2c4138c81dcb9d95212d85e51fd063281c6f838257d566fdcd0f62c9db",
+      "b6fb8157d7d49270ddf7fe6c1a254c10ddfd3752398584f309dcda9bd59ac762",
+      "b7f597d3a7b1ccc44ca1ee2192bb86478d23bdd820cab0facaaa5be9a13979a3",
+      "b80c0de55d6f5eab8b221ed4fa3fa53e639135cb837dce44fb3d3e74cf30b5ec",
+      "b8f4a396e3056f8687ed19913d4fdad3356dd10ff522b3b042d6818edf0e4df8",
+      "b8fbc6e85e7bca3cb35758ce9129eb7d04740b6c35db3b384270ecfb65a99b08",
+      "b9c3ca148e57172cdd9cae2c0855fe1e111a9d589ae380d9eb6cb46cd8c13788",
+      "bb48dbadd792e91e68f1f33e163099b6516ea66f38affabc574b0a4462a79d30",
+      "bc8cb69ccd1d56830e4bf6d47edc62b03ecf680813f4edbd9804bfa375e9c228",
+      "bea550f5ac63552030bc70b6b0babff2009e8f285e817b61aae6f9c1efdf9783",
+      "bf0b50842447e2cfb53fa695bd2c3787276bc056d63817b3168d31a1b4a2dc8d",
+      "bf3669622418dd7af75ea820a668af986e0a53896b8f6aca42f90e8da9c35d5e",
+      "bf682c0e7e263bbab651863fa82642208b717b854987dd021080dd875d531f31",
+      "c00d0451228bb7b21f795af73a53e98d2ecb9d5284b7f69d06e67070454b8114",
+      "c0820f5d2ef07b6dc49c0c694c0d7d31b05fc9b9fa4a008800526d9f81fe3d8c",
+      "c2dc20bd172b959b5258d1f2169520a58ecad9813c9bad7b7151d4a9c4204c88",
+      "c754295dcfd630b67b67a623206ff1a79a9b021fab51a3a408f3be18b397b7b6",
+      "c7e559ee187bebbaad1f761667bfde6f2bf7bb05223385efebd20ccd689c0a4b",
+      "c84aec2022c0e1423b8d2d4a1fd5471ea9f64af0b9d27b6fe369b2e77184afa2",
+      "c879ef2620cf6084c27741ba75e5db9bf93aa8fecac10baa94b27a36011b8986",
+      "ca643b89bb8675c3a5bb1864e9609a3e81e3af32cb43f00f8e04028b86487dec",
+      "cb046e813109e6d073525c5b3570468690943d13c21b4f41de4544053a9d47ff",
+      "cc0cc254e7fe277b1ff0fcf013a250fbf26533114f7af302f7ec379d9965586c",
+      "ce35f74f92c9e41ec2cfd645f07345d76467ca6ca4340e0f7a04c52cd08ec017",
+      "ce4b80fc95a52069321cd6934cffdea12369ba312a66f1e2de77ad9abfe0a3b8",
+      "cea14a3fd3bac5926a5e9e713c2183449d029b4aa10a491c7c89db24fdfec0f9",
+      "cff77ec606b31430cddfabe41f96ea4a0f192c40d3bd4434f18846444955c918",
+      "cffa00acd996877a1d87e111bf4fb8a4f5ca0febc6d01794ba54d8fe99c23666",
+      "d125f5b806e38bcc7d83a4a2da8ef17f3cb245b48c53543515d846d753167ec8",
+      "d1bded1355f17e99b2e8b2f5225139218bee7324943c6a1f053ec74f53f85fd6",
+      "d1f90f3df17da629e3a0e638319f727f48bc66e4862f92abc0c316894b32b67d",
+      "d20a40d49c6cd9793dfc1d9feb253b3c76da3bc956dc6297848ad5261abd257e",
+      "d406a5d537781f16506e15007754424c62b4e1c628ec0034544a369c7519cb5e",
+      "d558919aab7d4a0097e019b58222e324bd7e64d7c7cf78ff16478b8ea7dfd8d9",
+      "d759b64322a2bba0e61ada25f54cc1794e1c0eed635bfcbd7657f731f66e59bb",
+      "d882e931a55159f4e070ab12fbde302b9794bb91e0668dc378b2d055aded810e",
+      "dd6b72a5b04b8359fb77963a452fa52f26c09cb9a4a468a12e7bf2b019f06960",
+      "ddad7c50dbc0a915fcaad35b1a462251812ab934be7472086d72b33aa20beec4",
+      "df5b8b1170d16d21ea9627fc3e9645b1ea6ee56427d41d8cf3dc357060f8d7b1",
+      "e46aa2a6502114674795e8025ff04c1d2615cb9bb38473ca72d1ef3528e35da8",
+      "e559d584bde6c554d1328f2e0f414e983b5d54194c5a42e166514b9dc7ae14d6",
+      "e6897dcffae138dc449c8ee4ff56fb45c882870e90f57cc476c7de852884988d",
+      "ed70d0f1bffb52079a1474e81455d7370c5adf629a37526170b593441637884e",
+      "f3de6f406460850ae51606b941122d4c307ff0a5e80cf6636abda5ca7161e965",
+      "f4248ba93dfc56d1bbc929c67be4cb711b0f4b33d7e86d4f45fa0af76ad8a311",
+      "f5a203a3384b7dd7cbb88a4d45e71f50cbcb9b751c5708c957f5138eef3b9a61",
+      "f5ec5d39f0b7874013e74fcf4ed8dfc0de4dfce91a96c53f1bd0253acd021ed9",
+      "f66df9f65642e2df22e8470d276a34f4da841137118e4be0b383b1d73e33a6b5",
+      "f8a6510609b66fdfb214205a40bc25a19ccfde8e6c25e129e3f5fb67c5bbdb74",
+      "f9ebdea8e313508e7044be806e2da10aee97500bc2ad09d3dcc44800cf4cd2ae",
+      "fa510d289b4c424326fed8359a4b44c4dcce11181877bced8a4cfc57b38adcb6",
+      "fcd6c69c3360343c468c32afa3be4b91f4a3c47e9f980cdb30c13d45d38f5818",
+      "fd73dfe6d6331f1a583122d510bc7264ebc1cee12464c42ecb8611981cfdbacf",
+      "ffb4c48f6a6c61afa2c6ee684f3eb326e2adaf696c29e4397ce6637c146bd9f8"
+    ],
+    "predecessor_gates": {
+      "experiments/qwen35_4b_axis_corpus_v2_staged_repair/data/local_tasks_seed88017.jsonl": {
+        "messages_compared": 154,
+        "overlap": 0,
+        "sha256": "746cf1c4efae1cdd6614827f6fe8abb0eb7fb8cf5c2dc0c2c7dac4a6d930db81"
+      },
+      "experiments/qwen35_4b_axis_replay_stack_medium_target_match/data/local_tasks_seed88015.jsonl": {
+        "messages_compared": 144,
+        "overlap": 0,
+        "sha256": "1c019d70751a789a17ef555d51862c5a017f0a3c2bb1ebbce41a1a93496fefd1"
+      },
+      "experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/data/local_tasks_seed88016.jsonl": {
+        "messages_compared": 144,
+        "overlap": 0,
+        "sha256": "13788cc2e6fc237cfb709d2b22ae24dc6263a91f97c4822b856d098f816020b4"
+      },
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/local_tasks_seed88020.jsonl": {
+        "messages_compared": 144,
+        "overlap": 0,
+        "sha256": "8e4dd8b21febf64048fef5cf15541356d4a5808e45caf5d6f19525e154168822"
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/local_tasks_seed88014.jsonl": {
+        "messages_compared": 144,
+        "overlap": 0,
+        "sha256": "4753a277bdcfcab515a8bb5ece541498729107de6002f4be011b57b2eed34873"
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/local_tasks_seed88018.jsonl": {
+        "messages_compared": 124,
+        "overlap": 0,
+        "sha256": "597f10a44674cc12e5f499be8de6804bb040985019b18aacc5527339a26857eb"
+      },
+      "experiments/qwen35_4b_interleaved_replay_dose_medium/data/local_tasks_seed88019.jsonl": {
+        "messages_compared": 124,
+        "overlap": 0,
+        "sha256": "6e927f591f9ae9d2edad6e263be3f7c0262b39de4854314a64802e656b98c15b"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/local_tasks_seed88013.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "be817bd09f80a1fdf045bfb7638634f5f0e0e34ac6a404a34a98283e49dc5c2b"
+      }
+    },
+    "predecessor_sources": {
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/axis160_direct.jsonl": {
+        "messages_compared": 1478,
+        "overlap": 0,
+        "sha256": "0cbf3abf04781f3217189dd7b2bdf173d83772b0200b283a7c608dc3d386c1ee"
+      },
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/sft_axis160.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e"
+      },
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/axis_curriculum.jsonl": {
+        "messages_compared": 1459,
+        "overlap": 0,
+        "sha256": "e2561485ae28c9c374b663af4a002ab67e02cc75ec8994d1d89770e6b198e98a"
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/replay_repeat.jsonl": {
+        "messages_compared": 1435,
+        "overlap": 0,
+        "sha256": "878f501f3c6665982b7b3e9ffb2de675382d6b366b62a61d0a13e6709841c468"
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/sft_axis160.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e"
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      }
+    },
+    "prior_local_messages_compared": 546,
+    "prior_local_mix": "induct=2,execute=2,select=2,trace=2,verify=2,count=2,repair=2,optimize=2,abstain=2,state=2,order=2,probe=2,route=2",
+    "prior_local_overlap": 0,
+    "prior_local_seeds_compared": [
+      88000,
+      88001,
+      88002,
+      88003,
+      88004,
+      88005,
+      88006,
+      88007,
+      88008,
+      88009,
+      88010,
+      88011,
+      88012,
+      88013,
+      88014,
+      88015,
+      88016,
+      88017,
+      88018,
+      88019,
+      88020
+    ],
+    "regenerated_axis_training": {
+      "construction_seed": 77117,
+      "messages_compared": 160,
+      "mix": "tracefix=40,explore=40,hygiene=40,protocol=40",
+      "overlap": 0
+    },
+    "training_streams": {
+      "checked_lazily_when_present": true,
+      "covered_by_construction": "the stream is composed solely of sft_blend.jsonl replay rows and the inherited axis treatment corpus, both checked above",
+      "paths": [
+        "data/axis160_r64.jsonl"
+      ],
+      "policy": "zero canonical user-message overlap enforced against every stream file that exists, at generation time and at --check time"
+    },
+    "unique_local_messages": 144
+  },
+  "instruments": {
+    "axis_holdout": {
+      "generator": "scripts/gen_axis_curriculum.py",
+      "id_prefix": "axis88021_",
+      "mix": "tracefix=10,explore=10,hygiene=10,protocol=10",
+      "per_kind": 10,
+      "rows": 40
+    },
+    "retention": {
+      "generator": "scripts/gen_curriculum.py",
+      "id_prefix": "ret88021_",
+      "mix": "induct=8,execute=8,select=8,trace=8,verify=8,count=8,repair=8,optimize=8,abstain=8,state=8,order=8,probe=8,route=8",
+      "per_kind": 8,
+      "rows": 104
+    }
+  },
+  "kinds": {
+    "u_abstain": 8,
+    "u_count": 8,
+    "u_execute": 8,
+    "u_explore": 10,
+    "u_hygiene": 10,
+    "u_induct": 8,
+    "u_optimize": 8,
+    "u_order": 8,
+    "u_probe": 8,
+    "u_protocol": 10,
+    "u_repair": 8,
+    "u_route": 8,
+    "u_select": 8,
+    "u_state": 8,
+    "u_trace": 8,
+    "u_tracefix": 10,
+    "u_verify": 8
+  },
+  "mechanism_cell": true,
+  "model": {
+    "calls": 0,
+    "id": "Qwen/Qwen3.5-4B",
+    "loaded": false,
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+  },
+  "next_authorized_stage": "train-candidate",
+  "prerequisites": {
+    "candidate_training_and_merge_receipts": "deferred: authenticated at merge/eval time via merge_trained_arm.validate_published_merge",
+    "inherited_arms": {
+      "axis160_direct": {
+        "composite": "large_artifacts/qwen35_4b_dose_diversity_mechanism_cell/merged/axis160_direct",
+        "composite_name": "axis160_direct",
+        "files": [
+          {
+            "name": "chat_template.jinja",
+            "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+            "size": 7756
+          },
+          {
+            "name": "config.json",
+            "sha256": "a1c80f0efa6f83f631eaa9c25ffa166e3b1f9db395cc3b14374dfc0962261f60",
+            "size": 2829
+          },
+          {
+            "name": "generation_config.json",
+            "sha256": "0c46d8aa4f0ae5e611c961f70b87c83fb696043c1e319337708e96f882180de1",
+            "size": 116
+          },
+          {
+            "name": "merge_receipt.json",
+            "sha256": "a32f0d334611321f2ff4c3a6252a35fd1142da0c472c1af895ca9dd96b0f48f1",
+            "size": 875
+          },
+          {
+            "name": "model.safetensors",
+            "sha256": "3cd4272ee386dc3b8e878ef3b2ac9ebf94dd8d47ef7d9d480f921e7e45b37279",
+            "size": 9078620536
+          },
+          {
+            "name": "tokenizer.json",
+            "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+            "size": 19989325
+          },
+          {
+            "name": "tokenizer_config.json",
+            "sha256": "9cf04fffe3d8c3b85e439fb35c7acad0761ab51c422a8c4256d9f887c3a0be7d",
+            "size": 1125
+          }
+        ],
+        "merge_receipt": "experiments/qwen35_4b_dose_diversity_mechanism_cell/runs/merges/axis160_direct.json",
+        "merge_receipt_sha256": "7b878bb357e044c58a5ba27f34365906059259237e657ca77c2ad2e8fb77ea39",
+        "receipt_authenticated": true,
+        "tree_sha256": "b773fd439eca753e70d3b16862497ee0ba9783cdb024ddff84b4595d10b7da61",
+        "weights_sha256": "3cd4272ee386dc3b8e878ef3b2ac9ebf94dd8d47ef7d9d480f921e7e45b37279"
+      },
+      "clean_parent": {
+        "composite": "large_artifacts/qwen35_4b_universal_fresh_surface_budget_commit_target_match/merged/designed_fresh",
+        "composite_name": "designed_fresh",
+        "files": [
+          {
+            "name": "chat_template.jinja",
+            "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+            "size": 7756
+          },
+          {
+            "name": "config.json",
+            "sha256": "a1c80f0efa6f83f631eaa9c25ffa166e3b1f9db395cc3b14374dfc0962261f60",
+            "size": 2829
+          },
+          {
+            "name": "generation_config.json",
+            "sha256": "0c46d8aa4f0ae5e611c961f70b87c83fb696043c1e319337708e96f882180de1",
+            "size": 116
+          },
+          {
+            "name": "merge_receipt.json",
+            "sha256": "10b0de69bbda6edf8e216f45667b15f73557102f0661461fec620786e8a9170f",
+            "size": 897
+          },
+          {
+            "name": "model.safetensors",
+            "sha256": "0a3b89cdf57ed8a73590580489d744319c12b44b60991db55b5baba6f7c27979",
+            "size": 9078620536
+          },
+          {
+            "name": "tokenizer.json",
+            "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+            "size": 19989325
+          },
+          {
+            "name": "tokenizer_config.json",
+            "sha256": "9cf04fffe3d8c3b85e439fb35c7acad0761ab51c422a8c4256d9f887c3a0be7d",
+            "size": 1125
+          }
+        ],
+        "merge_receipt": "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/runs/merges/designed_fresh.json",
+        "merge_receipt_sha256": "ab3f20cc93d3fe21ead7a1d573edbca2903d59d6f9fe3d2af0c93e823676acc2",
+        "receipt_authenticated": true,
+        "tree_sha256": "93433aa2d5f3f0d6d4540126579c09feee1d8502df702c1563bae28eb7f60255",
+        "weights_sha256": "0a3b89cdf57ed8a73590580489d744319c12b44b60991db55b5baba6f7c27979"
+      }
+    }
+  },
+  "readings": {
+    "capacity_mechanism_verdict": {
+      "CAPACITY_REFUTED": "retention_delta_r32 <= -6 and retention_delta_r64 <= -6",
+      "CAPACITY_SUPPORTED": "retention_delta_r32 <= -6 and retention_delta_r64 >= -5",
+      "SCREEN_INSTABILITY": "retention_delta_r32 >= -5"
+    },
+    "complete_event_always_exits_zero": true,
+    "install_preserved_flag": "axis160_r64 axis total correct >= axis160_direct axis total correct on this same screen",
+    "no_aggregate_seed_exists": true,
+    "no_promotion": true,
+    "retention_delta_r32": "axis160_direct retention correct minus clean_parent retention correct on the same fresh screen (seed-88020 measured -9; re-measured fresh here)",
+    "retention_delta_r64": "axis160_r64 retention correct minus clean_parent retention correct on the fresh 104-row screen"
+  },
+  "rows": 144,
+  "runner_input": {
+    "contains_answer": false,
+    "contains_oracle": false,
+    "path": "experiments/qwen35_4b_rank_capacity_vehicle_cell/data/local_input_seed88021.jsonl",
+    "schema": [
+      "id",
+      "messages",
+      "meta"
+    ],
+    "sha256": "576252ed1509bea1e6042172fcf1192908fff6b1c9f73aa604314bc0427bdd14"
+  },
+  "schema_version": 1,
+  "seed": 88021,
+  "source": {
+    "contains_executable_truth": true,
+    "path": "experiments/qwen35_4b_rank_capacity_vehicle_cell/data/local_tasks_seed88021.jsonl",
+    "sha256": "64754430f3316d1d61fb81727aebbff03c9f32624f38182fbf5407b81e48d707"
+  },
+  "stage": "rank_capacity_vehicle_local_gate_design"
+}

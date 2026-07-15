@@ -1,0 +1,19 @@
+experiment_id: qwen35_4b_rank_capacity_vehicle_cell
+status: model_free_construction
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+training_base:
+  experiment: qwen35_4b_universal_fresh_surface_budget_commit_target_match
+  arm: designed_fresh
+  weight_sha256: 0a3b89cdf57ed8a73590580489d744319c12b44b60991db55b5baba6f7c27979
+  adapter: fresh rank-64 alpha-128, no warm start
+seeds:
+  corpus_construction_inherited: 77117
+  slot_match: 55124
+  training: 58
+  gate: 88021
+arms_new: [axis160_r64]
+arms_published: [axis160_direct, clean_parent]
+verdict: ordered three-way (SCREEN_INSTABILITY, CAPACITY_SUPPORTED, CAPACITY_REFUTED) + install_preserved flag
+benchmark_stage: none
