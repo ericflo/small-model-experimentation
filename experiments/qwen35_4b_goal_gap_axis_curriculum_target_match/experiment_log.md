@@ -32,3 +32,11 @@
   (train loss 0.3776, 1,320 wrapper seconds); receipt/log published and pinned
   fail-closed. The candidate arm remains untrained until this checkpoint
   publishes green.
+
+## 2026-07-14 — Authenticated candidate training
+
+- `train-candidate` ran only after control checkpoint `00ddd91e` matched
+  `origin/main` with both workflows green and a clean worktree.
+- `axis_curriculum` trained 1,520/1,520 rows with 0 skipped over 190 updates
+  (train loss 0.4884, 1,366 wrapper seconds); receipt/log published and pinned
+  fail-closed. Merges are the only next stage.
