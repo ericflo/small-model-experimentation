@@ -14,7 +14,9 @@ See the preregistration.
 
 ## Results
 
-No capability result exists.
+- Training (one arm): 1,520 rows, 0 skips, 190 updates, 0.5068 train loss.
+- Gate (seed 88,020, four weight-authenticated arms): retention of 104 — clean_parent 70, replay_clean 65 (−5), axis160_direct 61 (−9), hygiene_explore_direct 60 (−10, reproducing its known cost). Axis of 40 — axis160_direct 26 (hygiene 10/10, caps 5), hygiene_explore_direct 24, clean_parent 24, replay_clean 23.
+- Preregistered verdict: REFUTED_INTRINSIC.
 
 ## Controls
 
@@ -26,7 +28,7 @@ Executable truth grades outputs only; `benchmarks/` remains unread.
 
 ## Next Stage
 
-Design review; then train-candidate, merge-candidate, and the gate event.
+None. The verdict selects the dose-vehicle study (or the priced-trade gate path) as the funded successor; the recipe search stays closed.
 
 ## Artifact Manifest
 

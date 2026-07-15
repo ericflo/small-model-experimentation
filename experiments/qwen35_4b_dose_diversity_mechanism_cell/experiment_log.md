@@ -24,3 +24,15 @@
   `origin/main` with both workflows green; the composite merged (128/128
   modules, fingerprint-verified); the tree pin filled fail-closed. The one
   frozen four-arm gate event at seed 88,020 is the only next stage.
+
+## 2026-07-15 — Verdict: REFUTED_INTRINSIC; cell closed
+
+- The four-arm gate ran from the merge checkpoint: retention 70 / 65 / 61 / 60
+  (parent / replay / axis160 / hygiene-explore) — the diverse dose broke the
+  band (−9), the known −10 reproduced, and replay itself measured −5.
+- Verdict REFUTED_INTRINSIC per the frozen partition: the retention cost is
+  intrinsic to this dose vehicle; the sole retention-safe precedent was screen
+  fortune. Hygiene reached 10/10 (seventh consecutive win); axis160_direct
+  posted the best axis total (26/40) and best caps (5).
+- The preregistered successor is the dose-vehicle study. No benchmark seed
+  existed; the cell mints no claim.

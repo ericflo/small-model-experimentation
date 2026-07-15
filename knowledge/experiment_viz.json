@@ -48944,33 +48944,38 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Preregistered stage completion",
+     "title": "Seed-88020 verdict gate: retention and axis by arm",
      "categories": [
-      "intake",
-      "inherited corpus",
-      "exposure match",
-      "design review",
-      "train 1 arm",
-      "four-arm gate"
+      "clean_parent",
+      "replay_clean",
+      "axis160_direct",
+      "hygiene_explore_direct"
      ],
      "series": [
       {
-       "label": "completed checkpoint",
+       "label": "retention correct (of 104)",
        "values": [
-        1,
-        1,
-        0,
-        0,
-        0,
-        0
+        70,
+        65,
+        61,
+        60
+       ]
+      },
+      {
+       "label": "axis holdout correct (of 40)",
+       "values": [
+        24,
+        23,
+        26,
+        24
        ]
       }
      ],
-     "x_label": "preregistered experiment stage",
-     "y_label": "completion indicator",
+     "x_label": "explicit merged composite",
+     "y_label": "count",
      "y_format": "integer",
-     "note": "The single-variable mechanism cell: the twice-verified 160-row corpus dosed directly from the clean parent, judged beside the known −10 arm, the replay round, and the parent, with a preregistered three-way retention verdict. No benchmark stage.",
-     "source": "experiments/qwen35_4b_dose_diversity_mechanism_cell/reports/preregistration.md"
+     "note": "Verdict REFUTED_INTRINSIC: the diverse dose also broke the retention band (-9), the known -10 reproduced, and replay itself measured -5 — the retention cost is intrinsic to this vehicle and the sole safe precedent was screen fortune. Hygiene hit 10/10 (seven consecutive wins).",
+     "source": "experiments/qwen35_4b_dose_diversity_mechanism_cell/reports/report.md"
     }
    ]
   }

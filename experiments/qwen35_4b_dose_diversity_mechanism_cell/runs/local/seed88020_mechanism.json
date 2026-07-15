@@ -1,0 +1,142 @@
+{
+  "aggregate_seed": null,
+  "aggregate_seed_open": false,
+  "answer_normalization": {
+    "applied_to": "both the parsed and the expected answer, every arm, both instruments",
+    "definition": "re.sub(r'\\s+', ' ', s).strip(), then re.sub(r'\\s*>\\s*', '>', s), then re.sub(r'\\s*;\\s*', ';', s)",
+    "function": "check_local.normalize_answer",
+    "prospective": true,
+    "rationale": "21 correct-but-rejected whitespace rows across the three prior gate events (seeds 88014/88015/88016), recorded in experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/analysis/three_event_failure_forensics.md"
+  },
+  "axis_kinds": [
+    "u_explore",
+    "u_hygiene",
+    "u_protocol",
+    "u_tracefix"
+  ],
+  "axis_rows": 40,
+  "backend": "vllm_merged_composite",
+  "benchmark_data_read": false,
+  "candidates": [
+    "axis160_direct"
+  ],
+  "controls": [
+    "clean_parent",
+    "hygiene_explore_direct",
+    "replay_clean"
+  ],
+  "design_receipt_sha256": "f420fde871814ae03bd864f27f5a633350259cf724bb0c07c5e3c4d80d3f9ccd",
+  "diversity_mechanism": "REFUTED_INTRINSIC",
+  "eligible": [],
+  "experiment_id": "qwen35_4b_dose_diversity_mechanism_cell",
+  "local_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_dose_diversity_mechanism_cell/runs/local/seed88020.json",
+  "local_receipt_sha256": "d87f27a07e9724480f1be2efa6585634f8724060a8787fcf00c5cfb9d8e81c68",
+  "mechanism_cell": true,
+  "no_promotion_in_mechanism_cell": true,
+  "outcome": "MECHANISM_READ_COMPLETE",
+  "promoted": null,
+  "readings": {
+    "diversity_mechanism": "REFUTED_INTRINSIC",
+    "retention_delta_axis160": -9,
+    "retention_delta_hygexp": -10,
+    "retention_delta_replay_clean": -5
+  },
+  "retention_rows": 104,
+  "schema_version": 1,
+  "seed": 88020,
+  "summaries": {
+    "axis160_direct": {
+      "adapter": "axis160_direct",
+      "axis": {
+        "correct": 26,
+        "per_kind_correct": {
+          "u_explore": 6,
+          "u_hygiene": 10,
+          "u_protocol": 7,
+          "u_tracefix": 3
+        },
+        "rows": 40
+      },
+      "cap_contacts": 6,
+      "retention": {
+        "cap_contacts": 5,
+        "correct": 61,
+        "parsed": 96,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "total_correct": 87
+    },
+    "clean_parent": {
+      "adapter": "clean_parent",
+      "axis": {
+        "correct": 24,
+        "per_kind_correct": {
+          "u_explore": 5,
+          "u_hygiene": 7,
+          "u_protocol": 9,
+          "u_tracefix": 3
+        },
+        "rows": 40
+      },
+      "cap_contacts": 20,
+      "retention": {
+        "cap_contacts": 14,
+        "correct": 70,
+        "parsed": 91,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "total_correct": 94
+    },
+    "hygiene_explore_direct": {
+      "adapter": "hygiene_explore_direct",
+      "axis": {
+        "correct": 24,
+        "per_kind_correct": {
+          "u_explore": 8,
+          "u_hygiene": 8,
+          "u_protocol": 6,
+          "u_tracefix": 2
+        },
+        "rows": 40
+      },
+      "cap_contacts": 15,
+      "retention": {
+        "cap_contacts": 11,
+        "correct": 60,
+        "parsed": 93,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "total_correct": 84
+    },
+    "replay_clean": {
+      "adapter": "replay_clean",
+      "axis": {
+        "correct": 23,
+        "per_kind_correct": {
+          "u_explore": 7,
+          "u_hygiene": 7,
+          "u_protocol": 7,
+          "u_tracefix": 2
+        },
+        "rows": 40
+      },
+      "cap_contacts": 15,
+      "retention": {
+        "cap_contacts": 9,
+        "correct": 65,
+        "parsed": 94,
+        "route_abstentions": 0,
+        "rows": 104
+      },
+      "total_correct": 88
+    }
+  },
+  "thresholds": {
+    "forgot_at_most": -6,
+    "retained_at_least": -5,
+    "rule": "SCREEN_FORTUNE_SUSPECT if retention_delta_hygexp >= -5; else SUPPORTED if retention_delta_axis160 >= -5; else REFUTED_INTRINSIC"
+  }
+}

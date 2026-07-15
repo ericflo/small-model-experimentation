@@ -14153,40 +14153,40 @@
    ]
   },
   "qwen35_4b_dose_diversity_mechanism_cell": {
-   "verdict_tag": "Design under construction; nothing trained",
+   "verdict_tag": "Forgetting is intrinsic; the trade is priced",
    "concept_primer": "Every practice dose has cost the model about ten retained answers — except one, which used a larger, more varied practice set. After the schedule theory died in a direct test, one measurement remains: teach that larger varied set directly, with no review round, and see whether variety itself is what protects memory.",
    "plain_question": "Does a bigger, more varied practice set protect retained skills where the small focused set does not — or is forgetting simply the price of practice on this model?",
-   "plain_answer": "Nothing is trained yet. One new model will be trained and judged on a fresh screen alongside three already-built models — including a re-measurement of the known forgetting case — with a three-way verdict preregistered: variety protects, forgetting is intrinsic, or the original measurement was luck.",
-   "why_it_matters": "Whatever the answer, it ends the guessing: each verdict selects a different, already-specified next step, and none of them is another recipe shuffle.",
-   "verdict_tone": "neutral",
+   "plain_answer": "Variety does not protect memory: the larger varied practice set also cost nine retained answers, the known ten-point case reproduced exactly, and even pure review cost five on this fresh screen — so the one past case with zero forgetting was measurement luck. Meanwhile the skills themselves keep landing: the hygiene lesson went ten-for-ten, its seventh straight category win, and the varied-dose model posted the best overall skill score with the cleanest finishing behavior.",
+   "why_it_matters": "Four trials of questions collapse into one priced law: on this training setup, teaching new skills costs five to ten retained answers, full stop. The choice ahead is engineering — change the training vehicle, or accept and price the trade — and both paths are preregistered.",
+   "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "Variables changed",
-     "value": "1",
-     "sub": "practice-set size/variety; everything else fixed"
+     "label": "Verdict",
+     "value": "intrinsic",
+     "sub": "variety -9; known case -10 reproduced; review -5"
     },
     {
-     "label": "New training runs",
-     "value": "1",
-     "sub": "three comparison models already built"
+     "label": "Hygiene lesson",
+     "value": "10 / 10",
+     "sub": "seventh straight category win — perfect record"
     },
     {
-     "label": "Verdict options",
-     "value": "3",
-     "sub": "each with a preregistered successor"
+     "label": "Best skill score",
+     "value": "26 / 40",
+     "sub": "the varied dose, with the fewest run-ons (5)"
     },
     {
-     "label": "Benchmark stage",
-     "value": "none",
-     "sub": "mechanism cells mint no claims"
+     "label": "Lucky precedent",
+     "value": "resolved",
+     "sub": "the zero-forgetting case was screen fortune"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Where the experiment stands",
-     "chart_read": "Each bar is a preregistered stage; one means complete.",
-     "chart_takeaway": "The contract and inherited practice set are frozen; one training run and the four-model screen remain."
+     "chart_plain_title": "Every dose pays the memory tax; the skills land anyway",
+     "chart_read": "Bars per model: retained-skill total (of 104) and unseen skill total (of 40).",
+     "chart_takeaway": "The parent keeps the most memory; every trained arm pays five to ten points for its gains — the trade is real, two-sided, and now priced."
     }
    ]
   }

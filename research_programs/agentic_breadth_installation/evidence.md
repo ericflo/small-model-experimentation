@@ -946,3 +946,23 @@ Laws updated, one by refutation:
    optimizer dynamics), with its own intake. The 160-row/4-kind composition
    difference from the retention-safe precedent is that study's first
    variable.
+
+## qwen35_4b_dose_diversity_mechanism_cell (2026-07-15 — REFUTED_INTRINSIC: the retention trade is priced)
+
+The escalation rule's funded mechanism cell trained the twice-verified 160-row
+corpus directly from the clean parent and gated it at fresh seed 88,020 beside
+three published composites. Retention correct of 104: clean_parent 70,
+replay_clean 65 (−5), axis160_direct 61 (−9), hygiene_explore_direct 60 (−10 —
+its known cost reproduced exactly). Preregistered verdict: REFUTED_INTRINSIC.
+Axis holdout: axis160_direct best at 26/40 with hygiene 10/10 (SEVEN
+consecutive hygiene wins, now perfect) and best caps (5).
+
+The four-lifecycle retention arc closes with a priced law: at this vehicle
+(rank-32 LoRA continued in place, 190 updates, LR 1e-5), designed doses cost
+~5–10 retention points intrinsically. Diversity does not protect it
+(this cell); interleaving does not protect it (prior refutation); a pure
+replay round itself costs ~5 on a fresh screen; the sole byte-equal precedent
+was screen fortune. Installs remain unambiguous throughout — the trade is
+real on both sides. Successors must change the vehicle (rank, loss weighting,
+update count — single variables against this same gate design) or preregister
+gates that price the trade. The recipe search remains closed.

@@ -2,7 +2,7 @@
 
 The single missing measurement that adjudicates why designed doses cost retention: the verified 160-row/4-kind corpus dosed DIRECTLY from the clean parent (no replay round), judged on a fresh screen alongside the re-measured 80-row/2-kind dose (known −10), the replay round, and the parent — with a preregistered three-way verdict.
 
-**Status:** in-progress · since 2026-07-15 · model-free construction under way; no model event has run
+**Status:** finished · 2026-07-15 · verdict REFUTED_INTRINSIC — the retention cost of designed doses is intrinsic to this vehicle (diverse dose −9; known −10 reproduced; replay itself −5); the sole retention-safe precedent was screen fortune; hygiene reached seven-for-seven
 
 ## Research Program
 
@@ -44,16 +44,20 @@ Checkpointed stages:
 
 ## Results
 
-No model event has run.
+The single arm trained cleanly (0.5068 train loss, 0 skips) and merged. The four-arm gate at seed 88,020 (fresh screen, normalized grading): retention correct of 104 — clean_parent 70, replay_clean 65 (−5), axis160_direct 61 (−9), hygiene_explore_direct 60 (−10, reproducing its known cost exactly). Preregistered verdict: **REFUTED_INTRINSIC** — the diverse dose broke the band too. Axis holdout of 40: axis160_direct 26 (best; hygiene 10/10 — the seventh consecutive hygiene win, now perfect; caps 5, best), hygiene_explore_direct 24, clean_parent 24, replay_clean 23.
 
 ## Interpretation
 
-None yet.
+The mechanism question is answered: at this vehicle (rank-32 LoRA continued in place, 190 updates, LR 1e-5), designed doses cost roughly five to ten retention points intrinsically — corpus diversity does not protect it, replay interleaving does not protect it (prior refutation), and even a pure replay round costs about five on a fresh screen. The single retention-byte-equal precedent was screen fortune, exactly as the SCREEN_FORTUNE alternative anticipated for the OTHER arm. Meanwhile the installs themselves are unambiguous: hygiene is now seven-for-seven across every parent, dose size, and recipe, and the diverse dose posted the best axis total and termination in this event. The program-level law: install-versus-retention is a real, priced trade at this vehicle. Successors must either change the vehicle (rank, loss weighting, update count) or preregister gates that price the trade rather than demand its absence.
+
+## Terminal Disposition
+
+No later event is authorized here. No benchmark seed existed. All four composites and the verdict receipt are preserved. Per the preregistered branch, the funded successor is a dose-vehicle study (rank / loss weights / update count as single variables against this same gate design), with its own intake.
 
 ## Knowledgebase Update
 
-- Program evidence updated: pending the verdict.
-- Program backlog updated: this cell is the escalation rule's funded successor.
+- Program evidence updated: the intrinsic-cost verdict, the screen-fortune resolution, and hygiene's seven-for-seven recorded.
+- Program backlog updated: the vehicle study is the funded successor; the recipe search stays closed.
 - Claim ledger updated: no.
 
 ## Artifacts

@@ -216,12 +216,22 @@
   by the frozen escalation rule. The retention-safe precedent's true cause is
   unidentified (corpus composition 160/4-kinds vs 80/2, lineage depth, or
   screen fortune).
-- Funded successor (mechanism study, own intake required): why does an 80-row
-  two-kind dose cost ~10 retention points where the 160-row four-kind dose
-  once cost zero? First variables: corpus size/diversity at matched per-kind
-  dose, adapter rank, loss weighting, dose row count. Design constraint: the
-  study must vary ONE candidate mechanism per arm against the same gate
-  design, and hygiene (six-for-six) rides along as the install probe.
+- Completed mechanism cell (REFUTED_INTRINSIC):
+  `qwen35_4b_dose_diversity_mechanism_cell` — retention 70/65/61/60
+  (parent/replay/axis160/hyg-exp): the diverse dose broke the band (-9), the
+  known -10 reproduced, replay itself measured -5, and the sole
+  retention-safe precedent is resolved as screen fortune. Hygiene 10/10 (7/7
+  all-time); axis160_direct best axis (26/40) and caps (5). LAW: designed
+  doses cost ~5-10 retention points intrinsically at this vehicle; the trade
+  is priced, real, and two-sided.
+- Funded successor (vehicle study, own intake): single-variable arms against
+  the same gate design — adapter rank (64/128 vs 32), think/answer loss
+  weighting, and update count/LR — asking which vehicle change breaks the
+  install-retention trade. Alternative preregistered path: accept and price
+  the trade — a gate whose promotion condition is net-positive weighted score
+  (installs minus retention cost) — and take the best trade candidate to the
+  medium pilot the goal requires. Hygiene (7/7) remains the install probe for
+  either path.
 - Standing queued directions (unchanged): medium-native measurement intake for
   existing artifacts; mechanism-diverse attacks on menders/sirens (needs new
   mechanism evidence first).
