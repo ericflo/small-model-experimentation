@@ -110,6 +110,10 @@ external_artifacts:
       attempt-2 block-1 primary-seed44 COMPLETE journal f71411e8742c022c9b000c7c7cbaba08e592770599fe1cb4eb8dc76fffc44b1f;
       attempt-2 block-1 primary-seed44 score b6e6e887e2cf3ae230a0ee6fbb4ddb8286f68a1fcb31681306af593a76260485;
       attempt-2 block-1 quick STARTED journal 8f441c4df5e781a713415b6190ee181c865276a3b0e3e6ffe906c62ae4853ab6;
+      attempt-2 block-1 quick GENERATED journal 2d4d6539f4ce0636ef2eade37b64b8d9a778c2525acb2cbe594b5d138deb9a65;
+      attempt-2 block-1 quick COMPLETE journal 40d777ee9d8054c66a4805d5c0b3ef6fb00cb88f1f712b6f932f614836c36786;
+      attempt-2 block-1 quick score e820adcc5728e05994c0a2190e267701833f98263745bb4b3a5c23deb892ad48;
+      attempt-2 block-1 soup STARTED journal 8b6f61cdf306d8d74ff73bf7960fe7f043a1fa5016c625543f91ea976c379b8f;
       attempt-1 failure receipt 2e645322ead3fbbdf58760849fe17def81fd12b62cdfa4b6c58808e24612ed41;
       non-advantage terminal merge receipt 99e4d3258f450173204466bd4a2b4f1dfadfc54d706008e6fc3944a5f7bd57f5;
       wrong-teacher terminal merge receipt 90ba5ad70a6dede8e0181c1c05f80ffa9a0d9651b604a1cc27659a8da69df544;

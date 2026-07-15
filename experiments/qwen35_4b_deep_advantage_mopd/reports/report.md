@@ -252,6 +252,13 @@ quick from 4,359,813 sampled tokens. Its equal-cell macros are `0.590461` deep,
 dominate deep on block 1 as well: two are below it on both strata and seed 43
 makes only a small deep-for-quick trade. The remaining controls can rank the
 failure mode but cannot restore the frozen success condition.
+The block-1 quick source then scores direct item means `0.529900` deep and
+`0.777722` quick from 4,736,614 sampled tokens. Its equal-cell macros are
+`0.551467` deep, `0.777722` quick, and `0.664595` joint, trailing deep by
+`−0.048720`, `−0.033301`, and `−0.041010`. Deep is therefore the better source
+on both strata in both blocks. Every treatment seed beats quick here, but that
+only places the updates between or near their sources; it does not satisfy the
+registered requirement to improve on the better source.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply

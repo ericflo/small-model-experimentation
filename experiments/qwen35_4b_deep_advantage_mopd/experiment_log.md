@@ -817,3 +817,21 @@
   losses. Remaining arms rank controls; they cannot reopen the frozen gate.
 - The quick source started next with external journal hash
   `8f441c4df5e781a713415b6190ee181c865276a3b0e3e6ffe906c62ae4853ab6`.
+
+## 2026-07-15 — deep is the better source on both sealed blocks
+
+- Quick completed sealed generation and strict validation. `GENERATED.json`
+  and `COMPLETE.json` hash to
+  `2d4d6539f4ce0636ef2eade37b64b8d9a778c2525acb2cbe594b5d138deb9a65`
+  and `40d777ee9d8054c66a4805d5c0b3ef6fb00cb88f1f712b6f932f614836c36786`;
+  the score hashes to
+  `e820adcc5728e05994c0a2190e267701833f98263745bb4b3a5c23deb892ad48`.
+- Direct item-weighted means are `0.529900` deep and `0.777722` quick, using
+  4,736,614 sampled tokens. Equal-cell macros are `0.551467` deep, `0.777722`
+  quick, and `0.664595` joint, respectively `−0.048720`, `−0.033301`, and
+  `−0.041010` versus deep.
+- Deep is the better source on both strata in both blocks. The treatments beat
+  quick on block 1 but do not beat deep, locating them between or near their
+  sources rather than beyond the source frontier.
+- The immutable 40/60 soup started next with external journal hash
+  `8b6f61cdf306d8d74ff73bf7960fe7f043a1fa5016c625543f91ea976c379b8f`.
