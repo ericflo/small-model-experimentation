@@ -33,3 +33,11 @@
   `runs/training/` and their hashes pinned fail-closed in `train_trial.py`.
 - No evaluation ran; the treatment arms remain untrained until this checkpoint
   publishes green.
+
+## 2026-07-14 — Authenticated designed-fresh training
+
+- `train-designed` ran only after control checkpoint `cd1cba9e` matched
+  `origin/main` with both workflows green and a clean worktree.
+- `designed_fresh` trained 1,520/1,520 rows with 0 skipped over 190 updates
+  (train loss 0.4634, 1,334.7 wrapper seconds); receipt/log published and pinned.
+- The budget arm remains untrained until this checkpoint publishes green.
