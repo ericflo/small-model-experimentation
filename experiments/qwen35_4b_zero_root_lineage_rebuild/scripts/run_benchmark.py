@@ -124,7 +124,7 @@ FROZEN_TREE_SHA256 = {
     # TODO-PIN(post-merge): runs/lineage/merge.json -> output_tree_sha256.
     # Fill by replacing None with the quoted 64-hex ON THIS LINE; the
     # design receipt's normalized-hash pin canonicalizes only this value.
-    "zero_root_hygiene_explore": None,
+    "zero_root_hygiene_explore": "414f582950bf60fed2fe462cd141ab98d0f772087b4f9c6bc5aa12f03f379e7d",
 }
 FROZEN_WEIGHTS_SHA256 = {
     "base": "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db",
@@ -134,12 +134,12 @@ FROZEN_WEIGHTS_SHA256 = {
     # TODO-PIN(post-merge): runs/lineage/merge.json -> weights_sha256.
     # Fill by replacing None with the quoted 64-hex ON THIS LINE; the
     # design receipt's normalized-hash pin canonicalizes only this value.
-    "zero_root_hygiene_explore": None,
+    "zero_root_hygiene_explore": "6e9aad251465ca2713fda0238a34aa9f46262053860b867f80189d65c9ee3932",
 }
 # TODO-PIN(post-merge): sha256 of the COMMITTED runs/lineage/merge.json.
 # Fill by replacing None with the quoted 64-hex ON THIS LINE; the design
 # receipt's normalized-hash pin canonicalizes only this value.
-ZERO_ROOT_MERGE_RECEIPT_SHA256 = None
+ZERO_ROOT_MERGE_RECEIPT_SHA256 = "e906caea7c4b86f4a3eacb96affb7cc2fa9b7cc11e11b634b651cabc5dd01d2b"
 ZERO_ROOT_MERGE_RECEIPT = EXP / "runs" / "lineage" / "merge.json"
 ZERO_ROOT_STAGE_RECEIPTS = tuple(
     f"runs/lineage/{name}.json"

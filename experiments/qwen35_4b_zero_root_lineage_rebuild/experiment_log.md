@@ -53,3 +53,20 @@
   pin: three canonicalized fill slots, everything else byte-frozen, the
   six mutations now regression tests. Fidelity lens clean. 96 tests
   green; PASS_EXPENSIVE_RUN and PASS_REBUILD granted.
+
+## 2026-07-16 — The six-stage replay: two honest bumps, then clean
+
+- Stage 1 completed on the first invocation (42 min; the fresh zero-root
+  adapter trains slower than warm continuations). Stage 2 then OOMed at
+  step 78/190 (CUDA fragmentation under the gauntlet-era trainer
+  variant); the rebuild script fail-closed on the orphaned empty output
+  dir as designed. Resumed via direct rebuild invocation (stage 1
+  skipped by verified receipt) with PYTORCH_CUDA_ALLOC_CONF=
+  expandable_segments:True — an allocator setting, not a training
+  hyperparameter; recorded here for the reproduction path.
+- Stages 2–6 and the merge then ran clean: walls 23/5/5/22/22 min;
+  zero-root composite tree 414f5829…, weights 6e9aad25…, merge receipt
+  e906caea…. The three runner pins were filled from the committed merge
+  receipt and the normalized-hash pin verified byte-stable post-fill
+  (gen --check exit 0) — the review-installed mechanism working as
+  designed.
