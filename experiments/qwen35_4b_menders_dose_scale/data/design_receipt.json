@@ -1,0 +1,482 @@
+{
+  "arms": {
+    "control_trains_first": true,
+    "gate_arms": [
+      "hygiene_explore_parent",
+      "replay_ctl3",
+      "feedloop_scale"
+    ],
+    "parent_eval_label": "hygiene_explore_parent",
+    "trained_candidate": "feedloop_scale",
+    "trained_control": "replay_ctl3"
+  },
+  "benchmark_plan": {
+    "aggregate_seed_sealed": 78158,
+    "conditional_on_local_promotion": true,
+    "goal_gate": "all ten public families strictly > base; recorded from the same event either way, never part of the pilot pass",
+    "ledger": {
+      "closed_record_pins_summary_and_all_four_receipt_sha256s": true,
+      "closed_refuses_forever": true,
+      "crashed_summary_recovery": "byte-identical deterministic regeneration; divergence refuses with both digests",
+      "unopened_requires_clean_slate": true,
+      "write_ahead_opened_record": true
+    },
+    "model_order": [
+      "base",
+      "hygiene_explore_parent",
+      "replay_ctl3",
+      "feedloop_scale"
+    ],
+    "name": "pilot",
+    "pilot_gate": "candidate aggregate strictly > base AND > replay_ctl3 AND > hygiene_explore_parent",
+    "power_statement": "menders alone gates the all-families goal (nine families hold vs base on every sealed seed; the ties are 0-margin); three small-dose pedagogies failed at it and dose scale is the one permitted mechanism class, so menders > 0 for the candidate on this seed is the reading of consequence; any 10/10 feeds a fresh confirmation cell (independent seeds + matched compute) before any claim",
+    "think_budget": 1024,
+    "tier": "medium"
+  },
+  "checkpoint_policy": {
+    "clean_pushed_main_required": true,
+    "full_check_rebase_push_two_workflow_gate_between_expensive_stages": true,
+    "next_authorized_stage": "train-control",
+    "one_stage_per_invocation": true,
+    "preceding_receipt_committed_at_head": true
+  },
+  "code": {
+    "corpus_builder_sha256": "a1db761f8eb87568c184fdf666fc463e07c6a8942f7bb4b17241770b721d8a01",
+    "curriculum_generator_sha256": "70fc722a6a69f4f8a64ae4356058421ea44117c7e86d3350abfd72b047ccf080",
+    "external_merger_sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+    "feedloop_curriculum_generator_sha256": "91e55cc3322ac787aa1fdf24aaf114e4b9acbac963ee6af1f4471228bf7bed2a",
+    "rebuild_lineage_sha256": "e6868deedc5b31af35eda48ddbaaa2c0778d46d1343fab5d65cb1982bd59da0d",
+    "trainer_sha256": "e0eca2a230dae5d109d418dcb4cc19af05882a770af14350ffd741a8d5e90f01"
+  },
+  "corpora": {
+    "banned_vocabulary": {
+      "checked_by_generator": true,
+      "extended_with_statechain_surface_pools": true,
+      "retained_feedloop_surfaces_not_banned": true,
+      "sha256": "f3aa05d51700b38817c2358dfd08008970325b5ce0d6f667a08535da8ebd1fce",
+      "tokens": 261
+    },
+    "manifest_sha256": "5617c2c540726223c9b29831aba177a186bd5008de1a2838d7f662ab0249a5b1",
+    "replay": {
+      "inheritance": {
+        "byte_identical_to_every_predecessor_copy": true
+      },
+      "path": "data/sft_blend.jsonl",
+      "rows": 2240,
+      "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+    },
+    "treatment": {
+      "balance": {
+        "feedloop_formalisms": {
+          "balesled": 100,
+          "barrowyoke": 100,
+          "crankwheel": 100,
+          "millround": 100,
+          "sigilslate": 100,
+          "skeinreel": 100,
+          "trinketcord": 100,
+          "troughline": 100
+        },
+        "feedloop_out_of_bound_alternative_counts": {
+          "0": 656,
+          "1": 77,
+          "2": 45,
+          "3": 4,
+          "4": 6,
+          "5": 5,
+          "6": 4,
+          "7": 2,
+          "9": 1
+        },
+        "feedloop_round1_candidate_counts": {
+          "10": 6,
+          "11": 6,
+          "13": 1,
+          "15": 1,
+          "17": 1,
+          "19": 1,
+          "2": 556,
+          "3": 136,
+          "4": 35,
+          "5": 24,
+          "6": 16,
+          "7": 6,
+          "8": 3,
+          "9": 8
+        },
+        "feedloop_rows_with_out_of_bound_alternatives": 144
+      },
+      "construction": {
+        "builder": "scripts/build_corpus.py",
+        "generator": "scripts/gen_feedloop_curriculum.py",
+        "mix": "feedloop=800",
+        "seed": 77150
+      },
+      "dose_scale_contract": {
+        "container_names_probed_over_full_pool": [
+          "troughline",
+          "barrowyoke"
+        ],
+        "dose_multiple": 10,
+        "dose_rows": 800,
+        "extended_probe_amount_bound": 12,
+        "extended_probe_scope_by_formalism": {
+          "balesled": "lash/shove brands over the full bale pool; uncouple/walk carry no parameter",
+          "barrowyoke": "heave sizes to 12 AND every container dimension (heave/swap/dump targets) over the full barrow pool; phantom barrows start empty in the probe apply",
+          "crankwheel": "crank settings to 12; harvest/rewind carry no parameter; face names never parameterize an op",
+          "millround": "windlass settings to 12; empty/unwind carry no parameter; vane names never parameterize an op",
+          "sigilslate": "etch sigils over the full sigil pool; slot indices are the slate's four physical slots (structural, not a documented-pool parameter) and are NOT probed past 4",
+          "skeinreel": "reel counts to 12; letout/crosslay carry no parameter",
+          "trinketcord": "knot items over the full trinket pool; shear/mirror carry no parameter",
+          "troughline": "ladle amounts to 12 AND every container dimension (ladle/tip/scoop targets) over the full trough pool; phantom troughs start empty in the probe apply"
+        },
+        "extended_survivors_out_of_bound_only": true,
+        "formalisms": [
+          "troughline",
+          "trinketcord",
+          "crankwheel",
+          "sigilslate",
+          "barrowyoke",
+          "balesled",
+          "millround",
+          "skeinreel"
+        ],
+        "min_round1_candidates": 2,
+        "new_formalisms": [
+          "barrowyoke",
+          "balesled",
+          "millround",
+          "skeinreel"
+        ],
+        "parameterized_ops_bounded_in_spec_text": true,
+        "reference_failed_dose_rows": 80,
+        "retained_formalisms": [
+          "troughline",
+          "trinketcord",
+          "crankwheel",
+          "sigilslate"
+        ],
+        "retained_instances_fresh_via_row_overlap_audit": true,
+        "single_kind_dose": true,
+        "unique_fix_after_round2": true,
+        "wrong_attempt_in_round1_candidates": true
+      },
+      "kinds": {
+        "u_feedloop": 800
+      },
+      "path": "data/sft_feedloop_scale.jsonl",
+      "row_overlap_audit": {
+        "sources_checked": 36,
+        "total_overlap": 0
+      },
+      "rows": 800,
+      "sha256": "080c3603cd3bfca2b261b797be356f97684aedc4f65becd9b50cbb45706bd2c2",
+      "surface_freshness_audit": {
+        "inherited_tokens": 34,
+        "sources_checked": 36,
+        "token_inventory_sha256": "db764fc98480658116c73fd6b1800135cb71546a3b1c4aaa8cc85fdcde06c2f6",
+        "tokens": 47,
+        "total_hits": 0
+      },
+      "surfaces": {
+        "balesled": 100,
+        "barrowyoke": 100,
+        "crankwheel": 100,
+        "millround": 100,
+        "sigilslate": 100,
+        "skeinreel": 100,
+        "trinketcord": 100,
+        "troughline": 100
+      }
+    }
+  },
+  "experiment_id": "qwen35_4b_menders_dose_scale",
+  "firewall": {
+    "aggregate_seed_sealed": true,
+    "benchmark_data_read": false,
+    "benchmark_gateway_exposed": false
+  },
+  "lineage_package": {
+    "candidate_dataset": {
+      "path": "data/feedloop_scale.jsonl",
+      "rows": 2280,
+      "sha256": "3aee5f5e8731294e0d8a9b9dd08f014ca34ace9f949c2b46aa09aa1e548adc58"
+    },
+    "candidate_training_seed": 71,
+    "chain_training_seeds": [
+      42,
+      43,
+      44,
+      47,
+      51,
+      55
+    ],
+    "datasets": {
+      "stage01_replay_refresh.jsonl": {
+        "rows": 1520,
+        "sha256": "5d5d7c4b8a4b0a4f270fe8b2ecaebe356c771948d71b0f7bbeead6bfc04308b6"
+      },
+      "stage02_designed160.jsonl": {
+        "rows": 1520,
+        "sha256": "5159cf41b6474bdc8640cdb2a4a168587b59232ca8171c7b7057fc6bfe1b40c8"
+      },
+      "stage03_close_xi__targeted_standard.jsonl": {
+        "rows": 320,
+        "sha256": "12fc613bb31a46bcea9acd49b26467656704aa3b3418dab8d920adf057d14f00"
+      },
+      "stage04_replay_after_close.jsonl": {
+        "rows": 320,
+        "sha256": "541805df2d817707c1e76213e50c8f08fd9caff10d0a3887e1196424b6820be6"
+      },
+      "stage05_designed_fresh.jsonl": {
+        "rows": 1520,
+        "sha256": "6d4dc303bc159c19a1ffd0c60ca7d08ea64b02909366701b345d888482d67f3f"
+      },
+      "stage06_hygiene_explore.jsonl": {
+        "rows": 1520,
+        "sha256": "82aa1a78c0a429a48c3db6b94ac84397cea001b041477e7b137b38c21354112f"
+      }
+    },
+    "directive": "standalone-reproducibility gate (AGENTS.md non-negotiables; docs/quality_gates.md, owner directive 2026-07-15): the confirmation cell's six-stage package copied byte-identically and extended with this cell's stage 7 (the candidate's own training)",
+    "fast_verification": "scripts/rebuild_lineage.py --verify-inputs",
+    "manifest": "data/lineage/lineage_manifest.json",
+    "manifest_bytes_not_pinned_reason": "the candidate stage's produced fields are orchestrator-filled TODO-PINs after train-candidate/merge-arms publish; schema, chaining, and every copy are enforced fail-closed by rebuild_lineage.py --verify-inputs at smoke and test time",
+    "rebuild": "scripts/rebuild_lineage.py",
+    "root_adapter": {
+      "files": {
+        "README.md": {
+          "sha256": "aeb83ceb33aa84802245cc3bc4abe24160d7d08550ca8278baff84d8b24e9ba4",
+          "size": 5184
+        },
+        "adapter_config.json": {
+          "sha256": "cd764ae869b8a55526e283dd133e1940896b428839c6abf2e55d6ae2a0b32635",
+          "size": 1094
+        },
+        "adapter_model.safetensors": {
+          "sha256": "ad2ef4fae785debedf5e50932a79bda97869d3efc212f53d48ccb04c59e25d21",
+          "size": 169903320
+        },
+        "chat_template.jinja": {
+          "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+          "size": 7756
+        },
+        "tokenizer.json": {
+          "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+          "size": 19989325
+        },
+        "tokenizer_config.json": {
+          "sha256": "9cf04fffe3d8c3b85e439fb35c7acad0761ab51c422a8c4256d9f887c3a0be7d",
+          "size": 1125
+        }
+      },
+      "provenance_boundary": "HARD BOUNDARY: no committed creation receipt exists for the frozen 'blend' root adapter anywhere in the repository; it is vendored by bytes into this cell's own artifact storage and is NOT reconstructable from committed receipts",
+      "vendored_path": "large_artifacts/qwen35_4b_menders_dose_scale/lineage_root/blend"
+    },
+    "trainers": {
+      "lineage_trainers/train_think_close_stage3.py": "10b4914cdc6c24858a77750f4ab64074fae5cbf36d98f3e4fc26b8958068fb14",
+      "lineage_trainers/train_think_stage12.py": "400e4b856a5899db8805510c9f6d8d11da76b35cf30af16856b46f41abdb4e54",
+      "lineage_trainers/train_think_stage456.py": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4",
+      "merge_adapter.py": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+      "train_think.py": "e0eca2a230dae5d109d418dcb4cc19af05882a770af14350ffd741a8d5e90f01"
+    }
+  },
+  "local_gate": {
+    "answer_normalization": {
+      "applied_to": "both the parsed and the expected answer, every arm, the axis holdout and all three retention screens",
+      "definition": "re.sub(r'\\s+', ' ', s).strip(), then re.sub(r'\\s*>\\s*', '>', s), then re.sub(r'\\s*;\\s*', ';', s)",
+      "function": "check_local.normalize_answer",
+      "prospective": true,
+      "rationale": "21 correct-but-rejected whitespace rows across the three prior gate events (seeds 88014/88015/88016), recorded in experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/analysis/three_event_failure_forensics.md; unchanged since the seed-88021 gate"
+    },
+    "arms": [
+      "hygiene_explore_parent",
+      "replay_ctl3",
+      "feedloop_scale"
+    ],
+    "dose_response_reading": {
+      "baseline": {
+        "axis_feedloop_rows": 20,
+        "candidate_arm": "feedloop_state",
+        "candidate_feedloop_correct": 0,
+        "cell": "qwen35_4b_feedback_loop_state_chain_install",
+        "dose_rows": 80,
+        "gate_seed": 88026,
+        "promotion_receipt": "experiments/qwen35_4b_feedback_loop_state_chain_install/runs/local/seed88026_promotion.json",
+        "promotion_receipt_sha256": "d232a1be86b53a2f6d295cd735409e13b2343fa0e8403056b183fed14f650fa1"
+      },
+      "consequence_statements": {
+        "if_nonzero": "nonzero fresh-instance u_feedloop transfer at 10x the failed dose is evidence that SCALE-PLUS-DIVERSITY reopens the family (C43: the 80-row install was data-limited; the 10x dose is the dominant delta, but formalism diversity doubled 4->8 with it, so this is not a pure dose-response isolate), even without promotion",
+        "if_zero": "a 0 at 10x the failed dose closes the dose-scale mechanism class AND the added-diversity variant together for the feedback-loop skill on this parent"
+      },
+      "dose_multiple": 10,
+      "gating": false,
+      "recorded_either_way": true,
+      "rendered_per_formalism": true,
+      "this_cell_dose_rows": 800
+    },
+    "instruments": {
+      "axis_holdout": {
+        "generator": "scripts/gen_feedloop_curriculum.py",
+        "kind": "u_feedloop",
+        "per_surface": 5,
+        "rows": 40,
+        "surfaces": [
+          "troughline",
+          "trinketcord",
+          "crankwheel",
+          "sigilslate",
+          "barrowyoke",
+          "balesled",
+          "millround",
+          "skeinreel"
+        ]
+      },
+      "retention": {
+        "adjudication": "pooled_k3",
+        "generator": "scripts/gen_curriculum.py",
+        "per_kind": 8,
+        "rows_per_screen": 104,
+        "screens": 3,
+        "skills": 13
+      }
+    },
+    "promotion": {
+      "axis_total_strictly_beats_parent_and_replay": true,
+      "bands_evaluated_on_pooled_sums_times_screens": true,
+      "bands_on_pooled_means_not_per_screen": true,
+      "no_absolute_per_kind_floors": true,
+      "per_surface_reported_not_gated": true,
+      "retention_pooled_cap_contact_band": 3,
+      "retention_pooled_correct_band": 5,
+      "retention_pooled_parsed_band": 3,
+      "single_kind_dose_no_per_kind_split": true
+    },
+    "rows_per_arm": 352,
+    "screen_seeds": [
+      88038,
+      88039,
+      88040
+    ],
+    "seed": 88037
+  },
+  "model": {
+    "calls": 0,
+    "id": "Qwen/Qwen3.5-4B",
+    "loaded": false,
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+  },
+  "parent": {
+    "arm": "hygiene_explore",
+    "deployment": "explicit_merged_composite",
+    "eval_label": "hygiene_explore_parent",
+    "experiment": "qwen35_4b_hygiene_explore_destack_medium",
+    "external_receipt_sha256": "9eafc8b0b01b125c3cb2eaa3cf8b808ecb7b7ed40172cbbb2f92117be75995a9",
+    "lineage_adapter_receipt_pins": {
+      "config_sha256": "2174356710c961e3b4df956c6add4b8cc8bd129a01e872c3a20829f46bdeae84",
+      "weights_sha256": "7e28d6d152e7c2dbf7641d8516b9b47a1465b34967476ab01389d941b9563316"
+    },
+    "runtime_lora_forbidden": true,
+    "tracked_receipt_sha256": "22a22a68234de68314064b809352e7449c59ef821235402b66ecb6e5ebcc486a",
+    "training_base_via_model_path": true,
+    "tree_sha256": "9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971",
+    "weights_sha256": "e21123443a230ada2c73ded411e0b5b7c2b1459856b2c38e4f1beea8958dc02f",
+    "weights_size_bytes": 9078620536
+  },
+  "schema_version": 1,
+  "seeds": {
+    "aggregate_sealed": 78158,
+    "construction": 77150,
+    "local_gate": 88037,
+    "retention_screens": [
+      88038,
+      88039,
+      88040
+    ],
+    "seed_freshness": {
+      "pinned": [
+        77150,
+        55140,
+        71,
+        88037,
+        88038,
+        88039,
+        88040,
+        78158
+      ],
+      "rule_if_collision": "next free integer, recorded here",
+      "substitution_required": false,
+      "verified": "77150/55140/88037/88038/88039/88040/78158 verified grep-fresh in seed contexts across experiments/, knowledge/, research_programs/, scripts/, configs/, and docs/ at design time (zero seed-context hits). Training seed 71 verified fresh in the qwen35_4b lineage's training-seed contexts (prior training seeds: 42/43/44/47/51/55 chain stages, 67 for the reference and statechain cells' fresh adapters); its only seed-context grep hits are run artifacts of the retired sparse_support_memory_executor track and one unrelated scorer unit test's run_seed — the same artifact class the seed-67 audit accepted — recorded here rather than substituted"
+    },
+    "stream_slot_matching_namespace": 55140,
+    "training": 71
+  },
+  "stage": "menders_dose_scale_design",
+  "stream_geometry": {
+    "blocks": {
+      "feedloop_scale": {
+        "replay_filler_rows": 200,
+        "treatment_rows": 800
+      },
+      "replay_ctl3": {
+        "replay_slots": 1000
+      }
+    },
+    "core_stratified_by": [
+      "family",
+      "kind"
+    ],
+    "exact_match_axes": [
+      "forward",
+      "nonzero_target",
+      "absolute_loss_mass_x5"
+    ],
+    "match_limit": 0,
+    "pool_bind": {
+      "candidate_arm_duplicate_free": true,
+      "control_arm_max_multiplicity": 2,
+      "control_block_draws_from_full_pool": true,
+      "reason": "1,280 core + 1,000 distinct control rows exceed the 2,240-row pool and the treatment's long answer spans are unreachable from the 960 non-core rows alone; no replay row is seen more than twice in the control arm's epoch",
+      "repeats_solver_minimized": true,
+      "replay_pool_rows": 2240
+    },
+    "rows_per_arm": 2280,
+    "shared_core_replay_rows": 1280,
+    "slot_order_seed": 55140,
+    "solver": {
+      "backend": "highs",
+      "filler_and_control_solved_jointly": true,
+      "method": "scipy.optimize.milp",
+      "mip_rel_gap": 0,
+      "objective": "minimize arm-level repeated control rows",
+      "time_limit_seconds": 600
+    },
+    "variable_block_rows": 1000
+  },
+  "training_plan": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1,
+    "fresh_adapter": true,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "model_path_base_composite": {
+      "path": "large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore",
+      "tree_sha256": "9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971",
+      "weights_sha256": "e21123443a230ada2c73ded411e0b5b7c2b1459856b2c38e4f1beea8958dc02f"
+    },
+    "optimizer_steps": 285,
+    "rank": 32,
+    "required_before_training": [
+      "committed exact three-axis stream token receipt",
+      "second adversarial compute review with PASS_CONTROL_TRAINING"
+    ],
+    "rows_per_arm": 2280,
+    "seed": 71,
+    "training_authorized": false,
+    "w_close": 0.2,
+    "w_think": 0.2,
+    "warm_start": null,
+    "zero_skipped_rows_required": true
+  }
+}

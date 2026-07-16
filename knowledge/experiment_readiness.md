@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 277
-- Anchor-ready: 261
-- Human-authored READMEs: 264
+- Experiments: 278
+- Anchor-ready: 262
+- Human-authored READMEs: 265
 - Generated README stubs: 13
-- Primary reports: 276
-- Experiment logs: 180
-- Smoke commands: 145
-- Artifact manifests: 249
+- Primary reports: 277
+- Experiment logs: 181
+- Smoke commands: 146
+- Artifact manifests: 250
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 164 |
+| `documented-scripts` | 165 |
 | `scripts-undocumented` | 22 |
 | `source-or-analysis` | 53 |
 
@@ -142,6 +142,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_materialized_residual_sibling_search_fresh_replication`](../experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/README.md) | evidence_conditioned_selection, interpretability_and_diagnostics, structured_execution_and_compilers, test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_medium_budget_probe_measurement`](../experiments/qwen35_4b_medium_budget_probe_measurement/README.md) | agentic_breadth_installation, evidence_conditioned_selection | `human-authored` | [report](../experiments/qwen35_4b_medium_budget_probe_measurement/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_medium_intermediate_budget_probe`](../experiments/qwen35_4b_medium_intermediate_budget_probe/README.md) | agentic_breadth_installation | `human-authored` | [report](../experiments/qwen35_4b_medium_intermediate_budget_probe/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
+| yes | [`qwen35_4b_menders_dose_scale`](../experiments/qwen35_4b_menders_dose_scale/README.md) | agentic_breadth_installation | `human-authored` | [report](../experiments/qwen35_4b_menders_dose_scale/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen35_4b_menders_sirens_tier_forensics`](../experiments/qwen35_4b_menders_sirens_tier_forensics/README.md) | agentic_breadth_installation | `human-authored` | [report](../experiments/qwen35_4b_menders_sirens_tier_forensics/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_meta_induction`](../experiments/qwen35_4b_meta_induction/README.md) | posttraining_and_adaptation | `human-authored` | [report](../experiments/qwen35_4b_meta_induction/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_metacognitive_boundary`](../experiments/qwen35_4b_metacognitive_boundary/README.md) | benchmark_generalization | `human-authored` | [report](../experiments/qwen35_4b_metacognitive_boundary/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |

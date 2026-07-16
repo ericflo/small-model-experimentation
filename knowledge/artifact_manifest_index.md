@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 249
-- Manifest files: 590
+- Experiments with manifests: 250
+- Manifest files: 594
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 102 |
+| `other` | 105 |
 | `run-data` | 101 |
-| `standard-artifact` | 122 |
+| `standard-artifact` | 123 |
 
 ## Manifests
 
@@ -178,6 +178,10 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_materialized_residual_sibling_search_fresh_replication` | `standard-artifact` | [manifest](../experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/reports/artifact_manifest.yaml) |
 | `qwen35_4b_medium_budget_probe_measurement` | `standard-artifact` | [manifest](../experiments/qwen35_4b_medium_budget_probe_measurement/reports/artifact_manifest.yaml) |
 | `qwen35_4b_medium_intermediate_budget_probe` | `standard-artifact` | [manifest](../experiments/qwen35_4b_medium_intermediate_budget_probe/reports/artifact_manifest.yaml) |
+| `qwen35_4b_menders_dose_scale` | `other` | [manifest](../experiments/qwen35_4b_menders_dose_scale/data/corpus_manifest.json) |
+| `qwen35_4b_menders_dose_scale` | `other` | [manifest](../experiments/qwen35_4b_menders_dose_scale/data/lineage/lineage_manifest.json) |
+| `qwen35_4b_menders_dose_scale` | `other` | [manifest](../experiments/qwen35_4b_menders_dose_scale/data/stream_manifest.json) |
+| `qwen35_4b_menders_dose_scale` | `standard-artifact` | [manifest](../experiments/qwen35_4b_menders_dose_scale/reports/artifact_manifest.yaml) |
 | `qwen35_4b_menders_sirens_tier_forensics` | `standard-artifact` | [manifest](../experiments/qwen35_4b_menders_sirens_tier_forensics/reports/artifact_manifest.yaml) |
 | `qwen35_4b_meta_induction` | `standard-artifact` | [manifest](../experiments/qwen35_4b_meta_induction/reports/artifact_manifest.yaml) |
 | `qwen35_4b_metacognitive_boundary` | `standard-artifact` | [manifest](../experiments/qwen35_4b_metacognitive_boundary/reports/artifact_manifest.yaml) |

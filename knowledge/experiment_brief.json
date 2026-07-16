@@ -2,6 +2,37 @@
  "note": "Plain-language practitioner briefs shown above the fold on each experiment page (verdict + the-one-idea/question/finding/why-it-matters + KPI numbers + per-chart how-to-read/takeaway). Authored per experiment from its own README/report and verified chart specs under a strict no-jargon ban-list; all jargon-precise detail stays below the fold. Regenerate with scripts/enrichment/generate_briefs.workflow.js (see docs/site_maintenance.md).",
  "generated_on": "2026-07-05",
  "experiments": {
+  "qwen35_4b_menders_dose_scale": {
+   "verdict_tag": "Design frozen: ten times the failed dose, aimed at the last blocking family",
+   "concept_primer": "Nine of the ten benchmark families now beat the untouched base model on every sealed test seed; exactly one family — the one shaped like fix-it-and-check-again work — still ties at zero margin. An earlier experiment tried to teach that skill with 80 practice episodes on invented toy machines and installed nothing (0 of 20 fresh problems solved). Every other cheap route is closed by pre-registered kill rules; the one move still allowed is giving the SAME lesson ten times more data. This cell trains on 800 two-round repair episodes across eight invented machines (the four originals with brand-new instances plus four newly designed ones, every knob explicitly bounded in the written rules), against a matched control that sees exactly the same token exposure, from the same parent model.",
+   "plain_question": "At ten times the dose that scored zero, does ANY fresh-instance transfer of the repair-loop skill appear — and if the trained model passes the calibrated local gate, does the last blocking benchmark family finally move?",
+   "plain_answer": "Pending — the design is frozen and audited (corpus, matched-exposure training streams, local gate, sealed benchmark seed, standalone reproduction package) but no training has run yet. The pre-registered reading is decisive either way, with one stated caveat: machine variety doubled alongside the tenfold data, so any nonzero transfer is evidence that scale-plus-variety reopens the family (the tenfold data being the dominant change), not a pure more-data-alone result; a zero at 10x closes both the more-data route and the added-variety variant honestly.",
+   "why_it_matters": "This is the program's last permitted mechanism at its last blocking family. A nonzero result prices the next dose rung; a zero kills the whole scale class and redirects the budget to genuinely different mechanisms. Either outcome converts an open question into a measured fact.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Dose",
+     "value": "800 rows",
+     "sub": "10x the failed 80-row episode dose"
+    },
+    {
+     "label": "Baseline",
+     "value": "0/20",
+     "sub": "fresh-instance transfer at 80 rows"
+    },
+    {
+     "label": "Machines",
+     "value": "8",
+     "sub": "4 reused (fresh instances) + 4 new, all legality-bounded"
+    },
+    {
+     "label": "Exposure",
+     "value": "0 delta",
+     "sub": "exact 3-axis match, 2,280 rows/arm"
+    }
+   ],
+   "charts": []
+  },
   "adaptive_cognitive_kernel": {
    "verdict_tag": "Self-rewiring does real work but wins nothing extra",
    "concept_primer": "Picture a calculator that, for each instruction in a program, physically swaps in a fresh set of gears — temporarily rewiring itself — instead of a fixed machine that reads each instruction as an input code. Does the rewiring execute programs any better?",

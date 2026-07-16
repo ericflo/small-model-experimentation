@@ -1,0 +1,21 @@
+experiment_id: qwen35_4b_menders_dose_scale
+status: in-progress
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+parent: hygiene_explore composite (tree 9eb653d7...)
+arms: [replay_ctl3, feedloop_scale]
+dose:
+  treatment_rows: 800
+  reference_failed_dose_rows: 80
+  dose_multiple: 10
+  formalisms: 8
+seeds:
+  construction: 77150
+  namespace: 55140
+  training: 71
+  axis_gate: 88037
+  retention_screens: [88038, 88039, 88040]
+  aggregate_sealed: 78158
+retention_protocol: pooled_k3
+conditional_benchmark: {tier: medium, think_budget: 1024}

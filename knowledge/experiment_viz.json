@@ -49442,6 +49442,41 @@
      "source": "experiments/qwen35_4b_goal_gate_confirmation/runs/benchmark/confirmation_readout.json"
     }
    ]
+  },
+  "qwen35_4b_menders_dose_scale": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered stage completion",
+     "categories": [
+      "intake",
+      "corpus + exposure frozen",
+      "design review",
+      "train both arms",
+      "local gate + dose-response",
+      "conditional medium event"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "The last-family bet: 800 episode-feedback rows (10x the failed dose) across eight legality-bounded invented formalisms, fresh rank-32 adapter from the hygiene_explore parent vs an exposure-matched replay control (2,280 rows/arm, exact zero-delta MILP; the control's 575-row multiplicity-2 repetition is solver-proven minimal with bias direction stated). Non-gating dose-response reading vs the 80-row cell's 0/20 with the dose-x-diversity confound acknowledged; conditional medium event at sealed seed 78158. Nine families hold vs base on every sealed seed; menders alone gates the all-families goal.",
+     "source": "experiments/qwen35_4b_menders_dose_scale/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

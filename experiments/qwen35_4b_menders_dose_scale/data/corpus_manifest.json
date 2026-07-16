@@ -1,0 +1,618 @@
+{
+  "balance": {
+    "feedloop_formalisms": {
+      "balesled": 100,
+      "barrowyoke": 100,
+      "crankwheel": 100,
+      "millround": 100,
+      "sigilslate": 100,
+      "skeinreel": 100,
+      "trinketcord": 100,
+      "troughline": 100
+    },
+    "feedloop_out_of_bound_alternative_counts": {
+      "0": 656,
+      "1": 77,
+      "2": 45,
+      "3": 4,
+      "4": 6,
+      "5": 5,
+      "6": 4,
+      "7": 2,
+      "9": 1
+    },
+    "feedloop_round1_candidate_counts": {
+      "10": 6,
+      "11": 6,
+      "13": 1,
+      "15": 1,
+      "17": 1,
+      "19": 1,
+      "2": 556,
+      "3": 136,
+      "4": 35,
+      "5": 24,
+      "6": 16,
+      "7": 6,
+      "8": 3,
+      "9": 8
+    },
+    "feedloop_rows_with_out_of_bound_alternatives": 144
+  },
+  "banned_vocabulary": {
+    "extended_with_statechain_surface_pools": true,
+    "retained_feedloop_surfaces_not_banned": true,
+    "sha256": "f3aa05d51700b38817c2358dfd08008970325b5ce0d6f667a08535da8ebd1fce",
+    "tokens": 261
+  },
+  "banned_vocabulary_checked": true,
+  "construction_seed": 77150,
+  "corpus": {
+    "kinds": {
+      "u_feedloop": 800
+    },
+    "mix": "feedloop=800",
+    "path": "data/sft_feedloop_scale.jsonl",
+    "rows": 800,
+    "sha256": "080c3603cd3bfca2b261b797be356f97684aedc4f65becd9b50cbb45706bd2c2",
+    "surfaces": {
+      "balesled": 100,
+      "barrowyoke": 100,
+      "crankwheel": 100,
+      "millround": 100,
+      "sigilslate": 100,
+      "skeinreel": 100,
+      "trinketcord": 100,
+      "troughline": 100
+    }
+  },
+  "dose_scale_contract": {
+    "container_names_probed_over_full_pool": [
+      "troughline",
+      "barrowyoke"
+    ],
+    "dose_multiple": 10,
+    "dose_rows": 800,
+    "extended_probe_amount_bound": 12,
+    "extended_probe_scope_by_formalism": {
+      "balesled": "lash/shove brands over the full bale pool; uncouple/walk carry no parameter",
+      "barrowyoke": "heave sizes to 12 AND every container dimension (heave/swap/dump targets) over the full barrow pool; phantom barrows start empty in the probe apply",
+      "crankwheel": "crank settings to 12; harvest/rewind carry no parameter; face names never parameterize an op",
+      "millround": "windlass settings to 12; empty/unwind carry no parameter; vane names never parameterize an op",
+      "sigilslate": "etch sigils over the full sigil pool; slot indices are the slate's four physical slots (structural, not a documented-pool parameter) and are NOT probed past 4",
+      "skeinreel": "reel counts to 12; letout/crosslay carry no parameter",
+      "trinketcord": "knot items over the full trinket pool; shear/mirror carry no parameter",
+      "troughline": "ladle amounts to 12 AND every container dimension (ladle/tip/scoop targets) over the full trough pool; phantom troughs start empty in the probe apply"
+    },
+    "extended_survivors_out_of_bound_only": true,
+    "formalisms": [
+      "troughline",
+      "trinketcord",
+      "crankwheel",
+      "sigilslate",
+      "barrowyoke",
+      "balesled",
+      "millround",
+      "skeinreel"
+    ],
+    "min_round1_candidates": 2,
+    "new_formalisms": [
+      "barrowyoke",
+      "balesled",
+      "millround",
+      "skeinreel"
+    ],
+    "parameterized_ops_bounded_in_spec_text": true,
+    "reference_failed_dose_rows": 80,
+    "retained_formalisms": [
+      "troughline",
+      "trinketcord",
+      "crankwheel",
+      "sigilslate"
+    ],
+    "retained_instances_fresh_via_row_overlap_audit": true,
+    "single_kind_dose": true,
+    "unique_fix_after_round2": true,
+    "wrong_attempt_in_round1_candidates": true
+  },
+  "experiment_id": "qwen35_4b_menders_dose_scale",
+  "generator": "scripts/gen_feedloop_curriculum.py",
+  "row_overlap_audit": {
+    "corpus_messages": 800,
+    "match_rule": "canonical user-message byte equality, zero overlap required",
+    "sources": {
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/axis160_direct.jsonl": {
+        "messages_compared": 1478,
+        "overlap": 0,
+        "sha256": "0cbf3abf04781f3217189dd7b2bdf173d83772b0200b283a7c608dc3d386c1ee"
+      },
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/sft_axis160.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e"
+      },
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/feedloop_state.jsonl": {
+        "messages_compared": 1462,
+        "overlap": 0,
+        "sha256": "187787a8c6b2d652ba46553cecb8fe451b191e277094268f4df921babf621c2b"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/local_tasks_seed88026.jsonl": {
+        "messages_compared": 40,
+        "overlap": 0,
+        "sha256": "079075e0f51dacac9ea6c87eeea4c2d0e5f9258cb05af885d4cc897479d3866f"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/local_tasks_seed88027.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "f568b7d8cd04ce6e4bf270e46a80b4328978ee53a6c3d34a69b3d1c72a77b79f"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/local_tasks_seed88028.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "09b3d71c8b0fd693a21684f60b21dfa125cf3291b24de5878366026c81d34756"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/local_tasks_seed88030.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "9ff826de30c3b32bae1b63af69c3f2a677f6d876cc1046ea22ad41349dcc3511"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/replay_ctl.jsonl": {
+        "messages_compared": 1442,
+        "overlap": 0,
+        "sha256": "ef6f321f93804081eefb7b8ae3ca84fe39a46127604c69d81b803628d020e63c"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/sft_feedloop_state.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "e6d45ed45632f7d6bea8e300f469a4d4c076eb4d8be420d677bd14c27471083b"
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/axis_curriculum.jsonl": {
+        "messages_compared": 1459,
+        "overlap": 0,
+        "sha256": "e2561485ae28c9c374b663af4a002ab67e02cc75ec8994d1d89770e6b198e98a"
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/replay_repeat.jsonl": {
+        "messages_compared": 1435,
+        "overlap": 0,
+        "sha256": "878f501f3c6665982b7b3e9ffb2de675382d6b366b62a61d0a13e6709841c468"
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/sft_axis160.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e"
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/hygiene_explore.jsonl": {
+        "messages_compared": 1460,
+        "overlap": 0,
+        "sha256": "82aa1a78c0a429a48c3db6b94ac84397cea001b041477e7b137b38c21354112f"
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/replay_clean.jsonl": {
+        "messages_compared": 1441,
+        "overlap": 0,
+        "sha256": "2189d160c9c3007ccbaf935478b3354b597c71945f6dbf1c32bf4e670ace0017"
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/sft_hygiene_explore.jsonl": {
+        "messages_compared": 80,
+        "overlap": 0,
+        "sha256": "8b3e97919c62cbb0893add281dc1d3ae881aa0138d0d1721043fec26b0c22cf1"
+      },
+      "experiments/qwen35_4b_menders_dose_scale/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_rank_capacity_vehicle_cell/data/axis160_r64.jsonl": {
+        "messages_compared": 1472,
+        "overlap": 0,
+        "sha256": "336a044557cc6802aeffce497634528b844329d872f64d1c54ea4a63311c990c"
+      },
+      "experiments/qwen35_4b_rank_capacity_vehicle_cell/data/sft_axis160.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e"
+      },
+      "experiments/qwen35_4b_rank_capacity_vehicle_cell/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/local_tasks_seed88033.jsonl": {
+        "messages_compared": 40,
+        "overlap": 0,
+        "sha256": "11257caea2557d1fbc1ac86f4f8f061987a1e77cdb448b0bda1fa0a1422c4696"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/local_tasks_seed88034.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "2264646be93e159184602957d21ef5e3ba650ff1cd6743e4e6b15b8d3726b11e"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/local_tasks_seed88035.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "a8634bac86e5e0ef5185ee7e93ae079c57e4d2c79a7273207e0ed83b515847b4"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/local_tasks_seed88036.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "6ff076d7ef8a20093cf2a027f36a0fd8cf26d03fe87e72f9e76d1108b0751b21"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/replay_ctl2.jsonl": {
+        "messages_compared": 1443,
+        "overlap": 0,
+        "sha256": "0fecf519a8981ea71a9842f0c5a3615cfe60f157e58420d1ddc5e019f44e9477"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/sft_statechain_only.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "ab6c78458eb8a41f42ebee25e79354d42beb558f78bb3d348dd7902ca3a9bad3"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/statechain_only.jsonl": {
+        "messages_compared": 1462,
+        "overlap": 0,
+        "sha256": "2e3a08bb9a50f572df4e904fc7a08c6e0b06317972af74c2119de35e3f524eec"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/budget_commit.jsonl": {
+        "messages_compared": 1464,
+        "overlap": 0,
+        "sha256": "7dbc084809c6ae6b8dd794465a7057095e02b9d598c414fdad32dee7d361c8d7"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/designed_fresh.jsonl": {
+        "messages_compared": 1465,
+        "overlap": 0,
+        "sha256": "6d4dc303bc159c19a1ffd0c60ca7d08ea64b02909366701b345d888482d67f3f"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/replay_repeat.jsonl": {
+        "messages_compared": 1439,
+        "overlap": 0,
+        "sha256": "fa5198c2033dc527fa668f55f8a49865d8015a6d14cc059b319aa058dfad74f0"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/sft_fresh_budget160.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "ecece8e294f0b1c34a086705b05773d6004c6a9a239283aa26ee1c1bbad39800"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/sft_fresh_designed160.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "e599f1563f6e4fe68aa43ce64bbe450c264170fb07dc17dba9ea74e694f284d5"
+      }
+    }
+  },
+  "schema_version": 1,
+  "surface_freshness_audit": {
+    "inherited_tokens": {
+      "policy": "troughline/trinketcord/crankwheel/sigilslate surfaces are retained from the reference cell by design; they appear in the reference corpus and are excluded from the fresh-surface claim",
+      "sha256": "8326d0676715af8dea58e1dacacb19327652a86e357c962fd579ccc316135c73",
+      "tokens": [
+        "troughline",
+        "trinketcord",
+        "crankwheel",
+        "sigilslate",
+        "brann",
+        "clave",
+        "dorst",
+        "grelm",
+        "murd",
+        "prell",
+        "plome",
+        "quenn",
+        "trell",
+        "vosk",
+        "yorv",
+        "zilk",
+        "drasp",
+        "fyne",
+        "golve",
+        "hilm",
+        "juss",
+        "krev",
+        "morv",
+        "nilt",
+        "pryn",
+        "quav",
+        "rulf",
+        "senn",
+        "trough",
+        "troughs",
+        "trinket",
+        "trinkets",
+        "sigil",
+        "sigils"
+      ]
+    },
+    "match_rule": "case-insensitive word-boundary regex, zero hits required",
+    "sources": {
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/axis160_direct.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "0cbf3abf04781f3217189dd7b2bdf173d83772b0200b283a7c608dc3d386c1ee",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/sft_axis160.jsonl": {
+        "hits": 0,
+        "rows": 160,
+        "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/sft_blend.jsonl": {
+        "hits": 0,
+        "rows": 2240,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/feedloop_state.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "187787a8c6b2d652ba46553cecb8fe451b191e277094268f4df921babf621c2b",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/local_tasks_seed88026.jsonl": {
+        "hits": 0,
+        "rows": 40,
+        "sha256": "079075e0f51dacac9ea6c87eeea4c2d0e5f9258cb05af885d4cc897479d3866f",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/local_tasks_seed88027.jsonl": {
+        "hits": 0,
+        "rows": 104,
+        "sha256": "f568b7d8cd04ce6e4bf270e46a80b4328978ee53a6c3d34a69b3d1c72a77b79f",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/local_tasks_seed88028.jsonl": {
+        "hits": 0,
+        "rows": 104,
+        "sha256": "09b3d71c8b0fd693a21684f60b21dfa125cf3291b24de5878366026c81d34756",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/local_tasks_seed88030.jsonl": {
+        "hits": 0,
+        "rows": 104,
+        "sha256": "9ff826de30c3b32bae1b63af69c3f2a677f6d876cc1046ea22ad41349dcc3511",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/replay_ctl.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "ef6f321f93804081eefb7b8ae3ca84fe39a46127604c69d81b803628d020e63c",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/sft_blend.jsonl": {
+        "hits": 0,
+        "rows": 2240,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/sft_feedloop_state.jsonl": {
+        "hits": 0,
+        "rows": 160,
+        "sha256": "e6d45ed45632f7d6bea8e300f469a4d4c076eb4d8be420d677bd14c27471083b",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/axis_curriculum.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "e2561485ae28c9c374b663af4a002ab67e02cc75ec8994d1d89770e6b198e98a",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/replay_repeat.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "878f501f3c6665982b7b3e9ffb2de675382d6b366b62a61d0a13e6709841c468",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/sft_axis160.jsonl": {
+        "hits": 0,
+        "rows": 160,
+        "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/sft_blend.jsonl": {
+        "hits": 0,
+        "rows": 2240,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/hygiene_explore.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "82aa1a78c0a429a48c3db6b94ac84397cea001b041477e7b137b38c21354112f",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/replay_clean.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "2189d160c9c3007ccbaf935478b3354b597c71945f6dbf1c32bf4e670ace0017",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/sft_blend.jsonl": {
+        "hits": 0,
+        "rows": 2240,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/sft_hygiene_explore.jsonl": {
+        "hits": 0,
+        "rows": 80,
+        "sha256": "8b3e97919c62cbb0893add281dc1d3ae881aa0138d0d1721043fec26b0c22cf1",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_menders_dose_scale/data/sft_blend.jsonl": {
+        "hits": 0,
+        "rows": 2240,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_rank_capacity_vehicle_cell/data/axis160_r64.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "336a044557cc6802aeffce497634528b844329d872f64d1c54ea4a63311c990c",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_rank_capacity_vehicle_cell/data/sft_axis160.jsonl": {
+        "hits": 0,
+        "rows": 160,
+        "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_rank_capacity_vehicle_cell/data/sft_blend.jsonl": {
+        "hits": 0,
+        "rows": 2240,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/local_tasks_seed88033.jsonl": {
+        "hits": 0,
+        "rows": 40,
+        "sha256": "11257caea2557d1fbc1ac86f4f8f061987a1e77cdb448b0bda1fa0a1422c4696",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/local_tasks_seed88034.jsonl": {
+        "hits": 0,
+        "rows": 104,
+        "sha256": "2264646be93e159184602957d21ef5e3ba650ff1cd6743e4e6b15b8d3726b11e",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/local_tasks_seed88035.jsonl": {
+        "hits": 0,
+        "rows": 104,
+        "sha256": "a8634bac86e5e0ef5185ee7e93ae079c57e4d2c79a7273207e0ed83b515847b4",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/local_tasks_seed88036.jsonl": {
+        "hits": 0,
+        "rows": 104,
+        "sha256": "6ff076d7ef8a20093cf2a027f36a0fd8cf26d03fe87e72f9e76d1108b0751b21",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/replay_ctl2.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "0fecf519a8981ea71a9842f0c5a3615cfe60f157e58420d1ddc5e019f44e9477",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/sft_statechain_only.jsonl": {
+        "hits": 0,
+        "rows": 160,
+        "sha256": "ab6c78458eb8a41f42ebee25e79354d42beb558f78bb3d348dd7902ca3a9bad3",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/statechain_only.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "2e3a08bb9a50f572df4e904fc7a08c6e0b06317972af74c2119de35e3f524eec",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/budget_commit.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "7dbc084809c6ae6b8dd794465a7057095e02b9d598c414fdad32dee7d361c8d7",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/designed_fresh.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "6d4dc303bc159c19a1ffd0c60ca7d08ea64b02909366701b345d888482d67f3f",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/replay_repeat.jsonl": {
+        "hits": 0,
+        "rows": 1520,
+        "sha256": "fa5198c2033dc527fa668f55f8a49865d8015a6d14cc059b319aa058dfad74f0",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/sft_blend.jsonl": {
+        "hits": 0,
+        "rows": 2240,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/sft_fresh_budget160.jsonl": {
+        "hits": 0,
+        "rows": 160,
+        "sha256": "ecece8e294f0b1c34a086705b05773d6004c6a9a239283aa26ee1c1bbad39800",
+        "tokens_checked": 47
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/sft_fresh_designed160.jsonl": {
+        "hits": 0,
+        "rows": 160,
+        "sha256": "e599f1563f6e4fe68aa43ce64bbe450c264170fb07dc17dba9ea74e694f284d5",
+        "tokens_checked": 47
+      }
+    },
+    "token_inventory_sha256": "db764fc98480658116c73fd6b1800135cb71546a3b1c4aaa8cc85fdcde06c2f6",
+    "tokens": [
+      "barrowyoke",
+      "balesled",
+      "millround",
+      "skeinreel",
+      "askel",
+      "brumm",
+      "dimber",
+      "fluss",
+      "grond",
+      "torvic",
+      "gorbel",
+      "harnik",
+      "jelve",
+      "kimm",
+      "lorsk",
+      "pindle",
+      "ambel",
+      "cresk",
+      "durnic",
+      "hulvet",
+      "ostrel",
+      "twemb",
+      "murled",
+      "ferren",
+      "barrow",
+      "barrows",
+      "sack",
+      "sacks",
+      "heave",
+      "heaved",
+      "yoke",
+      "bale",
+      "bales",
+      "sled",
+      "lash",
+      "lashed",
+      "uncouple",
+      "brand",
+      "brands",
+      "vane",
+      "vanes",
+      "windlass",
+      "creel",
+      "shoe",
+      "reel",
+      "coil",
+      "coils"
+    ]
+  }
+}

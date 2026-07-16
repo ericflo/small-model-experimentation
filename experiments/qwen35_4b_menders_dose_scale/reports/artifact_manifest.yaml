@@ -1,0 +1,35 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_menders_dose_scale"
+external_artifacts:
+  - name: "hygiene_explore parent composite (training/merge base + eval arm)"
+    storage: "large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore"
+    required_for: "train-control/train-candidate/merge-arms/local/benchmark stages"
+    checksum: "tree sha256 9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971"
+    regenerate: "python scripts/rebuild_lineage.py (standalone six-stage rebuild inside THIS cell); originally published by qwen35_4b_hygiene_explore_destack_medium"
+  - name: "base reserialized composite (benchmark arm)"
+    storage: "large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized"
+    required_for: "conditional benchmark stage"
+    checksum: "tree sha256 26d8ee48583adb0fb557d0ff668664949adff0068fa5baafe6f0af68e22fb677"
+    regenerate: "published by qwen35_4b_universal_curriculum"
+  - name: "vendored frozen lineage root adapter (HARD provenance boundary)"
+    storage: "large_artifacts/qwen35_4b_menders_dose_scale/lineage_root/blend"
+    required_for: "scripts/rebuild_lineage.py (standalone-reproducibility gate)"
+    checksum: "adapter_model.safetensors ad2ef4fae785debedf5e50932a79bda97869d3efc212f53d48ccb04c59e25d21; adapter_config.json cd764ae869b8a55526e283dd133e1940896b428839c6abf2e55d6ae2a0b32635"
+    regenerate: "NOT reconstructable: no committed creation receipt exists anywhere in the repository; vendored by bytes from the confirmation cell's package"
+  - name: "trained adapters + merged arm composites (produced by the staged runs)"
+    storage: "large_artifacts/qwen35_4b_menders_dose_scale/{adapters,merged}/{replay_ctl3,feedloop_scale}"
+    required_for: "merge-arms/local/benchmark stages"
+    checksum: "pinned into scripts by the orchestrator after each stage publishes"
+    regenerate: "python scripts/run.py --stage train-control | train-candidate | merge-arms"
+omitted_artifacts:
+  - path: "large_artifacts/qwen35_4b_menders_dose_scale/"
+    reason: "adapter, merged full-weight, and vendored 170MB root-adapter bytes; never checked into git (hash-pinned in the lineage manifest, check_design.py, and the tests)"
+reproducibility:
+  smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_menders_dose_scale/scripts/run.py --smoke"
+  full_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_menders_dose_scale/scripts/run.py --stage train-control (then train-candidate, merge-arms, local, benchmark; one stage per pushed checkpoint)"
+  required_external_artifacts:
+    - "large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore"
+    - "large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized"
+    - "large_artifacts/qwen35_4b_menders_dose_scale/lineage_root/blend"
+notes: "Every data/ artifact regenerates as a pure function of the pinned seeds; --check modes byte-compare. GPU stages additionally require the staged review verdicts (PASS_CONTROL_TRAINING / PASS_CONTROL_MERGE / PASS_LOCAL_EVENT / PASS_BENCHMARK_EVENT) committed at a pushed main HEAD. The standalone lineage package (data/lineage/ + scripts/lineage_trainers/ + scripts/merge_adapter.py + the vendored root) rebuilds the parent composite and, once the stage-7 pins fill, the candidate."

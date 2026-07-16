@@ -1,0 +1,143 @@
+{
+  "absolute_loss_mass_x5_per_arm": 867281,
+  "aggregate_seed_open": false,
+  "benchmark_data_read": false,
+  "deltas": {
+    "feedloop_scale_minus_replay_ctl3": {
+      "absolute_loss_mass_x5": 0,
+      "answer_target": 0,
+      "close_target": 0,
+      "forward": 0,
+      "masked_context": 82652,
+      "nonzero_target": 0,
+      "parent_prefix": 0,
+      "prompt": 82652,
+      "target_span": -82652,
+      "think_target": -82652
+    }
+  },
+  "encoder": "scripts/train_think.py:encode_row",
+  "encoder_sha256": "e0eca2a230dae5d109d418dcb4cc19af05882a770af14350ffd741a8d5e90f01",
+  "experiment_id": "qwen35_4b_menders_dose_scale",
+  "files": {
+    "feedloop_scale": {
+      "absolute_loss_mass": 173456.2,
+      "encoded_rows": 2280,
+      "families": {
+        "burrowmaze": 153,
+        "caravan": 24,
+        "ferrier": 304,
+        "foundry_ledger": 30,
+        "gatepost": 88,
+        "glyphgate": 178,
+        "kilnrite": 393,
+        "loomfix": 145,
+        "packhouse": 34,
+        "patchwheel": 61,
+        "runeward": 17,
+        "stallwright": 53,
+        "universal": 800
+      },
+      "kinds": {
+        "atom": 91,
+        "atom_fc": 130,
+        "episode": 1009,
+        "oracle_trace": 250,
+        "u_feedloop": 800
+      },
+      "max_sequence_tokens": 3172,
+      "min_sequence_tokens": 299,
+      "path": "data/feedloop_scale.jsonl",
+      "rows": 2280,
+      "sha256": "3aee5f5e8731294e0d8a9b9dd08f014ca34ace9f949c2b46aa09aa1e548adc58",
+      "skipped": [],
+      "skipped_rows": 0,
+      "spans_per_epoch": {
+        "absolute_loss_mass_x5": 867281,
+        "answer_target": 23969,
+        "close_target": 4560,
+        "forward": 1878709,
+        "masked_context": 862970,
+        "nonzero_target": 771405,
+        "parent_prefix": 0,
+        "prompt": 862970,
+        "target_span": 1015739,
+        "think_target": 987210
+      }
+    },
+    "replay_ctl3": {
+      "absolute_loss_mass": 173456.2,
+      "encoded_rows": 2280,
+      "families": {
+        "burrowmaze": 179,
+        "caravan": 22,
+        "ferrier": 909,
+        "foundry_ledger": 23,
+        "gatepost": 104,
+        "glyphgate": 299,
+        "kilnrite": 364,
+        "loomfix": 109,
+        "packhouse": 71,
+        "patchwheel": 50,
+        "runeward": 15,
+        "stallwright": 135
+      },
+      "kinds": {
+        "atom": 87,
+        "atom_fc": 171,
+        "episode": 1588,
+        "oracle_trace": 434
+      },
+      "max_sequence_tokens": 3193,
+      "min_sequence_tokens": 299,
+      "path": "data/replay_ctl3.jsonl",
+      "rows": 2280,
+      "sha256": "02275b9553cc7ff6676ed370a91e1e154dd5d768a4ed36ae41a1ae583b92b56b",
+      "skipped": [],
+      "skipped_rows": 0,
+      "spans_per_epoch": {
+        "absolute_loss_mass_x5": 867281,
+        "answer_target": 23969,
+        "close_target": 4560,
+        "forward": 1878709,
+        "masked_context": 780318,
+        "nonzero_target": 771405,
+        "parent_prefix": 0,
+        "prompt": 780318,
+        "target_span": 1098391,
+        "think_target": 1069862
+      }
+    }
+  },
+  "forward_tokens_per_arm": 1878709,
+  "match_axes": [
+    "forward",
+    "nonzero_target",
+    "absolute_loss_mass_x5"
+  ],
+  "max_length": 4096,
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "nonzero_target_tokens_per_arm": 771405,
+  "row_multiplicity": {
+    "candidate_arm_repeated_rows": 0,
+    "control_arm_max_multiplicity": 2,
+    "control_arm_repeated_rows": 575
+  },
+  "rows_per_arm": 2280,
+  "rows_truncated_for_matching": false,
+  "schema_version": 1,
+  "shared_position_aligned_rows": 1280,
+  "skipped_rows": 0,
+  "stage": "independent_exact_exposure_validation",
+  "stream_manifest": "data/stream_manifest.json",
+  "stream_manifest_sha256": "5738f0b8532f0306e4c9b186ad694f1a43d819e44bfc02156a56cf5367f2e305",
+  "targets_modified_for_matching": false,
+  "tokenizer": {
+    "class": "Qwen2Tokenizer",
+    "eos_token_id": 248046,
+    "think_close_token_id": 248069,
+    "vocab_size": 248077
+  },
+  "training_authorized": false
+}

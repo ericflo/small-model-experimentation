@@ -1,0 +1,375 @@
+{
+ "base_reserialized_note": "large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized (weights b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db) is a weight-identical reserialization of the same pinned revision used ONLY as the paired eval arm of the benchmark events; it is never a training or merge input anywhere in this lineage",
+ "candidate_stage": {
+  "base": "the final_merge output (the rebuilt hygiene_explore composite) loaded via the trainer's --model-path; the raw HF base is never the stage-7 training base",
+  "dataset": {
+   "file": "data/feedloop_scale.jsonl",
+   "rows": 2280,
+   "sha256": "3aee5f5e8731294e0d8a9b9dd08f014ca34ace9f949c2b46aa09aa1e548adc58",
+   "source": "materialized IN this cell by scripts/materialize_streams.py as a pure function of the frozen seeds (sft_blend.jsonl 25a9595f... + sft_feedloop_scale.jsonl 080c3603... at namespace seed 55140)"
+  },
+  "hyperparameters": {
+   "alpha": 64,
+   "batch_size": 1,
+   "epochs": 1.0,
+   "grad_accum": 8,
+   "lr": 1e-05,
+   "max_length": 4096,
+   "rank": 32,
+   "w_close": 0.2,
+   "w_think": 0.2
+  },
+  "merge": {
+   "base_model": "the rebuilt hygiene_explore composite via --base-model; never the raw HF base and never base_reserialized",
+   "expected_output": {
+    "note": "TODO-PIN: filled from the committed merge receipt after run.py --stage merge-arms publishes the candidate composite",
+    "pending_fill": true,
+    "weights_sha256": null
+   },
+   "merger": "scripts/merge_adapter.py",
+   "merger_sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+   "output": "runs/lineage/merged/feedloop_scale"
+  },
+  "name": "feedloop_scale",
+  "output": "runs/lineage/stage07_feedloop_scale",
+  "produced": {
+   "adapter_config_sha256": null,
+   "adapter_weights_sha256": null,
+   "note": "TODO-PIN: the orchestrator fills both hashes (and clears pending_fill) from the committed training receipt after run.py --stage train-candidate publishes; produced hashes are verification aids (see the determinism block)",
+   "pending_fill": true,
+   "published_copy": "large_artifacts/qwen35_4b_menders_dose_scale/adapters/feedloop_scale",
+   "verification_aid": true
+  },
+  "role": "the candidate's own training: a FRESH rank-32/alpha-64 adapter on the stage-6 MERGED composite via --model-path (NOT a warm-start chain step; no warm start exists in this cell), followed by its explicit merge onto the same composite",
+  "seed": 71,
+  "stage": 7,
+  "trainer": "scripts/train_think.py",
+  "trainer_sha256": "e0eca2a230dae5d109d418dcb4cc19af05882a770af14350ffd741a8d5e90f01"
+ },
+ "carrier": "warm-start adapter chain: every stage trains QLoRA from the raw HF base plus the previous stage's adapter (--warm-start); only the stage-6 adapter is merged",
+ "determinism": {
+  "expectation": "same repo .venv (pinned torch/transformers/peft/bitsandbytes) + same GPU class (RTX 4090) + fixed seeds reproduce the recorded adapter hashes; on a different stack the produced hashes are verification aids and equivalence must be re-established behaviorally through the trusted benchmark gateway",
+  "produced_hashes_are_verification_aids": true,
+  "seeds_fixed_per_stage": [
+   42,
+   43,
+   44,
+   47,
+   51,
+   55
+  ]
+ },
+ "directive": "standalone-reproducibility gate (AGENTS.md non-negotiables; docs/quality_gates.md, owner directive 2026-07-15): this cell trains and evaluates non-base checkpoints and therefore carries the complete model-reproduction package in its own directory — the confirmation cell's six-stage hygiene_explore package copied byte-identically, extended with this cell's own stage 7 (the candidate's training)",
+ "experiment_id": "qwen35_4b_menders_dose_scale",
+ "final_merge": {
+  "adapter": "stage 6 output (hygiene_explore)",
+  "base_model": "Qwen/Qwen3.5-4B @ 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a (raw HF; the merger default)",
+  "expected_output": {
+   "content_files_sha256": {
+    "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+    "config.json": "a1c80f0efa6f83f631eaa9c25ffa166e3b1f9db395cc3b14374dfc0962261f60",
+    "generation_config.json": "0c46d8aa4f0ae5e611c961f70b87c83fb696043c1e319337708e96f882180de1",
+    "model.safetensors": "e21123443a230ada2c73ded411e0b5b7c2b1459856b2c38e4f1beea8958dc02f",
+    "tokenizer.json": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+    "tokenizer_config.json": "9cf04fffe3d8c3b85e439fb35c7acad0761ab51c422a8c4256d9f887c3a0be7d"
+   },
+   "published_tree_sha256": "9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971",
+   "tree_sha_note": "the published tree sha covers merge_receipt.json, which embeds the ABSOLUTE adapter path of the original merge; a rebuild reproduces every content file byte-identically (model.safetensors e2112344... is the hard check) while the rebuilt merge_receipt.json bytes are path-dependent",
+   "weights_sha256": "e21123443a230ada2c73ded411e0b5b7c2b1459856b2c38e4f1beea8958dc02f"
+  },
+  "measured_as": "the hygiene_explore arm of this cell's three-seed confirmation event (and the hygiene_explore_parent arm of the discovery event at seed 78154)",
+  "merger": "scripts/merge_adapter.py",
+  "merger_sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+  "output": "runs/lineage/merged/hygiene_explore"
+ },
+ "merger": {
+  "base_model": "raw pinned HF revision (the merger's default --base-model); never a local merged composite",
+  "path": "scripts/merge_adapter.py",
+  "sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+  "source": "experiments/qwen35_4b_same_prefix_advantage_routing/scripts/merge_adapter.py"
+ },
+ "model": {
+  "id": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "role": "the raw pinned HF revision is the base model for EVERY training stage and for the final merge; no stage trains from or merges onto a merged checkpoint"
+ },
+ "root_adapter": {
+  "config_sha256": "cd764ae869b8a55526e283dd133e1940896b428839c6abf2e55d6ae2a0b32635",
+  "files": {
+   "README.md": {
+    "sha256": "aeb83ceb33aa84802245cc3bc4abe24160d7d08550ca8278baff84d8b24e9ba4",
+    "size": 5184
+   },
+   "adapter_config.json": {
+    "sha256": "cd764ae869b8a55526e283dd133e1940896b428839c6abf2e55d6ae2a0b32635",
+    "size": 1094
+   },
+   "adapter_model.safetensors": {
+    "sha256": "ad2ef4fae785debedf5e50932a79bda97869d3efc212f53d48ccb04c59e25d21",
+    "size": 169903320
+   },
+   "chat_template.jinja": {
+    "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+    "size": 7756
+   },
+   "tokenizer.json": {
+    "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+    "size": 19989325
+   },
+   "tokenizer_config.json": {
+    "sha256": "9cf04fffe3d8c3b85e439fb35c7acad0761ab51c422a8c4256d9f887c3a0be7d",
+    "size": 1125
+   }
+  },
+  "name": "blend",
+  "provenance_boundary": "HARD BOUNDARY: no committed creation receipt exists for this adapter anywhere in the repository; it is a frozen INPUT vendored by bytes into this cell's own artifact storage, NOT reconstructable from committed receipts. Every stage below IS deterministically reconstructable from this cell alone given these vendored bytes plus the pinned HF base revision",
+  "source_declaration": "declared 'frozen C53 blend source adapter' in qwen35_4b_universal_curriculum's artifact manifest; original location large_artifacts/qwen35_4b_gauntlet_frontier/adapters/blend",
+  "vendored_path": "large_artifacts/qwen35_4b_menders_dose_scale/lineage_root/blend",
+  "weights_sha256": "ad2ef4fae785debedf5e50932a79bda97869d3efc212f53d48ccb04c59e25d21"
+ },
+ "schema_version": 1,
+ "stage": "lineage_manifest",
+ "stages": [
+  {
+   "dataset": {
+    "file": "data/lineage/stage01_replay_refresh.jsonl",
+    "rows": 1520,
+    "sha256": "5d5d7c4b8a4b0a4f270fe8b2ecaebe356c771948d71b0f7bbeead6bfc04308b6",
+    "source": "experiments/qwen35_4b_universal_replay_anchor/data/replay_refresh.jsonl"
+   },
+   "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "w_think": 0.2
+   },
+   "name": "replay_refresh",
+   "output": "runs/lineage/stage01_replay_refresh",
+   "produced": {
+    "adapter_config_sha256": "6b91df7d16d9a306ca3f04d84b4f9397394c12062112ce84a8198fe47e39e4d6",
+    "adapter_weights_sha256": "c296c774d20403c7de9c810bfa825dbbe22bd0683c37692a929bd2bb13e3d36a",
+    "published_copy": "large_artifacts/qwen35_4b_universal_replay_anchor/adapters/replay_refresh",
+    "verification_aid": true
+   },
+   "seed": 42,
+   "stage": 1,
+   "trainer": "scripts/lineage_trainers/train_think_stage12.py",
+   "trainer_sha256": "400e4b856a5899db8805510c9f6d8d11da76b35cf30af16856b46f41abdb4e54",
+   "warm_start": "root_adapter"
+  },
+  {
+   "dataset": {
+    "file": "data/lineage/stage02_designed160.jsonl",
+    "rows": 1520,
+    "sha256": "5159cf41b6474bdc8640cdb2a4a168587b59232ca8171c7b7057fc6bfe1b40c8",
+    "source": "experiments/qwen35_4b_universal_mid_density_token_match/data/designed160.jsonl"
+   },
+   "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "w_think": 0.2
+   },
+   "name": "designed160",
+   "output": "runs/lineage/stage02_designed160",
+   "produced": {
+    "adapter_config_sha256": "0cd3ca7c710e48c264fd1d4c019c304ec0b9e5b13098b89a5b4aa0b171191e58",
+    "adapter_weights_sha256": "f05c13ae66e19bbd29abbd2b62ae3c1a577642efefbdba435879012bf4494654",
+    "published_copy": "large_artifacts/qwen35_4b_universal_mid_density_token_match/adapters/designed160",
+    "verification_aid": true
+   },
+   "seed": 43,
+   "stage": 2,
+   "trainer": "scripts/lineage_trainers/train_think_stage12.py",
+   "trainer_sha256": "400e4b856a5899db8805510c9f6d8d11da76b35cf30af16856b46f41abdb4e54",
+   "warm_start": "stage 1"
+  },
+  {
+   "dataset": {
+    "file": "data/lineage/stage03_close_xi__targeted_standard.jsonl",
+    "filename_note": "the source dataset file is named targeted_standard.jsonl and does NOT match the arm name close_xi; copied as stage03_close_xi__targeted_standard.jsonl to preserve both names",
+    "rows": 320,
+    "sha256": "12fc613bb31a46bcea9acd49b26467656704aa3b3418dab8d920adf057d14f00",
+    "source": "experiments/qwen35_4b_universal_close_weight_token_match/data/targeted_standard.jsonl"
+   },
+   "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "w_close": 0.2,
+    "w_think": 0.2
+   },
+   "name": "close_xi",
+   "output": "runs/lineage/stage03_close_xi",
+   "produced": {
+    "adapter_config_sha256": "de953bd57502ff728a12d1627d5aacab6284b045428ec7b83026388afd8c47ff",
+    "adapter_weights_sha256": "16e9dc75a0e33e182e916600ff6e1d75fc46dfa45e870216e2c149a41253c179",
+    "published_copy": "large_artifacts/qwen35_4b_universal_close_weight_token_match/adapters/close_xi",
+    "verification_aid": true
+   },
+   "seed": 44,
+   "stage": 3,
+   "targeted_close_overrides": {
+    "target_close_kinds": [
+     "u_execute",
+     "u_induct"
+    ],
+    "target_w_close": 1.0
+   },
+   "trainer": "scripts/lineage_trainers/train_think_close_stage3.py",
+   "trainer_sha256": "10b4914cdc6c24858a77750f4ab64074fae5cbf36d98f3e4fc26b8958068fb14",
+   "warm_start": "stage 2"
+  },
+  {
+   "dataset": {
+    "file": "data/lineage/stage04_replay_after_close.jsonl",
+    "rows": 320,
+    "sha256": "541805df2d817707c1e76213e50c8f08fd9caff10d0a3887e1196424b6820be6",
+    "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/replay_after_close.jsonl"
+   },
+   "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "w_close": 0.2,
+    "w_think": 0.2
+   },
+   "name": "replay_after_close",
+   "output": "runs/lineage/stage04_replay_after_close",
+   "produced": {
+    "adapter_config_sha256": "0dfd9bda8a835926a87337782cc09b1e11e841a36f46b99c83fbae9bc89e120f",
+    "adapter_weights_sha256": "bb59d3bd9273ae3bb3dffe54e983590dada69e6e1bdba571009ffedbba05154d",
+    "published_copy": "large_artifacts/qwen35_4b_universal_on_policy_prefix_repair_token_match/adapters/replay_after_close",
+    "verification_aid": true
+   },
+   "seed": 47,
+   "stage": 4,
+   "trainer": "scripts/lineage_trainers/train_think_stage456.py",
+   "trainer_sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4",
+   "warm_start": "stage 3"
+  },
+  {
+   "dataset": {
+    "file": "data/lineage/stage05_designed_fresh.jsonl",
+    "rows": 1520,
+    "sha256": "6d4dc303bc159c19a1ffd0c60ca7d08ea64b02909366701b345d888482d67f3f",
+    "source": "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/designed_fresh.jsonl"
+   },
+   "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "w_close": 0.2,
+    "w_think": 0.2
+   },
+   "name": "designed_fresh",
+   "output": "runs/lineage/stage05_designed_fresh",
+   "produced": {
+    "adapter_config_sha256": "5966461bd9dbfe280b226940e79eec49030cc44e4131089147634df549dc4055",
+    "adapter_weights_sha256": "36f41095c2d628e4706694e7d64d16aba815870a1d3660af0e24b14dc0e6b442",
+    "published_copy": "large_artifacts/qwen35_4b_universal_fresh_surface_budget_commit_target_match/adapters/designed_fresh",
+    "verification_aid": true
+   },
+   "seed": 51,
+   "stage": 5,
+   "trainer": "scripts/lineage_trainers/train_think_stage456.py",
+   "trainer_sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4",
+   "warm_start": "stage 4"
+  },
+  {
+   "dataset": {
+    "file": "data/lineage/stage06_hygiene_explore.jsonl",
+    "rows": 1520,
+    "sha256": "82aa1a78c0a429a48c3db6b94ac84397cea001b041477e7b137b38c21354112f",
+    "source": "experiments/qwen35_4b_hygiene_explore_destack_medium/data/hygiene_explore.jsonl"
+   },
+   "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "w_close": 0.2,
+    "w_think": 0.2
+   },
+   "name": "hygiene_explore",
+   "output": "runs/lineage/stage06_hygiene_explore",
+   "produced": {
+    "adapter_config_sha256": "2174356710c961e3b4df956c6add4b8cc8bd129a01e872c3a20829f46bdeae84",
+    "adapter_weights_sha256": "7e28d6d152e7c2dbf7641d8516b9b47a1465b34967476ab01389d941b9563316",
+    "published_copy": "large_artifacts/qwen35_4b_hygiene_explore_destack_medium/adapters/hygiene_explore",
+    "verification_aid": true
+   },
+   "seed": 55,
+   "stage": 6,
+   "trainer": "scripts/lineage_trainers/train_think_stage456.py",
+   "trainer_sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4",
+   "warm_start": "stage 5"
+  }
+ ],
+ "trainers": {
+  "scripts/lineage_trainers/train_think_close_stage3.py": {
+   "close_channel": true,
+   "sha256": "10b4914cdc6c24858a77750f4ab64074fae5cbf36d98f3e4fc26b8958068fb14",
+   "source": "experiments/qwen35_4b_universal_close_weight_token_match/scripts/train_think_close.py",
+   "stages": [
+    3
+   ],
+   "targeted_close_overrides_supported": true
+  },
+  "scripts/lineage_trainers/train_think_stage12.py": {
+   "close_channel": false,
+   "sha256": "400e4b856a5899db8805510c9f6d8d11da76b35cf30af16856b46f41abdb4e54",
+   "source": "experiments/qwen35_4b_gauntlet_frontier/scripts/train_think.py",
+   "stages": [
+    1,
+    2
+   ]
+  },
+  "scripts/lineage_trainers/train_think_stage456.py": {
+   "close_channel": true,
+   "sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4",
+   "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/train_think.py",
+   "stages": [
+    4,
+    5,
+    6
+   ]
+  },
+  "scripts/train_think.py": {
+   "close_channel": true,
+   "model_path_composite_base": true,
+   "sha256": "e0eca2a230dae5d109d418dcb4cc19af05882a770af14350ffd741a8d5e90f01",
+   "source": "this cell's own per-experiment trainer (byte-identical to the statechain and reference cells' copies)",
+   "stages": [
+    7
+   ]
+  }
+ },
+ "verification": {
+  "fast_no_gpu": ".venv/bin/python -B experiments/qwen35_4b_menders_dose_scale/scripts/rebuild_lineage.py --verify-inputs",
+  "full_gpu_rebuild": ".venv/bin/python -B experiments/qwen35_4b_menders_dose_scale/scripts/rebuild_lineage.py"
+ }
+}
