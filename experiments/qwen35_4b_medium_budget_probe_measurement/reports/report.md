@@ -2,7 +2,7 @@
 
 ## Summary
 
-Model-free construction for the budget probe: the four published composites from the seed-78,150 medium event re-measured once at think budget 8,192 on sealed fresh seed 78,152, asking whether serial-compute room alone moves the menders/rites zeros — the question that decides whether the goal gate's reachable ceiling is 9 or 10 families before the next training dose is funded. Eval-only; nothing trains, nothing promotes.
+The budget probe closed on its preregistered stop: the gateway's hard wall-budget gate refused `base` at medium/tb8192 (safe diagnostic `budget_gate_failed`) before any treated arm ran — the frozen base-first order spent the minimum possible compute on the known risk. The 8× thinking-budget lever is infeasible for paired events at medium; seed 78,152 is spent per the opened ledger record; the budget-movement question survives only at intermediate budgets, where one further preregistered probe is the lever's last believable test.
 
 ## Research Program Fit
 
@@ -14,7 +14,7 @@ See the preregistration.
 
 ## Results
 
-No model event has run.
+`runs/benchmark/medium_tb8192_seed78152_measurement/base.failure.json`: gateway exit 2, `budget_gate_failed`, `score_emitted: false`, `raw_streams_exposed: false`; ledger holds the single opened record; no treated arm consumed compute; no readout exists by construction.
 
 ## Controls
 
@@ -26,7 +26,7 @@ Gateway aggregates and public family scores only; `benchmarks/` never read.
 
 ## Next Stage
 
-Adversarial design review, freeze-commit, CI green, then the single benchmark event.
+Closed. Successor options priced in the README: one intermediate-budget probe (tb4096/tb2048, fresh seed, same stop contract) or accept the 9/10 ceiling and fund the statechain-only dose.
 
 ## Artifact Manifest
 

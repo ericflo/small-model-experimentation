@@ -1132,3 +1132,29 @@ non-SFT levers). (2) The statechain lesson is a proven install and the
 rites-relevant successor is a statechain-only dose (drop the dead
 feedloop rows), which also relieves the retention pressure that came from
 competing against replay's own gain.
+
+## qwen35_4b_medium_budget_probe_measurement (2026-07-15 — BUDGET_GATE_STOP: the 8x thinking lever is infeasible at medium)
+
+The budget probe asked whether serial-compute room alone moves the
+menders/rites floors (the 9-versus-10 goal-ceiling question) and closed on
+its preregistered stop at the minimum possible cost: the trusted gateway's
+hard per-arm wall budget refused `base` at medium/tb8192 (safe diagnostic
+`budget_gate_failed`, exit 2, no score emitted, nothing exposed) before
+any treated arm ran — the frozen order ran base first precisely because
+the line's quick-tier power statements flagged this risk. Seed 78,152 is
+spent by the write-ahead ledger's opened record; no retry and no
+lower-budget re-run are permitted inside the directory.
+
+The delta review had corrected two MAJORs pre-freeze (movement booleans
+scoped to arm/family pairs at zero in the pinned tb1024 event —
+designed_fresh's rites was already 0.1 there, falsifying the original
+premise; and fail-closed benchmark-implementation-signature equality
+before any cross-budget contrast). Both amendments carry to any
+successor.
+
+Standing read: the budget lever survives only at intermediate settings
+(tb2048–4096); base ran medium/tb1024 in 157 s but hygiene_explore was
+the slowest arm (230 s), so either could bind at the gate. One further
+preregistered intermediate-budget probe is the lever's last believable
+test; a second stop closes the lever entirely and fixes the statechain
+successor's 9/10 ceiling as the program's honest position.

@@ -25,3 +25,14 @@
   implementation equality across the two events — the readings now fail
   closed unless the new receipts' shared implementation signature matches
   the reference summary's block, with both signatures surfaced.
+
+## 2026-07-15 — The event: preregistered stop at the first arm
+
+- CI green on the freeze; `--stage benchmark` opened the ledger and ran
+  base first per the frozen order; the gateway refused it with
+  `budget_gate_failed` (exit 2, nothing exposed). Zero treated arms ran.
+- Verdict BUDGET_GATE_STOP exactly as preregistered: failure receipt
+  preserved, seed 78,152 spent, no retry, no lower-budget re-run in this
+  directory. The 8× lever is closed; an intermediate-budget probe under a
+  fresh seed is the lever's last believable test (noting hygiene_explore,
+  not base, was the slowest arm at tb1024 — either could bind).

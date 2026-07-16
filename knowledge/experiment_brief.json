@@ -14381,40 +14381,40 @@
    ]
   },
   "qwen35_4b_medium_budget_probe_measurement": {
-   "verdict_tag": "Design under construction; the single benchmark event has not run",
+   "verdict_tag": "The referee stopped it at the door: eight-fold thinking time exceeds the wall-clock budget",
    "concept_primer": "Three different teaching methods have now failed at the same benchmark family — the debugging-style episodes where the model must use feedback across turns. Every remaining training idea therefore tops out at nine of ten families. But all previous measurements gave the model a tight thinking allowance, and the two stuck families are exactly the ones needing long multi-step reasoning. This experiment re-runs the same four already-built models on the medium benchmark with eight times the thinking room: if the stuck families move at all, the goal is still fully reachable and the venue just changes; if nothing moves, the wall is real and the next dose proceeds with honest expectations.",
    "plain_question": "With eight times the thinking allowance, do the two zero-score families finally move for any existing model — is the ten-family goal still reachable?",
-   "plain_answer": "Nothing has run yet. The frozen plan: the same four models from the last medium measurement each take the benchmark once at the raised thinking budget on a fresh sealed seed; the readings are whether the two stuck families move above zero, the per-family change versus the previous event (honestly labeled as seed-confounded), the recorded all-families verdict, and whether every model stayed inside the wall-clock budget.",
+   "plain_answer": "The probe never got to ask its question. The benchmark's own referee enforces a wall-clock budget per model, and the untouched base — deliberately sent first because this risk was written into the plan — blew past it with eight times the thinking allowance and was refused without a score. Zero extra compute was wasted, the sealed seed is recorded as spent, and the rule book says no retry at a lower budget in this experiment. What survives: the question of whether more thinking time moves the stuck families is still open at in-between budgets, and one more probe there is the last believable test of this lever.",
    "why_it_matters": "This is the cheapest possible test standing between the program and a decision about its goal: fund the next training dose knowing its ceiling is nine, or discover the ceiling is still ten and redirect the venue first.",
-   "verdict_tone": "neutral",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Training runs",
+     "label": "Arms run before the stop",
+     "value": "1",
+     "sub": "base first, by design"
+    },
+    {
+     "label": "Scores exposed",
      "value": "0",
-     "sub": "same four published models"
+     "sub": "the referee refused before scoring"
     },
     {
-     "label": "Thinking budget",
-     "value": "8192",
-     "sub": "vs 1024 in every prior line event"
+     "label": "Base wall time at tb1024",
+     "value": "157s",
+     "sub": "comfortably inside; 8x thinking was not"
     },
     {
-     "label": "Stuck families",
-     "value": "2",
-     "sub": "menders and rites, both at zero"
-    },
-    {
-     "label": "Failed teaching methods",
-     "value": "3",
-     "sub": "at the debugging-style family"
+     "label": "Lever still open at",
+     "value": "tb2048-4096",
+     "sub": "one more probe, fresh seed"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Where the experiment stands",
+     "chart_plain_title": "Where the experiment stopped",
      "chart_read": "Each bar is a preregistered stage; one means complete.",
-     "chart_takeaway": "The contract and pins are frozen; the four-model raised-budget event remains."
+     "chart_takeaway": "Design, review, and freeze completed; the event stopped at the first arm exactly as the preregistered stop outcome specified."
     }
    ]
   }

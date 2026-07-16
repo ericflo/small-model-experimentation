@@ -286,12 +286,21 @@
   skill; no further small designed SFT dose of any pedagogy is believable
   there without a different mechanism CLASS (scale, external scaffolding,
   or non-SFT levers).
+- Completed budget probe (BUDGET_GATE_STOP):
+  `qwen35_4b_medium_budget_probe_measurement` — the gateway's hard wall
+  budget refused base at medium/tb8192 before any treated arm ran
+  (base-first order; no score; seed 78152 spent per the preregistered
+  stop). The 8x lever is closed; tb2048-4096 remains the lever's only
+  believable range, with hygiene_explore (230 s at tb1024, the slowest
+  arm) as likely to bind as base. ONE further intermediate probe max; a
+  second stop closes the lever entirely.
 - FUNDED NEXT (statechain-only dose): 160 statechain rows (or 80 + fresh
   variants) from the hygiene_explore parent, same calibrated gates —
   the installed skill without the dead feedloop rows that dragged
   retention while teaching nothing; then the medium event on a fresh
   sealed seed with the goal gate recorded (rites is the reachable tie;
-  menders stays open and the gate likely lands 9/10).
+  menders stays open and the gate likely lands 9/10 unless the
+  intermediate-budget probe re-opens the ceiling).
 - Queued (calibration notes attached): (a) replay-compounding line — measure
   whether iterated replay rounds keep gaining aggregate and where they saturate;
   the published `replay_repeat` composite (0.5081) is the presumptive parent;

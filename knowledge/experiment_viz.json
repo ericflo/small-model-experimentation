@@ -49262,16 +49262,16 @@
      "categories": [
       "intake",
       "design receipt frozen",
-      "adversarial review",
-      "4-model tb8192 medium event"
+      "adversarial review + fixes",
+      "4-model tb8192 event"
      ],
      "series": [
       {
        "label": "completed checkpoint",
        "values": [
         1,
-        0,
-        0,
+        1,
+        1,
         0
        ]
       }
@@ -49279,8 +49279,8 @@
      "x_label": "preregistered experiment stage",
      "y_label": "completion indicator",
      "y_format": "integer",
-     "note": "Eval-only budget probe: the same four published composites as the seed-78150 medium event, re-measured once at think budget 8192 on sealed fresh seed 78152 through the hardened seed-boundary runner. Readings: menders/rites movement (the 9-vs-10 goal-ceiling question), seed-confounded budget contrast, recorded goal gate, within-budget integrity per arm. Nothing trains.",
-     "source": "experiments/qwen35_4b_medium_budget_probe_measurement/reports/preregistration.md"
+     "note": "BUDGET_GATE_STOP: the trusted gateway's hard wall-budget gate refused base at medium/tb8192 before any treated arm ran (safe diagnostic budget_gate_failed; no score emitted; seed 78152 spent by the write-ahead ledger record). The 8x thinking-budget lever is infeasible for paired events at medium; the budget-movement question survives only at intermediate budgets (tb2048-4096), where one further preregistered probe is the lever's last believable test.",
+     "source": "experiments/qwen35_4b_medium_budget_probe_measurement/runs/benchmark/medium_tb8192_seed78152_measurement/base.failure.json"
     }
    ]
   }
