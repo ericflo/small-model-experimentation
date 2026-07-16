@@ -1,0 +1,83 @@
+{
+  "adapter": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_clean_path_statechain_extension/adapters/replay_ctl4",
+  "adapter_config_sha256": "f1f8e438956b4c2bef18b9c28980030fdec2551f4e1a5acc77c4a21d2fc2caa3",
+  "adapter_weights_sha256": "e103081b620b81dbf323b55f63a64f1543bb51a141a35a427505377684e816a8",
+  "aggregate_seed_open": false,
+  "applied_lora_modules": 128,
+  "benchmark_data_read": false,
+  "command": [
+    "/home/ericflo/Development/small-model-experimentation/.venv/bin/python",
+    "-B",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_clean_path_statechain_extension/scripts/merge_adapter.py",
+    "--adapter",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_clean_path_statechain_extension/adapters/replay_ctl4",
+    "--out",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_clean_path_statechain_extension/merged/replay_ctl4",
+    "--base-model",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_zero_root_lineage_rebuild/merged/zero_root_hygiene_explore"
+  ],
+  "experiment_id": "qwen35_4b_clean_path_statechain_extension",
+  "local_design_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_clean_path_statechain_extension/data/local_design_receipt.json",
+  "local_design_receipt_sha256": "44c3d4f05fbdd782565abda390a263d0643fc155399b05e39eed82e2c1b124ef",
+  "log": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_clean_path_statechain_extension/runs/merges/replay_ctl4.log",
+  "log_sha256": "1517a74d2cc0beb8b31fff5ead2799ee649fcd5f00d6caf815dbee654a2e5825",
+  "merge_receipt_sha256": "bd60398525435b47172b10f3a692da69d3e6aa49b1663fa9503585ce69956250",
+  "merged": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_clean_path_statechain_extension/merged/replay_ctl4",
+  "merger": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_clean_path_statechain_extension/scripts/merge_adapter.py",
+  "merger_sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "name": "replay_ctl4",
+  "nonzero_lora_modules": 128,
+  "output_files": [
+    {
+      "name": "chat_template.jinja",
+      "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+      "size": 7756
+    },
+    {
+      "name": "config.json",
+      "sha256": "a1c80f0efa6f83f631eaa9c25ffa166e3b1f9db395cc3b14374dfc0962261f60",
+      "size": 2829
+    },
+    {
+      "name": "generation_config.json",
+      "sha256": "0c46d8aa4f0ae5e611c961f70b87c83fb696043c1e319337708e96f882180de1",
+      "size": 116
+    },
+    {
+      "name": "merge_receipt.json",
+      "sha256": "bd60398525435b47172b10f3a692da69d3e6aa49b1663fa9503585ce69956250",
+      "size": 958
+    },
+    {
+      "name": "model.safetensors",
+      "sha256": "7ab64488f5dd88200c615283d264032df521853ff097dbcfe50f63f9b7191c1a",
+      "size": 9078620536
+    },
+    {
+      "name": "tokenizer.json",
+      "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+      "size": 19989325
+    },
+    {
+      "name": "tokenizer_config.json",
+      "sha256": "bee8eba30f0eb4af73c0fe2cd06d0f89b657d7819941c438157ec42f7c80ea87",
+      "size": 1123
+    }
+  ],
+  "output_tree_sha256": "68d1489a78ac8f6369429c185f9c12ac49aa8279e42acd07fe4d6c9dc28f13bc",
+  "preflight_git_branch": "main",
+  "preflight_git_head": "4a3c4bb0cca90268ea454d9b9d87489ed7942720",
+  "preflight_git_status": "",
+  "preflight_origin_main": "4a3c4bb0cca90268ea454d9b9d87489ed7942720",
+  "schema_version": 2,
+  "training_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_clean_path_statechain_extension/runs/training/replay_ctl4.json",
+  "training_receipt_sha256": "11d67a36904e1353724fcedd3171d3abe5d48dc922dcd358f05eea8a7b657231",
+  "weight_files": [
+    {
+      "name": "model.safetensors",
+      "sha256": "7ab64488f5dd88200c615283d264032df521853ff097dbcfe50f63f9b7191c1a"
+    }
+  ]
+}

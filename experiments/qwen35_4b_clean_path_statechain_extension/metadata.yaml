@@ -23,11 +23,11 @@ top_level_dirs:
   - "src"
   - "tests"
 file_counts:
-  json: 16
+  json: 18
   jsonl: 18
-  log: 2
+  log: 4
   md: 9
   py: 29
   yaml: 3
-total_files: 77
-total_size_bytes: 40300301
+total_files: 81
+total_size_bytes: 40314335
