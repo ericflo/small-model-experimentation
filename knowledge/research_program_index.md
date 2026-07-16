@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 282
+- Experiments: 283
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 198
+- Assigned experiments: 199
 
 ### Seed Evidence
 
@@ -44,6 +44,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_balanced_discriminative_bridge` (track-z): [README](../experiments/qwen35_4b_balanced_discriminative_bridge/README.md)
 - `qwen35_4b_banking_installs_structure` (new): [README](../experiments/qwen35_4b_banking_installs_structure/README.md)
 - `qwen35_4b_banking_thinking_stack` (new): [README](../experiments/qwen35_4b_banking_thinking_stack/README.md)
+- `qwen35_4b_clean_gym_mix_dose` (new): [README](../experiments/qwen35_4b_clean_gym_mix_dose/README.md)
 - `qwen35_4b_clean_path_statechain_extension` (new): [README](../experiments/qwen35_4b_clean_path_statechain_extension/README.md)
 - `qwen35_4b_code_abi_compiler_heldout_primitive_pilot` (track-z): [README](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/README.md)
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
@@ -380,7 +381,7 @@ Choose or synthesize the next visible example, probe, test, or trace that collap
 Use libraries of verified algorithms, examples, traces, skills, or failures as reusable memory.
 
 - Charter: [algorithmic_memory_and_retrieval](../research_programs/algorithmic_memory_and_retrieval/charter.md)
-- Assigned experiments: 29
+- Assigned experiments: 30
 
 ### Seed Evidence
 
@@ -394,6 +395,7 @@ Use libraries of verified algorithms, examples, traces, skills, or failures as r
 - `feature_factorized_rule_diversity` (track-z): [README](../experiments/feature_factorized_rule_diversity/README.md)
 - `learned_sparse_slot_executor` (track-y): [README](../experiments/learned_sparse_slot_executor/README.md)
 - `qwen35_4b_balanced_discriminative_bridge` (track-z): [README](../experiments/qwen35_4b_balanced_discriminative_bridge/README.md)
+- `qwen35_4b_clean_gym_mix_dose` (new): [README](../experiments/qwen35_4b_clean_gym_mix_dose/README.md)
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
 - `qwen35_4b_constrained_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_constrained_coverage_dpo/README.md)
 - `qwen35_4b_coverage_banking` (new): [README](../experiments/qwen35_4b_coverage_banking/README.md)
@@ -1041,13 +1043,14 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 Install general agentic capability in Qwen3.5-4B via breadth-first expert iteration on a firewall-clean multi-family gym, arbitrated by the blackbox menagerie instrument.
 
 - Charter: [agentic_breadth_installation](../research_programs/agentic_breadth_installation/charter.md)
-- Assigned experiments: 50
+- Assigned experiments: 51
 
 ### Assigned Experiments
 
 - `qwen35_4b_axis_corpus_v2_staged_repair` (new): [README](../experiments/qwen35_4b_axis_corpus_v2_staged_repair/README.md)
 - `qwen35_4b_axis_replay_stack_medium_target_match` (new): [README](../experiments/qwen35_4b_axis_replay_stack_medium_target_match/README.md)
 - `qwen35_4b_axis_stack_readjudication_medium_pilot` (new): [README](../experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/README.md)
+- `qwen35_4b_clean_gym_mix_dose` (new): [README](../experiments/qwen35_4b_clean_gym_mix_dose/README.md)
 - `qwen35_4b_clean_path_statechain_extension` (new): [README](../experiments/qwen35_4b_clean_path_statechain_extension/README.md)
 - `qwen35_4b_counterfactual_evidence_acquisition_curriculum` (new): [README](../experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/README.md)
 - `qwen35_4b_deep_advantage_mopd` (new): [README](../experiments/qwen35_4b_deep_advantage_mopd/README.md)

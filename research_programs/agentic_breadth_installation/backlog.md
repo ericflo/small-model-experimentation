@@ -310,6 +310,25 @@
   local-install→family conversion, and hygiene_explore_parent recorded
   the FIRST 10/10 all-families goal-gate pass (menders 0.017, warren
   0.150 vs 0.100 — single-item margins). One seed ≠ a claim.
+- REOPENED (owner steer, 2026-07-16): "no fundable intake" overstated —
+  the closures cover the TESTED classes, not the idea space. Two new
+  mechanism arguments funded, both derived from the repo's own laws:
+  (a) CLEAN GYM-MIX DOSE (lifecycle 25; replaces a vetoed interpolation
+  idea — owner: do not propagate the prefix lineage, recreate its
+  gym-era ideas as fresh documented content instead) — a mixed 160-row
+  dose on the clean parent covering the prefix's three strength axes
+  with invented executable surfaces: episode-form injection resistance
+  (the 7/7 hygiene mechanism extended to transcripts → sirens),
+  the proven statechain machinery (→ rites), and provable-abstention
+  constraint systems (→ mirage). Attacks the sweep FLOOR on fully clean
+  ground.
+  (b) ENUMERATIVE-REPAIR PROTOCOL (lifecycle 26) — every failed menders
+  dose taught eliminative INFERENCE (closed); none taught systematic
+  ENUMERATION, though C34 (brute search dominates) is a model-level law
+  and protocols are the installable class (4-for-4). Teach: propose
+  legal candidates in canonical order, one per turn, let the rerun
+  verify, stop at success. A genuinely different mechanism the kill
+  rules permit.
 - Completed sweep-rate consolidation (CONSOLIDATED — erratum landed):
   `qwen35_4b_sweep_rate_consolidation` — over ALL six recorded goal-gate
   readings the sweep rate is 2/6 (95% CI [0.04, 0.78]; the informal ~50%

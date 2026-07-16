@@ -289,6 +289,14 @@
    ],
    "caveat": "run_logs/*.log console logs carry no timestamps; logs/experiment_log.md has no dated headings"
   },
+  "qwen35_4b_clean_gym_mix_dose": {
+   "start": "2026-07-16",
+   "end": "2026-07-16",
+   "confidence": "high",
+   "sources": [
+    "dated experiment_log.md heading (2026-07-16 design freeze)"
+   ]
+  },
   "qwen35_4b_clean_path_statechain_extension": {
    "start": "2026-07-16",
    "end": "2026-07-16",

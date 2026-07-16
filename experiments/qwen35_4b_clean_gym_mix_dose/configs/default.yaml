@@ -1,0 +1,28 @@
+experiment_id: qwen35_4b_clean_gym_mix_dose
+status: in-progress
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+parent: zero_root_hygiene_explore composite (tree 414f5829..., lifecycle 22)
+arms: [replay_ctl5, gym_mix]
+treatment: fresh 160-row three-kind gym-mix corpus (62950116...; 60 u_siren_episode + 50 u_statechain + 50 u_mirage_abstain)
+abstain_token: NOWHERE (invented; the family's public IMPOSSIBLE is banned everywhere in the corpus)
+seeds:
+  construction: 77180
+  namespace: 55160
+  training: 79
+  axis_gate: 88046
+  retention_screens: [88048, 88050, 88051]
+  skipped:
+    88043: taken by qwen35_4b_counterfactual_plan_reflection_transfer (retention)
+    88047: taken by qwen35_4b_counterfactual_plan_reflection_transfer (reflection)
+    88049: taken by qwen35_4b_counterfactual_plan_reflection_transfer (action)
+  aggregate_sealed: 78161
+retention_protocol: pooled_k3
+promotion: axis total strict over both controls AND at least 2 of 3 kinds strict over both controls (ties fail a kind)
+conditional_benchmark: {tier: medium, think_budget: 1024, axis_readings: [sirens, rites, mirage]}
+clean_chain:
+  stages: 7
+  package: data/lineage/
+  blend_root: forbidden everywhere (fail-closed)
+prefix_contamination: the retired gym-era prefix composite is never touched or referenced as a model input; only public family descriptions informed the design

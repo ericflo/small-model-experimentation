@@ -14879,6 +14879,44 @@
      "chart_takeaway": "Eight to ten wins every time, never a loss — the distance to a perfect sweep is always the same single family."
     }
    ]
+  },
+  "qwen35_4b_clean_gym_mix_dose": {
+   "verdict_tag": "Design frozen; the clean lineage learns the retired ancestor's lessons — training pending",
+   "concept_primer": "The retired ancestor adapter was good at exactly three benchmark families — resisting embedded trick instructions, following multi-step procedures, and knowing when a question has no forced answer. The owner's directive: don't bring the ancestor back; rebuild what it knew as fresh, fully documented training data instead. This experiment writes 160 new lessons on invented surfaces covering those three skills and trains them into the clean-lineage model whose every prior step is receipted.",
+   "plain_question": "Can fresh, documented gym-style lessons teach the clean model what the undocumented ancestor knew — and does it show up on the three benchmark families?",
+   "plain_answer": "Nothing has trained yet. The frozen plan: sixty trick-instruction episodes (the program's most reliable teaching mechanism, extended to multi-step form), fifty procedure-tracking lessons (the thrice-proven state-chain recipe), and fifty answer-or-abstain puzzles with machine-checked proofs and no surface tells separating the two classes — trained against a matched control, gated on fresh holdouts and the calibrated forgetting rule, then one sealed benchmark shot reading the three target families directly.",
+   "why_it_matters": "A win closes the clean lineage's three-family gap without inheriting a single undocumented byte, raising the odds of full ten-family sweeps on fully documented ground; a null sharpens the conversion law — designed substrate versus inherited substrate — either way the map improves.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Lessons",
+     "value": "160",
+     "sub": "60 trick-episodes + 50 procedures + 50 abstain"
+    },
+    {
+     "label": "Target families",
+     "value": "3",
+     "sub": "the retired ancestor's strengths"
+    },
+    {
+     "label": "Class-tell audit",
+     "value": "0 signals",
+     "sub": "forced vs abstain indistinguishable"
+    },
+    {
+     "label": "Training runs pending",
+     "value": "2",
+     "sub": "control first, then the mix"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Where the experiment stands",
+     "chart_read": "Each bar is a preregistered stage; one means complete.",
+     "chart_takeaway": "Corpus, audits, and gates are frozen; training, the local gate, and the sealed benchmark shot remain."
+    }
+   ]
   }
  }
 }

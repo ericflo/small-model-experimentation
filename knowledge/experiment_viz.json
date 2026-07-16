@@ -49721,6 +49721,41 @@
      "source": "experiments/qwen35_4b_sweep_rate_consolidation/runs/sweep_rate_analysis.json"
     }
    ]
+  },
+  "qwen35_4b_clean_gym_mix_dose": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered stage completion",
+     "categories": [
+      "intake",
+      "corpus + audits frozen",
+      "review (mirage shortcut hunt clean)",
+      "train both arms",
+      "pooled_k3 local gate",
+      "sealed medium event @78161"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "Owner-directed: recreate the retired prefix's gym-era strengths (sirens/rites/mirage) as fresh documented content on the clean zero-root lineage — 60 episode-form injection-resistance rows (the 7/7 hygiene mechanism), 50 proven statechain rows, 50 provable-abstention constraint rows (invented NOWHERE token; classes surface-indistinguishable, audited). 2-of-3-kinds promotion + pooled_k3 retention; conditional four-arm sealed event with per-axis readings vs the parent.",
+     "source": "experiments/qwen35_4b_clean_gym_mix_dose/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

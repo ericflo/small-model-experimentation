@@ -1,0 +1,141 @@
+{
+  "absolute_loss_mass_x5_per_arm": 621517,
+  "aggregate_seed_open": false,
+  "benchmark_data_read": false,
+  "deltas": {
+    "gym_mix_minus_replay_ctl5": {
+      "absolute_loss_mass_x5": 0,
+      "answer_target": 0,
+      "close_target": 0,
+      "forward": 0,
+      "masked_context": 2111,
+      "nonzero_target": 0,
+      "parent_prefix": 0,
+      "prompt": 2111,
+      "target_span": -2111,
+      "think_target": -2111
+    }
+  },
+  "encoder": "scripts/train_think.py:encode_row",
+  "encoder_sha256": "e0eca2a230dae5d109d418dcb4cc19af05882a770af14350ffd741a8d5e90f01",
+  "experiment_id": "qwen35_4b_clean_gym_mix_dose",
+  "files": {
+    "gym_mix": {
+      "absolute_loss_mass": 124303.4,
+      "encoded_rows": 1520,
+      "families": {
+        "burrowmaze": 144,
+        "caravan": 22,
+        "ferrier": 319,
+        "foundry_ledger": 24,
+        "gatepost": 80,
+        "glyphgate": 174,
+        "kilnrite": 329,
+        "loomfix": 110,
+        "packhouse": 37,
+        "patchwheel": 49,
+        "runeward": 16,
+        "stallwright": 56,
+        "universal": 160
+      },
+      "kinds": {
+        "atom": 76,
+        "atom_fc": 129,
+        "episode": 899,
+        "oracle_trace": 256,
+        "u_mirage_abstain": 50,
+        "u_siren_episode": 60,
+        "u_statechain": 50
+      },
+      "max_sequence_tokens": 3193,
+      "min_sequence_tokens": 268,
+      "path": "data/gym_mix.jsonl",
+      "rows": 1520,
+      "sha256": "979cf066115bd37b8b411944e9d3625a5e64f90a7d19a6f79d2619afc7780896",
+      "skipped": [],
+      "skipped_rows": 0,
+      "spans_per_epoch": {
+        "absolute_loss_mass_x5": 621517,
+        "answer_target": 13428,
+        "close_target": 3040,
+        "forward": 1359192,
+        "masked_context": 547024,
+        "nonzero_target": 567805,
+        "parent_prefix": 0,
+        "prompt": 547024,
+        "target_span": 812168,
+        "think_target": 795700
+      }
+    },
+    "replay_ctl5": {
+      "absolute_loss_mass": 124303.4,
+      "encoded_rows": 1520,
+      "families": {
+        "burrowmaze": 168,
+        "caravan": 24,
+        "ferrier": 412,
+        "foundry_ledger": 25,
+        "gatepost": 83,
+        "glyphgate": 198,
+        "kilnrite": 349,
+        "loomfix": 107,
+        "packhouse": 34,
+        "patchwheel": 49,
+        "runeward": 17,
+        "stallwright": 54
+      },
+      "kinds": {
+        "atom": 84,
+        "atom_fc": 131,
+        "episode": 1036,
+        "oracle_trace": 269
+      },
+      "max_sequence_tokens": 3193,
+      "min_sequence_tokens": 308,
+      "path": "data/replay_ctl5.jsonl",
+      "rows": 1520,
+      "sha256": "6deebd63cf8309aaf1e691729214bf122df8e8c1108c69a1025f936391ba7247",
+      "skipped": [],
+      "skipped_rows": 0,
+      "spans_per_epoch": {
+        "absolute_loss_mass_x5": 621517,
+        "answer_target": 13428,
+        "close_target": 3040,
+        "forward": 1359192,
+        "masked_context": 544913,
+        "nonzero_target": 567805,
+        "parent_prefix": 0,
+        "prompt": 544913,
+        "target_span": 814279,
+        "think_target": 797811
+      }
+    }
+  },
+  "forward_tokens_per_arm": 1359192,
+  "match_axes": [
+    "forward",
+    "nonzero_target",
+    "absolute_loss_mass_x5"
+  ],
+  "max_length": 4096,
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "nonzero_target_tokens_per_arm": 567805,
+  "rows_duplicated_for_matching": false,
+  "rows_per_arm": 1520,
+  "rows_truncated_for_matching": false,
+  "schema_version": 1,
+  "shared_position_aligned_rows": 1280,
+  "skipped_rows": 0,
+  "stage": "independent_exact_exposure_validation",
+  "stream_manifest": "data/stream_manifest.json",
+  "stream_manifest_sha256": "22f9a9ec3d1fb49081f31b24f6e854dd1a578c0b57e52f234643ed7c1b206590",
+  "targets_modified_for_matching": false,
+  "tokenizer": {
+    "class": "Qwen2Tokenizer",
+    "eos_token_id": 248046,
+    "think_close_token_id": 248069,
+    "vocab_size": 248077
+  },
+  "training_authorized": false
+}

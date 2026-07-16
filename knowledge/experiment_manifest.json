@@ -1152,6 +1152,42 @@
   },
   {
     "file_counts": {
+      ".json": 14,
+      ".jsonl": 18,
+      ".md": 8,
+      ".py": 30,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_clean_gym_mix_dose",
+    "path": "experiments/qwen35_4b_clean_gym_mix_dose",
+    "primary_readme": "experiments/qwen35_4b_clean_gym_mix_dose/README.md",
+    "primary_report": "experiments/qwen35_4b_clean_gym_mix_dose/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "algorithmic_memory_and_retrieval",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "agentic skills into the one 4B \u2014 provably, on fully documented lineage? composite, tree `414f5829\u2026`, 0.3462 aggregate at sealed 78,159) and lifecycle 23 (`qwen35_4b_clean_path_statechain_extension` \u2014 the statechain install replicates on the clean lineage but its rites CONVERSION does not: rites/sirens/mirage were precisely the retired C53 prefix's strengths, so the conversion law carries a substrate precondition).",
+    "tags": [
+      "latent-state",
+      "memory",
+      "small-model"
+    ],
+    "title": "Clean Gym-Mix Dose",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 73,
+    "total_size_bytes": 39966162
+  },
+  {
+    "file_counts": {
       ".json": 37,
       ".jsonl": 31,
       ".log": 16,

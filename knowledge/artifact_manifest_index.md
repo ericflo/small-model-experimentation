@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 254
-- Manifest files: 603
+- Experiments with manifests: 255
+- Manifest files: 607
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 110 |
+| `other` | 113 |
 | `run-data` | 101 |
-| `standard-artifact` | 127 |
+| `standard-artifact` | 128 |
 
 ## Manifests
 
@@ -69,6 +69,10 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_bucket_belief_probe_ranker` | `run-data` | [manifest](../experiments/qwen35_4b_bucket_belief_probe_ranker/data/bucket_train_examples.manifest.json) |
 | `qwen35_4b_bucket_belief_probe_ranker` | `dataset` | [manifest](../experiments/qwen35_4b_bucket_belief_probe_ranker/data/dataset_manifest.json) |
 | `qwen35_4b_bucket_belief_probe_ranker` | `large-artifact` | [manifest](../experiments/qwen35_4b_bucket_belief_probe_ranker/large_artifacts_manifest.md) |
+| `qwen35_4b_clean_gym_mix_dose` | `other` | [manifest](../experiments/qwen35_4b_clean_gym_mix_dose/data/corpus_manifest.json) |
+| `qwen35_4b_clean_gym_mix_dose` | `other` | [manifest](../experiments/qwen35_4b_clean_gym_mix_dose/data/lineage/lineage_manifest.json) |
+| `qwen35_4b_clean_gym_mix_dose` | `other` | [manifest](../experiments/qwen35_4b_clean_gym_mix_dose/data/stream_manifest.json) |
+| `qwen35_4b_clean_gym_mix_dose` | `standard-artifact` | [manifest](../experiments/qwen35_4b_clean_gym_mix_dose/reports/artifact_manifest.yaml) |
 | `qwen35_4b_clean_path_statechain_extension` | `other` | [manifest](../experiments/qwen35_4b_clean_path_statechain_extension/data/corpus_manifest.json) |
 | `qwen35_4b_clean_path_statechain_extension` | `other` | [manifest](../experiments/qwen35_4b_clean_path_statechain_extension/data/lineage/lineage_manifest.json) |
 | `qwen35_4b_clean_path_statechain_extension` | `other` | [manifest](../experiments/qwen35_4b_clean_path_statechain_extension/data/stream_manifest.json) |
