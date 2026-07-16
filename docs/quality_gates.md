@@ -36,6 +36,37 @@ make new-program PROGRAM=<program_id> TITLE="<Title>" FOCUS="<one-sentence focus
 make new-experiment EXPERIMENT=<experiment_id> PROGRAM=<program_id> TITLE="<Title>"
 ```
 
+## The standalone-reproducibility gate (owner directive, 2026-07-15)
+
+Every experiment must be reproducible from its OWN directory plus the pinned
+base model revision — never by walking another experiment's directory,
+receipts, or `large_artifacts/` tree. Concretely, any cell that trains from,
+merges onto, or even just EVALUATES a non-base checkpoint must contain:
+
+- `data/lineage/` — the complete ordered SFT datasets, copied in as
+  `stage01_<name>.jsonl`, `stage02_<name>.jsonl`, … (byte-identical copies of
+  every dataset in the composite's training history, in training order);
+- `data/lineage/lineage_manifest.json` — per stage: the dataset file + sha256,
+  base (always the pinned model revision at stage 1), adapter rank/alpha,
+  full hyperparameters, the FIXED training seed, and the merge step; plus the
+  expected tree/weights sha256 of each stage's output as a verification aid;
+- `scripts/rebuild_lineage.py` — replays the stages deterministically (same
+  datasets, same order, same seeds → same checkpoints) and verifies each
+  stage's output hash against the manifest.
+
+Cross-experiment SHAs are allowed only as verification aids (asserting a
+rebuilt artifact matches what was measured); they are never the reproduction
+path. Historical experiments predating this gate are grandfathered but new
+cells must comply, including eval-only cells.
+
+Scope boundary (owner clarification, same directive): shared MEASUREMENT
+instruments are repo-level infrastructure and are referenced in place, not
+copied — `benchmarks/` suites and the trusted aggregate gateway
+(`scripts/run_benchmark_aggregate.py`) in particular. The standalone
+requirement covers the model-reproduction path only: datasets, training
+recipes and seeds, adapter/merge steps, and the scripts that execute them
+(trainer and merger are copied into the cell).
+
 ## Landing a new experiment (exact order)
 
 The registration steps have ordering dependencies; doing them out of order produces confusing

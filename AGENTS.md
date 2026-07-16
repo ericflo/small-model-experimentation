@@ -27,6 +27,25 @@ This file plus `docs/` and `knowledge/` are the complete operating context: ever
 - **Never train on benchmarks/ content.** benchmarks/ holds held-out measurement instruments (see benchmarks/README.md). Experiments may RUN a suite via its run.py and record scores — nothing else: never import family modules, never read family sources, generated items, transcripts, or result details, and never put suite items/transcripts in training data. Directory and family names are public metadata; contents are read-forbidden because reading contaminates agent context and can leak into later experiments. Leaked benchmark content cannot be un-leaked.
 - **In ambiguity, follow the repo's evident convention** — not whatever is easiest to set up. If the corpus overwhelmingly does X, do X and solve the tooling friction.
 - Treat the imported tracks as prototypes, not as the repo boundary.
+- **Every experiment is STANDALONE — fully reproducible from its own
+  directory (owner directive, 2026-07-15).** An experiment must never
+  require walking another experiment's directory, receipts, or
+  `large_artifacts/` tree to be reproduced. If a cell merges adapters or
+  continues training from any prior checkpoint, it carries the complete
+  reproduction package itself: a clearly delineated ORDERED list of SFT
+  datasets copied into its own `data/` (e.g. `data/lineage/stage01_*.jsonl`),
+  the exact per-stage recipe (base model revision, adapter rank/alpha,
+  hyperparameters, fixed seeds, merge order), and a rebuild script such
+  that the same datasets in the same order with the same seeds reproduce
+  the same checkpoints. Cross-experiment tree/weights SHAs may appear as
+  *verification aids* (asserting the rebuilt artifact matches what was
+  measured) but never as the reproduction path or a load-bearing
+  dependency. Evaluation-only cells that measure a composite carry that
+  composite's full lineage package too. Scope boundary: shared measurement
+  instruments (`benchmarks/` suites, the trusted aggregate gateway) are
+  repo-level infrastructure referenced in place — the standalone rule
+  covers the model-reproduction path (datasets, training recipes, seeds,
+  merges, and their scripts), not the instruments.
 - Keep experiments self-contained under `experiments/<id>/`.
 - Follow-up benchmarks, replications, and design variants get their own experiment
   directory. Copy the prior harness or artifacts you need into the new experiment
