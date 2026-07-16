@@ -1,0 +1,14 @@
+experiment_id: qwen35_4b_medium_intermediate_budget_probe
+status: model_free_construction
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+arms: [base, designed_fresh, replay_repeat, hygiene_explore]
+event:
+  tier: medium
+  think_budget: 4096
+  seed: 78153
+readings: [budget_movement_scoped, budget_contrast_implementation_verified, recorded_goal_gate, budget_integrity]
+stop_consequence: a second BUDGET_GATE_STOP closes the thinking-budget lever entirely
+training: none
+promotion: none

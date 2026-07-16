@@ -14417,6 +14417,44 @@
      "chart_takeaway": "Design, review, and freeze completed; the event stopped at the first arm exactly as the preregistered stop outcome specified."
     }
    ]
+  },
+  "qwen35_4b_medium_intermediate_budget_probe": {
+   "verdict_tag": "Design under construction; the single benchmark event has not run",
+   "concept_primer": "The previous probe asked whether eight times the thinking allowance would move the two stuck benchmark families — and never got an answer, because the benchmark's referee enforces a wall-clock limit per model and refused the very first model at the door. This successor halves the ask: four times the thinking allowance, one fresh seed, same four models. Either the event fits and finally answers the question, or a second refusal proves the thinking-time lever simply does not fit this benchmark's rules and the program accepts a nine-of-ten ceiling for its next training move.",
+   "plain_question": "Does four-times thinking room fit the benchmark's wall-clock rules — and if it fits, do the stuck families finally move?",
+   "plain_answer": "Nothing has run yet. The frozen plan carries every reviewed correction from the predecessor: movement only counts for families that were exactly zero before, the cross-event comparison is valid only after the benchmark implementation is verified identical, and a stop at the wall-clock gate — by any model, not just the base — closes the thinking-time lever for good.",
+   "why_it_matters": "This is the last cheap test standing between the program and an honest strategic fork: a reopened ten-family goal, or a committed nine-family ceiling with the proven state-tracking dose as the next move.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Thinking budget",
+     "value": "4096",
+     "sub": "vs 8192 refused, 1024 baseline"
+    },
+    {
+     "label": "Training runs",
+     "value": "0",
+     "sub": "same four published models"
+    },
+    {
+     "label": "Slowest arm at tb1024",
+     "value": "230s",
+     "sub": "hygiene_explore — may bind first"
+    },
+    {
+     "label": "Stops before lever closes",
+     "value": "1",
+     "sub": "this is the last budget probe"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Where the experiment stands",
+     "chart_read": "Each bar is a preregistered stage; one means complete.",
+     "chart_takeaway": "The contract and pins are frozen; the four-model tb4096 event remains."
+    }
+   ]
   }
  }
 }

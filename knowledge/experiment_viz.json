@@ -49283,6 +49283,37 @@
      "source": "experiments/qwen35_4b_medium_budget_probe_measurement/runs/benchmark/medium_tb8192_seed78152_measurement/base.failure.json"
     }
    ]
+  },
+  "qwen35_4b_medium_intermediate_budget_probe": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered stage completion",
+     "categories": [
+      "intake",
+      "design receipt frozen",
+      "delta review",
+      "4-model tb4096 medium event"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "The thinking-budget lever's last test: medium/tb4096 on sealed fresh seed 78153, same four composites and post-review readings as the tb8192 probe (which stopped at the gateway's wall-budget gate on its first arm). A second BUDGET_GATE_STOP closes the lever entirely for paired medium events. Nothing trains.",
+     "source": "experiments/qwen35_4b_medium_intermediate_budget_probe/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

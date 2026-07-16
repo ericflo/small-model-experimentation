@@ -3872,6 +3872,37 @@
   },
   {
     "file_counts": {
+      ".json": 1,
+      ".md": 7,
+      ".py": 7,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_medium_intermediate_budget_probe",
+    "path": "experiments/qwen35_4b_medium_intermediate_budget_probe",
+    "primary_readme": "experiments/qwen35_4b_medium_intermediate_budget_probe/README.md",
+    "primary_report": "experiments/qwen35_4b_medium_intermediate_budget_probe/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation"
+    ],
+    "source_track": "new",
+    "summary": "The thinking-budget lever's last test: the same four published composites, medium tier, think budget 4,096, fresh sealed seed \u2014 either the event fits the gateway's wall budget and answers whether serial-compute room moves menders/rites, or a second BUDGET_GATE_STOP closes the lever entirely.",
+    "tags": [
+      "small-model"
+    ],
+    "title": "Medium Intermediate Budget Probe",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 18,
+    "total_size_bytes": 146582
+  },
+  {
+    "file_counts": {
       ".json": 2,
       ".md": 6,
       ".py": 4,
