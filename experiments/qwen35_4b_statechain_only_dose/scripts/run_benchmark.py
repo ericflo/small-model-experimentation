@@ -103,16 +103,24 @@ FROZEN_TREE_SHA256: dict[str, str | None] = {
     FROZEN_PARENT: (
         "9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971"
     ),
-    FROZEN_REPLAY_CONTROL: None,  # TODO-PIN
-    "statechain_only": None,  # TODO-PIN
+    FROZEN_REPLAY_CONTROL: (
+        "95d61d021d382d4a3911694fba0acefb948fd529d3a69f920e7ac48d21b21e97"
+    ),
+    "statechain_only": (
+        "bdea09832ca55f99b6670793ab4607fad63375e6c8ec8f57975c2dbd63ef1a2a"
+    ),
 }
 FROZEN_WEIGHTS_SHA256: dict[str, str | None] = {
     "base": "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db",
     FROZEN_PARENT: (
         "e21123443a230ada2c73ded411e0b5b7c2b1459856b2c38e4f1beea8958dc02f"
     ),
-    FROZEN_REPLAY_CONTROL: None,  # TODO-PIN
-    "statechain_only": None,  # TODO-PIN
+    FROZEN_REPLAY_CONTROL: (
+        "7dd947dfd20447edd9d6e458944d4b48d326bf591a37f309cadc698cc4dee868"
+    ),
+    "statechain_only": (
+        "63bdd70f7d196932c1b1bf9a8232d7a95b867438231a1ce33cd038629d9b79d1"
+    ),
 }
 WEIGHTS_SIZE_BYTES = 9_078_620_536
 # The parent arm carries a committed merge receipt at its source experiment;
@@ -127,11 +135,11 @@ COMMITTED_MERGE_RECEIPTS: dict[str, tuple[str, str | None]] = {
     ),
     FROZEN_REPLAY_CONTROL: (
         f"experiments/{EXP.name}/runs/merges/replay_ctl2.json",
-        None,  # TODO-PIN
+        "5b741f3658ecd5db9ae42b6279b9e0715baddf8050231688c8e48de8ec7e3760",
     ),
     "statechain_only": (
         f"experiments/{EXP.name}/runs/merges/statechain_only.json",
-        None,  # TODO-PIN
+        "c49eda5d37a5e23ad1ae81a9b087b6fef80782abb755a347e6e14809bf84328c",
     ),
 }
 EXPECTED_MERGE_RECEIPT_NAMES = {

@@ -31,3 +31,17 @@
   masked, and the fail-closed None pins were committed instead. No event
   ran (the eval aborts on None by design). This follow-up fills both pins
   correctly; the record stands corrected here.
+
+## 2026-07-15 — Local gate: PROMOTED; benchmark authorized
+
+- The 12-run pooled_k3 gate promoted statechain_only on all eight frozen
+  checks: axis 21/40 strictly over replay_ctl2 (19) and the parent (17);
+  pooled retention 64.67 vs 66.67/67.33 — inside the calibrated bands
+  (−2.0/−2.67); caps and parsed clean. The install replicated a second
+  time, now with retention held.
+- Per-formalism: brewvat 8/7/6, courierloft 5/3/2, muletrack 1/0/0
+  (floor-hard for everyone), peatstove 7/9/9 (the candidate LOST
+  peatstove to both controls — recorded for the surface-generality
+  reading).
+- Benchmark pins filled and verified on disk; PASS_BENCHMARK_EVENT
+  granted; sealed seed 78,154 opens at the next green checkpoint.

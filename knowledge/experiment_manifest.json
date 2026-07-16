@@ -5587,10 +5587,10 @@
   },
   {
     "file_counts": {
-      ".json": 10,
-      ".jsonl": 12,
-      ".log": 4,
-      ".md": 9,
+      ".json": 24,
+      ".jsonl": 24,
+      ".log": 16,
+      ".md": 10,
       ".py": 22,
       ".yaml": 3
     },
@@ -5620,8 +5620,8 @@
       "src",
       "tests"
     ],
-    "total_files": 60,
-    "total_size_bytes": 19102987
+    "total_files": 99,
+    "total_size_bytes": 25176214
   },
   {
     "file_counts": {
