@@ -22,3 +22,12 @@
   ≥3 contract alongside the shipped corpus's measured ≥5.
 - 89 tests green; smoke green; PASS_EXPENSIVE_RUN and
   PASS_CONTROL_TRAINING granted.
+
+## 2026-07-15 — Honest correction on the pin-fill commit
+
+- The commit "Publish merges; authorize local event" (ed5f8d32) claimed
+  the eval trained-tree pins were filled; the fill had actually failed on
+  a format mismatch (`# TODO-PIN` comments) that the command chain
+  masked, and the fail-closed None pins were committed instead. No event
+  ran (the eval aborts on None by design). This follow-up fills both pins
+  correctly; the record stands corrected here.
