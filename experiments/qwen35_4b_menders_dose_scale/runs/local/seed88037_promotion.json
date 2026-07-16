@@ -1,0 +1,303 @@
+{
+  "adjudication_protocol": "pooled_k3",
+  "aggregate_seed": 78158,
+  "aggregate_seed_open": false,
+  "axis_kinds": [
+    "u_feedloop"
+  ],
+  "axis_rows": 40,
+  "axis_surfaces": [
+    "balesled",
+    "barrowyoke",
+    "crankwheel",
+    "millround",
+    "sigilslate",
+    "skeinreel",
+    "trinketcord",
+    "troughline"
+  ],
+  "backend": "vllm_merged_composite",
+  "benchmark_data_read": false,
+  "candidates": [
+    "feedloop_scale"
+  ],
+  "checks": {
+    "axis_total_strictly_beats_parent": false,
+    "axis_total_strictly_beats_replay": false,
+    "retention_pooled_cap_contacts_within_3_of_parent": false,
+    "retention_pooled_cap_contacts_within_3_of_replay": false,
+    "retention_pooled_correct_within_5_of_parent": false,
+    "retention_pooled_correct_within_5_of_replay": true,
+    "retention_pooled_parsed_within_3_of_parent": false,
+    "retention_pooled_parsed_within_3_of_replay": false
+  },
+  "controls": [
+    "replay_ctl3",
+    "hygiene_explore_parent"
+  ],
+  "descriptive_noise": {
+    "delta_sd_pooled": 4.08248290463863,
+    "deltas_vs_parent": {
+      "feedloop_scale": {
+        "by_screen": [
+          -11,
+          0,
+          -5
+        ],
+        "pooled_mean": -5.333333333333333,
+        "sd": 5.507570547286102,
+        "vs": "hygiene_explore_parent"
+      },
+      "replay_ctl3": {
+        "by_screen": [
+          -2,
+          -5,
+          -2
+        ],
+        "pooled_mean": -3.0,
+        "sd": 1.7320508075688772,
+        "vs": "hygiene_explore_parent"
+      }
+    },
+    "reported_not_gated": true,
+    "screen_sd_pooled_levels": 3.6514837167011076
+  },
+  "design_receipt_sha256": "7ac40653e7522a1a24df78e700a2bd8ccdc9df462263071246a5b976f1e3ee03",
+  "dose_response_reading": {
+    "baseline": {
+      "axis_feedloop_rows": 20,
+      "candidate_arm": "feedloop_state",
+      "candidate_feedloop_correct": 0,
+      "cell": "qwen35_4b_feedback_loop_state_chain_install",
+      "dose_rows": 80,
+      "gate_seed": 88026,
+      "promotion_receipt": "experiments/qwen35_4b_feedback_loop_state_chain_install/runs/local/seed88026_promotion.json",
+      "promotion_receipt_sha256": "d232a1be86b53a2f6d295cd735409e13b2343fa0e8403056b183fed14f650fa1"
+    },
+    "consequence": "nonzero fresh-instance u_feedloop transfer at 10x the failed dose is evidence that SCALE-PLUS-DIVERSITY reopens the family (C43: the 80-row install was data-limited; the 10x dose is the dominant delta, but formalism diversity doubled 4->8 with it, so this is not a pure dose-response isolate), even without promotion",
+    "consequence_statements": {
+      "if_nonzero": "nonzero fresh-instance u_feedloop transfer at 10x the failed dose is evidence that SCALE-PLUS-DIVERSITY reopens the family (C43: the 80-row install was data-limited; the 10x dose is the dominant delta, but formalism diversity doubled 4->8 with it, so this is not a pure dose-response isolate), even without promotion",
+      "if_zero": "a 0 at 10x the failed dose closes the dose-scale mechanism class AND the added-diversity variant together for the feedback-loop skill on this parent"
+    },
+    "gating": false,
+    "nonzero_transfer_at_10x": true,
+    "this_cell": {
+      "axis_feedloop_rows": 40,
+      "candidate_feedloop_correct": 1,
+      "dose_multiple_vs_baseline": 10,
+      "dose_rows": 800,
+      "per_surface_correct": {
+        "balesled": 0,
+        "barrowyoke": 0,
+        "crankwheel": 1,
+        "millround": 0,
+        "sigilslate": 0,
+        "skeinreel": 0,
+        "trinketcord": 0,
+        "troughline": 0
+      }
+    }
+  },
+  "eligible": [],
+  "experiment_id": "qwen35_4b_menders_dose_scale",
+  "local_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_menders_dose_scale/runs/local/seed88037.json",
+  "local_receipt_sha256": "95ca0f8456935f209739a43fce8604308f396e61353d2e8260f6bc84509f57a8",
+  "no_absolute_per_kind_floors": true,
+  "per_surface_reported_not_gated": true,
+  "promoted": null,
+  "retention_rows_per_screen": 104,
+  "retention_screens": 3,
+  "schema_version": 1,
+  "screen_seeds": [
+    88038,
+    88039,
+    88040
+  ],
+  "seed": 88037,
+  "single_kind_dose_no_per_kind_split": true,
+  "summaries": {
+    "feedloop_scale": {
+      "adapter": "feedloop_scale",
+      "axis": {
+        "cap_contacts": 7,
+        "correct": 1,
+        "parsed": 33,
+        "per_surface_correct": {
+          "balesled": 0,
+          "barrowyoke": 0,
+          "crankwheel": 1,
+          "millround": 0,
+          "sigilslate": 0,
+          "skeinreel": 0,
+          "trinketcord": 0,
+          "troughline": 0
+        },
+        "rows": 40
+      },
+      "retention": {
+        "correct_by_screen": [
+          61,
+          68,
+          61
+        ],
+        "pooled_means": {
+          "cap_contacts": 13.333333333333334,
+          "correct": 63.333333333333336,
+          "parsed": 90.66666666666667,
+          "route_abstentions": 0.0
+        },
+        "screens": {
+          "88038": {
+            "cap_contacts": 16,
+            "correct": 61,
+            "parsed": 88,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88039": {
+            "cap_contacts": 11,
+            "correct": 68,
+            "parsed": 92,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88040": {
+            "cap_contacts": 13,
+            "correct": 61,
+            "parsed": 92,
+            "route_abstentions": 0,
+            "rows": 104
+          }
+        },
+        "sums": {
+          "cap_contacts": 40,
+          "correct": 190,
+          "parsed": 272,
+          "route_abstentions": 0
+        }
+      }
+    },
+    "hygiene_explore_parent": {
+      "adapter": "hygiene_explore_parent",
+      "axis": {
+        "cap_contacts": 13,
+        "correct": 1,
+        "parsed": 27,
+        "per_surface_correct": {
+          "balesled": 0,
+          "barrowyoke": 0,
+          "crankwheel": 0,
+          "millround": 1,
+          "sigilslate": 0,
+          "skeinreel": 0,
+          "trinketcord": 0,
+          "troughline": 0
+        },
+        "rows": 40
+      },
+      "retention": {
+        "correct_by_screen": [
+          72,
+          68,
+          66
+        ],
+        "pooled_means": {
+          "cap_contacts": 7.333333333333333,
+          "correct": 68.66666666666667,
+          "parsed": 96.66666666666667,
+          "route_abstentions": 0.0
+        },
+        "screens": {
+          "88038": {
+            "cap_contacts": 9,
+            "correct": 72,
+            "parsed": 95,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88039": {
+            "cap_contacts": 6,
+            "correct": 68,
+            "parsed": 98,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88040": {
+            "cap_contacts": 7,
+            "correct": 66,
+            "parsed": 97,
+            "route_abstentions": 0,
+            "rows": 104
+          }
+        },
+        "sums": {
+          "cap_contacts": 22,
+          "correct": 206,
+          "parsed": 290,
+          "route_abstentions": 0
+        }
+      }
+    },
+    "replay_ctl3": {
+      "adapter": "replay_ctl3",
+      "axis": {
+        "cap_contacts": 7,
+        "correct": 1,
+        "parsed": 33,
+        "per_surface_correct": {
+          "balesled": 0,
+          "barrowyoke": 0,
+          "crankwheel": 0,
+          "millround": 0,
+          "sigilslate": 1,
+          "skeinreel": 0,
+          "trinketcord": 0,
+          "troughline": 0
+        },
+        "rows": 40
+      },
+      "retention": {
+        "correct_by_screen": [
+          70,
+          63,
+          64
+        ],
+        "pooled_means": {
+          "cap_contacts": 8.666666666666666,
+          "correct": 65.66666666666667,
+          "parsed": 95.0,
+          "route_abstentions": 0.0
+        },
+        "screens": {
+          "88038": {
+            "cap_contacts": 8,
+            "correct": 70,
+            "parsed": 96,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88039": {
+            "cap_contacts": 11,
+            "correct": 63,
+            "parsed": 92,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88040": {
+            "cap_contacts": 7,
+            "correct": 64,
+            "parsed": 97,
+            "route_abstentions": 0,
+            "rows": 104
+          }
+        },
+        "sums": {
+          "cap_contacts": 26,
+          "correct": 197,
+          "parsed": 285,
+          "route_abstentions": 0
+        }
+      }
+    }
+  }
+}

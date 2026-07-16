@@ -129,3 +129,19 @@ Created as a new experiment scaffold.
   scope records (corpus bytes unchanged), dead recovery branch removed.
 - 154 tests green; smoke green; receipts regenerated (--check twice);
   PASS_EXPENSIVE_RUN and PASS_CONTROL_TRAINING granted.
+
+## 2026-07-16 — Training, the gate, and the null that closes the class
+
+- Both arms trained clean behind green checkpoints at the enlarged stream;
+  merges published; the 12-run gate executed with full authentication.
+- Verdict NOT_PROMOTED: candidate 1/40 on the fresh-instance holdout,
+  exactly equal to parent (1/40) and replay (1/40) — the guess floor, not
+  transfer; retention 63.33 failed the parent band (−5.33) with caps and
+  parsed bands failing against both controls. Seed 78,158 permanently
+  sealed.
+- The dose-response reading adjudicated honestly: the mechanical
+  'nonzero' branch fired (1 > 0) but both untrained controls scored the
+  same 1/40, so the substantive reading is NULL AT CONTROL LEVEL — 0/20
+  at 80 rows, control-floor at 800. The dose-scale mechanism class and
+  the added-diversity variant close together, extending the repair kill
+  rule to every tested SFT dose size and shape.

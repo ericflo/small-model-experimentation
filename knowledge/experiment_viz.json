@@ -49448,33 +49448,39 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Preregistered stage completion",
+     "title": "Eight-formalism fresh-instance holdout (of 40) and pooled retention, seed 88037 gate",
      "categories": [
-      "intake",
-      "corpus + exposure frozen",
-      "design review",
-      "train both arms",
-      "local gate + dose-response",
-      "conditional medium event"
+      "holdout correct (40)",
+      "retention pooled mean (104)"
      ],
      "series": [
       {
-       "label": "completed checkpoint",
+       "label": "hygiene_explore_parent",
        "values": [
         1,
+        68.67
+       ]
+      },
+      {
+       "label": "replay_ctl3",
+       "values": [
         1,
+        65.67
+       ]
+      },
+      {
+       "label": "feedloop_scale (800-row dose)",
+       "values": [
         1,
-        0,
-        0,
-        0
+        63.33
        ]
       }
      ],
-     "x_label": "preregistered experiment stage",
-     "y_label": "completion indicator",
-     "y_format": "integer",
-     "note": "The last-family bet: 800 episode-feedback rows (10x the failed dose) across eight legality-bounded invented formalisms, fresh rank-32 adapter from the hygiene_explore parent vs an exposure-matched replay control (2,280 rows/arm, exact zero-delta MILP; the control's 575-row multiplicity-2 repetition is solver-proven minimal with bias direction stated). Non-gating dose-response reading vs the 80-row cell's 0/20 with the dose-x-diversity confound acknowledged; conditional medium event at sealed seed 78158. Nine families hold vs base on every sealed seed; menders alone gates the all-families goal.",
-     "source": "experiments/qwen35_4b_menders_dose_scale/reports/preregistration.md"
+     "x_label": "gate instrument",
+     "y_label": "correct",
+     "y_format": "number",
+     "note": "NOT_PROMOTED + DOSE_SCALE_NULL: at 10x the failed dose the candidate's fresh-instance transfer is exactly the untrained controls' (1/40 each — the guess floor; the mechanical 'nonzero' branch fired but the strict control comparison adjudicates the null). Dose curve flat at floor: 0/20 at 80 rows, 1/40-at-control at 800. Retention failed the parent band (-5.33). The dose-scale mechanism class and the added-diversity variant close together; menders is closed to every tested SFT configuration; seed 78158 permanently sealed.",
+     "source": "experiments/qwen35_4b_menders_dose_scale/runs/local/seed88037_promotion.json"
     }
    ]
   }

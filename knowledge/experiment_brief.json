@@ -3,35 +3,44 @@
  "generated_on": "2026-07-05",
  "experiments": {
   "qwen35_4b_menders_dose_scale": {
-   "verdict_tag": "Design frozen: ten times the failed dose, aimed at the last blocking family",
+   "verdict_tag": "Ten times the lessons, zero learning: the last teaching route closes",
    "concept_primer": "Nine of the ten benchmark families now beat the untouched base model on every sealed test seed; exactly one family — the one shaped like fix-it-and-check-again work — still ties at zero margin. An earlier experiment tried to teach that skill with 80 practice episodes on invented toy machines and installed nothing (0 of 20 fresh problems solved). Every other cheap route is closed by pre-registered kill rules; the one move still allowed is giving the SAME lesson ten times more data. This cell trains on 800 two-round repair episodes across eight invented machines (the four originals with brand-new instances plus four newly designed ones, every knob explicitly bounded in the written rules), against a matched control that sees exactly the same token exposure, from the same parent model.",
    "plain_question": "At ten times the dose that scored zero, does ANY fresh-instance transfer of the repair-loop skill appear — and if the trained model passes the calibrated local gate, does the last blocking benchmark family finally move?",
-   "plain_answer": "Pending — the design is frozen and audited (corpus, matched-exposure training streams, local gate, sealed benchmark seed, standalone reproduction package) but no training has run yet. The pre-registered reading is decisive either way, with one stated caveat: machine variety doubled alongside the tenfold data, so any nonzero transfer is evidence that scale-plus-variety reopens the family (the tenfold data being the dominant change), not a pure more-data-alone result; a zero at 10x closes both the more-data route and the added-variety variant honestly.",
+   "plain_answer": [
+    "The scale bet returned the cleanest possible no. After ten times the training data — eight hundred feedback-repair lessons across eight invented machines — the trained model solved exactly one of forty fresh test episodes, the same single lucky guess as both untrained comparison models. More lessons did not overcome the zero; the skill simply does not install this way. Forgetting also crept past the allowed margin against the parent. With this, every supervised-teaching route to the one family blocking the program's ten-family goal is closed by pre-written rules: three teaching styles, doses from eighty to eight hundred lessons, and the thinking-time levers. What remains: a fundamentally different training class (learning from the model's own attempts with live feedback), or standing on the program's honest position — the full ten-family sweep demonstrated on two of four sealed seeds."
+   ],
    "why_it_matters": "This is the program's last permitted mechanism at its last blocking family. A nonzero result prices the next dose rung; a zero kills the whole scale class and redirects the budget to genuinely different mechanisms. Either outcome converts an open question into a measured fact.",
-   "verdict_tone": "neutral",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Dose",
-     "value": "800 rows",
-     "sub": "10x the failed 80-row episode dose"
+     "label": "Fresh-instance transfer",
+     "value": "1/40",
+     "sub": "= both untrained controls exactly"
     },
     {
-     "label": "Baseline",
-     "value": "0/20",
-     "sub": "fresh-instance transfer at 80 rows"
+     "label": "Dose curve",
+     "value": "0/20 → 1/40",
+     "sub": "80 rows → 800 rows: flat at floor"
     },
     {
-     "label": "Machines",
-     "value": "8",
-     "sub": "4 reused (fresh instances) + 4 new, all legality-bounded"
+     "label": "Retention vs parent",
+     "value": "-5.33",
+     "sub": "outside the calibrated ±5 band"
     },
     {
-     "label": "Exposure",
-     "value": "0 delta",
-     "sub": "exact 3-axis match, 2,280 rows/arm"
+     "label": "SFT routes now closed",
+     "value": "all",
+     "sub": "3 pedagogies × 80-800 rows + budget levers"
     }
    ],
-   "charts": []
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Fresh-episode test scores after ten times the training",
+     "chart_read": "Three bars: the model trained on 800 repair lessons beside its untrained parent and a matched control.",
+     "chart_takeaway": "One in forty for all three — the training installed nothing the untrained models did not already have."
+    }
+   ]
   },
   "adaptive_cognitive_kernel": {
    "verdict_tag": "Self-rewiring does real work but wins nothing extra",

@@ -326,7 +326,15 @@
   and 78156 8/10 with ZERO losses, blocked by menders 0-margin ties plus
   one warren tie). Demonstrated, not confirmed; the gate is localized to
   menders alone. First standalone-compliant cell (full lineage package).
-- FUNDED NEXT (menders dose-scale intake): the one permitted mechanism
+- Completed dose-scale null (NOT_PROMOTED + DOSE_SCALE_NULL):
+  `qwen35_4b_menders_dose_scale` — 10x dose, 8 formalisms: candidate 1/40
+  on fresh instances = both untrained controls exactly (guess floor);
+  retention failed the parent band (-5.33); dose curve flat at floor
+  (0/20 at 80 rows, control-level at 800); seed 78158 sealed. MENDERS IS
+  CLOSED TO SFT at every tested point (3 pedagogies x 80-800 rows x 4-8
+  formalisms + budget levers). Remaining classes: on-policy episode
+  training (own charter, heavy) or stand on demonstrated-not-confirmed.
+- (superseded) FUNDED NEXT (menders dose-scale intake): the one permitted mechanism
   class — 800+ episode-feedback rows (10x the failed doses; C43: partial
   installs were data-limited) from the hygiene_explore parent, calibrated
   gates, success criterion known exactly: any reliable nonzero menders

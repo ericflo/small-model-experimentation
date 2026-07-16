@@ -2,7 +2,7 @@
 
 Lifecycle 20 — the dose-SCALE cell aimed at the last blocking family. Nine benchmark families now hold vs base on every sealed seed; menders alone gates the all-families goal (0-margin ties). Three small-dose pedagogies failed at it; the scale hypothesis (C43: partial installs were data-limited) is the one permitted mechanism class. The dose: 800 episode-feedback rows — 10x the reference cell's failed 80-row dose (u_feedloop scored 0/20 on fresh instances there).
 
-**Status:** in-progress · since 2026-07-16 · design frozen and reviewed (zero majors; the pool-bind deviation adjudicated acceptable by all four lenses); training, the calibrated gates, and the conditional sealed-seed event remain
+**Status:** finished · 2026-07-16 · verdict NOT_PROMOTED + DOSE_SCALE_NULL — at 10× the failed dose (800 rows, eight formalisms) the candidate scored 1/40 on fresh instances, exactly equal to BOTH untrained controls (1/40 each): no transfer above controls; the frozen 'nonzero' branch fired mechanically but the strict control comparison adjudicates the null; retention also failed the parent band (−5.33). The dose-scale mechanism class and its added-diversity variant close together; seed 78,158 permanently sealed
 
 ## Research Program
 
@@ -45,11 +45,13 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_menders_dose
 
 ## Results
 
-The staged runs have not started: control training, candidate training, merges, the eight-formalism holdout plus pooled_k3 retention gate, the preregistered non-gating dose-response reading against the 80-row cell's 0/20, and the conditional medium event at sealed seed 78,158 all remain. Separate deployable evidence from oracle/hidden evaluation. The dose-response reading (candidate u_feedloop axis total vs the frozen 0/20 baseline, per formalism) is recorded either way and never feeds the promotion verdict.
+All staged runs completed clean (control loss 0.3899, candidate 0.5298 at 2,280 rows/285 updates each; merges pinned; 12-run authenticated gate). The gate: candidate 1/40 on the eight-formalism fresh-instance holdout — exactly equal to the parent (1/40) and the replay control (1/40); every strict axis bar failed; pooled retention 63.33 vs parent 68.67 (−5.33, outside the ±5 band) and vs replay 65.67 (−2.33, inside); caps and parsed bands failed against both. NOT promoted; sealed seed 78,158 never opened.
+
+The dose-response reading, honestly adjudicated: 80 rows → 0/20 (0%); 800 rows → 1/40 (2.5%) with BOTH untrained controls also at 1/40 (2.5%) — the mechanical 'nonzero' trigger fired but the preregistered strict control comparison reads it as the guess floor, not transfer. Per the frozen zero-consequence's substance, the dose-scale mechanism class AND the added-diversity variant close together. Separate deployable evidence from oracle/hidden evaluation. The dose-response reading (candidate u_feedloop axis total vs the frozen 0/20 baseline, per formalism) is recorded either way and never feeds the promotion verdict.
 
 ## Interpretation
 
-Pending. The frozen consequences: any nonzero fresh-instance transfer at 10x reopens the last family with a scale-plus-diversity reading; a zero closes the dose-scale mechanism class and the added-diversity variant together, leaving the zero-root rebuild and on-policy episode training as the remaining intakes.
+The map hardens decisively. The menders-shaped skill (two-round eliminative repair) is not installable in this model by ANY tested SFT configuration: three pedagogies (asserted, demonstrated-search, episode-feedback), doses from 80 to 800 rows, four to eight surface formalisms, and the deployment budget levers are ALL closed by preregistered kill rules and null results. This extends C38/C48: the eliminative-inference wall is dose-independent in the tested range — more data does not overcome a zero, unlike C43's data-limited partial install (which amplified a 0.087, not a 0). What remains believable for menders: on-policy episode training (a genuinely different mechanism class, its own charter) — or accepting the program's demonstrated-not-confirmed position, which stands at two full 10/10 sweeps across four sealed seeds with nine families holding everywhere. The zero-root lineage rebuild remains queued as the provenance question.
 
 ## Knowledgebase Update
 

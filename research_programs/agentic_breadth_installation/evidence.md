@@ -1249,3 +1249,34 @@ installs were data-limited; all failed menders attempts were 80–160
 rows) with a precisely-known success criterion — any reliable nonzero
 menders yield completes the gate; the zero-root lineage rebuild stays
 queued as the provenance question.
+
+## qwen35_4b_menders_dose_scale (2026-07-16 — NOT_PROMOTED + DOSE_SCALE_NULL: the last SFT route to menders closes)
+
+The scale bet ran the full ladder clean (fresh rank-32 adapters from the
+hygiene_explore parent at an enlarged 2,280-row stream, 285 updates,
+exact zero-delta exposure with the control's solver-proven-minimal
+multiplicity-2 repetition disclosed and direction-of-bias stated; the
+four new formalisms hand-simulated clean in review) and returned the
+cleanest possible null: at 10× the failed dose the candidate scored 1/40
+on the eight-formalism fresh-instance holdout — EXACTLY equal to both
+untrained controls (1/40 each). The frozen "nonzero" branch fired
+mechanically (1 > 0) but the strict control comparison adjudicates it as
+the guess floor. The dose curve is flat at floor: 0/20 at 80 rows,
+control-level at 800. Retention fell outside the parent band (63.33 vs
+68.67, −5.33) with caps/parsed bands failing against both controls — the
+larger dose costs more and buys nothing. Sealed seed 78,158 was never
+opened.
+
+Standing law, now closed at every tested point: the menders-shaped
+eliminative-repair skill is NOT installable in this model by supervised
+fine-tuning — three pedagogies (asserted repair, demonstrated bounded
+search, episode feedback), doses 80→800 rows, surface diversity 4→8
+formalisms, and the deployment thinking-budget levers are all closed by
+preregistered kill rules and adjudicated nulls. Unlike C43's data-limited
+partial install (which amplified a 0.087), scale does not overcome a
+zero: this hardens C38/C48 into a dose-independent wall for the
+eliminative-inference class. Remaining believable classes for menders:
+on-policy episode training (its own charter, genuinely different
+mechanism), or standing on the program's demonstrated-not-confirmed
+position (two 10/10 sweeps across four sealed seeds; nine families hold
+everywhere; the aggregate transfer unconditional at 4/4).
