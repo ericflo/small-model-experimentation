@@ -70,3 +70,14 @@
   receipt and the normalized-hash pin verified byte-stable post-fill
   (gen --check exit 0) — the review-installed mechanism working as
   designed.
+
+## 2026-07-16 — Post-fill fixture repair (test-only)
+
+- One tamper-fixture in the normalized-pin test suite hardcoded the
+  pre-fill `= None` slot form and broke after the legitimate post-merge
+  pin fill; the previous commit's smoke failure was this and was masked
+  by a command chain — recorded honestly. Fixed test-only with a
+  `_none_baseline()` canonicalizer so the mutation fixtures are
+  fill-state-agnostic; no pinned code changed (the normalized hash and
+  the design receipt are untouched; gen --check still passes). 96 tests
+  green; smoke green.

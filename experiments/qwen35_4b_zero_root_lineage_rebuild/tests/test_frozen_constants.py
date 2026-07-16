@@ -301,6 +301,22 @@ class TestNormalizedRunnerPin(unittest.TestCase):
         self.assertNotIn('"zero_root_hygiene_explore": None,', normalized)
         self.assertNotIn("ZERO_ROOT_MERGE_RECEIPT_SHA256 = None", normalized)
 
+    def _none_baseline(self) -> str:
+        """Canonicalize the three pin slots back to None regardless of the
+        file's live fill state (the runner is legitimately pin-filled after
+        the merge; these mutation fixtures need the pre-fill form)."""
+        text = self.text
+        for _, pattern, count in gd.PIN_SLOT_PATTERNS:
+            compiled = re.compile(pattern, re.MULTILINE)
+
+            def to_none(match):
+                tail = match.group(3) if match.re.groups >= 3 else ""
+                return f"{match.group(1)}None{tail}"
+
+            text, n = compiled.subn(to_none, text)
+            self.assertEqual(n, count)
+        return text
+
     def _filled_variant(self, values: list[str]) -> str:
         """Fill the three pin slots (in file order) with quoted 64-hex."""
         text = self.text
@@ -410,12 +426,13 @@ class TestNormalizedRunnerPin(unittest.TestCase):
         )
 
     def test_a_drifted_pin_slot_fails_closed_instead_of_hashing(self):
+        baseline = self._none_baseline()
         mutated = _delete_line_containing(
-            self.text, "ZERO_ROOT_MERGE_RECEIPT_SHA256 = None"
+            baseline, "ZERO_ROOT_MERGE_RECEIPT_SHA256 = None"
         )
         with self.assertRaises(ValueError):
             gd.normalize_run_benchmark_source(mutated)
-        malformed = self.text.replace(
+        malformed = baseline.replace(
             "ZERO_ROOT_MERGE_RECEIPT_SHA256 = None",
             'ZERO_ROOT_MERGE_RECEIPT_SHA256 = "not-a-sha"',
             1,
