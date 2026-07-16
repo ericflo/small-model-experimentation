@@ -2530,32 +2530,32 @@
    ]
   },
   "qwen35_4b_deep_advantage_mopd": {
-   "verdict_tag": "Five updates stayed local",
+   "verdict_tag": "Right teacher signal, wrong update recipe",
    "concept_primer": "Imagine a strong all-round apprentice and two specialists standing at the same half-finished job. The deep specialist is copied only when separate trial runs show that it finishes that exact job better than both the apprentice and the other specialist.",
    "plain_question": "Can carefully chosen lessons from the deep specialist improve one already blended small model without sacrificing its faster skills?",
-   "plain_answer": "The teacher choice and the small safety update both passed. Deep won on two fresh groups, and five training steps changed unrelated logits only slightly while improving the lesson-matching loss. That authorizes the full four-round trial; no improved-capability result exists yet.",
-   "why_it_matters": "The study has cleared the two common false starts: choosing a teacher that does not really help and making a weight edit that immediately spills everywhere. The remaining test is the important one: whether the full update creates one checkpoint that beats the specialists, runtime switching, controls, and eight tries.",
-   "verdict_tone": "neutral",
+   "plain_answer": "No. The deep specialist really was the better teacher on selected states, and copying it worked slightly better than copying the wrong teacher or training on matched non-winning states. But after four rounds the resulting model still scored below the deep specialist, below a simple weight blend, and far below giving the original blend eight tries. Broad retention and untouched transfer survived, so this is a failure to add capability rather than a general collapse.",
+   "why_it_matters": "Finding the right lesson is not enough if the training update does not survive in the deployed model. The next experiment should prove a tiny update directly in deployment precision before spending on another large self-distillation run; smarter two-teacher routing comes only after that works.",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Unrelated-logit drift after five steps",
-     "value": "0.0276",
-     "sub": "well below the frozen 0.10 safety ceiling on 20 exact probes"
+     "label": "Trained model vs deep specialist",
+     "value": "−0.0068",
+     "sub": "average two-block score gap; both blocks were below the stronger source"
     },
     {
-     "label": "Output uncertainty lost",
-     "value": "3.1%",
-     "sub": "below the frozen 10% collapse ceiling"
+     "label": "Trained model vs eight tries",
+     "value": "−0.1692",
+     "sub": "a large repeated loss to the matched-compute sampling baseline"
     },
     {
-     "label": "Exact lesson-matching loss",
-     "value": "0.0129 → 0.0117",
-     "sub": "improved rather than merely staying under the safety ceiling"
+     "label": "Right teacher vs wrong teacher",
+     "value": "+0.0053",
+     "sub": "a small positive two-block signal, but not enough to beat the source"
     },
     {
-     "label": "Deep wins available online",
-     "value": "90",
-     "sub": "enough to freeze 60 lessons plus 20 reminders and 60 matched controls"
+     "label": "Untouched transfer families",
+     "value": "+0.0156 / +0.0106",
+     "sub": "both improved, confirming the negative was not broad capability collapse"
     }
    ],
    "charts": [
@@ -2563,19 +2563,19 @@
      "index": 0,
      "chart_plain_title": "Five update steps barely moved unrelated logits",
      "chart_read": "Two short bars show the average unrelated-logit movement and the relative loss of output uncertainty on 20 exact before-and-after probes. Smaller is safer; both are far below one tenth.",
-     "chart_takeaway": "The small pilot cleared its safety gate, and its exact lesson-matching loss also improved, so the full four-round test may proceed."
+     "chart_takeaway": "The small pilot genuinely cleared its safety gate, but the later sealed evaluation shows that local training safety did not imply a stronger deployed model."
     },
     {
      "index": 1,
      "chart_plain_title": "Deep wins on separate check runs in both fresh blocks",
      "chart_read": "Each block has two positive bars: deep's score edge over the starting blend and over the quick specialist. Taller is better, but merely staying above zero in both untouched blocks is the key replication test.",
-     "chart_takeaway": "Deep's local teaching advantage repeated against both alternatives, so the experiment may now test whether that signal can be installed safely into one checkpoint."
+     "chart_takeaway": "Deep's local teaching advantage was real and repeated, but the completed experiment shows that this training recipe could not turn it into a model stronger than deep itself."
     },
     {
      "index": 2,
      "chart_plain_title": "The proposed training and its two sharp controls receive identical lesson counts",
      "chart_read": "Each group has a tall 60-unit capability bar and a shorter 20-unit reminder bar. Only the source of the 60 capability lessons changes: verified deep wins, matched places where deep did not win, or the wrong specialist on the verified-win states.",
-     "chart_takeaway": "Because all three arms get the same 80 lessons, a primary win can be attributed to choosing both the right state and the right specialist rather than to extra training."
+     "chart_takeaway": "The matched arms reveal a small benefit from choosing the right state and teacher, while the source and sampling losses show that this benefit did not become capability installation."
     }
    ]
   },

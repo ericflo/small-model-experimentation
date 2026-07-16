@@ -1,16 +1,18 @@
 # Qwen3.5-4B Deep-Advantage MOPD
 
-**Status:** in-progress · since 2026-07-12 · Both sealed blocks reject the frozen capability rule, and matched-compute sampling wins decisively; the final wrong-teacher control is running for the terminal receipt.
+**Status:** finished · 2026-07-12 to 2026-07-15 · Sealed negative: deep-only routed MOPD preserved retention and transfer but lost to the deep source, ordinary interpolation, and matched-compute sampling; benchmarking was not authorized.
 
 ## Status
 
 **Fresh qualification, exact-logit locality, three four-round integrations,
-and all control-construction gates passed, but sealed block 0 already rejects
-the capability claim. All three MOPD seeds trail the better source on the
-registered deep cell macro, ordinary interpolation matches their tradeoff, and
-seed 42 loses decisively to soup best-of-eight on both sealed blocks.** The
-final wrong-teacher arm continues only to complete the frozen terminal analysis
-and control ranking. This is a new result-bearing successor to
+and all control-construction gates passed, but the two-block terminal analysis
+rejects capability installation. Primary seed 42 trails deep by `-0.006845`
+joint, trails soup by `-0.001300`, trails soup75 by `-0.003706`, and trails
+soup best-of-eight by `-0.169239`; seeds 43/44 also trail deep. Retention and
+transfer pass, while correct-teacher MOPD beats wrong-teacher and non-advantage
+controls only modestly.** The frozen decision emitted
+`stop_before_benchmark_cli`; no benchmark was opened. This is a new
+result-bearing successor to
 `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal
 result.
 
@@ -243,20 +245,20 @@ gate. Primary seed 43 then scored `0.576097` deep and `0.804167` quick,
 Primary seed 44 then scored `0.572010` deep and `0.805422` quick, `−0.008058`
 and `−0.004607` versus the source, with 4,393,570 sampled tokens. All three
 optimizer seeds therefore agree on a negative block-0 deep sign. The frozen
-success condition is unreachable, but the full campaign continues to quantify
+success condition became unreachable, but the full campaign continued to quantify
 the control landscape and produce the registered terminal receipt. The quick
 source then scored `0.529284` deep and `0.775684` quick, respectively
 `−0.050784` and `−0.034344` versus the deep source, using 4,773,735 sampled
 tokens. Thus the deep source is the better source on both block-0 strata; all
 three MOPD seeds fall between the two sources, but none improves on the better
-source. The frozen soup comparison is running next.
+source. The frozen soup comparison followed.
 The immutable 40/60 soup then scored `0.571744` deep and `0.811128` quick,
 `−0.008324` and `+0.001099` versus the deep source, using 4,392,180 sampled
 tokens. Each MOPD seed is slightly above soup on deep (`+0.005261`,
 `+0.004353`, and `+0.000266`) but below it on quick (`−0.015903`,
 `−0.006961`, and `−0.005706`). The update therefore does not dominate its own
-initialization on block 0. The registered interpolation controls are running
-next. Soup25 then scored `0.543311` deep and `0.801212` quick, `−0.036757`
+initialization on block 0. The registered interpolation controls then ran.
+Soup25 scored `0.543311` deep and `0.801212` quick, `−0.036757`
 and `−0.008817` versus the deep source, using 4,693,690 sampled tokens. It is
 also dominated by the 40/60 initialization by `−0.028434` deep and `−0.009916`
 quick, so this interpolation does not explain the treatment's position. Soup50
@@ -264,7 +266,7 @@ then scored `0.562536` deep and `0.812542` quick, `−0.017532` and `+0.002514`
 versus the deep source, using 4,494,796 sampled tokens. Relative to the 40/60
 initialization it trades `−0.009208` deep for only `+0.001415` quick. Every MOPD
 seed is above soup50 on deep and below it on quick, again describing a Pareto
-trade rather than capability installation. Soup75 is running next.
+trade rather than capability installation. Soup75 followed.
 Soup75 then scored `0.576786` deep and `0.807131` quick, only `−0.003282`
 and `−0.002897` versus the deep source, using 4,332,931 sampled tokens. It
 dominates MOPD seeds 43 and 44 on both strata; seed 42 is merely `+0.000219`
@@ -279,7 +281,7 @@ sampling therefore wins decisively on block 0. Wrong-teacher then scored
 beats it by only `+0.003054` deep, `+0.006392` quick, and `+0.004723` joint.
 Teacher identity therefore has a small favorable signal, but not enough to
 overcome the treatment's losses to deep, soup, soup75, or sample-more. Block 0
-is complete; full block 1 is running for the sealed terminal receipt.
+was complete; full block 1 then ran for the sealed terminal receipt.
 
 Block-1 deep then completed at `0.584024` deep and `0.811023` quick from
 4,228,153 sampled tokens. Its registered equal-cell macros are `0.600187` deep,
@@ -311,7 +313,50 @@ registered equal-cell macros are `0.787636` deep, `0.957211` quick, and
 and the deep source by `+0.187449`, `+0.146187`, and `+0.166818`. Averaged
 across both sealed blocks, sample-more beats seed 42 by `+0.187748` deep,
 `+0.150731` quick, and `+0.169239` joint. This is a decisive replicated loss
-to the deployment-time baseline. The final wrong-teacher arm is running next.
+to the deployment-time baseline. The final wrong-teacher arm then completed.
+
+## Terminal Confirmation Result
+
+Wrong-teacher quick MOPD closed block 1 at direct item means `0.568835` deep
+and `0.795695` quick from 4,408,929 sampled tokens. Its equal-cell macros are
+`0.591619` deep, `0.795695` quick, and `0.693657` joint. Primary seed 42 beats
+it by `+0.000767`, `+0.011034`, and `+0.005901` on block 1; pooled across both
+blocks, correct-teacher pressure beats wrong-teacher by `+0.001911` deep,
+`+0.008713` quick, and `+0.005312` joint with a one-sided 95% joint lower bound
+of `+0.000099`. Teacher identity therefore carries a small, statistically
+directional mechanism signal, but it does not install capability beyond the
+source or inference baselines.
+
+The frozen analyzer authenticated all 26 score sets and passed every protocol
+check. Primary seed 42's pooled joint deltas are `+0.033284` versus quick,
+`+0.005619` versus non-advantage MOPD, and `+0.010066` versus the visible
+router, but `-0.006845` versus deep (one-sided 95% LCB `-0.012839`),
+`-0.001300` versus the initial soup, `-0.001872` versus off-policy SFT,
+`-0.003706` versus soup75, and `-0.169239` versus soup best-of-eight (LCB
+`-0.175468`). Both primary blocks are negative versus deep; seeds 43 and 44
+also have pooled joint deltas of `-0.003450` and `-0.005660` versus deep.
+Seed 42 misses the better source on both strata in both blocks. Retention passes
+its `0.02` regression ceiling, and the untouched `brinework`/`spindle` transfer
+macros improve by `+0.015625`/`+0.010590`.
+
+The terminal gate is therefore negative. Same-prefix verification found a real
+deep advantage, the routed target improved over wrong-teacher and matched
+non-advantage updates, and broad behavior was retained; nevertheless the
+deployed bf16 checkpoint did not cross its deep-source frontier, did not beat
+simple 75% interpolation, and was overwhelmed by matched-compute sampling on
+both sealed blocks. The analyzer hashes to
+`faa1ab0d5f5af16ac252cc795ab98913bd5cc2e656040e2701e7c2b90018cdd3` and
+authorizes only `stop_before_benchmark_cli`. No benchmark content was read or
+run.
+
+The strongest successor is not another larger NF4 MOPD campaign. First prove a
+deployment-parity causal update kernel with direct-bf16 microtraining and an
+explicit merge-survival gate against the deep source, interpolation, and
+sample-more. Only after that should a new two-teacher experiment use
+cross-fitted direct `teacher - student` advantage prediction, uncertainty-aware
+adaptive allocation (including zero quick allocation), and a third untouched
+block. The predictor cannot rescue an update operator that fails to survive
+deployment.
 
 ## NF4/BF16 Interpretation Diagnostic
 

@@ -78,7 +78,7 @@ blocks, then independently re-establish complete-loop behavior and acquisition
 headroom before training. Do not raise the observed ceiling, swap lineage
 after the result, or rescue this directory.
 
-## Deep-Advantage MOPD Through Controls (2026-07-14 — Confirmation pending)
+## Deep-Advantage MOPD (2026-07-15 — Terminal capability negative)
 
 `qwen35_4b_deep_advantage_mopd` repeated same-prefix qualification on two new
 192-state blocks from the immutable 40/60 joint soup. Deep was selected on
@@ -91,11 +91,10 @@ The locality round needed three fixed candidate batches and found 90 deep
 routes, from which it froze 60 deep units, 20 soup anchors, and 60 disjoint
 matched non-advantage controls. The five-update 15-deep/5-soup pilot passed:
 centered non-target drift was 0.02760, entropy drop was 3.11%, and exact target
-loss improved 0.01293→0.01170. This authorizes four-round MOPD. The exact
-measurement is one midpoint token per consumed unit, and no capability result
-exists yet. Seeds 42, 43, and 44 subsequently completed all four registered
+loss improved 0.01293→0.01170. The exact measurement is one midpoint token per
+consumed unit. Seeds 42, 43, and 44 subsequently completed all four registered
 integration rounds, establishing replicated route supply and optimizer-gate
-completion but not deployed improvement.
+completion.
 
 All matched controls are now built. Four-round full-prefix non-advantage MOPD,
 wrong-teacher quick MOPD, and off-policy continuation SFT each completed every
@@ -103,15 +102,32 @@ consume-once update and passed their frozen training gates; the 25%/50%/75%
 deep parameter soups have exhaustive model-byte receipts. Independent canonical
 replay passes for aggregate controls receipt
 `103ef4cc0b24d7c10666b6f0adfcd4dfae4720415c7fbbc76b681ab79162640b`.
-This is the first line member to reach a controlled routed-MOPD capability
-comparison. It licenses sealed confirmation only: no causal-routing,
-installation, retention, transfer, or sample-more claim exists yet.
+The sealed two-block comparison is terminal negative. Primary seed 42's pooled
+joint deltas are `−0.006845` versus deep (one-sided 95% LCB `−0.012839`),
+`−0.001300` versus the soup initialization, `−0.001872` versus off-policy SFT,
+`−0.003706` versus soup75, and `−0.169239` versus soup best-of-eight (LCB
+`−0.175468`). Both block means versus deep are negative, every better-source
+stratum cell fails, and seeds 43/44 also trail deep by `−0.003450`/`−0.005660`
+pooled joint. Retention passes, while untouched `brinework` and `spindle`
+transfer improve `+0.015625`/`+0.010590`.
+
+There is a small real mechanism signal: primary seed 42 beats matched
+non-advantage MOPD by `+0.005619` pooled joint (LCB `+0.000582`) and
+wrong-teacher by `+0.005312` (LCB `+0.000099`). Advantage routing and teacher
+identity therefore affect the update direction, but the operator does not
+cross the source frontier and loses to simple interpolation and sample-more.
+The terminal analyzer emitted `stop_before_benchmark_cli`; no benchmark was
+authorized or opened.
 
 Quick also passed diagnostically on 29/18 routes in this fresh replication,
 after failing one soup-relative block in the predecessor. This is not license
 to add it to the locked deep-only treatment. It makes the later two-teacher
-design more worthwhile, but that return still requires cross-fitted direct
-advantage prediction, adaptive branch allocation, and a third untouched block.
+design more worthwhile, but those estimator improvements are not sufficient.
+First require a direct-bf16 deployment-parity microtrial whose causal update
+survives merge and beats the source, interpolation, and sample-more. A later
+two-teacher return still requires cross-fitted direct advantage prediction,
+adaptive branch allocation (including zero quick allocation), and a third
+untouched block.
 
 ## Specialist Integration Attempt (2026-07-12; stopped before training)
 

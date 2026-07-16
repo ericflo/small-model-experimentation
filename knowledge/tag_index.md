@@ -368,7 +368,6 @@ Tags are generated from experiment ids, titles, and summaries. Treat them as nav
 - `qwen35_4b_counterfactual_plan_reflection_transfer` (new): [README](../experiments/qwen35_4b_counterfactual_plan_reflection_transfer/README.md)
 - `qwen35_4b_crosssubstrate_structure` (new): [README](../experiments/qwen35_4b_crosssubstrate_structure/README.md)
 - `qwen35_4b_decompose_compose_frontier` (new): [README](../experiments/qwen35_4b_decompose_compose_frontier/README.md)
-- `qwen35_4b_deep_advantage_mopd` (new): [README](../experiments/qwen35_4b_deep_advantage_mopd/README.md)
 - `qwen35_4b_depth3_dose_response` (new): [README](../experiments/qwen35_4b_depth3_dose_response/README.md)
 - `qwen35_4b_depth_wall_anatomy` (new): [README](../experiments/qwen35_4b_depth_wall_anatomy/README.md)
 - `qwen35_4b_dose_diversity_mechanism_cell` (new): [README](../experiments/qwen35_4b_dose_diversity_mechanism_cell/README.md)

@@ -15,19 +15,23 @@
   soup-relative audit macro reversed from `+0.2009` to `-0.0253`; no MOPD,
   locality, or Menagerie event ran. Post-result diagnostics show conditional
   winner noise, not a missing `+0.10` threshold.
-- Active experiment: `qwen35_4b_deep_advantage_mopd` uses fresh states to
-  requalify the already validated deep route, then conditionally tests the MOPD
-  update kernel from the immutable joint soup. It preserves quick behavior
-  through the frozen-soup anchor and requires one checkpoint to beat both
-  sources, visible routing, matched controls, and sample-more before Menagerie
-  escalation. Fresh qualification has now passed: deep routed on 28/26 states
-  and its audit advantage over soup was +0.1650/+0.1220 (pooled lower bound
-  +0.1230). The five-update pilot also passed literal exact-logit locality
-  (drift 0.02760; entropy drop 3.11%; target loss improved), so four-round
-  integration is active. No capability result exists yet.
-- A new two-teacher attempt needs cross-fitted direct advantage prediction and
-  a third untouched route block. If quick again lacks independent support,
-  retire it as a complementary teacher; do not tune an observed-margin cutoff.
+- Completed capability negative: `qwen35_4b_deep_advantage_mopd` found
+  replicated same-prefix deep advantage and passed exact locality, but primary
+  seed 42 trailed deep by `−0.006845` pooled joint and soup best-of-eight by
+  `−0.169239`; seeds 43/44 also trailed deep. Correct-teacher pressure beat
+  wrong-teacher and non-advantage controls modestly, while retention/transfer
+  passed. This is directional routing signal without source-frontier crossing,
+  not a reason to repeat the NF4 recipe at larger scale. Benchmarking stopped.
+- Highest-value update-operator experiment: use direct-bf16 microtraining on a
+  fresh self-contained substrate and require the causal update to survive its
+  deployed merge and beat deep, ordinary interpolation, and matched-compute
+  sampling before any full campaign. Preserve the same-prefix verifier and
+  matched controls, but make train/deploy parity a hard admission gate.
+- A later two-teacher attempt needs cross-fitted direct advantage prediction,
+  uncertainty-aware adaptive allocation, and a third untouched route block.
+  Permit zero quick allocation if it lacks independent conditional value; do
+  not tune an observed-margin cutoff. This estimator work is downstream of the
+  direct-bf16 update-kernel prerequisite.
 - Completed negative: `qwen35_4b_repo_search_compress_bank` — exact-token
   operator balance plus replay-minimized successful repository traces improved
   trained families 40/48→48/48 but regressed wholly held-out families

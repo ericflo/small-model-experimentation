@@ -5,11 +5,10 @@ source_track: "new"
 path: "experiments/qwen35_4b_deep_advantage_mopd"
 primary_readme: "experiments/qwen35_4b_deep_advantage_mopd/README.md"
 primary_report: "experiments/qwen35_4b_deep_advantage_mopd/reports/report.md"
-summary: "**Fresh qualification, exact-logit locality, three four-round integrations, and all control-construction gates passed, but sealed block 0 already rejects the capability claim. All three MOPD seeds trail the better source on the registered deep cell macro, ordinary interpolation matches their tradeoff, and seed 42 loses decisively to soup best-of-eight on both sealed blocks.** The final wrong-teacher arm continues only to complete the frozen terminal analysis and control ranking. This is a new result-bearing successor to `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal result."
+summary: "**Fresh qualification, exact-logit locality, three four-round integrations, and all control-construction gates passed, but the two-block terminal analysis rejects capability installation. Primary seed 42 trails deep by `-0.006845` joint, trails soup by `-0.001300`, trails soup75 by `-0.003706`, and trails soup best-of-eight by `-0.169239`; seeds 43/44 also trail deep. Retention and transfer pass, while correct-teacher MOPD beats wrong-teacher and non-advantage controls only modestly.** The frozen decision emitted `stop_before_benchmark_cli`; no benchmark was opened. This is a new result-bearing successor to `qwen35_4b_same_prefix_advantage_routing`, not an extension of its terminal result."
 tags:
   - "abi"
   - "distillation"
-  - "latent-state"
   - "small-model"
 research_programs:
   - "agentic_breadth_installation"
@@ -26,10 +25,10 @@ top_level_dirs:
   - "tests"
 file_counts:
   gz: 10
-  json: 57
+  json: 60
   jsonl: 8
   md: 10
   py: 78
   yaml: 3
-total_files: 166
-total_size_bytes: 54386254
+total_files: 169
+total_size_bytes: 55586587

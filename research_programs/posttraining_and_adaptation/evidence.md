@@ -126,17 +126,28 @@ That continuation now resolves the next boundary. Same-prefix verification did
 find a replicated deep advantage, but four-branch three-way argmax did not
 produce a stable quick route. Absolute policy estimates correlated `0.79`--
 `0.86` across halves; conditioning on the largest noisy estimate caused the
-failure. The shortest clean update test is therefore fresh deep-only routed
-MOPD from the joint soup. Two-teacher composition should wait for cross-fitted
+failure. The clean update test was therefore fresh deep-only routed MOPD from
+the joint soup. Two-teacher composition remained downstream of cross-fitted
 direct advantage prediction and a third untouched block, not a larger fixed
 effect-size threshold.
 
-That deep-only successor has now passed fresh qualification, exact-logit
-locality, three four-round optimizer seeds, all three matched trained controls,
-and the 25%/50%/75% parameter-soup construction gates. The independently
-replayed controls receipt is
+That deep-only successor passed fresh qualification, exact-logit locality,
+three four-round optimizer seeds, all three matched trained controls, and the
+25%/50%/75% parameter-soup construction gates. The independently replayed
+controls receipt is
 `103ef4cc0b24d7c10666b6f0adfcd4dfae4720415c7fbbc76b681ab79162640b`.
-Training-side loss improvement remains non-evidence of capability—especially
-given the measured NF4/bf16 update-parity weakness. Same-backend sealed
-comparison against sources, controls, visible routing, and sample-more is now
-the sole adjudicator.
+The same-backend sealed comparison then rejected installation: primary seed 42
+was `−0.006845` joint versus deep, `−0.003706` versus soup75, and `−0.169239`
+versus soup best-of-eight; seeds 43/44 also trailed deep. Retention and transfer
+passed. Correct-teacher pressure did beat wrong-teacher (`+0.005312`, one-sided
+LCB `+0.000099`) and non-advantage MOPD (`+0.005619`, LCB `+0.000582`), so the
+route signal is causal enough to move the checkpoint but insufficient to cross
+the source frontier.
+
+This elevates the measured NF4/bf16 parity failure from caution to design
+prerequisite: mean NF4 objective gain was `+0.02191`, explicit bf16 gain was
+`−0.000224`, and correlation was `−0.152`. Before any larger or two-teacher
+MOPD run, directly train a bf16 micro-update and require its deployed checkpoint
+to beat the source, interpolation, and matched-compute sampling. Cross-fitted
+advantages, adaptive allocation, and a third block remain necessary for later
+two-teacher work, but they cannot rescue a non-deploying update operator.

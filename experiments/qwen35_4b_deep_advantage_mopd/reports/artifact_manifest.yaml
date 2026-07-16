@@ -134,6 +134,11 @@ external_artifacts:
       attempt-2 block-1 soup-best8 COMPLETE journal 386c0587218badb42833b3ede837a9795874985c1dda0fea2a1830c76e1e1e07;
       attempt-2 block-1 soup-best8 score c74e6f2f4225b220f99567aa666f9281310d7e492d17ad2552c2cd18bfd6c75e;
       attempt-2 block-1 wrong-teacher STARTED journal 7f71ae4083bb45f1bda0c2148b0f9e061ce67dddd2446e7735bf222fb82959a5;
+      attempt-2 block-1 wrong-teacher GENERATED journal a6315632da88d74deaf1b6c90958b60e4cc6139fc81f04224b9b9be2b895d365;
+      attempt-2 block-1 wrong-teacher COMPLETE journal 38357e20c5a7a8bae8110e44c928763fa0340b9c8f9245019427bcbf884d989a;
+      attempt-2 block-1 wrong-teacher score 2667a17fe7395c6296a35b74d22396a94bfa724e1f675c219e2b298f322aa7ea;
+      terminal confirmation manifest aeedc23524fa81e92ffb9de4e05829e897f64ca2a5fb53c0d6af364f87aadfdf;
+      terminal confirmation analysis faa1ab0d5f5af16ac252cc795ab98913bd5cc2e656040e2701e7c2b90018cdd3;
       attempt-1 failure receipt 2e645322ead3fbbdf58760849fe17def81fd12b62cdfa4b6c58808e24612ed41;
       non-advantage terminal merge receipt 99e4d3258f450173204466bd4a2b4f1dfadfc54d706008e6fc3944a5f7bd57f5;
       wrong-teacher terminal merge receipt 90ba5ad70a6dede8e0181c1c05f80ffa9a0d9651b604a1cc27659a8da69df544;
@@ -141,7 +146,7 @@ external_artifacts:
       soup25/50/75 receipts aa42d8e67ee87f8cfd937404bf7c43daa5064483185e2fde72c20d3cb2f43d0d,
       1599289b9b83932b6d0a5553daa7907ca2b95a22139140f22e5020f0e6b5280a,
       and 95b607b4e644f2236b1f01498101dac5a274e008ba1c1fae26e0133234feeb1b;
-      later artifacts remain bound by their per-artifact receipts.
+      terminal confirmation artifacts are fully bound above.
     regenerate: >-
       Run verify-student, route-qualify, locality, three integrate seeds,
       controls, and confirm only as authorized by each gate.

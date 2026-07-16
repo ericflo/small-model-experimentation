@@ -1,0 +1,456 @@
+{
+  "arms": {
+    "deep": [
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_0/deep/scores.json",
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_1/deep/scores.json"
+    ],
+    "non_advantage_route": [
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_0/non_advantage_route/scores.json",
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_1/non_advantage_route/scores.json"
+    ],
+    "offpolicy_sft": [
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_0/offpolicy_sft/scores.json",
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_1/offpolicy_sft/scores.json"
+    ],
+    "primary_seed42": [
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_0/primary_seed42/scores.json",
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_1/primary_seed42/scores.json"
+    ],
+    "primary_seed43": [
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_0/primary_seed43/scores.json",
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_1/primary_seed43/scores.json"
+    ],
+    "primary_seed44": [
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_0/primary_seed44/scores.json",
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_1/primary_seed44/scores.json"
+    ],
+    "quick": [
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_0/quick/scores.json",
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_1/quick/scores.json"
+    ],
+    "soup": [
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_0/soup/scores.json",
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_1/soup/scores.json"
+    ],
+    "soup25": [
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_0/soup25/scores.json",
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_1/soup25/scores.json"
+    ],
+    "soup50": [
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_0/soup50/scores.json",
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_1/soup50/scores.json"
+    ],
+    "soup75": [
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_0/soup75/scores.json",
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_1/soup75/scores.json"
+    ],
+    "soup_best8": [
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_0/soup_best8/scores.json",
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_1/soup_best8/scores.json"
+    ],
+    "wrong_teacher": [
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_0/wrong_teacher/scores.json",
+      "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/block_1/wrong_teacher/scores.json"
+    ]
+  },
+  "block_seeds": [
+    98700,
+    98800
+  ],
+  "config": "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/configs/default.yaml",
+  "config_sha256": "2fe8ce9acb1fbdcb83ce2f19ed4de111906ae943fcaccf1425a826fae4cca2a7",
+  "confirmation_admission": {
+    "control_code_inventory_sha256": "e814f33a55825ff8175ec02036329b3b4d79e1e689de1d1c371fe1117bb7463e",
+    "controls_authorization_sha256": "2b9b86aa76bfb87169a2c70313f967f20c13a09e62fbab25069120e29f0ef9f1",
+    "path": "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/runs/confirmation/ADMISSION.json",
+    "payload_sha256": "2ce5ee0aab9f269debcafec1f1b9243405b08c4edb28545b9a8f6b23b845749e",
+    "sha256": "6424b68d01420154d10b7a999332eb4b9d44fca3cad63cf7266f098b9d9c990e"
+  },
+  "controls_authorization": {
+    "confirmation_arms": {
+      "deep": {
+        "decode": "greedy",
+        "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_pareto_policy_integration/merged/deep_apex",
+        "model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+        "model_inference_inventory_sha256": "4bc502f616b570cccf2887c01cadbbfe2d924e12c15730cefef8167fc893f22e",
+        "model_merge_receipt_sha256": "16316211c0c8da9c176ad7fb7c132ff648a7c8d398d3f96a1e153f52b97ea475"
+      },
+      "non_advantage_route": {
+        "decode": "greedy",
+        "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/controls/non_advantage_route/round_3",
+        "model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+        "model_inference_inventory_sha256": "f901286741126bbdbe95dc8763dd4575028b64ff8e50ed3c457d433553652dea",
+        "model_merge_receipt_sha256": "99e4d3258f450173204466bd4a2b4f1dfadfc54d706008e6fc3944a5f7bd57f5"
+      },
+      "offpolicy_sft": {
+        "decode": "greedy",
+        "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/controls/offpolicy_sft/round_3",
+        "model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+        "model_inference_inventory_sha256": "b56aa0832b7d193b2db62c7617891e97d049f87041c65333a51ee2f61711f592",
+        "model_merge_receipt_sha256": "5f6b2c9c1d2a68001b7556c30324976c8312c3c4f170fe489496f0580853c435"
+      },
+      "primary_seed42": {
+        "decode": "greedy",
+        "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/primary/seed_42/round_3",
+        "model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+        "model_inference_inventory_sha256": "3ed9a364b80d1fa94f699db4b35ca2fcf501cfb85e467f1896818525472701b8",
+        "model_merge_receipt_sha256": "88512a57ebb190f0392118a30258eee5fb3bc58d5d34ae04e384afc8842f9122"
+      },
+      "primary_seed43": {
+        "decode": "greedy",
+        "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/primary/seed_43/round_3",
+        "model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+        "model_inference_inventory_sha256": "fe82d588f96f790b976111c22b43c3a4d5db8caa38cbb4929d00c053bd1c8652",
+        "model_merge_receipt_sha256": "4af497550de22d9bbafdd9de97dd95eabeb6b16b6fa9a7516bf78c4c719d6ecf"
+      },
+      "primary_seed44": {
+        "decode": "greedy",
+        "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/primary/seed_44/round_3",
+        "model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+        "model_inference_inventory_sha256": "c3db55671e1e8dc14369a0e0cb439a298c3e12a7411c99e0441436ebb8f057e2",
+        "model_merge_receipt_sha256": "33ae673db2abda3bfee69f311f5d5d5b8e1bda29fb2c1b286b3adbe514d4ba00"
+      },
+      "quick": {
+        "decode": "greedy",
+        "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_pareto_policy_integration/merged/quick_blend",
+        "model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+        "model_inference_inventory_sha256": "73d856fb7b775c4678772ffd0b4ae39123a0be90d06350b904899ef3d8ab4ac1",
+        "model_merge_receipt_sha256": "be852a5134a7ba47c479eb412e9f07b497cb0c4c201bc6f07bf118d0ad22f126"
+      },
+      "soup": {
+        "decode": "greedy",
+        "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_same_prefix_advantage_routing/merged/soup40",
+        "model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+        "model_inference_inventory_sha256": "327ce5c78193a4598e5b250156d75b88b4dafa4e45fa1fa41f7a4df60b5d9b5c",
+        "model_merge_receipt_sha256": "6447540351caf9b20be01c8750db09a9506cfb1261bf711f5ee00cd2c8c4107e"
+      },
+      "soup25": {
+        "decode": "greedy",
+        "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/soup25",
+        "model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+        "model_inference_inventory_sha256": "0c386b249647f43b695fd840232e783b3c8db458ede0885942b4129f167c0ac9",
+        "model_merge_receipt_sha256": "aa42d8e67ee87f8cfd937404bf7c43daa5064483185e2fde72c20d3cb2f43d0d"
+      },
+      "soup50": {
+        "decode": "greedy",
+        "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/soup50",
+        "model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+        "model_inference_inventory_sha256": "f72fba335c1ade6708ee7ac83d016c8c12aba201c91dc6add9260bea5722af16",
+        "model_merge_receipt_sha256": "1599289b9b83932b6d0a5553daa7907ca2b95a22139140f22e5020f0e6b5280a"
+      },
+      "soup75": {
+        "decode": "greedy",
+        "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/soup75",
+        "model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+        "model_inference_inventory_sha256": "84c08d62cc969815c0917c349350959671d2a7011a19b5cdef1480cbb5bfdae9",
+        "model_merge_receipt_sha256": "95b607b4e644f2236b1f01498101dac5a274e008ba1c1fae26e0133234feeb1b"
+      },
+      "soup_best8": {
+        "decode": "sample8",
+        "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_same_prefix_advantage_routing/merged/soup40",
+        "model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+        "model_inference_inventory_sha256": "327ce5c78193a4598e5b250156d75b88b4dafa4e45fa1fa41f7a4df60b5d9b5c",
+        "model_merge_receipt_sha256": "6447540351caf9b20be01c8750db09a9506cfb1261bf711f5ee00cd2c8c4107e"
+      },
+      "wrong_teacher": {
+        "decode": "greedy",
+        "model": "/workspace/small-model-experimentation/large_artifacts/qwen35_4b_deep_advantage_mopd/merged/controls/wrong_teacher/round_3",
+        "model_config_sha256": "f64803e92c6b93971a8e4fa89a811c8607b9b4efd6d0df0e6ca6016404f42630",
+        "model_inference_inventory_sha256": "d82337bd43e3ed21119263d1cf049437ee48500aeb8393b19c71bee6e4e5d4c5",
+        "model_merge_receipt_sha256": "90ba5ad70a6dede8e0181c1c05f80ffa9a0d9651b604a1cc27659a8da69df544"
+      }
+    },
+    "confirmation_arms_sha256": "709694b7d770b5cbb09afe8b932bba3891ab4fea39c54c625fc84c5da973072d",
+    "control_code_inventory": {
+      "file_count": 56,
+      "files": [
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/analyze_benchmark.py",
+          "sha256": "62f85826365e4329cef5472b3f17f1d8932324fceb5e144fc8a76b329f0c988a"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/analyze_confirmation.py",
+          "sha256": "4e30ff46ab79cbf7a9856700c26705b5c3c80307e646f6966adbd0b0480fdac5"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/analyze_installation_canary.py",
+          "sha256": "a54ddaa8435e7458f88d1ecd9c11bf1f2f61ebd5fbfc4f81afeaf7a6a35d2761"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/analyze_locality.py",
+          "sha256": "b6a0b44674d83618f944ec938df2eaf8ed045274b22e0d9e58d89f00f515a3b2"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/analyze_route_qualification.py",
+          "sha256": "47db587b4b1c181d1d468dd870b9152810888914bcc85fdcad14080df91c6820"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/assemble_route_block.py",
+          "sha256": "379e2a6691473ef55d5076066d8ba2c53cd693db6e2e26f8b7f606d362e93120"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/assemble_training_round.py",
+          "sha256": "d2adaaca5c998489cb4c97105c2f36c5f9c14ab82eeb8f384057485b1578df13"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/authorize_benchmark.py",
+          "sha256": "9fa6f89b8922e3bf7d22b18a84ef1e21e524e482034ff128a78f18e85b7851dd"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/authorize_controls.py",
+          "sha256": "25ffb2b3ccc005a799d69f13f2b06462552d36778e9d265cb6476736c5c6616e"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/bench.py",
+          "sha256": "9144fd5ce950215f444747ce8c35ff910c91867838e0698c1fc2aaa28a5b6801"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/branch_states.py",
+          "sha256": "3a15e63c39901c3f6d88e26b9aa1fda2e90ba9beca5b8d98736f76633c210a61"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/build_control_overlay.py",
+          "sha256": "eceb02cb1b38f8188e90943ea0b974ab9e1ebbbfafc0bc79465b399d2f06a6a7"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/build_installation_canary.py",
+          "sha256": "c7210b0abbdbb09ed5e815d3c705c0c677985a7f001e89cd3405da93074721b2"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/cache_policy_targets.py",
+          "sha256": "44a1a819d10d8def427bbccb3b0a14da44696b4122388d3a984ead4cd90b6a08"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/diagnose_nf4_bf16_parity.py",
+          "sha256": "39e20bd03ae5f049a6eac2daaa854ee56631c805a1fad02f03639ce49e8d7f0d"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/eval_policy.py",
+          "sha256": "5c64981c321feb215043227e49548c1c784d65154826700df52796d2ff8bd08a"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/generate_student_states.py",
+          "sha256": "307d21e4d8d59b895ee78943d8cff369d19088b8136519d63d2a6b1c9f85ff69"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/merge_adapter.py",
+          "sha256": "c4553b3567394d42237053dcf97f25c3858387ab092709470ccd898ed860d31c"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/merge_weighted_adapters.py",
+          "sha256": "f30002d69f96f88aa9f1729e76159d75e5b09d04de88b3b5676342ff9eb9f7be"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/model_smoke.py",
+          "sha256": "f2f79b4d20ec6f5ea90a5d32710ecf4bc68933470a46e3aa7baa1556df9572cb"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/run.py",
+          "sha256": "08ba887de3a4bd5f918a67a487f2bfbf9b88a1e003ab6acaf9953256b41e8ee4"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/selftest_gym.py",
+          "sha256": "1db80152785003b0b27a8c20b25c17b0c4515e7f0993e49b0b9785074e3d11be"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/train_mopd_round.py",
+          "sha256": "1997150c53aabde5dede4926ecb53a72036f00b7729dc8fdb84614d1921bba4b"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/scripts/train_offpolicy_round.py",
+          "sha256": "7ab33ea4d152c95350cb48e63fa076460beab7b9d51661a71eda83192db7daa4"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/advantage_routing.py",
+          "sha256": "1dd435f99c880f9f18fa71ad983de11741a0ef76bb93951cc46ee200a3e77295"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/confirmation_artifacts.py",
+          "sha256": "c3281bef36418e4cd73face315c035fa6490d022b2638b6a984eae75641cc50b"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/confirmation_protocol.py",
+          "sha256": "b3d987f5f9fa800d69a78dda851935b8648414d452f6d727582d9a1f65a4cb6d"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/control_code_inventory.py",
+          "sha256": "2bef03cc7338a8feba505c6826e7468d9a366fe4d6cd70c5e6e3bc3bde88d1b8"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/control_receipts.py",
+          "sha256": "8293879b1740d6964752dcfd278fec2c512b96fb2872b13839350444fc8a0030"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/control_rematch.py",
+          "sha256": "4e18e77ab0301196fe7fadb48c432793e7cd3c6b6968db3c16625c97b6452f6c"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/gym/__init__.py",
+          "sha256": "5f8ccca4925b76424611a1754073ad4e5e142f471c38475ddffb9c7b09ea43f6"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/gym/base.py",
+          "sha256": "48b204a8e084e5097cb493a5fbc14e1c3b63d3625ee064e0ba83eb317fc916ab"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/gym/families/__init__.py",
+          "sha256": "6ac384c27598b256a9dedd9de70b1312b01dd2f4f0578ff3b501667d80ce90f4"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/gym/families/brinework.py",
+          "sha256": "44b6d5f413808874587b6db68db3390e1171e7e2707d155e77a8f1273440df71"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/gym/families/burrowmaze.py",
+          "sha256": "7f9b9c811509a7c8a5e32db256a6d580c6a08c2e66b189b817bec3a09ae79f48"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/gym/families/caravan.py",
+          "sha256": "a2748c770fcd8d6d214af1a1ffa95b974c44ea1c2b8a97d97b3b138c7b33ef65"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/gym/families/ferrier.py",
+          "sha256": "ba6d0fc48519fd734814c55eba78f717abe52002fd9211eda2427178f66020c6"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/gym/families/foundry_ledger.py",
+          "sha256": "bf6622e0d3fab183fdfcbe3cd9cf579304ed7b968879b41772d996d5789a56fb"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/gym/families/gatepost.py",
+          "sha256": "8bc6617e9dbc73a097452da6a0975f08b327538499ccb825c36929a8dd983690"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/gym/families/glyphgate.py",
+          "sha256": "8b46bc0a500ca8489e5c9ed313726af801e938c13f7e4057b561d249a5066820"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/gym/families/kilnrite.py",
+          "sha256": "d83d607bcc61ea7b16b6bf3baabd40670684f540e416e1f73de7509e08f08598"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/gym/families/loomfix.py",
+          "sha256": "42cd3bf41ac6fc3ada8edc8ca4fe422fafcfed36e6aaded9b201ca2f157d96e5"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/gym/families/packhouse.py",
+          "sha256": "ec16ec8d427172d33ad1d066c7cbb2540cd0d0ec2594605fff5b521ecf07e481"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/gym/families/patchwheel.py",
+          "sha256": "6d40c281da07cf32586f2df24bc017ffb4f4df86857cc67523b5d6309ba7c155"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/gym/families/runeward.py",
+          "sha256": "133278c9726647755c3e5bf4eba60367335ef172c2f3a8055fe65d9236a820e3"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/gym/families/spindle.py",
+          "sha256": "511ac14608a7b3f5b45ce75cfabfce49536714bf6a14d853928334c275e5aab4"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/gym/families/stallwright.py",
+          "sha256": "be3406d565c69ee81ee0af186c17e817a54816c3201e94fedc5754f9a3d78ee3"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/harness.py",
+          "sha256": "63dde318e8b159cac882a0724d9012f09f394c8bfde4ee9af321e1c5462046e2"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/io_utils.py",
+          "sha256": "9141483c3bbc9f3b1ce3d96944609b5a4ffb3e96f0887bb04be378eb02a257d0"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/model_provenance.py",
+          "sha256": "0f9e9f0426caeeead33264da73975343910bf858433849ff25fe73ffb3358845"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/mopd_loss.py",
+          "sha256": "3e680dc291b5cfb5c40dd1ce12c125a83d95930ee68cd8feb6b89128d09b4d45"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/precision_parity.py",
+          "sha256": "1a796e8e2c15b5fcff74be1c3348369e58ba2b670974567e7ea4dff6517c7f72"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/route_control_matching.py",
+          "sha256": "59fcf35beffe384a39dd9905e4f5031e3d0a754f8bba955c608984bd8b0d0829"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/state_replay.py",
+          "sha256": "41d627fda9a55a6f532aec648a110821e5aba20682e4d886b279ce6a752af9c0"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/training_units.py",
+          "sha256": "8272d15b9b8b851994240e411091cd6ae49ea4fcf7d061b756bb4c5efbb4e825"
+        },
+        {
+          "path": "experiments/qwen35_4b_deep_advantage_mopd/src/vllm_runner.py",
+          "sha256": "1e065b9c3718e4d2353dc3215928b936ed3fdaeb0d1e04ce96f215d4c9331054"
+        }
+      ],
+      "sha256": "690a5b5e345f7f4070f731eb69f7a6d9adf7f8148d4b4c07e8234cb8916250ef"
+    },
+    "control_code_inventory_sha256": "e814f33a55825ff8175ec02036329b3b4d79e1e689de1d1c371fe1117bb7463e",
+    "path": "/workspace/small-model-experimentation/experiments/qwen35_4b_deep_advantage_mopd/analysis/controls_authorization.json",
+    "payload_sha256": "2ae39e48e1940988d07bf29a14670d0e896c6ee7337bad41194a6c96af8035c2",
+    "sha256": "2b9b86aa76bfb87169a2c70313f967f20c13a09e62fbab25069120e29f0ef9f1"
+  },
+  "deep_arm": "deep",
+  "evaluator_sha256": "5c64981c321feb215043227e49548c1c784d65154826700df52796d2ff8bd08a",
+  "evaluator_source_inventory": {
+    "file_count": 26,
+    "sha256": "f05b9c1e331cddcd33165146741846caa1b238c000281fe6b8efb18eb9b40a58"
+  },
+  "model_inference_inventories": {
+    "deep": "4bc502f616b570cccf2887c01cadbbfe2d924e12c15730cefef8167fc893f22e",
+    "non_advantage_route": "f901286741126bbdbe95dc8763dd4575028b64ff8e50ed3c457d433553652dea",
+    "offpolicy_sft": "b56aa0832b7d193b2db62c7617891e97d049f87041c65333a51ee2f61711f592",
+    "primary_seed42": "3ed9a364b80d1fa94f699db4b35ca2fcf501cfb85e467f1896818525472701b8",
+    "primary_seed43": "fe82d588f96f790b976111c22b43c3a4d5db8caa38cbb4929d00c053bd1c8652",
+    "primary_seed44": "c3db55671e1e8dc14369a0e0cb439a298c3e12a7411c99e0441436ebb8f057e2",
+    "quick": "73d856fb7b775c4678772ffd0b4ae39123a0be90d06350b904899ef3d8ab4ac1",
+    "soup": "327ce5c78193a4598e5b250156d75b88b4dafa4e45fa1fa41f7a4df60b5d9b5c",
+    "soup25": "0c386b249647f43b695fd840232e783b3c8db458ede0885942b4129f167c0ac9",
+    "soup50": "f72fba335c1ade6708ee7ac83d016c8c12aba201c91dc6add9260bea5722af16",
+    "soup75": "84c08d62cc969815c0917c349350959671d2a7011a19b5cdef1480cbb5bfdae9",
+    "soup_best8": "327ce5c78193a4598e5b250156d75b88b4dafa4e45fa1fa41f7a4df60b5d9b5c",
+    "wrong_teacher": "d82337bd43e3ed21119263d1cf049437ee48500aeb8393b19c71bee6e4e5d4c5"
+  },
+  "model_merge_receipts": {
+    "deep": "16316211c0c8da9c176ad7fb7c132ff648a7c8d398d3f96a1e153f52b97ea475",
+    "non_advantage_route": "99e4d3258f450173204466bd4a2b4f1dfadfc54d706008e6fc3944a5f7bd57f5",
+    "offpolicy_sft": "5f6b2c9c1d2a68001b7556c30324976c8312c3c4f170fe489496f0580853c435",
+    "primary_seed42": "88512a57ebb190f0392118a30258eee5fb3bc58d5d34ae04e384afc8842f9122",
+    "primary_seed43": "4af497550de22d9bbafdd9de97dd95eabeb6b16b6fa9a7516bf78c4c719d6ecf",
+    "primary_seed44": "33ae673db2abda3bfee69f311f5d5d5b8e1bda29fb2c1b286b3adbe514d4ba00",
+    "quick": "be852a5134a7ba47c479eb412e9f07b497cb0c4c201bc6f07bf118d0ad22f126",
+    "soup": "6447540351caf9b20be01c8750db09a9506cfb1261bf711f5ee00cd2c8c4107e",
+    "soup25": "aa42d8e67ee87f8cfd937404bf7c43daa5064483185e2fde72c20d3cb2f43d0d",
+    "soup50": "1599289b9b83932b6d0a5553daa7907ca2b95a22139140f22e5020f0e6b5280a",
+    "soup75": "95b607b4e644f2236b1f01498101dac5a274e008ba1c1fae26e0133234feeb1b",
+    "soup_best8": "6447540351caf9b20be01c8750db09a9506cfb1261bf711f5ee00cd2c8c4107e",
+    "wrong_teacher": "90ba5ad70a6dede8e0181c1c05f80ffa9a0d9651b604a1cc27659a8da69df544"
+  },
+  "primary_arm": "primary_seed42",
+  "quick_arm": "quick",
+  "replicate_arms": [
+    "primary_seed43",
+    "primary_seed44"
+  ],
+  "sample_more_arm": "soup_best8",
+  "schema_version": 1,
+  "soup_arm": "soup",
+  "stage": "sealed_confirmation_manifest",
+  "strict_comparator_arms": [
+    "quick",
+    "deep",
+    "soup",
+    "non_advantage_route",
+    "wrong_teacher",
+    "offpolicy_sft",
+    "soup25",
+    "soup50",
+    "soup75"
+  ]
+}

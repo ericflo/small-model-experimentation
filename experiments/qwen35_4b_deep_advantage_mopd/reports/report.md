@@ -3,11 +3,13 @@
 ## Status
 
 The preregistered CPU/scientific smoke, pinned-model preflight, installation
-canary, fresh route qualification, five-update exact-logit locality pilot, and
-all three four-round integrations pass. All matched trained controls and fixed
-parameter soups also pass their artifact/training gates. The sealed capability
-comparison is running: its first block-0 deep source anchor is complete, but no
-treatment comparison exists yet.
+canary, fresh route qualification, five-update exact-logit locality pilot, all
+three four-round integrations, matched controls, and fixed parameter soups
+passed their protocol gates. The complete sealed comparison is terminal
+negative: all three MOPD seeds trail deep, seed 42 trails ordinary soup75 and
+matched-compute soup best-of-eight, and the analyzer authorizes only
+`stop_before_benchmark_cli`. Retention and transfer pass; benchmarking did not
+open.
 
 ## Research Program Fit
 
@@ -298,15 +300,51 @@ averages `0.779220` deep, `0.951708` quick, and `0.865464` joint, beating seed
 42 by `+0.187748`, `+0.150731`, and `+0.169239`. Thus the registered method
 does not merely miss a capability threshold: it is decisively dominated by
 matched-compute inference on both sealed blocks. The final wrong-teacher arm
-remains necessary only to finish the mechanism ranking and terminal receipt.
+then finished the mechanism ranking and terminal receipt.
+
+Wrong-teacher closed block 1 at equal-cell macros `0.591619` deep, `0.795695`
+quick, and `0.693657` joint. Primary seed 42 exceeds it by `+0.005901` joint on
+that block and `+0.005312` pooled across both blocks; the pooled one-sided 95%
+lower bound is `+0.000099`. Correct teacher identity is therefore directionally
+better than applying quick-teacher pressure on the exact same selected states.
+Seed 42 also beats matched non-advantage MOPD by `+0.005619` pooled joint with
+LCB `+0.000582`. These two controls show that the verifier-backed route and
+teacher identity contain a real update signal. They do not show capability
+installation.
+
+The frozen terminal analyzer authenticates all 26 score sets and passes every
+protocol check. Primary seed 42 has pooled joint deltas `−0.006845` versus deep
+(one-sided 95% LCB `−0.012839`), `−0.001300` versus the immutable soup,
+`−0.001872` versus off-policy SFT, and `−0.003706` versus soup75. Both block
+means versus deep are negative. Seeds 43/44 also trail deep by `−0.003450` and
+`−0.005660` pooled joint, and every primary better-source stratum cell fails.
+Against soup best-of-eight, seed 42 is `−0.169239` pooled joint with LCB
+`−0.175468`. Retention passes its `0.02` regression allowance, while untouched
+transfer improves `+0.015625` on `brinework` and `+0.010590` on `spindle`.
+
+This is a clean mechanism-positive/capability-negative separation. The update
+preserves broad behavior and moves in the correct-teacher direction, but the
+deployed checkpoint remains below deep, below ordinary 75% interpolation, and
+far below matched-compute sampling. Together with the interpretation-only
+NF4/bf16 diagnostic (mean trainer objective gain `+0.02191` versus merged bf16
+gain `−0.000224`, correlation `−0.152`), the highest-information successor is
+a direct-bf16 deployment-parity microtrial with an explicit merge-survival gate.
+Cross-fitted two-teacher prediction and adaptive allocation cannot compensate
+for an update operator that does not cross the source frontier after merge.
+
+The terminal analysis hashes to
+`faa1ab0d5f5af16ac252cc795ab98913bd5cc2e656040e2701e7c2b90018cdd3` and
+emits `stop_before_benchmark_cli`. Benchmarking was neither authorized nor run.
 
 Together, the three frozen optimizer seeds establish that the registered
 four-round update can complete safely and that strict-deep route supply
 persists on fresh seed-local states after the shared round-0 block. They do not
-establish capability gain, causal advantage routing, superiority to any
-source, router, control, parameter soup, or sample-more baseline, retention,
-transfer, or composability. Those questions remain reserved for the sealed
-confirmation; the quarantined attempt contributes no performance evidence.
+by themselves establish capability gain, causal advantage routing, superiority
+to any source, router, control, parameter soup, or sample-more baseline,
+retention, transfer, or composability. The valid sealed confirmation above
+resolves those comparisons: directional control effects and retention/transfer
+pass, while capability installation fails. The quarantined attempt contributes
+no performance evidence.
 
 The valid interpretation-only NF4/bf16 diagnostic further weakens any inference
 from trainer-side improvement. Across 32 fixed consumed units and 7,970 target
@@ -314,14 +352,15 @@ positions, mean NF4 objective gain was `+0.02191`, while the explicit bf16
 merges averaged `-0.000224`; gain-sign agreement was 15/32, gain correlation
 was `-0.152`, and midpoint update cosine averaged `0.407`. Endpoint top-1
 agreement was still 31/32. Thus endpoint similarity does not establish update
-parity, and the diagnostic gives no authorization. Only sealed same-vLLM
-procedural confirmation can determine whether the deployed checkpoint gained.
+parity, and the diagnostic gives no authorization. The later sealed same-vLLM
+procedural confirmation determines that the deployed checkpoint did not gain
+beyond its source and strong inference baselines.
 
 The exact locality measurement covers one midpoint active token for each of
 the 20 consumed units, rather than every one of the 4,898 trained positions.
 It therefore establishes the literal preregistered local-safety gate, not
-global invariance. No procedural capability, control, sampling, routing, or
-benchmark result exists yet.
+global invariance. The later sealed procedural result is terminal negative;
+no benchmark result exists because the frozen stop forbade exposure.
 
 Before starting controls, a fail-closed review found that the prior semantic
 authorization did not fully reauthenticate the frozen quick/deep/soup source

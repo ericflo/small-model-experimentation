@@ -23,18 +23,24 @@
   disjoint selection/audit branches. Deep independently passed, and the
   combined router passed, but quick reversed from `+0.2009` to `-0.0253`
   versus the soup across blocks. Four-branch statewise argmax is stopped as a
-  two-teacher labeler; MOPD itself remains untested.
-- Highest-value new experiment: requalify the frozen deep selection/audit rule
-  on fresh states, then test deep-only verifier-backed MOPD from the 40/60
-  soup. Require locality before escalation and still compare the final single
-  checkpoint with quick, deep, soup, visible routing, matched controls, and
-  sample-more. This isolates the validated teacher signal from the failed
-  two-teacher estimator.
+  two-teacher labeler; the later deep-only successor tested MOPD and is recorded
+  below.
+- Completed capability negative: deep-only verifier-backed MOPD from the 40/60
+  soup passed route qualification and locality but trailed deep, soup75, and
+  sample-more on sealed confirmation. Correct-teacher and advantage-state
+  controls were directionally positive, so preserve the route signal; do not
+  repeat the NF4 update operator at larger scale.
+- Highest-value new experiment: direct-bf16 deployment-parity microtraining on
+  fresh procedural states. Require the merged causal update to beat deep,
+  ordinary interpolation, and matched-compute sampling before opening a full
+  campaign. Include the same route/non-route/wrong-teacher controls so update
+  survival, not only target quality, is identified.
 - A later two-teacher successor must estimate each direct
   `teacher - student` advantage with cross-fitting and uncertainty-aware branch
   allocation, freeze the predictor, and confirm both teachers on a third
-  untouched block. Do not retry statewise three-way argmax or repair it with a
-  posthoc fixed margin.
+  untouched block, after the direct-bf16 operator gate passes. Permit zero
+  allocation to a teacher without independent conditional value. Do not retry
+  statewise three-way argmax or repair it with a posthoc fixed margin.
 - Stopped cross-program test: `qwen35_4b_specialist_policy_integration` reached
   a design-feasibility negative before any specialist or integration update.
   Its sole tools core scored 0.994 at baseline, so the mandatory `+0.10` gain

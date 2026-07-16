@@ -930,3 +930,42 @@
   replicated, and not a weighting artifact.
 - Wrong-teacher started as the final confirmation arm with external journal
   hash `7f71ae4083bb45f1bda0c2148b0f9e061ce67dddd2446e7735bf222fb82959a5`.
+
+## 2026-07-15 — terminal confirmation rejects capability installation
+
+- Wrong-teacher completed sealed generation and strict validation.
+  `GENERATED.json` and `COMPLETE.json` hash to
+  `a6315632da88d74deaf1b6c90958b60e4cc6139fc81f04224b9b9be2b895d365`
+  and `38357e20c5a7a8bae8110e44c928763fa0340b9c8f9245019427bcbf884d989a`;
+  the score hashes to
+  `2667a17fe7395c6296a35b74d22396a94bfa724e1f675c219e2b298f322aa7ea`.
+- Its direct item-weighted means are `0.568835` deep and `0.795695` quick,
+  using 4,408,929 sampled tokens. Equal-cell macros are `0.591619` deep,
+  `0.795695` quick, and `0.693657` joint. Seed 42 beats it by `+0.005901`
+  joint in block 1 and `+0.005312` pooled, with one-sided 95% LCB `+0.000099`.
+- The terminal manifest hashes to
+  `aeedc23524fa81e92ffb9de4e05829e897f64ca2a5fb53c0d6af364f87aadfdf`.
+  The frozen analyzer authenticated all 26 arm-block score sets, passed every
+  protocol check, and produced analysis hash
+  `faa1ab0d5f5af16ac252cc795ab98913bd5cc2e656040e2701e7c2b90018cdd3`.
+- Primary seed 42 has pooled joint deltas `−0.006845` versus deep (one-sided
+  95% LCB `−0.012839`), `−0.001300` versus soup, `−0.001872` versus
+  off-policy SFT, `−0.003706` versus soup75, and `−0.169239` versus soup
+  best-of-eight (LCB `−0.175468`). Seeds 43/44 are also negative versus deep
+  by `−0.003450`/`−0.005660` pooled joint. All source-stratum domination cells
+  fail.
+- Seed 42 does beat quick (`+0.033284` joint), non-advantage MOPD
+  (`+0.005619`), the visible router (`+0.010066`), and wrong-teacher
+  (`+0.005312`). These controls establish that routing and teacher identity
+  contain directional signal, not that the update crosses the source frontier.
+- Retention passes its `0.02` regression ceiling. Untouched transfer improves
+  by `+0.015625` on `brinework` and `+0.010590` on `spindle`. These successes
+  do not rescue the capability gate.
+- The analyzer exited with the preregistered negative code 4 and emitted
+  `stop_before_benchmark_cli`. No benchmark file, content, authorization, or
+  run was opened. The experiment is terminal and finished.
+- Strategic read: direct-bf16 deployment-parity microtraining with an explicit
+  merge-survival/source/interpolation/sample-more gate is now prerequisite to
+  more MOPD. Cross-fitted direct advantages, adaptive allocation, and a third
+  untouched block remain necessary for two-teacher integration, but are not
+  sufficient until the causal update kernel survives deployment.
