@@ -49294,15 +49294,15 @@
       "intake",
       "design receipt frozen",
       "delta review",
-      "4-model tb4096 medium event"
+      "4-model tb4096 event"
      ],
      "series": [
       {
        "label": "completed checkpoint",
        "values": [
         1,
-        0,
-        0,
+        1,
+        1,
         0
        ]
       }
@@ -49310,8 +49310,8 @@
      "x_label": "preregistered experiment stage",
      "y_label": "completion indicator",
      "y_format": "integer",
-     "note": "The thinking-budget lever's last test: medium/tb4096 on sealed fresh seed 78153, same four composites and post-review readings as the tb8192 probe (which stopped at the gateway's wall-budget gate on its first arm). A second BUDGET_GATE_STOP closes the lever entirely for paired medium events. Nothing trains.",
-     "source": "experiments/qwen35_4b_medium_intermediate_budget_probe/reports/preregistration.md"
+     "note": "BUDGET_GATE_STOP, second and final: the gateway refused base at medium/tb4096 exactly as at tb8192 (budget_gate_failed, no score emitted, seed 78153 spent). Per the frozen consequence the thinking-budget lever is closed entirely for paired medium events. The program's reachable ceiling with believable training paths is 9/10 families; menders requires a different mechanism class (dose scale or on-policy episode training).",
+     "source": "experiments/qwen35_4b_medium_intermediate_budget_probe/runs/benchmark/medium_tb4096_seed78153_measurement/base.failure.json"
     }
    ]
   }

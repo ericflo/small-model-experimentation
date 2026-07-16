@@ -1158,3 +1158,26 @@ the slowest arm (230 s), so either could bind at the gate. One further
 preregistered intermediate-budget probe is the lever's last believable
 test; a second stop closes the lever entirely and fixes the statechain
 successor's 9/10 ceiling as the program's honest position.
+
+## qwen35_4b_medium_intermediate_budget_probe (2026-07-15 — second BUDGET_GATE_STOP: the thinking-budget lever is closed)
+
+The lever's preregistered last test refused identically to the first: the
+gateway's per-arm wall budget rejected `base` at medium/tb4096
+(`budget_gate_failed`, exit 2, nothing exposed) before any treated arm
+ran. Base fits medium at tb1024 (157 s) but not at 4× or 8× thinking room
+— the wall budget binds between 1× and 4× for the slowest common
+denominator, and per the frozen consequence the thinking-budget lever is
+CLOSED ENTIRELY for paired medium events; no further budget probes at any
+setting without a new mechanism argument. Total cost of the complete
+answer: two sealed seeds (78,152 / 78,153), two single-arm refusals, zero
+exposed scores.
+
+Program position after the lever's closure: menders has defeated three
+small-dose SFT pedagogies AND the deployment-budget lever. The reachable
+ceiling for currently-believable training paths is 9/10 families
+(hygiene_explore + a rites flip). The mechanism classes that remain
+believable for menders — dose SCALE (C43: partial installs were
+data-limited; all three failed menders attempts were 80–160 rows) and
+on-policy episode training — each need their own intake, calibration, and
+kill rules. The funded branch is the statechain-only dose toward the 9/10
+position; the queued divergent bet is the dose-scale cell.

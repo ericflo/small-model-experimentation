@@ -286,6 +286,14 @@
   skill; no further small designed SFT dose of any pedagogy is believable
   there without a different mechanism CLASS (scale, external scaffolding,
   or non-SFT levers).
+- Completed intermediate budget probe (second and FINAL BUDGET_GATE_STOP):
+  `qwen35_4b_medium_intermediate_budget_probe` — base refused at tb4096
+  exactly as at tb8192; per the frozen consequence the thinking-budget
+  lever is CLOSED ENTIRELY for paired medium events (total cost: two
+  seeds, zero exposed scores). Believable menders mechanisms remaining:
+  dose SCALE (C43 precedent — the three failed attempts were all 80-160
+  rows; an 800+-row episode-feedback corpus tests scale as the mechanism
+  class) and on-policy episode training. Each needs its own intake.
 - Completed budget probe (BUDGET_GATE_STOP):
   `qwen35_4b_medium_budget_probe_measurement` — the gateway's hard wall
   budget refused base at medium/tb8192 before any treated arm ran
