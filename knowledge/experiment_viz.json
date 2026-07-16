@@ -49252,6 +49252,37 @@
      "source": "experiments/qwen35_4b_feedback_loop_state_chain_install/runs/local/seed88026_promotion.json"
     }
    ]
+  },
+  "qwen35_4b_medium_budget_probe_measurement": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered stage completion",
+     "categories": [
+      "intake",
+      "design receipt frozen",
+      "adversarial review",
+      "4-model tb8192 medium event"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "Eval-only budget probe: the same four published composites as the seed-78150 medium event, re-measured once at think budget 8192 on sealed fresh seed 78152 through the hardened seed-boundary runner. Readings: menders/rites movement (the 9-vs-10 goal-ceiling question), seed-confounded budget contrast, recorded goal gate, within-budget integrity per arm. Nothing trains.",
+     "source": "experiments/qwen35_4b_medium_budget_probe_measurement/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

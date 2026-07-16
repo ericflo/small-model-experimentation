@@ -3,7 +3,7 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 273
+- Experiments: 274
 
 ## Structured Execution And Compilers
 
@@ -221,7 +221,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 Turn candidate-pool coverage into deployable decisions under visible evidence.
 
 - Charter: [evidence_conditioned_selection](../research_programs/evidence_conditioned_selection/charter.md)
-- Assigned experiments: 102
+- Assigned experiments: 103
 
 ### Seed Evidence
 
@@ -269,6 +269,7 @@ Turn candidate-pool coverage into deployable decisions under visible evidence.
 - `qwen35_4b_long_horizon_answer_potential_sft` (new): [README](../experiments/qwen35_4b_long_horizon_answer_potential_sft/README.md)
 - `qwen35_4b_materialized_residual_sibling_search` (new): [README](../experiments/qwen35_4b_materialized_residual_sibling_search/README.md)
 - `qwen35_4b_materialized_residual_sibling_search_fresh_replication` (new): [README](../experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/README.md)
+- `qwen35_4b_medium_budget_probe_measurement` (new): [README](../experiments/qwen35_4b_medium_budget_probe_measurement/README.md)
 - `qwen35_4b_model_in_loop_counterexamples` (track-z): [README](../experiments/qwen35_4b_model_in_loop_counterexamples/README.md)
 - `qwen35_4b_offline_hard_negative_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_offline_hard_negative_coverage_dpo/README.md)
 - `qwen35_4b_oracle_distilled_semantic_verifier` (track-z): [README](../experiments/qwen35_4b_oracle_distilled_semantic_verifier/README.md)
@@ -1027,7 +1028,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 Install general agentic capability in Qwen3.5-4B via breadth-first expert iteration on a firewall-clean multi-family gym, arbitrated by the blackbox menagerie instrument.
 
 - Charter: [agentic_breadth_installation](../research_programs/agentic_breadth_installation/charter.md)
-- Assigned experiments: 41
+- Assigned experiments: 42
 
 ### Assigned Experiments
 
@@ -1044,6 +1045,7 @@ Install general agentic capability in Qwen3.5-4B via breadth-first expert iterat
 - `qwen35_4b_hygiene_explore_destack_medium` (new): [README](../experiments/qwen35_4b_hygiene_explore_destack_medium/README.md)
 - `qwen35_4b_interactive_policy_curriculum` (new): [README](../experiments/qwen35_4b_interactive_policy_curriculum/README.md)
 - `qwen35_4b_interleaved_replay_dose_medium` (new): [README](../experiments/qwen35_4b_interleaved_replay_dose_medium/README.md)
+- `qwen35_4b_medium_budget_probe_measurement` (new): [README](../experiments/qwen35_4b_medium_budget_probe_measurement/README.md)
 - `qwen35_4b_menders_sirens_tier_forensics` (new): [README](../experiments/qwen35_4b_menders_sirens_tier_forensics/README.md)
 - `qwen35_4b_pareto_policy_integration` (new): [README](../experiments/qwen35_4b_pareto_policy_integration/README.md)
 - `qwen35_4b_rank_capacity_vehicle_cell` (new): [README](../experiments/qwen35_4b_rank_capacity_vehicle_cell/README.md)

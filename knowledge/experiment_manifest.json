@@ -3837,6 +3837,39 @@
   },
   {
     "file_counts": {
+      ".json": 1,
+      ".md": 7,
+      ".py": 7,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_medium_budget_probe_measurement",
+    "path": "experiments/qwen35_4b_medium_budget_probe_measurement",
+    "primary_readme": "experiments/qwen35_4b_medium_budget_probe_measurement/README.md",
+    "primary_report": "experiments/qwen35_4b_medium_budget_probe_measurement/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "evidence_conditioned_selection"
+    ],
+    "source_track": "new",
+    "summary": "The last cheap lever on the binding constraint: the same four published composites as the seed-78,150 medium event, re-measured once at think budget 8,192 \u2014 does thinking room alone move menders (zero for every arm at tb1024) or rites (zero for all but designed_fresh) off their floors, i.e. is the goal-gate ceiling 9 or 10?",
+    "tags": [
+      "coverage",
+      "small-model"
+    ],
+    "title": "Medium Budget-Probe Measurement",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 18,
+    "total_size_bytes": 148812
+  },
+  {
+    "file_counts": {
       ".json": 2,
       ".md": 6,
       ".py": 4,

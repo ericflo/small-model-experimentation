@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 245
-- Manifest files: 583
+- Experiments with manifests: 246
+- Manifest files: 584
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 99 |
 | `run-data` | 101 |
-| `standard-artifact` | 118 |
+| `standard-artifact` | 119 |
 
 ## Manifests
 
@@ -174,6 +174,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_materialized_residual_answer_seam_factorial` | `standard-artifact` | [manifest](../experiments/qwen35_4b_materialized_residual_answer_seam_factorial/reports/artifact_manifest.yaml) |
 | `qwen35_4b_materialized_residual_sibling_search` | `standard-artifact` | [manifest](../experiments/qwen35_4b_materialized_residual_sibling_search/reports/artifact_manifest.yaml) |
 | `qwen35_4b_materialized_residual_sibling_search_fresh_replication` | `standard-artifact` | [manifest](../experiments/qwen35_4b_materialized_residual_sibling_search_fresh_replication/reports/artifact_manifest.yaml) |
+| `qwen35_4b_medium_budget_probe_measurement` | `standard-artifact` | [manifest](../experiments/qwen35_4b_medium_budget_probe_measurement/reports/artifact_manifest.yaml) |
 | `qwen35_4b_menders_sirens_tier_forensics` | `standard-artifact` | [manifest](../experiments/qwen35_4b_menders_sirens_tier_forensics/reports/artifact_manifest.yaml) |
 | `qwen35_4b_meta_induction` | `standard-artifact` | [manifest](../experiments/qwen35_4b_meta_induction/reports/artifact_manifest.yaml) |
 | `qwen35_4b_metacognitive_boundary` | `standard-artifact` | [manifest](../experiments/qwen35_4b_metacognitive_boundary/reports/artifact_manifest.yaml) |

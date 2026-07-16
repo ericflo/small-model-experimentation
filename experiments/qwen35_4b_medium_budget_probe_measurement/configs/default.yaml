@@ -1,0 +1,13 @@
+experiment_id: qwen35_4b_medium_budget_probe_measurement
+status: model_free_construction
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+arms: [base, designed_fresh, replay_repeat, hygiene_explore]
+event:
+  tier: medium
+  think_budget: 8192
+  seed: 78152
+readings: [budget_movement_menders_rites, budget_contrast_vs_78150_seed_confounded, recorded_goal_gate, budget_integrity]
+training: none
+promotion: none
