@@ -67,3 +67,18 @@
   the honest 216-combination verdict-partition enumeration.
 - 146 tests green; smoke green; receipt 66c19b24… --check twice;
   PASS_BENCHMARK_EVENT granted.
+
+## 2026-07-15 — The three-seed event and closure
+
+- CI green on the freeze; the six runs executed in the frozen seed-major
+  order; every closed ledger record carries both receipt pins; the
+  readout verified the full provenance chain before rendering.
+- Verdict AGGREGATE_ONLY: aggregate strict wins on all three seeds
+  (0.3287/0.3737/0.3837 vs 0.0586/0.1122/0.0982); goal gate 1/3 (78,157
+  swept 10/10; 78,155 read 9/10 blocked by a menders 0-margin tie with
+  warren WON at +0.267; 78,156 read 8/10 blocked by menders and warren
+  ties; zero losses anywhere).
+- Position: two full sweeps across four independent sealed seeds;
+  demonstrated, not confirmed at the frozen 2/3 bar; menders is the
+  single binding family (0.0 margin on every failing seed). The
+  dose-scale intake aims at a precisely-known target.

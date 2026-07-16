@@ -1,0 +1,511 @@
+{
+ "benchmark_data_read": false,
+ "benchmark_implementation": {
+  "discovery": {
+   "runner_sha256": "a3beecd8b5c89ccfd99a172a6d85321d39b9feb6c29d12f10b2f4d7499e273cb",
+   "source_file_count": 56,
+   "source_inventory_sha256": "218b8615a95f24da962c931e9cd2dba58d853a7bdcd2847cd8e2c42fc2c05f42"
+  },
+  "identical_across_all_six_receipts_and_discovery": true,
+  "signature": {
+   "runner_sha256": "a3beecd8b5c89ccfd99a172a6d85321d39b9feb6c29d12f10b2f4d7499e273cb",
+   "source_file_count": 56,
+   "source_inventory_sha256": "218b8615a95f24da962c931e9cd2dba58d853a7bdcd2847cd8e2c42fc2c05f42"
+  }
+ },
+ "budget": {
+  "78155": {
+   "base": {
+    "wall_seconds": 157.5878832861781,
+    "within_budget": true
+   },
+   "hygiene_explore": {
+    "wall_seconds": 138.0815589139238,
+    "within_budget": true
+   }
+  },
+  "78156": {
+   "base": {
+    "wall_seconds": 152.87985062110238,
+    "within_budget": true
+   },
+   "hygiene_explore": {
+    "wall_seconds": 133.9098546479363,
+    "within_budget": true
+   }
+  },
+  "78157": {
+   "base": {
+    "wall_seconds": 153.57669625082053,
+    "within_budget": true
+   },
+   "hygiene_explore": {
+    "wall_seconds": 134.4251958760433,
+    "within_budget": true
+   }
+  }
+ },
+ "design_receipt_sha256": "66c19b24e245aa55697100619d30caf2797d7f4cdf6ae49ea468ce49c3730065",
+ "discovery_reference": {
+  "base_arm": "base",
+  "counted_in_verdict": false,
+  "seed": 78154,
+  "summary": "experiments/qwen35_4b_statechain_only_dose/runs/benchmark/medium_tb1024_seed78154_pilot/summary.json",
+  "summary_sha256": "6b1a43869f013e24a048a45a04e5603b45fe59488912194eb3e76a43679255fa",
+  "think_budget": 1024,
+  "tier": "medium",
+  "treated_arm": "hygiene_explore_parent"
+ },
+ "experiment_id": "qwen35_4b_goal_gate_confirmation",
+ "name": "confirmation",
+ "outcome": "CONFIRMATION_READ_COMPLETE",
+ "paired_comparison_valid": true,
+ "promoted": null,
+ "provenance": {
+  "ledger": "runs/benchmark_events.jsonl",
+  "ledger_complete_sequence_required": true,
+  "receipt_blocks_verified_against_sealed_summaries": true,
+  "receipt_sha256s_pinned_in_closed_records": true,
+  "receipts_verified_against_ledger_pins": true,
+  "summaries_verified_against_ledger_pins": true
+ },
+ "readings": {
+  "budget_integrity": {
+   "all_within_budget": true,
+   "paired_comparison_valid": true,
+   "per_seed": {
+    "78155": {
+     "all_within_budget": true,
+     "paired_comparison_valid": true,
+     "per_arm": {
+      "base": {
+       "wall_seconds": 157.5878832861781,
+       "within_budget": true
+      },
+      "hygiene_explore": {
+       "wall_seconds": 138.0815589139238,
+       "within_budget": true
+      }
+     },
+     "reason": null
+    },
+    "78156": {
+     "all_within_budget": true,
+     "paired_comparison_valid": true,
+     "per_arm": {
+      "base": {
+       "wall_seconds": 152.87985062110238,
+       "within_budget": true
+      },
+      "hygiene_explore": {
+       "wall_seconds": 133.9098546479363,
+       "within_budget": true
+      }
+     },
+     "reason": null
+    },
+    "78157": {
+     "all_within_budget": true,
+     "paired_comparison_valid": true,
+     "per_arm": {
+      "base": {
+       "wall_seconds": 153.57669625082053,
+       "within_budget": true
+      },
+      "hygiene_explore": {
+       "wall_seconds": 134.4251958760433,
+       "within_budget": true
+      }
+     },
+     "reason": null
+    }
+   },
+   "reason": null
+  },
+  "confirmation_verdict": {
+   "aggregate_strict_wins": {
+    "78155": true,
+    "78156": true,
+    "78157": true
+   },
+   "aggregate_wins_all_three_seeds": true,
+   "discovery": {
+    "aggregate_margin": 0.28634408602150535,
+    "aggregates": {
+     "base": 0.08,
+     "hygiene_explore_parent": 0.36634408602150537
+    },
+    "counted_in_verdict": false,
+    "fragility_margins": {
+     "menders": 0.016666666666666666,
+     "warren": 0.04999999999999999
+    },
+    "goal_gate": {
+     "goal_gate_pass": true,
+     "losses": [],
+     "strict_wins": 10,
+     "ties": [],
+     "wins": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "sirens",
+      "stockade",
+      "toolsmith",
+      "warren"
+     ]
+    },
+    "seed": 78154,
+    "summary": "experiments/qwen35_4b_statechain_only_dose/runs/benchmark/medium_tb1024_seed78154_pilot/summary.json",
+    "summary_sha256": "6b1a43869f013e24a048a45a04e5603b45fe59488912194eb3e76a43679255fa",
+    "think_budget": 1024,
+    "tier": "medium",
+    "treated_arm_label": "hygiene_explore_parent"
+   },
+   "goal_gate_majority": false,
+   "goal_gate_pass_count": 1,
+   "goal_gate_passes": {
+    "78155": false,
+    "78156": false,
+    "78157": true
+   },
+   "rule": "ordered total partition: CONFIRMED iff hygiene_explore's aggregate strictly beats base on ALL THREE seeds AND the goal gate (ten strict family wins) passes on AT LEAST TWO of three; AGGREGATE_ONLY iff the aggregate strictly beats base on all three seeds but the goal-gate majority fails; NOT_REPLICATED otherwise; exact ties are never strict wins; the discovery seed 78154 is reported alongside and NEVER counted",
+   "verdict": "AGGREGATE_ONLY"
+  },
+  "fragility": {
+   "families": [
+    "menders",
+    "warren"
+   ],
+   "per_seed": {
+    "78155": {
+     "blocking_families": [
+      "menders"
+     ],
+     "goal_gate_pass": false,
+     "menders_margin": 0.0,
+     "warren_margin": 0.26666666666666666
+    },
+    "78156": {
+     "blocking_families": [
+      "menders",
+      "warren"
+     ],
+     "goal_gate_pass": false,
+     "menders_margin": 0.0,
+     "warren_margin": 0.0
+    },
+    "78157": {
+     "blocking_families": [],
+     "goal_gate_pass": true,
+     "menders_margin": 0.1,
+     "warren_margin": 0.16666666666666666
+    }
+   },
+   "question": "do the two single-item margins that carried the discovery pass (menders 0.0167 and warren 0.050 at seed 78154) survive fresh seeds, and which families block any seed that does not pass the goal gate"
+  },
+  "per_seed": {
+   "78155": {
+    "aggregate_margin": 0.2700952380952381,
+    "aggregates": {
+     "base": 0.05857142857142857,
+     "hygiene_explore": 0.32866666666666666
+    },
+    "goal_gate": {
+     "goal_gate_pass": false,
+     "losses": [],
+     "strict_wins": 9,
+     "ties": [
+      "menders"
+     ],
+     "wins": [
+      "chronicle",
+      "lockpick",
+      "mirage",
+      "rites",
+      "siftstack",
+      "sirens",
+      "stockade",
+      "toolsmith",
+      "warren"
+     ]
+    },
+    "per_family": {
+     "base": {
+      "chronicle": 0.0,
+      "lockpick": 0.0,
+      "menders": 0.0,
+      "mirage": 0.0,
+      "rites": 0.0,
+      "siftstack": 0.0,
+      "sirens": 0.3,
+      "stockade": 0.05238095238095238,
+      "toolsmith": 0.23333333333333334,
+      "warren": 0.0
+     },
+     "hygiene_explore": {
+      "chronicle": 0.3,
+      "lockpick": 0.1,
+      "menders": 0.0,
+      "mirage": 0.5,
+      "rites": 0.1,
+      "siftstack": 0.5,
+      "sirens": 0.6,
+      "stockade": 0.2,
+      "toolsmith": 0.72,
+      "warren": 0.26666666666666666
+     }
+    },
+    "treated_beats_base_aggregate": true
+   },
+   "78156": {
+    "aggregate_margin": 0.2615660010903639,
+    "aggregates": {
+     "base": 0.11218103448275862,
+     "hygiene_explore": 0.3737470355731225
+    },
+    "goal_gate": {
+     "goal_gate_pass": false,
+     "losses": [],
+     "strict_wins": 8,
+     "ties": [
+      "menders",
+      "warren"
+     ],
+     "wins": [
+      "chronicle",
+      "lockpick",
+      "mirage",
+      "rites",
+      "siftstack",
+      "sirens",
+      "stockade",
+      "toolsmith"
+     ]
+    },
+    "per_family": {
+     "base": {
+      "chronicle": 0.0,
+      "lockpick": 0.0,
+      "menders": 0.0,
+      "mirage": 0.0,
+      "rites": 0.0,
+      "siftstack": 0.0,
+      "sirens": 0.4,
+      "stockade": 0.07931034482758621,
+      "toolsmith": 0.5425,
+      "warren": 0.1
+     },
+     "hygiene_explore": {
+      "chronicle": 0.4,
+      "lockpick": 0.2,
+      "menders": 0.0,
+      "mirage": 0.7,
+      "rites": 0.1,
+      "siftstack": 0.7,
+      "sirens": 0.6,
+      "stockade": 0.2774703557312253,
+      "toolsmith": 0.6599999999999999,
+      "warren": 0.1
+     }
+    },
+    "treated_beats_base_aggregate": true
+   },
+   "78157": {
+    "aggregate_margin": 0.285444704648185,
+    "aggregates": {
+     "base": 0.09821631878557875,
+     "hygiene_explore": 0.38366102343376374
+    },
+    "goal_gate": {
+     "goal_gate_pass": true,
+     "losses": [],
+     "strict_wins": 10,
+     "ties": [],
+     "wins": [
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "sirens",
+      "stockade",
+      "toolsmith",
+      "warren"
+     ]
+    },
+    "per_family": {
+     "base": {
+      "chronicle": 0.1,
+      "lockpick": 0.0,
+      "menders": 0.0,
+      "mirage": 0.0,
+      "rites": 0.0,
+      "siftstack": 0.0,
+      "sirens": 0.3,
+      "stockade": 0.18216318785578747,
+      "toolsmith": 0.4,
+      "warren": 0.0
+     },
+     "hygiene_explore": {
+      "chronicle": 0.5,
+      "lockpick": 0.1,
+      "menders": 0.1,
+      "mirage": 0.7,
+      "rites": 0.1,
+      "siftstack": 0.6,
+      "sirens": 0.6,
+      "stockade": 0.26994356767097083,
+      "toolsmith": 0.7,
+      "warren": 0.16666666666666666
+     }
+    },
+    "treated_beats_base_aggregate": true
+   }
+  }
+ },
+ "receipts": {
+  "78155": {
+   "base": {
+    "path": "experiments/qwen35_4b_goal_gate_confirmation/runs/benchmark/medium_tb1024_seed78155_confirmation/base.json",
+    "sha256": "c6c544de926d9970f4d86da9612d03291143d83012b461580e2bed0cb12ffda7"
+   },
+   "hygiene_explore": {
+    "path": "experiments/qwen35_4b_goal_gate_confirmation/runs/benchmark/medium_tb1024_seed78155_confirmation/hygiene_explore.json",
+    "sha256": "a9668f3ba2e84e714ea241ca403ac1dd83380390ca1c25472c8357cb044dcb62"
+   }
+  },
+  "78156": {
+   "base": {
+    "path": "experiments/qwen35_4b_goal_gate_confirmation/runs/benchmark/medium_tb1024_seed78156_confirmation/base.json",
+    "sha256": "3588319eebe2503a7c74490854be3615a8373fbaac6b7cace73ba18ae5c4534f"
+   },
+   "hygiene_explore": {
+    "path": "experiments/qwen35_4b_goal_gate_confirmation/runs/benchmark/medium_tb1024_seed78156_confirmation/hygiene_explore.json",
+    "sha256": "ea5096d788261a9eca34f7d4f3059f1dc4a3bb94976a2db43d9383ab8fd86d46"
+   }
+  },
+  "78157": {
+   "base": {
+    "path": "experiments/qwen35_4b_goal_gate_confirmation/runs/benchmark/medium_tb1024_seed78157_confirmation/base.json",
+    "sha256": "f2c8433f30b9035429165c42218ee41bc4395e560b6cd93267b0ef8d75f57933"
+   },
+   "hygiene_explore": {
+    "path": "experiments/qwen35_4b_goal_gate_confirmation/runs/benchmark/medium_tb1024_seed78157_confirmation/hygiene_explore.json",
+    "sha256": "32c402957baec97c897e9be622a7c1b6f664cf37a50473b4691da9d15749f04b"
+   }
+  }
+ },
+ "schema_version": 1,
+ "scores": {
+  "78155": {
+   "base": {
+    "aggregate": 0.05857142857142857,
+    "per_family": {
+     "chronicle": 0.0,
+     "lockpick": 0.0,
+     "menders": 0.0,
+     "mirage": 0.0,
+     "rites": 0.0,
+     "siftstack": 0.0,
+     "sirens": 0.3,
+     "stockade": 0.05238095238095238,
+     "toolsmith": 0.23333333333333334,
+     "warren": 0.0
+    }
+   },
+   "hygiene_explore": {
+    "aggregate": 0.32866666666666666,
+    "per_family": {
+     "chronicle": 0.3,
+     "lockpick": 0.1,
+     "menders": 0.0,
+     "mirage": 0.5,
+     "rites": 0.1,
+     "siftstack": 0.5,
+     "sirens": 0.6,
+     "stockade": 0.2,
+     "toolsmith": 0.72,
+     "warren": 0.26666666666666666
+    }
+   }
+  },
+  "78156": {
+   "base": {
+    "aggregate": 0.11218103448275862,
+    "per_family": {
+     "chronicle": 0.0,
+     "lockpick": 0.0,
+     "menders": 0.0,
+     "mirage": 0.0,
+     "rites": 0.0,
+     "siftstack": 0.0,
+     "sirens": 0.4,
+     "stockade": 0.07931034482758621,
+     "toolsmith": 0.5425,
+     "warren": 0.1
+    }
+   },
+   "hygiene_explore": {
+    "aggregate": 0.3737470355731225,
+    "per_family": {
+     "chronicle": 0.4,
+     "lockpick": 0.2,
+     "menders": 0.0,
+     "mirage": 0.7,
+     "rites": 0.1,
+     "siftstack": 0.7,
+     "sirens": 0.6,
+     "stockade": 0.2774703557312253,
+     "toolsmith": 0.6599999999999999,
+     "warren": 0.1
+    }
+   }
+  },
+  "78157": {
+   "base": {
+    "aggregate": 0.09821631878557875,
+    "per_family": {
+     "chronicle": 0.1,
+     "lockpick": 0.0,
+     "menders": 0.0,
+     "mirage": 0.0,
+     "rites": 0.0,
+     "siftstack": 0.0,
+     "sirens": 0.3,
+     "stockade": 0.18216318785578747,
+     "toolsmith": 0.4,
+     "warren": 0.0
+    }
+   },
+   "hygiene_explore": {
+    "aggregate": 0.38366102343376374,
+    "per_family": {
+     "chronicle": 0.5,
+     "lockpick": 0.1,
+     "menders": 0.1,
+     "mirage": 0.7,
+     "rites": 0.1,
+     "siftstack": 0.6,
+     "sirens": 0.6,
+     "stockade": 0.26994356767097083,
+     "toolsmith": 0.7,
+     "warren": 0.16666666666666666
+    }
+   }
+  }
+ },
+ "seeds": [
+  78155,
+  78156,
+  78157
+ ],
+ "stage": "goal_gate_confirmation_readout",
+ "think_budget": 1024,
+ "tier": "medium",
+ "verdict": "AGGREGATE_ONLY"
+}

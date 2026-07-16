@@ -14495,40 +14495,40 @@
    ]
   },
   "qwen35_4b_goal_gate_confirmation": {
-   "verdict_tag": "Design under construction; the three-seed replication has not run",
+   "verdict_tag": "Not confirmed at the bar — but the sweep repeated once and the gap narrowed to one family",
    "concept_primer": "One sealed benchmark event just recorded the program's stated goal for the first time: a clean-trained model beat the untouched base on every one of ten families at once. But two of those family wins rode on single-item margins, and this program's own laws say one seed is a draw until it replicates. This experiment is the replication: the same two models, three brand-new sealed seeds, and a verdict written before the event.",
    "plain_question": "Does the all-ten-families win replicate across three fresh sealed seeds?",
-   "plain_answer": "Nothing has run yet. The frozen rule: CONFIRMED requires the aggregate win on all three seeds and the full ten-family sweep on at least two; the discovery seed is reported alongside but never counted; the two fragile families' margins are reported per seed either way.",
+   "plain_answer": "The replication returned a split answer. The overall improvement replicated without drama: the trained model beat the base decisively on all three fresh seeds, making four for four all-time. The perfect ten-family sweep repeated on one of the three — two full sweeps across four independent seeds — but the pre-written rule demanded two of three, so the formal verdict is aggregate-only. The near-misses are the striking part: nine-of-ten and eight-of-ten with ZERO losses, blocked purely by zero-zero ties at the debugging-style family that has resisted every teaching method. The goal now hangs on exactly one family, and the queued larger-dose experiment knows precisely what it must produce: any reliable nonzero score there.",
    "why_it_matters": "This is the program goal's final gate: a confirmed pass completes the demonstration-plus-confirmation chain the goal demands; a non-replication prices the discovery honestly and hands the program back its 9-of-10 position with the newly proven skill-to-family conversion mechanism.",
    "verdict_tone": "neutral",
    "key_numbers": [
     {
-     "label": "Fresh seeds",
-     "value": "3",
-     "sub": "78,155 / 78,156 / 78,157, sealed"
+     "label": "Formal verdict",
+     "value": "AGGREGATE_ONLY",
+     "sub": "10/10 on 1/3 seeds vs the 2/3 bar"
     },
     {
-     "label": "Discovery margins",
-     "value": "1 item",
-     "sub": "menders 0.017, warren +0.05"
+     "label": "Aggregate wins",
+     "value": "4/4",
+     "sub": "all-time, never close"
     },
     {
-     "label": "Bar for CONFIRMED",
-     "value": "2/3",
-     "sub": "ten-family sweeps + aggregate 3/3"
+     "label": "Full sweeps",
+     "value": "2 of 4",
+     "sub": "seeds 78,154 and 78,157"
     },
     {
-     "label": "Training runs",
-     "value": "0",
-     "sub": "pure replication"
+     "label": "The one blocker",
+     "value": "menders",
+     "sub": "0.0 margin on every failing seed"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Where the experiment stands",
-     "chart_read": "Each bar is a preregistered stage; one means complete.",
-     "chart_takeaway": "The contract, pins, and verdict rule are frozen; the three-seed event remains."
+     "chart_plain_title": "Family wins against the base on each fresh seed",
+     "chart_read": "One bar per seed: how many of the ten families the trained model strictly won.",
+     "chart_takeaway": "Ten, nine, and eight family wins with zero losses anywhere — the misses are all zero-zero ties at one stubborn family."
     }
    ]
   }

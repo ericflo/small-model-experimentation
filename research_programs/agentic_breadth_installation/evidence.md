@@ -1216,3 +1216,36 @@ and warren on ONE seed. The confirmation law — independent fresh sealed
 seeds plus a same-backend matched-compute sample-more baseline — governs
 before any claim. The confirmation cell is the immediate funded
 successor; nothing else outranks it.
+
+## qwen35_4b_goal_gate_confirmation (2026-07-15 — AGGREGATE_ONLY: the sweep repeated once; the goal narrows to one family)
+
+The mandatory replication of the recorded 10/10 ran clean: three
+independent sealed medium seeds, both arms authenticated, every closed
+ledger record carrying receipt pins, the readout refusing anything not
+provenance-anchored (the review had caught and fixed exactly that gap
+pre-freeze). It is also the program's first standalone-compliant cell
+under the owner directive: the full six-stage lineage package (copied
+datasets, fixed-seed manifest, three vendored trainer variants + merger,
+the C53-era root adapter vendored with its provenance boundary stated,
+rebuild_lineage.py verified in smoke).
+
+Verdict AGGREGATE_ONLY under the frozen ordered partition. The aggregate
+transfer is unconditional: 0.3287/0.3737/0.3837 versus base
+0.0586/0.1122/0.0982 — strict wins on all three seeds, 4/4 all-time with
+the discovery, never close. The all-families sweep replicated once: seed
+78,157 passed 10/10 (two full sweeps across four independent sealed
+seeds). The frozen 2/3 bar failed because 78,155 (9/10) and 78,156 (8/10)
+were blocked entirely by TIES — menders at a 0.0 margin on both, warren
+once (warren WON +0.267 on 78,155) — with zero strict losses anywhere in
+the event.
+
+Program position, stated exactly: the goal's primary condition is
+DEMONSTRATED on two of four independent sealed seeds and NOT CONFIRMED at
+the preregistered majority bar. The gate is localized to a single family:
+menders, where both arms sit at zero on most draws and every tested
+small-dose pedagogy plus the budget lever are closed. The funded
+successor is the menders dose-scale intake (C43 precedent: partial
+installs were data-limited; all failed menders attempts were 80–160
+rows) with a precisely-known success criterion — any reliable nonzero
+menders yield completes the gate; the zero-root lineage rebuild stays
+queued as the provenance question.

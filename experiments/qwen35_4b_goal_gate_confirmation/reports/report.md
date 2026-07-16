@@ -2,7 +2,7 @@
 
 ## Summary
 
-Model-free construction for the mandatory replication: the recorded 10/10 all-families pass (hygiene_explore vs base at sealed 78,154) is re-tested on three independent fresh sealed medium seeds under an ordered verdict — CONFIRMED (aggregate wins all three, goal gate on at least two), AGGREGATE_ONLY, or NOT_REPLICATED — with the discovery seed sha-pinned, reported, and never counted. Eval-only; nothing trains.
+The three-seed replication closed AGGREGATE_ONLY. The aggregate transfer is unconditional — hygiene_explore strictly beat base on all three fresh sealed seeds (0.3287/0.3737/0.3837 vs 0.0586/0.1122/0.0982; with the discovery, 4/4 all-time, never close). The all-families sweep replicated once: seed 78,157 passed 10/10, making two full sweeps across four independent sealed seeds; the frozen 2/3 majority bar failed because 78,155 (9/10) and 78,156 (8/10) were blocked entirely by ties — menders at a 0.0 margin on both, warren once (while warren WON +0.267 on the other) — with zero strict losses anywhere. The verdict localizes the goal to a single family: any reliable nonzero menders yield completes the gate. Every reading is provenance-anchored (receipt shas pinned in closed ledger records; the readout refuses any break in the sealed chain).
 
 ## Research Program Fit
 
@@ -14,7 +14,7 @@ See the preregistration.
 
 ## Results
 
-No model event has run.
+`runs/benchmark/confirmation_readout.json`: verdict AGGREGATE_ONLY; per-seed goal gates 9/10, 8/10, 10/10 (PASS); aggregate strict wins 3/3; fragility — menders margin 0.0 on both failing seeds, warren +0.267/tie/win; discovery seed reported (0.3663 vs 0.0800, 10/10) and never counted.
 
 ## Controls
 
@@ -26,7 +26,7 @@ Gateway aggregates and public family scores only; `benchmarks/` never read.
 
 ## Next Stage
 
-Adversarial design review, freeze-commit, CI green, then the three-seed event.
+Closed. The menders dose-scale intake (the one permitted mechanism class) is the funded successor with a precisely-known target; the zero-root lineage rebuild stays queued.
 
 ## Artifact Manifest
 

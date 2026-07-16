@@ -319,7 +319,20 @@
   the recorded goal-gate pass the undocumented prefix is buying. It
   produces a DIFFERENT model (blend alone scored ~0.44 quick aggregate vs
   base 0.17), so it is a new experiment, not a reproduction; ~2.5-3h GPU.
-- FUNDED NEXT — THE CONFIRMATION CELL (nothing outranks it): per the
+- Completed confirmation (AGGREGATE_ONLY):
+  `qwen35_4b_goal_gate_confirmation` — aggregate strict wins 3/3 fresh
+  seeds (4/4 all-time, never close); goal gate 1/3 vs the 2/3 bar (78157
+  swept 10/10 — two full sweeps across four independent seeds; 78155 9/10
+  and 78156 8/10 with ZERO losses, blocked by menders 0-margin ties plus
+  one warren tie). Demonstrated, not confirmed; the gate is localized to
+  menders alone. First standalone-compliant cell (full lineage package).
+- FUNDED NEXT (menders dose-scale intake): the one permitted mechanism
+  class — 800+ episode-feedback rows (10x the failed doses; C43: partial
+  installs were data-limited) from the hygiene_explore parent, calibrated
+  gates, success criterion known exactly: any reliable nonzero menders
+  yield completes the all-families gate whose every other family now
+  holds on every seed.
+- (superseded) FUNDED NEXT — THE CONFIRMATION CELL (nothing outranks it): per the
   confirmation law and the goal's own text, hygiene_explore vs base (and
   a same-backend matched-compute sample-more baseline arm) on MULTIPLE
   independent fresh sealed medium seeds at tb1024; the goal gate recorded
