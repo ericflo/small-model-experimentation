@@ -1276,6 +1276,14 @@
     "experiment_log.md: dated headings cover experiment creation, adversarial repair, implementation audit, and CPU smoke on 2026-07-13; no model-bearing run had begun"
    ]
   },
+  "qwen35_4b_statechain_only_dose": {
+   "start": "2026-07-15",
+   "end": "2026-07-15",
+   "confidence": "high",
+   "sources": [
+    "dated experiment_log.md heading (2026-07-15 design freeze)"
+   ]
+  },
   "qwen35_4b_static_bridge_ceiling_breaker": {
    "start": "",
    "end": "",

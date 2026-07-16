@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 275
+- Experiments: 276
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 193
+- Assigned experiments: 194
 
 ### Seed Evidence
 
@@ -115,6 +115,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_state_formation_branch_handoff_recovery` (new): [README](../experiments/qwen35_4b_state_formation_branch_handoff_recovery/README.md)
 - `qwen35_4b_state_formation_branch_recovery` (new): [README](../experiments/qwen35_4b_state_formation_branch_recovery/README.md)
 - `qwen35_4b_state_formation_capacity_adjudication` (new): [README](../experiments/qwen35_4b_state_formation_capacity_adjudication/README.md)
+- `qwen35_4b_statechain_only_dose` (new): [README](../experiments/qwen35_4b_statechain_only_dose/README.md)
 - `qwen35_4b_static_bridge_ceiling_breaker` (track-z): [README](../experiments/qwen35_4b_static_bridge_ceiling_breaker/README.md)
 - `qwen35_4b_structure_or_values` (new): [README](../experiments/qwen35_4b_structure_or_values/README.md)
 - `qwen35_4b_structure_search_scaling` (new): [README](../experiments/qwen35_4b_structure_search_scaling/README.md)
@@ -374,7 +375,7 @@ Choose or synthesize the next visible example, probe, test, or trace that collap
 Use libraries of verified algorithms, examples, traces, skills, or failures as reusable memory.
 
 - Charter: [algorithmic_memory_and_retrieval](../research_programs/algorithmic_memory_and_retrieval/charter.md)
-- Assigned experiments: 28
+- Assigned experiments: 29
 
 ### Seed Evidence
 
@@ -402,6 +403,7 @@ Use libraries of verified algorithms, examples, traces, skills, or failures as r
 - `qwen35_4b_real_sample_verify_commit` (track-z): [README](../experiments/qwen35_4b_real_sample_verify_commit/README.md)
 - `qwen35_4b_retrieval_adapt_verify_scale` (track-z): [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)
 - `qwen35_4b_sketch_coverage_shift_probe` (track-z): [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md)
+- `qwen35_4b_statechain_only_dose` (new): [README](../experiments/qwen35_4b_statechain_only_dose/README.md)
 - `qwen35_4b_substrate_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md)
 - `qwen35_4b_thinking_budget_scaling` (new): [README](../experiments/qwen35_4b_thinking_budget_scaling/README.md)
 - `qwen35_4b_tool_seeded_banking` (new): [README](../experiments/qwen35_4b_tool_seeded_banking/README.md)
@@ -1028,7 +1030,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 Install general agentic capability in Qwen3.5-4B via breadth-first expert iteration on a firewall-clean multi-family gym, arbitrated by the blackbox menagerie instrument.
 
 - Charter: [agentic_breadth_installation](../research_programs/agentic_breadth_installation/charter.md)
-- Assigned experiments: 43
+- Assigned experiments: 44
 
 ### Assigned Experiments
 
@@ -1058,6 +1060,7 @@ Install general agentic capability in Qwen3.5-4B via breadth-first expert iterat
 - `qwen35_4b_same_prefix_advantage_routing` (new): [README](../experiments/qwen35_4b_same_prefix_advantage_routing/README.md)
 - `qwen35_4b_semantic_policy_headroom_tournament` (new): [README](../experiments/qwen35_4b_semantic_policy_headroom_tournament/README.md)
 - `qwen35_4b_specialist_policy_integration` (new): [README](../experiments/qwen35_4b_specialist_policy_integration/README.md)
+- `qwen35_4b_statechain_only_dose` (new): [README](../experiments/qwen35_4b_statechain_only_dose/README.md)
 - `qwen35_4b_think_ftpo_round1` (new): [README](../experiments/qwen35_4b_think_ftpo_round1/README.md)
 - `qwen35_4b_think_ftpo_round2` (new): [README](../experiments/qwen35_4b_think_ftpo_round2/README.md)
 - `qwen35_4b_transaction_invariant_recovery_curriculum` (new): [README](../experiments/qwen35_4b_transaction_invariant_recovery_curriculum/README.md)

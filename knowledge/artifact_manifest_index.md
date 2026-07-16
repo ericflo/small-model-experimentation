@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 247
-- Manifest files: 585
+- Experiments with manifests: 248
+- Manifest files: 588
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 99 |
+| `other` | 101 |
 | `run-data` | 101 |
-| `standard-artifact` | 120 |
+| `standard-artifact` | 121 |
 
 ## Manifests
 
@@ -253,6 +253,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_state_formation_branch_handoff_recovery` | `standard-artifact` | [manifest](../experiments/qwen35_4b_state_formation_branch_handoff_recovery/reports/artifact_manifest.yaml) |
 | `qwen35_4b_state_formation_branch_recovery` | `standard-artifact` | [manifest](../experiments/qwen35_4b_state_formation_branch_recovery/reports/artifact_manifest.yaml) |
 | `qwen35_4b_state_formation_capacity_adjudication` | `standard-artifact` | [manifest](../experiments/qwen35_4b_state_formation_capacity_adjudication/reports/artifact_manifest.yaml) |
+| `qwen35_4b_statechain_only_dose` | `other` | [manifest](../experiments/qwen35_4b_statechain_only_dose/data/corpus_manifest.json) |
+| `qwen35_4b_statechain_only_dose` | `other` | [manifest](../experiments/qwen35_4b_statechain_only_dose/data/stream_manifest.json) |
+| `qwen35_4b_statechain_only_dose` | `standard-artifact` | [manifest](../experiments/qwen35_4b_statechain_only_dose/reports/artifact_manifest.yaml) |
 | `qwen35_4b_static_bridge_ceiling_breaker` | `dataset` | [manifest](../experiments/qwen35_4b_static_bridge_ceiling_breaker/data/dataset_manifest.json) |
 | `qwen35_4b_static_bridge_ceiling_breaker` | `large-artifact` | [manifest](../experiments/qwen35_4b_static_bridge_ceiling_breaker/large_artifacts_manifest.md) |
 | `qwen35_4b_strategy_token_diversity_lora` | `run-data` | [manifest](../experiments/qwen35_4b_strategy_token_diversity_lora/data/main_base_k4_records.manifest.json) |

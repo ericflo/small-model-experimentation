@@ -14455,6 +14455,32 @@
      "chart_takeaway": "Design, review, and freeze completed; the event stopped at the first arm and the pre-written consequence closed the lever."
     }
    ]
+  },
+  "qwen35_4b_statechain_only_dose": {
+   "verdict_tag": "Re-dose only the half that worked: state-tracking alone, twice the rows",
+   "verdict_tone": "neutral",
+   "concept_primer": "The previous experiment taught two lessons at once on invented toy machines: an act-observe-revise repair loop and hidden-state tracking. The verdict split cleanly — state-tracking installed (the trained model beat both its parent and a matched control on fresh instances) while the repair loop scored zero and dragged overall retention just outside the allowed band. This successor drops the dead half entirely: all 160 training rows teach state-tracking, on the two machines that already worked (as brand-new instances) plus two newly invented ones, with every knob on every machine explicitly bounded in the written rules. Everything else — the parent model, the matched-exposure control, the calibrated three-screen retention gate, and the one sealed benchmark shot — is inherited unchanged from the reference design.",
+   "plain_question": "Does a state-tracking-only dose (no dead repair rows) install the skill cleanly — beating both parent and control on fresh instances — while staying inside the retention bands the mixed dose failed?",
+   "plain_answer": "Pending. The full pipeline is frozen pre-compute: the 160-row corpus is built and audited (fresh vocabulary, zero row overlap with every earlier training set and test), both training streams are matched to exactly zero token difference on all three exposure axes, and the promotion gate is preregistered — the candidate must strictly beat both the parent and the replay control on a 40-task fresh holdout AND hold pooled retention within the calibrated bands against both. Only a promoted candidate may open the sealed ten-family benchmark seed.",
+   "why_it_matters": "The split verdict left the obvious question unanswered: was the state-tracking install real and merely taxed by the failing half of the dose, or does any 160-row dose pay the same retention cost? A clean pass here isolates the proven skill and gives the program its best remaining shot at converting one of the two zero-zero benchmark families (the state-tracking-shaped one); a clean fail says the retention tax comes from dosing itself, not from dead rows.",
+   "key_numbers": [
+    {
+     "label": "Treatment dose",
+     "value": "160 rows",
+     "sub": "state-tracking only; 40 per machine, two machines reused + two new"
+    },
+    {
+     "label": "Exposure match",
+     "value": "0 tokens",
+     "sub": "exact zero delta on all three axes vs the replay control"
+    },
+    {
+     "label": "Prior split",
+     "value": "11/20 vs 0/20",
+     "sub": "state-tracking installed, repair dead (reference cell)"
+    }
+   ],
+   "charts": []
   }
  }
 }

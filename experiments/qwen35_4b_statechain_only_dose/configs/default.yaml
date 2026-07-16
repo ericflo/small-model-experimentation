@@ -1,0 +1,16 @@
+experiment_id: qwen35_4b_statechain_only_dose
+status: in-progress
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+parent: hygiene_explore composite (tree 9eb653d7...)
+arms: [replay_ctl2, statechain_only]
+seeds:
+  construction: 77140
+  namespace: 55131
+  training: 67
+  axis_gate: 88033
+  retention_screens: [88034, 88035, 88036]
+  aggregate_sealed: 78154
+retention_protocol: pooled_k3
+conditional_benchmark: {tier: medium, think_budget: 1024}

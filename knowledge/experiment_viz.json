@@ -49314,6 +49314,43 @@
      "source": "experiments/qwen35_4b_medium_intermediate_budget_probe/runs/benchmark/medium_tb4096_seed78153_measurement/base.failure.json"
     }
    ]
+  },
+  "qwen35_4b_statechain_only_dose": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Frozen 1,520-row training streams: statechain-only dose vs matched replay control",
+     "categories": [
+      "shared replay core",
+      "variable replay rows",
+      "u_statechain treatment rows"
+     ],
+     "series": [
+      {
+       "label": "replay_ctl2 (control)",
+       "values": [
+        1280,
+        240,
+        0
+       ]
+      },
+      {
+       "label": "statechain_only (candidate)",
+       "values": [
+        1280,
+        80,
+        160
+       ]
+      }
+     ],
+     "x_label": "stream block",
+     "y_label": "rows per arm",
+     "y_format": "number",
+     "note": "Design frozen pre-compute (lifecycle 18). The candidate's 240-row variable block carries the 160-row statechain-only corpus (brewvat + courierloft reused as fresh instances, peatstove + muletrack newly designed, 40 rows each) plus 80 MILP-chosen replay fillers; the joint solver forces EXACT zero deltas on all three exposure axes (1,368,815 forward tokens, 574,630 nonzero targets, 628,314 loss-mass x5 per arm) with 1,280 position-aligned shared rows. Gate: axis holdout at seed 88033 (strict total over parent AND replay, single-kind, no per-kind split) + pooled_k3 retention bands at seeds 88034-88036; sealed medium seed 78154 opens only on promotion.",
+     "source": "experiments/qwen35_4b_statechain_only_dose/data/stream_manifest.json"
+    }
+   ]
   }
  }
 }

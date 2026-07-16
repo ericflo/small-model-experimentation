@@ -5587,6 +5587,42 @@
   },
   {
     "file_counts": {
+      ".json": 6,
+      ".jsonl": 12,
+      ".md": 8,
+      ".py": 22,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_statechain_only_dose",
+    "path": "experiments/qwen35_4b_statechain_only_dose",
+    "primary_readme": "experiments/qwen35_4b_statechain_only_dose/README.md",
+    "primary_report": "experiments/qwen35_4b_statechain_only_dose/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "algorithmic_memory_and_retrieval",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "Dose ONLY the proven skill: lifecycle 15 split its verdict \u2014 u_statechain INSTALLED (11/20, strict over both controls) while u_feedloop died at 0/20 and dragged retention below the replay band. This cell re-runs the install with a 160-row statechain-only corpus (no dead feedloop rows) and asks whether the clean dose clears the calibrated gate the mixed dose failed.",
+    "tags": [
+      "latent-state",
+      "memory",
+      "small-model"
+    ],
+    "title": "Statechain-Only Dose",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 51,
+    "total_size_bytes": 19045726
+  },
+  {
+    "file_counts": {
       ".json": 13,
       ".jsonl": 10,
       ".log": 16,
