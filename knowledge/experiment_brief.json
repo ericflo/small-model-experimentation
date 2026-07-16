@@ -14493,6 +14493,44 @@
      "chart_takeaway": "The parent swept all ten families against base — the program goal, recorded once, awaiting confirmation."
     }
    ]
+  },
+  "qwen35_4b_goal_gate_confirmation": {
+   "verdict_tag": "Design under construction; the three-seed replication has not run",
+   "concept_primer": "One sealed benchmark event just recorded the program's stated goal for the first time: a clean-trained model beat the untouched base on every one of ten families at once. But two of those family wins rode on single-item margins, and this program's own laws say one seed is a draw until it replicates. This experiment is the replication: the same two models, three brand-new sealed seeds, and a verdict written before the event.",
+   "plain_question": "Does the all-ten-families win replicate across three fresh sealed seeds?",
+   "plain_answer": "Nothing has run yet. The frozen rule: CONFIRMED requires the aggregate win on all three seeds and the full ten-family sweep on at least two; the discovery seed is reported alongside but never counted; the two fragile families' margins are reported per seed either way.",
+   "why_it_matters": "This is the program goal's final gate: a confirmed pass completes the demonstration-plus-confirmation chain the goal demands; a non-replication prices the discovery honestly and hands the program back its 9-of-10 position with the newly proven skill-to-family conversion mechanism.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Fresh seeds",
+     "value": "3",
+     "sub": "78,155 / 78,156 / 78,157, sealed"
+    },
+    {
+     "label": "Discovery margins",
+     "value": "1 item",
+     "sub": "menders 0.017, warren +0.05"
+    },
+    {
+     "label": "Bar for CONFIRMED",
+     "value": "2/3",
+     "sub": "ten-family sweeps + aggregate 3/3"
+    },
+    {
+     "label": "Training runs",
+     "value": "0",
+     "sub": "pure replication"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Where the experiment stands",
+     "chart_read": "Each bar is a preregistered stage; one means complete.",
+     "chart_takeaway": "The contract, pins, and verdict rule are frozen; the three-seed event remains."
+    }
+   ]
   }
  }
 }

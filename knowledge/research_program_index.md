@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 276
+- Experiments: 277
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 194
+- Assigned experiments: 195
 
 ### Seed Evidence
 
@@ -78,6 +78,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_gauntlet_breadth_round1` (new): [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md)
 - `qwen35_4b_generator_verifier_gap` (new): [README](../experiments/qwen35_4b_generator_verifier_gap/README.md)
 - `qwen35_4b_goal_gap_axis_curriculum_target_match` (new): [README](../experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/README.md)
+- `qwen35_4b_goal_gate_confirmation` (new): [README](../experiments/qwen35_4b_goal_gate_confirmation/README.md)
 - `qwen35_4b_graphir_self_repair` (track-z): [README](../experiments/qwen35_4b_graphir_self_repair/README.md)
 - `qwen35_4b_humaneval_adaptive_budget` (track-z): [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md)
 - `qwen35_4b_hypothesize_verify_wall` (new): [README](../experiments/qwen35_4b_hypothesize_verify_wall/README.md)
@@ -1030,7 +1031,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 Install general agentic capability in Qwen3.5-4B via breadth-first expert iteration on a firewall-clean multi-family gym, arbitrated by the blackbox menagerie instrument.
 
 - Charter: [agentic_breadth_installation](../research_programs/agentic_breadth_installation/charter.md)
-- Assigned experiments: 44
+- Assigned experiments: 45
 
 ### Assigned Experiments
 
@@ -1044,6 +1045,7 @@ Install general agentic capability in Qwen3.5-4B via breadth-first expert iterat
 - `qwen35_4b_gauntlet_breadth_round1` (new): [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md)
 - `qwen35_4b_gauntlet_frontier` (new): [README](../experiments/qwen35_4b_gauntlet_frontier/README.md)
 - `qwen35_4b_goal_gap_axis_curriculum_target_match` (new): [README](../experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/README.md)
+- `qwen35_4b_goal_gate_confirmation` (new): [README](../experiments/qwen35_4b_goal_gate_confirmation/README.md)
 - `qwen35_4b_hygiene_explore_destack_medium` (new): [README](../experiments/qwen35_4b_hygiene_explore_destack_medium/README.md)
 - `qwen35_4b_interactive_policy_curriculum` (new): [README](../experiments/qwen35_4b_interactive_policy_curriculum/README.md)
 - `qwen35_4b_interleaved_replay_dose_medium` (new): [README](../experiments/qwen35_4b_interleaved_replay_dose_medium/README.md)

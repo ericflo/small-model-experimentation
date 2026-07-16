@@ -670,6 +670,14 @@
     "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
+  "qwen35_4b_goal_gate_confirmation": {
+   "start": "2026-07-15",
+   "end": "2026-07-15",
+   "confidence": "high",
+   "sources": [
+    "dated experiment_log.md heading (2026-07-15 design freeze)"
+   ]
+  },
   "qwen35_4b_graphir_self_repair": {
    "start": "",
    "end": "",

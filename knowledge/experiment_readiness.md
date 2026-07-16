@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 276
-- Anchor-ready: 260
-- Human-authored READMEs: 263
+- Experiments: 277
+- Anchor-ready: 261
+- Human-authored READMEs: 264
 - Generated README stubs: 13
-- Primary reports: 275
-- Experiment logs: 179
-- Smoke commands: 144
-- Artifact manifests: 248
+- Primary reports: 276
+- Experiment logs: 180
+- Smoke commands: 145
+- Artifact manifests: 249
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 163 |
+| `documented-scripts` | 164 |
 | `scripts-undocumented` | 22 |
 | `source-or-analysis` | 53 |
 
@@ -113,6 +113,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_gauntlet_frontier`](../experiments/qwen35_4b_gauntlet_frontier/README.md) | agentic_breadth_installation | `human-authored` | [report](../experiments/qwen35_4b_gauntlet_frontier/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_generator_verifier_gap`](../experiments/qwen35_4b_generator_verifier_gap/README.md) | evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_generator_verifier_gap/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_goal_gap_axis_curriculum_target_match`](../experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/README.md) | agentic_breadth_installation, benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
+| yes | [`qwen35_4b_goal_gate_confirmation`](../experiments/qwen35_4b_goal_gate_confirmation/README.md) | agentic_breadth_installation, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_goal_gate_confirmation/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen35_4b_graphir_self_repair`](../experiments/qwen35_4b_graphir_self_repair/README.md) | benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_graphir_self_repair/reports/qwen35_4b_graphir_self_repair_report.md) | no | `scripts-undocumented` | no | dataset, large-artifact | add-experiment-log, document-run-path, add-smoke-command |
 | no | [`qwen35_4b_humaneval_adaptive_budget`](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md) | benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety, structured_execution_and_compilers | `generated-stub` | [report](../experiments/qwen35_4b_humaneval_adaptive_budget/reports/qwen35_4b_humaneval_adaptive_budget_report.md) | no | `documented-scripts` | no | dataset | replace-generated-readme, add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_humaneval_code_confidence`](../experiments/qwen35_4b_humaneval_code_confidence/README.md) | benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety | `human-authored` | [report](../experiments/qwen35_4b_humaneval_code_confidence/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |

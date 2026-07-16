@@ -1,0 +1,29 @@
+schema_version: 1
+experiment_id: "qwen35_4b_goal_gate_confirmation"
+external_artifacts:
+  - name: base_reserialized composite
+    storage: large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized
+    required_for: benchmark arm (all three seeds)
+    checksum: b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db
+    regenerate: reserialization of the pinned base revision (weights sha; tree recomputed at event time)
+  - name: hygiene_explore composite
+    storage: large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore
+    required_for: benchmark arm (all three seeds)
+    checksum: 9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971
+    regenerate: this cell's own scripts/rebuild_lineage.py (data/lineage/ + scripts/lineage_trainers/ + scripts/merge_adapter.py + the vendored lineage root; model.safetensors e21123443a230ada2c73ded411e0b5b7c2b1459856b2c38e4f1beea8958dc02f is the hard check — the published tree sha covers a machine-local merge receipt path); the source experiment's merge receipt (22a22a68…) remains a verification aid
+  - name: lineage root adapter (frozen blend, vendored)
+    storage: large_artifacts/qwen35_4b_goal_gate_confirmation/lineage_root/blend
+    required_for: scripts/rebuild_lineage.py stage 1 warm start (standalone-reproducibility gate)
+    checksum: ad2ef4fae785debedf5e50932a79bda97869d3efc212f53d48ccb04c59e25d21 (adapter_model.safetensors; adapter_config.json cd764ae869b8a55526e283dd133e1940896b428839c6abf2e55d6ae2a0b32635; all six file hashes in data/lineage/lineage_manifest.json)
+    regenerate: NOT RECONSTRUCTABLE — hard provenance boundary; no committed creation receipt exists for this frozen adapter (declared "frozen C53 blend source adapter"); restore from this cell's artifact storage (original copy at large_artifacts/qwen35_4b_gauntlet_frontier/adapters/blend is a verification aid only)
+omitted_artifacts: []
+reproducibility:
+  smoke_command: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_goal_gate_confirmation/scripts/run.py --smoke
+  full_command: checkpointed scripts/run.py --stage benchmark only
+  lineage_verify_command: .venv/bin/python -B experiments/qwen35_4b_goal_gate_confirmation/scripts/rebuild_lineage.py --verify-inputs
+  lineage_rebuild_command: .venv/bin/python -B experiments/qwen35_4b_goal_gate_confirmation/scripts/rebuild_lineage.py
+  required_external_artifacts:
+    - base_reserialized composite
+    - hygiene_explore composite
+    - lineage root adapter (frozen blend, vendored)
+notes: Eval-only three-seed replication; per-seed write-ahead ledger; the discovery event's summary is sha-pinned for context and implementation anchoring but never counted in the verdict; no training and no promotion exist in this cell. Standalone-reproducibility gate (2026-07-15) — the treated composite's complete model-reproduction package lives in this cell; data/lineage/ carries the six ordered SFT dataset copies and the fixed-seed recipe manifest, scripts/lineage_trainers/ + scripts/merge_adapter.py carry the byte-identical trainer/merger copies, and the frozen root adapter is vendored above.

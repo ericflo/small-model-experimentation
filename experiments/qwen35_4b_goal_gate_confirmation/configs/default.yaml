@@ -1,0 +1,14 @@
+experiment_id: qwen35_4b_goal_gate_confirmation
+status: model_free_construction
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+arms: [base, hygiene_explore]
+event:
+  tier: medium
+  think_budget: 1024
+  seeds: [78155, 78156, 78157]
+verdict_space: [CONFIRMED, AGGREGATE_ONLY, NOT_REPLICATED]
+discovery_seed_reported_not_counted: 78154
+training: none
+promotion: none

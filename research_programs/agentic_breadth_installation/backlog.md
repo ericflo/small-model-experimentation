@@ -310,6 +310,15 @@
   local-install→family conversion, and hygiene_explore_parent recorded
   the FIRST 10/10 all-families goal-gate pass (menders 0.017, warren
   0.150 vs 0.100 — single-item margins). One seed ≠ a claim.
+- QUEUED (zero-root rebuild, own intake — opened by the standalone
+  directive's lineage walk): the hygiene_explore adapter chain warm-starts
+  from the frozen C53-era `blend` adapter (no committed creation receipt;
+  gym-era training; vendored+hash-pinned in the confirmation cell). A
+  zero-root rebuild — fresh adapter on the official base, the same six
+  receipted stages replayed at their fixed seeds — answers how much of
+  the recorded goal-gate pass the undocumented prefix is buying. It
+  produces a DIFFERENT model (blend alone scored ~0.44 quick aggregate vs
+  base 0.17), so it is a new experiment, not a reproduction; ~2.5-3h GPU.
 - FUNDED NEXT — THE CONFIRMATION CELL (nothing outranks it): per the
   confirmation law and the goal's own text, hygiene_explore vs base (and
   a same-backend matched-compute sample-more baseline arm) on MULTIPLE

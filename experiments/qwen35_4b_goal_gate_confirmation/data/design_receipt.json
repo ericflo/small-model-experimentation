@@ -1,0 +1,265 @@
+{
+ "checkpoint_policy": {
+  "benchmark_review_verdict_required": "PASS_BENCHMARK_EVENT",
+  "clean_pushed_main_required": true,
+  "design_receipt_committed_at_head_required": true,
+  "next_authorized_stage": "benchmark",
+  "one_stage_per_invocation": true
+ },
+ "code": {
+  "check_benchmark_sha256": "e58d3d9d1b51336b1e62c39d0725a9126d9d21aca370ff7285830e52d805c1d8",
+  "gen_design_receipt_sha256": "ed64ef94df94afdd7478dd83ebca5410f5e3c75c531f4012ece536e9f8e09205",
+  "harness_sha256": "fe8999793ed1167cb4dc8d5027eca991f4298a247cb675338392929e43672612",
+  "rebuild_lineage_sha256": "91c834b869972266ac64e2bc0e43ec05759f198b404425878815f86a25f2be5d",
+  "run_benchmark_sha256": "b5010aa1afbb40802a90e25cdc4d8c95ee820dc7f901e1c0df45612aecbcf6f4"
+ },
+ "discovery_reference": {
+  "all_six_receipts_must_match_implementation": true,
+  "benchmark_implementation": {
+   "runner_sha256": "a3beecd8b5c89ccfd99a172a6d85321d39b9feb6c29d12f10b2f4d7499e273cb",
+   "source_file_count": 56,
+   "source_inventory_sha256": "218b8615a95f24da962c931e9cd2dba58d853a7bdcd2847cd8e2c42fc2c05f42"
+  },
+  "recorded_goal_gate_pass": true,
+  "reported_never_counted": true,
+  "seed": 78154,
+  "summary": "experiments/qwen35_4b_statechain_only_dose/runs/benchmark/medium_tb1024_seed78154_pilot/summary.json",
+  "summary_sha256": "6b1a43869f013e24a048a45a04e5603b45fe59488912194eb3e76a43679255fa",
+  "think_budget": 1024,
+  "tier": "medium",
+  "treated_arm_label": "hygiene_explore_parent"
+ },
+ "event": {
+  "closed_records_pin_summary_and_receipt_sha256s": true,
+  "closed_seed_refused_forever": true,
+  "completed_seeds_never_rerun": true,
+  "crashed_summary_recovery": "byte-identical deterministic regeneration; divergence refuses with both digests",
+  "gateway_runs_total": 6,
+  "k_seed_ledger": "runs/benchmark_events.jsonl",
+  "ledger_write_ahead_per_seed": true,
+  "model_order": [
+   "base",
+   "hygiene_explore"
+  ],
+  "name": "confirmation",
+  "overall_completes_only_when_all_seeds_close": true,
+  "per_seed_event_dirs": {
+   "78155": "runs/benchmark/medium_tb1024_seed78155_confirmation",
+   "78156": "runs/benchmark/medium_tb1024_seed78156_confirmation",
+   "78157": "runs/benchmark/medium_tb1024_seed78157_confirmation"
+  },
+  "readout_requires_complete_ledger": true,
+  "seed_major_frozen_order": true,
+  "seeds": [
+   78155,
+   78156,
+   78157
+  ],
+  "sequential_same_seed_runs": true,
+  "terminal_readout": "runs/benchmark/confirmation_readout.json",
+  "think_budget": 1024,
+  "tier": "medium",
+  "unopened_seed_requires_clean_slate": true
+ },
+ "experiment_id": "qwen35_4b_goal_gate_confirmation",
+ "firewall": {
+  "benchmark_data_read": false,
+  "gateway_receipts_only": true
+ },
+ "fragility_families": [
+  "menders",
+  "warren"
+ ],
+ "gateway": {
+  "path": "scripts/run_benchmark_aggregate.py",
+  "sha256": "53cf6533dbd710eb167503363c39f73dbf7559a0d91f40a00436a3c218a01c17"
+ },
+ "lineage_package": {
+  "datasets": {
+   "stage01_replay_refresh.jsonl": {
+    "rows": 1520,
+    "sha256": "5d5d7c4b8a4b0a4f270fe8b2ecaebe356c771948d71b0f7bbeead6bfc04308b6"
+   },
+   "stage02_designed160.jsonl": {
+    "rows": 1520,
+    "sha256": "5159cf41b6474bdc8640cdb2a4a168587b59232ca8171c7b7057fc6bfe1b40c8"
+   },
+   "stage03_close_xi__targeted_standard.jsonl": {
+    "rows": 320,
+    "sha256": "12fc613bb31a46bcea9acd49b26467656704aa3b3418dab8d920adf057d14f00"
+   },
+   "stage04_replay_after_close.jsonl": {
+    "rows": 320,
+    "sha256": "541805df2d817707c1e76213e50c8f08fd9caff10d0a3887e1196424b6820be6"
+   },
+   "stage05_designed_fresh.jsonl": {
+    "rows": 1520,
+    "sha256": "6d4dc303bc159c19a1ffd0c60ca7d08ea64b02909366701b345d888482d67f3f"
+   },
+   "stage06_hygiene_explore.jsonl": {
+    "rows": 1520,
+    "sha256": "82aa1a78c0a429a48c3db6b94ac84397cea001b041477e7b137b38c21354112f"
+   }
+  },
+  "directive": "standalone-reproducibility gate (AGENTS.md non-negotiables; docs/quality_gates.md, owner directive 2026-07-15)",
+  "fast_verification": "scripts/rebuild_lineage.py --verify-inputs",
+  "manifest": "experiments/qwen35_4b_goal_gate_confirmation/data/lineage/lineage_manifest.json",
+  "manifest_sha256": "1f49cd8b8706c8db858d30af1bf14fe09403971256514919bc24e7b6c47ff121",
+  "rebuild": "scripts/rebuild_lineage.py",
+  "root_adapter": {
+   "files": {
+    "README.md": {
+     "sha256": "aeb83ceb33aa84802245cc3bc4abe24160d7d08550ca8278baff84d8b24e9ba4",
+     "size": 5184
+    },
+    "adapter_config.json": {
+     "sha256": "cd764ae869b8a55526e283dd133e1940896b428839c6abf2e55d6ae2a0b32635",
+     "size": 1094
+    },
+    "adapter_model.safetensors": {
+     "sha256": "ad2ef4fae785debedf5e50932a79bda97869d3efc212f53d48ccb04c59e25d21",
+     "size": 169903320
+    },
+    "chat_template.jinja": {
+     "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+     "size": 7756
+    },
+    "tokenizer.json": {
+     "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+     "size": 19989325
+    },
+    "tokenizer_config.json": {
+     "sha256": "9cf04fffe3d8c3b85e439fb35c7acad0761ab51c422a8c4256d9f887c3a0be7d",
+     "size": 1125
+    }
+   },
+   "provenance_boundary": "HARD BOUNDARY: the frozen 'blend' root adapter has no committed creation receipt anywhere in the repository; it is vendored by bytes into this cell's own artifact storage and is NOT reconstructable from committed receipts. Every later stage IS reconstructable from this cell alone (data/lineage/ + scripts/lineage_trainers/ + scripts/merge_adapter.py + the pinned HF base revision)",
+   "vendored_path": "large_artifacts/qwen35_4b_goal_gate_confirmation/lineage_root/blend"
+  },
+  "trainers": {
+   "lineage_trainers/train_think_close_stage3.py": "10b4914cdc6c24858a77750f4ab64074fae5cbf36d98f3e4fc26b8958068fb14",
+   "lineage_trainers/train_think_stage12.py": "400e4b856a5899db8805510c9f6d8d11da76b35cf30af16856b46f41abdb4e54",
+   "lineage_trainers/train_think_stage456.py": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4",
+   "merge_adapter.py": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672"
+  },
+  "training_seeds": [
+   42,
+   43,
+   44,
+   47,
+   51,
+   55
+  ],
+  "verified_at_receipt_time": true
+ },
+ "measurement_intake": {
+  "adapters": null,
+  "exit_zero_on_any_complete_event": true,
+  "local_gate": null,
+  "promotion": null,
+  "training": null
+ },
+ "model": {
+  "calls": 0,
+  "id": "Qwen/Qwen3.5-4B",
+  "loaded": false,
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+ },
+ "models": {
+  "base": {
+   "deployment": "explicit_merged_composite",
+   "merge_receipt": {
+    "committed": false,
+    "path": "large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized/merge_receipt.json",
+    "sha256": "25aee794cfffe4d58110defc61177edef1f5324e47deb28fbd3cb7ccd61ae54f"
+   },
+   "path": "large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized",
+   "runtime_lora_forbidden": true,
+   "tree_recomputed_at_event_time": true,
+   "tree_sha256": "26d8ee48583adb0fb557d0ff668664949adff0068fa5baafe6f0af68e22fb677",
+   "weights_sha256": "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db",
+   "weights_size_bytes": 9078620536
+  },
+  "hygiene_explore": {
+   "deployment": "explicit_merged_composite",
+   "merge_receipt": {
+    "committed": true,
+    "path": "experiments/qwen35_4b_hygiene_explore_destack_medium/runs/merges/hygiene_explore.json",
+    "sha256": "22a22a68234de68314064b809352e7449c59ef821235402b66ecb6e5ebcc486a"
+   },
+   "path": "large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore",
+   "runtime_lora_forbidden": true,
+   "tree_recomputed_at_event_time": true,
+   "tree_sha256": "9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971",
+   "weights_sha256": "e21123443a230ada2c73ded411e0b5b7c2b1459856b2c38e4f1beea8958dc02f",
+   "weights_size_bytes": 9078620536
+  }
+ },
+ "public_families": [
+  "chronicle",
+  "lockpick",
+  "menders",
+  "mirage",
+  "rites",
+  "siftstack",
+  "sirens",
+  "stockade",
+  "toolsmith",
+  "warren"
+ ],
+ "readings": {
+  "budget_integrity": "per arm per seed: the gateway receipt's within_budget flag and wall_seconds; if any arm at any seed has within_budget false the readout sets paired_comparison_valid: false with the reason; scores are still recorded",
+  "confirmation_verdict": "ordered total partition: CONFIRMED iff hygiene_explore's aggregate strictly beats base on ALL THREE seeds AND the goal gate passes on AT LEAST TWO of three; AGGREGATE_ONLY iff the aggregate strictly beats base on all three seeds but the goal-gate majority fails; NOT_REPLICATED otherwise; exact ties are never strict wins; the discovery seed 78154 is reported alongside from the sha-pinned committed summary and NEVER counted in the verdict",
+  "fragility": "per seed: the menders and warren margins (hygiene_explore minus base — the two single-item margins that carried the discovery pass, 0.0167 and 0.050) and which families block any seed that does not pass the goal gate",
+  "per_seed": "per seed: both aggregates, the full per-family table, and the goal gate — strict wins/ties/losses of hygiene_explore vs base over the ten public families, byte-identical to the tier forensics FAMILIES; pass = ten strict wins"
+ },
+ "schema_version": 1,
+ "seed_freshness_audits": {
+  "78155": {
+   "disallowed_matches": [],
+   "fresh": true,
+   "pattern": "seed[^0-9]{0,3}78155(?![0-9])|(?<![0-9])78155[^0-9]{0,3}seed",
+   "roots": [
+    "experiments",
+    "knowledge",
+    "research_programs"
+   ],
+   "seed": 78155,
+   "self_directory_excluded": "experiments/qwen35_4b_goal_gate_confirmation",
+   "self_reference_line_window": 3,
+   "substring_hits_in_floats_and_long_seeds_excluded": true,
+   "word_boundary_guards": true
+  },
+  "78156": {
+   "disallowed_matches": [],
+   "fresh": true,
+   "pattern": "seed[^0-9]{0,3}78156(?![0-9])|(?<![0-9])78156[^0-9]{0,3}seed",
+   "roots": [
+    "experiments",
+    "knowledge",
+    "research_programs"
+   ],
+   "seed": 78156,
+   "self_directory_excluded": "experiments/qwen35_4b_goal_gate_confirmation",
+   "self_reference_line_window": 3,
+   "substring_hits_in_floats_and_long_seeds_excluded": true,
+   "word_boundary_guards": true
+  },
+  "78157": {
+   "disallowed_matches": [],
+   "fresh": true,
+   "pattern": "seed[^0-9]{0,3}78157(?![0-9])|(?<![0-9])78157[^0-9]{0,3}seed",
+   "roots": [
+    "experiments",
+    "knowledge",
+    "research_programs"
+   ],
+   "seed": 78157,
+   "self_directory_excluded": "experiments/qwen35_4b_goal_gate_confirmation",
+   "self_reference_line_window": 3,
+   "substring_hits_in_floats_and_long_seeds_excluded": true,
+   "word_boundary_guards": true
+  }
+ },
+ "stage": "goal_gate_confirmation_design"
+}

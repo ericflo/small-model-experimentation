@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 248
-- Manifest files: 588
+- Experiments with manifests: 249
+- Manifest files: 590
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 101 |
+| `other` | 102 |
 | `run-data` | 101 |
-| `standard-artifact` | 121 |
+| `standard-artifact` | 122 |
 
 ## Manifests
 
@@ -133,6 +133,8 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_goal_gap_axis_curriculum_target_match` | `other` | [manifest](../experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/corpus_manifest.json) |
 | `qwen35_4b_goal_gap_axis_curriculum_target_match` | `other` | [manifest](../experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/stream_manifest.json) |
 | `qwen35_4b_goal_gap_axis_curriculum_target_match` | `standard-artifact` | [manifest](../experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/reports/artifact_manifest.yaml) |
+| `qwen35_4b_goal_gate_confirmation` | `other` | [manifest](../experiments/qwen35_4b_goal_gate_confirmation/data/lineage/lineage_manifest.json) |
+| `qwen35_4b_goal_gate_confirmation` | `standard-artifact` | [manifest](../experiments/qwen35_4b_goal_gate_confirmation/reports/artifact_manifest.yaml) |
 | `qwen35_4b_graphir_self_repair` | `dataset` | [manifest](../experiments/qwen35_4b_graphir_self_repair/data/dataset_manifest.json) |
 | `qwen35_4b_graphir_self_repair` | `large-artifact` | [manifest](../experiments/qwen35_4b_graphir_self_repair/large_artifacts_manifest.md) |
 | `qwen35_4b_humaneval_adaptive_budget` | `dataset` | [manifest](../experiments/qwen35_4b_humaneval_adaptive_budget/data/dataset_manifest.json) |

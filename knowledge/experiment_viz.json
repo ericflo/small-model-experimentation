@@ -49402,6 +49402,37 @@
      "source": "experiments/qwen35_4b_statechain_only_dose/runs/benchmark/medium_tb1024_seed78154_pilot/summary.json"
     }
    ]
+  },
+  "qwen35_4b_goal_gate_confirmation": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered stage completion",
+     "categories": [
+      "intake",
+      "design receipt frozen",
+      "adversarial review",
+      "3-seed medium event"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "The mandatory replication of the recorded 10/10: base vs hygiene_explore on sealed seeds 78155/78156/78157 at medium/tb1024, per-seed write-ahead ledger, ordered verdict (CONFIRMED requires aggregate 3/3 + goal gate 2/3), discovery seed 78154 sha-pinned and reported but never counted, menders/warren fragility margins per seed. Nothing trains.",
+     "source": "experiments/qwen35_4b_goal_gate_confirmation/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

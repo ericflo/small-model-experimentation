@@ -97,6 +97,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_gauntlet_frontier` | [README](../experiments/qwen35_4b_gauntlet_frontier/README.md) | [report](../experiments/qwen35_4b_gauntlet_frontier/reports/report.md) |
 | `qwen35_4b_generator_verifier_gap` | [README](../experiments/qwen35_4b_generator_verifier_gap/README.md) | [report](../experiments/qwen35_4b_generator_verifier_gap/reports/report.md) |
 | `qwen35_4b_goal_gap_axis_curriculum_target_match` | [README](../experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/README.md) | [report](../experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/reports/report.md) |
+| `qwen35_4b_goal_gate_confirmation` | [README](../experiments/qwen35_4b_goal_gate_confirmation/README.md) | [report](../experiments/qwen35_4b_goal_gate_confirmation/reports/report.md) |
 | `qwen35_4b_graphir_self_repair` | [README](../experiments/qwen35_4b_graphir_self_repair/README.md) | [report](../experiments/qwen35_4b_graphir_self_repair/reports/qwen35_4b_graphir_self_repair_report.md) |
 | `qwen35_4b_humaneval_adaptive_budget` | [README](../experiments/qwen35_4b_humaneval_adaptive_budget/README.md) | [report](../experiments/qwen35_4b_humaneval_adaptive_budget/reports/qwen35_4b_humaneval_adaptive_budget_report.md) |
 | `qwen35_4b_humaneval_code_confidence` | [README](../experiments/qwen35_4b_humaneval_code_confidence/README.md) | [report](../experiments/qwen35_4b_humaneval_code_confidence/reports/report.md) |
