@@ -1,0 +1,85 @@
+{
+ "adapter": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_zero_root_lineage_rebuild/adapters/stage05_designed_fresh",
+ "command": [
+  "/home/ericflo/Development/small-model-experimentation/.venv/bin/python",
+  "-B",
+  "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_zero_root_lineage_rebuild/scripts/lineage_trainers/train_think_stage456.py",
+  "--train",
+  "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_zero_root_lineage_rebuild/data/lineage/stage05_designed_fresh.jsonl",
+  "--out",
+  "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_zero_root_lineage_rebuild/adapters/stage05_designed_fresh",
+  "--epochs",
+  "1.0",
+  "--lr",
+  "1e-05",
+  "--rank",
+  "32",
+  "--alpha",
+  "64",
+  "--batch-size",
+  "1",
+  "--grad-accum",
+  "8",
+  "--max-length",
+  "4096",
+  "--warm-start",
+  "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_zero_root_lineage_rebuild/adapters/stage04_replay_after_close",
+  "--w-think",
+  "0.2",
+  "--seed",
+  "51",
+  "--w-close",
+  "0.2"
+ ],
+ "dataset": {
+  "file": "data/lineage/stage05_designed_fresh.jsonl",
+  "rows": 1520,
+  "sha256": "6d4dc303bc159c19a1ffd0c60ca7d08ea64b02909366701b345d888482d67f3f"
+ },
+ "experiment_id": "qwen35_4b_zero_root_lineage_rebuild",
+ "fresh_init": false,
+ "hyperparameters": {
+  "alpha": 64,
+  "batch_size": 1,
+  "epochs": 1.0,
+  "grad_accum": 8,
+  "lr": 1e-05,
+  "max_length": 4096,
+  "rank": 32,
+  "w_close": 0.2,
+  "w_think": 0.2
+ },
+ "lineage": "zero_root",
+ "manifest_sha256": "1f49cd8b8706c8db858d30af1bf14fe09403971256514919bc24e7b6c47ff121",
+ "model": {
+  "id": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+ },
+ "name": "designed_fresh",
+ "original_produced_contrast": {
+  "adapter_config_sha256": "5966461bd9dbfe280b226940e79eec49030cc44e4131089147634df549dc4055",
+  "adapter_weights_sha256": "36f41095c2d628e4706694e7d64d16aba815870a1d3660af0e24b14dc0e6b442",
+  "note": "CONTRAST ONLY: these are the ORIGINAL blend-rooted chain's recorded hashes; the zero-root chain trains from a different root, so its bytes are EXPECTED to differ and these values are never used as verification"
+ },
+ "produced": {
+  "adapter_config_sha256": "3a09879539290f63ae23765eca1a0365b18426ac43fc40c3cf7f6beaefae025c",
+  "adapter_weights_sha256": "1eceeb64bbf2e9b4044901af301ab040b7a779ae2eefb919e8199a7f128f332c",
+  "adapter_weights_size": 169903320
+ },
+ "schema_version": 1,
+ "seed": 51,
+ "seed_is_inherited_stage_constant": true,
+ "stage": 5,
+ "targeted_close_overrides": null,
+ "trainer": {
+  "path": "scripts/lineage_trainers/train_think_stage456.py",
+  "sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4"
+ },
+ "wall_seconds": 1335.0760019910522,
+ "warm_start": {
+  "adapter": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_zero_root_lineage_rebuild/adapters/stage04_replay_after_close",
+  "adapter_config_sha256": "1c0c1e852d4a4e416fac5c35227b80a64257c5e06b5ef2afa7863d370bcd77c7",
+  "adapter_weights_sha256": "eb10faa9d43ec3f2528725c5b7aa6e862a7023aa701309775504473248b0253e",
+  "source": "stage 4"
+ }
+}

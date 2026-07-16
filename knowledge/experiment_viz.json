@@ -49587,6 +49587,41 @@
      "source": "experiments/qwen35_4b_zero_root_lineage_rebuild/runs/benchmark/zero_root_readout.json"
     }
    ]
+  },
+  "qwen35_4b_clean_path_statechain_extension": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered stage completion",
+     "categories": [
+      "intake",
+      "design frozen (clean chain enforced)",
+      "review",
+      "train both arms",
+      "pooled_k3 local gate",
+      "conditional medium event @78160"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "The mission's cleanest artifact: the proven statechain converter dose (byte-copied corpus) on the zero-root parent, entire lineage documented end-to-end with blend-root absence enforced fail-closed. Readings of consequence at the sealed event: the rites conversion on clean ground and the fully-documented model's profile; menders is closed so the winnable ceiling is 9/10.",
+     "source": "experiments/qwen35_4b_clean_path_statechain_extension/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

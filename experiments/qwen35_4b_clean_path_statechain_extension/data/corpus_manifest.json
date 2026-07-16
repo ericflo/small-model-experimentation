@@ -1,0 +1,80 @@
+{
+  "balance": {
+    "new_formalism_rows_with_out_of_bound_parameters": 0,
+    "statechain_formalisms": {
+      "brewvat": 40,
+      "courierloft": 40,
+      "muletrack": 40,
+      "peatstove": 40
+    },
+    "statechain_hidden_updates_min": 5
+  },
+  "banned_vocabulary": {
+    "sha256": "cc656ae2fda49d6250cc36d84318b6aba554dd775284e7331c0e17d155cf3035",
+    "tokens": 233
+  },
+  "banned_vocabulary_checked": true,
+  "corpus": {
+    "kinds": {
+      "u_statechain": 160
+    },
+    "mix": "statechain=160",
+    "path": "data/sft_statechain_only.jsonl",
+    "rows": 160,
+    "sha256": "ab6c78458eb8a41f42ebee25e79354d42beb558f78bb3d348dd7902ca3a9bad3",
+    "surfaces": {
+      "brewvat": 40,
+      "courierloft": 40,
+      "muletrack": 40,
+      "peatstove": 40
+    }
+  },
+  "experiment_id": "qwen35_4b_clean_path_statechain_extension",
+  "replay": {
+    "byte_identical_to_every_predecessor_copy": true,
+    "path": "data/sft_blend.jsonl",
+    "rows": 2240,
+    "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+  },
+  "replay_overlap": {
+    "messages_compared": 2088,
+    "overlap": 0
+  },
+  "schema_version": 1,
+  "treatment_provenance": {
+    "copies": {
+      "generator": {
+        "byte_identical_to_source": true,
+        "path": "experiments/qwen35_4b_clean_path_statechain_extension/scripts/gen_statechain_curriculum.py",
+        "sha256": "26dba75986df4516505c105c1edefdc8f6e41727198b9a6dd39f86cd456019ed",
+        "source": "experiments/qwen35_4b_statechain_only_dose/scripts/gen_statechain_curriculum.py"
+      },
+      "replay": {
+        "byte_identical_to_source": true,
+        "path": "experiments/qwen35_4b_clean_path_statechain_extension/data/sft_blend.jsonl",
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2",
+        "source": "experiments/qwen35_4b_statechain_only_dose/data/sft_blend.jsonl"
+      },
+      "treatment": {
+        "byte_identical_to_source": true,
+        "path": "experiments/qwen35_4b_clean_path_statechain_extension/data/sft_statechain_only.jsonl",
+        "sha256": "ab6c78458eb8a41f42ebee25e79354d42beb558f78bb3d348dd7902ca3a9bad3",
+        "source": "experiments/qwen35_4b_statechain_only_dose/data/sft_statechain_only.jsonl"
+      }
+    },
+    "inherited_audits": {
+      "documented_in": "the source cell's committed corpus manifest",
+      "row_overlap_audit_sources": 29,
+      "row_overlap_total": 0,
+      "surface_freshness_audit_sources": 29,
+      "surface_freshness_total_hits": 0
+    },
+    "policy": "byte_identical_copy_of_the_proven_dose",
+    "rationale": "the statechain dose is the PROVEN treatment (lifecycle 18: 21/40 axis strict over both controls, rites conversion 0.300 vs 0.100/0.100 paired); fresh instances would change the treatment, so the byte-identical copy is the controlled choice for applying it to the zero-root composite",
+    "regenerated_byte_identically_via_copied_generator": true,
+    "source_construction_seed": 77140,
+    "source_experiment": "qwen35_4b_statechain_only_dose",
+    "source_manifest": "experiments/qwen35_4b_statechain_only_dose/data/corpus_manifest.json",
+    "source_manifest_sha256": "97aa9f504c43e7b124c46f17ae367c862c1f67952ff1c72c197b70f019390467"
+  }
+}

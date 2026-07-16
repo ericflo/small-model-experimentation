@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 252
-- Manifest files: 598
+- Experiments with manifests: 253
+- Manifest files: 602
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 107 |
+| `other` | 110 |
 | `run-data` | 101 |
-| `standard-artifact` | 125 |
+| `standard-artifact` | 126 |
 
 ## Manifests
 
@@ -69,6 +69,10 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_bucket_belief_probe_ranker` | `run-data` | [manifest](../experiments/qwen35_4b_bucket_belief_probe_ranker/data/bucket_train_examples.manifest.json) |
 | `qwen35_4b_bucket_belief_probe_ranker` | `dataset` | [manifest](../experiments/qwen35_4b_bucket_belief_probe_ranker/data/dataset_manifest.json) |
 | `qwen35_4b_bucket_belief_probe_ranker` | `large-artifact` | [manifest](../experiments/qwen35_4b_bucket_belief_probe_ranker/large_artifacts_manifest.md) |
+| `qwen35_4b_clean_path_statechain_extension` | `other` | [manifest](../experiments/qwen35_4b_clean_path_statechain_extension/data/corpus_manifest.json) |
+| `qwen35_4b_clean_path_statechain_extension` | `other` | [manifest](../experiments/qwen35_4b_clean_path_statechain_extension/data/lineage/lineage_manifest.json) |
+| `qwen35_4b_clean_path_statechain_extension` | `other` | [manifest](../experiments/qwen35_4b_clean_path_statechain_extension/data/stream_manifest.json) |
+| `qwen35_4b_clean_path_statechain_extension` | `standard-artifact` | [manifest](../experiments/qwen35_4b_clean_path_statechain_extension/reports/artifact_manifest.yaml) |
 | `qwen35_4b_code_abi_compiler_heldout_primitive_pilot` | `large-artifact` | [manifest](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/large_artifacts_manifest.md) |
 | `qwen35_4b_code_abi_oracle_coverage_ladder` | `large-artifact` | [manifest](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/large_artifacts_manifest.md) |
 | `qwen35_4b_code_confidence` | `standard-artifact` | [manifest](../experiments/qwen35_4b_code_confidence/reports/artifact_manifest.yaml) |

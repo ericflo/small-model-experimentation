@@ -1,0 +1,333 @@
+{
+ "base_reserialized_note": "large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized (weights b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db) is a weight-identical reserialization of the same pinned revision used ONLY as the paired eval arm of the benchmark events; it is never a training or merge input anywhere in this lineage",
+ "carrier": "clean chain: stage 1 trains a FRESH rank-32/alpha-64 QLoRA adapter on the raw pinned HF base (no warm start; LoRA-B zero-initialized, so the delta starts at zero); stages 2-6 warm-start from the previous stage's adapter, every stage trained on the raw pinned HF base; the stage-6 adapter is merged onto the raw HF base to produce the zero-root composite (lifecycle 22); stage 7 trains a FRESH rank-32/alpha-64 adapter ON the zero-root composite via --model-path (no warm start) and is merged onto that composite",
+ "clean_chain": {
+  "blend_root_forbidden": "NO undocumented root adapter exists anywhere in this lineage and none may ever be vendored into this cell; the six-stage chain from a zero-initialized adapter is fully documented by lifecycle 22's committed receipts (copied byte-identically into data/lineage/provenance/) and stage 7 is documented by this cell's own run receipts",
+  "provenance_receipts": {
+   "merge.json": "e906caea7c4b86f4a3eacb96affb7cc2fa9b7cc11e11b634b651cabc5dd01d2b",
+   "stage01_replay_refresh.json": "9fcb4521c2cd7f90a3325a09000ae0766f3a5b7e6f5042cf3ba177a4f6816b53",
+   "stage02_designed160.json": "fac2a348dd1608f82657bc3b0b01491da6a5c7938aa466fa6e9e7979c446cd74",
+   "stage03_close_xi.json": "0bb04493a11c6db879448c61b36f53add0774f4277b9051e3d997cd61f1b0854",
+   "stage04_replay_after_close.json": "94eac7ac9cf0295515a182fe5c4004a5c24fe798bfab252f70b00ae4ead4d6bd",
+   "stage05_designed_fresh.json": "6a7c94dfa0423af9ac15f52a4954885bfbe171bce707d76186ce33e3b7d73f05",
+   "stage06_hygiene_explore.json": "c5d85cf46bfb99b42eaa6d6a965c6e983512c7544da40de4a15c1159ff6fda48"
+  },
+  "zero_root_composite": {
+   "committed_receipt": "experiments/qwen35_4b_zero_root_lineage_rebuild/runs/lineage/merge.json",
+   "committed_receipt_sha256": "e906caea7c4b86f4a3eacb96affb7cc2fa9b7cc11e11b634b651cabc5dd01d2b",
+   "inner_merge_receipt_sha256": "f8981f4638d901471eb41aff0ffd0bfac88aebd6e3e4d4db1e1c733be16709c0",
+   "output_tree_sha256": "414f582950bf60fed2fe462cd141ab98d0f772087b4f9c6bc5aa12f03f379e7d",
+   "path": "large_artifacts/qwen35_4b_zero_root_lineage_rebuild/merged/zero_root_hygiene_explore",
+   "weights_sha256": "6e9aad251465ca2713fda0238a34aa9f46262053860b867f80189d65c9ee3932",
+   "weights_size_bytes": 9078620536
+  }
+ },
+ "determinism": {
+  "expectation": "same repo .venv (pinned torch/transformers/peft/bitsandbytes) + same GPU class (RTX 4090) + fixed seeds reproduce the recorded adapter hashes; on a different stack the produced hashes are verification aids and equivalence must be re-established behaviorally through the trusted benchmark gateway",
+  "produced_hashes_are_verification_aids": true,
+  "seeds_fixed_per_stage": [
+   42,
+   43,
+   44,
+   47,
+   51,
+   55,
+   73
+  ]
+ },
+ "directive": "standalone-reproducibility gate (AGENTS.md non-negotiables; docs/quality_gates.md): this cell evaluates a non-base checkpoint and therefore carries the complete model-reproduction package in its own directory — the six zero-root stage datasets, the three lineage trainer copies, the merger copy, the stage-7 trainer and training stream, and lifecycle 22's receipts as provenance documents",
+ "experiment_id": "qwen35_4b_clean_path_statechain_extension",
+ "final_merge": {
+  "adapter": "stage 7 output (statechain_clean), fresh adapter on the zero-root composite",
+  "base_model": "the zero-root composite (tree 414f582950bf60fed2fe462cd141ab98d0f772087b4f9c6bc5aa12f03f379e7d) via the merger's --base-model",
+  "merger": "scripts/merge_adapter.py",
+  "merger_sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+  "output": "large_artifacts/qwen35_4b_clean_path_statechain_extension/merged/statechain_clean",
+  "receipt": "runs/merges/statechain_clean.json"
+ },
+ "framing": "clean_chain",
+ "merger": {
+  "base_model": "stages 1-6 merge onto the raw pinned HF revision (the merger's default --base-model); stage 7 merges onto the zero-root composite via --base-model",
+  "path": "scripts/merge_adapter.py",
+  "sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+  "source": "experiments/qwen35_4b_same_prefix_advantage_routing/scripts/merge_adapter.py"
+ },
+ "model": {
+  "id": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "role": "the raw pinned HF revision is the base model for training stages 1-6 and their final merge; stage 7 trains on and merges onto the zero-root composite produced by that merge"
+ },
+ "schema_version": 1,
+ "stage": "clean_chain_lineage_manifest",
+ "stages": [
+  {
+   "dataset": {
+    "file": "data/lineage/stage01_replay_refresh.jsonl",
+    "rows": 1520,
+    "sha256": "5d5d7c4b8a4b0a4f270fe8b2ecaebe356c771948d71b0f7bbeead6bfc04308b6",
+    "source": "experiments/qwen35_4b_universal_replay_anchor/data/replay_refresh.jsonl"
+   },
+   "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "w_think": 0.2
+   },
+   "name": "replay_refresh",
+   "produced_zero_root": {
+    "adapter_config_sha256": "aaa81acb5a73fa9782dda7bc9c148a1502374bc29e761f7a4eef50e9952d1524",
+    "adapter_weights_sha256": "e271e2eab58e153dee4804959e105e766c6ba1aee3b1725194e4cab3755d4584",
+    "receipt": "data/lineage/provenance/stage01_replay_refresh.json",
+    "verification_aid": true
+   },
+   "seed": 42,
+   "stage": 1,
+   "trainer": "scripts/lineage_trainers/train_think_stage12.py",
+   "trainer_sha256": "400e4b856a5899db8805510c9f6d8d11da76b35cf30af16856b46f41abdb4e54",
+   "warm_start": "fresh_zero_init"
+  },
+  {
+   "dataset": {
+    "file": "data/lineage/stage02_designed160.jsonl",
+    "rows": 1520,
+    "sha256": "5159cf41b6474bdc8640cdb2a4a168587b59232ca8171c7b7057fc6bfe1b40c8",
+    "source": "experiments/qwen35_4b_universal_mid_density_token_match/data/designed160.jsonl"
+   },
+   "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "w_think": 0.2
+   },
+   "name": "designed160",
+   "produced_zero_root": {
+    "adapter_config_sha256": "bd6083d9a8a2e5a93b8be2923cfb2bf35006aa6a1c4ab6b414a569c71f33fff2",
+    "adapter_weights_sha256": "da325f3dbabc8d00ad87c53a39185618d9917a7f930c000326abee665a8fe42b",
+    "receipt": "data/lineage/provenance/stage02_designed160.json",
+    "verification_aid": true
+   },
+   "seed": 43,
+   "stage": 2,
+   "trainer": "scripts/lineage_trainers/train_think_stage12.py",
+   "trainer_sha256": "400e4b856a5899db8805510c9f6d8d11da76b35cf30af16856b46f41abdb4e54",
+   "warm_start": "stage 1"
+  },
+  {
+   "dataset": {
+    "file": "data/lineage/stage03_close_xi__targeted_standard.jsonl",
+    "filename_note": "the source dataset file is named targeted_standard.jsonl and does NOT match the arm name close_xi; copied as stage03_close_xi__targeted_standard.jsonl to preserve both names",
+    "rows": 320,
+    "sha256": "12fc613bb31a46bcea9acd49b26467656704aa3b3418dab8d920adf057d14f00",
+    "source": "experiments/qwen35_4b_universal_close_weight_token_match/data/targeted_standard.jsonl"
+   },
+   "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "w_close": 0.2,
+    "w_think": 0.2
+   },
+   "name": "close_xi",
+   "produced_zero_root": {
+    "adapter_config_sha256": "bf5ade0b3328489d5ba676aa497e311d9883f70908cf56bda69f73882e232bac",
+    "adapter_weights_sha256": "d0e5bbac898d996b491da5b4960d2a49c6ab13025057413a5fe551f0414d3f32",
+    "receipt": "data/lineage/provenance/stage03_close_xi.json",
+    "verification_aid": true
+   },
+   "seed": 44,
+   "stage": 3,
+   "targeted_close_overrides": {
+    "target_close_kinds": [
+     "u_execute",
+     "u_induct"
+    ],
+    "target_w_close": 1.0
+   },
+   "trainer": "scripts/lineage_trainers/train_think_close_stage3.py",
+   "trainer_sha256": "10b4914cdc6c24858a77750f4ab64074fae5cbf36d98f3e4fc26b8958068fb14",
+   "warm_start": "stage 2"
+  },
+  {
+   "dataset": {
+    "file": "data/lineage/stage04_replay_after_close.jsonl",
+    "rows": 320,
+    "sha256": "541805df2d817707c1e76213e50c8f08fd9caff10d0a3887e1196424b6820be6",
+    "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/data/replay_after_close.jsonl"
+   },
+   "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "w_close": 0.2,
+    "w_think": 0.2
+   },
+   "name": "replay_after_close",
+   "produced_zero_root": {
+    "adapter_config_sha256": "1c0c1e852d4a4e416fac5c35227b80a64257c5e06b5ef2afa7863d370bcd77c7",
+    "adapter_weights_sha256": "eb10faa9d43ec3f2528725c5b7aa6e862a7023aa701309775504473248b0253e",
+    "receipt": "data/lineage/provenance/stage04_replay_after_close.json",
+    "verification_aid": true
+   },
+   "seed": 47,
+   "stage": 4,
+   "trainer": "scripts/lineage_trainers/train_think_stage456.py",
+   "trainer_sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4",
+   "warm_start": "stage 3"
+  },
+  {
+   "dataset": {
+    "file": "data/lineage/stage05_designed_fresh.jsonl",
+    "rows": 1520,
+    "sha256": "6d4dc303bc159c19a1ffd0c60ca7d08ea64b02909366701b345d888482d67f3f",
+    "source": "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/designed_fresh.jsonl"
+   },
+   "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "w_close": 0.2,
+    "w_think": 0.2
+   },
+   "name": "designed_fresh",
+   "produced_zero_root": {
+    "adapter_config_sha256": "3a09879539290f63ae23765eca1a0365b18426ac43fc40c3cf7f6beaefae025c",
+    "adapter_weights_sha256": "1eceeb64bbf2e9b4044901af301ab040b7a779ae2eefb919e8199a7f128f332c",
+    "receipt": "data/lineage/provenance/stage05_designed_fresh.json",
+    "verification_aid": true
+   },
+   "seed": 51,
+   "stage": 5,
+   "trainer": "scripts/lineage_trainers/train_think_stage456.py",
+   "trainer_sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4",
+   "warm_start": "stage 4"
+  },
+  {
+   "dataset": {
+    "file": "data/lineage/stage06_hygiene_explore.jsonl",
+    "rows": 1520,
+    "sha256": "82aa1a78c0a429a48c3db6b94ac84397cea001b041477e7b137b38c21354112f",
+    "source": "experiments/qwen35_4b_hygiene_explore_destack_medium/data/hygiene_explore.jsonl"
+   },
+   "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "w_close": 0.2,
+    "w_think": 0.2
+   },
+   "name": "hygiene_explore",
+   "produced_zero_root": {
+    "adapter_config_sha256": "ffd5ef97871e98190b2474dabeb7ef865d13d0615d50d6f130e8a0aacd1c919a",
+    "adapter_weights_sha256": "627c8df24937214afa51306d1435bf419d11d5c3406ef5782e2ed5be4fee7926",
+    "receipt": "data/lineage/provenance/stage06_hygiene_explore.json",
+    "verification_aid": true
+   },
+   "seed": 55,
+   "stage": 6,
+   "trainer": "scripts/lineage_trainers/train_think_stage456.py",
+   "trainer_sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4",
+   "warm_start": "stage 5"
+  },
+  {
+   "dataset": {
+    "composition": "1,280-row shared replay core (family+kind stratified from sft_blend.jsonl at namespace seed 55150) + the 160-row byte-copied statechain treatment (sha ab6c78458eb8a41f42ebee25e79354d42beb558f78bb3d348dd7902ca3a9bad3, lifecycle 18's frozen corpus) + 80 exact-match replay fillers; three-axis MILP exposure-matched against replay_ctl4.jsonl with zero delta",
+    "file": "data/statechain_clean.jsonl",
+    "rows": 1520,
+    "sha256": "bae8af90ebed212a6381b6192ec5a17949630e68d6b7d18edd1d837196efcb55",
+    "source": "materialized by scripts/materialize_streams.py from data/sft_blend.jsonl + data/sft_statechain_only.jsonl"
+   },
+   "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "w_close": 0.2,
+    "w_think": 0.2
+   },
+   "name": "statechain_clean",
+   "produced_zero_root": null,
+   "receipt": "runs/training/statechain_clean.json",
+   "seed": 73,
+   "stage": 7,
+   "stage7_base": {
+    "note": "stage 7 trains a FRESH rank-32/alpha-64 adapter on the zero-root COMPOSITE via the trainer's --model-path (no warm start), then merges onto that composite via scripts/merge_trained_arm.py; the paired exposure-matched control arm replay_ctl4 (data/replay_ctl4.jsonl, sha b18e90b25cd9d4ea7341cf5bb27b37b15bd50bdd50dabb927ca2ea19e1b8b39d) trains first and is a control, not part of the headline lineage",
+    "path": "large_artifacts/qwen35_4b_zero_root_lineage_rebuild/merged/zero_root_hygiene_explore",
+    "tree_sha256": "414f582950bf60fed2fe462cd141ab98d0f772087b4f9c6bc5aa12f03f379e7d",
+    "weights_sha256": "6e9aad251465ca2713fda0238a34aa9f46262053860b867f80189d65c9ee3932"
+   },
+   "trainer": "scripts/train_think.py",
+   "trainer_sha256": "e0eca2a230dae5d109d418dcb4cc19af05882a770af14350ffd741a8d5e90f01",
+   "warm_start": "fresh_adapter_on_zero_root_composite_via_model_path"
+  }
+ ],
+ "trainers": {
+  "scripts/lineage_trainers/train_think_close_stage3.py": {
+   "close_channel": true,
+   "sha256": "10b4914cdc6c24858a77750f4ab64074fae5cbf36d98f3e4fc26b8958068fb14",
+   "source": "experiments/qwen35_4b_universal_close_weight_token_match/scripts/train_think_close.py",
+   "stages": [
+    3
+   ],
+   "targeted_close_overrides_supported": true
+  },
+  "scripts/lineage_trainers/train_think_stage12.py": {
+   "close_channel": false,
+   "sha256": "400e4b856a5899db8805510c9f6d8d11da76b35cf30af16856b46f41abdb4e54",
+   "source": "experiments/qwen35_4b_gauntlet_frontier/scripts/train_think.py",
+   "stages": [
+    1,
+    2
+   ]
+  },
+  "scripts/train_think.py": {
+   "close_channel": true,
+   "model_path_supported": true,
+   "sha256": "e0eca2a230dae5d109d418dcb4cc19af05882a770af14350ffd741a8d5e90f01",
+   "source": "experiments/qwen35_4b_statechain_only_dose/scripts/train_think.py (byte-identical copy)",
+   "stages": [
+    7
+   ]
+  },
+  "scripts/lineage_trainers/train_think_stage456.py": {
+   "close_channel": true,
+   "sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4",
+   "source": "experiments/qwen35_4b_universal_on_policy_prefix_repair_token_match/scripts/train_think.py",
+   "stages": [
+    4,
+    5,
+    6
+   ]
+  }
+ },
+ "verification": {
+  "fast_no_gpu": ".venv/bin/python -B experiments/qwen35_4b_clean_path_statechain_extension/scripts/rebuild_clean_chain.py --verify-inputs",
+  "full_gpu_rebuild": ".venv/bin/python -B experiments/qwen35_4b_clean_path_statechain_extension/scripts/rebuild_clean_chain.py"
+ }
+}

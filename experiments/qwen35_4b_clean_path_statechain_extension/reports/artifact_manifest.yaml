@@ -1,0 +1,29 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_clean_path_statechain_extension"
+external_artifacts:
+  - name: "zero-root parent composite (training/merge base + eval arm; lifecycle 22)"
+    storage: "large_artifacts/qwen35_4b_zero_root_lineage_rebuild/merged/zero_root_hygiene_explore"
+    required_for: "train-control/train-candidate/merge-arms/local/benchmark stages"
+    checksum: "tree sha256 414f582950bf60fed2fe462cd141ab98d0f772087b4f9c6bc5aa12f03f379e7d"
+    regenerate: "published by qwen35_4b_zero_root_lineage_rebuild (committed runs/lineage/merge.json, e906caea...); also reproducible standalone via this cell's scripts/rebuild_clean_chain.py"
+  - name: "base reserialized composite (benchmark arm)"
+    storage: "large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized"
+    required_for: "conditional benchmark stage"
+    checksum: "tree sha256 26d8ee48583adb0fb557d0ff668664949adff0068fa5baafe6f0af68e22fb677"
+    regenerate: "published by qwen35_4b_universal_curriculum"
+  - name: "trained adapters + merged arm composites (produced by the staged runs)"
+    storage: "large_artifacts/qwen35_4b_clean_path_statechain_extension/{adapters,merged}/{replay_ctl4,statechain_clean}"
+    required_for: "merge-arms/local/benchmark stages"
+    checksum: "pinned into scripts by the orchestrator after each stage publishes"
+    regenerate: "python scripts/run.py --stage train-control | train-candidate | merge-arms"
+omitted_artifacts:
+  - path: "large_artifacts/qwen35_4b_clean_path_statechain_extension/"
+    reason: "adapter, merged full-weight, and clean-chain rebuild outputs; never checked into git"
+reproducibility:
+  smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_clean_path_statechain_extension/scripts/run.py --smoke"
+  full_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_clean_path_statechain_extension/scripts/run.py --stage train-control (then train-candidate, merge-arms, local, benchmark; one stage per pushed checkpoint)"
+  required_external_artifacts:
+    - "large_artifacts/qwen35_4b_zero_root_lineage_rebuild/merged/zero_root_hygiene_explore"
+    - "large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized"
+notes: "Every data/ artifact regenerates as a pure function of the pinned bytes and seeds; --check modes byte-compare. The complete clean-chain reproduction package (six zero-root stage datasets + lifecycle 22's receipts + trainers + merger + the stage-7 dose) lives in data/lineage/ and scripts/; scripts/rebuild_clean_chain.py --verify-inputs authenticates it without a GPU. GPU stages additionally require the staged review verdicts (PASS_CONTROL_TRAINING / PASS_CONTROL_MERGE / PASS_LOCAL_EVENT / PASS_BENCHMARK_EVENT) committed at a pushed main HEAD."

@@ -1,0 +1,22 @@
+experiment_id: qwen35_4b_clean_path_statechain_extension
+status: in-progress
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+parent: zero_root_hygiene_explore composite (tree 414f5829..., lifecycle 22)
+arms: [replay_ctl4, statechain_clean]
+treatment: byte-identical copy of qwen35_4b_statechain_only_dose's frozen 160-row corpus (ab6c7845...)
+seeds:
+  source_construction_inherited: 77140
+  namespace: 55150
+  training: 73
+  axis_gate: 88041
+  retention_screens: [88042, 88044, 88045]
+  skipped: {88043: taken by qwen35_4b_counterfactual_plan_reflection_transfer}
+  aggregate_sealed: 78160
+retention_protocol: pooled_k3
+conditional_benchmark: {tier: medium, think_budget: 1024}
+clean_chain:
+  stages: 7
+  package: data/lineage/
+  blend_root: forbidden everywhere (fail-closed)

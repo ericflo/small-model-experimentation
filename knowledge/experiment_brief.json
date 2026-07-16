@@ -14649,6 +14649,39 @@
      "chart_takeaway": "The rebuild matches or beats the original on seven families; the ancestor's edge lives in three."
     }
    ]
+  },
+  "qwen35_4b_clean_path_statechain_extension": {
+   "verdict_tag": "In progress: the proven dose lands on the fully documented model",
+   "concept_primer": "Earlier work proved two things separately: a small 160-example training dose reliably teaches the model to track hidden running state (and that skill carries over to a benchmark family it had always failed), and the program's best model can be rebuilt from scratch using only documented, contamination-free training steps. This experiment combines them: apply the exact proven dose, byte-for-byte, to the clean rebuilt model.",
+   "plain_question": "Does the proven state-tracking dose install just as well on the fully documented clean-lineage model, and does it again unlock the benchmark family it unlocked before?",
+   "plain_answer": [
+    "Not yet run. The design is frozen: the treatment is copied byte-for-byte from the cell that proved it (regenerating fresh examples would change the treatment), the control arm sees exactly the same amount of training signal on all three measured axes, and a three-part local exam plus one sealed benchmark event will decide the outcome."
+   ],
+   "why_it_matters": "If it works, the program has ONE headline model whose every training step is documented, receipted, and reproducible from a blank start — no mystery ingredients anywhere — while carrying the strongest install the program has proven.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Treatment",
+     "value": "160 rows",
+     "sub": "byte-identical copy of the proven dose"
+    },
+    {
+     "label": "Parent",
+     "value": "zero-root composite",
+     "sub": "0.3462 aggregate, 7/10 strict wins, zero losses"
+    },
+    {
+     "label": "Exposure delta",
+     "value": "0",
+     "sub": "exact match on all three token axes"
+    },
+    {
+     "label": "Sealed seed",
+     "value": "78160",
+     "sub": "one conditional medium event"
+    }
+   ],
+   "charts": []
   }
  }
 }

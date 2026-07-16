@@ -1152,6 +1152,42 @@
   },
   {
     "file_counts": {
+      ".json": 14,
+      ".jsonl": 18,
+      ".md": 8,
+      ".py": 29,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_clean_path_statechain_extension",
+    "path": "experiments/qwen35_4b_clean_path_statechain_extension",
+    "primary_readme": "experiments/qwen35_4b_clean_path_statechain_extension/README.md",
+    "primary_report": "experiments/qwen35_4b_clean_path_statechain_extension/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "posttraining_and_adaptation",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "agentic skills into the one 4B \u2014 provably, on fully documented lineage? installs, 21/40 axis strict over both controls, and CONVERTS to the rites family: 0.300 vs 0.100/0.100 paired at sealed 78,154) and lifecycle 22 (`qwen35_4b_zero_root_lineage_rebuild` \u2014 the six documented stages replayed from a fresh zero-initialized adapter produce the zero-root composite, tree `414f5829\u2026`, weights `6e9aad25\u2026`, 0.3462 aggregate with 7/10 strict wins and zero losses at sealed 78,159).",
+    "tags": [
+      "latent-state",
+      "lora",
+      "small-model"
+    ],
+    "title": "Clean-Path Statechain Extension",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 72,
+    "total_size_bytes": 40256871
+  },
+  {
+    "file_counts": {
       ".json": 3,
       ".jsonl": 6,
       ".log": 2,

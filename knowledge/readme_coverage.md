@@ -53,6 +53,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_banking_installs_structure` | [README](../experiments/qwen35_4b_banking_installs_structure/README.md) | [report](../experiments/qwen35_4b_banking_installs_structure/reports/report.md) |
 | `qwen35_4b_banking_thinking_stack` | [README](../experiments/qwen35_4b_banking_thinking_stack/README.md) | [report](../experiments/qwen35_4b_banking_thinking_stack/reports/report.md) |
 | `qwen35_4b_bucket_belief_probe_ranker` | [README](../experiments/qwen35_4b_bucket_belief_probe_ranker/README.md) | [report](../experiments/qwen35_4b_bucket_belief_probe_ranker/reports/qwen35_4b_bucket_belief_probe_ranker_report.md) |
+| `qwen35_4b_clean_path_statechain_extension` | [README](../experiments/qwen35_4b_clean_path_statechain_extension/README.md) | [report](../experiments/qwen35_4b_clean_path_statechain_extension/reports/report.md) |
 | `qwen35_4b_code_abi_compiler_heldout_primitive_pilot` | [README](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/README.md) | [report](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/reports/final_report.md) |
 | `qwen35_4b_code_abi_oracle_coverage_ladder` | [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md) | [report](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/reports/final_report.md) |
 | `qwen35_4b_code_confidence` | [README](../experiments/qwen35_4b_code_confidence/README.md) | [report](../experiments/qwen35_4b_code_confidence/reports/report.md) |
