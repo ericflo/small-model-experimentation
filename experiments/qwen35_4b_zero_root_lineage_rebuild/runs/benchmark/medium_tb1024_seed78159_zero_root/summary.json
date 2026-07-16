@@ -1,0 +1,98 @@
+{
+ "benchmark_data_read": false,
+ "benchmark_implementation": {
+  "runner_sha256": "a3beecd8b5c89ccfd99a172a6d85321d39b9feb6c29d12f10b2f4d7499e273cb",
+  "source_file_count": 56,
+  "source_inventory_sha256": "218b8615a95f24da962c931e9cd2dba58d853a7bdcd2847cd8e2c42fc2c05f42"
+ },
+ "budget": {
+  "base": {
+   "wall_seconds": 158.25063555012457,
+   "within_budget": true
+  },
+  "hygiene_explore_original": {
+   "wall_seconds": 139.85121601400897,
+   "within_budget": true
+  },
+  "zero_root_hygiene_explore": {
+   "wall_seconds": 234.629352505086,
+   "within_budget": true
+  }
+ },
+ "design_receipt_sha256": "7b82209584ef6601d9390fda7d8eee09f7069a5d85d1e4a8f2376f0bfe1ba986",
+ "gateway_sha256": "53cf6533dbd710eb167503363c39f73dbf7559a0d91f40a00436a3c218a01c17",
+ "model_order": [
+  "base",
+  "hygiene_explore_original",
+  "zero_root_hygiene_explore"
+ ],
+ "model_tree_sha256s": {
+  "base": "26d8ee48583adb0fb557d0ff668664949adff0068fa5baafe6f0af68e22fb677",
+  "hygiene_explore_original": "9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971",
+  "zero_root_hygiene_explore": "414f582950bf60fed2fe462cd141ab98d0f772087b4f9c6bc5aa12f03f379e7d"
+ },
+ "model_weight_sha256s": {
+  "base": "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db",
+  "hygiene_explore_original": "e21123443a230ada2c73ded411e0b5b7c2b1459856b2c38e4f1beea8958dc02f",
+  "zero_root_hygiene_explore": "6e9aad251465ca2713fda0238a34aa9f46262053860b867f80189d65c9ee3932"
+ },
+ "models": {
+  "base": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized",
+  "hygiene_explore_original": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore",
+  "zero_root_hygiene_explore": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_zero_root_lineage_rebuild/merged/zero_root_hygiene_explore"
+ },
+ "name": "zero_root",
+ "promoted": null,
+ "schema_version": 1,
+ "scores": {
+  "base": {
+   "aggregate": 0.07132183908045978,
+   "per_family": {
+    "chronicle": 0.0,
+    "lockpick": 0.0,
+    "menders": 0.0,
+    "mirage": 0.0,
+    "rites": 0.0,
+    "siftstack": 0.0,
+    "sirens": 0.4,
+    "stockade": 0.09655172413793103,
+    "toolsmith": 0.11666666666666667,
+    "warren": 0.1
+   }
+  },
+  "hygiene_explore_original": {
+   "aggregate": 0.3823744706594071,
+   "per_family": {
+    "chronicle": 0.4,
+    "lockpick": 0.1,
+    "menders": 0.0,
+    "mirage": 0.8,
+    "rites": 0.2,
+    "siftstack": 0.5,
+    "sirens": 0.7,
+    "stockade": 0.1570780399274047,
+    "toolsmith": 0.8,
+    "warren": 0.16666666666666666
+   }
+  },
+  "zero_root_hygiene_explore": {
+   "aggregate": 0.3461711213771105,
+   "per_family": {
+    "chronicle": 0.6,
+    "lockpick": 0.1,
+    "menders": 0.0,
+    "mirage": 0.5,
+    "rites": 0.0,
+    "siftstack": 0.6,
+    "sirens": 0.4,
+    "stockade": 0.3550445471044382,
+    "toolsmith": 0.74,
+    "warren": 0.16666666666666666
+   }
+  }
+ },
+ "seed": 78159,
+ "think_budget": 1024,
+ "tier": "medium",
+ "zero_root_merge_receipt_sha256": "e906caea7c4b86f4a3eacb96affb7cc2fa9b7cc11e11b634b651cabc5dd01d2b"
+}

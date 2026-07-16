@@ -2,14 +2,7 @@
 
 ## Summary
 
-PENDING — design frozen and receipted (2026-07-16); the rebuild and
-benchmark stages have not run. The question: how load-bearing is the
-undocumented C53-era gym-line 'blend' root adapter at medium? The six
-documented contamination-free stages of the hygiene_explore composite
-are replayed from a FRESH zero-initialized adapter (same datasets, same
-fixed seeds, same trainers, same hyperparameters, raw pinned HF base
-everywhere) and measured ONCE at medium/tb1024 on the fresh sealed seed
-78159 against the original composite and base.
+The provenance question closed with a measured answer: ZERO_ROOT_DEGRADED, mildly. Replaying the six documented contamination-free stages from a fresh zero-initialized adapter (same datasets, seeds 42/43/44/47/51/55, trainer variants) produces a composite at 0.3462 aggregate versus the original's 0.3824 over base 0.0713 on the same sealed seed — ~90% of the transfer, 7/10 strict family wins, zero losses — while the undocumented C53-era prefix contributes ~0.036 aggregate concentrated in sirens/rites/mirage and actually suppressed chronicle/siftstack/stockade. The original read 9/10 on this seed (menders tie). The headline model's recorded sweeps lean on the prefix margin, so the contamination-clean upgrade is not available; every prior reading involving this lineage now carries a recorded, quantified scope instead of a suspicion.
 
 ## Research Program Fit
 

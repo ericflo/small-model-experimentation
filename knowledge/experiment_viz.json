@@ -49520,31 +49520,71 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Preregistered stage completion",
+     "title": "Per-family scores at medium tier, sealed seed 78159 (tb 1024)",
      "categories": [
-      "intake",
-      "design frozen (root omitted fail-closed)",
-      "review",
-      "6-stage zero-root replay",
-      "3-arm medium event @78159"
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "sirens",
+      "stockade",
+      "toolsmith",
+      "warren"
      ],
      "series": [
       {
-       "label": "completed checkpoint",
+       "label": "base",
        "values": [
-        1,
-        1,
-        0,
-        0,
-        0
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.4,
+        0.097,
+        0.117,
+        0.1
+       ]
+      },
+      {
+       "label": "hygiene_explore_original",
+       "values": [
+        0.4,
+        0.1,
+        0.0,
+        0.8,
+        0.2,
+        0.5,
+        0.7,
+        0.157,
+        0.8,
+        0.167
+       ]
+      },
+      {
+       "label": "zero_root_rebuild",
+       "values": [
+        0.6,
+        0.1,
+        0.0,
+        0.5,
+        0.0,
+        0.6,
+        0.4,
+        0.355,
+        0.74,
+        0.167
        ]
       }
      ],
-     "x_label": "preregistered experiment stage",
-     "y_label": "completion indicator",
-     "y_format": "integer",
-     "note": "The provenance question made measurable: the six documented contamination-free stages of the hygiene_explore lineage replayed from a FRESH zero-initialized adapter (the undocumented C53-era blend root omitted as the treatment, enforced fail-closed), merged, and measured once at medium beside the original. ZERO_ROOT_COMPARABLE upgrades the headline model to contamination-clean end-to-end; ZERO_ROOT_DEGRADED measures the prefix's contribution per family, same-seed paired.",
-     "source": "experiments/qwen35_4b_zero_root_lineage_rebuild/reports/preregistration.md"
+     "x_label": "public benchmark family",
+     "y_label": "family score",
+     "y_format": "number",
+     "note": "ZERO_ROOT_DEGRADED, mildly: the six documented contamination-free stages replayed from a fresh zero-initialized adapter carry ~90% of the transfer (0.3462 vs the original's 0.3824 over base 0.0713; 7/10 strict wins vs base with ZERO losses). The undocumented C53-era prefix contributes ~0.036 aggregate concentrated in sirens/rites/mirage — coherent with its gym-era profile — and SUPPRESSED chronicle/siftstack/stockade where the rebuild wins. The original read 9/10 on this seed (menders tie, the fifth data point on the ~50% sweep rate). The provenance scope is now a recorded number; a zero-root lineage + the statechain converter is the mapped clean path.",
+     "source": "experiments/qwen35_4b_zero_root_lineage_rebuild/runs/benchmark/zero_root_readout.json"
     }
    ]
   }

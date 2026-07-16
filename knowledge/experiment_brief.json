@@ -14611,30 +14611,44 @@
    ]
   },
   "qwen35_4b_zero_root_lineage_rebuild": {
-   "verdict_tag": "In progress: design frozen, GPU stages pending",
+   "verdict_tag": "The mystery ancestor priced: ninety percent of the win was the documented recipe",
    "concept_primer": "The program's best model was built by six well-documented training steps stacked on top of one mystery ingredient: an old starter adapter nobody kept a recipe for. This experiment rebuilds the model using only the six documented steps, starting from a truly blank adapter, to see whether the mystery ingredient actually mattered.",
    "plain_question": "If the six documented training steps are replayed from a blank adapter (no undocumented starter), does the rebuilt model still match the original on the sealed ten-skill benchmark?",
-   "plain_answer": "Not yet measured. The plan is frozen and audited: the exact recorded datasets, seeds, and settings are copied byte-for-byte, only the starter adapter is removed, and one sealed benchmark run will compare the rebuild against the original and the untouched base. The pre-registered call: 'comparable' if the rebuild beats the base overall and wins nearly as many skills as the original; 'degraded' otherwise, with the gap recorded as the mystery ingredient's contribution.",
+   "plain_answer": [
+    "The rebuild answered the provenance question with numbers. Retracing the six documented training steps from a truly blank starting adapter — same datasets, same seeds, same settings — produced a model with about ninety percent of the original's benchmark gain: 4.9 times the base score, seven of ten families strictly won, nothing lost. The undocumented ancestor adapter turns out to be worth about 0.04 aggregate, concentrated in exactly the three families that match its old training era — and it actually held BACK three other families, where the clean rebuild scores higher. So the formal verdict is 'degraded': the original's perfect sweeps lean on that ancestor's margin, and the clean-provenance upgrade is not available. But the honest headline is the reverse: the program's documented, contamination-free recipe does almost all of the work on its own, and a fully clean lineage extended with the proven skill-converter dose is now a mapped path."
+   ],
    "why_it_matters": "The headline result rests on a model whose first ingredient has no recorded origin. If the rebuild matches, the whole result becomes reproducible from committed recipes end-to-end; if it degrades, the program finally learns how much it owes to an ingredient it cannot reproduce.",
-   "verdict_tone": "mixed",
+   "verdict_tone": "neutral",
    "key_numbers": [
     {
-     "label": "Documented stages replayed",
-     "value": "6",
-     "sub": "same data, seeds, and settings; only the root removed"
+     "label": "Zero-root aggregate",
+     "value": "0.3462",
+     "sub": "vs original 0.3824, base 0.0713"
     },
     {
-     "label": "Sealed benchmark seeds",
-     "value": "1",
-     "sub": "seed 78,159, fresh by repo-wide audit"
+     "label": "Transfer carried by documented stages",
+     "value": "~90%",
+     "sub": "7/10 strict wins, zero losses"
     },
     {
-     "label": "Arms compared",
+     "label": "The ancestor's worth",
+     "value": "~0.036",
+     "sub": "concentrated in sirens/rites/mirage"
+    },
+    {
+     "label": "Families the ancestor suppressed",
      "value": "3",
-     "sub": "base, original composite, zero-root rebuild"
+     "sub": "chronicle, siftstack, stockade"
     }
    ],
-   "charts": []
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Original versus clean-rebuild scores on the ten families",
+     "chart_read": "Grouped bars per family: base, the original model, and the zero-root rebuild on the same sealed seed.",
+     "chart_takeaway": "The rebuild matches or beats the original on seven families; the ancestor's edge lives in three."
+    }
+   ]
   }
  }
 }

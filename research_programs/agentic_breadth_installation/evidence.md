@@ -1313,3 +1313,28 @@ blocking skill precisely characterized — the model can neither produce,
 nor buy with serial compute, nor recognize multi-constraint eliminative
 repairs. The statechain→rites conversion remains the program's proven
 install mechanism; the zero-root rebuild remains queued as provenance.
+
+## qwen35_4b_zero_root_lineage_rebuild (2026-07-16 — ZERO_ROOT_DEGRADED, mildly: the prefix priced at ~0.036; the documented recipe carries ~90%)
+
+The provenance question closed with numbers. Six stage replays from a
+fresh zero-initialized adapter (same datasets, fixed seeds
+42/43/44/47/51/55, recorded trainer variants; two honest bumps logged —
+a mid-stage CUDA-fragmentation OOM resumed under the expandable-segments
+allocator, and one masked-then-corrected test-fixture failure) produced
+a composite measured beside the original at sealed 78,159: aggregates
+0.0713 / 0.3824 / 0.3462 (base / original / zero-root). The zero-root
+arm took 7/10 strict wins with ZERO losses; the original read 9/10
+(menders tie — the fifth data point on the ~50% sweep rate). Verdict
+ZERO_ROOT_DEGRADED under the frozen ≥ original−1 rule.
+
+The contrast is the durable finding: the undocumented C53-era prefix is
+worth ~0.036 aggregate, concentrated exactly in sirens/rites/mirage
+(coherent with its gym-era training profile) — and it SUPPRESSED
+chronicle/siftstack/stockade, where the clean rebuild wins outright. So
+the documented contamination-free recipe carries ~90% of the transfer on
+its own; the headline model's recorded sweeps lean on the prefix margin
+(the clean-provenance upgrade is not available); and every prior reading
+involving this lineage now carries a quantified scope. The mapped clean
+path, if funded: a zero-root lineage extended with the statechain
+converter — fully documented end-to-end. The cell also validated the
+review-installed normalized-hash pin through a real post-merge fill.

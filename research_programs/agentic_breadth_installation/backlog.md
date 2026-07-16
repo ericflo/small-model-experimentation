@@ -310,7 +310,15 @@
   local-install→family conversion, and hygiene_explore_parent recorded
   the FIRST 10/10 all-families goal-gate pass (menders 0.017, warren
   0.150 vs 0.100 — single-item margins). One seed ≠ a claim.
-- QUEUED (zero-root rebuild, own intake — opened by the standalone
+- Completed zero-root rebuild (ZERO_ROOT_DEGRADED, mildly):
+  `qwen35_4b_zero_root_lineage_rebuild` — the documented stages alone
+  carry ~90% of the transfer (0.3462 vs 0.3824 over base 0.0713; 7/10
+  strict wins, zero losses); the C53 prefix priced at ~0.036 aggregate
+  concentrated in sirens/rites/mirage and SUPPRESSING
+  chronicle/siftstack/stockade. Contamination-clean upgrade unavailable;
+  prior readings carry the quantified scope. Mapped clean path: a
+  zero-root lineage + the statechain converter, fully documented.
+- (superseded) QUEUED (zero-root rebuild, own intake — opened by the standalone
   directive's lineage walk): the hygiene_explore adapter chain warm-starts
   from the frozen C53-era `blend` adapter (no committed creation receipt;
   gym-era training; vendored+hash-pinned in the confirmation cell). A

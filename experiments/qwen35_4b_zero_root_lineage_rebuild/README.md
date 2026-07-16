@@ -2,7 +2,7 @@
 
 Lifecycle 22 — the provenance question elevated to the program's strongest remaining bet: the six documented contamination-free training stages of the hygiene_explore composite, replayed from a FRESH zero-initialized adapter on the official base (removing the undocumented C53-era gym-line root adapter), then measured ONCE at medium against the original.
 
-**Status:** in-progress · since 2026-07-16 · design frozen and receipted; awaiting the PASS_REBUILD compute review before the ~2.5-3h GPU stage replay
+**Status:** finished · 2026-07-16 · verdict ZERO_ROOT_DEGRADED (mildly) — the six documented stages alone carry ~90% of the transfer (0.3462 vs the original's 0.3824 over base 0.0713; 7/10 strict wins, ZERO losses) while the undocumented prefix contributes ~0.036 aggregate concentrated in mirage/sirens/rites; the zero-root model beats the original on chronicle/siftstack/stockade; the original read 9/10 on this seed (menders tie — the sweep rate holding)
 
 ## Research Program
 

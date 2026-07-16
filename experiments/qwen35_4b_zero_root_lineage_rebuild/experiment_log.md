@@ -81,3 +81,18 @@
   fill-state-agnostic; no pinned code changed (the normalized hash and
   the design receipt are untouched; gen --check still passes). 96 tests
   green; smoke green.
+
+## 2026-07-16 — The event and closure: the prefix priced
+
+- The three-arm event at sealed 78,159 ran clean end-to-end. Verdict
+  ZERO_ROOT_DEGRADED per the frozen rule (7 strict wins vs the required
+  8): the documented stages alone carry ~90% of the transfer (0.3462 vs
+  0.3824 over base 0.0713; zero losses), and the undocumented prefix's
+  contribution is ~0.036 aggregate concentrated in sirens/rites/mirage —
+  coherent with its gym-era profile. The zero-root model beats the
+  original on chronicle/siftstack/stockade (the prefix also suppressed
+  capability). The original read 9/10 (menders tie), the fifth data
+  point on the ~50% sweep rate.
+- The provenance scope is now a recorded number, not a suspicion; the
+  contamination-clean upgrade is not available; a zero-root lineage
+  extended with the statechain converter is the clean future line.
