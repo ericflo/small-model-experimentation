@@ -1,0 +1,18 @@
+[merge] loading composite /home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore bf16 ...
+
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]
+Loading weights:  20%|██        | 145/723 [00:00<00:00, 1446.01it/s]
+Loading weights:  40%|████      | 290/723 [00:00<00:00, 1425.15it/s]
+Loading weights:  60%|█████▉    | 433/723 [00:00<00:00, 1422.38it/s]
+Loading weights:  80%|███████▉  | 576/723 [00:00<00:00, 1370.66it/s]
+Loading weights: 100%|██████████| 723/723 [00:00<00:00, 1647.35it/s]
+[merge] LoRA products use cuda with FP32 matmul
+[merge] example composite tail: '0.linear_attn.conv1d' -> ['model.language_model.layers.0.linear_attn.conv1d']
+[merge] applied 128 LoRA deltas (expected 7 modules x layers)
+[merge] saving composite merged model to /home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_statechain_only_dose/merged/replay_ctl2 ...
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.18s/it]
+Writing model shards: 100%|██████████| 1/1 [00:07<00:00,  7.20s/it]
+[merge] processor save skipped: Can't load image processor for '/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure '/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore' is the correct path to a directory containing a preprocessor_config.json file
+[merge] done

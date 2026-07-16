@@ -1,0 +1,83 @@
+{
+  "adapter": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_statechain_only_dose/adapters/statechain_only",
+  "adapter_config_sha256": "ffaee33e8d79b921b8b427c04b1dc686410ea4634974150d42977d6402057038",
+  "adapter_weights_sha256": "14022d3575e6b41a1ecdca63a69e481e6138562ad41e11419a65166ad6c9a7f6",
+  "aggregate_seed_open": false,
+  "applied_lora_modules": 128,
+  "benchmark_data_read": false,
+  "command": [
+    "/home/ericflo/Development/small-model-experimentation/.venv/bin/python",
+    "-B",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/scripts/merge_adapter.py",
+    "--adapter",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_statechain_only_dose/adapters/statechain_only",
+    "--out",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_statechain_only_dose/merged/statechain_only",
+    "--base-model",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore"
+  ],
+  "experiment_id": "qwen35_4b_statechain_only_dose",
+  "local_design_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_statechain_only_dose/data/local_design_receipt.json",
+  "local_design_receipt_sha256": "23dfe063344fda4b66b1fb9ac7aa68ddc51ac435e7478de8ca4229bf0565e873",
+  "log": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_statechain_only_dose/runs/merges/statechain_only.log",
+  "log_sha256": "90daf304790bffdaa6ccc95b2249e0e8d334c145a0ec6461a30b20f4be3dd36d",
+  "merge_receipt_sha256": "15e03b9fe5bed5ea8b253c3345799f96a422c39c3be7e1bf6c897fd16d272712",
+  "merged": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_statechain_only_dose/merged/statechain_only",
+  "merger": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_same_prefix_advantage_routing/scripts/merge_adapter.py",
+  "merger_sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "name": "statechain_only",
+  "nonzero_lora_modules": 128,
+  "output_files": [
+    {
+      "name": "chat_template.jinja",
+      "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+      "size": 7756
+    },
+    {
+      "name": "config.json",
+      "sha256": "a1c80f0efa6f83f631eaa9c25ffa166e3b1f9db395cc3b14374dfc0962261f60",
+      "size": 2829
+    },
+    {
+      "name": "generation_config.json",
+      "sha256": "0c46d8aa4f0ae5e611c961f70b87c83fb696043c1e319337708e96f882180de1",
+      "size": 116
+    },
+    {
+      "name": "merge_receipt.json",
+      "sha256": "15e03b9fe5bed5ea8b253c3345799f96a422c39c3be7e1bf6c897fd16d272712",
+      "size": 948
+    },
+    {
+      "name": "model.safetensors",
+      "sha256": "63bdd70f7d196932c1b1bf9a8232d7a95b867438231a1ce33cd038629d9b79d1",
+      "size": 9078620536
+    },
+    {
+      "name": "tokenizer.json",
+      "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+      "size": 19989325
+    },
+    {
+      "name": "tokenizer_config.json",
+      "sha256": "bee8eba30f0eb4af73c0fe2cd06d0f89b657d7819941c438157ec42f7c80ea87",
+      "size": 1123
+    }
+  ],
+  "output_tree_sha256": "bdea09832ca55f99b6670793ab4607fad63375e6c8ec8f57975c2dbd63ef1a2a",
+  "preflight_git_branch": "main",
+  "preflight_git_head": "1f96fd22da9cea54fee2926bf7a2071ffb1329d4",
+  "preflight_git_status": "?? experiments/qwen35_4b_statechain_only_dose/runs/merges/",
+  "preflight_origin_main": "1f96fd22da9cea54fee2926bf7a2071ffb1329d4",
+  "schema_version": 2,
+  "training_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_statechain_only_dose/runs/training/statechain_only.json",
+  "training_receipt_sha256": "3e42d619f703172a813464aa735e5f9ad6bba6cb885dd2db485d63187f0cfb76",
+  "weight_files": [
+    {
+      "name": "model.safetensors",
+      "sha256": "63bdd70f7d196932c1b1bf9a8232d7a95b867438231a1ce33cd038629d9b79d1"
+    }
+  ]
+}
