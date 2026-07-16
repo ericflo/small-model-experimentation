@@ -2,7 +2,7 @@
 
 ## Summary
 
-Pipeline frozen, no compute spent yet. Lifecycle 18 doses ONLY the proven u_statechain skill from the lifecycle-15 split verdict: 160 rows across four procedure-machine formalisms (brewvat and courierloft reused as fresh instances; peatstove and muletrack newly designed with legality-bounded parameterized operations), trained as a fresh rank-32 adapter on the hygiene_explore composite against an exactly exposure-matched replay control (`replay_ctl2`), gated by the single-kind axis holdout at seed 88,033 plus three pooled_k3 retention screens (88,034/88,035/88,036), with a conditional four-model medium pilot at sealed seed 78,154.
+The statechain-only dose promoted at the first pooled_k3 local gate (axis 21/40 strictly over both controls; retention inside the calibrated bands) and opened sealed seed 78,154 for the medium event, which returned three readings: the candidate beat base and its replay control but not its parent (pilot NOT promoted, −0.017); its rites score of 0.300 versus 0.100 for both matched controls is the program's first demonstrated local-install→family conversion; and the hygiene_explore parent recorded the first 10/10 all-families goal-gate pass in program history (aggregate 0.3663 vs base 0.0800, zero ties, zero losses — menders 0.017 and warren 0.150 on single-item margins). Confirmation on independent seeds with a matched-compute sample-more baseline is owed before any claim.
 
 ## Research Program Fit
 

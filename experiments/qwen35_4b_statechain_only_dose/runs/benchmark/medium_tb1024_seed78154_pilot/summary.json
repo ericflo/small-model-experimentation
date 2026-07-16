@@ -1,0 +1,268 @@
+{
+  "benchmark_data_read": false,
+  "benchmark_implementation": {
+    "runner_sha256": "a3beecd8b5c89ccfd99a172a6d85321d39b9feb6c29d12f10b2f4d7499e273cb",
+    "source_file_count": 56,
+    "source_inventory_sha256": "218b8615a95f24da962c931e9cd2dba58d853a7bdcd2847cd8e2c42fc2c05f42"
+  },
+  "candidate": "statechain_only",
+  "candidate_comparisons": {
+    "statechain_only": {
+      "statechain_only_minus_hygiene_explore_parent": {
+        "aggregate_delta": -0.016989247311827937,
+        "per_family_delta": {
+          "chronicle": 0.0,
+          "lockpick": -0.09999999999999998,
+          "menders": -0.016666666666666666,
+          "mirage": 0.0,
+          "rites": 0.19999999999999998,
+          "siftstack": -0.09999999999999998,
+          "sirens": -0.09999999999999998,
+          "stockade": -0.0032258064516129115,
+          "toolsmith": 0.0,
+          "warren": -0.04999999999999999
+        }
+      },
+      "statechain_only_minus_replay_ctl2": {
+        "aggregate_delta": 0.0336774193548387,
+        "per_family_delta": {
+          "chronicle": 0.0,
+          "lockpick": 0.1,
+          "menders": 0.0,
+          "mirage": 0.09999999999999998,
+          "rites": 0.19999999999999998,
+          "siftstack": 0.0,
+          "sirens": -0.09999999999999998,
+          "stockade": -0.06322580645161291,
+          "toolsmith": 0.0,
+          "warren": 0.1
+        }
+      }
+    }
+  },
+  "comparisons": {
+    "hygiene_explore_parent_minus_base": {
+      "aggregate_delta": 0.28634408602150535,
+      "minimum_family_delta": 0.016666666666666666,
+      "nonnegative_families": 10,
+      "per_family_delta": {
+        "chronicle": 0.1,
+        "lockpick": 0.3,
+        "menders": 0.016666666666666666,
+        "mirage": 0.7,
+        "rites": 0.1,
+        "siftstack": 0.6,
+        "sirens": 0.19999999999999996,
+        "stockade": 0.1967741935483871,
+        "toolsmith": 0.6000000000000001,
+        "warren": 0.04999999999999999
+      },
+      "positive_families": 10
+    },
+    "replay_ctl2_minus_base": {
+      "aggregate_delta": 0.2356774193548387,
+      "minimum_family_delta": -0.1,
+      "nonnegative_families": 9,
+      "per_family_delta": {
+        "chronicle": 0.1,
+        "lockpick": 0.1,
+        "menders": 0.0,
+        "mirage": 0.6,
+        "rites": 0.1,
+        "siftstack": 0.5,
+        "sirens": 0.19999999999999996,
+        "stockade": 0.2567741935483871,
+        "toolsmith": 0.6000000000000001,
+        "warren": -0.1
+      },
+      "positive_families": 8
+    },
+    "statechain_only_minus_base": {
+      "aggregate_delta": 0.2693548387096774,
+      "minimum_family_delta": 0.0,
+      "nonnegative_families": 10,
+      "per_family_delta": {
+        "chronicle": 0.1,
+        "lockpick": 0.2,
+        "menders": 0.0,
+        "mirage": 0.7,
+        "rites": 0.3,
+        "siftstack": 0.5,
+        "sirens": 0.09999999999999998,
+        "stockade": 0.1935483870967742,
+        "toolsmith": 0.6000000000000001,
+        "warren": 0.0
+      },
+      "positive_families": 8
+    }
+  },
+  "design_receipt_sha256": "0addf326da7e907ed3ee4b9262fc928c6468098b16f7890e68d570c94ffb7821",
+  "gateway_sha256": "53cf6533dbd710eb167503363c39f73dbf7559a0d91f40a00436a3c218a01c17",
+  "goal_gate": {
+    "included_in_pilot_gate": false,
+    "per_arm": {
+      "hygiene_explore_parent": {
+        "goal_gate_pass": true,
+        "losses": [],
+        "strict_wins": 10,
+        "ties": [],
+        "wins": [
+          "chronicle",
+          "lockpick",
+          "menders",
+          "mirage",
+          "rites",
+          "siftstack",
+          "sirens",
+          "stockade",
+          "toolsmith",
+          "warren"
+        ]
+      },
+      "replay_ctl2": {
+        "goal_gate_pass": false,
+        "losses": [
+          "warren"
+        ],
+        "strict_wins": 8,
+        "ties": [
+          "menders"
+        ],
+        "wins": [
+          "chronicle",
+          "lockpick",
+          "mirage",
+          "rites",
+          "siftstack",
+          "sirens",
+          "stockade",
+          "toolsmith"
+        ]
+      },
+      "statechain_only": {
+        "goal_gate_pass": false,
+        "losses": [],
+        "strict_wins": 8,
+        "ties": [
+          "menders",
+          "warren"
+        ],
+        "wins": [
+          "chronicle",
+          "lockpick",
+          "mirage",
+          "rites",
+          "siftstack",
+          "sirens",
+          "stockade",
+          "toolsmith"
+        ]
+      }
+    },
+    "power_statement": "menders is 0 for every believable arm (three pedagogies + the budget lever all closed), so the maximum reachable is 9/10; the reading of interest is whether the LOCAL statechain install converts to the rites FAMILY (the parent's rites was 0.0 at 78150; any candidate rites > 0 with base at 0 is a strict win there); a goal-gate pass triggers the confirmation law (independent seeds + matched-compute sample-more) before any claim",
+    "recorded_either_way": true
+  },
+  "local_design_receipt_sha256": "23dfe063344fda4b66b1fb9ac7aa68ddc51ac435e7478de8ca4229bf0565e873",
+  "local_promotion_promoted": "statechain_only",
+  "local_promotion_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_statechain_only_dose/runs/local/seed88033_promotion.json",
+  "local_promotion_receipt_sha256": "4a12639091c83c2ec01607e07dd81bb68c2d84985a0ace8dc0b21403a3f8f37f",
+  "model_order": [
+    "base",
+    "hygiene_explore_parent",
+    "replay_ctl2",
+    "statechain_only"
+  ],
+  "model_tree_sha256s": {
+    "base": "26d8ee48583adb0fb557d0ff668664949adff0068fa5baafe6f0af68e22fb677",
+    "hygiene_explore_parent": "9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971",
+    "replay_ctl2": "95d61d021d382d4a3911694fba0acefb948fd529d3a69f920e7ac48d21b21e97",
+    "statechain_only": "bdea09832ca55f99b6670793ab4607fad63375e6c8ec8f57975c2dbd63ef1a2a"
+  },
+  "model_weight_sha256s": {
+    "base": "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db",
+    "hygiene_explore_parent": "e21123443a230ada2c73ded411e0b5b7c2b1459856b2c38e4f1beea8958dc02f",
+    "replay_ctl2": "7dd947dfd20447edd9d6e458944d4b48d326bf591a37f309cadc698cc4dee868",
+    "statechain_only": "63bdd70f7d196932c1b1bf9a8232d7a95b867438231a1ce33cd038629d9b79d1"
+  },
+  "models": {
+    "base": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized",
+    "hygiene_explore_parent": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore",
+    "replay_ctl2": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_statechain_only_dose/merged/replay_ctl2",
+    "statechain_only": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_statechain_only_dose/merged/statechain_only"
+  },
+  "name": "pilot",
+  "promotions": {
+    "statechain_only": {
+      "passes_pilot_gate": false,
+      "strictly_beats_base_aggregate": true,
+      "strictly_beats_immediate_parent_aggregate": false,
+      "strictly_beats_replay_control_aggregate": true
+    }
+  },
+  "schema_version": 1,
+  "scores": {
+    "base": {
+      "aggregate": 0.08,
+      "per_family": {
+        "chronicle": 0.1,
+        "lockpick": 0.0,
+        "menders": 0.0,
+        "mirage": 0.0,
+        "rites": 0.0,
+        "siftstack": 0.0,
+        "sirens": 0.4,
+        "stockade": 0.0,
+        "toolsmith": 0.2,
+        "warren": 0.1
+      }
+    },
+    "hygiene_explore_parent": {
+      "aggregate": 0.36634408602150537,
+      "per_family": {
+        "chronicle": 0.2,
+        "lockpick": 0.3,
+        "menders": 0.016666666666666666,
+        "mirage": 0.7,
+        "rites": 0.1,
+        "siftstack": 0.6,
+        "sirens": 0.6,
+        "stockade": 0.1967741935483871,
+        "toolsmith": 0.8,
+        "warren": 0.15
+      }
+    },
+    "replay_ctl2": {
+      "aggregate": 0.31567741935483873,
+      "per_family": {
+        "chronicle": 0.2,
+        "lockpick": 0.1,
+        "menders": 0.0,
+        "mirage": 0.6,
+        "rites": 0.1,
+        "siftstack": 0.5,
+        "sirens": 0.6,
+        "stockade": 0.2567741935483871,
+        "toolsmith": 0.8,
+        "warren": 0.0
+      }
+    },
+    "statechain_only": {
+      "aggregate": 0.34935483870967743,
+      "per_family": {
+        "chronicle": 0.2,
+        "lockpick": 0.2,
+        "menders": 0.0,
+        "mirage": 0.7,
+        "rites": 0.3,
+        "siftstack": 0.5,
+        "sirens": 0.5,
+        "stockade": 0.1935483870967742,
+        "toolsmith": 0.8,
+        "warren": 0.1
+      }
+    }
+  },
+  "seed": 78154,
+  "think_budget": 1024,
+  "tier": "medium"
+}

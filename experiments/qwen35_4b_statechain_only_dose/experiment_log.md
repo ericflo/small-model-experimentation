@@ -45,3 +45,25 @@
   reading).
 - Benchmark pins filled and verified on disk; PASS_BENCHMARK_EVENT
   granted; sealed seed 78,154 opens at the next green checkpoint.
+
+## 2026-07-15 — The medium event at sealed 78,154: three readings, one historic
+
+- All four arms ran clean (trees recomputed, within budget, ledger
+  opened/closed). Aggregates: parent 0.3663 > candidate 0.3494 >
+  replay_ctl2 0.3157 > base 0.0800.
+- Pilot: NOT promoted — the candidate strictly beat base and the replay
+  control but lost to its parent by 0.017 aggregate.
+- THE CONVERSION: candidate rites 0.300 vs parent 0.100, replay 0.100,
+  base 0.000 — the first time a locally-installed skill moved its
+  benchmark family (+0.2 over both controls, paired, exposure-matched).
+  The statechain→rites transfer is real.
+- THE HISTORIC READING: hygiene_explore_parent recorded goal_gate_pass
+  TRUE — 10/10 strict family wins vs base including menders 0.017 and
+  warren 0.150 vs 0.100, zero ties, zero losses. The first all-families
+  pass by a contamination-free arm in program history. The frozen 9/10
+  "ceiling" was a draw-dependent floor-tie, exactly as the forensics
+  said: menders was never an absolute wall, and on this seed's draw the
+  parent scored it.
+- Honest scope: single-item margins at menders/warren on ONE seed; the
+  confirmation law (independent seeds + matched-compute sample-more)
+  governs before any claim. Confirmation is the next funded cell.

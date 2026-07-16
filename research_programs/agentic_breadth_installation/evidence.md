@@ -1181,3 +1181,38 @@ data-limited; all three failed menders attempts were 80–160 rows) and
 on-policy episode training — each need their own intake, calibration, and
 kill rules. The funded branch is the statechain-only dose toward the 9/10
 position; the queued divergent bet is the dose-scale cell.
+
+## qwen35_4b_statechain_only_dose (2026-07-15 — PROMOTED locally; rites CONVERTED; the parent recorded the first 10/10)
+
+Lifecycle 15's funded successor ran the full ladder clean and produced the
+program's densest single event. Local gate (the first pooled_k3
+promotion): axis 21/40 strictly over replay_ctl2 (19) and the parent
+(17); pooled retention 64.67 vs 66.67/67.33 — inside the calibrated ±5
+bands (−2.0/−2.67; the revised tax law priced it right); per-formalism
+counts recorded (peatstove lost to both controls; muletrack floor-hard).
+
+The medium event at sealed seed 78,154 returned three readings:
+
+1. PILOT NOT PROMOTED: the candidate strictly beat base (0.3494 vs
+   0.0800) and its exposure-matched replay control (0.3157) but lost to
+   its parent by 0.017 (lockpick/siftstack/sirens gave back what rites
+   gained). The parent remains the portfolio's best single model.
+2. THE CONVERSION: candidate rites 0.300 versus 0.100 for BOTH matched
+   controls on the same seed — the first demonstrated
+   local-install→family transfer in program history. The axis→family
+   under-conversion law has its first counterexample, with an end-to-end
+   causal chain: designed state-chain episodes → local holdout install →
+   benchmark family movement, all paired and exposure-matched.
+3. THE RECORDED PASS: hygiene_explore_parent goal_gate_pass TRUE — 10/10
+   strict family wins vs base (menders 0.017; warren 0.150 vs 0.100),
+   zero ties, zero losses, aggregate 0.3663 vs 0.0800. The first
+   all-families pass by a contamination-free arm. The frozen "9/10
+   ceiling" was a draw-dependent floor-tie, exactly as the tier
+   forensics predicted: menders was marginal capability plus item luck,
+   never an absolute wall.
+
+Honest scope, frozen into every document: single-item margins at menders
+and warren on ONE seed. The confirmation law — independent fresh sealed
+seeds plus a same-backend matched-compute sample-more baseline — governs
+before any claim. The confirmation cell is the immediate funded
+successor; nothing else outranks it.

@@ -2,7 +2,7 @@
 
 Dose ONLY the proven skill: lifecycle 15 split its verdict — u_statechain INSTALLED (11/20, strict over both controls) while u_feedloop died at 0/20 and dragged retention below the replay band. This cell re-runs the install with a 160-row statechain-only corpus (no dead feedloop rows) and asks whether the clean dose clears the calibrated gate the mixed dose failed.
 
-**Status:** in-progress · since 2026-07-15 · pipeline + gate frozen; awaiting compute review before train-control
+**Status:** finished · 2026-07-15 · verdict PILOT_NOT_PROMOTED + RITES_CONVERTED + PARENT_GOAL_GATE_PASS_RECORDED — the candidate beat base and replay but not its parent at medium; its rites 0.300 vs 0.100/0.100 is the program's first local-install→family conversion; and the hygiene_explore parent recorded the FIRST 10/10 all-families goal-gate pass in program history (aggregate 0.3663 vs base 0.0800, zero ties, zero losses) on sealed seed 78,154 — confirmation now owed per the frozen law
 
 ## Research Program
 
@@ -36,11 +36,22 @@ PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_statechain_o
 
 ## Results
 
-Fill after the staged runs. Separate deployable evidence from oracle/hidden evaluation.
+Local gate (seed 88,033 + screens 88,034–88,036): PROMOTED on all eight frozen checks — axis 21/40 strictly over replay_ctl2 (19) and the parent (17); pooled retention 64.67 vs 66.67/67.33, inside the calibrated ±5 bands; per-formalism brewvat 8/7/6, courierloft 5/3/2, muletrack 1/0/0, peatstove 7/9/9 (the candidate lost peatstove — recorded).
+
+Medium event at sealed seed 78,154 (tb 1,024), all arms authenticated and within budget:
+
+| arm | aggregate | goal gate vs base | notes |
+|---|---|---|---|
+| base | 0.0800 | — | inside every historical envelope |
+| **hygiene_explore_parent** | **0.3663** | **PASS 10/10** — zero ties, zero losses | menders 0.017, warren 0.150 vs 0.100 |
+| statechain_only | 0.3494 | 8/10 (ties menders, warren) | **rites 0.300** vs parent/replay 0.100 |
+| replay_ctl2 | 0.3157 | 8/10 (tie menders; loses warren) | |
+
+Pilot gates: candidate > base ✓, > replay ✓, > parent ✗ (−0.017) — NOT promoted per the frozen contract. The conversion reading: candidate rites 0.300 against 0.100 for BOTH the parent and the exposure-matched replay control on the same seed — the program's first demonstrated local-install→family transfer. The recorded goal gate: the parent passed all ten families strictly, the first such pass in program history by a contamination-free model.
 
 ## Interpretation
 
-Pending.
+Three lessons, one owed action. (1) The statechain dose converts: teaching narrated hidden-state tracking on invented machines moved the protocol-compliance family threefold over matched controls — the axis→family under-conversion law has its first counterexample, with an end-to-end causal chain from designed data to benchmark family. (2) The dose still trades: −0.017 aggregate versus its own parent (lockpick/siftstack/sirens gave back what rites gained), so the parent remains the portfolio's best single model. (3) The parent's 10/10 is a recorded event fact on one seed with single-item margins at menders and warren; the "9/10 ceiling" was a draw-dependent floor-tie, exactly as the tier forensics predicted. The confirmation law — independent fresh seeds plus a same-backend matched-compute sample-more baseline — governs before any claim; confirmation is the immediate funded successor.
 
 ## Knowledgebase Update
 

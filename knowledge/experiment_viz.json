@@ -49320,35 +49320,86 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Frozen 1,520-row training streams: statechain-only dose vs matched replay control",
+     "title": "Per-family scores at medium tier, sealed seed 78154 (tb 1024)",
      "categories": [
-      "shared replay core",
-      "variable replay rows",
-      "u_statechain treatment rows"
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "sirens",
+      "stockade",
+      "toolsmith",
+      "warren"
      ],
      "series": [
       {
-       "label": "replay_ctl2 (control)",
+       "label": "base",
        "values": [
-        1280,
-        240,
-        0
+        0.1,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.4,
+        0.0,
+        0.2,
+        0.1
        ]
       },
       {
-       "label": "statechain_only (candidate)",
+       "label": "hygiene_explore_parent",
        "values": [
-        1280,
-        80,
-        160
+        0.2,
+        0.3,
+        0.017,
+        0.7,
+        0.1,
+        0.6,
+        0.6,
+        0.197,
+        0.8,
+        0.15
+       ]
+      },
+      {
+       "label": "replay_ctl2",
+       "values": [
+        0.2,
+        0.1,
+        0.0,
+        0.6,
+        0.1,
+        0.5,
+        0.6,
+        0.257,
+        0.8,
+        0.0
+       ]
+      },
+      {
+       "label": "statechain_only",
+       "values": [
+        0.2,
+        0.2,
+        0.0,
+        0.7,
+        0.3,
+        0.5,
+        0.5,
+        0.194,
+        0.8,
+        0.1
        ]
       }
      ],
-     "x_label": "stream block",
-     "y_label": "rows per arm",
+     "x_label": "public benchmark family",
+     "y_label": "family score",
      "y_format": "number",
-     "note": "Design frozen pre-compute (lifecycle 18). The candidate's 240-row variable block carries the 160-row statechain-only corpus (brewvat + courierloft reused as fresh instances, peatstove + muletrack newly designed, 40 rows each) plus 80 MILP-chosen replay fillers; the joint solver forces EXACT zero deltas on all three exposure axes (1,368,815 forward tokens, 574,630 nonzero targets, 628,314 loss-mass x5 per arm) with 1,280 position-aligned shared rows. Gate: axis holdout at seed 88033 (strict total over parent AND replay, single-kind, no per-kind split) + pooled_k3 retention bands at seeds 88034-88036; sealed medium seed 78154 opens only on promotion.",
-     "source": "experiments/qwen35_4b_statechain_only_dose/data/stream_manifest.json"
+     "note": "Three readings from one sealed event: the candidate (statechain_only, locally promoted under pooled_k3) beat base and its exposure-matched replay control but not its parent (0.3494 vs 0.3663); its rites 0.300 vs 0.100/0.100 is the program's first local-install-to-family conversion; and hygiene_explore_parent recorded the FIRST 10/10 all-families goal-gate pass in program history (aggregate 0.3663 vs base 0.0800, zero ties, zero losses; menders 0.017 and warren 0.150 on single-item margins). Confirmation on independent seeds + matched-compute sample-more is owed before any claim.",
+     "source": "experiments/qwen35_4b_statechain_only_dose/runs/benchmark/medium_tb1024_seed78154_pilot/summary.json"
     }
    ]
   }

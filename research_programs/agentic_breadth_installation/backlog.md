@@ -302,13 +302,24 @@
   believable range, with hygiene_explore (230 s at tb1024, the slowest
   arm) as likely to bind as base. ONE further intermediate probe max; a
   second stop closes the lever entirely.
-- FUNDED NEXT (statechain-only dose): 160 statechain rows (or 80 + fresh
-  variants) from the hygiene_explore parent, same calibrated gates —
-  the installed skill without the dead feedloop rows that dragged
-  retention while teaching nothing; then the medium event on a fresh
-  sealed seed with the goal gate recorded (rites is the reachable tie;
-  menders stays open and the gate likely lands 9/10 unless the
-  intermediate-budget probe re-opens the ceiling).
+- Completed statechain-only dose (PROMOTED + RITES_CONVERTED +
+  PARENT_GOAL_GATE_PASS_RECORDED): `qwen35_4b_statechain_only_dose` —
+  first pooled_k3 promotion (axis 21/40 strict; retention in-band); at
+  sealed 78154 the candidate beat base+replay but not its parent
+  (-0.017), its rites 0.300 vs 0.100/0.100 is the first
+  local-install→family conversion, and hygiene_explore_parent recorded
+  the FIRST 10/10 all-families goal-gate pass (menders 0.017, warren
+  0.150 vs 0.100 — single-item margins). One seed ≠ a claim.
+- FUNDED NEXT — THE CONFIRMATION CELL (nothing outranks it): per the
+  confirmation law and the goal's own text, hygiene_explore vs base (and
+  a same-backend matched-compute sample-more baseline arm) on MULTIPLE
+  independent fresh sealed medium seeds at tb1024; the goal gate recorded
+  per seed; pre-registered replication bar (e.g. aggregate + strict
+  all-ten on a majority of seeds, with the menders/warren single-item
+  fragility priced explicitly). Eval-only, no training. A confirmed pass
+  completes the program goal's primary condition; a non-replication
+  prices the 78154 pass honestly as a draw and the program continues
+  from the 9/10 position with the conversion mechanism in hand.
 - Queued (calibration notes attached): (a) replay-compounding line — measure
   whether iterated replay rounds keep gaining aggregate and where they saturate;
   the published `replay_repeat` composite (0.5081) is the presumptive parent;
