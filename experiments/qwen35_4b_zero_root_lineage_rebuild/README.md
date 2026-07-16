@@ -69,3 +69,14 @@ Pending the sealed event.
 - `scripts/rebuild_zero_root.py`: the six-stage zero-root replay + merge (receipts to `runs/lineage/`).
 - `scripts/run_benchmark.py`, `scripts/check_benchmark.py`: the hardened single-seed three-arm event and its provenance-anchored readout.
 - `reports/artifact_manifest.yaml`: external artifact declarations (adapters + merged composite live under `large_artifacts/`).
+
+
+## Erratum (2026-07-16)
+
+The sweep-rate framing in this document ("two full sweeps across four
+independent sealed seeds", ~50%) reflects the 78,154–78,157 window and
+omits the earlier 78,150 reading (8/10, menders+rites ties). Over ALL six
+recorded goal-gate readings the rate is 2/6 (exact 95% CI [0.04, 0.78]),
+with menders blocking every miss. See
+`experiments/qwen35_4b_sweep_rate_consolidation` for the consolidated
+record; the per-seed facts in this document are unchanged.

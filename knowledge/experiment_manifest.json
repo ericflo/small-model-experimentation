@@ -2910,7 +2910,7 @@
       "tests"
     ],
     "total_files": 42,
-    "total_size_bytes": 21173411
+    "total_size_bytes": 21174379
   },
   {
     "file_counts": {
@@ -5970,6 +5970,40 @@
   },
   {
     "file_counts": {
+      ".json": 8,
+      ".md": 6,
+      ".py": 5,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_sweep_rate_consolidation",
+    "path": "experiments/qwen35_4b_sweep_rate_consolidation",
+    "primary_readme": "experiments/qwen35_4b_sweep_rate_consolidation/README.md",
+    "primary_report": "experiments/qwen35_4b_sweep_rate_consolidation/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "Terminal bookkeeping for the agentic-breadth program's headline sweep claim: the informal \"~50% sweep rate\" was computed over a favorable four-seed window (78154\u201378157); the full committed record holds SIX goal-gate readings of the hygiene_explore composite vs base at sealed medium/tb1024 seeds, and the honest all-events rate is **2/6** (exact Clopper-Pearson 95% CI [0.043, 0.777]; Beta(1,1) posterior mean 0.375, 95% CrI [0.099, 0.710]). Analysis-only: zero GPU, zero seeds, no model, `benchmarks/` never read.",
+    "tags": [
+      "execution",
+      "small-model"
+    ],
+    "title": "Sweep-Rate Consolidation (Erratum: 2/6, not ~50%)",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "runs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 22,
+    "total_size_bytes": 101034
+  },
+  {
+    "file_counts": {
       ".gz": 2,
       ".json": 28,
       ".md": 8,
@@ -7648,7 +7682,7 @@
       "tests"
     ],
     "total_files": 47,
-    "total_size_bytes": 21186952
+    "total_size_bytes": 21187436
   },
   {
     "file_counts": {

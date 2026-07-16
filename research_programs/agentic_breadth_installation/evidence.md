@@ -1372,3 +1372,26 @@ at its one seed; any future conversion claim must state its lineage;
 (3) the clean lineage (stages 1–7 fully receipted from the official
 base, zero contamination) is the mission's reference artifact at 2.7×
 base aggregate.
+
+## qwen35_4b_sweep_rate_consolidation (2026-07-16 — CONSOLIDATED: the terminal claim on all the evidence)
+
+Terminal bookkeeping with a correction. The campaign's closures cited an
+informal "~50% sweep rate" computed over the 78,154–78,157 window (2/4),
+later held as "a fifth data point" at 2/5 — both omitting the earlier
+78,150 reading. This cell collected ALL SIX recorded goal-gate readings
+of the reference composite from sha-pinned byte-copied summaries,
+recomputed every verdict from per-family scores (forensics-identical
+counting, cross-checked against any recorded gate block), and corrected
+the figure everywhere with visible errata.
+
+The consolidated terminal statement: strict wins 8/10, 10/10, 9/10,
+8/10, 10/10, 9/10 across seeds 78,150–78,159 — sweep rate 2/6 = 0.333
+(exact 95% CI [0.043, 0.777]; Beta posterior mean 0.375), ZERO strict
+losses in all sixty family comparisons, aggregate strict win 6/6, and
+menders blocking every miss at a 0-margin draw (rites and warren once
+each; warren WON +0.267 at 78,155). Base draw note: base rites was 0.0
+on all six seeds; chronicle drew >0 for base on exactly the two passing
+seeds. Errata landed in the confirmation README/report, the zero-root
+README, three synthesis paragraphs, and both carrier briefs; no per-seed
+fact changed anywhere. The program's flagship number now rests on the
+complete record with its honest uncertainty.

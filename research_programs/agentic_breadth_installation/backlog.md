@@ -310,6 +310,12 @@
   local-install→family conversion, and hygiene_explore_parent recorded
   the FIRST 10/10 all-families goal-gate pass (menders 0.017, warren
   0.150 vs 0.100 — single-item margins). One seed ≠ a claim.
+- Completed sweep-rate consolidation (CONSOLIDATED — erratum landed):
+  `qwen35_4b_sweep_rate_consolidation` — over ALL six recorded goal-gate
+  readings the sweep rate is 2/6 (95% CI [0.04, 0.78]; the informal ~50%
+  was a 2/4 window), menders blocking every miss at 0-margin, zero
+  strict losses in 60 comparisons, aggregate 6/6. Visible errata in all
+  carrier documents. The terminal claim rests on the complete record.
 - Completed clean-path extension (install 3-for-3; conversion scoped):
   `qwen35_4b_clean_path_statechain_extension` — third statechain
   promotion on the third distinct parent (retention in-band every time),

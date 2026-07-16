@@ -178,6 +178,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_structure_or_values` | [README](../experiments/qwen35_4b_structure_or_values/README.md) | [report](../experiments/qwen35_4b_structure_or_values/reports/report.md) |
 | `qwen35_4b_structure_search_scaling` | [README](../experiments/qwen35_4b_structure_search_scaling/README.md) | [report](../experiments/qwen35_4b_structure_search_scaling/reports/report.md) |
 | `qwen35_4b_substrate_coverage_ladder` | [README](../experiments/qwen35_4b_substrate_coverage_ladder/README.md) | [report](../experiments/qwen35_4b_substrate_coverage_ladder/reports/final_report.md) |
+| `qwen35_4b_sweep_rate_consolidation` | [README](../experiments/qwen35_4b_sweep_rate_consolidation/README.md) | [report](../experiments/qwen35_4b_sweep_rate_consolidation/reports/report.md) |
 | `qwen35_4b_think_ftpo_round1` | [README](../experiments/qwen35_4b_think_ftpo_round1/README.md) | [report](../experiments/qwen35_4b_think_ftpo_round1/reports/report.md) |
 | `qwen35_4b_think_ftpo_round2` | [README](../experiments/qwen35_4b_think_ftpo_round2/README.md) | [report](../experiments/qwen35_4b_think_ftpo_round2/reports/report.md) |
 | `qwen35_4b_thinking_budget_controller` | [README](../experiments/qwen35_4b_thinking_budget_controller/README.md) | [report](../experiments/qwen35_4b_thinking_budget_controller/reports/report.md) |

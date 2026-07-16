@@ -57,3 +57,14 @@ The replication sharpens rather than overturns the discovery. The aggregate tran
 - `data/design_receipt.json`: seeds/tier/budget/models/gateway/discovery pins + the standalone lineage-package pins.
 - `data/lineage/`: the six stage datasets and `lineage_manifest.json` (the complete fixed-seed recipe; produced shas are verification aids).
 - `reports/preregistration.md`, `reports/benchmark_design_review.md`: contract and authorization.
+
+
+## Erratum (2026-07-16)
+
+The sweep-rate framing in this document ("two full sweeps across four
+independent sealed seeds", ~50%) reflects the 78,154–78,157 window and
+omits the earlier 78,150 reading (8/10, menders+rites ties). Over ALL six
+recorded goal-gate readings the rate is 2/6 (exact 95% CI [0.04, 0.78]),
+with menders blocking every miss. See
+`experiments/qwen35_4b_sweep_rate_consolidation` for the consolidated
+record; the per-seed facts in this document are unchanged.

@@ -1,0 +1,316 @@
+{
+ "base_draws": {
+  "families": {
+   "chronicle": {
+    "max": 0.1,
+    "median": 0.0,
+    "min": 0.0,
+    "seeds_gt_zero": 2,
+    "values_by_seed": {
+     "78150": 0.0,
+     "78154": 0.1,
+     "78155": 0.0,
+     "78156": 0.0,
+     "78157": 0.1,
+     "78159": 0.0
+    }
+   },
+   "lockpick": {
+    "max": 0.0,
+    "median": 0.0,
+    "min": 0.0,
+    "seeds_gt_zero": 0,
+    "values_by_seed": {
+     "78150": 0.0,
+     "78154": 0.0,
+     "78155": 0.0,
+     "78156": 0.0,
+     "78157": 0.0,
+     "78159": 0.0
+    }
+   },
+   "menders": {
+    "max": 0.0,
+    "median": 0.0,
+    "min": 0.0,
+    "seeds_gt_zero": 0,
+    "values_by_seed": {
+     "78150": 0.0,
+     "78154": 0.0,
+     "78155": 0.0,
+     "78156": 0.0,
+     "78157": 0.0,
+     "78159": 0.0
+    }
+   },
+   "mirage": {
+    "max": 0.0,
+    "median": 0.0,
+    "min": 0.0,
+    "seeds_gt_zero": 0,
+    "values_by_seed": {
+     "78150": 0.0,
+     "78154": 0.0,
+     "78155": 0.0,
+     "78156": 0.0,
+     "78157": 0.0,
+     "78159": 0.0
+    }
+   },
+   "rites": {
+    "max": 0.0,
+    "median": 0.0,
+    "min": 0.0,
+    "seeds_gt_zero": 0,
+    "values_by_seed": {
+     "78150": 0.0,
+     "78154": 0.0,
+     "78155": 0.0,
+     "78156": 0.0,
+     "78157": 0.0,
+     "78159": 0.0
+    }
+   },
+   "siftstack": {
+    "max": 0.0,
+    "median": 0.0,
+    "min": 0.0,
+    "seeds_gt_zero": 0,
+    "values_by_seed": {
+     "78150": 0.0,
+     "78154": 0.0,
+     "78155": 0.0,
+     "78156": 0.0,
+     "78157": 0.0,
+     "78159": 0.0
+    }
+   },
+   "sirens": {
+    "max": 0.4,
+    "median": 0.4,
+    "min": 0.3,
+    "seeds_gt_zero": 6,
+    "values_by_seed": {
+     "78150": 0.4,
+     "78154": 0.4,
+     "78155": 0.3,
+     "78156": 0.4,
+     "78157": 0.3,
+     "78159": 0.4
+    }
+   },
+   "stockade": {
+    "max": 0.182163,
+    "median": 0.065846,
+    "min": 0.0,
+    "seeds_gt_zero": 4,
+    "values_by_seed": {
+     "78150": 0.0,
+     "78154": 0.0,
+     "78155": 0.05238095238095238,
+     "78156": 0.07931034482758621,
+     "78157": 0.18216318785578747,
+     "78159": 0.09655172413793103
+    }
+   },
+   "toolsmith": {
+    "max": 0.5425,
+    "median": 0.216667,
+    "min": 0.1,
+    "seeds_gt_zero": 6,
+    "values_by_seed": {
+     "78150": 0.1,
+     "78154": 0.2,
+     "78155": 0.23333333333333334,
+     "78156": 0.5425,
+     "78157": 0.4,
+     "78159": 0.11666666666666667
+    }
+   },
+   "warren": {
+    "max": 0.1,
+    "median": 0.083333,
+    "min": 0.0,
+    "seeds_gt_zero": 4,
+    "values_by_seed": {
+     "78150": 0.06666666666666667,
+     "78154": 0.1,
+     "78155": 0.0,
+     "78156": 0.1,
+     "78157": 0.0,
+     "78159": 0.1
+    }
+   }
+  },
+  "note": "computed, not assumed: base drew ZERO on all six seeds for lockpick/menders/mirage/rites/siftstack; the intake note's guess 'base rites>0 on 2 seeds' is wrong — rites is 0.0 on all six; CHRONICLE is the family above zero on exactly 2 seeds"
+ },
+ "benchmark_data_read": false,
+ "blockers": {
+  "every_miss_includes_a_menders_draw": true,
+  "miss_events": 4,
+  "per_family_miss_counts": {
+   "menders": 4,
+   "rites": 1,
+   "warren": 1
+  },
+  "per_miss_detail": [
+   {
+    "blockers": [
+     "menders",
+     "rites"
+    ],
+    "losses": [],
+    "seed": 78150,
+    "strict_wins": 8
+   },
+   {
+    "blockers": [
+     "menders"
+    ],
+    "losses": [],
+    "seed": 78155,
+    "strict_wins": 9
+   },
+   {
+    "blockers": [
+     "menders",
+     "warren"
+    ],
+    "losses": [],
+    "seed": 78156,
+    "strict_wins": 8
+   },
+   {
+    "blockers": [
+     "menders"
+    ],
+    "losses": [],
+    "seed": 78159,
+    "strict_wins": 9
+   }
+  ],
+  "total_strict_losses_across_all_events": 0,
+  "zero_strict_losses_across_all_events": true
+ },
+ "erratum": {
+  "corrected": {
+   "events": 6,
+   "passes": 2,
+   "rate": 0.333333,
+   "seeds": [
+    78150,
+    78154,
+    78155,
+    78156,
+    78157,
+    78159
+   ],
+   "statement": "the full all-time record holds SIX goal-gate readings of the hygiene_explore composite vs base at sealed medium/tb1024 seeds; the honest sweep rate is 2/6 (~0.333), not ~50% — the informal figure was computed over a favorable four-seed window that started at the first pass (78154) and omitted the earlier 78150 miss (8/10) and, later, undercounted the 78159 miss"
+  },
+  "documents_carrying_informal_figure": [
+   {
+    "document": "experiments/qwen35_4b_goal_gate_confirmation/README.md",
+    "phrasing": "two full sweeps across four independent sealed seeds (status line and interpretation)"
+   },
+   {
+    "document": "experiments/qwen35_4b_goal_gate_confirmation/reports/report.md",
+    "phrasing": "two full sweeps across four independent sealed seeds"
+   },
+   {
+    "document": "knowledge/synthesis.md",
+    "phrasing": "confirmation entry: 'two full 10/10s across four independent sealed seeds'; dose-scale entry: 'two 10/10 sweeps across four independent sealed seeds'; zero-root entry: 'the fifth consistent data point on the ~50% sweep rate'"
+   },
+   {
+    "document": "knowledge/experiment_brief.json",
+    "phrasing": "qwen35_4b_menders_dose_scale and qwen35_4b_repair_verifier_signal_probe briefs: 'the full ten-family sweep demonstrated on two of four sealed seeds'"
+   },
+   {
+    "document": "knowledge/experiment_viz.json",
+    "phrasing": "zero-root note: 'the fifth data point on the ~50% sweep rate'"
+   },
+   {
+    "document": "experiments/qwen35_4b_zero_root_lineage_rebuild/experiment_log.md",
+    "phrasing": "the fifth data point on the ~50% sweep rate"
+   },
+   {
+    "document": "experiments/qwen35_4b_zero_root_lineage_rebuild/README.md",
+    "phrasing": "the original read 9/10 on this seed (menders tie — the sweep rate holding)"
+   },
+   {
+    "document": "experiments/qwen35_4b_zero_root_lineage_rebuild/reports/preregistration.md",
+    "phrasing": "The original's two recorded sweeps came from four-seed evidence"
+   }
+  ],
+  "fifth_data_point_extension": {
+   "events": 5,
+   "note": "the zero-root docs called seed 78159 'the fifth data point on the ~50% sweep rate'; even that five-event count reads 2/5 = 0.4, and it still omits the 78150 miss",
+   "passes": 2,
+   "rate": 0.4,
+   "seeds": [
+    78154,
+    78155,
+    78156,
+    78157,
+    78159
+   ]
+  },
+  "informal_claim": "'~50% sweep rate' / 'two full sweeps across four independent sealed seeds' / 'demonstrated on two of four sealed seeds'",
+  "informal_window": {
+   "events": 4,
+   "passes": 2,
+   "rate": 0.5,
+   "seeds": [
+    78154,
+    78155,
+    78156,
+    78157
+   ]
+  },
+  "omitted_by_window": [
+   {
+    "outcome": "miss (8/10; ties menders+rites)",
+    "seed": 78150,
+    "source_experiment": "qwen35_4b_universal_medium_tier_measurement"
+   },
+   {
+    "outcome": "miss (9/10; ties menders)",
+    "seed": 78159,
+    "source_experiment": "qwen35_4b_zero_root_lineage_rebuild"
+   }
+  ],
+  "unaffected_facts": "zero strict losses in all six events; every miss includes a menders 0-margin draw; the aggregate win is 6/6 all-time"
+ },
+ "schema_version": 1,
+ "source_table": "runs/readings_table.json",
+ "sweep_rate": {
+  "beta_posterior": {
+   "alpha": 3,
+   "beta": 5,
+   "credible_95": {
+    "high": 0.709579,
+    "low": 0.098988
+   },
+   "mean": 0.375,
+   "prior": "Beta(1,1)"
+  },
+  "clopper_pearson_95": {
+   "alpha": 0.05,
+   "high": 0.777222,
+   "low": 0.043272
+  },
+  "events": 6,
+  "method": "exact Clopper-Pearson via integer-shape beta quantiles (I_p(a,b) = P(Binomial(a+b-1, p) >= a), deterministic bisection)",
+  "miss_seeds": [
+   78150,
+   78155,
+   78156,
+   78159
+  ],
+  "pass_seeds": [
+   78154,
+   78157
+  ],
+  "passes": 2,
+  "rate": 0.333333
+ }
+}

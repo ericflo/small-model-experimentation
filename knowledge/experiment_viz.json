@@ -49675,6 +49675,52 @@
      "source": "experiments/qwen35_4b_clean_path_statechain_extension/runs/benchmark/medium_tb1024_seed78160_pilot/summary.json"
     }
    ]
+  },
+  "qwen35_4b_sweep_rate_consolidation": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Strict family wins vs base per sealed seed (of 10) — all six recorded readings",
+     "categories": [
+      "78150",
+      "78154",
+      "78155",
+      "78156",
+      "78157",
+      "78159"
+     ],
+     "series": [
+      {
+       "label": "families strictly won",
+       "values": [
+        8,
+        10,
+        9,
+        8,
+        10,
+        9
+       ]
+      },
+      {
+       "label": "families lost",
+       "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "sealed medium seed (tb 1024)",
+     "y_label": "families (of 10)",
+     "y_format": "integer",
+     "note": "The consolidated record: sweep rate 2/6 = 0.333 (exact 95% CI [0.043, 0.777]; Beta posterior mean 0.375), correcting the informal ~50% window figure (2/4 over 78154-78157). Menders blocked all four misses at 0-margin; rites and warren once each (warren WON +0.267 at 78155); zero strict losses in sixty family comparisons; aggregate strict win 6/6. Visible errata landed in every carrier document; no per-seed fact changed.",
+     "source": "experiments/qwen35_4b_sweep_rate_consolidation/runs/sweep_rate_analysis.json"
+    }
+   ]
   }
  }
 }

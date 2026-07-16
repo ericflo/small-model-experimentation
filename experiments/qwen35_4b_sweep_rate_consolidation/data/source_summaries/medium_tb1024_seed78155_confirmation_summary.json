@@ -1,0 +1,75 @@
+{
+ "benchmark_data_read": false,
+ "benchmark_implementation": {
+  "runner_sha256": "a3beecd8b5c89ccfd99a172a6d85321d39b9feb6c29d12f10b2f4d7499e273cb",
+  "source_file_count": 56,
+  "source_inventory_sha256": "218b8615a95f24da962c931e9cd2dba58d853a7bdcd2847cd8e2c42fc2c05f42"
+ },
+ "budget": {
+  "base": {
+   "wall_seconds": 157.5878832861781,
+   "within_budget": true
+  },
+  "hygiene_explore": {
+   "wall_seconds": 138.0815589139238,
+   "within_budget": true
+  }
+ },
+ "design_receipt_sha256": "66c19b24e245aa55697100619d30caf2797d7f4cdf6ae49ea468ce49c3730065",
+ "discovery_summary_sha256": "6b1a43869f013e24a048a45a04e5603b45fe59488912194eb3e76a43679255fa",
+ "gateway_sha256": "53cf6533dbd710eb167503363c39f73dbf7559a0d91f40a00436a3c218a01c17",
+ "model_order": [
+  "base",
+  "hygiene_explore"
+ ],
+ "model_tree_sha256s": {
+  "base": "26d8ee48583adb0fb557d0ff668664949adff0068fa5baafe6f0af68e22fb677",
+  "hygiene_explore": "9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971"
+ },
+ "model_weight_sha256s": {
+  "base": "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db",
+  "hygiene_explore": "e21123443a230ada2c73ded411e0b5b7c2b1459856b2c38e4f1beea8958dc02f"
+ },
+ "models": {
+  "base": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized",
+  "hygiene_explore": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore"
+ },
+ "name": "confirmation",
+ "promoted": null,
+ "schema_version": 1,
+ "scores": {
+  "base": {
+   "aggregate": 0.05857142857142857,
+   "per_family": {
+    "chronicle": 0.0,
+    "lockpick": 0.0,
+    "menders": 0.0,
+    "mirage": 0.0,
+    "rites": 0.0,
+    "siftstack": 0.0,
+    "sirens": 0.3,
+    "stockade": 0.05238095238095238,
+    "toolsmith": 0.23333333333333334,
+    "warren": 0.0
+   }
+  },
+  "hygiene_explore": {
+   "aggregate": 0.32866666666666666,
+   "per_family": {
+    "chronicle": 0.3,
+    "lockpick": 0.1,
+    "menders": 0.0,
+    "mirage": 0.5,
+    "rites": 0.1,
+    "siftstack": 0.5,
+    "sirens": 0.6,
+    "stockade": 0.2,
+    "toolsmith": 0.72,
+    "warren": 0.26666666666666666
+   }
+  }
+ },
+ "seed": 78155,
+ "think_budget": 1024,
+ "tier": "medium"
+}
