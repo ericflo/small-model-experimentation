@@ -12,3 +12,17 @@
   against 414f5829… pre-merge); no runtime-LoRA path exists.
 
 **Verdict:** `PASS_CONTROL_MERGE`.
+
+## Local event authorization
+
+- Merge receipts published and self-pinned for both arms; the eval's
+  trained-tree pins are filled fail-closed and the boundary
+  re-authenticates the zero-root parent and both merges before each run.
+- The event: three arms × four frozen oracle-free inputs (gym-mix
+  holdout 88,046 with 14/13/13 per kind; retention screens
+  88,048/88,050/88,051) in sequential authenticated engine runs;
+  promotion logic (2-of-3 kinds + strict totals) and pooled_k3 bands are
+  the frozen preregistration's, unit-pinned; no seed can be opened by
+  this event.
+
+**Verdict:** `PASS_LOCAL_EVENT`.

@@ -90,8 +90,12 @@ MERGED = {
 # merge_trained_arm.py publishes the merged composite; the eval refuses to run
 # while any pin is still None.
 EXPECTED_TRAINED_TREE_SHA256: dict[str, str | None] = {
-    "replay_ctl5": None,
-    "gym_mix": None,
+    "replay_ctl5": (
+        "c8c9e6b96754a1e5d6190b20267796ec954a4a250ef8a3ae28c18b2308abacdf"
+    ),
+    "gym_mix": (
+        "8d46e450feadaa19e0d8e2f4d5c2c0bf4ca1b7f718d75d3505384fd0bcdb5c9f"
+    ),
 }
 ANSWER_RE = re.compile(r"(?:^|\n)ANSWER:\s*(.*?)(?=\n|<\||</|$)", re.DOTALL)
 
