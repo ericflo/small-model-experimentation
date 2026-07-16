@@ -14573,40 +14573,40 @@
    ]
   },
   "qwen35_4b_repair_verifier_signal_probe": {
-   "verdict_tag": "Design frozen; the 400-judgment feasibility gate has not run",
+   "verdict_tag": "Coin-flip: the model cannot even recognize the repair it cannot produce",
    "concept_primer": "Every teaching route to the one benchmark family blocking the program's ten-family goal is now closed: the model cannot learn debugging-style repair from demonstrations at any tested dose. One training class remains — letting the model learn from its own attempts with live feedback — but that loop only works if the model can at least RECOGNIZE a correct repair when shown one, even though it cannot produce one. This experiment measures exactly that: two hundred puzzles, each showing a broken procedure's failures on two trials plus two candidate one-step fixes, only one of which works for both. Picking the right one requires mentally running each candidate — the model's one reliably strong skill.",
    "plain_question": "Can the model recognize the correct repair when shown two candidates — the signal an attempt-and-feedback training loop would need?",
-   "plain_answer": "Nothing has run yet. The frozen rule: sixty-five percent accuracy with statistical confidence above coin-flip funds the attempt-and-feedback charter; anything less closes the last training class and completes the program's map. The design survived its own review scare: the first draft accidentally marked the wrong answer as a previously-failed attempt, which would have let word-matching impersonate recognition — the frozen version presents both candidates identically with a zero-hit audit over thirty-three telltale words, and the best any guessing shortcut can score is pinned at 53 percent, safely below the bar.",
+   "plain_answer": "The gate said no, cleanly. Handed two candidate repairs and the full failure evidence — a task solvable by mentally running each candidate through both trials — the model picked the working one 51.5 percent of the time with its reasoning enabled and 49 percent without: coin-flip, below even the best word-matching shortcut the design team pre-computed and pinned at 53 percent. It was not running out of thinking room (only 7.5 percent of items hit the cap); it finishes its reasoning and still cannot tell. With recognition absent, a learn-from-your-own-attempts loop would have no signal to climb, and the last training class for the stubborn family closes by the pre-written rule. The program's map is complete: the ten-family goal stands demonstrated on two of four sealed seeds, every route to making it reliable is closed by rule rather than fatigue, and the one blocking skill is now precisely characterized — the model can neither produce, nor buy with thinking time, nor even recognize multi-constraint eliminative repairs.",
    "why_it_matters": "This one cheap measurement decides whether the program's last mechanism class gets funded on evidence or closed by rule — the difference between a live path to the ten-family goal and an honestly completed map.",
-   "verdict_tone": "neutral",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Judgments",
-     "value": "400",
-     "sub": "200 items x thinking on/off"
+     "label": "Recognition accuracy",
+     "value": "51.5%",
+     "sub": "with thinking; 49.0% without"
     },
     {
-     "label": "Signal bar",
-     "value": "≥65%",
-     "sub": "with CI excluding coin-flip"
-    },
-    {
-     "label": "Guessing ceiling",
+     "label": "Shortcut ceiling",
      "value": "53.25%",
-     "sub": "best shortcut heuristic, test-pinned"
+     "sub": "pre-pinned; the model scored below it"
     },
     {
-     "label": "Training runs",
-     "value": "0",
-     "sub": "pure measurement"
+     "label": "Thinking-cap contacts",
+     "value": "7.5%",
+     "sub": "not budget-limited"
+    },
+    {
+     "label": "Mechanism classes now closed",
+     "value": "all",
+     "sub": "SFT, budget, and on-policy — by rule"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Where the experiment stands",
-     "chart_read": "Each bar is a preregistered stage; one means complete.",
-     "chart_takeaway": "The probe set, audits, and the two-state consequence rule are frozen; the measurement event remains."
+     "chart_plain_title": "Repair-recognition accuracy against the pre-registered bars",
+     "chart_read": "Two bars for the model's two modes, with the coin-flip floor, the shortcut ceiling, and the funding bar marked.",
+     "chart_takeaway": "Both modes sit at the coin-flip floor, below the shortcut ceiling and far from the 65 percent funding bar."
     }
    ]
   }

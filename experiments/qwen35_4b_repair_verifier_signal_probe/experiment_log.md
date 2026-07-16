@@ -116,3 +116,16 @@ Created as a new experiment scaffold.
   coincidences filtered deterministically; the cap-contact scope
   annotation preregistered for any SIGNAL_ABSENT reading. 134 tests
   green; smoke green; PASS_LOCAL_EVENT granted.
+
+## 2026-07-16 — The event: SIGNAL_ABSENT, cleanly
+
+- Both arms ran authenticated; think 103/200 (51.5%), nothink 98/200
+  (49.0%) — chance, below even the pinned 53.25% shortcut ceiling, with
+  cap contacts at 7.5% (no budget scoping). Per-formalism max 16/25;
+  position bias noise-shaped.
+- The frozen consequence: the eliminative-repair skill lacks even
+  execution-based fix verification — the model finishes its reasoning
+  and still cannot tell which of two handed candidates works. The C29
+  read-only-verifier dissociation is itself skill-scoped: it does not
+  extend to multi-constraint eliminative bookkeeping. The on-policy
+  class closes for menders; the program map is complete.

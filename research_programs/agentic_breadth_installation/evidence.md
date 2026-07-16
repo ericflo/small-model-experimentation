@@ -1280,3 +1280,36 @@ on-policy episode training (its own charter, genuinely different
 mechanism), or standing on the program's demonstrated-not-confirmed
 position (two 10/10 sweeps across four sealed seeds; nine families hold
 everywhere; the aggregate transfer unconditional at 4/4).
+
+## qwen35_4b_repair_verifier_signal_probe (2026-07-16 — SIGNAL_ABSENT: the map completes)
+
+The on-policy charter's feasibility gate ran clean after its review caught
+and removed a narration confound (the first build textually marked the
+wrong option as the failed attempt; the frozen design presents pure
+failure evidence with symmetric unmarked candidates, a 33-token marker
+audit at zero hits, and a test-pinned 53.25% shortcut ceiling). Verdict:
+SIGNAL_ABSENT — think 103/200 (51.5%), nothink 98/200 (49.0%), both at
+the coin-flip floor and below the shortcut ceiling, with cap contacts at
+7.5% (no budget scoping). The model finishes its reasoning and still
+cannot tell which of two handed repairs works.
+
+The scientific content: the C29 read-only-verifier dissociation is
+SKILL-SCOPED. Verifying a fix against two trials is execution the model
+nominally has, but the multi-constraint bookkeeping (two candidates ×
+two trials × outcome comparison) sits behind the same wall as proposal —
+extending C32/C36/C38/C48 to the verification seat. An on-policy loop
+would have no reward signal to climb: the class closes for menders by
+the frozen rule.
+
+THE PROGRAM MAP IS COMPLETE. Every mechanism class for the one
+goal-gating family is closed by a preregistered rule: three SFT
+pedagogies (asserted, demonstrated-search, episode-feedback) across
+80–800 rows and 4–8 formalisms; the deployment thinking budget (two
+gateway stops); and on-policy selection (no verification signal). The
+goal position stands exactly: aggregate transfer unconditional (4/4
+sealed seeds, 3–6× margins), the all-families sweep demonstrated on two
+of four sealed seeds, not confirmed at the frozen 2/3 bar, and the
+blocking skill precisely characterized — the model can neither produce,
+nor buy with serial compute, nor recognize multi-constraint eliminative
+repairs. The statechain→rites conversion remains the program's proven
+install mechanism; the zero-root rebuild remains queued as provenance.

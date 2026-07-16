@@ -2,7 +2,7 @@
 
 Lifecycle 21 — a cheap, eval-only FEASIBILITY GATE for a possible on-policy training charter. The menders-shaped eliminative-repair skill is closed to SFT at every tested dose (three pedagogies, 80–800 rows; the dose-scale candidate scored exactly the untrained controls' guess floor). On-policy training (learn from own attempts + live feedback) is the one remaining mechanism class, and it only has signal if the model can VERIFY repairs it cannot propose (C29 precedent: read-only 2AFC verifier 0.81 while generation collapsed; C47: think-judges rescue substrate-scoped no-think judges). This probe measures that verification signal directly: 400 judgments, no training, no benchmark seed, no promotion.
 
-**Status:** in-progress · since 2026-07-16 · design frozen post-redesign (the narration confound caught in review; symmetric items audited); the 400-judgment event remains
+**Status:** finished · 2026-07-16 · verdict SIGNAL_ABSENT — think-arm 2AFC accuracy 103/200 (51.5%), nothink 98/200 (49.0%), both at the coin-flip floor and below the 53.25% shortcut ceiling; cap contacts 7.5% (well under the 20% scope threshold, so the reading is NOT budget-limited); the model cannot verify the repair it cannot produce, the on-policy class closes for menders, and the program map completes at demonstrated-not-confirmed
 
 ## Research Program
 

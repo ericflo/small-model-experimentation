@@ -1,0 +1,210 @@
+{
+  "aggregate_seed": null,
+  "aggregate_seed_open": false,
+  "answer_normalization": {
+    "applied_to": "both the parsed and the expected answer, both arms, all 200 items",
+    "definition": "re.sub(r'\\s+', ' ', s).strip(), then re.sub(r'\\s*>\\s*', '>', s), then re.sub(r'\\s*;\\s*', ';', s)",
+    "function": "check_local.normalize_answer",
+    "prospective": true,
+    "rationale": "byte-identical to the retention-calibration and dose-scale cells' frozen rule (unchanged since the seed-88021 gate); the expected answer here is always a single letter, so normalization only forgives whitespace"
+  },
+  "arms": [
+    "think",
+    "nothink"
+  ],
+  "backend": "vllm_merged_composite",
+  "benchmark_data_read": false,
+  "consequence_statements": {
+    "SIGNAL_ABSENT": "SIGNAL_ABSENT: the eliminative-repair skill lacks even execution-based fix-verification signal at this instrument; the on-policy class closes for menders and the program map is complete at demonstrated-not-confirmed",
+    "SIGNAL_PRESENT": "SIGNAL_PRESENT: the on-policy episode charter is fundable — execution-based fix-verification signal exists for the skill generation cannot produce (C29-class dissociation): the model can simulate candidate repairs against two-trial evidence above the frozen bar"
+  },
+  "design_receipt_sha256": "6fc897f29fe107ba0aca954d80091df19769007fa631b8fdf31279bcbd03137e",
+  "eligible": [],
+  "evaluated_model": "hygiene_explore composite (tree 9eb653d7...)",
+  "experiment_id": "qwen35_4b_repair_verifier_signal_probe",
+  "feasibility_probe": true,
+  "gating_arm": "think",
+  "local_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_repair_verifier_signal_probe/runs/local/probe.json",
+  "local_receipt_sha256": "765f419e5b6fb989406870693dbcb4e6ada6d86d4886f40fa2d6c21a3d18a3c6",
+  "no_promotion_in_feasibility_probe": true,
+  "outcome": "PROBE_READ_COMPLETE",
+  "promoted": null,
+  "readings": {
+    "consequence": {
+      "cap_contact_diagnostic": {
+        "budget_limited_scope_applies": false,
+        "note": "cap contacts within budget (<= 20% of items) or verdict SIGNAL_PRESENT; no budget scoping applies",
+        "scope_threshold": 0.2,
+        "think_cap_contact_rate": 0.075,
+        "think_cap_contacts": 15
+      },
+      "ordered_total_no_third_state": true,
+      "statement": "SIGNAL_ABSENT: the eliminative-repair skill lacks even execution-based fix-verification signal at this instrument; the on-policy class closes for menders and the program map is complete at demonstrated-not-confirmed",
+      "think_accuracy": 0.515,
+      "think_ci95": [
+        0.4434636357492162,
+        0.5860851703849561
+      ],
+      "think_correct": 103,
+      "verdict": "SIGNAL_ABSENT"
+    },
+    "nothink_descriptive": {
+      "gating": false,
+      "nothink_accuracy": 0.49,
+      "role": "C47 substrate-scoping check: whether the no-think judge seat holds on this substrate is reported, never gated",
+      "think_minus_nothink": 0.025000000000000022
+    },
+    "per_arm": {
+      "nothink": {
+        "2afc_accuracy": 0.49,
+        "cap_contact_rate": 0.0,
+        "cap_contacts": 0,
+        "chance_floor": 0.5,
+        "ci95_exact": [
+          0.4188225152054853,
+          0.5614782774378335
+        ],
+        "ci95_excludes_chance": false,
+        "correct": 98,
+        "mean_sampled_tokens": 7.0,
+        "parsed": 200,
+        "per_formalism": {
+          "balesled": {
+            "accuracy": 0.52,
+            "correct": 13,
+            "n": 25
+          },
+          "barrowyoke": {
+            "accuracy": 0.48,
+            "correct": 12,
+            "n": 25
+          },
+          "crankwheel": {
+            "accuracy": 0.28,
+            "correct": 7,
+            "n": 25
+          },
+          "millround": {
+            "accuracy": 0.56,
+            "correct": 14,
+            "n": 25
+          },
+          "sigilslate": {
+            "accuracy": 0.64,
+            "correct": 16,
+            "n": 25
+          },
+          "skeinreel": {
+            "accuracy": 0.36,
+            "correct": 9,
+            "n": 25
+          },
+          "trinketcord": {
+            "accuracy": 0.52,
+            "correct": 13,
+            "n": 25
+          },
+          "troughline": {
+            "accuracy": 0.56,
+            "correct": 14,
+            "n": 25
+          }
+        },
+        "position_bias": {
+          "a_correct_items": {
+            "accuracy": 0.22,
+            "correct": 22,
+            "n": 100
+          },
+          "accuracy_gap_a_minus_b": -0.54,
+          "b_correct_items": {
+            "accuracy": 0.76,
+            "correct": 76,
+            "n": 100
+          }
+        },
+        "rows": 200
+      },
+      "think": {
+        "2afc_accuracy": 0.515,
+        "cap_contact_rate": 0.075,
+        "cap_contacts": 15,
+        "chance_floor": 0.5,
+        "ci95_exact": [
+          0.4434636357492162,
+          0.5860851703849561
+        ],
+        "ci95_excludes_chance": false,
+        "correct": 103,
+        "mean_sampled_tokens": 546.3,
+        "parsed": 185,
+        "per_formalism": {
+          "balesled": {
+            "accuracy": 0.48,
+            "correct": 12,
+            "n": 25
+          },
+          "barrowyoke": {
+            "accuracy": 0.64,
+            "correct": 16,
+            "n": 25
+          },
+          "crankwheel": {
+            "accuracy": 0.48,
+            "correct": 12,
+            "n": 25
+          },
+          "millround": {
+            "accuracy": 0.44,
+            "correct": 11,
+            "n": 25
+          },
+          "sigilslate": {
+            "accuracy": 0.48,
+            "correct": 12,
+            "n": 25
+          },
+          "skeinreel": {
+            "accuracy": 0.64,
+            "correct": 16,
+            "n": 25
+          },
+          "trinketcord": {
+            "accuracy": 0.44,
+            "correct": 11,
+            "n": 25
+          },
+          "troughline": {
+            "accuracy": 0.52,
+            "correct": 13,
+            "n": 25
+          }
+        },
+        "position_bias": {
+          "a_correct_items": {
+            "accuracy": 0.61,
+            "correct": 61,
+            "n": 100
+          },
+          "accuracy_gap_a_minus_b": 0.19,
+          "b_correct_items": {
+            "accuracy": 0.42,
+            "correct": 42,
+            "n": 100
+          }
+        },
+        "rows": 200
+      }
+    }
+  },
+  "rows_per_arm": 200,
+  "schema_version": 1,
+  "seed": 77160,
+  "thresholds": {
+    "cap_scope_threshold": 0.2,
+    "chance_floor": 0.5,
+    "confidence": 0.95,
+    "rule": "SIGNAL_PRESENT iff think-arm 2afc_accuracy >= 0.65 AND the exact two-sided 95% binomial CI excludes 0.5; otherwise SIGNAL_ABSENT. Ordered, total, no third state; the nothink arm is descriptive. A SIGNAL_ABSENT reading with think-arm cap contacts on more than 20% of items is annotated as possibly budget-limited at the 1,024-token cap",
+    "signal_min_accuracy": 0.65
+  }
+}

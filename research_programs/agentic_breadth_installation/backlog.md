@@ -326,6 +326,16 @@
   and 78156 8/10 with ZERO losses, blocked by menders 0-margin ties plus
   one warren tie). Demonstrated, not confirmed; the gate is localized to
   menders alone. First standalone-compliant cell (full lineage package).
+- Completed verifier probe (SIGNAL_ABSENT — the map completes):
+  `qwen35_4b_repair_verifier_signal_probe` — 2AFC repair verification at
+  the coin-flip floor in both arms (51.5%/49.0%, below the pinned 53.25%
+  shortcut ceiling, caps 7.5%): the model cannot recognize the repair it
+  cannot produce, so on-policy training has no signal and the class
+  closes by the frozen rule. EVERY mechanism class for menders is now
+  closed by preregistered rule; the goal stands demonstrated (two 10/10
+  sweeps / four sealed seeds) and not confirmed; no fundable intake
+  remains for the confirmed-goal within the constraint set. New intakes
+  require genuinely new mechanism arguments.
 - Completed dose-scale null (NOT_PROMOTED + DOSE_SCALE_NULL):
   `qwen35_4b_menders_dose_scale` — 10x dose, 8 formalisms: candidate 1/40
   on fresh instances = both untrained controls exactly (guess floor);
