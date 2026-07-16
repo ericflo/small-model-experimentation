@@ -115,10 +115,10 @@ FROZEN_TREE_SHA256: dict[str, str | None] = {
     # TODO-PIN(post-merge): runs/merges/replay_ctl4.json -> output_tree_sha256.
     # Fill by replacing None with the quoted 64-hex ON THIS LINE; the design
     # receipt's normalized-hash pin canonicalizes only this value.
-    "replay_ctl4": None,
+    "replay_ctl4": "68d1489a78ac8f6369429c185f9c12ac49aa8279e42acd07fe4d6c9dc28f13bc",
     # TODO-PIN(post-merge): runs/merges/statechain_clean.json ->
     # output_tree_sha256. Fill ON THIS LINE only.
-    "statechain_clean": None,
+    "statechain_clean": "9f1a279a1c6120263013a6ecac0701cd73fa3af86f5269ed66b71199d164f450",
 }
 FROZEN_WEIGHTS_SHA256: dict[str, str | None] = {
     "base": "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db",
@@ -127,19 +127,19 @@ FROZEN_WEIGHTS_SHA256: dict[str, str | None] = {
     ),
     # TODO-PIN(post-merge): runs/merges/replay_ctl4.json weight sha256.
     # Fill by replacing None with the quoted 64-hex ON THIS LINE.
-    "replay_ctl4": None,
+    "replay_ctl4": "7ab64488f5dd88200c615283d264032df521853ff097dbcfe50f63f9b7191c1a",
     # TODO-PIN(post-merge): runs/merges/statechain_clean.json weight sha256.
     # Fill by replacing None with the quoted 64-hex ON THIS LINE.
-    "statechain_clean": None,
+    "statechain_clean": "1b436a0e39f825ae12bf7ac327b3a0d4adf286596f13799f10de2db3422ec614",
 }
 WEIGHTS_SIZE_BYTES = 9_078_620_536
 # TODO-PIN(post-merge): sha256 of the COMMITTED runs/merges/replay_ctl4.json.
 # Fill by replacing None with the quoted 64-hex ON THIS LINE; the design
 # receipt's normalized-hash pin canonicalizes only this value.
-REPLAY_CTL4_MERGE_RECEIPT_SHA256 = None
+REPLAY_CTL4_MERGE_RECEIPT_SHA256 = "6844abf90b6ca85cb462f177c6405638751dafa9c330d78ee34bb8b28a3ad0a0"
 # TODO-PIN(post-merge): sha256 of the COMMITTED
 # runs/merges/statechain_clean.json. Fill ON THIS LINE only.
-STATECHAIN_CLEAN_MERGE_RECEIPT_SHA256 = None
+STATECHAIN_CLEAN_MERGE_RECEIPT_SHA256 = "f575af3be4257f3e1d129aea3dc213fcd2b1e06c978123b7c40e1ee6e8669d26"
 # The two trained arms carry committed receipts in this experiment (their
 # shas are the two slot constants above); the zero-root parent is
 # authenticated against lifecycle 22's committed lineage merge receipt via

@@ -1,0 +1,254 @@
+{
+  "adjudication_protocol": "pooled_k3",
+  "aggregate_seed": 78160,
+  "aggregate_seed_open": true,
+  "axis_kinds": [
+    "u_statechain"
+  ],
+  "axis_rows": 40,
+  "axis_surfaces": [
+    "brewvat",
+    "courierloft",
+    "muletrack",
+    "peatstove"
+  ],
+  "backend": "vllm_merged_composite",
+  "benchmark_data_read": false,
+  "candidates": [
+    "statechain_clean"
+  ],
+  "checks": {
+    "axis_total_strictly_beats_parent": true,
+    "axis_total_strictly_beats_replay": true,
+    "retention_pooled_cap_contacts_within_3_of_parent": true,
+    "retention_pooled_cap_contacts_within_3_of_replay": true,
+    "retention_pooled_correct_within_5_of_parent": true,
+    "retention_pooled_correct_within_5_of_replay": true,
+    "retention_pooled_parsed_within_3_of_parent": true,
+    "retention_pooled_parsed_within_3_of_replay": true
+  },
+  "controls": [
+    "replay_ctl4",
+    "zero_root_parent"
+  ],
+  "descriptive_noise": {
+    "delta_sd_pooled": 4.320493798938574,
+    "deltas_vs_parent": {
+      "replay_ctl4": {
+        "by_screen": [
+          -5,
+          4,
+          3
+        ],
+        "pooled_mean": 0.6666666666666666,
+        "sd": 4.932882862316248,
+        "vs": "zero_root_parent"
+      },
+      "statechain_clean": {
+        "by_screen": [
+          -4,
+          -2,
+          3
+        ],
+        "pooled_mean": -1.0,
+        "sd": 3.605551275463989,
+        "vs": "zero_root_parent"
+      }
+    },
+    "reported_not_gated": true,
+    "screen_sd_pooled_levels": 4.955356249106169
+  },
+  "design_receipt_sha256": "44c3d4f05fbdd782565abda390a263d0643fc155399b05e39eed82e2c1b124ef",
+  "eligible": [
+    "statechain_clean"
+  ],
+  "experiment_id": "qwen35_4b_clean_path_statechain_extension",
+  "local_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_clean_path_statechain_extension/runs/local/seed88041.json",
+  "local_receipt_sha256": "73f8db28084e31862352bed585eb2b28ab2ebc8d64978a6c697702b35d3b0e43",
+  "no_absolute_per_kind_floors": true,
+  "per_surface_reported_not_gated": true,
+  "promoted": "statechain_clean",
+  "retention_rows_per_screen": 104,
+  "retention_screens": 3,
+  "schema_version": 1,
+  "screen_seeds": [
+    88042,
+    88044,
+    88045
+  ],
+  "seed": 88041,
+  "single_kind_dose_no_per_kind_split": true,
+  "summaries": {
+    "replay_ctl4": {
+      "adapter": "replay_ctl4",
+      "axis": {
+        "cap_contacts": 16,
+        "correct": 16,
+        "parsed": 24,
+        "per_surface_correct": {
+          "brewvat": 9,
+          "courierloft": 0,
+          "muletrack": 1,
+          "peatstove": 6
+        },
+        "rows": 40
+      },
+      "retention": {
+        "correct_by_screen": [
+          60,
+          70,
+          59
+        ],
+        "pooled_means": {
+          "cap_contacts": 10.666666666666666,
+          "correct": 63.0,
+          "parsed": 93.33333333333333,
+          "route_abstentions": 0.0
+        },
+        "screens": {
+          "88042": {
+            "cap_contacts": 9,
+            "correct": 60,
+            "parsed": 95,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88044": {
+            "cap_contacts": 9,
+            "correct": 70,
+            "parsed": 95,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88045": {
+            "cap_contacts": 14,
+            "correct": 59,
+            "parsed": 90,
+            "route_abstentions": 0,
+            "rows": 104
+          }
+        },
+        "sums": {
+          "cap_contacts": 32,
+          "correct": 189,
+          "parsed": 280,
+          "route_abstentions": 0
+        }
+      }
+    },
+    "statechain_clean": {
+      "adapter": "statechain_clean",
+      "axis": {
+        "cap_contacts": 6,
+        "correct": 21,
+        "parsed": 34,
+        "per_surface_correct": {
+          "brewvat": 10,
+          "courierloft": 1,
+          "muletrack": 1,
+          "peatstove": 9
+        },
+        "rows": 40
+      },
+      "retention": {
+        "correct_by_screen": [
+          61,
+          64,
+          59
+        ],
+        "pooled_means": {
+          "cap_contacts": 11.333333333333334,
+          "correct": 61.333333333333336,
+          "parsed": 92.66666666666667,
+          "route_abstentions": 0.0
+        },
+        "screens": {
+          "88042": {
+            "cap_contacts": 10,
+            "correct": 61,
+            "parsed": 94,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88044": {
+            "cap_contacts": 10,
+            "correct": 64,
+            "parsed": 94,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88045": {
+            "cap_contacts": 14,
+            "correct": 59,
+            "parsed": 90,
+            "route_abstentions": 0,
+            "rows": 104
+          }
+        },
+        "sums": {
+          "cap_contacts": 34,
+          "correct": 184,
+          "parsed": 278,
+          "route_abstentions": 0
+        }
+      }
+    },
+    "zero_root_parent": {
+      "adapter": "zero_root_parent",
+      "axis": {
+        "cap_contacts": 17,
+        "correct": 19,
+        "parsed": 24,
+        "per_surface_correct": {
+          "brewvat": 9,
+          "courierloft": 0,
+          "muletrack": 3,
+          "peatstove": 7
+        },
+        "rows": 40
+      },
+      "retention": {
+        "correct_by_screen": [
+          65,
+          66,
+          56
+        ],
+        "pooled_means": {
+          "cap_contacts": 12.333333333333334,
+          "correct": 62.333333333333336,
+          "parsed": 92.0,
+          "route_abstentions": 0.0
+        },
+        "screens": {
+          "88042": {
+            "cap_contacts": 12,
+            "correct": 65,
+            "parsed": 93,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88044": {
+            "cap_contacts": 14,
+            "correct": 66,
+            "parsed": 90,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88045": {
+            "cap_contacts": 11,
+            "correct": 56,
+            "parsed": 93,
+            "route_abstentions": 0,
+            "rows": 104
+          }
+        },
+        "sums": {
+          "cap_contacts": 37,
+          "correct": 187,
+          "parsed": 276,
+          "route_abstentions": 0
+        }
+      }
+    }
+  }
+}

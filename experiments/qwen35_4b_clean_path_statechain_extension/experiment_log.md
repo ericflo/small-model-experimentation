@@ -12,3 +12,15 @@
   fill-state-agnostic mutation fixtures (the lifecycle-22 lesson
   applied at build time). 127 tests green; smoke green; zero seed
   substitutions.
+
+## 2026-07-16 — Local gate: PROMOTED (third install replication); benchmark authorized
+
+- The 12-run pooled_k3 gate promoted statechain_clean on all eight
+  checks: axis 21/40 strictly over the parent (19) and replay (16);
+  pooled retention 61.33 vs 62.33/63.0 — the converter installs on its
+  third distinct parent with retention held. Training-loss note recorded
+  (clean chain ~1.3 vs original ~0.43 on identical data; loss-level ≠
+  capability).
+- Six pin slots filled from committed receipts; the normalized-hash pin
+  verified post-fill; PASS_BENCHMARK_EVENT granted; sealed 78,160 opens
+  at the next green checkpoint.
