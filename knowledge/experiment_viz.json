@@ -49514,6 +49514,39 @@
      "source": "experiments/qwen35_4b_repair_verifier_signal_probe/runs/local/probe_readout.json"
     }
    ]
+  },
+  "qwen35_4b_zero_root_lineage_rebuild": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered stage completion",
+     "categories": [
+      "intake",
+      "design frozen (root omitted fail-closed)",
+      "review",
+      "6-stage zero-root replay",
+      "3-arm medium event @78159"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        1,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "The provenance question made measurable: the six documented contamination-free stages of the hygiene_explore lineage replayed from a FRESH zero-initialized adapter (the undocumented C53-era blend root omitted as the treatment, enforced fail-closed), merged, and measured once at medium beside the original. ZERO_ROOT_COMPARABLE upgrades the headline model to contamination-clean end-to-end; ZERO_ROOT_DEGRADED measures the prefix's contribution per family, same-seed paired.",
+     "source": "experiments/qwen35_4b_zero_root_lineage_rebuild/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

@@ -1707,6 +1707,14 @@
     "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
+  "qwen35_4b_zero_root_lineage_rebuild": {
+   "start": "2026-07-16",
+   "end": "2026-07-16",
+   "confidence": "high",
+   "sources": [
+    "dated experiment_log.md heading (2026-07-16 design freeze)"
+   ]
+  },
   "qwen_action_conditioned_vm_echo_policy_iteration": {
    "start": "2026-06-24",
    "end": "2026-06-24",

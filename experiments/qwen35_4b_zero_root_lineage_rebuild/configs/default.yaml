@@ -1,0 +1,24 @@
+# Frozen design constants (informational mirror; the authoritative copies
+# live in the scripts and are held identical by tests/test_frozen_constants.py
+# and pinned by data/design_receipt.json).
+experiment_id: "qwen35_4b_zero_root_lineage_rebuild"
+model:
+  id: "Qwen/Qwen3.5-4B"
+  revision: "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+lineage:
+  source_experiment: "qwen35_4b_goal_gate_confirmation"
+  manifest_sha256: "1f49cd8b8706c8db858d30af1bf14fe09403971256514919bc24e7b6c47ff121"
+  root_adapter: "DELIBERATELY OMITTED (zero-root design); stage 1 trains fresh rank-32/alpha-64"
+  training_seeds: [42, 43, 44, 47, 51, 55]  # inherited stage constants, not fresh draws
+benchmark_event:
+  name: "zero_root"
+  tier: "medium"
+  think_budget: 1024
+  seed: 78159  # the ONE fresh sealed seed (grep-fresh audited)
+  model_order: ["base", "hygiene_explore_original", "zero_root_hygiene_explore"]
+consequence:
+  values: ["ZERO_ROOT_COMPARABLE", "ZERO_ROOT_DEGRADED"]
+  rule: >-
+    ZERO_ROOT_COMPARABLE iff the zero-root aggregate strictly beats base AND
+    its goal-gate strict wins >= original's strict wins on this seed minus
+    one; ZERO_ROOT_DEGRADED otherwise; exact ties are never strict wins

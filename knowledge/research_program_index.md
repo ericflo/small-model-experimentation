@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 279
+- Experiments: 280
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 195
+- Assigned experiments: 196
 
 ### Seed Evidence
 
@@ -150,6 +150,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_verifier_conditioned_recovery_bank` (new): [README](../experiments/qwen35_4b_verifier_conditioned_recovery_bank/README.md)
 - `qwen35_4b_verifier_free_banking` (new): [README](../experiments/qwen35_4b_verifier_free_banking/README.md)
 - `qwen35_4b_wall_climbing` (new): [README](../experiments/qwen35_4b_wall_climbing/README.md)
+- `qwen35_4b_zero_root_lineage_rebuild` (new): [README](../experiments/qwen35_4b_zero_root_lineage_rebuild/README.md)
 - `qwen_action_conditioned_vm_echo_policy_iteration` (track-y): [README](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/README.md)
 - `qwen_active_crystallizer_public_gate` (track-y): [README](../experiments/qwen_active_crystallizer_public_gate/README.md)
 - `qwen_budgeted_action_value_compiler` (track-y): [README](../experiments/qwen_budgeted_action_value_compiler/README.md)
@@ -452,7 +453,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and other update mechanisms.
 
 - Charter: [posttraining_and_adaptation](../research_programs/posttraining_and_adaptation/charter.md)
-- Assigned experiments: 95
+- Assigned experiments: 96
 
 ### Seed Evidence
 
@@ -537,6 +538,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 - `qwen35_4b_verifier_conditioned_recovery_bank` (new): [README](../experiments/qwen35_4b_verifier_conditioned_recovery_bank/README.md)
 - `qwen35_4b_verifier_free_banking` (new): [README](../experiments/qwen35_4b_verifier_free_banking/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
+- `qwen35_4b_zero_root_lineage_rebuild` (new): [README](../experiments/qwen35_4b_zero_root_lineage_rebuild/README.md)
 - `qwen_action_conditioned_vm_echo_policy_iteration` (track-y): [README](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/README.md)
 - `qwen_counterfactual_episodic_icl` (track-y): [README](../experiments/qwen_counterfactual_episodic_icl/README.md)
 - `qwen_counterfactual_icl_public_multiseed` (track-y): [README](../experiments/qwen_counterfactual_icl_public_multiseed/README.md)
@@ -1036,7 +1038,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 Install general agentic capability in Qwen3.5-4B via breadth-first expert iteration on a firewall-clean multi-family gym, arbitrated by the blackbox menagerie instrument.
 
 - Charter: [agentic_breadth_installation](../research_programs/agentic_breadth_installation/charter.md)
-- Assigned experiments: 47
+- Assigned experiments: 48
 
 ### Assigned Experiments
 
@@ -1087,6 +1089,7 @@ Install general agentic capability in Qwen3.5-4B via breadth-first expert iterat
 - `qwen35_4b_universal_successful_sibling_target_match` (new): [README](../experiments/qwen35_4b_universal_successful_sibling_target_match/README.md)
 - `qwen35_4b_validation_policy_counterexample_curriculum` (new): [README](../experiments/qwen35_4b_validation_policy_counterexample_curriculum/README.md)
 - `qwen35_4b_verifier_conditioned_recovery_bank` (new): [README](../experiments/qwen35_4b_verifier_conditioned_recovery_bank/README.md)
+- `qwen35_4b_zero_root_lineage_rebuild` (new): [README](../experiments/qwen35_4b_zero_root_lineage_rebuild/README.md)
 
 ## Program Review Needed
 

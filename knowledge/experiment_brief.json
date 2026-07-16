@@ -14609,6 +14609,32 @@
      "chart_takeaway": "Both modes sit at the coin-flip floor, below the shortcut ceiling and far from the 65 percent funding bar."
     }
    ]
+  },
+  "qwen35_4b_zero_root_lineage_rebuild": {
+   "verdict_tag": "In progress: design frozen, GPU stages pending",
+   "concept_primer": "The program's best model was built by six well-documented training steps stacked on top of one mystery ingredient: an old starter adapter nobody kept a recipe for. This experiment rebuilds the model using only the six documented steps, starting from a truly blank adapter, to see whether the mystery ingredient actually mattered.",
+   "plain_question": "If the six documented training steps are replayed from a blank adapter (no undocumented starter), does the rebuilt model still match the original on the sealed ten-skill benchmark?",
+   "plain_answer": "Not yet measured. The plan is frozen and audited: the exact recorded datasets, seeds, and settings are copied byte-for-byte, only the starter adapter is removed, and one sealed benchmark run will compare the rebuild against the original and the untouched base. The pre-registered call: 'comparable' if the rebuild beats the base overall and wins nearly as many skills as the original; 'degraded' otherwise, with the gap recorded as the mystery ingredient's contribution.",
+   "why_it_matters": "The headline result rests on a model whose first ingredient has no recorded origin. If the rebuild matches, the whole result becomes reproducible from committed recipes end-to-end; if it degrades, the program finally learns how much it owes to an ingredient it cannot reproduce.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "Documented stages replayed",
+     "value": "6",
+     "sub": "same data, seeds, and settings; only the root removed"
+    },
+    {
+     "label": "Sealed benchmark seeds",
+     "value": "1",
+     "sub": "seed 78,159, fresh by repo-wide audit"
+    },
+    {
+     "label": "Arms compared",
+     "value": "3",
+     "sub": "base, original composite, zero-root rebuild"
+    }
+   ],
+   "charts": []
   }
  }
 }

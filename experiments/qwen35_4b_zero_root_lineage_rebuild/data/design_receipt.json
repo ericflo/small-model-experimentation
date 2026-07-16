@@ -1,0 +1,495 @@
+{
+ "checkpoint_policy": {
+  "benchmark_requires_committed_rebuild_receipts": true,
+  "benchmark_review_verdict_required": "PASS_BENCHMARK_EVENT",
+  "clean_pushed_main_required": true,
+  "design_receipt_committed_at_head_required": true,
+  "one_stage_per_invocation": true,
+  "rebuild_review_verdict_required": "PASS_REBUILD",
+  "stages": [
+   "rebuild",
+   "benchmark"
+  ]
+ },
+ "code": {
+  "check_benchmark_sha256": "49b420219cc2aac5db1a43b9ec84323312c3d4f9380a189914b42c6fc150ebaf",
+  "gen_design_receipt_sha256": "c9e5ee376ba1e00a32645bd48cb33c8c2e0912a73aa295fbd03a790c9164ebaf",
+  "harness_sha256": "0b21b773988f12ab9acb4d05aa21be2ace1da7692f31a688121430f7f5f1bb2d",
+  "rebuild_zero_root_sha256": "2e71295e9cf7296b06a6dbabbcaa9857de7dfcc88a270fc97c440a4fd9816389"
+ },
+ "consequence": {
+  "no_promotion": true,
+  "rule": "ordered total partition: ZERO_ROOT_COMPARABLE iff the zero-root composite's aggregate strictly beats base AND its goal-gate strict wins over the ten public families are at least the original composite's strict wins on this seed minus one; ZERO_ROOT_DEGRADED otherwise; exact ties are never strict wins",
+  "statements": {
+   "ZERO_ROOT_COMPARABLE": "the documented stages alone carry the demonstrated position; the headline model is contamination-clean end-to-end",
+   "ZERO_ROOT_DEGRADED": "the undocumented prefix is load-bearing at medium; its contribution is the recorded contrast"
+  },
+  "values": [
+   "ZERO_ROOT_COMPARABLE",
+   "ZERO_ROOT_DEGRADED"
+  ]
+ },
+ "event": {
+  "closed_record_pins_summary_and_receipt_sha256s": true,
+  "closed_seed_refused_forever": true,
+  "crashed_summary_recovery": "byte-identical deterministic regeneration; divergence refuses with both digests",
+  "event_dir": "runs/benchmark/medium_tb1024_seed78159_zero_root",
+  "gateway_runs_total": 3,
+  "ledger": "runs/benchmark_events.jsonl",
+  "ledger_write_ahead": true,
+  "model_order": [
+   "base",
+   "hygiene_explore_original",
+   "zero_root_hygiene_explore"
+  ],
+  "name": "zero_root",
+  "readout_requires_complete_ledger": true,
+  "seed": 78159,
+  "sequential_same_seed_runs": true,
+  "terminal_readout": "runs/benchmark/zero_root_readout.json",
+  "think_budget": 1024,
+  "tier": "medium",
+  "unopened_seed_requires_clean_slate": true
+ },
+ "experiment_id": "qwen35_4b_zero_root_lineage_rebuild",
+ "final_merge": {
+  "adapter": "stage 6 output (hygiene_explore), zero-root chain",
+  "base_model": "Qwen/Qwen3.5-4B @ 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a (raw HF; the merger default)",
+  "merger": "scripts/merge_adapter.py",
+  "merger_sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+  "original_contrast": {
+   "contrast_only": true,
+   "published_tree_sha256": "9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971",
+   "weights_sha256": "e21123443a230ada2c73ded411e0b5b7c2b1459856b2c38e4f1beea8958dc02f"
+  },
+  "output": "large_artifacts/qwen35_4b_zero_root_lineage_rebuild/merged/zero_root_hygiene_explore",
+  "receipt": "runs/lineage/merge.json"
+ },
+ "firewall": {
+  "benchmark_data_read": false,
+  "gateway_receipts_only": true
+ },
+ "gateway": {
+  "path": "scripts/run_benchmark_aggregate.py",
+  "sha256": "53cf6533dbd710eb167503363c39f73dbf7559a0d91f40a00436a3c218a01c17"
+ },
+ "lineage_package": {
+  "datasets": {
+   "stage01_replay_refresh.jsonl": {
+    "rows": 1520,
+    "sha256": "5d5d7c4b8a4b0a4f270fe8b2ecaebe356c771948d71b0f7bbeead6bfc04308b6"
+   },
+   "stage02_designed160.jsonl": {
+    "rows": 1520,
+    "sha256": "5159cf41b6474bdc8640cdb2a4a168587b59232ca8171c7b7057fc6bfe1b40c8"
+   },
+   "stage03_close_xi__targeted_standard.jsonl": {
+    "rows": 320,
+    "sha256": "12fc613bb31a46bcea9acd49b26467656704aa3b3418dab8d920adf057d14f00"
+   },
+   "stage04_replay_after_close.jsonl": {
+    "rows": 320,
+    "sha256": "541805df2d817707c1e76213e50c8f08fd9caff10d0a3887e1196424b6820be6"
+   },
+   "stage05_designed_fresh.jsonl": {
+    "rows": 1520,
+    "sha256": "6d4dc303bc159c19a1ffd0c60ca7d08ea64b02909366701b345d888482d67f3f"
+   },
+   "stage06_hygiene_explore.jsonl": {
+    "rows": 1520,
+    "sha256": "82aa1a78c0a429a48c3db6b94ac84397cea001b041477e7b137b38c21354112f"
+   }
+  },
+  "directive": "standalone-reproducibility gate (AGENTS.md non-negotiables; docs/quality_gates.md): the complete stage-replay package is carried byte-identically in THIS cell",
+  "manifest": "experiments/qwen35_4b_zero_root_lineage_rebuild/data/lineage/lineage_manifest.json",
+  "manifest_sha256": "1f49cd8b8706c8db858d30af1bf14fe09403971256514919bc24e7b6c47ff121",
+  "source_experiment": "qwen35_4b_goal_gate_confirmation",
+  "trainers": {
+   "lineage_trainers/train_think_close_stage3.py": "10b4914cdc6c24858a77750f4ab64074fae5cbf36d98f3e4fc26b8958068fb14",
+   "lineage_trainers/train_think_stage12.py": "400e4b856a5899db8805510c9f6d8d11da76b35cf30af16856b46f41abdb4e54",
+   "lineage_trainers/train_think_stage456.py": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4",
+   "merge_adapter.py": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672"
+  },
+  "verified_at_receipt_time": true
+ },
+ "margin_families": [
+  "menders",
+  "rites",
+  "warren"
+ ],
+ "measurement_intake": {
+  "exit_zero_on_any_complete_event": true,
+  "local_gate": null,
+  "promotion": null,
+  "training": "six-stage zero-root replay (the treatment is the removed root)"
+ },
+ "model": {
+  "calls": 0,
+  "id": "Qwen/Qwen3.5-4B",
+  "loaded": false,
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+ },
+ "models": {
+  "base": {
+   "deployment": "explicit_merged_composite",
+   "path": "large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized",
+   "runtime_lora_forbidden": true,
+   "tree_recomputed_at_event_time": true,
+   "tree_sha256": "26d8ee48583adb0fb557d0ff668664949adff0068fa5baafe6f0af68e22fb677",
+   "weights_sha256": "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db",
+   "weights_size_bytes": 9078620536
+  },
+  "hygiene_explore_original": {
+   "deployment": "explicit_merged_composite",
+   "path": "large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore",
+   "runtime_lora_forbidden": true,
+   "tree_recomputed_at_event_time": true,
+   "tree_sha256": "9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971",
+   "weights_sha256": "e21123443a230ada2c73ded411e0b5b7c2b1459856b2c38e4f1beea8958dc02f",
+   "weights_size_bytes": 9078620536
+  },
+  "zero_root_hygiene_explore": {
+   "anchored_to_committed_rebuild_receipts": true,
+   "deployment": "explicit_merged_composite",
+   "path": "large_artifacts/qwen35_4b_zero_root_lineage_rebuild/merged/zero_root_hygiene_explore",
+   "pins": "TODO-PINs in scripts/run_benchmark.py (tree sha256, weights sha256, committed merge-receipt sha256), filled post-merge from runs/lineage/merge.json; every unfilled pin refuses fail-closed and the committed merge receipt is re-authenticated at event time",
+   "runtime_lora_forbidden": true,
+   "weights_size_bytes": 9078620536
+  }
+ },
+ "original_position_references": {
+  "confirmation_readout": {
+   "counted_in_consequence": false,
+   "path": "experiments/qwen35_4b_goal_gate_confirmation/runs/benchmark/confirmation_readout.json",
+   "sha256": "7eb1a4c540a0f15d48c08eb6e992b38f24f21ac0231e8a26827e9b3e1198e246"
+  },
+  "discovery_summary": {
+   "counted_in_consequence": false,
+   "path": "experiments/qwen35_4b_statechain_only_dose/runs/benchmark/medium_tb1024_seed78154_pilot/summary.json",
+   "sha256": "6b1a43869f013e24a048a45a04e5603b45fe59488912194eb3e76a43679255fa"
+  }
+ },
+ "public_families": [
+  "chronicle",
+  "lockpick",
+  "menders",
+  "mirage",
+  "rites",
+  "siftstack",
+  "sirens",
+  "stockade",
+  "toolsmith",
+  "warren"
+ ],
+ "question": "how load-bearing is the undocumented C53-era gym-line blend root adapter at medium: the six documented contamination-free stages, replayed from a FRESH zero-initialized adapter on the official base, measured once against the original blend-rooted composite and the untouched base",
+ "readings": {
+  "budget_integrity": "per arm: the gateway receipt's within_budget flag and wall_seconds; any false sets paired_comparison_valid false with the reason; scores are still recorded",
+  "goal_gate": "strict wins/ties/losses versus base for BOTH composites over the ten public families, byte-identical to the tier forensics FAMILIES and strict-win logic; pass = ten strict wins; exact ties are never strict wins",
+  "margins": "menders/rites/warren margins versus base for both composites; the statechain-to-rites conversion question does NOT apply (no statechain stage), but rites/warren margins matter for the sweep reading",
+  "per_family": "aggregates and the full per-family table for all three arms",
+  "prefix_contribution": "zero-root minus original per family and aggregate; framing: the gym-era root's contribution at medium, one seed, cross-arm same-seed paired"
+ },
+ "reference_implementation": {
+  "all_three_receipts_must_match": true,
+  "signature": {
+   "runner_sha256": "a3beecd8b5c89ccfd99a172a6d85321d39b9feb6c29d12f10b2f4d7499e273cb",
+   "source_file_count": 56,
+   "source_inventory_sha256": "218b8615a95f24da962c931e9cd2dba58d853a7bdcd2847cd8e2c42fc2c05f42"
+  },
+  "source": "the discovery (78154) and confirmation (78155-78157) events under which the original composite recorded its two 10/10 sweeps"
+ },
+ "root_omission": {
+  "design": "the undocumented C53-era gym-line 'blend' root adapter is deliberately NOT vendored and NOT used anywhere in this cell; stage 1 trains a FRESH rank-32/alpha-64 adapter (the trainer's default fresh path; LoRA-B zero-initialized, so the delta starts at zero) — removing the root IS the treatment",
+  "must_not_exist": "large_artifacts/qwen35_4b_zero_root_lineage_rebuild/lineage_root",
+  "original_root_contrast": {
+   "adapter_config_sha256": "cd764ae869b8a55526e283dd133e1940896b428839c6abf2e55d6ae2a0b32635",
+   "adapter_weights_sha256": "ad2ef4fae785debedf5e50932a79bda97869d3efc212f53d48ccb04c59e25d21",
+   "name": "blend",
+   "source_vendored_copy": "large_artifacts/qwen35_4b_goal_gate_confirmation/lineage_root/blend"
+  },
+  "vendored_here": false
+ },
+ "run_benchmark_normalized_pin": {
+  "call_site_contracts_are_belt_and_braces_only": true,
+  "call_site_contracts_retained": [
+   "        require_todo_pins_filled()",
+   "        require_verdict(BENCH_REVIEW, BENCH_VERDICT, \"benchmark design review\")",
+   "        require_clean_pushed_main(",
+   "        plan = ledger_plan(ledger_rows(LEDGER), args.resume)",
+   "        append_ledger(opened_record())",
+   "        require_zero_root_provenance()"
+  ],
+  "file": "scripts/run_benchmark.py",
+  "mechanism": "NORMALIZED-HASH code pin: run_benchmark.py carries the three fail-closed zero-root TODO-PINs filled post-merge, so a raw hash would break on the fill; instead exactly the three pin VALUE slots (None pre-fill, the quoted 64-hex post-fill) are canonicalized to the fixed placeholder and the sha256 of the canonicalized bytes is frozen — every byte outside those slots, every guard call site included, is byte-frozen pre- and post-fill and re-checked on every --check, including at the seed-consuming boundary",
+  "normalization_rule": {
+   "fail_closed_on_slot_count_mismatch": true,
+   "placeholder": "__ZERO_ROOT_TODO_PIN__",
+   "slots": [
+    {
+     "name": "tree_and_weights_dict_entries",
+     "pattern": "^(    \"zero_root_hygiene_explore\": )(None|\"[0-9a-f]{64}\")(,)$",
+     "required_matches": 2
+    },
+    {
+     "name": "merge_receipt_constant",
+     "pattern": "^(ZERO_ROOT_MERGE_RECEIPT_SHA256 = )(None|\"[0-9a-f]{64}\")$",
+     "required_matches": 1
+    }
+   ],
+   "value_group": 2
+  },
+  "run_benchmark_normalized_sha256": "a2d87408efe346a9456bffc7b9933725e7c395ff720491420d45daf6f28209cc"
+ },
+ "schema_version": 1,
+ "seed_freshness_audit": {
+  "disallowed_matches": [],
+  "fresh": true,
+  "pattern": "seed[^0-9]{0,3}78159(?![0-9])|(?<![0-9])78159[^0-9]{0,3}seed",
+  "roots": [
+   "experiments",
+   "knowledge",
+   "research_programs"
+  ],
+  "seed": 78159,
+  "self_directory_excluded": "experiments/qwen35_4b_zero_root_lineage_rebuild",
+  "self_reference_line_window": 3,
+  "substring_hits_in_floats_and_hashes_excluded": true,
+  "word_boundary_guards": true
+ },
+ "stage": "zero_root_lineage_rebuild_design",
+ "stage_plan": [
+  {
+   "adapter_out": "large_artifacts/qwen35_4b_zero_root_lineage_rebuild/adapters/stage01_replay_refresh",
+   "dataset": {
+    "file": "data/lineage/stage01_replay_refresh.jsonl",
+    "rows": 1520,
+    "sha256": "5d5d7c4b8a4b0a4f270fe8b2ecaebe356c771948d71b0f7bbeead6bfc04308b6"
+   },
+   "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "w_think": 0.2
+   },
+   "name": "replay_refresh",
+   "original_produced_contrast": {
+    "adapter_config_sha256": "6b91df7d16d9a306ca3f04d84b4f9397394c12062112ce84a8198fe47e39e4d6",
+    "adapter_weights_sha256": "c296c774d20403c7de9c810bfa825dbbe22bd0683c37692a929bd2bb13e3d36a",
+    "contrast_only": true,
+    "note": "the recorded hashes belong to the blend-rooted chain; a different root means different bytes, so they are never used as verification"
+   },
+   "original_warm_start": "root_adapter",
+   "receipt": "runs/lineage/stage01_replay_refresh.json",
+   "seed": 42,
+   "seed_is_inherited_stage_constant": true,
+   "stage": 1,
+   "trainer": {
+    "path": "scripts/lineage_trainers/train_think_stage12.py",
+    "sha256": "400e4b856a5899db8805510c9f6d8d11da76b35cf30af16856b46f41abdb4e54"
+   },
+   "warm_start": "fresh_zero_init"
+  },
+  {
+   "adapter_out": "large_artifacts/qwen35_4b_zero_root_lineage_rebuild/adapters/stage02_designed160",
+   "dataset": {
+    "file": "data/lineage/stage02_designed160.jsonl",
+    "rows": 1520,
+    "sha256": "5159cf41b6474bdc8640cdb2a4a168587b59232ca8171c7b7057fc6bfe1b40c8"
+   },
+   "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "w_think": 0.2
+   },
+   "name": "designed160",
+   "original_produced_contrast": {
+    "adapter_config_sha256": "0cd3ca7c710e48c264fd1d4c019c304ec0b9e5b13098b89a5b4aa0b171191e58",
+    "adapter_weights_sha256": "f05c13ae66e19bbd29abbd2b62ae3c1a577642efefbdba435879012bf4494654",
+    "contrast_only": true,
+    "note": "the recorded hashes belong to the blend-rooted chain; a different root means different bytes, so they are never used as verification"
+   },
+   "original_warm_start": "stage 1",
+   "receipt": "runs/lineage/stage02_designed160.json",
+   "seed": 43,
+   "seed_is_inherited_stage_constant": true,
+   "stage": 2,
+   "trainer": {
+    "path": "scripts/lineage_trainers/train_think_stage12.py",
+    "sha256": "400e4b856a5899db8805510c9f6d8d11da76b35cf30af16856b46f41abdb4e54"
+   },
+   "warm_start": "stage 1"
+  },
+  {
+   "adapter_out": "large_artifacts/qwen35_4b_zero_root_lineage_rebuild/adapters/stage03_close_xi",
+   "dataset": {
+    "file": "data/lineage/stage03_close_xi__targeted_standard.jsonl",
+    "rows": 320,
+    "sha256": "12fc613bb31a46bcea9acd49b26467656704aa3b3418dab8d920adf057d14f00"
+   },
+   "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "w_close": 0.2,
+    "w_think": 0.2
+   },
+   "name": "close_xi",
+   "original_produced_contrast": {
+    "adapter_config_sha256": "de953bd57502ff728a12d1627d5aacab6284b045428ec7b83026388afd8c47ff",
+    "adapter_weights_sha256": "16e9dc75a0e33e182e916600ff6e1d75fc46dfa45e870216e2c149a41253c179",
+    "contrast_only": true,
+    "note": "the recorded hashes belong to the blend-rooted chain; a different root means different bytes, so they are never used as verification"
+   },
+   "original_warm_start": "stage 2",
+   "receipt": "runs/lineage/stage03_close_xi.json",
+   "seed": 44,
+   "seed_is_inherited_stage_constant": true,
+   "stage": 3,
+   "targeted_close_overrides": {
+    "target_close_kinds": [
+     "u_execute",
+     "u_induct"
+    ],
+    "target_w_close": 1.0
+   },
+   "trainer": {
+    "path": "scripts/lineage_trainers/train_think_close_stage3.py",
+    "sha256": "10b4914cdc6c24858a77750f4ab64074fae5cbf36d98f3e4fc26b8958068fb14"
+   },
+   "warm_start": "stage 2"
+  },
+  {
+   "adapter_out": "large_artifacts/qwen35_4b_zero_root_lineage_rebuild/adapters/stage04_replay_after_close",
+   "dataset": {
+    "file": "data/lineage/stage04_replay_after_close.jsonl",
+    "rows": 320,
+    "sha256": "541805df2d817707c1e76213e50c8f08fd9caff10d0a3887e1196424b6820be6"
+   },
+   "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "w_close": 0.2,
+    "w_think": 0.2
+   },
+   "name": "replay_after_close",
+   "original_produced_contrast": {
+    "adapter_config_sha256": "0dfd9bda8a835926a87337782cc09b1e11e841a36f46b99c83fbae9bc89e120f",
+    "adapter_weights_sha256": "bb59d3bd9273ae3bb3dffe54e983590dada69e6e1bdba571009ffedbba05154d",
+    "contrast_only": true,
+    "note": "the recorded hashes belong to the blend-rooted chain; a different root means different bytes, so they are never used as verification"
+   },
+   "original_warm_start": "stage 3",
+   "receipt": "runs/lineage/stage04_replay_after_close.json",
+   "seed": 47,
+   "seed_is_inherited_stage_constant": true,
+   "stage": 4,
+   "trainer": {
+    "path": "scripts/lineage_trainers/train_think_stage456.py",
+    "sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4"
+   },
+   "warm_start": "stage 3"
+  },
+  {
+   "adapter_out": "large_artifacts/qwen35_4b_zero_root_lineage_rebuild/adapters/stage05_designed_fresh",
+   "dataset": {
+    "file": "data/lineage/stage05_designed_fresh.jsonl",
+    "rows": 1520,
+    "sha256": "6d4dc303bc159c19a1ffd0c60ca7d08ea64b02909366701b345d888482d67f3f"
+   },
+   "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "w_close": 0.2,
+    "w_think": 0.2
+   },
+   "name": "designed_fresh",
+   "original_produced_contrast": {
+    "adapter_config_sha256": "5966461bd9dbfe280b226940e79eec49030cc44e4131089147634df549dc4055",
+    "adapter_weights_sha256": "36f41095c2d628e4706694e7d64d16aba815870a1d3660af0e24b14dc0e6b442",
+    "contrast_only": true,
+    "note": "the recorded hashes belong to the blend-rooted chain; a different root means different bytes, so they are never used as verification"
+   },
+   "original_warm_start": "stage 4",
+   "receipt": "runs/lineage/stage05_designed_fresh.json",
+   "seed": 51,
+   "seed_is_inherited_stage_constant": true,
+   "stage": 5,
+   "trainer": {
+    "path": "scripts/lineage_trainers/train_think_stage456.py",
+    "sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4"
+   },
+   "warm_start": "stage 4"
+  },
+  {
+   "adapter_out": "large_artifacts/qwen35_4b_zero_root_lineage_rebuild/adapters/stage06_hygiene_explore",
+   "dataset": {
+    "file": "data/lineage/stage06_hygiene_explore.jsonl",
+    "rows": 1520,
+    "sha256": "82aa1a78c0a429a48c3db6b94ac84397cea001b041477e7b137b38c21354112f"
+   },
+   "hyperparameters": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1.0,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "rank": 32,
+    "w_close": 0.2,
+    "w_think": 0.2
+   },
+   "name": "hygiene_explore",
+   "original_produced_contrast": {
+    "adapter_config_sha256": "2174356710c961e3b4df956c6add4b8cc8bd129a01e872c3a20829f46bdeae84",
+    "adapter_weights_sha256": "7e28d6d152e7c2dbf7641d8516b9b47a1465b34967476ab01389d941b9563316",
+    "contrast_only": true,
+    "note": "the recorded hashes belong to the blend-rooted chain; a different root means different bytes, so they are never used as verification"
+   },
+   "original_warm_start": "stage 5",
+   "receipt": "runs/lineage/stage06_hygiene_explore.json",
+   "seed": 55,
+   "seed_is_inherited_stage_constant": true,
+   "stage": 6,
+   "trainer": {
+    "path": "scripts/lineage_trainers/train_think_stage456.py",
+    "sha256": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4"
+   },
+   "warm_start": "stage 5"
+  }
+ ],
+ "training_seeds": {
+  "inherited_stage_constants": true,
+  "note": "42/43/44/47/51/55 are reused deliberately — the fixed per-stage seeds are part of what 'same recipe' means — not fresh draws; the only fresh sealed seed in this cell is the benchmark seed 78159",
+  "values": [
+   42,
+   43,
+   44,
+   47,
+   51,
+   55
+  ]
+ }
+}

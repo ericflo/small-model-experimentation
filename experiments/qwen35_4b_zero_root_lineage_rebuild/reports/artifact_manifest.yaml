@@ -1,0 +1,36 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_zero_root_lineage_rebuild"
+external_artifacts:
+  - name: "zero-root stage adapters (six, ~170MB each)"
+    storage: "large_artifacts/qwen35_4b_zero_root_lineage_rebuild/adapters/stageNN_<name>"
+    required_for: "warm-start chain continuity and the final merge"
+    checksum: "per-stage sha256s recorded in runs/lineage/stageNN_<name>.json (committed receipts)"
+    regenerate: ".venv/bin/python -B experiments/qwen35_4b_zero_root_lineage_rebuild/scripts/run.py --stage rebuild"
+  - name: "zero_root_hygiene_explore merged composite (~9GB)"
+    storage: "large_artifacts/qwen35_4b_zero_root_lineage_rebuild/merged/zero_root_hygiene_explore"
+    required_for: "the third benchmark arm"
+    checksum: "full tree + weights sha256 recorded in runs/lineage/merge.json (committed receipt)"
+    regenerate: ".venv/bin/python -B experiments/qwen35_4b_zero_root_lineage_rebuild/scripts/run.py --stage rebuild"
+  - name: "base_reserialized composite (inherited eval arm)"
+    storage: "large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized"
+    required_for: "the base benchmark arm"
+    checksum: "tree 26d8ee48…, weights b654e033… (pinned in data/design_receipt.json)"
+    regenerate: "weight-identical reserialization of the pinned HF revision (see source experiment)"
+  - name: "hygiene_explore original composite (inherited eval arm)"
+    storage: "large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore"
+    required_for: "the original-composite benchmark arm"
+    checksum: "tree 9eb653d7…, weights e2112344… (pinned in data/design_receipt.json)"
+    regenerate: "experiments/qwen35_4b_goal_gate_confirmation/scripts/rebuild_lineage.py (needs its vendored root)"
+omitted_artifacts:
+  - path: "large_artifacts/qwen35_4b_zero_root_lineage_rebuild/"
+    reason: "trained adapters and 9GB merged composite; never checked into git (receipts in runs/lineage/ are committed instead)"
+  - path: "large_artifacts/qwen35_4b_zero_root_lineage_rebuild/lineage_root"
+    reason: "MUST NOT EXIST — the blend root adapter is deliberately not vendored (its omission is the design; verify-inputs fails closed on it)"
+reproducibility:
+  smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_zero_root_lineage_rebuild/scripts/run.py --smoke"
+  full_command: ".venv/bin/python -B experiments/qwen35_4b_zero_root_lineage_rebuild/scripts/run.py --stage rebuild && ... --stage benchmark (each behind its committed review verdict)"
+  required_external_artifacts:
+    - "large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized"
+    - "large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore"
+notes: "The complete stage-replay package (manifest, datasets, trainers, merger) is carried IN-REPO under data/lineage/ and scripts/; only the model weights live outside git."
