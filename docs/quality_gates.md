@@ -59,13 +59,16 @@ rebuilt artifact matches what was measured); they are never the reproduction
 path. Historical experiments predating this gate are grandfathered but new
 cells must comply, including eval-only cells.
 
-Scope boundary (owner clarification, same directive): shared MEASUREMENT
-instruments are repo-level infrastructure and are referenced in place, not
-copied — `benchmarks/` suites and the trusted aggregate gateway
-(`scripts/run_benchmark_aggregate.py`) in particular. The standalone
-requirement covers the model-reproduction path only: datasets, training
-recipes and seeds, adapter/merge steps, and the scripts that execute them
-(trainer and merger are copied into the cell).
+Scope boundary (owner clarification, same directive): the split is
+PRODUCTION versus MEASUREMENT. Everything on the production side is copied
+into the cell — SFT datasets, gym environments and curriculum generators
+used to produce training data, the trainer, the merger, seeds, and the
+per-stage recipe. Everything on the measurement side is shared repo-level
+infrastructure referenced in place — `benchmarks/` suites and the trusted
+aggregate gateway (`scripts/run_benchmark_aggregate.py`) in particular.
+Rule of thumb: if deleting every other experiment directory would break
+REPRODUCING your model or its training data, the dependency belongs inside
+your cell; if it would only break re-MEASURING it, it may stay shared.
 
 ## Landing a new experiment (exact order)
 

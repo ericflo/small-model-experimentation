@@ -41,11 +41,13 @@ This file plus `docs/` and `knowledge/` are the complete operating context: ever
   *verification aids* (asserting the rebuilt artifact matches what was
   measured) but never as the reproduction path or a load-bearing
   dependency. Evaluation-only cells that measure a composite carry that
-  composite's full lineage package too. Scope boundary: shared measurement
-  instruments (`benchmarks/` suites, the trusted aggregate gateway) are
-  repo-level infrastructure referenced in place — the standalone rule
-  covers the model-reproduction path (datasets, training recipes, seeds,
-  merges, and their scripts), not the instruments.
+  composite's full lineage package too. The scope split is PRODUCTION
+  versus MEASUREMENT: everything that produces the model or its training
+  data is copied into the cell — SFT datasets, gym environments and
+  curriculum generators used for training-data generation, the trainer,
+  the merger, seeds, and recipes — while shared measurement instruments
+  (`benchmarks/` suites, the trusted aggregate gateway) are repo-level
+  infrastructure referenced in place.
 - Keep experiments self-contained under `experiments/<id>/`.
 - Follow-up benchmarks, replications, and design variants get their own experiment
   directory. Copy the prior harness or artifacts you need into the new experiment
