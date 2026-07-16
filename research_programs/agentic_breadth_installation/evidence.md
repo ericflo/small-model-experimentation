@@ -1338,3 +1338,37 @@ involving this lineage now carries a quantified scope. The mapped clean
 path, if funded: a zero-root lineage extended with the statechain
 converter — fully documented end-to-end. The cell also validated the
 review-installed normalized-hash pin through a real post-merge fill.
+
+## qwen35_4b_clean_path_statechain_extension (2026-07-16 — install 3-for-3; the conversion is lineage-dependent)
+
+The clean-path cell ran the full ladder (fresh adapters on the zero-root
+parent; the treatment byte-copied from the proven converter cell; the
+six-slot normalized pin held through a real fill; the training-loss
+property recorded — the clean chain fits the replay surface at ~1.3
+versus the original's ~0.43 while performing within ~10% at the
+benchmark: loss-level ≠ capability, dramatically).
+
+Local: PROMOTED on all eight checks — the statechain install's THIRD
+replication on its third distinct parent (21/40 strictly over parent 19
+and replay 16; pooled retention −1.0/−1.67). The install is the
+program's most replicated designed effect.
+
+Sealed 78,160: base 0.1234 (the strongest base draw yet — it took rites
+0.1, warren 0.133, lockpick 0.1 and squeezed every treated arm to 6/10),
+parent 0.3517, candidate 0.3333 (beat base 2.7× and the replay control;
+lost to the parent by 0.018 — pilot not promoted, the same shape as the
+original cell). THE SCOPING NULL: converts_on_clean_lineage FALSE —
+candidate rites 0.000 versus the original lineage's 0.300 conversion.
+The data→family converter is 1-for-2 and lineage-dependent, and the
+pattern is legible: rites/sirens/mirage were exactly the C53 prefix's
+strengths, so conversion appears to require substrate the prefix
+supplied. Footnote: the candidate took a strict menders WIN (0.017, a
+draw) while rites collapsed — family movements remain draw-coupled.
+
+Standing consequences: (1) the install law strengthens to 3-for-3 with
+retention held under calibrated bands every time; (2) the conversion law
+is SCOPED — demonstrated on the prefix lineage, absent on the clean one
+at its one seed; any future conversion claim must state its lineage;
+(3) the clean lineage (stages 1–7 fully receipted from the official
+base, zero contamination) is the mission's reference artifact at 2.7×
+base aggregate.

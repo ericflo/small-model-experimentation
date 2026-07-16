@@ -310,6 +310,15 @@
   local-install→family conversion, and hygiene_explore_parent recorded
   the FIRST 10/10 all-families goal-gate pass (menders 0.017, warren
   0.150 vs 0.100 — single-item margins). One seed ≠ a claim.
+- Completed clean-path extension (install 3-for-3; conversion scoped):
+  `qwen35_4b_clean_path_statechain_extension` — third statechain
+  promotion on the third distinct parent (retention in-band every time),
+  but converts_on_clean_lineage FALSE (rites 0.0 vs the original 0.300):
+  the data-to-family converter is lineage-dependent, needing the C53
+  prefix's substrate (rites/sirens/mirage were its strengths). Clean
+  model: 2.7x base, stages 1-7 fully receipted — the mission's reference
+  artifact. Footnote: strict menders draw-win (0.017) at the sealed
+  event; base drew its strongest hand ever (0.1234).
 - Completed zero-root rebuild (ZERO_ROOT_DEGRADED, mildly):
   `qwen35_4b_zero_root_lineage_rebuild` — the documented stages alone
   carry ~90% of the transfer (0.3462 vs 0.3824 over base 0.0713; 7/10

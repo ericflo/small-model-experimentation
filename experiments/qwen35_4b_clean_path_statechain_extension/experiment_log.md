@@ -24,3 +24,17 @@
 - Six pin slots filled from committed receipts; the normalized-hash pin
   verified post-fill; PASS_BENCHMARK_EVENT granted; sealed 78,160 opens
   at the next green checkpoint.
+
+## 2026-07-16 — The sealed event and closure
+
+- All four arms ran clean at 78,160. Aggregates 0.1234 / 0.3517 / 0.3119
+  / 0.3333 (base — the strongest base draw yet / parent / replay /
+  candidate). Pilot NOT promoted (beat base and replay; lost to the
+  parent by 0.018). The frozen conversion reading:
+  converts_on_clean_lineage FALSE — candidate rites 0.0 vs the original
+  lineage's 0.300; the conversion is 1-for-2 and lineage-dependent, with
+  the legible pattern that rites/sirens/mirage were the C53 prefix's
+  strengths. Footnote: the candidate took a strict menders WIN (0.017,
+  a draw) while rites collapsed — family movements remain draw-coupled.
+- The clean lineage stands as the mission's best-documented artifact:
+  2.7× base, stages 1–7 fully receipted, zero contamination end-to-end.

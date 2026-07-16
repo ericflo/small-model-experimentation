@@ -1,6 +1,6 @@
 # Clean-Path Statechain Extension
 
-**Status:** in-progress · since 2026-07-16 · model-free design frozen; staged GPU runs pending review verdicts
+**Status:** finished · 2026-07-16 · verdict PILOT_NOT_PROMOTED + CONVERSION_NOT_REPLICATED — the install held on its third parent (local 21/40 strict, retention in-band) and the clean model beat base (0.3333 vs 0.1234, 2.7×) and its replay control, but lost to its parent (−0.018) and the rites conversion did NOT replicate on the clean lineage (candidate 0.0 vs the original lineage's 0.300; converts_on_clean_lineage false) — the conversion is 1-for-2 and lineage-dependent; footnote: the candidate took a menders draw (0.017, a strict win) on the strongest base seed ever drawn (6/10 gates all around)
 
 ## Research Program
 
@@ -98,12 +98,22 @@ Standalone lineage verification (no GPU) / full clean-chain rebuild (GPU):
 
 ## Results
 
-No model event has run. Fill after the staged runs; separate deployable evidence from
-oracle/hidden evaluation.
+Local gate: PROMOTED on all eight checks — the statechain install's third replication, on its third distinct parent (axis 21/40 strictly over parent 19 and replay 16; pooled retention 61.33 vs 62.33/63.0, deep inside the calibrated bands). Training-loss property recorded: the clean chain fits the replay surface at ~1.3 versus the original lineage's ~0.43 while performing within ~10% at the benchmark (loss-level ≠ capability, dramatically).
+
+Sealed event at 78,160 (all arms authenticated; the six-slot normalized pin held through the fill):
+
+| arm | aggregate | goal gate vs base | rites |
+|---|---|---|---|
+| base | 0.1234 (strongest base draw yet) | — | 0.100 |
+| zero_root_parent | 0.3517 | 6/10 | 0.100 |
+| statechain_clean | 0.3333 | 6/10 (incl. a strict MENDERS win, 0.017) | **0.000** |
+| replay_ctl4 | 0.3119 | 6/10 | 0.000 |
+
+Pilot: candidate > base ✓, > replay ✓, > parent ✗ (−0.018) — NOT promoted, the same shape as the original statechain cell. The frozen conversion reading: `converts_on_clean_lineage: false` — candidate rites 0.0 against the original-lineage conversion's 0.300.
 
 ## Interpretation
 
-Pending.
+Three durable readings. (1) The statechain INSTALL is robust — three parents, three promotions, retention held each time under calibrated bands. (2) The CONVERSION is lineage-dependent: 1-for-2, expressed on the prefix lineage and absent on the clean one, and the pattern is legible — rites/sirens/mirage were precisely the C53 prefix's strengths, so the designed dose appears to convert only where the prefix's substrate already leans toward the family. The program's one proven data→family mechanism thus carries a substrate precondition, which scopes the conversion law honestly. (3) Per-seed goal gates swing on base's own draws: this seed's base took rites 0.1/warren 0.133/lockpick 0.1 and squeezed every treated arm to 6/10 — more evidence that per-seed sweep readings are rate measurements, never single-event claims. The clean lineage remains the mission's best-documented artifact: 2.7× base aggregate, fully receipted stages 1–7, zero contamination anywhere in its history.
 
 ## Knowledgebase Update
 

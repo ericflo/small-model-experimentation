@@ -49593,33 +49593,86 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Preregistered stage completion",
+     "title": "Per-family scores at medium tier, sealed seed 78160 (tb 1024)",
      "categories": [
-      "intake",
-      "design frozen (clean chain enforced)",
-      "review",
-      "train both arms",
-      "pooled_k3 local gate",
-      "conditional medium event @78160"
+      "chronicle",
+      "lockpick",
+      "menders",
+      "mirage",
+      "rites",
+      "siftstack",
+      "sirens",
+      "stockade",
+      "toolsmith",
+      "warren"
      ],
      "series": [
       {
-       "label": "completed checkpoint",
+       "label": "base",
        "values": [
-        1,
-        1,
-        1,
-        0,
-        0,
-        0
+        0.1,
+        0.1,
+        0.0,
+        0.0,
+        0.1,
+        0.0,
+        0.4,
+        0.1,
+        0.3,
+        0.133
+       ]
+      },
+      {
+       "label": "zero_root_parent",
+       "values": [
+        0.7,
+        0.0,
+        0.0,
+        0.6,
+        0.1,
+        0.5,
+        0.5,
+        0.1,
+        0.8,
+        0.217
+       ]
+      },
+      {
+       "label": "replay_ctl4",
+       "values": [
+        0.6,
+        0.1,
+        0.0,
+        0.3,
+        0.0,
+        0.6,
+        0.4,
+        0.132,
+        0.72,
+        0.267
+       ]
+      },
+      {
+       "label": "statechain_clean",
+       "values": [
+        0.6,
+        0.0,
+        0.017,
+        0.7,
+        0.0,
+        0.5,
+        0.4,
+        0.273,
+        0.71,
+        0.133
        ]
       }
      ],
-     "x_label": "preregistered experiment stage",
-     "y_label": "completion indicator",
-     "y_format": "integer",
-     "note": "The mission's cleanest artifact: the proven statechain converter dose (byte-copied corpus) on the zero-root parent, entire lineage documented end-to-end with blend-root absence enforced fail-closed. Readings of consequence at the sealed event: the rites conversion on clean ground and the fully-documented model's profile; menders is closed so the winnable ceiling is 9/10.",
-     "source": "experiments/qwen35_4b_clean_path_statechain_extension/reports/preregistration.md"
+     "x_label": "public benchmark family",
+     "y_label": "family score",
+     "y_format": "number",
+     "note": "PILOT_NOT_PROMOTED + CONVERSION_NOT_REPLICATED: the statechain install held on its third parent (local 21/40 strict; retention in-band — 3-for-3) and the clean candidate beat base 2.7x and its replay control, but lost to its parent by 0.018 and the rites conversion came back FALSE (candidate 0.0 vs the original lineage's 0.300) — the data-to-family converter is lineage-dependent: rites/sirens/mirage were exactly the C53 prefix's strengths. Footnote: a strict menders draw-win (0.017) landed while rites collapsed; this seed drew the strongest base ever (0.1234), squeezing all treated arms to 6/10.",
+     "source": "experiments/qwen35_4b_clean_path_statechain_extension/runs/benchmark/medium_tb1024_seed78160_pilot/summary.json"
     }
    ]
   }
