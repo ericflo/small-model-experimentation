@@ -915,6 +915,14 @@
     "dated experiment_log.md heading (2026-07-15 design freeze)"
    ]
   },
+  "qwen35_4b_menders_dose_scale": {
+   "start": "2026-07-16",
+   "end": "2026-07-16",
+   "confidence": "high",
+   "sources": [
+    "dated experiment_log.md heading (2026-07-16 design freeze)"
+   ]
+  },
   "qwen35_4b_menders_sirens_tier_forensics": {
    "start": "2026-07-15",
    "end": "2026-07-15",
@@ -1150,6 +1158,14 @@
     "reports/final_report.md:2026-06-26 mention"
    ],
    "caveat": "data/verified_algorithm_library.jsonl 2026-01-02 is data"
+  },
+  "qwen35_4b_repair_verifier_signal_probe": {
+   "start": "2026-07-16",
+   "end": "2026-07-16",
+   "confidence": "high",
+   "sources": [
+    "dated experiment_log.md heading (2026-07-16 redesign freeze)"
+   ]
   },
   "qwen35_4b_repo_search_compress_bank": {
    "start": "2026-07-12",
@@ -2448,14 +2464,6 @@
     "trace_keyed_symbol_repair/logs/experiment_log.md: headings '## 2026-06-20 Setup', '## 2026-06-20 Dataset Design and First Build', ... (single day)",
     "trace_keyed_symbol_repair/configs/experiment.json: \"date_utc\": \"2026-06-20\"",
     "trace_keyed_symbol_repair/reports/trace_keyed_symbol_repair_paper.md: 2026-06-20"
-   ]
-  },
-  "qwen35_4b_menders_dose_scale": {
-   "start": "2026-07-16",
-   "end": "2026-07-16",
-   "confidence": "high",
-   "sources": [
-    "dated experiment_log.md heading (2026-07-16 design freeze)"
    ]
   }
  }

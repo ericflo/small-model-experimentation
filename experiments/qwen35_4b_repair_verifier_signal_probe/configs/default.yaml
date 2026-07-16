@@ -1,0 +1,34 @@
+experiment_id: qwen35_4b_repair_verifier_signal_probe
+status: design-frozen
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+evaluated_composite:
+  label: hygiene_explore
+  tree_sha256: 9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971
+probe:
+  construction_seed: 77160
+  instance_pool_mix: feedloop=320
+  selection: first 25 per formalism in stream order whose written sequence fails both trials
+  rows: 200
+  per_formalism: 25
+  position_balance: {A: 100, B: 100}
+  kind: u_verify2afc
+  item_shape: fully symmetric 2AFC (no repair history; marker-token + self-reference audited)
+arms: [think, nothink]
+arm_thinking: {think: natural, nothink: "off"}
+gating_arm: think
+judgments_total: 400
+decode:
+  greedy: true
+  max_tokens: 1024
+  max_model_len: 4096
+consequence_partition:
+  signal_min_accuracy: 0.65
+  chance_floor: 0.5
+  confidence: 0.95
+  cap_contact_scope_threshold: 0.20
+  verdicts: [SIGNAL_PRESENT, SIGNAL_ABSENT]
+training: none
+benchmark_stage: none
+promotion: none

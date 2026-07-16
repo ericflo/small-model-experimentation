@@ -1,0 +1,22 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_repair_verifier_signal_probe"
+external_artifacts:
+  - name: hygiene_explore composite (the one evaluated model)
+    storage: large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore
+    required_for: both probe arms (think / nothink)
+    checksum: 9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971
+    regenerate: scripts/rebuild_lineage.py (standalone in-cell package; cross-experiment receipt experiments/qwen35_4b_hygiene_explore_destack_medium/runs/merges/hygiene_explore.json is a verification aid, sha 22a22a68234de68314064b809352e7449c59ef821235402b66ecb6e5ebcc486a)
+  - name: vendored frozen root adapter (lineage stage-1 warm start)
+    storage: large_artifacts/qwen35_4b_repair_verifier_signal_probe/lineage_root/blend
+    required_for: scripts/rebuild_lineage.py (standalone-reproducibility gate)
+    checksum: ad2ef4fae785debedf5e50932a79bda97869d3efc212f53d48ccb04c59e25d21
+    regenerate: "HARD provenance boundary: no committed creation receipt exists; frozen input vendored by bytes (config cd764ae869b8a55526e283dd133e1940896b428839c6abf2e55d6ae2a0b32635)"
+omitted_artifacts: []
+reproducibility:
+  smoke_command: PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_repair_verifier_signal_probe/scripts/run.py --smoke
+  full_command: checkpointed scripts/run.py --stage local only
+  required_external_artifacts:
+    - hygiene_explore composite (the one evaluated model)
+    - vendored frozen root adapter (lineage stage-1 warm start)
+notes: Eval-only feasibility probe; the frozen 200-item 2AFC probe set, runner input, and design receipt are tracked in-repo; nothing trains; no benchmark stage exists; the composite checksum is its output_tree_sha256, recomputed and required to match at event time.

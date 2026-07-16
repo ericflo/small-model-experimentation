@@ -49483,6 +49483,37 @@
      "source": "experiments/qwen35_4b_menders_dose_scale/runs/local/seed88037_promotion.json"
     }
    ]
+  },
+  "qwen35_4b_repair_verifier_signal_probe": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered stage completion",
+     "categories": [
+      "intake",
+      "probe set + audits frozen",
+      "review (confound caught)",
+      "400-judgment event"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        1,
+        1,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "Eval-only feasibility gate for the on-policy episode charter: 200 symmetric 2AFC items (pure failure evidence, unmarked candidates, marker audit 33 tokens x 200 prompts = 0 hits, collision-heuristic ceiling test-pinned at 0.5325) judged by the hygiene_explore composite in think and nothink arms. SIGNAL_PRESENT (>=0.65 with CI excluding 0.5) funds the charter; SIGNAL_ABSENT closes the last mechanism class for menders. Nothing trains.",
+     "source": "experiments/qwen35_4b_repair_verifier_signal_probe/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

@@ -14571,6 +14571,44 @@
      "chart_takeaway": "Ten, nine, and eight family wins with zero losses anywhere — the misses are all zero-zero ties at one stubborn family."
     }
    ]
+  },
+  "qwen35_4b_repair_verifier_signal_probe": {
+   "verdict_tag": "Design frozen; the 400-judgment feasibility gate has not run",
+   "concept_primer": "Every teaching route to the one benchmark family blocking the program's ten-family goal is now closed: the model cannot learn debugging-style repair from demonstrations at any tested dose. One training class remains — letting the model learn from its own attempts with live feedback — but that loop only works if the model can at least RECOGNIZE a correct repair when shown one, even though it cannot produce one. This experiment measures exactly that: two hundred puzzles, each showing a broken procedure's failures on two trials plus two candidate one-step fixes, only one of which works for both. Picking the right one requires mentally running each candidate — the model's one reliably strong skill.",
+   "plain_question": "Can the model recognize the correct repair when shown two candidates — the signal an attempt-and-feedback training loop would need?",
+   "plain_answer": "Nothing has run yet. The frozen rule: sixty-five percent accuracy with statistical confidence above coin-flip funds the attempt-and-feedback charter; anything less closes the last training class and completes the program's map. The design survived its own review scare: the first draft accidentally marked the wrong answer as a previously-failed attempt, which would have let word-matching impersonate recognition — the frozen version presents both candidates identically with a zero-hit audit over thirty-three telltale words, and the best any guessing shortcut can score is pinned at 53 percent, safely below the bar.",
+   "why_it_matters": "This one cheap measurement decides whether the program's last mechanism class gets funded on evidence or closed by rule — the difference between a live path to the ten-family goal and an honestly completed map.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Judgments",
+     "value": "400",
+     "sub": "200 items x thinking on/off"
+    },
+    {
+     "label": "Signal bar",
+     "value": "≥65%",
+     "sub": "with CI excluding coin-flip"
+    },
+    {
+     "label": "Guessing ceiling",
+     "value": "53.25%",
+     "sub": "best shortcut heuristic, test-pinned"
+    },
+    {
+     "label": "Training runs",
+     "value": "0",
+     "sub": "pure measurement"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Where the experiment stands",
+     "chart_read": "Each bar is a preregistered stage; one means complete.",
+     "chart_takeaway": "The probe set, audits, and the two-state consequence rule are frozen; the measurement event remains."
+    }
+   ]
   }
  }
 }

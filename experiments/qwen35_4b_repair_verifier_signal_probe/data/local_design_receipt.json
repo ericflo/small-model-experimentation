@@ -1,0 +1,899 @@
+{
+  "answer_normalization": {
+    "applied_to": "both the parsed and the expected answer, both arms, all 200 items",
+    "definition": "re.sub(r'\\s+', ' ', s).strip(), then re.sub(r'\\s*>\\s*', '>', s), then re.sub(r'\\s*;\\s*', ';', s)",
+    "function": "check_local.normalize_answer",
+    "prospective": true,
+    "rationale": "byte-identical to the retention-calibration and dose-scale cells' frozen rule (unchanged since the seed-88021 gate); the expected answer here is always a single letter, so normalization only forgives whitespace"
+  },
+  "arms": [
+    "think",
+    "nothink"
+  ],
+  "backend": {
+    "arm_thinking": {
+      "nothink": "off",
+      "think": "natural"
+    },
+    "cudagraph_capture_sizes": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ],
+    "greedy": true,
+    "max_model_len": 4096,
+    "max_num_batched_tokens": 8192,
+    "max_num_seqs": 16,
+    "max_tokens": 1024,
+    "name": "vllm_merged_composite",
+    "run_seed": 77160,
+    "runtime_lora_forbidden": true,
+    "same_runner_and_geometry_for_every_arm": true,
+    "samples_per_task": 1
+  },
+  "candidates": [],
+  "code_pins_deferred": {
+    "files": [],
+    "reason": "none: every code file of the local event is pinned here"
+  },
+  "code_sha256": {
+    "curriculum": "70fc722a6a69f4f8a64ae4356058421ea44117c7e86d3350abfd72b047ccf080",
+    "eval": "8d4fbef088d58b4f854d9b99c78b24657c3533a2966a63ff8f6d9304c42add33",
+    "external_merger": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+    "feedloop_curriculum": "91e55cc3322ac787aa1fdf24aaf114e4b9acbac963ee6af1f4471228bf7bed2a",
+    "gate": "fb4cda177ee4e0d49b18b61c251967ca0c3416ad9ba62e0bce04229193789f7a",
+    "generator": "7746e41d10775f8fe5c32242d3358dbb97110a59227490156ae24f58026d0daf",
+    "harness": "69a7d4cfe489e76b656087746c8dffa20fadffdbde69709a9e1dedaa0217536a",
+    "rebuild_lineage": "54a37a5eeb201e8bcb7e723f6155d289a824abb425a679d1aafb65bf21c8ea4a",
+    "runner": "cf1a766a70df8e3aacae18fc52a1a2186f2f8fc20161a6ef679b3dd51f60fcd2"
+  },
+  "experiment_id": "qwen35_4b_repair_verifier_signal_probe",
+  "feasibility_probe": true,
+  "firewall": {
+    "benchmark_data_read": false,
+    "benchmark_gateway_exposed": false,
+    "no_aggregate_seed_exists": true
+  },
+  "freshness": {
+    "dose_scale_sources": {
+      "experiments/qwen35_4b_menders_dose_scale/data/feedloop_scale.jsonl": {
+        "messages_compared": 2216,
+        "overlap": 0,
+        "sha256": "3aee5f5e8731294e0d8a9b9dd08f014ca34ace9f949c2b46aa09aa1e548adc58"
+      },
+      "experiments/qwen35_4b_menders_dose_scale/data/replay_ctl3.jsonl": {
+        "messages_compared": 1612,
+        "overlap": 0,
+        "sha256": "02275b9553cc7ff6676ed370a91e1e154dd5d768a4ed36ae41a1ae583b92b56b"
+      },
+      "experiments/qwen35_4b_menders_dose_scale/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_menders_dose_scale/data/sft_feedloop_scale.jsonl": {
+        "messages_compared": 800,
+        "overlap": 0,
+        "sha256": "080c3603cd3bfca2b261b797be356f97684aedc4f65becd9b50cbb45706bd2c2"
+      }
+    },
+    "message_sha256s": [
+      "010c0885ebc61133d31e2ee3bb9c8329fd6f3c48bcefe104890a8608eaabd836",
+      "01d36f15873dc0e94f0c942477b6c8bd189c05e187ef9545a6870b40502c2426",
+      "0240f8b4fd7ce50947a3a3fac4972a42e01a730413dbe206fa9b1d3dbd0b50c7",
+      "043530348001d49edbb08c271e7184bc4948aeb42d5f6b3d81453bc315f3c24c",
+      "04fe07736a4307828ad22f44120775699b69dbe3702047e9e7bd87832a531dd8",
+      "06903c192c0024ce2970a46c9bb3f34c667a431bc148fb76e17f614fd6c58e9a",
+      "080b456cc8ac2fc91ba39d59f911a0acb76685431a620cb66d85cb853e3e0a96",
+      "088947e2aa212eb2ca30b911f07460274af5ee676f360b56f4f5486dd92d4ed4",
+      "08e580df3b0dcdbad15bddbfd48da36df4b8f49c57831c3e3389110936335d02",
+      "0982b95472debb0d33f0e3b82a4754371dfda5ac8627e35773c04a6fd3bdaff6",
+      "0af5a13d3658d34e4d864fe4661eb030140988a9047dac8202e0f2f927cdc810",
+      "0ebf7b32e7dc110aa40168ce9878394ccaeb677b251cf4fdd4e32d1f76b16e0d",
+      "11cf7db8812b9a9a5249f3e0a843e68dbef1b334ee0a38ec4f704dffd0ce3960",
+      "12a428584a491745e55be6a1fec9cb6b7386af1231b4479a743ef1bfce025457",
+      "12bc5b1b28ee2f90a2c38dfc7624f00ac627c8041c2e8188ef205827e4fa2c58",
+      "13f0fe95993227da5cbc513346f42370facf2cfde4ce297d294372b8afac145b",
+      "14af1366c0ee96cc5bbb26dd375de8a0809cb394e68ed3d3cf2dce56a8dd9928",
+      "14cd7e10395984c66311a397dfc0192a6a6d18a005bb3b8c145e89ec459e574f",
+      "16dfbf68be7e4fe66dc868e267f5b60f8638f0a3f00ba3b9b8056e0bbd4f2539",
+      "176175f54213ef506552bec334be9504194e06dffb5562fb6fce40f6f3d97728",
+      "176b41c6a13a61c45084487f8ee00feed7bfa0abceeb3a1e40dac86aae3f6b64",
+      "1855d48525f58380903cab1a8e2b8b794ccacc38fd20b12dbd4888236d3c8a7c",
+      "1904b117230b7d3232ec95485e1d6dacebeb123acca4fee7874a76d8e742ed87",
+      "1ab49558ca10182905481a3c883a3cfb25bf334d815d3418fd851a43f1abdc4b",
+      "1ac3d9c4157daf044a6c19b0499e2104b9285af3d30a74efa685a02be1b70f64",
+      "1ae9687ac6bc1f87071b921d5ad687d5d5da616d1023568352438b83db2848f2",
+      "1ce180a6ff39fe70c419acfe5b764ec1d51433ddb3aa382e85166c23eb541ca8",
+      "1d89bb4e6026d05f8de45c6c9d5b252f6ed6fb04019f908d63629c15841cf80b",
+      "1dae73bc5b7c814ef1080afe1c8177fe62f80498339dbd40596258c4ec0bd4c2",
+      "1ddbd1a1fa73e7c6ba50cd286869062b53850a47557acb35c9d0f85c0ef12abc",
+      "1dde0432483bceda00b1012b9b3282817b5e0fd86663ff62030a726d76bd4a21",
+      "1ebad7b12cb17dc8300b92c6e4f408c15a7cb8240a053abb2051cfab62fce4fb",
+      "1f1dce129167007333a9f508435ccaa75e4ab03a2261f8c926511e5e709ac461",
+      "20b98623095662fa7fc33750687ec4a0be13d1c0c78511a803ab941a5fb0523a",
+      "2376c64e74aed9dd2e265075e190884d87cb8eb21712915b7a510c5971739ae7",
+      "2457ddeeff826a008943b6a7f18f61f8427da45d64885e2e2342b173ea1b98b0",
+      "2573fea38023f5ecef3e0ffcd96623e644adcf0f782aa0ab7ec052455156d998",
+      "257e72583871cc5b0dd3ea8760660cd0c88cfc99c3229ac0bee226e927c12e64",
+      "28ceccb867e5179ed4ee33de9b3f77eaafb8f785b7467b126bbc63fd6afd91b2",
+      "295da58731fa1382324878722ef3bf1770856de1731b4eb78a26a655e740b409",
+      "2985659cd46efe552f0d94415b9e67b5459416d0e518f425a547f954e7e6a322",
+      "2b26e734ff781d733958c7aebad15eb015f816152b6ec98fc10693ccd912118d",
+      "2c92eab8804775e40a056f00d39c4cb13f9da2f26b375069bd7cb5bfc140e118",
+      "2d7ce1e0c1a5aef91491d1fc3157814ed000f1aa8e7d9766090cf7b408ca0a6e",
+      "2e39b9605e3ef7932e5a2bcea79d8ec062e98c14e9924c6478a244d1b013acf3",
+      "2ebbcd78e048ee5a42f1c85efa1178f52e2fe8064b7261fd3cc7ba6839a06e6e",
+      "31c4c339ad2c07898896b264f3b2862f026f1674dc6f86ce5369f4ec7a2ba93c",
+      "33f4e73caf23e5cc1d4a5a84f804c69a74db366cce68454812b59cff67dda36d",
+      "34b1e3bc547c1008a90ee916224996019ca14f8991b55c51c7c68d22c7a15faf",
+      "389c5678e4dbce8cae0f0e52910fda6d68c36aec713c8f67cf43734dc9205f02",
+      "3a085472f13d4a95e9ea6623684ffee4df4fc7b55b79d5b0d8acaa4860c7684f",
+      "3b0cfa2c333981d9e7788fab58672273cf31819dca6ca939ed3581d2ac46d6b1",
+      "3b670504e6e629dcc914f5c69ba4d6f5bf9cd8f7259f8dae5f2e62ca8bc39ddf",
+      "3c3416a5d9bbac99534b154ffdfcb459530814a94417f0402879b390a7b9a6d4",
+      "3f2b2bc535054b93d6933760414ae1b35776da309c8018d57899ff74eac351ab",
+      "44315440196bd133f558172f366a7ac8a73b2c14033a256b4fcaf693b6ec6642",
+      "4478ddc4b107932e44915f4d01ac48b0143f897b48ea59801b6cf91542cfe1c7",
+      "4793b7f046eab44f7319d3090ad428b9ddf3bac8f67f694484e8c57c4e95b2e5",
+      "4914c52787fc9228644e1d1d1cccd712b1eb251a8f132ddc591639f968797305",
+      "4b2772de5e43e291e15d73890778e50a0d940280222284f3565e1c4022693a95",
+      "4bc5d7bcadaec0041f5307a7457af6ad3028cf9b9903252fca3aa5d660a81227",
+      "4d71ccd5d68f5b71b44ad6d98498fd0febd1a6fbcac127dd428e46a338ef547d",
+      "4f61875c2d1bb334968a59d417bbb2267f017568150e723942d5b52ca0a088e3",
+      "52db5192635c50ace135c1d3e0c1ff09aba4a2eaa0253e9ae842c77ed7eb9ef9",
+      "53a1e621d8e3c2bda953a73b80f47a1a018eeb236cfca4135a515c13a2f08282",
+      "54de04d742ca5f1da9b55aa9c9d3a0c78380faceb4d1ec94ce2cb7fbdf2f39b8",
+      "5818971bdfdb0ea8397840db98f4fca87284b9c885644d7f8f6b690680ec68b7",
+      "5843d39d6b15e13a4f09cd397f709090fda676b16f4af8e83b638e6947efc84c",
+      "5ca587205327acf627b20c838392a8bf86c65a4c1324352d8fb8133277dd918e",
+      "5d7f0a1049c20d566e400a121beee380e5a36e07390d714fcab9cdd14cc04928",
+      "5ecc5b23487d9a27f7ba4416daf9865f38a552b023e21d2329bdd51f27146219",
+      "5f4cc6c62ca757bf013354bdca5b1564ae756ebc33b22e7f402e1ae722b67336",
+      "5fd57843dafbf00b3555f3baf76f14867da2b938e5506c8215cf6d492889d1fd",
+      "602f16a2bfeb4e019edb507e8998d80e17c079d1ffc438288360c0d12cf508bc",
+      "6414b0695f153f92506d13d1c23584b8bf50afbbf8127899ca4d8c7870422d17",
+      "65572f9dd8def1d0793f629db222941bee14ba82ac0a74bccc4c6e25aee6d99c",
+      "6a4b27aca02f609ab5108a23d507958c20f144f3f6a17afe8513d63af6464f46",
+      "6a4c20fb0470c72c2914b794b0a15a516f48e16200d6fbc444e5e172525d5bb7",
+      "6ab601a6e5e5cb187cc4eac4d6ddfac0d774fa3324461086911a6907cf8564c9",
+      "6c41d3a54020e3a1709fab198e893b0215d78f8718cc1c2bdd8dd10df7c7bfd0",
+      "6ca9ba5b979372831d10fa2907afd427be52bae93981b71a1a60f473cf0db7b3",
+      "6cc5b9e9c99934f12c9151fd078dfd10d8c3d99345e7d4d4c3976995b22b90a5",
+      "7047ab4dee3200ecab3744ec918d17fa023f5ed1dbd679d53f008cbb7f4b4e57",
+      "747ea132240a0288f6d43354c6fae6fa40fe89e04248d965f49174cea9f22bf3",
+      "7490188a490164f6863f99d7e4ea0f290b5db5748de8cb4af41d979e6cd57efc",
+      "76068907f0e4dd770b5a3303c67b09224f0352c852400292cdea7fface23cb14",
+      "76d04185929794516b464db99a776e90acd3ab3e1757b221dd6a95a662f9d7f5",
+      "7b1689472b79e46d8435bb8e7745147ac4dd8809b3069e720826f2bbc1fb4939",
+      "7b7bd71848eadd96e0e07f7e258f5537b23fedef5e33e74ff9a44db0e876e418",
+      "7c918a2b76bf07745f33a8348b3b855135ea91ddab3621efbd6d0caeeecc0386",
+      "7cc42753965897572cf1fb27d8462598e8be48620d1dd426b91dae8799189cba",
+      "7ecd1da2854a36ee23e5d4f98565a1f6feea6d78530c03b38f2e3080f02f2344",
+      "7fed1746af59aa7f6075762c907b0d79b9de226abeff16d45c943dfc72fed434",
+      "803be11c95eef76a89bcb610f3c0a562e2be9bbfb298568dd9922342183c6c01",
+      "80479c6c2fd894c95079c194cf37567ad6ac9c0cf97dccc64752423ea83ad845",
+      "80afa20a53c0264f6cd2d56cff3ab3a3046fddb3ca742e7753e3ea4def27b638",
+      "81ae5793a9b99c1e6f6c53a3cecd74a7e6e6d00ea9bdb8dc1114cea95bc991aa",
+      "8206b7c3a6ae43f6c230a790679eb7f8cef4ba5796b18fd4682910cd84dff369",
+      "839a3990f52b041bc88c3a0af5f3c2f790fdbecb5c09e31f94dd6ea9a70732dc",
+      "86b81cbd9ba7fcbf0f25b434f5968299a2267bfe109d7cb7bf9ecba701732742",
+      "89a643c336c788fe3c4b0565dbf7193c9a51e6721685c625af4b8a18e2c93313",
+      "8b36965c2706518bee3471c65e4addb00588adf85f009040f0f2378f6c6b40d7",
+      "8b6d0ed6eea567778e4265c9ef4a1bd5d08b3800084a440d9589efb404029cf2",
+      "8e82fe85de711d298319a2d8154c7837cfd8c023fa838ea1d4f689d1ea4d59d8",
+      "8faf705fc0f2e64bd30222c08f00ba7590c30a38c14e8ce80612857097a4836d",
+      "8fe78b49d7f9628df8ec4a0ad4c6c4a24b25c4ca69124f4b94357766717f9b2c",
+      "9004a4d20194879453b3fa029af439be74d4ecfa20c787c713f1772d260e1344",
+      "9430534074785ae213a8d09a90884fadafe6e302f6e80b8b92ed72b6f8a68f89",
+      "9504344d8b227cb5d17b9219625c0ed7feaf6ad830a8590a7dd57201c09d2129",
+      "9640dfbe759e1d4e65531f79d5b30dfc8eddff9e3c90f0f82cea98b48b6656ab",
+      "969360bf695f1b8743fa2635d0addf3f7da8a347896fd341454d0f6f69e97136",
+      "98d0994b564c9d8661557462e96e14dd2a63263348b0d93b6b58d00e92b773ca",
+      "98dc5c378288ac7dfbaffbab8bfc78f56ceeb64265e8768702212c5ae2db0589",
+      "99165018818d90474b04a98058cf01b6da9e01ecdbff6d1c97341ca531fb4eb0",
+      "9a2b3e50d16db26e38019178ef4c0d8152851e7cf60a0bd94829ea95f0e31b77",
+      "9b65b4a1957b21b0d8d28bc844508580d78058586d930bb02eb5efee2a74eabc",
+      "9d7026c5478d2caf374e03f7b84b56f6bcc501949751f5b07d403d11673927dd",
+      "9e20659d4a1ba2c7155659c2712a5a695b23c719ec4e7bb6e88bc21f3b12eff2",
+      "9e8df80ed3ca793fd6ddb48a456ec02898a22e6b5b0fe455506771d89a46c8f6",
+      "a0a6654fc7a80baa35a62dcaf62f17b8d2fe40dd850ec160f3f335174d7167e3",
+      "a1acd8951292d5938556293d332900562a672bd31d9668165f60b7baaf0d4dc1",
+      "a29ebc4903d32c1ee75cebccfb96c835d44e1ebffa9ce80f4c5cf102d6f93ca4",
+      "a3c39716efe507e00f7439f0dbfe7e6561b3f4294c38e283c66b5b4fbe792ba9",
+      "a539a6ecf0fa22e3ef1cef3e0042eb7362956e5a3489a87e06e41fdfe6755eb8",
+      "a56d585ce93d873070f43ce8edc1b9dacc8a96db1805bed9815e7cc29a2cd65d",
+      "a591915f51d9b11ab9f9f44e7a5c7233bb5a50b93f067915b063032385889527",
+      "a5cdf574d58df9f53904eb4a21125ab26d9f67e6cf13dc9f76b1a5c4129779b2",
+      "a7de304722bf632186dbf5a48af07c64911c4d22a0bce39f8f9fde453ab087f8",
+      "a8123f5c26156ac6da8d93ba1807a0ee3e47816b55807b65f2d6f99014d943a8",
+      "a8ee448ced5f877643b9a8156dc8571b0fbdf1a99b5e5d49490b9312eb40dc4a",
+      "a91455e0f99fb13637408ef651ee388e588bf2982ca97da09d5459eebb753c03",
+      "aad979c02d109b9106bc6b4339dba4e537f9999cbebcf2d1e6e179e0046f1647",
+      "aaf3e66406ff23aecf589c1fe2b4e4814b9b262f3539b6c9da3e9e017cf76f20",
+      "ab60a514a2221a6422ff52f923fce17498c0e085d35972fdb3d5246c164a3fb3",
+      "abd3ca5e298ca4160176fe3a73178a0ac40fbd9e9968ef54ce619c81e8819755",
+      "ac7a6e9d4d886c1161302ef094160e4d1f6418d5c21c88bd1516dce53cb8bc7c",
+      "ad3793cc0b7b3b54159b354e21166d947cfe2ebeb3dee1d8634d651c5119e010",
+      "adda00821a7cc12e3a3885929d72e2e781093af4097f75ef345c8f0a5fb7f612",
+      "aeed16a70e3628f263167e6991f0a1e682d51f7227343848d588d6991f1304fe",
+      "b17a6a260b2a42d57c74808bd9324b3438bdbd0b6dad7f90c146acc549f17f72",
+      "b2e43e6c5e723f5ec69df691425765d79c8b7b310c0dcb5fd29b4e9b478b0e6c",
+      "b3581f741d2e94c4fb54bb4965485dcfd7b39eb073756aba646852cd0dfcef8a",
+      "b42707be5addec102e9882ff39d3336d278a3cc1d0f004da8430d33e59011209",
+      "b621fc537ec9a5e69af8888cbc1b3d735baca7bbecbb615a00b722a8c30f523c",
+      "b85a30800a973ea4a8e940d8207cca89d78caf564922305e2c5db5e96651e9d2",
+      "b9fcf0b43b0c504797097a34977d17c1fa66f6452386a8495e5d0360c8b4e298",
+      "bb81f92b3a8c02f5ef418b767af7c2d0d4b7371841ecf79e33606f28f7457784",
+      "bbf7a438d02653d186f73b0bb445ca66219f3b1438ffe31521616e5c9f85ad2f",
+      "bc38cbc11b66ec8502d24ff58ea2431969090f4811814f725cb916cdf2b69852",
+      "bc7f0564e9f7da2b30fd0e1bed442f1a241b6fd7e5c6938b7ea30aa0a0792057",
+      "bcb9ca6a2ffc8f79f1309e9f4627fba58ae16ff993870f930b5df1597bca3a45",
+      "bfff2c4213725639333abfd9407b5556af9e48f79d1862c054c26a2605dae762",
+      "c0451aa303f7e4560043063f1ed39e009b2e9935ac8e5aa50a37d65bc5be84c8",
+      "c0b472b8b9d1f047ab193cd21eb59d84e60cccbf8d5eced171a9fa18d9815676",
+      "c3139fcaf41d7c4f9327a90083e119813129ae4f0e8833af3000e5505c0aebad",
+      "c4923185f8f9867ca5e1fb17e37f524d54a5305747f2a980a1b0bda351e3ce49",
+      "c4f9a7cb220c3f4e242a55588e554451112a9f19fc496ed5191602c934d7482f",
+      "c9237c601f0e457c509af488db8c54a872d75b1d9f3dd1e6da85d4471b511926",
+      "c92686cd46ba78fa6d2597ccfaed130977035ac1c5d4df6b31fec2f5745864c7",
+      "ccf96f73d5ccdf64f84b8bd000572369a695f4a237661f32f6dae6ae8a7c60f8",
+      "ce3eb3ab54409cbd70842b92f573de1b7d556592278d4e8070a81b5e3279ffc7",
+      "d1e5205bc1853ef85ae682d48e771a2a0e32e9dc635929c855087b6eddfbb9de",
+      "d303d6caab424f0eb0b87164c2e4543300324d6500ba4cafccd5d2ddf4d9c6df",
+      "d5ce951c95ad8f357960351743a931da0565a0f70eac7ccb7b1bf2d72bd07838",
+      "d67a9a7e6f7a41f57920b5b8a4ac810175e76a837f1e5adc795c3a09b061e789",
+      "d686b16ebad1deea00e2fb8673bef42e9eb1658f76526fdcc484f0429903587d",
+      "d6e80ffb92dd234efb07117329bbde3ed223c80e335abd78db1ee129fe4b3f17",
+      "d8db2f32cedf2aa3e15cd839dd524151f5c98aa5087b6f117ac6164b96cc4cde",
+      "d9cb8f90ca4a0dc0bbb16ec2f4b2d1f42a5fef97defd0a9c638461f0ef92f77f",
+      "da42e8e2d9ace59019757b4284fdeea8ec50a83f8b2dfed8a5d62cc02a3f5286",
+      "dafcd52e376f00fc88b02d5eff01addd1b3b4f37f189ea9bbd245a2c5575e503",
+      "db0afa4ec894680c550606056864efc4d1522d6db1641e14c0921424c62b0227",
+      "db7974e41200929971fc5c6b666253b05fb93dc787db8129260e904dc7130cac",
+      "dbeaaac109e611e1bbc18c3a818788dd4dc8da8a55b131bc0aa650e72c84fa2f",
+      "dd7a425039c8b61ef87e6b944781a78f81d318e26c5c1da106d855400d49cc95",
+      "df97617f6cf296fca36f922492c1c022f0fbae533e09d58a8c78edfa6e014310",
+      "dfe486dbb79e1881b9b52c7e285f4096e4d10d052cbb486a187cd82657c914ea",
+      "e3a4e338efb97bc10337f2080e894cd6abc5a44dc399e42fba513a37c3773a7b",
+      "e56e93e22ae9c2aeee75a5a1a04dcad58b32f70f43c8d37e730f41af4aceb129",
+      "e588a2874a610d02545998d6dcf07e5b20f84e33027a4252765544d68818007e",
+      "e65573a7ab3e6cde813799eb4757fc9091aec5ea8b4142d8e8a352e32e4c7eda",
+      "e966266d8703d99cdb49a9c50aa8b94441c92512f06e2982b7fa30913b5257db",
+      "eb483572551b472545a93031ca0f7bd043751ec4b092682f5f1d0e3871b3e918",
+      "eb837cfde30efbd2baf8ebd943b646bc23d5c752fc8342c966a43d2f961cdcae",
+      "edf8900bd5d691ec4a1c66ec9e0b834e8eb132d73f088b9b4988ba3d7f994d37",
+      "ef1f8f117cc8b76b475f10e8f07436278e6d25eed12403b514acb80a7e9687d3",
+      "f0d56c815193f64b171a9c7e988c8f83112111d34016a24c125e609cf6686ec4",
+      "f17cb2798dd1716cf8fb285197f85e68d9ddd3c25fd009a2545dafaba8cdbe75",
+      "f188a207140f5408dcdbc586b261ca8cb71cd3642e173493278dd1b59a65a1db",
+      "f251d9deea10133e095254e6afcc26d5418cee4792607abdb610df495e4bbf05",
+      "f49fe49b3cf7a1352e06ff7338637d1092df530c584e57775be7ace322bf62b6",
+      "f6b98eb453ea660b8f0949d0c96b86281cf5e8162c98d97f9ec2499bc0e64fee",
+      "f8516d0b87216e7397c4c7e33afe900eb12743d9af60977e4c4b80cbc353a0f0",
+      "f9c1807afb6ed21630a2b84cc1e119e705250c8c8280b3d22480423fffa8d58e",
+      "f9e9bd22ed1463cd172069ee0c1513f0369d12c287bbe8134f466a816de5a30d",
+      "fd5ac34197c4a27ced0aa304224278796bc89ecfd0ebe60fdf7d2e0c692a125a",
+      "fe502e8c1baff4343c66f85b7e31129d0a7b0a016ef45f37233ec8f83d6776c3",
+      "fe8befcd6def47bfc212f70a5e8d3970d11a22e9a875dc3021ffc6fc079eff39",
+      "fe942c884a80a845877f7d54ee0eb39319f92da56ce64c54b2fa30c717a7357b",
+      "fe9f9bc5e4246a15b858a4426809e7ea10f3a1a195fec24a73cb209c686cb1a1"
+    ],
+    "own_episode_renderings": {
+      "messages_compared": 320,
+      "note": "the 2AFC prompts are rendered fresh (no attempt narration, new trial section, option block), so the raw episode renderings of the full 320-instance pool at this cell's own seed are disjoint by construction and checked anyway",
+      "overlap": 0
+    },
+    "predecessor_gates": {
+      "experiments/qwen35_4b_axis_corpus_v2_staged_repair/data/local_tasks_seed88017.jsonl": {
+        "messages_compared": 154,
+        "overlap": 0,
+        "sha256": "746cf1c4efae1cdd6614827f6fe8abb0eb7fb8cf5c2dc0c2c7dac4a6d930db81"
+      },
+      "experiments/qwen35_4b_axis_replay_stack_medium_target_match/data/local_tasks_seed88015.jsonl": {
+        "messages_compared": 144,
+        "overlap": 0,
+        "sha256": "1c019d70751a789a17ef555d51862c5a017f0a3c2bb1ebbce41a1a93496fefd1"
+      },
+      "experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/data/local_tasks_seed88016.jsonl": {
+        "messages_compared": 144,
+        "overlap": 0,
+        "sha256": "13788cc2e6fc237cfb709d2b22ae24dc6263a91f97c4822b856d098f816020b4"
+      },
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/local_tasks_seed88020.jsonl": {
+        "messages_compared": 144,
+        "overlap": 0,
+        "sha256": "8e4dd8b21febf64048fef5cf15541356d4a5808e45caf5d6f19525e154168822"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/local_tasks_seed88026.jsonl": {
+        "messages_compared": 40,
+        "overlap": 0,
+        "sha256": "079075e0f51dacac9ea6c87eeea4c2d0e5f9258cb05af885d4cc897479d3866f"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/local_tasks_seed88027.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "f568b7d8cd04ce6e4bf270e46a80b4328978ee53a6c3d34a69b3d1c72a77b79f"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/local_tasks_seed88028.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "09b3d71c8b0fd693a21684f60b21dfa125cf3291b24de5878366026c81d34756"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/local_tasks_seed88030.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "9ff826de30c3b32bae1b63af69c3f2a677f6d876cc1046ea22ad41349dcc3511"
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/local_tasks_seed88014.jsonl": {
+        "messages_compared": 144,
+        "overlap": 0,
+        "sha256": "4753a277bdcfcab515a8bb5ece541498729107de6002f4be011b57b2eed34873"
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/local_tasks_seed88018.jsonl": {
+        "messages_compared": 124,
+        "overlap": 0,
+        "sha256": "597f10a44674cc12e5f499be8de6804bb040985019b18aacc5527339a26857eb"
+      },
+      "experiments/qwen35_4b_interleaved_replay_dose_medium/data/local_tasks_seed88019.jsonl": {
+        "messages_compared": 124,
+        "overlap": 0,
+        "sha256": "6e927f591f9ae9d2edad6e263be3f7c0262b39de4854314a64802e656b98c15b"
+      },
+      "experiments/qwen35_4b_menders_dose_scale/data/local_tasks_seed88037.jsonl": {
+        "messages_compared": 40,
+        "overlap": 0,
+        "sha256": "5ec590bf508c5f9e6aa4758d37819e68eaa4807e400a63ac2f980ad975c45519"
+      },
+      "experiments/qwen35_4b_menders_dose_scale/data/local_tasks_seed88038.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "96e03aea5013f871b0ec863590ae5ea62d0620f09b216d0af39eee2bba1d74c9"
+      },
+      "experiments/qwen35_4b_menders_dose_scale/data/local_tasks_seed88039.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "9575b27506011ccb1fd32c1c63579610b80ef2c330629dbcfd930ad442942367"
+      },
+      "experiments/qwen35_4b_menders_dose_scale/data/local_tasks_seed88040.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "7b0223561fe32da48e6b45a280fae1ade96a8546f5429e76f14f607a6716deed"
+      },
+      "experiments/qwen35_4b_rank_capacity_vehicle_cell/data/local_tasks_seed88021.jsonl": {
+        "messages_compared": 144,
+        "overlap": 0,
+        "sha256": "64754430f3316d1d61fb81727aebbff03c9f32624f38182fbf5407b81e48d707"
+      },
+      "experiments/qwen35_4b_retention_screen_calibration/data/local_tasks_seed88022.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "e41e47d87b31a1f15dcc3b4978f73730b7acfb690b502388ce497bbed5951114"
+      },
+      "experiments/qwen35_4b_retention_screen_calibration/data/local_tasks_seed88023.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "8b8728960780debe45412b13be5245e1311de71ea3cbdcabdd5e4a2a62469d59"
+      },
+      "experiments/qwen35_4b_retention_screen_calibration/data/local_tasks_seed88024.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "f0cd07500e0be9541bb5c356cf09efdc48c2757e91e21366ef8c34d2e90bb24f"
+      },
+      "experiments/qwen35_4b_retention_screen_calibration/data/local_tasks_seed88025.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "3ca1704960f701382a5c766bc2bdbebc73e30b94113698f0ac39dc7962591f01"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/local_tasks_seed88033.jsonl": {
+        "messages_compared": 40,
+        "overlap": 0,
+        "sha256": "11257caea2557d1fbc1ac86f4f8f061987a1e77cdb448b0bda1fa0a1422c4696"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/local_tasks_seed88034.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "2264646be93e159184602957d21ef5e3ba650ff1cd6743e4e6b15b8d3726b11e"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/local_tasks_seed88035.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "a8634bac86e5e0ef5185ee7e93ae079c57e4d2c79a7273207e0ed83b515847b4"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/local_tasks_seed88036.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "6ff076d7ef8a20093cf2a027f36a0fd8cf26d03fe87e72f9e76d1108b0751b21"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/local_tasks_seed88013.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "be817bd09f80a1fdf045bfb7638634f5f0e0e34ac6a404a34a98283e49dc5c2b"
+      }
+    },
+    "predecessor_sources": {
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/axis160_direct.jsonl": {
+        "messages_compared": 1478,
+        "overlap": 0,
+        "sha256": "0cbf3abf04781f3217189dd7b2bdf173d83772b0200b283a7c608dc3d386c1ee"
+      },
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/sft_axis160.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e"
+      },
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/feedloop_state.jsonl": {
+        "messages_compared": 1462,
+        "overlap": 0,
+        "sha256": "187787a8c6b2d652ba46553cecb8fe451b191e277094268f4df921babf621c2b"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/replay_ctl.jsonl": {
+        "messages_compared": 1442,
+        "overlap": 0,
+        "sha256": "ef6f321f93804081eefb7b8ae3ca84fe39a46127604c69d81b803628d020e63c"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/sft_feedloop_state.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "e6d45ed45632f7d6bea8e300f469a4d4c076eb4d8be420d677bd14c27471083b"
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/axis_curriculum.jsonl": {
+        "messages_compared": 1459,
+        "overlap": 0,
+        "sha256": "e2561485ae28c9c374b663af4a002ab67e02cc75ec8994d1d89770e6b198e98a"
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/replay_repeat.jsonl": {
+        "messages_compared": 1435,
+        "overlap": 0,
+        "sha256": "878f501f3c6665982b7b3e9ffb2de675382d6b366b62a61d0a13e6709841c468"
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/sft_axis160.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e"
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/hygiene_explore.jsonl": {
+        "messages_compared": 1460,
+        "overlap": 0,
+        "sha256": "82aa1a78c0a429a48c3db6b94ac84397cea001b041477e7b137b38c21354112f"
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/replay_clean.jsonl": {
+        "messages_compared": 1441,
+        "overlap": 0,
+        "sha256": "2189d160c9c3007ccbaf935478b3354b597c71945f6dbf1c32bf4e670ace0017"
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/sft_hygiene_explore.jsonl": {
+        "messages_compared": 80,
+        "overlap": 0,
+        "sha256": "8b3e97919c62cbb0893add281dc1d3ae881aa0138d0d1721043fec26b0c22cf1"
+      },
+      "experiments/qwen35_4b_rank_capacity_vehicle_cell/data/axis160_r64.jsonl": {
+        "messages_compared": 1472,
+        "overlap": 0,
+        "sha256": "336a044557cc6802aeffce497634528b844329d872f64d1c54ea4a63311c990c"
+      },
+      "experiments/qwen35_4b_rank_capacity_vehicle_cell/data/sft_axis160.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e"
+      },
+      "experiments/qwen35_4b_rank_capacity_vehicle_cell/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/replay_ctl2.jsonl": {
+        "messages_compared": 1443,
+        "overlap": 0,
+        "sha256": "0fecf519a8981ea71a9842f0c5a3615cfe60f157e58420d1ddc5e019f44e9477"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/sft_statechain_only.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "ab6c78458eb8a41f42ebee25e79354d42beb558f78bb3d348dd7902ca3a9bad3"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/statechain_only.jsonl": {
+        "messages_compared": 1462,
+        "overlap": 0,
+        "sha256": "2e3a08bb9a50f572df4e904fc7a08c6e0b06317972af74c2119de35e3f524eec"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/budget_commit.jsonl": {
+        "messages_compared": 1464,
+        "overlap": 0,
+        "sha256": "7dbc084809c6ae6b8dd794465a7057095e02b9d598c414fdad32dee7d361c8d7"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/designed_fresh.jsonl": {
+        "messages_compared": 1465,
+        "overlap": 0,
+        "sha256": "6d4dc303bc159c19a1ffd0c60ca7d08ea64b02909366701b345d888482d67f3f"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/replay_repeat.jsonl": {
+        "messages_compared": 1439,
+        "overlap": 0,
+        "sha256": "fa5198c2033dc527fa668f55f8a49865d8015a6d14cc059b319aa058dfad74f0"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/sft_fresh_budget160.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "ecece8e294f0b1c34a086705b05773d6004c6a9a239283aa26ee1c1bbad39800"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/sft_fresh_designed160.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "e599f1563f6e4fe68aa43ce64bbe450c264170fb07dc17dba9ea74e694f284d5"
+      }
+    },
+    "prior_local_messages_compared": 1066,
+    "prior_local_mix": "induct=2,execute=2,select=2,trace=2,verify=2,count=2,repair=2,optimize=2,abstain=2,state=2,order=2,probe=2,route=2",
+    "prior_local_overlap": 0,
+    "prior_local_seeds_compared": [
+      88000,
+      88001,
+      88002,
+      88003,
+      88004,
+      88005,
+      88006,
+      88007,
+      88008,
+      88009,
+      88010,
+      88011,
+      88012,
+      88013,
+      88014,
+      88015,
+      88016,
+      88017,
+      88018,
+      88019,
+      88020,
+      88021,
+      88022,
+      88023,
+      88024,
+      88025,
+      88026,
+      88027,
+      88028,
+      88029,
+      88030,
+      88031,
+      88032,
+      88033,
+      88034,
+      88035,
+      88036,
+      88037,
+      88038,
+      88039,
+      88040
+    ],
+    "regenerated_dose_scale_holdout": {
+      "messages_compared": 40,
+      "mix": "feedloop=40",
+      "overlap": 0,
+      "seed": 88037
+    },
+    "regenerated_dose_scale_treatment": {
+      "construction_seed": 77150,
+      "messages_compared": 800,
+      "mix": "feedloop=800",
+      "overlap": 0
+    },
+    "training_streams": {
+      "paths": [],
+      "policy": "this cell materializes no training stream and trains nothing; the dose-scale cell's two 2,280-row streams are hash-pinned and checked above"
+    },
+    "unique_probe_messages": 200
+  },
+  "gating_arm": "think",
+  "judgments_total": 400,
+  "model": {
+    "calls": 0,
+    "id": "Qwen/Qwen3.5-4B",
+    "loaded": false,
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+  },
+  "next_authorized_stage": "local",
+  "prerequisites": {
+    "evaluated_composite": {
+      "composite": "large_artifacts/qwen35_4b_hygiene_explore_destack_medium/merged/hygiene_explore",
+      "files": [
+        {
+          "name": "chat_template.jinja",
+          "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+          "size": 7756
+        },
+        {
+          "name": "config.json",
+          "sha256": "a1c80f0efa6f83f631eaa9c25ffa166e3b1f9db395cc3b14374dfc0962261f60",
+          "size": 2829
+        },
+        {
+          "name": "generation_config.json",
+          "sha256": "0c46d8aa4f0ae5e611c961f70b87c83fb696043c1e319337708e96f882180de1",
+          "size": 116
+        },
+        {
+          "name": "merge_receipt.json",
+          "sha256": "9eafc8b0b01b125c3cb2eaa3cf8b808ecb7b7ed40172cbbb2f92117be75995a9",
+          "size": 876
+        },
+        {
+          "name": "model.safetensors",
+          "sha256": "e21123443a230ada2c73ded411e0b5b7c2b1459856b2c38e4f1beea8958dc02f",
+          "size": 9078620536
+        },
+        {
+          "name": "tokenizer.json",
+          "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+          "size": 19989325
+        },
+        {
+          "name": "tokenizer_config.json",
+          "sha256": "9cf04fffe3d8c3b85e439fb35c7acad0761ab51c422a8c4256d9f887c3a0be7d",
+          "size": 1125
+        }
+      ],
+      "label": "hygiene_explore",
+      "merge_receipt": "experiments/qwen35_4b_hygiene_explore_destack_medium/runs/merges/hygiene_explore.json",
+      "merge_receipt_sha256": "22a22a68234de68314064b809352e7449c59ef821235402b66ecb6e5ebcc486a",
+      "receipt_authenticated": true,
+      "tree_recomputed_at_boundary": true,
+      "tree_sha256": "9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971",
+      "weights_sha256": "e21123443a230ada2c73ded411e0b5b7c2b1459856b2c38e4f1beea8958dc02f"
+    },
+    "standalone_lineage_package": {
+      "manifest": "data/lineage/lineage_manifest.json",
+      "root_adapter_vendored": "large_artifacts/qwen35_4b_repair_verifier_signal_probe/lineage_root/blend",
+      "verify": "scripts/rebuild_lineage.py --verify-inputs"
+    }
+  },
+  "probe": {
+    "construction": "fully symmetric 2AFC rendered fresh per instance: machine spec with legality clauses + the original written sequence + BOTH trials' setups, wanted outcomes, and the observed outcomes of the original (broken) sequence on both trials (pure failure evidence, no repair history, no attempt narration) + two candidate single-step changes labeled A and B in identical grammatical form — the unique legal both-trials fix and the legal trial-one-consistent distractor — + the ask for the letter of the one change that makes both trials come out as wanted; deciding requires simulating each candidate against both trials (execution-based fix verification)",
+    "formalisms": [
+      "troughline",
+      "trinketcord",
+      "crankwheel",
+      "sigilslate",
+      "barrowyoke",
+      "balesled",
+      "millround",
+      "skeinreel"
+    ],
+    "generator": "scripts/gen_feedloop_curriculum.py (reused machinery)",
+    "id_prefix": "probe77160_",
+    "instance_pool_mix": "feedloop=320",
+    "instance_pool_rows": 320,
+    "instrument": "verifier_2afc",
+    "kind": "u_verify2afc",
+    "kinds": {
+      "u_verify2afc": 200
+    },
+    "listing_collision_audit": {
+      "both_collide": 26,
+      "collision_heuristic_ceiling": 0.5325,
+      "neither_collides": 101,
+      "note": "a change text coinciding with a listed step is intrinsic to the task (a fix often restores an op used elsewhere) and carries no provenance; this reading freezes the best accuracy a collision-keyed guesser could reach so the artifact ceiling is on file next to the 0.65 signal bar",
+      "true_fix_only_collides": 30,
+      "wrong_fix_only_collides": 43
+    },
+    "marker_token_audit": {
+      "fail_closed": true,
+      "hits": 0,
+      "scope": "every rendered 2AFC prompt, word-boundary, case-insensitive",
+      "tokens": [
+        "attempt",
+        "attempts",
+        "attempted",
+        "attempting",
+        "try",
+        "tries",
+        "tried",
+        "trying",
+        "earlier",
+        "previous",
+        "previously",
+        "prior",
+        "former",
+        "original",
+        "originally",
+        "already",
+        "instead",
+        "fail",
+        "fails",
+        "failed",
+        "failing",
+        "failure",
+        "wrong",
+        "wrongly",
+        "incorrect",
+        "incorrectly",
+        "mistake",
+        "mistaken",
+        "rejected",
+        "ruled",
+        "eliminated",
+        "eliminates",
+        "discarded"
+      ]
+    },
+    "per_formalism": 25,
+    "position_balance": {
+      "a_correct": 100,
+      "assignment": "deterministic from the construction seed: per-formalism 13/12 A-splits (even/odd formalism index) shuffled by the stream random.Random(f'{seed}:{formalism}:position')",
+      "b_correct": 100
+    },
+    "reverified_per_item": [
+      "written run reproduces the recorded trial-one evidence",
+      "written run FAILS trial two (pure failure evidence; selection-rule enforced and re-checked fail-closed)",
+      "correct fix lands on the wanted outcome in both trials",
+      "distractor lands on the wanted outcome in trial one only and reproduces the recorded trial-two failure",
+      "re-implemented state renderers verified against the generator's own episode rendering",
+      "candidate descriptions equal the module's own op descriptions",
+      "no provenance-marker token anywhere in the prompt",
+      "option lines and quoted change texts appear only in the option block",
+      "generator audits (>=2 round-1 candidates, unique round-2 survivor, extended-grammar legality) re-checked per item"
+    ],
+    "rows": 200,
+    "runner_input": {
+      "contains_answer": false,
+      "contains_oracle": false,
+      "path": "experiments/qwen35_4b_repair_verifier_signal_probe/data/probe_input_seed77160.jsonl",
+      "schema": [
+        "id",
+        "messages",
+        "meta"
+      ],
+      "sha256": "169716c49fb7c7473c041a38777e43ce1cfaa0fd3e98564ec05f9b70bd0770b2"
+    },
+    "selection": {
+      "excluded_total": 11,
+      "per_formalism": {
+        "balesled": {
+          "excluded_trial_two_success_before_quota": 0,
+          "pool": 40,
+          "selected": 25,
+          "unused_after_quota": 15
+        },
+        "barrowyoke": {
+          "excluded_trial_two_success_before_quota": 1,
+          "pool": 40,
+          "selected": 25,
+          "unused_after_quota": 14
+        },
+        "crankwheel": {
+          "excluded_trial_two_success_before_quota": 6,
+          "pool": 40,
+          "selected": 25,
+          "unused_after_quota": 9
+        },
+        "millround": {
+          "excluded_trial_two_success_before_quota": 4,
+          "pool": 40,
+          "selected": 25,
+          "unused_after_quota": 11
+        },
+        "sigilslate": {
+          "excluded_trial_two_success_before_quota": 0,
+          "pool": 40,
+          "selected": 25,
+          "unused_after_quota": 15
+        },
+        "skeinreel": {
+          "excluded_trial_two_success_before_quota": 0,
+          "pool": 40,
+          "selected": 25,
+          "unused_after_quota": 15
+        },
+        "trinketcord": {
+          "excluded_trial_two_success_before_quota": 0,
+          "pool": 40,
+          "selected": 25,
+          "unused_after_quota": 15
+        },
+        "troughline": {
+          "excluded_trial_two_success_before_quota": 0,
+          "pool": 40,
+          "selected": 25,
+          "unused_after_quota": 15
+        }
+      },
+      "pool_mix": "feedloop=320",
+      "pool_rows": 320,
+      "rule": "first 25 instances per formalism in generator stream order whose WRITTEN sequence also fails trial two (pure failure evidence on both trials); instances where the broken sequence coincidentally lands on trial two's wanted outcome are excluded and counted"
+    },
+    "self_reference_audit": {
+      "option_line_unique": true,
+      "quoted_change_text_only_in_option_block": true,
+      "rules_line_excluded_from_quoted_scope": "the machine documentation quotes every op form symmetrically (a parameterless op's description equals its documented form), so it cannot mark either option"
+    },
+    "source": {
+      "contains_executable_truth": true,
+      "path": "experiments/qwen35_4b_repair_verifier_signal_probe/data/probe_tasks_seed77160.jsonl",
+      "sha256": "088564158c4e57978b9012b229818455f7c9588106940352963c465b904dd4fc"
+    },
+    "surfaces": {
+      "balesled": 25,
+      "barrowyoke": 25,
+      "crankwheel": 25,
+      "millround": 25,
+      "sigilslate": 25,
+      "skeinreel": 25,
+      "trinketcord": 25,
+      "troughline": 25
+    }
+  },
+  "readings": {
+    "2afc_accuracy": "per arm: correct/200 with the exact (Clopper-Pearson) two-sided 95% binomial CI against the 0.5 chance floor",
+    "cap_contact_diagnostic": {
+      "preregistered": true,
+      "rule": "simulating two candidates over two trials each may press the 1,024-token think cap; a SIGNAL_ABSENT reading with think-arm cap contacts on more than 20% of items is annotated as possibly budget-limited (the verdict space stays two-state)",
+      "scope_threshold": 0.2
+    },
+    "complete_event_always_exits_zero": true,
+    "consequence_partition": {
+      "basis": "think arm only; the nothink arm is descriptive",
+      "chance_floor": 0.5,
+      "confidence": 0.95,
+      "ordered_total_no_third_state": true,
+      "signal_min_accuracy": 0.65,
+      "statements": {
+        "SIGNAL_ABSENT": "SIGNAL_ABSENT: the eliminative-repair skill lacks even execution-based fix-verification signal at this instrument; the on-policy class closes for menders and the program map is complete at demonstrated-not-confirmed",
+        "SIGNAL_PRESENT": "SIGNAL_PRESENT: the on-policy episode charter is fundable — execution-based fix-verification signal exists for the skill generation cannot produce (C29-class dissociation): the model can simulate candidate repairs against two-trial evidence above the frozen bar"
+      }
+    },
+    "no_aggregate_seed_exists": true,
+    "no_promotion": true,
+    "nothink_role": "C47 substrate-scoping check, reported not gated",
+    "per_formalism_accuracy": "25 items per formalism per arm, descriptive",
+    "position_bias": "accuracy on A-correct vs B-correct items (100 each), descriptive"
+  },
+  "rows": 200,
+  "run_order": {
+    "policy": "think first, then nothink — two sequential authenticated engine events on the one evaluated composite",
+    "sequence": [
+      "think_seed77160",
+      "nothink_seed77160"
+    ]
+  },
+  "schema_version": 1,
+  "seed": 77160,
+  "seed_freshness": {
+    "construction_seed": 77160,
+    "rule_if_collision": "next free integer, recorded here",
+    "runner_seed": 77160,
+    "substitution_required": false,
+    "verified": "77160 verified grep-fresh in seed contexts across experiments/, knowledge/, research_programs/, scripts/, configs/, and docs/ at design time (zero seed-context hits; 77150 is the dose-scale cell's construction seed immediately below this block). The runner seed reuses 77160 — both engine runs are greedy, so the seed is recorded provenance, not a sampling input; no new seed is drawn"
+  },
+  "stage": "repair_verifier_signal_probe_design",
+  "trains_nothing": true
+}

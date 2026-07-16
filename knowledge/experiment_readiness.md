@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 278
-- Anchor-ready: 262
-- Human-authored READMEs: 265
+- Experiments: 279
+- Anchor-ready: 263
+- Human-authored READMEs: 266
 - Generated README stubs: 13
-- Primary reports: 277
-- Experiment logs: 181
-- Smoke commands: 146
-- Artifact manifests: 250
+- Primary reports: 278
+- Experiment logs: 182
+- Smoke commands: 147
+- Artifact manifests: 251
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 165 |
+| `documented-scripts` | 166 |
 | `scripts-undocumented` | 22 |
 | `source-or-analysis` | 53 |
 
@@ -170,6 +170,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_recovery_reason_locality_interpolation`](../experiments/qwen35_4b_recovery_reason_locality_interpolation/README.md) | agentic_breadth_installation, posttraining_and_adaptation, process_control_and_tool_use | `human-authored` | [report](../experiments/qwen35_4b_recovery_reason_locality_interpolation/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_recovery_verifier_branch_tournament`](../experiments/qwen35_4b_recovery_verifier_branch_tournament/README.md) | agentic_breadth_installation, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_recovery_verifier_branch_tournament/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_reliability_exec_opsd_audit`](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md) | interpretability_and_diagnostics, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_reliability_exec_opsd_audit/reports/final_report.md) | no | `scripts-undocumented` | no | large-artifact, run-data | add-experiment-log, document-run-path, add-smoke-command |
+| yes | [`qwen35_4b_repair_verifier_signal_probe`](../experiments/qwen35_4b_repair_verifier_signal_probe/README.md) | agentic_breadth_installation, evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety | `human-authored` | [report](../experiments/qwen35_4b_repair_verifier_signal_probe/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen35_4b_repo_search_compress_bank`](../experiments/qwen35_4b_repo_search_compress_bank/README.md) | agentic_breadth_installation, benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, operator_and_skill_inventories, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_repo_search_compress_bank/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_retention_screen_calibration`](../experiments/qwen35_4b_retention_screen_calibration/README.md) | agentic_breadth_installation, interpretability_and_diagnostics, reliability_and_safety | `human-authored` | [report](../experiments/qwen35_4b_retention_screen_calibration/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_retrieval_adapt_verify_scale`](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety | `human-authored` | [report](../experiments/qwen35_4b_retrieval_adapt_verify_scale/reports/final_report.md) | no | `scripts-undocumented` | no | large-artifact, run-data | add-experiment-log, document-run-path, add-smoke-command |
