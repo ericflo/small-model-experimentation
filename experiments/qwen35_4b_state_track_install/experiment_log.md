@@ -104,3 +104,30 @@ unconsumed.
 
 Next: commit + push, seek the adversarial compute review
 (PASS_CONTROL_TRAINING) for `--stage train`.
+
+## 2026-07-17 — Sealed event 78169: INSTALLED_TRANSFER; cell closed
+
+- Three arms at 78169 (medium tb1024): base 0.1675, count_walk parent
+  0.3004, state_track candidate 0.3260. Candidate beats parent (+0.0256)
+  AND base on aggregate, with NO family below the one-episode slack
+  (families_below_slack=[]) -> frozen verdict INSTALLED_TRANSFER. First
+  NEW aggregate-adding move class since replay bounded at stage 8;
+  validates the core doctrine (install a universal skill via a designed
+  synthetic curriculum that looks nothing like the eval, prove by
+  transfer).
+- Per-family vs parent: siftstack +0.2, lockpick +0.1, mirage +0.1;
+  ties on chronicle/menders/rites/warren; sub-episode dips sirens -0.1,
+  toolsmith -0.03, stockade -0.014 (all within slack). The gains are on
+  agentic families plausibly reached by state-tracking transfer.
+- HONEST SCOPE (recorded at closure): (1) SINGLE SEED. The parent's own
+  aggregate swings 0.30-0.36 across sealed seeds (0.3004 here vs 0.3626
+  at 78168), and state_track's 0.3260 sits inside that band — the
+  +0.0256 could be partly seed noise. Per the confirmation doctrine
+  (which correctly killed the menders reading in lifecycle 28), a fresh
+  eval-only multi-seed confirmation on the same committed composites is
+  required before crowning state_track the durable reference. (2) The
+  ultimate /goal bar (every family strictly > base) is NOT met: warren
+  0.200 < base 0.367 — a count_walk-inherited weakness state_track did
+  not fix (goal gate vs base: 6 wins, 3 ties, 1 loss on warren).
+- state_track composite: tree 45fd2925..., weights b4bafbb7.... Funded
+  successor: eval-only multi-seed confirmation of the aggregate lift.
