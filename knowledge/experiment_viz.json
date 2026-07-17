@@ -49939,27 +49939,38 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Expression cost: walk pedagogy truncates, count pedagogy fits the budget",
+     "title": "Sealed event 78163: menders moves for the first time with all controls at zero",
      "categories": [
-      "walk: unparseable axis rows (of 21) cut at the 1,024-token cap",
-      "count: max think-target tokens (cap 120)",
-      "count: mean think-target tokens"
+      "base",
+      "zero_root_parent",
+      "replay_ctl7",
+      "count_walk (trained)"
      ],
      "series": [
       {
-       "label": "measured",
+       "label": "menders",
        "values": [
-        20,
-        105,
-        95.8
+        0.0,
+        0.0,
+        0.0,
+        0.1
+       ]
+      },
+      {
+       "label": "aggregate",
+       "values": [
+        0.0753,
+        0.295,
+        0.3298,
+        0.3312
        ]
       }
      ],
-     "x_label": "measurement",
-     "y_label": "rows / tokens",
+     "x_label": "arm",
+     "y_label": "score",
      "y_format": "number",
-     "note": "DESIGN FROZEN, pre-event. Predecessor forensics (enumerative_repair, committed generations at seed 88052): 20 of 21 unparseable axis rows were 1,024-token cap truncations caught mid-CORRECT canonical walk — the discipline installed but its expression cost grows with the number of prior attempts. This cell teaches the identical discipline as a constant-cost computation (count the k tried entries → target candidate k+1 → index arithmetic over rendered per-step candidate ranges): every training think target verified ≤ 120 real-tokenizer tokens (max 105, mean 95.8), constant in k. Results land after the gated stages; chart will be replaced by the fidelity cascade per arm.",
-     "source": "experiments/qwen35_4b_count_dont_walk_enumeration/data/design_receipt.json"
+     "note": "MECHANISM_ANSWER per the preregistered precedence rule: count_walk drew menders 0.1 with base, parent, AND the replay-trained control all at exactly 0.0 — the first candidate-vs-all-controls menders movement in program history — and topped the aggregate outright. Twist: the cell's intended mechanism was refuted at its own local gate (think tokens still at the 1,024 cap, median 1024, 25/40 truncations; canonical-next fidelity 7/40 = 0.175 << the frozen 0.50 precondition; the replay control drew 5/40 off the rendered-ranges prompt delta). Teaching verified ≤105-token constant-cost think targets did NOT install short thinking at 160 rows — verbose enumeration is the model's own preference — yet the dose converted anyway (candidate-specific vs replay: menders +0.1, mirage +0.4, stockade +0.21, all single-seed). Honest scope: one episode in one sealed seed, and the reference cell's untreated replay control once drew 0.1 on a different seed; the funded successor is an eval-only multi-seed confirmation on the same committed composites before any claim.",
+     "source": "experiments/qwen35_4b_count_dont_walk_enumeration/runs/benchmark/medium_tb1024_seed78163_pilot/summary.json"
     }
    ]
   }

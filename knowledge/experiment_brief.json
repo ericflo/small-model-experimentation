@@ -14957,32 +14957,32 @@
    ]
   },
   "qwen35_4b_count_dont_walk_enumeration": {
-   "verdict_tag": "Design frozen: same enumeration lesson, compact arithmetic answers instead of long walks",
+   "verdict_tag": "Mechanism answer: menders moves for the first time (0.1 vs all controls 0.0) — but not by the taught mechanism",
    "concept_primer": "The previous experiment taught the model a searcher's discipline for fix-the-broken-procedure puzzles: try every legal one-step change in a fixed, documented order, skipping the ones already tried. The discipline genuinely took — untrained models score exactly zero at it — but the model expressed it by narrating the whole march through the list, and on deep puzzles that narration ran out of room: 20 of its 21 unreadable exam answers were cut off mid-march while marching CORRECTLY. The insight this successor acts on: if the tried list already holds k entries in the fixed order, the right next candidate is simply entry k+1 — you can COUNT instead of WALK. Every puzzle now prints how many candidates each step offers (a small table of number ranges), and the model is taught a five-line arithmetic recipe: count the tried entries, add one, find which step's range holds that number, convert to the list slot, answer. The cost of the answer no longer grows with how deep the search is.",
    "plain_question": "If the model is taught to compute the next candidate's position with arithmetic (five short lines, always the same shape) instead of narrating a walk through the list, does the already-installed search discipline finally express itself within the answer budget — and clear the 50% bar the previous run missed?",
-   "plain_answer": "Not run yet — this is the frozen design. Everything is cloned from the previous experiment except how the answer is expressed: 160 fresh lessons (verified zero overlap with every earlier lesson and exam, including the predecessor's), the same fixed search order now printed with each step's number ranges, and taught answers capped at 120 thinking tokens (the actual lessons measure at most 105, no matter how deep the search). The exam, the fairness matching (both training runs see exactly the same token counts), the promotion rule, and the pre-written win/lose readings are unchanged; a new recorded-only readout will report each model's thinking length and how many answers hit the cap.",
+   "plain_answer": "Two results that point in opposite directions, both real. The taught compact phrasing did NOT take: at the local exam the trained model still thought all the way to its 1,024-token ceiling on most puzzles (25 of 40 answers cut off, barely fewer than its untreated siblings), and it produced the correct next candidate only 7 times in 40 — nowhere near the pre-set 50% bar. The model keeps its own long-winded style no matter how short the taught examples are. AND YET: at the sealed benchmark, the trained model solved a fix-the-procedure episode that its three comparison models — the raw base, its parent, and a sibling trained on the same replay data without the new lessons — all scored exactly zero on. Under the rules written down before the run, a candidate scoring above zero with every control at zero is the pre-declared positive outcome, and this is the first time it has happened for this family in the whole program. The honest caveats: it is one episode on one exam seed, a control model once hit the same score on a different seed in the previous experiment, and whatever the lessons installed that did the converting, it visibly is not the five-line arithmetic they taught.",
    "why_it_matters": "The predecessor's autopsy said the failure was expression cost, not the skill: the model searched correctly and ran out of room saying so. If a constant-cost expression clears the pre-set 50% bar, it confirms the skill was there all along and only the phrasing was broken — and it gives the one benchmark family still stuck at zero its best remaining shot. If it still falls short, the compact-expression explanation dies and the enumeration route is genuinely closed, not just badly phrased.",
-   "verdict_tone": "neutral",
+   "verdict_tone": "positive",
    "key_numbers": [
     {
-     "label": "Taught answer budget",
-     "value": "≤ 120 tokens",
-     "sub": "measured max 105, mean 96 — depth-independent"
+     "label": "Menders (sealed)",
+     "value": "0.1 vs 0 / 0 / 0",
+     "sub": "first candidate-over-all-controls move; n=1 episode"
     },
     {
-     "label": "Predecessor's cutoffs",
-     "value": "20 of 21",
-     "sub": "unreadable answers were mid-march truncations"
+     "label": "Aggregate (sealed)",
+     "value": "0.3312",
+     "sub": "tops replay 0.3298, parent 0.2950, base 0.0753"
     },
     {
-     "label": "Lesson dose",
-     "value": "160 rows",
-     "sub": "one kind, full concentration, fresh instances"
+     "label": "Compact phrasing",
+     "value": "refuted",
+     "sub": "median think at the 1,024 cap; 25/40 truncations"
     },
     {
-     "label": "Perfect-searcher need",
-     "value": "27.1 turns",
-     "sub": "mean on the fresh exam; 80% need > 10"
+     "label": "Fidelity bar",
+     "value": "7/40 = 0.175",
+     "sub": "pre-set bar was 0.50; replay control drew 5/40"
     }
    ],
    "charts": []

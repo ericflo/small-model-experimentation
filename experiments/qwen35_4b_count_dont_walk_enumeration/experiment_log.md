@@ -108,3 +108,28 @@ MAJOR finding on any lens. Actions taken from the minors, pre-GPU:
   teach proposing a candidate that does NOT repair (the intended
   propose-and-let-the-trial-judge discipline, but a strong prior
   against "answer = the fix").
+
+## 2026-07-16 — Sealed event 78163: MECHANISM_ANSWER; cell closed
+
+- Local gate (88056-88059): count_walk PROMOTED (strict totals over
+  both controls; retention in-band) but the cell's central bet was
+  refuted at the same gate: think tokens still at the 1,024 cap
+  (median) with 25/40 truncations, fidelity 7/40 = 0.175 << 0.50, and
+  the replay control drew 5/40 by itself off the rendered-ranges
+  prompt delta. Short thinking does not install at a 160-row dose;
+  verbose enumeration is the model's own preference, not a
+  walk-pedagogy artifact.
+- Sealed medium event at 78163: menders 0.1 with ALL controls at 0.0
+  -> frozen_interpretation = MECHANISM_ANSWER (positive precedence
+  branch; the failed fidelity precondition scoped only zero readings).
+  First candidate-vs-all-controls menders movement in program history.
+  Aggregate: candidate 0.3312 tops all arms (replay 0.3298, parent
+  0.2950, base 0.0753); goal gate vs base 9 wins / 1 tie / 0 losses.
+- Honest scope, recorded at closure: n=1 episode in one sealed seed;
+  the reference cell's untreated replay control drew menders 0.1 on a
+  different seed; the mechanism that converted is NOT the taught
+  compact expression (refuted above) — the dose installed something
+  else (candidate-specific: menders +0.1, mirage +0.4, stockade +0.21
+  vs replay, all single-seed). Per the program's confirmation doctrine
+  the funded successor is an EVAL-ONLY multi-seed confirmation on the
+  same committed composites; no capability claim until it replicates.

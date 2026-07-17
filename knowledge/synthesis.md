@@ -741,6 +741,26 @@ matched-compute sample-more ceiling.
 
 **Install is not conversion, proven at the sharpest possible contrast (2026-07-16, the enumerative-repair cell).** [qwen35_4b_enumerative_repair_protocol](../experiments/qwen35_4b_enumerative_repair_protocol/reports/report.md) taught the anti-cleverness discipline the corpus's own laws favored (C34: brute search dominates; protocols: the installable class) and produced the program's starkest mechanism contrast — 9/40 canonical-next enumeration on fresh instances versus BOTH controls at exactly 0/40 — with retention deep in-band: protocols now install 5-for-5. And it still failed at the family, on its own preregistered terms: 22.5% fidelity sat below the frozen 0.50 precondition (the leak is long-prompt answer formatting — parseable 19/40 — not the ordering logic, which ran 56% once a legal untried candidate emerged), the candidate drew menders 0.0 at the sealed event while the untrained replay control drew 0.1, and the pilot lost to both controls. The frozen two-direction rule (installed pre-event after review caught one-sided consequences) read FAILED_ON_ITS_OWN_TERMS, closing the pure-enumeration SFT route at this dose without ambiguity. The durable law hardens: LOCAL INSTALLATION AND FAMILY CONVERSION ARE SEPARATE WALLS — five installed protocols, one conversion (statechain→rites, itself lineage-scoped), zero conversions at menders across every mechanism class the program has been ingenious enough to try. The map records each closure by rule; the next genuinely different idea starts from this dissociation, not from another dose shape.
 
+The count-don't-walk cell (2026-07-16) delivered the program's first
+preregistered positive at the menders family — and refuted its own
+mechanism on the way. The dose (160 rows teaching a constant-cost
+five-line index computation instead of a verbose enumeration walk)
+failed to install short thinking: at the local gate the trained
+candidate still thought to the 1,024-token cap on most axis rows and
+its canonical-next fidelity (0.175) missed the frozen 0.50 bar, with
+the replay control lifted to 5/40 purely by the rendered-ranges prompt
+delta. Yet at sealed seed 78,163 the candidate drew menders 0.1 with
+ALL THREE controls at exactly 0.0 — the preregistered MECHANISM_ANSWER
+branch, never before reached — while also topping the aggregate
+(0.3312). The dissociation matters in both directions: the model's
+verbose expression style is its own stable preference (a second
+independent refutation of low-dose style transfer, after the menders
+pedagogy closures), and conversion at the family evidently does not
+require the visible taught form. Scope discipline: one episode, one
+seed, an untreated control once matched it elsewhere; an eval-only
+multi-seed confirmation on the same committed composites is the funded
+next step, and no capability claim exists until it replicates.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

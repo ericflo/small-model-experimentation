@@ -1447,3 +1447,33 @@ locally-installed skill and a benchmark family stands even for the
 mechanism the corpus's own laws favored; (3) menders draws continue to
 land on arbitrary arms (the replay control this time), re-confirming
 draw-domination at this granularity.
+
+## qwen35_4b_count_dont_walk_enumeration (2026-07-16 — MECHANISM_ANSWER: first menders move over all controls; the taught mechanism refuted en route)
+
+The truncation-forensics successor ran the full ladder clean and
+produced the program's first preregistered positive at the family.
+Local gate: count_walk PROMOTED (axis totals strictly over BOTH
+controls, retention in-band) — but the cell's own hypothesis died
+there: the new expression_cost reading showed the trained candidate
+still thinking to the 1,024-token cap (median 1,024; truncations
+25/40 vs replay 27, parent 32) despite 160 rows of verified
+≤105-token constant-cost targets, and canonical-next fidelity reached
+only 7/40 = 0.175 (replay drew 5/40 by itself off the rendered-ranges
+prompt delta shown to all arms). Two laws land: SHORT THINKING DOES
+NOT INSTALL at a 160-row dose — the verbose enumeration is the model's
+own preference, not a walk-pedagogy artifact — and PROMPT-RENDERED
+STRUCTURE LIFTS EVERY ARM (the strictly-above-both-controls clause is
+what kept the claim honest).
+
+Sealed 78,163: menders 0.1 with base, parent, AND replay all at
+exactly 0.0 → the frozen positive-precedence branch (MECHANISM_ANSWER)
+fired, the first candidate-vs-all-controls menders movement in program
+history; the candidate also topped the aggregate outright (0.3312 vs
+0.3298/0.2950/0.0753) with a 9-win/1-tie/0-loss goal gate vs base.
+Honest scope, frozen at closure: one episode in one sealed seed; the
+reference cell's untreated replay control drew 0.1 on a different
+seed; and whatever converted is NOT the taught compact computation
+(refuted above) — candidate-specific deltas vs replay (menders +0.1,
+mirage +0.4, stockade +0.21) are all single-seed. The confirmation
+doctrine funds an EVAL-ONLY multi-seed confirmation on the same two
+committed composites before any claim.
