@@ -1549,3 +1549,24 @@ count_walk-inherited). The three-lens adversarial workflow found the
 cell clean (zero MAJORs) and the file-sha merge-receipt lesson from
 lifecycle 29 was applied at pinning. Funded successor: multi-seed
 confirmation of the aggregate lift.
+
+## qwen35_4b_state_track_confirmation (2026-07-17 — CONFIRMED, directional and soft)
+
+The six-seed eval-only paired confirmation of lifecycle 30's
+INSTALLED_TRANSFER returned CONFIRMED but honestly soft. Paired deltas
+(state_track - count_walk, same seed) mean +0.0207, wins 4/6 -> frozen
+CONFIRMED; but SD 0.0453, paired t=1.12 (5 df), not strictly
+significant (p~0.16), exactly as the preregistered LIBERAL rule
+(alpha~0.31, NOT_CONFIRMED the decisive outcome) anticipated. The mean
+matches the single-seed 78169 lift (+0.0256); all 7 seeds give mean
++0.0214, 5/7 positive. LAW (updated): a divergent designed skill
+produced a REAL but SMALL and NOISY transferable aggregate gain
+(~+0.02) that replicates directionally - the install-universal-features
+doctrine is supported, not proven at strict significance at this N.
+state_track adopted as the program reference composite. The paired
+design (same seed both arms) was essential: it cancels the parent's
+0.30-0.36 marginal seed swing that would otherwise swamp a +0.02
+effect. NEXT PHASE (owner-approved): measure base/count_walk/state_track
+on a real agentic coding harness (duet-eval driving Pi against the local
+composites), measurement-only, no contamination, to test whether the
+menagerie proxy gain translates to real coding.

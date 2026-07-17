@@ -822,6 +822,27 @@ portfolio now has a live, believable engine for further aggregate
 gains (divergent designed skills, one per dose) to replace the
 exhausted replay lever.
 
+The state_track confirmation (2026-07-17) closed the menagerie phase of
+this push with an honest, modest positive. Six fresh sealed seeds, run
+paired (same seed to both arms so the parent's 0.30-0.36 seed swing
+cancels), gave a mean lift of +0.0207 with state_track winning 4 of 6 -
+CONFIRMED under the frozen rule, and matching the original single-seed
++0.0256. But the effect is small and noisy (SD 0.045, paired t=1.12,
+not strictly significant at n=6); the rule was preregistered as a
+liberal directional check for exactly this reason, with the decisive
+outcome being the negative-mean kill that did not fire. The honest
+takeaway: installing a divergent, uncontaminated universal skill
+produced a real but small transferable aggregate gain that replicates
+directionally - genuine support for the founding doctrine, not a
+decisive proof. state_track is adopted as the program reference
+composite. The strategic pivot is now set (owner-approved): rather than
+install another proxy skill, measure the current best composites on a
+REAL agentic coding harness (duet-eval driving the Pi coding agent
+against the local models), measurement-only to avoid contamination -
+because the entire program's value rests on whether the menagerie proxy
+gains translate to the actual target, and that link has never been
+measured.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

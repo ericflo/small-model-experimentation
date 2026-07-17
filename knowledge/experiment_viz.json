@@ -7,27 +7,33 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Design freeze: the single-seed 78169 lift this cell re-tests across six sealed seeds",
+     "title": "Six-seed paired confirmation: state_track's lift replicates directionally (CONFIRMED, soft)",
      "categories": [
-      "base",
-      "count_walk (parent)",
-      "state_track (candidate)"
+      "78170",
+      "78171",
+      "78172",
+      "78173",
+      "78174",
+      "78175"
      ],
      "series": [
       {
-       "label": "prior aggregate at sealed seed 78169",
+       "label": "paired delta (state_track - count_walk aggregate)",
        "values": [
-        0.1675,
-        0.3004,
-        0.326
+        -0.0123,
+        0.0373,
+        -0.0385,
+        0.005,
+        0.0439,
+        0.0887
        ]
       }
      ],
-     "x_label": "arm",
-     "y_label": "aggregate score",
+     "x_label": "sealed seed",
+     "y_label": "per-seed aggregate delta",
      "y_format": "number",
-     "note": "Design-frozen, eval-only (no seed consumed yet). The bars are the PRIOR single-seed 78169 event that this cell re-tests: state_track beat its count_walk parent by a PAIRED +0.0256 (0.3260 vs 0.3004), the lift that drew lifecycle 30's INSTALLED_TRANSFER. The problem this cell fixes: the parent's own aggregate swings 0.30-0.36 seed-to-seed (0.3004 here vs 0.3626 at 78168), so state_track's 0.3260 sits INSIDE the parent's own band. The frozen paired rule re-forms the delta d = state_track - count_walk on each of six fresh sealed seeds (78170-78175), so the common seed-difficulty cancels: CONFIRMED iff mean_d > 0 AND at least 4 of 6 per-seed wins (1e-12 tie guard); NOT_CONFIRMED iff mean_d <= 0 (dominates the wins clause); AMBIGUOUS otherwise; 78169 is prior evidence, never pooled. Honest calibration: this paired majority rule is a LIBERAL directional check (false-CONFIRMED ~0.31 under the pure null) - the decisive, high-value outcome is NOT_CONFIRMED, and the test has 0.90-0.98 power if the +0.0256 lift is real (sigma_d 0.02-0.03). The 78169 bars are prior evidence reported alongside the eventual verdict, never pooled into it.",
-     "source": "experiments/qwen35_4b_state_track_confirmation/reports/preregistration.md"
+     "note": "The frozen paired rule returned CONFIRMED: mean paired delta +0.0207 with state_track winning 4 of 6 fresh sealed seeds (threshold >=4). Pairing (same seed to both arms) cancels the parent's 0.30-0.36 seed swing, isolating the skill effect. HONEST EFFECT SIZE: SD 0.045, paired t=1.12 on 5 df -> NOT strictly significant (p~0.16); the preregistered rule was deliberately a LIBERAL directional check (false-CONFIRMED ~0.31 under the null), with NOT_CONFIRMED as the decisive kill. The +0.0207 mean matches the single-seed 78169 observation (+0.0256); across all 7 seeds the mean is +0.0214 with 5/7 positive. Reading: state_track is a real-but-small (~+0.02) and noisy aggregate improvement - durable enough to adopt as the program reference composite, not a large or crisp gain. Directionally supports the install-universal-features doctrine.",
+     "source": "experiments/qwen35_4b_state_track_confirmation/runs/benchmark/confirmation_readout.json"
     }
    ]
   },

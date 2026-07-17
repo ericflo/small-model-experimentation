@@ -2,19 +2,24 @@
 
 ## Summary
 
-Design-frozen, eval-only. Lifecycle 30 recorded a single-seed
-INSTALLED_TRANSFER at sealed seed 78169: the `state_track` composite
-scored aggregate 0.3260 versus the `count_walk` parent's 0.3004, a paired
-lift of +0.0256 with no family below the one-episode retention slack. But
-the parent's own aggregate swings 0.30-0.36 across sealed seeds (0.3004 at
-78169 versus 0.3626 at 78168), so state_track's 0.3260 sits inside the
-parent's own seed band and the lift could be partly or wholly seed noise.
-This cell (lifecycle 31) confirms or kills that lift across six fresh
-sealed seeds with a frozen PAIRED replication rule: it trains nothing,
-merges nothing, builds no corpus, and promotes nothing. The terminal
-artifact is the three-state readout (CONFIRMED / NOT_CONFIRMED /
-AMBIGUOUS). This document is frozen at design time; the Results section
-records the design and the pending event, not a measured outcome.
+CONFIRMED, directionally — the state_track aggregate lift replicated
+across six fresh sealed seeds, but the effect is small and statistically
+soft. Paired deltas (state_track − count_walk on the same seed, so the
+parent's 0.30-0.36 seed swing cancels) were
+[-0.0123, +0.0373, -0.0385, +0.0050, +0.0439, +0.0887]: mean +0.0207,
+state_track winning 4 of 6 (threshold ≥4), clearing the frozen rule as
+CONFIRMED. Honest effect size (promised at freeze): SD 0.0453, paired
+t = 1.12 on 5 df — not strictly significant (one-sided p ≈ 0.16). This
+is exactly what the preregistered LIBERAL rule (false-CONFIRMED ≈ 0.31
+under the null) anticipated; the decisive high-value outcome was
+NOT_CONFIRMED (a negative mean), which did not occur. The mean lift
+(+0.0207) matches the single-seed 78169 observation (+0.0256); across
+all seven seeds the mean is +0.0214 with 5/7 positive. Reading:
+state_track is a real-but-small (~+0.02) and noisy aggregate
+improvement — durable enough to adopt as the program reference
+composite, not a large or crisp gain. The install-universal-features
+doctrine is directionally supported, not proven at strict significance
+at n=6.
 
 ## Research Program Fit
 
