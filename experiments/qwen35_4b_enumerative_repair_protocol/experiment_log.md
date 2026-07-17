@@ -85,3 +85,18 @@ Created as a new experiment scaffold.
   `--check` twice byte-identical; the local gate receipt is untouched —
   no pinned file changed). Tests extended for the scoping rule and the
   0.50 boundary; suite and smoke re-run green.
+
+## 2026-07-16 — Local gate: PROMOTED with the program's starkest contrast
+
+- The 12-run gate promoted enum_repair on all eight checks: axis 9/40
+  versus BOTH controls at 0/40 — untrained models cannot produce the
+  canonical-next candidate at all; retention 57.67 pooled vs 59.33/59.67
+  (deep in-band). Fidelity cascade: parseable 19/40 (the bottleneck is
+  answer formatting on long prompts), legal 18, untried 16,
+  canonical-next 9 (56% ordering discipline once legal-untried).
+- Honest pre-event note: 22.5% fidelity is below the frozen 0.50
+  precondition, so a zero menders draw will read
+  FAILED_ON_ITS_OWN_TERMS per the preregistered rule; MECHANISM_ANSWER
+  (menders > 0, controls 0) takes precedence if it fires. Pins filled;
+  the normalized hash held; PASS_BENCHMARK_EVENT granted; sealed 78,162
+  opens at the next green checkpoint.

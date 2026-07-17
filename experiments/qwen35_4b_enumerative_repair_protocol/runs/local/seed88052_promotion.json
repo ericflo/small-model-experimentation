@@ -1,0 +1,343 @@
+{
+  "adjudication_protocol": "pooled_k3",
+  "aggregate_seed": 78162,
+  "aggregate_seed_open": true,
+  "axis_kind_counts": {
+    "u_enum_repair": 40
+  },
+  "axis_kinds": [
+    "u_enum_repair"
+  ],
+  "axis_rows": 40,
+  "axis_surfaces": [
+    "balesled",
+    "barrowyoke",
+    "crankwheel",
+    "millround",
+    "sigilslate",
+    "skeinreel",
+    "trinketcord",
+    "troughline"
+  ],
+  "backend": "vllm_merged_composite",
+  "benchmark_data_read": false,
+  "candidates": [
+    "enum_repair"
+  ],
+  "checks": {
+    "axis_total_strictly_beats_parent": true,
+    "axis_total_strictly_beats_replay": true,
+    "retention_pooled_cap_contacts_within_3_of_parent": true,
+    "retention_pooled_cap_contacts_within_3_of_replay": true,
+    "retention_pooled_correct_within_5_of_parent": true,
+    "retention_pooled_correct_within_5_of_replay": true,
+    "retention_pooled_parsed_within_3_of_parent": true,
+    "retention_pooled_parsed_within_3_of_replay": true
+  },
+  "controls": [
+    "replay_ctl6",
+    "zero_root_parent"
+  ],
+  "descriptive_noise": {
+    "delta_sd_pooled": 2.614064523559687,
+    "deltas_vs_parent": {
+      "enum_repair": {
+        "by_screen": [
+          2,
+          -2,
+          -5
+        ],
+        "pooled_mean": -1.6666666666666667,
+        "sd": 3.5118845842842465,
+        "vs": "zero_root_parent"
+      },
+      "replay_ctl6": {
+        "by_screen": [
+          1,
+          1,
+          -1
+        ],
+        "pooled_mean": 0.3333333333333333,
+        "sd": 1.1547005383792517,
+        "vs": "zero_root_parent"
+      }
+    },
+    "reported_not_gated": true,
+    "screen_sd_pooled_levels": 3.958114029012639
+  },
+  "design_receipt_sha256": "5eb2ccb0d90b71430137c525dbd4d68015c2458abee3bab05944030cb0952b26",
+  "eligible": [
+    "enum_repair"
+  ],
+  "experiment_id": "qwen35_4b_enumerative_repair_protocol",
+  "local_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_enumerative_repair_protocol/runs/local/seed88052.json",
+  "local_receipt_sha256": "050ba9799d51c68ef0d29750fb07fed634a272b1b5bf43974b3ce98507135891",
+  "mechanism_reading": {
+    "decomposition": "legal / untried / canonical-next booleans per axis row: a mechanism decomposition beyond raw correctness — an arm can propose legal-but-already-tried candidates (no crossing off), legal-untried-but-out-of-order candidates (no frozen order), or the canonical-next candidate (the installed enumerator)",
+    "enumeration_fidelity_per_arm": {
+      "enum_repair": {
+        "canonical_next": 9,
+        "legal": 18,
+        "legal_but_already_tried": 2,
+        "legal_untried_but_not_next": 7,
+        "parseable": 19,
+        "reported_not_gated": true,
+        "rows_with_readout": 40,
+        "untried": 16
+      },
+      "replay_ctl6": {
+        "canonical_next": 0,
+        "legal": 5,
+        "legal_but_already_tried": 2,
+        "legal_untried_but_not_next": 3,
+        "parseable": 9,
+        "reported_not_gated": true,
+        "rows_with_readout": 40,
+        "untried": 3
+      },
+      "zero_root_parent": {
+        "canonical_next": 0,
+        "legal": 4,
+        "legal_but_already_tried": 2,
+        "legal_untried_but_not_next": 2,
+        "parseable": 4,
+        "reported_not_gated": true,
+        "rows_with_readout": 40,
+        "untried": 2
+      }
+    },
+    "reported_not_gated": true
+  },
+  "no_absolute_per_kind_floors": true,
+  "per_surface_reported_not_gated": true,
+  "promoted": "enum_repair",
+  "retention_rows_per_screen": 104,
+  "retention_screens": 3,
+  "schema_version": 1,
+  "screen_seeds": [
+    88053,
+    88054,
+    88055
+  ],
+  "seed": 88052,
+  "single_kind_gate": {
+    "kind": "enum_repair",
+    "no_per_kind_split_exists": true,
+    "ties_fail_the_axis_total": true
+  },
+  "summaries": {
+    "enum_repair": {
+      "adapter": "enum_repair",
+      "axis": {
+        "cap_contacts": 21,
+        "correct": 9,
+        "enumeration_fidelity": {
+          "canonical_next": 9,
+          "legal": 18,
+          "legal_but_already_tried": 2,
+          "legal_untried_but_not_next": 7,
+          "parseable": 19,
+          "reported_not_gated": true,
+          "rows_with_readout": 40,
+          "untried": 16
+        },
+        "parsed": 19,
+        "per_surface_correct": {
+          "balesled": 1,
+          "barrowyoke": 1,
+          "crankwheel": 0,
+          "millround": 0,
+          "sigilslate": 1,
+          "skeinreel": 3,
+          "trinketcord": 2,
+          "troughline": 1
+        },
+        "rows": 40
+      },
+      "retention": {
+        "correct_by_screen": [
+          64,
+          56,
+          53
+        ],
+        "pooled_means": {
+          "cap_contacts": 12.333333333333334,
+          "correct": 57.666666666666664,
+          "parsed": 91.66666666666667,
+          "route_abstentions": 0.3333333333333333
+        },
+        "screens": {
+          "88053": {
+            "cap_contacts": 14,
+            "correct": 64,
+            "parsed": 90,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88054": {
+            "cap_contacts": 11,
+            "correct": 56,
+            "parsed": 93,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88055": {
+            "cap_contacts": 12,
+            "correct": 53,
+            "parsed": 92,
+            "route_abstentions": 1,
+            "rows": 104
+          }
+        },
+        "sums": {
+          "cap_contacts": 37,
+          "correct": 173,
+          "parsed": 275,
+          "route_abstentions": 1
+        }
+      }
+    },
+    "replay_ctl6": {
+      "adapter": "replay_ctl6",
+      "axis": {
+        "cap_contacts": 31,
+        "correct": 0,
+        "enumeration_fidelity": {
+          "canonical_next": 0,
+          "legal": 5,
+          "legal_but_already_tried": 2,
+          "legal_untried_but_not_next": 3,
+          "parseable": 9,
+          "reported_not_gated": true,
+          "rows_with_readout": 40,
+          "untried": 3
+        },
+        "parsed": 9,
+        "per_surface_correct": {
+          "balesled": 0,
+          "barrowyoke": 0,
+          "crankwheel": 0,
+          "millround": 0,
+          "sigilslate": 0,
+          "skeinreel": 0,
+          "trinketcord": 0,
+          "troughline": 0
+        },
+        "rows": 40
+      },
+      "retention": {
+        "correct_by_screen": [
+          63,
+          59,
+          57
+        ],
+        "pooled_means": {
+          "cap_contacts": 10.0,
+          "correct": 59.666666666666664,
+          "parsed": 94.33333333333333,
+          "route_abstentions": 0.0
+        },
+        "screens": {
+          "88053": {
+            "cap_contacts": 10,
+            "correct": 63,
+            "parsed": 95,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88054": {
+            "cap_contacts": 10,
+            "correct": 59,
+            "parsed": 94,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88055": {
+            "cap_contacts": 10,
+            "correct": 57,
+            "parsed": 94,
+            "route_abstentions": 0,
+            "rows": 104
+          }
+        },
+        "sums": {
+          "cap_contacts": 30,
+          "correct": 179,
+          "parsed": 283,
+          "route_abstentions": 0
+        }
+      }
+    },
+    "zero_root_parent": {
+      "adapter": "zero_root_parent",
+      "axis": {
+        "cap_contacts": 36,
+        "correct": 0,
+        "enumeration_fidelity": {
+          "canonical_next": 0,
+          "legal": 4,
+          "legal_but_already_tried": 2,
+          "legal_untried_but_not_next": 2,
+          "parseable": 4,
+          "reported_not_gated": true,
+          "rows_with_readout": 40,
+          "untried": 2
+        },
+        "parsed": 4,
+        "per_surface_correct": {
+          "balesled": 0,
+          "barrowyoke": 0,
+          "crankwheel": 0,
+          "millround": 0,
+          "sigilslate": 0,
+          "skeinreel": 0,
+          "trinketcord": 0,
+          "troughline": 0
+        },
+        "rows": 40
+      },
+      "retention": {
+        "correct_by_screen": [
+          62,
+          58,
+          58
+        ],
+        "pooled_means": {
+          "cap_contacts": 12.333333333333334,
+          "correct": 59.333333333333336,
+          "parsed": 91.66666666666667,
+          "route_abstentions": 0.0
+        },
+        "screens": {
+          "88053": {
+            "cap_contacts": 13,
+            "correct": 62,
+            "parsed": 91,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88054": {
+            "cap_contacts": 14,
+            "correct": 58,
+            "parsed": 90,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88055": {
+            "cap_contacts": 10,
+            "correct": 58,
+            "parsed": 94,
+            "route_abstentions": 0,
+            "rows": 104
+          }
+        },
+        "sums": {
+          "cap_contacts": 37,
+          "correct": 178,
+          "parsed": 275,
+          "route_abstentions": 0
+        }
+      }
+    }
+  }
+}
