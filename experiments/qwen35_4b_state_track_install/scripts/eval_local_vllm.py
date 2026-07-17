@@ -106,7 +106,7 @@ MERGED = {
 # canonicalizes exactly this value slot); the eval refuses to run while the
 # pin is still None.
 EXPECTED_TRAINED_TREE_SHA256: dict[str, str | None] = {
-    "state_track": None,
+    "state_track": "45fd2925e417c82e4848b2ca89907934df9e60503b6529af0bddbd8aa359be7e",
 }
 ANSWER_RE = re.compile(r"(?:^|\n)ANSWER:\s*(.*?)(?=\n|<\||</|$)", re.DOTALL)
 

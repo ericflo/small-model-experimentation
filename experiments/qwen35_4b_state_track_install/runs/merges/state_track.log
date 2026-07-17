@@ -1,0 +1,18 @@
+[merge] loading composite /home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_count_dont_walk_enumeration/merged/count_walk bf16 ...
+
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]
+Loading weights:  19%|█▉        | 139/723 [00:00<00:00, 1378.20it/s]
+Loading weights:  38%|███▊      | 277/723 [00:00<00:00, 1341.38it/s]
+Loading weights:  59%|█████▉    | 425/723 [00:00<00:00, 1400.96it/s]
+Loading weights:  78%|███████▊  | 567/723 [00:00<00:00, 1406.67it/s]
+Loading weights: 100%|██████████| 723/723 [00:00<00:00, 1646.65it/s]
+[merge] LoRA products use cuda with FP32 matmul
+[merge] example composite tail: '0.linear_attn.conv1d' -> ['model.language_model.layers.0.linear_attn.conv1d']
+[merge] applied 128 LoRA deltas (expected 7 modules x layers)
+[merge] saving composite merged model to /home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_state_track_install/merged/state_track ...
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [01:10<00:00, 70.14s/it]
+Writing model shards: 100%|██████████| 1/1 [01:10<00:00, 70.14s/it]
+[merge] processor save skipped: Can't load image processor for '/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_count_dont_walk_enumeration/merged/count_walk'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure '/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_count_dont_walk_enumeration/merged/count_walk' is the correct path to a directory containing a preprocessor_config.json file
+[merge] done
