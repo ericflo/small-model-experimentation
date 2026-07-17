@@ -166,6 +166,16 @@ exists for the zero draw):
    actual budget."
 3. OTHERWISE a menders 0 reads as the install/conversion failing on its
    own terms.
+4. NONZERO-WITH-NONZERO-CONTROL (added pre-GPU by review amendment,
+   before any model event): if the candidate's menders reading is > 0
+   but ANY control is also > 0, the reading is DESCRIPTIVE ONLY — no
+   mechanism claim of any strength may be made from this cell (the code
+   already records this branch with frozen_interpretation = None). The
+   reference cell's sealed event showed the replay control can draw
+   menders 0.1, so this branch is live; any mechanism claim from a draw
+   in this branch requires a fresh confirmation cell with its own
+   preregistered candidate-vs-control contrast. This clause freezes
+   interpretation only and changes no code.
 
 Fidelity precondition (defined numerically a priori, keyed to the
 preregistered enumeration-fidelity readout; integer-exact comparisons):

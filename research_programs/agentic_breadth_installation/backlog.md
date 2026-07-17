@@ -620,3 +620,12 @@ variants (think-economy-only mixture, abstention-only install) or retire.
   steering. Compare +0.25 uplift with a context-gated last-layer/activation
   intervention and stop at P1 unless median non-target drift is ≤0.10. Do not
   fund n=32/gap=1.0 harvesting until a mechanism passes that preflight.
+
+- Template-level hardening for future cells (from the count-dont-walk
+  pre-GPU review; all inherited conventions, none blocking): scope
+  rebuild_clean_chain's original-byte-compare to --verify-inputs so a
+  cell is literally standalone with sibling dirs deleted; extend the
+  normalized-hash pin (or a design-time pin) to eval_local_vllm.py;
+  recompute canonical_next_counts inside authenticate_local_promotion;
+  document the ledger crash-wedge recovery and add a lock or a
+  single-invocation guard.

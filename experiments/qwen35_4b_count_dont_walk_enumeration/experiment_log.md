@@ -54,3 +54,57 @@ Created as a new experiment scaffold.
   suite, and the expression-cost gate-reading suite. `run.py --smoke`
   green end to end. Boundary drills refuse (train/merge/local/benchmark
   stages abort on a dirty tree and on unfilled TODO-PINs).
+
+## 2026-07-16 — Pre-GPU adversarial review (three lenses): NO MAJOR; amendments recorded
+
+Three independent review lenses ran against the frozen design at
+ddde0e37 before any GPU stage: (1) preregistration/consequence-rule
+soundness, (2) treatment-content correctness — an independent per-row
+re-derivation of all 200 model-facing rows from prompt text alone,
+0 errors, byte-exact — and contamination (0 banned-vocab hits, 0
+overlap across 83 pinned sources, no renamed-structure leak), (3)
+pins/reproducibility — every pin live-verified non-vacuous, the
+normalized-hash mutation probes all held (slot canonicalization exactly
+6 slots; injection/relocation/duplication all fail closed), seeds
+grep-fresh, stage ordering and merge refusals confirmed. Verdict: no
+MAJOR finding on any lens. Actions taken from the minors, pre-GPU:
+
+- REVIEW AMENDMENT (preregistration): added frozen consequence 4 —
+  candidate menders > 0 with ANY control > 0 is DESCRIPTIVE ONLY, no
+  mechanism claim; matches the code's existing frozen_interpretation =
+  None branch; interpretation-only, no code change, no pin churn.
+- ERRATA (design receipt, seed 85): the receipt sentence "zero
+  seed-context hits anywhere in the repo" for training seed 85 is
+  overstated by its own evidentiary standard: `"seed": 85` appears as a
+  per-row data field in
+  experiments/qwen35_4b_meta_induction/data/train_shift.jsonl (one
+  row), the same class of hit the receipt cites as secondary takenness
+  evidence for 84. Not a collision (per-row generation field in an
+  unrelated cell vs a torch training seed; program precedent excludes
+  per-row fields — the reference cell recorded-and-excluded the same
+  class for its seed 83). The receipt is NOT rewritten; this errata is
+  the record. Seed 85 stands.
+- ACCEPTED INHERITED LIMITATIONS (logged, not fixed here; carried
+  byte-identically from the reference cell): (a) rebuild_clean_chain
+  verify_inputs unconditionally requires the sibling zero-root cell's
+  receipts to exist even though all information is in-cell — a scoping
+  fix belongs in a future cell's template; (b) eval_local_vllm.py is
+  deferred-pinned only (drift before the local stage is caught by
+  clean-pushed-main + post-hoc sha, not a design-time pin); (c)
+  authenticate_local_promotion verifies the promotion receipt by
+  sha/pointer without recomputing canonical_next_counts — a hand-edited
+  receipt could flip verdict 3 to 2 (both non-success verdicts; the raw
+  local receipt is committed and sha-pinned so tampering is
+  deterministically detectable post-hoc); (d) benchmark ledger: a crash
+  between summary write and closed-append wedges (recovery: delete
+  summary.json, --resume regenerates byte-identically without new
+  gateway calls); no file lock against concurrent invocations
+  (single-operator environment; double-consumption detectable as 2
+  ledger rows).
+- READOUT PRIORS (from the content lens, to carry into interpretation):
+  the locate arithmetic is exercised only at canonical indices <= 11
+  and never targets steps 4-5 (train/gate symmetric; family episodes
+  needing deeper indices are extrapolation); 98.75% of training rows
+  teach proposing a candidate that does NOT repair (the intended
+  propose-and-let-the-trial-judge discipline, but a strong prior
+  against "answer = the fix").
