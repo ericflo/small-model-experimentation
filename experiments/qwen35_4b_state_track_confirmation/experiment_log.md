@@ -63,3 +63,29 @@ the intake was `4170b082...`, which is actually the `replay_compound`
 receipt sha from a sibling cell; the correct count_walk merge-receipt file
 sha (used by lifecycle 30 and matching the file on disk) is
 `840edca0...`. The correct pin is used here.
+
+## 2026-07-17 — Six-seed confirmation complete: CONFIRMED (directional; statistically soft)
+
+- Events 78170-78175 (12 sealed runs, budget-clean, implementation
+  signature identical across all receipts and the prior 78169 event).
+  Paired deltas d_i = state_track_agg - count_walk_agg (same seed):
+  [-0.0123, +0.0373, -0.0385, +0.0050, +0.0439, +0.0887]. mean_d =
+  +0.0207, wins = 4/6 -> frozen verdict CONFIRMED (mean_d > 0 AND wins
+  >= 4).
+- HONEST EFFECT SIZE (descriptive, promised at freeze): SD 0.0453, SE
+  0.0185, paired t = 1.12 on 5 df — NOT strictly significant (one-sided
+  p ~ 0.16). The observed variance exceeds the preregistered sigma_d
+  (0.02-0.03), exactly why the frozen rule was declared a LIBERAL
+  directional check (alpha ~ 0.31), not a significance test. The mean
+  lift (+0.0207) matches the single-seed 78169 observation (+0.0256);
+  combined 7 seeds give mean +0.0214, 5/7 positive.
+- READING: state_track is a real-but-small and noisy aggregate
+  improvement over count_walk — durable enough to treat state_track as
+  the current-best composite, but the edge is ~+0.02 with high
+  seed variance, NOT a large or crisp gain. The install-universal-
+  features doctrine is supported (a divergent skill added transferable
+  aggregate and it replicated directionally); it is not proven at
+  strict significance at n=6.
+- Consequence: state_track adopted as the program reference composite
+  for the next phase (the coding-harness measurement); the modest,
+  noisy magnitude is carried forward honestly.

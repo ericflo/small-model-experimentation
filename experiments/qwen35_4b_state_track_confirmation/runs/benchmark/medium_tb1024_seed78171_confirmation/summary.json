@@ -1,0 +1,81 @@
+{
+ "benchmark_data_read": false,
+ "benchmark_implementation": {
+  "runner_sha256": "a3beecd8b5c89ccfd99a172a6d85321d39b9feb6c29d12f10b2f4d7499e273cb",
+  "source_file_count": 56,
+  "source_inventory_sha256": "218b8615a95f24da962c931e9cd2dba58d853a7bdcd2847cd8e2c42fc2c05f42"
+ },
+ "budget": {
+  "count_walk": {
+   "wall_seconds": 161.86340251681395,
+   "within_budget": true
+  },
+  "state_track": {
+   "wall_seconds": 143.3334373489488,
+   "within_budget": true
+  }
+ },
+ "gateway_sha256": "53cf6533dbd710eb167503363c39f73dbf7559a0d91f40a00436a3c218a01c17",
+ "model_order": [
+  "count_walk",
+  "state_track"
+ ],
+ "model_tree_sha256s": {
+  "count_walk": "d5fdc55c0238ffbe2465bd73a5f9d63f442ad4083ff9eb477c9887e15e3da6b1",
+  "state_track": "45fd2925e417c82e4848b2ca89907934df9e60503b6529af0bddbd8aa359be7e"
+ },
+ "model_weight_sha256s": {
+  "count_walk": "ddd7bc4b5b8f4f2393996148bcb1b411a8be4d7f03430babe789b3534b9850a3",
+  "state_track": "b4bafbb7d3ff8dedd2fa216bc9c62997d960d43a6cac22a88976245bcc35d1c1"
+ },
+ "models": {
+  "count_walk": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_count_dont_walk_enumeration/merged/count_walk",
+  "state_track": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_state_track_install/merged/state_track"
+ },
+ "name": "confirmation",
+ "paired": {
+  "candidate_wins": true,
+  "count_walk_aggregate": 0.2889473684210526,
+  "paired_delta": 0.03729290617848974,
+  "state_track_aggregate": 0.32624027459954236,
+  "verdict_deferred_to_readout": true
+ },
+ "prior_summary_sha256": "187cc3acfe81016899cb08a8bebf5f6045a6cabba9868edd5379c51708ec1192",
+ "promoted": null,
+ "schema_version": 1,
+ "scores": {
+  "count_walk": {
+   "aggregate": 0.2889473684210526,
+   "per_family": {
+    "chronicle": 0.3,
+    "lockpick": 0.1,
+    "menders": 0.0,
+    "mirage": 0.4,
+    "rites": 0.1,
+    "siftstack": 0.6,
+    "sirens": 0.4,
+    "stockade": 0.18947368421052632,
+    "toolsmith": 0.8,
+    "warren": 0.0
+   }
+  },
+  "state_track": {
+   "aggregate": 0.32624027459954236,
+   "per_family": {
+    "chronicle": 0.5,
+    "lockpick": 0.0,
+    "menders": 0.0,
+    "mirage": 0.8,
+    "rites": 0.0,
+    "siftstack": 0.6,
+    "sirens": 0.4,
+    "stockade": 0.20240274599542335,
+    "toolsmith": 0.71,
+    "warren": 0.05
+   }
+  }
+ },
+ "seed": 78171,
+ "think_budget": 1024,
+ "tier": "medium"
+}
