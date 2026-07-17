@@ -1,0 +1,314 @@
+{
+  "adjudication_protocol": "pooled_k3",
+  "aggregate_seed": 78161,
+  "aggregate_seed_open": false,
+  "axis_kind_counts": {
+    "u_mirage_abstain": 13,
+    "u_siren_episode": 14,
+    "u_statechain": 13
+  },
+  "axis_kinds": [
+    "u_mirage_abstain",
+    "u_siren_episode",
+    "u_statechain"
+  ],
+  "axis_rows": 40,
+  "axis_surfaces": [
+    "stillroom",
+    "counterhouse",
+    "brewvat",
+    "courierloft",
+    "muletrack",
+    "peatstove"
+  ],
+  "backend": "vllm_merged_composite",
+  "benchmark_data_read": false,
+  "candidates": [
+    "gym_mix"
+  ],
+  "checks": {
+    "at_least_2_of_3_kinds_strict_over_both_controls": false,
+    "axis_total_strictly_beats_parent": false,
+    "axis_total_strictly_beats_replay": false,
+    "retention_pooled_cap_contacts_within_3_of_parent": true,
+    "retention_pooled_cap_contacts_within_3_of_replay": true,
+    "retention_pooled_correct_within_5_of_parent": true,
+    "retention_pooled_correct_within_5_of_replay": true,
+    "retention_pooled_parsed_within_3_of_parent": true,
+    "retention_pooled_parsed_within_3_of_replay": true
+  },
+  "controls": [
+    "replay_ctl5",
+    "zero_root_parent"
+  ],
+  "descriptive_noise": {
+    "delta_sd_pooled": 3.6285901761795403,
+    "deltas_vs_parent": {
+      "gym_mix": {
+        "by_screen": [
+          -7,
+          -3,
+          1
+        ],
+        "pooled_mean": -3.0,
+        "sd": 4.0,
+        "vs": "zero_root_parent"
+      },
+      "replay_ctl5": {
+        "by_screen": [
+          3,
+          -2,
+          4
+        ],
+        "pooled_mean": 1.6666666666666667,
+        "sd": 3.2145502536643185,
+        "vs": "zero_root_parent"
+      }
+    },
+    "reported_not_gated": true,
+    "screen_sd_pooled_levels": 6.4031242374328485
+  },
+  "design_receipt_sha256": "c6dfc89252a0ca42eeeb8bdd1cd4cc374bdd86780da7e51f8d5413315ffb18a0",
+  "eligible": [],
+  "experiment_id": "qwen35_4b_clean_gym_mix_dose",
+  "kind_gate": {
+    "at_least_2_of_3_kinds_strict_over_both_controls": false,
+    "kinds_required": 2,
+    "kinds_won": 0,
+    "per_kind": {
+      "u_mirage_abstain": {
+        "candidate": 6,
+        "parent": 8,
+        "replay": 10,
+        "strictly_beats_parent": false,
+        "strictly_beats_replay": false,
+        "won": false
+      },
+      "u_siren_episode": {
+        "candidate": 3,
+        "parent": 4,
+        "replay": 2,
+        "strictly_beats_parent": false,
+        "strictly_beats_replay": true,
+        "won": false
+      },
+      "u_statechain": {
+        "candidate": 6,
+        "parent": 5,
+        "replay": 7,
+        "strictly_beats_parent": true,
+        "strictly_beats_replay": false,
+        "won": false
+      }
+    },
+    "ties_fail_a_kind": true
+  },
+  "local_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_clean_gym_mix_dose/runs/local/seed88046.json",
+  "local_receipt_sha256": "db42faa4566e18b16786f7967f4cd6217582d7f5e66ffd81f4032ccf5efda82d",
+  "no_absolute_per_kind_floors": true,
+  "per_surface_reported_not_gated": true,
+  "promoted": null,
+  "retention_rows_per_screen": 104,
+  "retention_screens": 3,
+  "schema_version": 1,
+  "screen_seeds": [
+    88048,
+    88050,
+    88051
+  ],
+  "seed": 88046,
+  "summaries": {
+    "gym_mix": {
+      "adapter": "gym_mix",
+      "axis": {
+        "cap_contacts": 11,
+        "correct": 15,
+        "parsed": 30,
+        "per_kind_correct": {
+          "u_mirage_abstain": 6,
+          "u_siren_episode": 3,
+          "u_statechain": 6
+        },
+        "per_surface_correct": {
+          "brewvat": 4,
+          "counterhouse": 6,
+          "courierloft": 0,
+          "muletrack": 0,
+          "peatstove": 2,
+          "stillroom": 3
+        },
+        "rows": 40
+      },
+      "retention": {
+        "correct_by_screen": [
+          58,
+          66,
+          55
+        ],
+        "pooled_means": {
+          "cap_contacts": 11.0,
+          "correct": 59.666666666666664,
+          "parsed": 93.0,
+          "route_abstentions": 0.0
+        },
+        "screens": {
+          "88048": {
+            "cap_contacts": 11,
+            "correct": 58,
+            "parsed": 93,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88050": {
+            "cap_contacts": 13,
+            "correct": 66,
+            "parsed": 91,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88051": {
+            "cap_contacts": 9,
+            "correct": 55,
+            "parsed": 95,
+            "route_abstentions": 0,
+            "rows": 104
+          }
+        },
+        "sums": {
+          "cap_contacts": 33,
+          "correct": 179,
+          "parsed": 279,
+          "route_abstentions": 0
+        }
+      }
+    },
+    "replay_ctl5": {
+      "adapter": "replay_ctl5",
+      "axis": {
+        "cap_contacts": 9,
+        "correct": 19,
+        "parsed": 32,
+        "per_kind_correct": {
+          "u_mirage_abstain": 10,
+          "u_siren_episode": 2,
+          "u_statechain": 7
+        },
+        "per_surface_correct": {
+          "brewvat": 4,
+          "counterhouse": 10,
+          "courierloft": 0,
+          "muletrack": 1,
+          "peatstove": 2,
+          "stillroom": 2
+        },
+        "rows": 40
+      },
+      "retention": {
+        "correct_by_screen": [
+          68,
+          67,
+          58
+        ],
+        "pooled_means": {
+          "cap_contacts": 9.666666666666666,
+          "correct": 64.33333333333333,
+          "parsed": 94.33333333333333,
+          "route_abstentions": 0.0
+        },
+        "screens": {
+          "88048": {
+            "cap_contacts": 8,
+            "correct": 68,
+            "parsed": 96,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88050": {
+            "cap_contacts": 13,
+            "correct": 67,
+            "parsed": 91,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88051": {
+            "cap_contacts": 8,
+            "correct": 58,
+            "parsed": 96,
+            "route_abstentions": 0,
+            "rows": 104
+          }
+        },
+        "sums": {
+          "cap_contacts": 29,
+          "correct": 193,
+          "parsed": 283,
+          "route_abstentions": 0
+        }
+      }
+    },
+    "zero_root_parent": {
+      "adapter": "zero_root_parent",
+      "axis": {
+        "cap_contacts": 12,
+        "correct": 17,
+        "parsed": 28,
+        "per_kind_correct": {
+          "u_mirage_abstain": 8,
+          "u_siren_episode": 4,
+          "u_statechain": 5
+        },
+        "per_surface_correct": {
+          "brewvat": 3,
+          "counterhouse": 8,
+          "courierloft": 0,
+          "muletrack": 0,
+          "peatstove": 2,
+          "stillroom": 4
+        },
+        "rows": 40
+      },
+      "retention": {
+        "correct_by_screen": [
+          65,
+          69,
+          54
+        ],
+        "pooled_means": {
+          "cap_contacts": 13.0,
+          "correct": 62.666666666666664,
+          "parsed": 91.0,
+          "route_abstentions": 0.0
+        },
+        "screens": {
+          "88048": {
+            "cap_contacts": 13,
+            "correct": 65,
+            "parsed": 91,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88050": {
+            "cap_contacts": 12,
+            "correct": 69,
+            "parsed": 92,
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88051": {
+            "cap_contacts": 14,
+            "correct": 54,
+            "parsed": 90,
+            "route_abstentions": 0,
+            "rows": 104
+          }
+        },
+        "sums": {
+          "cap_contacts": 39,
+          "correct": 188,
+          "parsed": 273,
+          "route_abstentions": 0
+        }
+      }
+    }
+  }
+}

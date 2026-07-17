@@ -49727,33 +49727,51 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Preregistered stage completion",
+     "title": "Gym-mix holdout by kind (correct) and pooled retention, seed 88046 gate",
      "categories": [
-      "intake",
-      "corpus + audits frozen",
-      "review (mirage shortcut hunt clean)",
-      "train both arms",
-      "pooled_k3 local gate",
-      "sealed medium event @78161"
+      "siren_episode (14)",
+      "statechain (13)",
+      "mirage_abstain (13)",
+      "axis total (40)",
+      "retention pooled (104)"
      ],
      "series": [
       {
-       "label": "completed checkpoint",
+       "label": "zero_root_parent",
        "values": [
-        1,
-        1,
-        1,
-        0,
-        0,
-        0
+        4,
+        5,
+        8,
+        17,
+        62.67
+       ]
+      },
+      {
+       "label": "replay_ctl5",
+       "values": [
+        2,
+        7,
+        10,
+        19,
+        64.33
+       ]
+      },
+      {
+       "label": "gym_mix",
+       "values": [
+        3,
+        6,
+        6,
+        15,
+        59.67
        ]
       }
      ],
-     "x_label": "preregistered experiment stage",
-     "y_label": "completion indicator",
-     "y_format": "integer",
-     "note": "Owner-directed: recreate the retired prefix's gym-era strengths (sirens/rites/mirage) as fresh documented content on the clean zero-root lineage — 60 episode-form injection-resistance rows (the 7/7 hygiene mechanism), 50 proven statechain rows, 50 provable-abstention constraint rows (invented NOWHERE token; classes surface-indistinguishable, audited). 2-of-3-kinds promotion + pooled_k3 retention; conditional four-arm sealed event with per-axis readings vs the parent.",
-     "source": "experiments/qwen35_4b_clean_gym_mix_dose/reports/preregistration.md"
+     "x_label": "gate instrument",
+     "y_label": "correct",
+     "y_format": "number",
+     "note": "NOT_PROMOTED (mixture dilution): splitting 160 rows across three kinds installed nothing — the candidate scored below both controls on its own holdout while retention stayed in-band (inert, not destructive). The dose-diversity law re-confirms on clean ground: one kind per dose at full concentration. Instrument findings: mirage-abstain ceilinged for untrained controls (replay 10/13); siren-episode floored for everyone (2-4/14). Seed 78161 permanently sealed.",
+     "source": "experiments/qwen35_4b_clean_gym_mix_dose/runs/local/seed88046_promotion.json"
     }
    ]
   }

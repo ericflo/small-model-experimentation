@@ -310,6 +310,14 @@
   local-install→family conversion, and hygiene_explore_parent recorded
   the FIRST 10/10 all-families goal-gate pass (menders 0.017, warren
   0.150 vs 0.100 — single-item margins). One seed ≠ a claim.
+- Completed clean gym-mix (NOT_PROMOTED — mixture dilution):
+  `qwen35_4b_clean_gym_mix_dose` — 15/40 below both controls on its own
+  holdout, no kind won, retention in-band (inert). Design rule hardened:
+  ONE KIND PER DOSE at full concentration (50-60 rows/kind installs
+  nothing; the statechain wins used all 160). Instrument rules: the
+  mirage-abstain holdout ceilinged untrained (replay 10/13); the
+  siren-episode holdout floored for everyone. Seed 78161 sealed. The
+  three families need three separate concentrated cells.
 - REOPENED (owner steer, 2026-07-16): "no fundable intake" overstated —
   the closures cover the TESTED classes, not the idea space. Two new
   mechanism arguments funded, both derived from the repo's own laws:

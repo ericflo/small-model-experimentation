@@ -14881,40 +14881,40 @@
    ]
   },
   "qwen35_4b_clean_gym_mix_dose": {
-   "verdict_tag": "Design frozen; the clean lineage learns the retired ancestor's lessons — training pending",
+   "verdict_tag": "Three lessons in one dose taught none of them: dilution, re-confirmed",
    "concept_primer": "The retired ancestor adapter was good at exactly three benchmark families — resisting embedded trick instructions, following multi-step procedures, and knowing when a question has no forced answer. The owner's directive: don't bring the ancestor back; rebuild what it knew as fresh, fully documented training data instead. This experiment writes 160 new lessons on invented surfaces covering those three skills and trains them into the clean-lineage model whose every prior step is receipted.",
    "plain_question": "Can fresh, documented gym-style lessons teach the clean model what the undocumented ancestor knew — and does it show up on the three benchmark families?",
-   "plain_answer": "Nothing has trained yet. The frozen plan: sixty trick-instruction episodes (the program's most reliable teaching mechanism, extended to multi-step form), fifty procedure-tracking lessons (the thrice-proven state-chain recipe), and fifty answer-or-abstain puzzles with machine-checked proofs and no surface tells separating the two classes — trained against a matched control, gated on fresh holdouts and the calibrated forgetting rule, then one sealed benchmark shot reading the three target families directly.",
+   "plain_answer": "The mix failed cleanly and instructively. Splitting the standard 160-lesson budget across three skills — sixty trick-instruction episodes, fifty procedure chains, fifty answer-or-abstain puzzles — taught none of them: on its own fresh exam the trained model scored below BOTH untrained comparison models, while forgetting stayed safely inside the calibrated margins (the dose was inert, not harmful). This re-confirms an earlier program law on clean ground: thin slices of many skills dilute below the threshold where anything installs — the one skill that reliably installs (procedure-tracking) always got the full 160 rows in its winning runs. Two bonus findings about the measuring sticks themselves: the answer-or-abstain exam was too easy for untrained models (they nearly aced it, so it can't detect teaching), and the trick-episode exam was too hard for everyone. The three target families now need three separate full-strength experiments; the sealed benchmark seed was never spent.",
    "why_it_matters": "A win closes the clean lineage's three-family gap without inheriting a single undocumented byte, raising the odds of full ten-family sweeps on fully documented ground; a null sharpens the conversion law — designed substrate versus inherited substrate — either way the map improves.",
-   "verdict_tone": "neutral",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Lessons",
-     "value": "160",
-     "sub": "60 trick-episodes + 50 procedures + 50 abstain"
+     "label": "Candidate on its own exam",
+     "value": "15/40",
+     "sub": "below parent 17 and control 19"
     },
     {
-     "label": "Target families",
-     "value": "3",
-     "sub": "the retired ancestor's strengths"
+     "label": "Rows per skill",
+     "value": "50-60",
+     "sub": "vs 160 in the winning single-skill runs"
     },
     {
-     "label": "Class-tell audit",
-     "value": "0 signals",
-     "sub": "forced vs abstain indistinguishable"
+     "label": "Forgetting",
+     "value": "in-band",
+     "sub": "inert, not destructive"
     },
     {
-     "label": "Training runs pending",
-     "value": "2",
-     "sub": "control first, then the mix"
+     "label": "Benchmark seeds spent",
+     "value": "0",
+     "sub": "sealed 78,161 never opened"
     }
    ],
    "charts": [
     {
      "index": 0,
-     "chart_plain_title": "Where the experiment stands",
-     "chart_read": "Each bar is a preregistered stage; one means complete.",
-     "chart_takeaway": "Corpus, audits, and gates are frozen; training, the local gate, and the sealed benchmark shot remain."
+     "chart_plain_title": "Fresh-exam scores by skill for the three models",
+     "chart_read": "Grouped bars per skill: the trained mix beside its parent and the matched control.",
+     "chart_takeaway": "The trained model wins nothing — thin multi-skill doses dilute below the installation threshold."
     }
    ]
   }

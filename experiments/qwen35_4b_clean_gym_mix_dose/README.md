@@ -1,6 +1,6 @@
 # Clean Gym-Mix Dose
 
-**Status:** in-progress · since 2026-07-16 · design frozen and reviewed (zero majors; mirage shortcut hunt clean; four minors fixed); training, the calibrated gates, and the sealed event remain
+**Status:** finished · 2026-07-16 · verdict NOT_PROMOTED (mixture dilution) — the three-kind mix scored 15/40 on its own holdout, BELOW both the parent (17) and the replay control (19), with retention comfortably in-band: thin per-kind doses (50–60 rows) dilute below the proven 160-row single-kind concentration, the mirage kind ceilinged for untrained controls (replay 10/13), and the dose-diversity law is re-confirmed on clean ground; seed 78,161 permanently sealed
 
 ## Research Program
 
@@ -125,19 +125,19 @@ Standalone lineage verification (no GPU) / full clean-chain rebuild (GPU):
 
 ## Results
 
-Pending (GPU stages not yet run). Model-free construction receipts:
+Both arms trained clean (retention bands all passed — the dose was not destructive); the 12-run gate:
 
-- Treatment corpus sha `62950116…` (160 rows; 45/15 siren injected/clean; 25/25
-  mirage forced/abstain with 13 unsatisfiable + 12 undetermined; statechain
-  13/13/12/12), fresh-surface audit 34 tokens × 69 sources, zero hits; row-overlap
-  audit zero overlap everywhere.
-- Exposure MILP: exact zero-delta on all three axes (HiGHS optimal); both streams
-  1,520 rows, 1,280 position-aligned shared rows, zero tokenizer skips.
-- Local gate frozen at 88,046 + 88,048/88,050/88,051 with full overlap receipts.
+| arm | axis total (40) | siren_episode (14) | statechain (13) | mirage_abstain (13) | retention pooled |
+|---|---|---|---|---|---|
+| zero_root_parent | 17 | 4 | 5 | 8 | 62.67 |
+| replay_ctl5 | **19** | 2 | 7 | **10** | 64.33 |
+| gym_mix | 15 | 3 | 6 | 6 | 59.67 |
+
+NOT promoted: the candidate lost the axis total to BOTH controls and won no kind. Seed 78,161 permanently sealed per contract.
 
 ## Interpretation
 
-Pending results.
+Three lessons. (1) MIXTURE DILUTION: 50–60 rows per kind installs nothing — the proven statechain effect needed its full 160-row concentration (its own cell won 21/40 with the same vehicle), and splitting the budget three ways landed below controls; this re-confirms the dose-diversity refutation on clean ground and hardens it into a design rule: one kind per dose at full concentration. (2) INSTRUMENT CEILING: the mirage-abstain kind was too easy untrained (replay 10/13) — a kind whose holdout the controls nearly ceiling cannot register installation; future abstention instruments need harder forced/abstain discrimination. (3) The siren-episode kind floors for everyone (2–4/14) — episode-form injection resistance likely needs its own concentrated cell to move at all. The path to the three families runs through three SEPARATE concentrated doses, not one mix.
 
 ## Knowledgebase Update
 

@@ -1395,3 +1395,27 @@ seeds. Errata landed in the confirmation README/report, the zero-root
 README, three synthesis paragraphs, and both carrier briefs; no per-seed
 fact changed anywhere. The program's flagship number now rests on the
 complete record with its honest uncertainty.
+
+## qwen35_4b_clean_gym_mix_dose (2026-07-16 — NOT_PROMOTED: mixture dilution re-confirmed on clean ground)
+
+The owner-directed cell (recreate the retired prefix's strengths as
+fresh documented content) ran the full ladder clean and the gate refused
+decisively: the three-kind mix scored 15/40 on its own holdout — BELOW
+the parent (17) and the replay control (19) — winning no kind, with
+retention comfortably in-band (59.67 vs 62.67/64.33 pooled; inert, not
+destructive). Per-kind: siren_episode 3 vs 4/2 (floored for everyone at
+2–4/14), statechain 6 vs 5/7 (the proven skill did NOT re-install at 50
+rows — its winning cells used the full 160), mirage_abstain 6 vs 8/10
+(the instrument ceilinged for untrained controls — replay 10/13 — so it
+measures general ability, not the skill). Sealed seed 78,161 was never
+opened.
+
+Standing law hardened: MIXTURE DILUTION — thin per-kind doses (50–60
+rows) install nothing; the dose-diversity refutation now has a clean-
+lineage replication and becomes a design rule: one kind per dose at
+full concentration. Instrument rules recorded: an abstention instrument
+must be hard enough that untrained controls do not ceiling; episode-form
+injection instruments need difficulty calibration before they can
+register installs. The retired prefix's three families remain open and
+now require three separate concentrated cells; the enumerative-repair
+dose (queued, single-kind by design) is unaffected and proceeds.
