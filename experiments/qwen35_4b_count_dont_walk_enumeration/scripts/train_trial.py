@@ -84,7 +84,12 @@ PUBLISHED_ARM_HASHES = {
     # published, the orchestrator replaces the None with the four published
     # sha256 values {"receipt": ..., "log": ..., "adapter_config": ...,
     # "adapter_weights": ...}.
-    "replay_ctl7": None,
+    "replay_ctl7": {
+        "receipt": "565d542c06108a7a3aaaeb3bb233908ceb6fadef6a6afbe76687da7f59ada968",
+        "log": "53fa482e769a610bb2c952d75eabe24609fd9d058c2fd356f95c09909ba93358",
+        "adapter_config": "a69345bb4f2411dba4d54e2c26fa63c13a953e046a50bbccdd4dcfd8f1569e41",
+        "adapter_weights": "eca703599bd9f2398329a1f8cd7200ac1dbe635630b45b5ce0b9598a4703c3e5",
+    },
     "count_walk": None,
 }
 ADAPTER_ROOT = ROOT / "large_artifacts" / EXP.name / "adapters"
