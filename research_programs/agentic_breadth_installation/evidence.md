@@ -1500,3 +1500,28 @@ candidate. MENDERS REMAINS WITHOUT A CONFIRMED MOVER; single-episode
 draws at the family are noise until a design clears a multi-event bar.
 Descriptive, never gating: count_walk topped the aggregate at 2 of 4
 seeds (0.398, 0.392 — the program's best aggregate readings to date).
+
+## qwen35_4b_count_walk_replay_compound (2026-07-17 — BOUNDED: replay compounding hits diminishing returns at stage 8)
+
+The chain's stage-8 replay-refresh (fresh rank-32 adapter on the
+count_walk composite, seed 86, mirroring the recipe that added
+aggregate at stages 1/4/7) ran the full ladder clean and returned the
+first NEGATIVE compounding result in the chain's history. Sealed 78168:
+candidate 0.3420 vs parent 0.3626 (a real -0.0206 loss, tie guard
+inactive) with warren -0.15 past the family slack -> frozen verdict
+BOUNDED: "the replay-compounding law hits diminishing returns at stage
+8 on this parent; the count_walk composite remains the reference;
+further aggregate pushes need a different move class." LAW: replay
+compounding is not unbounded — on a replay-saturated parent it
+redistributes across families (2 up, 3 down, net negative) rather than
+accumulating. This retires the strongest reflexive broad move as the
+default next step and forces move-class diversification. The pre-GPU
+adversarial workflow earned its keep: it caught an aggregate tie-guard
+gap (ulp-level rendering of true rational ties could have flipped
+BOUNDED->COMPOUNDED) and the chain-wide standalone-reproduction
+violation, both fixed pre-freeze; and a mid-ladder orchestration slip
+(pinning the receipt's internal merge_receipt_sha256 field instead of
+the committed-file sha) was caught by direct pin-vs-runtime
+verification before the seed was spent. count_walk remains the
+program's best aggregate artifact (0.3626 here, records 0.398/0.392 at
+78164/78167).

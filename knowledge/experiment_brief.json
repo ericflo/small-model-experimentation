@@ -15019,32 +15019,32 @@
    "charts": []
   },
   "qwen35_4b_count_walk_replay_compound": {
-   "verdict_tag": "Design frozen: one sealed exam decides if stacking a replay round still helps",
+   "verdict_tag": "Bounded: replay compounding stops adding at stage 8 — the first time this reliable move failed",
    "concept_primer": "The team has spent months building one model through a documented chain of training rounds, like coats of varnish: each round trains a small add-on on top of the current model and folds it in, and each documented round so far has raised the model's overall score on sealed exams. One reliable trick in that chain is the 'replay round': re-teach the model its own accumulated practice problems (nothing new, just the full review deck) and fold that in. At the last stage this exact trick added about two points even as a control. The open question is whether the trick has run out: the current model is the best in the chain, and re-teaching an already-good student their old notes must stop helping at some point.",
    "plain_question": "Does an eighth coat of varnish still shine - if the current best model gets one more replay round over the full 2,240-problem review deck, does its sealed-exam score go up without any subject collapsing, or has the replay trick hit diminishing returns?",
-   "plain_answer": "Not yet run. The rule is signed in advance and has only two outcomes: COMPOUNDED (score strictly above the parent, no subject more than one notch below it, score above the untrained base) makes this the program's new reference model and funds a confirmation round; BOUNDED (anything else) closes the replay trick at this stage and sends the budget to a different kind of move. The team's own written prior says BOUNDED is likelier (roughly 60-75%), mostly because history shows one subject usually dips more than a notch even when the total rises - and they declared before the exam that this outcome would be a finding about where the trick's power ends, not a failure.",
+   "plain_answer": "The believed-likelier outcome, delivered cleanly. 'Replay compounding' — retraining on the accumulated replay mixture — had lifted the aggregate score at every previous link in this model's build chain, so it was the safest broad move available. On the eighth link it stopped working: the new model scored 0.342 versus the parent's 0.363, a genuine drop, and one task family (warren) fell far enough to trip the guardrail on its own. The pre-registered rule reads that as BOUNDED: the move has hit diminishing returns on this particular parent, which is already saturated with replay data, so more of the same just reshuffles strength between families instead of adding it (two families up, three down, net negative). The parent model stays the reference. The useful part is the knowledge: we now know the cheap reliable lever has a ceiling here, so the next push has to be a different KIND of move, not another dose of the same one. The new model still crushes the raw base model by 0.238 and wins 8 of 10 families against it.",
    "why_it_matters": "The chain is the program's flagship artifact: a fully documented, contamination-free recipe that turned a 0.08 base into a 0.36 model. Knowing exactly where its cheapest move stops working is worth one sealed exam: if replay still compounds, the floor rises for free; if it is bounded, the program stops burning exams on re-rolls and must invent a genuinely new move class.",
    "verdict_tone": "neutral",
    "key_numbers": [
     {
-     "label": "Parent (stage 7)",
-     "value": "0.357 mean",
-     "sub": "count_walk over five sealed exams; base sits at 0.085"
+     "label": "Candidate vs parent",
+     "value": "0.342 vs 0.363",
+     "sub": "aggregate dropped 0.021 — a real loss"
     },
     {
-     "label": "Move-class precedent",
-     "value": "4 of 5",
-     "sub": "stage-7 replay control beat its parent (mean +0.018)"
+     "label": "Verdict",
+     "value": "BOUNDED",
+     "sub": "warren also dipped 0.15 past the family slack"
     },
     {
-     "label": "P(COMPOUNDED)",
-     "value": "~0.25-0.40",
-     "sub": "frozen prior; the one-notch subject clause binds most often"
+     "label": "Chain history",
+     "value": "first miss",
+     "sub": "replay added aggregate at every prior stage"
     },
     {
-     "label": "Sealed budget",
-     "value": "1 seed (78168)",
-     "sub": "three arms, frozen order, write-ahead ledger"
+     "label": "vs base (desc.)",
+     "value": "+0.238",
+     "sub": "8 family wins, 1 tie, 1 loss — descriptive only"
     }
    ],
    "charts": []

@@ -780,6 +780,26 @@ aggregate artifact descriptively — it topped all arms at two of the
 four confirmation seeds (0.398, 0.392, both program records) — and any
 future menders attempt must differentiate its mechanism, not its seed.
 
+Stage 8 (2026-07-17) bounded the program's most reliable broad move.
+Replay compounding — retraining on the accumulated replay mixture — had
+lifted the aggregate at every prior link in the build chain, so it was
+the safe default next step. On the count_walk composite it stopped
+working: the fresh replay adapter scored 0.3420 vs the parent's 0.3626,
+a genuine loss, with warren dipping past the family slack, firing the
+preregistered BOUNDED verdict. The mechanism is saturation — on a
+parent already dense with replay, the move redistributes strength
+between families (two up, three down) instead of accumulating it. Two
+portfolio consequences: the reflexive "just replay again" lever is
+retired as the default, and any further aggregate push must diversify
+the move CLASS, not the dose. The count_walk composite is confirmed as
+the program's standing reference artifact (0.3626 here; records 0.398
+and 0.392 at the confirmation seeds). Process note: the pre-GPU
+adversarial workflow caught two would-be-corrupting defects before the
+seed was spent (an aggregate tie-guard gap that could have flipped the
+verdict, and the chain-wide standalone-reproduction violation), and
+direct pin-vs-runtime verification caught a mid-ladder merge-receipt
+pin slip — the verification layers are load-bearing, not ceremonial.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.
