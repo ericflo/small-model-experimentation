@@ -161,7 +161,7 @@ FROZEN_TREE_SHA256: dict[str, str | None] = {
     # output_tree_sha256. Fill by replacing None with the quoted 64-hex ON
     # THIS LINE; check_design's normalized-hash pin canonicalizes only this
     # value.
-    "replay_compound": None,
+    "replay_compound": "22a045e066103fb81cb5744f535f5f0275b3280798b7260d357913d0c485135c",
 }
 FROZEN_WEIGHTS_SHA256: dict[str, str | None] = {
     "base": "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db",
@@ -170,12 +170,12 @@ FROZEN_WEIGHTS_SHA256: dict[str, str | None] = {
     ),
     # TODO-PIN(post-merge): runs/merges/replay_compound.json weight sha256.
     # Fill by replacing None with the quoted 64-hex ON THIS LINE.
-    "replay_compound": None,
+    "replay_compound": "65d12d18759ef25588172e5e27313f480c7143510e186c75abf9422173d538da",
 }
 WEIGHTS_SIZE_BYTES = 9_078_620_536
 # TODO-PIN(post-merge): sha256 of the COMMITTED runs/merges/replay_compound.json.
 # Fill by replacing None with the quoted 64-hex ON THIS LINE.
-REPLAY_COMPOUND_MERGE_RECEIPT_SHA256 = None
+REPLAY_COMPOUND_MERGE_RECEIPT_SHA256 = "4170b0823471143f8cf41bbdb4b4d6a803fd36f5aedffc1621b16c2883922e63"
 COMMITTED_MERGE_RECEIPTS: dict[str, tuple[str, object]] = {
     "replay_compound": (
         f"experiments/{EXP.name}/runs/merges/replay_compound.json",
