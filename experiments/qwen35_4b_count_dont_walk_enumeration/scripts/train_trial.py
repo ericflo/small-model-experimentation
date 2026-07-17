@@ -90,7 +90,12 @@ PUBLISHED_ARM_HASHES = {
         "adapter_config": "a69345bb4f2411dba4d54e2c26fa63c13a953e046a50bbccdd4dcfd8f1569e41",
         "adapter_weights": "eca703599bd9f2398329a1f8cd7200ac1dbe635630b45b5ce0b9598a4703c3e5",
     },
-    "count_walk": None,
+    "count_walk": {
+        "receipt": "54611d0faacca71747404dd136a2056007289b2f781c1cdb7e5d5949dc80cef1",
+        "log": "fc8a594e5d4969c06b66cf035ca8be4c075722296a5d4c6e412aecca1369159f",
+        "adapter_config": "34ba015042c43777aed5c559e85146a06eaf26a2852bf8676f7f606f714ad7a0",
+        "adapter_weights": "20f6191ae1e04b7267377d4b07e5e4649e6d0a06e486f7e6ea932d3f73de8216",
+    },
 }
 ADAPTER_ROOT = ROOT / "large_artifacts" / EXP.name / "adapters"
 
