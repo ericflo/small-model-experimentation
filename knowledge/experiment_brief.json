@@ -15017,6 +15017,37 @@
     }
    ],
    "charts": []
+  },
+  "qwen35_4b_count_walk_replay_compound": {
+   "verdict_tag": "Design frozen: one sealed exam decides if stacking a replay round still helps",
+   "concept_primer": "The team has spent months building one model through a documented chain of training rounds, like coats of varnish: each round trains a small add-on on top of the current model and folds it in, and each documented round so far has raised the model's overall score on sealed exams. One reliable trick in that chain is the 'replay round': re-teach the model its own accumulated practice problems (nothing new, just the full review deck) and fold that in. At the last stage this exact trick added about two points even as a control. The open question is whether the trick has run out: the current model is the best in the chain, and re-teaching an already-good student their old notes must stop helping at some point.",
+   "plain_question": "Does an eighth coat of varnish still shine - if the current best model gets one more replay round over the full 2,240-problem review deck, does its sealed-exam score go up without any subject collapsing, or has the replay trick hit diminishing returns?",
+   "plain_answer": "Not yet run. The rule is signed in advance and has only two outcomes: COMPOUNDED (score strictly above the parent, no subject more than one notch below it, score above the untrained base) makes this the program's new reference model and funds a confirmation round; BOUNDED (anything else) closes the replay trick at this stage and sends the budget to a different kind of move. The team's own written prior says BOUNDED is likelier (roughly 60-75%), mostly because history shows one subject usually dips more than a notch even when the total rises - and they declared before the exam that this outcome would be a finding about where the trick's power ends, not a failure.",
+   "why_it_matters": "The chain is the program's flagship artifact: a fully documented, contamination-free recipe that turned a 0.08 base into a 0.36 model. Knowing exactly where its cheapest move stops working is worth one sealed exam: if replay still compounds, the floor rises for free; if it is bounded, the program stops burning exams on re-rolls and must invent a genuinely new move class.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Parent (stage 7)",
+     "value": "0.357 mean",
+     "sub": "count_walk over five sealed exams; base sits at 0.085"
+    },
+    {
+     "label": "Move-class precedent",
+     "value": "4 of 5",
+     "sub": "stage-7 replay control beat its parent (mean +0.018)"
+    },
+    {
+     "label": "P(COMPOUNDED)",
+     "value": "~0.25-0.40",
+     "sub": "frozen prior; the one-notch subject clause binds most often"
+    },
+    {
+     "label": "Sealed budget",
+     "value": "1 seed (78168)",
+     "sub": "three arms, frozen order, write-ahead ledger"
+    }
+   ],
+   "charts": []
   }
  }
 }

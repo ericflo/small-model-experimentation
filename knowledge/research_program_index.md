@@ -3,7 +3,7 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 286
+- Experiments: 287
 
 ## Structured Execution And Compilers
 
@@ -458,7 +458,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and other update mechanisms.
 
 - Charter: [posttraining_and_adaptation](../research_programs/posttraining_and_adaptation/charter.md)
-- Assigned experiments: 97
+- Assigned experiments: 98
 
 ### Seed Evidence
 
@@ -484,6 +484,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 - `qwen35_4b_confidence_policy` (new): [README](../experiments/qwen35_4b_confidence_policy/README.md)
 - `qwen35_4b_constrained_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_constrained_coverage_dpo/README.md)
 - `qwen35_4b_context_local_jacobian_clamp` (new): [README](../experiments/qwen35_4b_context_local_jacobian_clamp/README.md)
+- `qwen35_4b_count_walk_replay_compound` (new): [README](../experiments/qwen35_4b_count_walk_replay_compound/README.md)
 - `qwen35_4b_counterfactual_evidence_acquisition_curriculum` (new): [README](../experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/README.md)
 - `qwen35_4b_counterfactual_plan_reflection_transfer` (new): [README](../experiments/qwen35_4b_counterfactual_plan_reflection_transfer/README.md)
 - `qwen35_4b_decompose_compose_frontier` (new): [README](../experiments/qwen35_4b_decompose_compose_frontier/README.md)
@@ -1044,7 +1045,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 Install general agentic capability in Qwen3.5-4B via breadth-first expert iteration on a firewall-clean multi-family gym, arbitrated by the blackbox menagerie instrument.
 
 - Charter: [agentic_breadth_installation](../research_programs/agentic_breadth_installation/charter.md)
-- Assigned experiments: 54
+- Assigned experiments: 55
 
 ### Assigned Experiments
 
@@ -1055,6 +1056,7 @@ Install general agentic capability in Qwen3.5-4B via breadth-first expert iterat
 - `qwen35_4b_clean_path_statechain_extension` (new): [README](../experiments/qwen35_4b_clean_path_statechain_extension/README.md)
 - `qwen35_4b_count_dont_walk_enumeration` (new): [README](../experiments/qwen35_4b_count_dont_walk_enumeration/README.md)
 - `qwen35_4b_count_walk_menders_confirmation` (new): [README](../experiments/qwen35_4b_count_walk_menders_confirmation/README.md)
+- `qwen35_4b_count_walk_replay_compound` (new): [README](../experiments/qwen35_4b_count_walk_replay_compound/README.md)
 - `qwen35_4b_counterfactual_evidence_acquisition_curriculum` (new): [README](../experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/README.md)
 - `qwen35_4b_deep_advantage_mopd` (new): [README](../experiments/qwen35_4b_deep_advantage_mopd/README.md)
 - `qwen35_4b_dose_diversity_mechanism_cell` (new): [README](../experiments/qwen35_4b_dose_diversity_mechanism_cell/README.md)

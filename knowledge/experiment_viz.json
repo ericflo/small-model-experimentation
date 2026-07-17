@@ -50031,6 +50031,69 @@
      "source": "experiments/qwen35_4b_count_walk_menders_confirmation/runs/benchmark/confirmation_readout.json"
     }
    ]
+  },
+  "qwen35_4b_count_walk_replay_compound": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "The chain's sealed aggregate history, and the stage-8 question",
+     "categories": [
+      "78163",
+      "78164",
+      "78165",
+      "78166",
+      "78167"
+     ],
+     "series": [
+      {
+       "label": "base",
+       "values": [
+        0.0753,
+        0.0777,
+        0.0911,
+        0.09,
+        0.0897
+       ]
+      },
+      {
+       "label": "zero_root_parent (stage 6)",
+       "values": [
+        0.295,
+        0.3269,
+        0.3492,
+        0.3248,
+        0.3304
+       ]
+      },
+      {
+       "label": "replay_ctl7 (stage-7 replay control)",
+       "values": [
+        0.3298,
+        0.3538,
+        0.3358,
+        0.3283,
+        0.3682
+       ]
+      },
+      {
+       "label": "count_walk (stage 7 - the stage-8 parent)",
+       "values": [
+        0.3312,
+        0.398,
+        0.3373,
+        0.3269,
+        0.3916
+       ]
+      }
+     ],
+     "x_label": "sealed event seed (medium, tb1024)",
+     "y_label": "aggregate",
+     "y_format": "number",
+     "note": "Design note (frozen before any event; no stage-8 result exists yet): every documented chain stage added aggregate, and the stage-7 replay control - the EXACT move class stage 8 repeats, a pure replay pool trained onto the composite - beat its stage-6 parent on 4 of 5 sealed draws (mean +0.018); the stage-7 count_walk arm (the stage-8 parent) averaged 0.357 over these five draws against base 0.085. Stage 8 asks whether one more replay round over the full 2,240-row pool still compounds on this stronger parent at fresh sealed seed 78168, under the frozen two-state rule: COMPOUNDED (aggregate strictly above the parent, no family below it by more than 0.1, aggregate above base) or BOUNDED. Honest frozen prior: P(COMPOUNDED) ~ 0.25-0.40 - the per-family slack clause historically binds on ~4 of 5 draws - so BOUNDED is the believed-likelier verdict and is preregistered as a finding about the replay-compounding law's boundary, not a failure.",
+     "source": "experiments/qwen35_4b_count_walk_replay_compound/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

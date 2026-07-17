@@ -1686,6 +1686,40 @@
   },
   {
     "file_counts": {
+      ".json": 11,
+      ".jsonl": 24,
+      ".md": 5,
+      ".py": 30,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_count_walk_replay_compound",
+    "path": "experiments/qwen35_4b_count_walk_replay_compound",
+    "primary_readme": "experiments/qwen35_4b_count_walk_replay_compound/README.md",
+    "primary_report": "experiments/qwen35_4b_count_walk_replay_compound/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "posttraining_and_adaptation"
+    ],
+    "source_track": "new",
+    "summary": "Lifecycle 29 \u2014 stage 8 of the documented zero-root chain: REPLAY COMPOUNDING onto the count_walk composite. ONE fresh rank-32/alpha-64 adapter trains on the FULL 2,240-row replay pool (`data/sft_blend.jsonl`, sha `25a9595f\u2026`) from the count_walk composite parent at fresh seed 86 with the chain's established replay-refresh recipe, merges through the vendored external merger, must pass a two-arm three-screen pooled_k3 retention non-drift gate, and only a locally promoted candidate may consume the ONE sealed medium seed 78168 under the frozen two-directional COMPOUNDED / BOUNDED consequence.",
+    "tags": [
+      "lora",
+      "small-model"
+    ],
+    "title": "Count-Walk Replay Compound (Stage 8)",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 73,
+    "total_size_bytes": 40707141
+  },
+  {
+    "file_counts": {
       ".json": 9,
       ".jsonl": 6,
       ".log": 10,

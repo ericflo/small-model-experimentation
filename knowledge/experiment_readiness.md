@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 286
-- Anchor-ready: 270
-- Human-authored READMEs: 273
+- Experiments: 287
+- Anchor-ready: 271
+- Human-authored READMEs: 274
 - Generated README stubs: 13
-- Primary reports: 285
-- Experiment logs: 189
-- Smoke commands: 154
-- Artifact manifests: 258
+- Primary reports: 286
+- Experiment logs: 190
+- Smoke commands: 155
+- Artifact manifests: 259
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 172 |
+| `documented-scripts` | 173 |
 | `scripts-undocumented` | 23 |
 | `source-or-analysis` | 53 |
 
@@ -83,6 +83,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_context_local_jacobian_clamp`](../experiments/qwen35_4b_context_local_jacobian_clamp/README.md) | interpretability_and_diagnostics, posttraining_and_adaptation, process_control_and_tool_use | `human-authored` | [report](../experiments/qwen35_4b_context_local_jacobian_clamp/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_count_dont_walk_enumeration`](../experiments/qwen35_4b_count_dont_walk_enumeration/README.md) | agentic_breadth_installation | `human-authored` | [report](../experiments/qwen35_4b_count_dont_walk_enumeration/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen35_4b_count_walk_menders_confirmation`](../experiments/qwen35_4b_count_walk_menders_confirmation/README.md) | agentic_breadth_installation, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_count_walk_menders_confirmation/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
+| yes | [`qwen35_4b_count_walk_replay_compound`](../experiments/qwen35_4b_count_walk_replay_compound/README.md) | agentic_breadth_installation, posttraining_and_adaptation | `human-authored` | [report](../experiments/qwen35_4b_count_walk_replay_compound/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen35_4b_counterexample_directed_dsl`](../experiments/qwen35_4b_counterexample_directed_dsl/README.md) | benchmark_generalization, evidence_conditioned_selection, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_counterexample_directed_dsl/reports/qwen35_4b_counterexample_directed_dsl_report.md) | no | `documented-scripts` | no | dataset, large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_counterfactual_evidence_acquisition_curriculum`](../experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/README.md) | active_evidence_acquisition, agentic_breadth_installation, benchmark_generalization, posttraining_and_adaptation, process_control_and_tool_use | `human-authored` | [report](../experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_counterfactual_order_support_selector`](../experiments/qwen35_4b_counterfactual_order_support_selector/README.md) | evidence_conditioned_selection, interpretability_and_diagnostics, structured_execution_and_compilers, test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_counterfactual_order_support_selector/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |

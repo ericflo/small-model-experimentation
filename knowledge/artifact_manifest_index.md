@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 258
-- Manifest files: 617
+- Experiments with manifests: 259
+- Manifest files: 619
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 120 |
+| `other` | 121 |
 | `run-data` | 101 |
-| `standard-artifact` | 131 |
+| `standard-artifact` | 132 |
 
 ## Manifests
 
@@ -97,6 +97,8 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_count_dont_walk_enumeration` | `standard-artifact` | [manifest](../experiments/qwen35_4b_count_dont_walk_enumeration/reports/artifact_manifest.yaml) |
 | `qwen35_4b_count_walk_menders_confirmation` | `other` | [manifest](../experiments/qwen35_4b_count_walk_menders_confirmation/data/lineage/lineage_manifest.json) |
 | `qwen35_4b_count_walk_menders_confirmation` | `standard-artifact` | [manifest](../experiments/qwen35_4b_count_walk_menders_confirmation/reports/artifact_manifest.yaml) |
+| `qwen35_4b_count_walk_replay_compound` | `other` | [manifest](../experiments/qwen35_4b_count_walk_replay_compound/data/lineage/lineage_manifest.json) |
+| `qwen35_4b_count_walk_replay_compound` | `standard-artifact` | [manifest](../experiments/qwen35_4b_count_walk_replay_compound/reports/artifact_manifest.yaml) |
 | `qwen35_4b_counterexample_directed_dsl` | `dataset` | [manifest](../experiments/qwen35_4b_counterexample_directed_dsl/data/counterexample/dataset_manifest.json) |
 | `qwen35_4b_counterexample_directed_dsl` | `dataset` | [manifest](../experiments/qwen35_4b_counterexample_directed_dsl/data/dataset_manifest.json) |
 | `qwen35_4b_counterexample_directed_dsl` | `dataset` | [manifest](../experiments/qwen35_4b_counterexample_directed_dsl/data/random/dataset_manifest.json) |

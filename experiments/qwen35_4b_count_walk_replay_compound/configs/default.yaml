@@ -1,0 +1,61 @@
+# Frozen configuration for the stage-8 replay-compound trial (lifecycle 29).
+# The load-bearing constants live in the scripts (fail-closed pins); this file
+# documents the frozen design for humans and the catalog.
+experiment_id: qwen35_4b_count_walk_replay_compound
+lifecycle: 29
+chain_stage: 8
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+treatment:
+  arm: replay_compound
+  training_data: data/sft_blend.jsonl
+  training_data_sha256: 25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2
+  rows: 2240
+  seed: 86
+  recipe:
+    epochs: 1.0
+    lr: 1.0e-5
+    rank: 32
+    alpha: 64
+    batch_size: 1
+    grad_accum: 8
+    max_length: 4096
+    w_think: 0.2
+    w_close: 0.2
+    optimizer_steps: 280
+  trainer: scripts/train_think.py
+  trainer_sha256: e0eca2a230dae5d109d418dcb4cc19af05882a770af14350ffd741a8d5e90f01
+parent_composite:
+  label: count_walk
+  path: large_artifacts/qwen35_4b_count_dont_walk_enumeration/merged/count_walk
+  tree_sha256: d5fdc55c0238ffbe2465bd73a5f9d63f442ad4083ff9eb477c9887e15e3da6b1
+  weights_sha256: ddd7bc4b5b8f4f2393996148bcb1b411a8be4d7f03430babe789b3534b9850a3
+  committed_merge_receipt_sha256: 840edca0638b9e291bb34fde28b4b530df8743faf9b7b18b7f2358ce55ec4c36
+merge:
+  merger: scripts/merge_adapter.py
+  merger_sha256: cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672
+  output: large_artifacts/qwen35_4b_count_walk_replay_compound/merged/replay_compound
+local_gate:
+  arms: [count_walk, replay_compound]
+  screen_seeds: [88060, 88061, 88062]
+  rows_per_screen: 104
+  protocol: pooled_k3
+  bands_two_sided: true
+  correct_band_pooled_mean: 5
+  parsed_band_pooled_mean: 3
+  cap_contact_band_pooled_mean: 3
+benchmark_event:
+  name: compound
+  tier: medium
+  think_budget: 1024
+  seed: 78168
+  model_order: [base, count_walk, replay_compound]
+  gateway: scripts/run_benchmark_aggregate.py
+  gateway_sha256: 53cf6533dbd710eb167503363c39f73dbf7559a0d91f40a00436a3c218a01c17
+consequence:
+  states: [COMPOUNDED, BOUNDED]
+  per_family_slack: 0.1
+  slack_epsilon: 1.0e-9
+lineage_manifest_sha256: 45d1a0d9b9262dad00eb5576fff5a0427aab7f505e01232ae584fb3b65636d1c
+run_benchmark_normalized_sha256: d619d5dfabacec359033f65c0b4084e6120d41b735b6cddeed39db7a6380dd5f
