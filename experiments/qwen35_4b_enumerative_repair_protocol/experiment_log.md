@@ -116,3 +116,13 @@ Created as a new experiment scaffold.
   formatting (parseable 19/40), not the ordering discipline (56% once
   legal-untried). Any successor needs new evidence per
   calibrate-and-diverge; seed 78,162 spent.
+
+## 2026-07-16 — Post-closure truncation forensics (analysis only)
+
+- The committed gate generations show 20 of the 21 unparseable axis rows
+  are 1,024-token cap truncations caught mid-CORRECT canonical walk —
+  the 22.5% fidelity undercounts the installed discipline; the failure
+  is expression cost (a verbose linear walk), not the ordering logic.
+  Recorded in analysis/truncation_forensics.md as the new-evidence basis
+  for a count-don't-walk successor (index arithmetic over the numbered
+  list, constant-cost in k). The frozen verdict stands unchanged.

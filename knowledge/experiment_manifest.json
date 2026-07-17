@@ -2268,7 +2268,7 @@
       ".json": 37,
       ".jsonl": 31,
       ".log": 16,
-      ".md": 10,
+      ".md": 11,
       ".py": 30,
       ".yaml": 3
     },
@@ -2287,6 +2287,7 @@
     ],
     "title": "Enumerative Repair Protocol",
     "top_level_dirs": [
+      "analysis",
       "configs",
       "data",
       "reports",
@@ -2295,8 +2296,8 @@
       "src",
       "tests"
     ],
-    "total_files": 127,
-    "total_size_bytes": 47080743
+    "total_files": 128,
+    "total_size_bytes": 47082963
   },
   {
     "file_counts": {
