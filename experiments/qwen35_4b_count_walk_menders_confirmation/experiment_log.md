@@ -94,3 +94,23 @@ provenance in `reports/preregistration.md`, "Review amendments" section.
   (`reports/benchmark_design_review.md` with the literal
   PASS_BENCHMARK_EVENT verdict) before `--stage benchmark` can consume any
   seed.
+
+## 2026-07-17 — Four-seed event complete: AMBIGUOUS; cell closed
+
+- Events 78164-78167 (16 runs, all within budget, paired comparison
+  valid, implementation signature identical across all sixteen receipts
+  and the prior event). Menders per event: 78164 candidate 0.1 AND
+  replay control 0.1 (one full episode each); 78165/78166 all arms 0.0;
+  78167 candidate 0.0167 partial (recorded, never counted — the
+  review's floor-semantics fix operating as designed).
+- Frozen rule: hits_c = 1 (< 2) and episode totals candidate 1 vs
+  replay 1 (tie = no dominance) → AMBIGUOUS. Frozen claim applies: no
+  claim; further spending on this contrast requires a
+  mechanism-differentiated NEW design, not more seeds of the same.
+- Honest reading: the replay control's full episode at 78164 is the
+  noise process the preregistration priced (background arm-event rate
+  ~0.10); the 78163 MECHANISM_ANSWER is now best read as that
+  coincidence. Menders remains without a confirmed mover. Descriptive:
+  count_walk topped the aggregate at 78164 (0.398) and 78167 (0.392),
+  lost narrowly at 78165 (parent 0.3492 vs 0.3373) and 78166 (replay
+  0.3283 vs 0.3269) — single-seed readings, never gating.

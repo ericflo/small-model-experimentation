@@ -1,0 +1,1597 @@
+{
+ "benchmark_data_read": false,
+ "benchmark_implementation": {
+  "identical_across_all_sixteen_receipts_and_prior": true,
+  "prior": {
+   "runner_sha256": "a3beecd8b5c89ccfd99a172a6d85321d39b9feb6c29d12f10b2f4d7499e273cb",
+   "source_file_count": 56,
+   "source_inventory_sha256": "218b8615a95f24da962c931e9cd2dba58d853a7bdcd2847cd8e2c42fc2c05f42"
+  },
+  "signature": {
+   "runner_sha256": "a3beecd8b5c89ccfd99a172a6d85321d39b9feb6c29d12f10b2f4d7499e273cb",
+   "source_file_count": 56,
+   "source_inventory_sha256": "218b8615a95f24da962c931e9cd2dba58d853a7bdcd2847cd8e2c42fc2c05f42"
+  }
+ },
+ "budget": {
+  "78164": {
+   "base": {
+    "wall_seconds": 157.59248300408944,
+    "within_budget": true
+   },
+   "count_walk": {
+    "wall_seconds": 141.22966706915759,
+    "within_budget": true
+   },
+   "replay_ctl7": {
+    "wall_seconds": 137.78421204397455,
+    "within_budget": true
+   },
+   "zero_root_parent": {
+    "wall_seconds": 140.69735625293106,
+    "within_budget": true
+   }
+  },
+  "78165": {
+   "base": {
+    "wall_seconds": 152.5499699411448,
+    "within_budget": true
+   },
+   "count_walk": {
+    "wall_seconds": 140.51527058403008,
+    "within_budget": true
+   },
+   "replay_ctl7": {
+    "wall_seconds": 141.03494374314323,
+    "within_budget": true
+   },
+   "zero_root_parent": {
+    "wall_seconds": 140.32411214802414,
+    "within_budget": true
+   }
+  },
+  "78166": {
+   "base": {
+    "wall_seconds": 153.4587558649946,
+    "within_budget": true
+   },
+   "count_walk": {
+    "wall_seconds": 141.3245964620728,
+    "within_budget": true
+   },
+   "replay_ctl7": {
+    "wall_seconds": 137.4119148340542,
+    "within_budget": true
+   },
+   "zero_root_parent": {
+    "wall_seconds": 140.63241236982867,
+    "within_budget": true
+   }
+  },
+  "78167": {
+   "base": {
+    "wall_seconds": 153.34306100010872,
+    "within_budget": true
+   },
+   "count_walk": {
+    "wall_seconds": 138.677089454839,
+    "within_budget": true
+   },
+   "replay_ctl7": {
+    "wall_seconds": 140.15374442306347,
+    "within_budget": true
+   },
+   "zero_root_parent": {
+    "wall_seconds": 142.31003116886131,
+    "within_budget": true
+   }
+  }
+ },
+ "experiment_id": "qwen35_4b_count_walk_menders_confirmation",
+ "frozen_claim": "no claim; further spending on this contrast requires a mechanism-differentiated NEW design, not more seeds of the same.",
+ "name": "confirmation",
+ "outcome": "CONFIRMATION_READ_COMPLETE",
+ "paired_comparison_valid": true,
+ "prior_event": {
+  "aggregates": {
+   "base": 0.07533333333333334,
+   "count_walk": 0.3311762604635949,
+   "replay_ctl7": 0.3298359788359788,
+   "zero_root_parent": 0.2950102171136654
+  },
+  "counted_in_verdict": false,
+  "mechanism_answer": true,
+  "menders_episodes_per_arm": {
+   "base": 0,
+   "count_walk": 1,
+   "replay_ctl7": 0,
+   "zero_root_parent": 0
+  },
+  "menders_per_arm": {
+   "base": 0.0,
+   "count_walk": 0.1,
+   "replay_ctl7": 0.0,
+   "zero_root_parent": 0.0
+  },
+  "seed": 78163,
+  "summary": "experiments/qwen35_4b_count_dont_walk_enumeration/runs/benchmark/medium_tb1024_seed78163_pilot/summary.json",
+  "summary_sha256": "a8c394758aeea8255389b1d7c2b6d7c3f37d6072d9ea226f1b4786a8eee191af",
+  "think_budget": 1024,
+  "tier": "medium"
+ },
+ "promoted": null,
+ "provenance": {
+  "ledger": "runs/benchmark_events.jsonl",
+  "ledger_complete_sequence_required": true,
+  "receipt_blocks_verified_against_sealed_summaries": true,
+  "receipt_sha256s_pinned_in_closed_records": true,
+  "receipts_verified_against_ledger_pins": true,
+  "summaries_verified_against_ledger_pins": true
+ },
+ "readings": {
+  "budget_integrity": {
+   "all_within_budget": true,
+   "paired_comparison_valid": true,
+   "per_seed": {
+    "78164": {
+     "all_within_budget": true,
+     "paired_comparison_valid": true,
+     "per_arm": {
+      "base": {
+       "wall_seconds": 157.59248300408944,
+       "within_budget": true
+      },
+      "count_walk": {
+       "wall_seconds": 141.22966706915759,
+       "within_budget": true
+      },
+      "replay_ctl7": {
+       "wall_seconds": 137.78421204397455,
+       "within_budget": true
+      },
+      "zero_root_parent": {
+       "wall_seconds": 140.69735625293106,
+       "within_budget": true
+      }
+     },
+     "reason": null
+    },
+    "78165": {
+     "all_within_budget": true,
+     "paired_comparison_valid": true,
+     "per_arm": {
+      "base": {
+       "wall_seconds": 152.5499699411448,
+       "within_budget": true
+      },
+      "count_walk": {
+       "wall_seconds": 140.51527058403008,
+       "within_budget": true
+      },
+      "replay_ctl7": {
+       "wall_seconds": 141.03494374314323,
+       "within_budget": true
+      },
+      "zero_root_parent": {
+       "wall_seconds": 140.32411214802414,
+       "within_budget": true
+      }
+     },
+     "reason": null
+    },
+    "78166": {
+     "all_within_budget": true,
+     "paired_comparison_valid": true,
+     "per_arm": {
+      "base": {
+       "wall_seconds": 153.4587558649946,
+       "within_budget": true
+      },
+      "count_walk": {
+       "wall_seconds": 141.3245964620728,
+       "within_budget": true
+      },
+      "replay_ctl7": {
+       "wall_seconds": 137.4119148340542,
+       "within_budget": true
+      },
+      "zero_root_parent": {
+       "wall_seconds": 140.63241236982867,
+       "within_budget": true
+      }
+     },
+     "reason": null
+    },
+    "78167": {
+     "all_within_budget": true,
+     "paired_comparison_valid": true,
+     "per_arm": {
+      "base": {
+       "wall_seconds": 153.34306100010872,
+       "within_budget": true
+      },
+      "count_walk": {
+       "wall_seconds": 138.677089454839,
+       "within_budget": true
+      },
+      "replay_ctl7": {
+       "wall_seconds": 140.15374442306347,
+       "within_budget": true
+      },
+      "zero_root_parent": {
+       "wall_seconds": 142.31003116886131,
+       "within_budget": true
+      }
+     },
+     "reason": null
+    }
+   },
+   "reason": null
+  },
+  "per_seed": {
+   "78164": {
+    "aggregates": {
+     "base": 0.07770833333333334,
+     "count_walk": 0.398,
+     "replay_ctl7": 0.3537797619047619,
+     "zero_root_parent": 0.32691666666666663
+    },
+    "candidate_vs_controls": {
+     "count_walk_minus_base": {
+      "aggregate_delta": 0.3202916666666667,
+      "menders_delta": 0.1,
+      "per_family_delta": {
+       "chronicle": 0.6,
+       "lockpick": 0.4,
+       "menders": 0.1,
+       "mirage": 0.5,
+       "rites": 0.0,
+       "siftstack": 0.5,
+       "sirens": 0.10000000000000003,
+       "stockade": 0.15291666666666665,
+       "toolsmith": 0.55,
+       "warren": 0.3
+      }
+     },
+     "count_walk_minus_replay_ctl7": {
+      "aggregate_delta": 0.04422023809523812,
+      "menders_delta": 0.0,
+      "per_family_delta": {
+       "chronicle": 0.19999999999999996,
+       "lockpick": 0.10000000000000003,
+       "menders": 0.0,
+       "mirage": 0.0,
+       "rites": 0.0,
+       "siftstack": -0.09999999999999998,
+       "sirens": 0.0,
+       "stockade": 0.16720238095238094,
+       "toolsmith": 0.07500000000000007,
+       "warren": 0.0
+      }
+     },
+     "count_walk_minus_zero_root_parent": {
+      "aggregate_delta": 0.07108333333333339,
+      "menders_delta": 0.1,
+      "per_family_delta": {
+       "chronicle": 0.09999999999999998,
+       "lockpick": 0.30000000000000004,
+       "menders": 0.1,
+       "mirage": 0.0,
+       "rites": 0.0,
+       "siftstack": 0.0,
+       "sirens": 0.0,
+       "stockade": 0.013333333333333308,
+       "toolsmith": 0.14749999999999996,
+       "warren": 0.04999999999999999
+      }
+     }
+    },
+    "comparisons": {
+     "count_walk_minus_base": {
+      "aggregate_delta": 0.3202916666666667,
+      "minimum_family_delta": 0.0,
+      "nonnegative_families": 10,
+      "per_family_delta": {
+       "chronicle": 0.6,
+       "lockpick": 0.4,
+       "menders": 0.1,
+       "mirage": 0.5,
+       "rites": 0.0,
+       "siftstack": 0.5,
+       "sirens": 0.10000000000000003,
+       "stockade": 0.15291666666666665,
+       "toolsmith": 0.55,
+       "warren": 0.3
+      },
+      "positive_families": 9
+     },
+     "replay_ctl7_minus_base": {
+      "aggregate_delta": 0.2760714285714286,
+      "minimum_family_delta": -0.014285714285714277,
+      "nonnegative_families": 9,
+      "per_family_delta": {
+       "chronicle": 0.4,
+       "lockpick": 0.3,
+       "menders": 0.1,
+       "mirage": 0.5,
+       "rites": 0.0,
+       "siftstack": 0.6,
+       "sirens": 0.10000000000000003,
+       "stockade": -0.014285714285714277,
+       "toolsmith": 0.475,
+       "warren": 0.3
+      },
+      "positive_families": 8
+     },
+     "zero_root_parent_minus_base": {
+      "aggregate_delta": 0.2492083333333333,
+      "minimum_family_delta": 0.0,
+      "nonnegative_families": 10,
+      "per_family_delta": {
+       "chronicle": 0.5,
+       "lockpick": 0.1,
+       "menders": 0.0,
+       "mirage": 0.5,
+       "rites": 0.0,
+       "siftstack": 0.5,
+       "sirens": 0.10000000000000003,
+       "stockade": 0.13958333333333334,
+       "toolsmith": 0.4025000000000001,
+       "warren": 0.25
+      },
+      "positive_families": 8
+     }
+    },
+    "descriptive_only": true,
+    "goal_gates_vs_base": {
+     "count_walk": {
+      "goal_gate_pass": false,
+      "losses": [],
+      "strict_wins": 9,
+      "ties": [
+       "rites"
+      ],
+      "wins": [
+       "chronicle",
+       "lockpick",
+       "menders",
+       "mirage",
+       "siftstack",
+       "sirens",
+       "stockade",
+       "toolsmith",
+       "warren"
+      ]
+     },
+     "replay_ctl7": {
+      "goal_gate_pass": false,
+      "losses": [
+       "stockade"
+      ],
+      "strict_wins": 8,
+      "ties": [
+       "rites"
+      ],
+      "wins": [
+       "chronicle",
+       "lockpick",
+       "menders",
+       "mirage",
+       "siftstack",
+       "sirens",
+       "toolsmith",
+       "warren"
+      ]
+     },
+     "zero_root_parent": {
+      "goal_gate_pass": false,
+      "losses": [],
+      "strict_wins": 8,
+      "ties": [
+       "menders",
+       "rites"
+      ],
+      "wins": [
+       "chronicle",
+       "lockpick",
+       "mirage",
+       "siftstack",
+       "sirens",
+       "stockade",
+       "toolsmith",
+       "warren"
+      ]
+     }
+    },
+    "per_family": {
+     "base": {
+      "chronicle": 0.1,
+      "lockpick": 0.0,
+      "menders": 0.0,
+      "mirage": 0.0,
+      "rites": 0.0,
+      "siftstack": 0.0,
+      "sirens": 0.3,
+      "stockade": 0.12708333333333333,
+      "toolsmith": 0.25,
+      "warren": 0.0
+     },
+     "count_walk": {
+      "chronicle": 0.7,
+      "lockpick": 0.4,
+      "menders": 0.1,
+      "mirage": 0.5,
+      "rites": 0.0,
+      "siftstack": 0.5,
+      "sirens": 0.4,
+      "stockade": 0.27999999999999997,
+      "toolsmith": 0.8,
+      "warren": 0.3
+     },
+     "replay_ctl7": {
+      "chronicle": 0.5,
+      "lockpick": 0.3,
+      "menders": 0.1,
+      "mirage": 0.5,
+      "rites": 0.0,
+      "siftstack": 0.6,
+      "sirens": 0.4,
+      "stockade": 0.11279761904761905,
+      "toolsmith": 0.725,
+      "warren": 0.3
+     },
+     "zero_root_parent": {
+      "chronicle": 0.6,
+      "lockpick": 0.1,
+      "menders": 0.0,
+      "mirage": 0.5,
+      "rites": 0.0,
+      "siftstack": 0.5,
+      "sirens": 0.4,
+      "stockade": 0.26666666666666666,
+      "toolsmith": 0.6525000000000001,
+      "warren": 0.25
+     }
+    }
+   },
+   "78165": {
+    "aggregates": {
+     "base": 0.09111111111111111,
+     "count_walk": 0.33728070175438596,
+     "replay_ctl7": 0.3357755499860763,
+     "zero_root_parent": 0.349238662694472
+    },
+    "candidate_vs_controls": {
+     "count_walk_minus_base": {
+      "aggregate_delta": 0.24616959064327484,
+      "menders_delta": 0.0,
+      "per_family_delta": {
+       "chronicle": 0.3,
+       "lockpick": 0.1,
+       "menders": 0.0,
+       "mirage": 0.6,
+       "rites": 0.1,
+       "siftstack": 0.5,
+       "sirens": 0.0,
+       "stockade": 0.17836257309941517,
+       "toolsmith": 0.6000000000000001,
+       "warren": 0.08333333333333333
+      }
+     },
+     "count_walk_minus_replay_ctl7": {
+      "aggregate_delta": 0.001505151768309676,
+      "menders_delta": 0.0,
+      "per_family_delta": {
+       "chronicle": 0.3,
+       "lockpick": 0.0,
+       "menders": 0.0,
+       "mirage": -0.09999999999999998,
+       "rites": 0.0,
+       "siftstack": -0.09999999999999998,
+       "sirens": -0.09999999999999998,
+       "stockade": -0.06828181565023672,
+       "toolsmith": 0.0,
+       "warren": 0.08333333333333333
+      }
+     },
+     "count_walk_minus_zero_root_parent": {
+      "aggregate_delta": -0.011957960940086054,
+      "menders_delta": 0.0,
+      "per_family_delta": {
+       "chronicle": -0.09999999999999998,
+       "lockpick": 0.0,
+       "menders": 0.0,
+       "mirage": 0.09999999999999998,
+       "rites": 0.1,
+       "siftstack": 0.0,
+       "sirens": -0.09999999999999998,
+       "stockade": -0.06957960940086066,
+       "toolsmith": 0.20000000000000007,
+       "warren": -0.25
+      }
+     }
+    },
+    "comparisons": {
+     "count_walk_minus_base": {
+      "aggregate_delta": 0.24616959064327484,
+      "minimum_family_delta": 0.0,
+      "nonnegative_families": 10,
+      "per_family_delta": {
+       "chronicle": 0.3,
+       "lockpick": 0.1,
+       "menders": 0.0,
+       "mirage": 0.6,
+       "rites": 0.1,
+       "siftstack": 0.5,
+       "sirens": 0.0,
+       "stockade": 0.17836257309941517,
+       "toolsmith": 0.6000000000000001,
+       "warren": 0.08333333333333333
+      },
+      "positive_families": 8
+     },
+     "replay_ctl7_minus_base": {
+      "aggregate_delta": 0.24466443887496517,
+      "minimum_family_delta": 0.0,
+      "nonnegative_families": 10,
+      "per_family_delta": {
+       "chronicle": 0.0,
+       "lockpick": 0.1,
+       "menders": 0.0,
+       "mirage": 0.7,
+       "rites": 0.1,
+       "siftstack": 0.6,
+       "sirens": 0.09999999999999998,
+       "stockade": 0.2466443887496519,
+       "toolsmith": 0.6000000000000001,
+       "warren": 0.0
+      },
+      "positive_families": 7
+     },
+     "zero_root_parent_minus_base": {
+      "aggregate_delta": 0.25812755158336087,
+      "minimum_family_delta": 0.0,
+      "nonnegative_families": 10,
+      "per_family_delta": {
+       "chronicle": 0.39999999999999997,
+       "lockpick": 0.1,
+       "menders": 0.0,
+       "mirage": 0.5,
+       "rites": 0.0,
+       "siftstack": 0.5,
+       "sirens": 0.09999999999999998,
+       "stockade": 0.24794218250027583,
+       "toolsmith": 0.39999999999999997,
+       "warren": 0.33333333333333337
+      },
+      "positive_families": 8
+     }
+    },
+    "descriptive_only": true,
+    "goal_gates_vs_base": {
+     "count_walk": {
+      "goal_gate_pass": false,
+      "losses": [],
+      "strict_wins": 8,
+      "ties": [
+       "menders",
+       "sirens"
+      ],
+      "wins": [
+       "chronicle",
+       "lockpick",
+       "mirage",
+       "rites",
+       "siftstack",
+       "stockade",
+       "toolsmith",
+       "warren"
+      ]
+     },
+     "replay_ctl7": {
+      "goal_gate_pass": false,
+      "losses": [],
+      "strict_wins": 7,
+      "ties": [
+       "chronicle",
+       "menders",
+       "warren"
+      ],
+      "wins": [
+       "lockpick",
+       "mirage",
+       "rites",
+       "siftstack",
+       "sirens",
+       "stockade",
+       "toolsmith"
+      ]
+     },
+     "zero_root_parent": {
+      "goal_gate_pass": false,
+      "losses": [],
+      "strict_wins": 8,
+      "ties": [
+       "menders",
+       "rites"
+      ],
+      "wins": [
+       "chronicle",
+       "lockpick",
+       "mirage",
+       "siftstack",
+       "sirens",
+       "stockade",
+       "toolsmith",
+       "warren"
+      ]
+     }
+    },
+    "per_family": {
+     "base": {
+      "chronicle": 0.2,
+      "lockpick": 0.0,
+      "menders": 0.0,
+      "mirage": 0.0,
+      "rites": 0.0,
+      "siftstack": 0.0,
+      "sirens": 0.4,
+      "stockade": 0.04444444444444444,
+      "toolsmith": 0.2,
+      "warren": 0.06666666666666667
+     },
+     "count_walk": {
+      "chronicle": 0.5,
+      "lockpick": 0.1,
+      "menders": 0.0,
+      "mirage": 0.6,
+      "rites": 0.1,
+      "siftstack": 0.5,
+      "sirens": 0.4,
+      "stockade": 0.22280701754385962,
+      "toolsmith": 0.8,
+      "warren": 0.15
+     },
+     "replay_ctl7": {
+      "chronicle": 0.2,
+      "lockpick": 0.1,
+      "menders": 0.0,
+      "mirage": 0.7,
+      "rites": 0.1,
+      "siftstack": 0.6,
+      "sirens": 0.5,
+      "stockade": 0.29108883319409634,
+      "toolsmith": 0.8,
+      "warren": 0.06666666666666667
+     },
+     "zero_root_parent": {
+      "chronicle": 0.6,
+      "lockpick": 0.1,
+      "menders": 0.0,
+      "mirage": 0.5,
+      "rites": 0.0,
+      "siftstack": 0.5,
+      "sirens": 0.5,
+      "stockade": 0.2923866269447203,
+      "toolsmith": 0.6,
+      "warren": 0.4
+     }
+    }
+   },
+   "78166": {
+    "aggregates": {
+     "base": 0.09,
+     "count_walk": 0.32689519295781977,
+     "replay_ctl7": 0.3282969592949309,
+     "zero_root_parent": 0.32480865449628127
+    },
+    "candidate_vs_controls": {
+     "count_walk_minus_base": {
+      "aggregate_delta": 0.23689519295781977,
+      "menders_delta": 0.0,
+      "per_family_delta": {
+       "chronicle": 0.5,
+       "lockpick": 0.3,
+       "menders": 0.0,
+       "mirage": 0.3,
+       "rites": 0.1,
+       "siftstack": 0.4,
+       "sirens": -0.10000000000000003,
+       "stockade": 0.2522852629115307,
+       "toolsmith": 0.30000000000000004,
+       "warren": 0.31666666666666665
+      }
+     },
+     "count_walk_minus_replay_ctl7": {
+      "aggregate_delta": -0.0014017663371111433,
+      "menders_delta": 0.0,
+      "per_family_delta": {
+       "chronicle": 0.09999999999999998,
+       "lockpick": 0.19999999999999998,
+       "menders": 0.0,
+       "mirage": -0.10000000000000003,
+       "rites": 0.1,
+       "siftstack": 0.0,
+       "sirens": -0.2,
+       "stockade": -0.06401766337111164,
+       "toolsmith": 0.0,
+       "warren": -0.04999999999999999
+      }
+     },
+     "count_walk_minus_zero_root_parent": {
+      "aggregate_delta": 0.0020865384615385008,
+      "menders_delta": 0.0,
+      "per_family_delta": {
+       "chronicle": -0.09999999999999998,
+       "lockpick": 0.0,
+       "menders": 0.0,
+       "mirage": 0.0,
+       "rites": 0.1,
+       "siftstack": -0.19999999999999996,
+       "sirens": -0.10000000000000003,
+       "stockade": -0.015801282051282006,
+       "toolsmith": 0.13666666666666671,
+       "warren": 0.2
+      }
+     }
+    },
+    "comparisons": {
+     "count_walk_minus_base": {
+      "aggregate_delta": 0.23689519295781977,
+      "minimum_family_delta": -0.10000000000000003,
+      "nonnegative_families": 9,
+      "per_family_delta": {
+       "chronicle": 0.5,
+       "lockpick": 0.3,
+       "menders": 0.0,
+       "mirage": 0.3,
+       "rites": 0.1,
+       "siftstack": 0.4,
+       "sirens": -0.10000000000000003,
+       "stockade": 0.2522852629115307,
+       "toolsmith": 0.30000000000000004,
+       "warren": 0.31666666666666665
+      },
+      "positive_families": 8
+     },
+     "replay_ctl7_minus_base": {
+      "aggregate_delta": 0.23829695929493092,
+      "minimum_family_delta": 0.0,
+      "nonnegative_families": 10,
+      "per_family_delta": {
+       "chronicle": 0.4,
+       "lockpick": 0.1,
+       "menders": 0.0,
+       "mirage": 0.4,
+       "rites": 0.0,
+       "siftstack": 0.4,
+       "sirens": 0.09999999999999998,
+       "stockade": 0.31630292628264234,
+       "toolsmith": 0.30000000000000004,
+       "warren": 0.36666666666666664
+      },
+      "positive_families": 8
+     },
+     "zero_root_parent_minus_base": {
+      "aggregate_delta": 0.23480865449628127,
+      "minimum_family_delta": 0.0,
+      "nonnegative_families": 10,
+      "per_family_delta": {
+       "chronicle": 0.6,
+       "lockpick": 0.3,
+       "menders": 0.0,
+       "mirage": 0.3,
+       "rites": 0.0,
+       "siftstack": 0.6,
+       "sirens": 0.0,
+       "stockade": 0.2680865449628127,
+       "toolsmith": 0.16333333333333333,
+       "warren": 0.11666666666666665
+      },
+      "positive_families": 7
+     }
+    },
+    "descriptive_only": true,
+    "goal_gates_vs_base": {
+     "count_walk": {
+      "goal_gate_pass": false,
+      "losses": [
+       "sirens"
+      ],
+      "strict_wins": 8,
+      "ties": [
+       "menders"
+      ],
+      "wins": [
+       "chronicle",
+       "lockpick",
+       "mirage",
+       "rites",
+       "siftstack",
+       "stockade",
+       "toolsmith",
+       "warren"
+      ]
+     },
+     "replay_ctl7": {
+      "goal_gate_pass": false,
+      "losses": [],
+      "strict_wins": 8,
+      "ties": [
+       "menders",
+       "rites"
+      ],
+      "wins": [
+       "chronicle",
+       "lockpick",
+       "mirage",
+       "siftstack",
+       "sirens",
+       "stockade",
+       "toolsmith",
+       "warren"
+      ]
+     },
+     "zero_root_parent": {
+      "goal_gate_pass": false,
+      "losses": [],
+      "strict_wins": 7,
+      "ties": [
+       "menders",
+       "rites",
+       "sirens"
+      ],
+      "wins": [
+       "chronicle",
+       "lockpick",
+       "mirage",
+       "siftstack",
+       "stockade",
+       "toolsmith",
+       "warren"
+      ]
+     }
+    },
+    "per_family": {
+     "base": {
+      "chronicle": 0.0,
+      "lockpick": 0.0,
+      "menders": 0.0,
+      "mirage": 0.0,
+      "rites": 0.0,
+      "siftstack": 0.0,
+      "sirens": 0.4,
+      "stockade": 0.0,
+      "toolsmith": 0.5,
+      "warren": 0.0
+     },
+     "count_walk": {
+      "chronicle": 0.5,
+      "lockpick": 0.3,
+      "menders": 0.0,
+      "mirage": 0.3,
+      "rites": 0.1,
+      "siftstack": 0.4,
+      "sirens": 0.3,
+      "stockade": 0.2522852629115307,
+      "toolsmith": 0.8,
+      "warren": 0.31666666666666665
+     },
+     "replay_ctl7": {
+      "chronicle": 0.4,
+      "lockpick": 0.1,
+      "menders": 0.0,
+      "mirage": 0.4,
+      "rites": 0.0,
+      "siftstack": 0.4,
+      "sirens": 0.5,
+      "stockade": 0.31630292628264234,
+      "toolsmith": 0.8,
+      "warren": 0.36666666666666664
+     },
+     "zero_root_parent": {
+      "chronicle": 0.6,
+      "lockpick": 0.3,
+      "menders": 0.0,
+      "mirage": 0.3,
+      "rites": 0.0,
+      "siftstack": 0.6,
+      "sirens": 0.4,
+      "stockade": 0.2680865449628127,
+      "toolsmith": 0.6633333333333333,
+      "warren": 0.11666666666666665
+     }
+    }
+   },
+   "78167": {
+    "aggregates": {
+     "base": 0.08966666666666666,
+     "count_walk": 0.3915757575757576,
+     "replay_ctl7": 0.3681969696969697,
+     "zero_root_parent": 0.3303904428904429
+    },
+    "candidate_vs_controls": {
+     "count_walk_minus_base": {
+      "aggregate_delta": 0.3019090909090909,
+      "menders_delta": 0.016666666666666666,
+      "per_family_delta": {
+       "chronicle": 0.4,
+       "lockpick": 0.0,
+       "menders": 0.016666666666666666,
+       "mirage": 0.8,
+       "rites": 0.1,
+       "siftstack": 0.7,
+       "sirens": 0.09999999999999998,
+       "stockade": 0.24909090909090909,
+       "toolsmith": 0.4700000000000001,
+       "warren": 0.18333333333333335
+      }
+     },
+     "count_walk_minus_replay_ctl7": {
+      "aggregate_delta": 0.023378787878787888,
+      "menders_delta": 0.016666666666666666,
+      "per_family_delta": {
+       "chronicle": 0.0,
+       "lockpick": -0.3,
+       "menders": 0.016666666666666666,
+       "mirage": 0.0,
+       "rites": -0.1,
+       "siftstack": 0.19999999999999996,
+       "sirens": 0.09999999999999998,
+       "stockade": 0.01045454545454541,
+       "toolsmith": 0.2566666666666667,
+       "warren": 0.04999999999999999
+      }
+     },
+     "count_walk_minus_zero_root_parent": {
+      "aggregate_delta": 0.061185314685314685,
+      "menders_delta": 0.016666666666666666,
+      "per_family_delta": {
+       "chronicle": 0.09999999999999998,
+       "lockpick": -0.1,
+       "menders": 0.016666666666666666,
+       "mirage": 0.20000000000000007,
+       "rites": 0.0,
+       "siftstack": 0.09999999999999998,
+       "sirens": 0.09999999999999998,
+       "stockade": -0.11481351981351984,
+       "toolsmith": 0.16000000000000003,
+       "warren": 0.15
+      }
+     }
+    },
+    "comparisons": {
+     "count_walk_minus_base": {
+      "aggregate_delta": 0.3019090909090909,
+      "minimum_family_delta": 0.0,
+      "nonnegative_families": 10,
+      "per_family_delta": {
+       "chronicle": 0.4,
+       "lockpick": 0.0,
+       "menders": 0.016666666666666666,
+       "mirage": 0.8,
+       "rites": 0.1,
+       "siftstack": 0.7,
+       "sirens": 0.09999999999999998,
+       "stockade": 0.24909090909090909,
+       "toolsmith": 0.4700000000000001,
+       "warren": 0.18333333333333335
+      },
+      "positive_families": 9
+     },
+     "replay_ctl7_minus_base": {
+      "aggregate_delta": 0.278530303030303,
+      "minimum_family_delta": 0.0,
+      "nonnegative_families": 10,
+      "per_family_delta": {
+       "chronicle": 0.4,
+       "lockpick": 0.3,
+       "menders": 0.0,
+       "mirage": 0.8,
+       "rites": 0.2,
+       "siftstack": 0.5,
+       "sirens": 0.0,
+       "stockade": 0.23863636363636367,
+       "toolsmith": 0.21333333333333337,
+       "warren": 0.13333333333333336
+      },
+      "positive_families": 8
+     },
+     "zero_root_parent_minus_base": {
+      "aggregate_delta": 0.24072377622377622,
+      "minimum_family_delta": 0.0,
+      "nonnegative_families": 10,
+      "per_family_delta": {
+       "chronicle": 0.30000000000000004,
+       "lockpick": 0.1,
+       "menders": 0.0,
+       "mirage": 0.6,
+       "rites": 0.1,
+       "siftstack": 0.6,
+       "sirens": 0.0,
+       "stockade": 0.3639044289044289,
+       "toolsmith": 0.31000000000000005,
+       "warren": 0.03333333333333334
+      },
+      "positive_families": 8
+     }
+    },
+    "descriptive_only": true,
+    "goal_gates_vs_base": {
+     "count_walk": {
+      "goal_gate_pass": false,
+      "losses": [],
+      "strict_wins": 9,
+      "ties": [
+       "lockpick"
+      ],
+      "wins": [
+       "chronicle",
+       "menders",
+       "mirage",
+       "rites",
+       "siftstack",
+       "sirens",
+       "stockade",
+       "toolsmith",
+       "warren"
+      ]
+     },
+     "replay_ctl7": {
+      "goal_gate_pass": false,
+      "losses": [],
+      "strict_wins": 8,
+      "ties": [
+       "menders",
+       "sirens"
+      ],
+      "wins": [
+       "chronicle",
+       "lockpick",
+       "mirage",
+       "rites",
+       "siftstack",
+       "stockade",
+       "toolsmith",
+       "warren"
+      ]
+     },
+     "zero_root_parent": {
+      "goal_gate_pass": false,
+      "losses": [],
+      "strict_wins": 8,
+      "ties": [
+       "menders",
+       "sirens"
+      ],
+      "wins": [
+       "chronicle",
+       "lockpick",
+       "mirage",
+       "rites",
+       "siftstack",
+       "stockade",
+       "toolsmith",
+       "warren"
+      ]
+     }
+    },
+    "per_family": {
+     "base": {
+      "chronicle": 0.1,
+      "lockpick": 0.0,
+      "menders": 0.0,
+      "mirage": 0.0,
+      "rites": 0.0,
+      "siftstack": 0.0,
+      "sirens": 0.4,
+      "stockade": 0.0,
+      "toolsmith": 0.32999999999999996,
+      "warren": 0.06666666666666667
+     },
+     "count_walk": {
+      "chronicle": 0.5,
+      "lockpick": 0.0,
+      "menders": 0.016666666666666666,
+      "mirage": 0.8,
+      "rites": 0.1,
+      "siftstack": 0.7,
+      "sirens": 0.5,
+      "stockade": 0.24909090909090909,
+      "toolsmith": 0.8,
+      "warren": 0.25
+     },
+     "replay_ctl7": {
+      "chronicle": 0.5,
+      "lockpick": 0.3,
+      "menders": 0.0,
+      "mirage": 0.8,
+      "rites": 0.2,
+      "siftstack": 0.5,
+      "sirens": 0.4,
+      "stockade": 0.23863636363636367,
+      "toolsmith": 0.5433333333333333,
+      "warren": 0.2
+     },
+     "zero_root_parent": {
+      "chronicle": 0.4,
+      "lockpick": 0.1,
+      "menders": 0.0,
+      "mirage": 0.6,
+      "rites": 0.1,
+      "siftstack": 0.6,
+      "sirens": 0.4,
+      "stockade": 0.3639044289044289,
+      "toolsmith": 0.64,
+      "warren": 0.1
+     }
+    }
+   }
+  },
+  "replication": {
+   "candidate_dominates_control": {
+    "base": true,
+    "replay_ctl7": false,
+    "zero_root_parent": true
+   },
+   "candidate_dominates_every_control": false,
+   "episode_totals": {
+    "base": 0,
+    "count_walk": 1,
+    "replay_ctl7": 1,
+    "zero_root_parent": 0
+   },
+   "events_counted": [
+    78164,
+    78165,
+    78166,
+    78167
+   ],
+   "family": "menders",
+   "frozen_claim": "no claim; further spending on this contrast requires a mechanism-differentiated NEW design, not more seeds of the same.",
+   "frozen_claims": {
+    "AMBIGUOUS": "no claim; further spending on this contrast requires a mechanism-differentiated NEW design, not more seeds of the same.",
+    "NOT_REPLICATED": "the 78163 reading closes as seed noise; the count-dont-walk dose did not durably move menders; the expression-cost law stands; the composite remains a documented artifact (at a true per-event hit rate of 0.3 this outcome retains probability ≈ 0.24 — the closure is a preregistered funding decision, not a nonexistence proof).",
+    "REPLICATED": "the count_walk composite solves menders episodes at a rate no control matches; the first confirmed menders capability movement in the program."
+   },
+   "hits_c": 1,
+   "hits_per_arm": {
+    "base": 0,
+    "count_walk": 1,
+    "replay_ctl7": 1,
+    "zero_root_parent": 0
+   },
+   "per_event": {
+    "78164": {
+     "candidate_hit": true,
+     "episodes": {
+      "base": 0,
+      "count_walk": 1,
+      "replay_ctl7": 1,
+      "zero_root_parent": 0
+     },
+     "raw_positive": {
+      "base": false,
+      "count_walk": true,
+      "replay_ctl7": true,
+      "zero_root_parent": false
+     },
+     "scores": {
+      "base": 0.0,
+      "count_walk": 0.1,
+      "replay_ctl7": 0.1,
+      "zero_root_parent": 0.0
+     }
+    },
+    "78165": {
+     "candidate_hit": false,
+     "episodes": {
+      "base": 0,
+      "count_walk": 0,
+      "replay_ctl7": 0,
+      "zero_root_parent": 0
+     },
+     "raw_positive": {
+      "base": false,
+      "count_walk": false,
+      "replay_ctl7": false,
+      "zero_root_parent": false
+     },
+     "scores": {
+      "base": 0.0,
+      "count_walk": 0.0,
+      "replay_ctl7": 0.0,
+      "zero_root_parent": 0.0
+     }
+    },
+    "78166": {
+     "candidate_hit": false,
+     "episodes": {
+      "base": 0,
+      "count_walk": 0,
+      "replay_ctl7": 0,
+      "zero_root_parent": 0
+     },
+     "raw_positive": {
+      "base": false,
+      "count_walk": false,
+      "replay_ctl7": false,
+      "zero_root_parent": false
+     },
+     "scores": {
+      "base": 0.0,
+      "count_walk": 0.0,
+      "replay_ctl7": 0.0,
+      "zero_root_parent": 0.0
+     }
+    },
+    "78167": {
+     "candidate_hit": false,
+     "episodes": {
+      "base": 0,
+      "count_walk": 0,
+      "replay_ctl7": 0,
+      "zero_root_parent": 0
+     },
+     "raw_positive": {
+      "base": false,
+      "count_walk": true,
+      "replay_ctl7": false,
+      "zero_root_parent": false
+     },
+     "scores": {
+      "base": 0.0,
+      "count_walk": 0.016666666666666666,
+      "replay_ctl7": 0.0,
+      "zero_root_parent": 0.0
+     }
+    }
+   },
+   "prior_event_pooled": false,
+   "raw_positive_descriptive_only": true,
+   "raw_positive_events_per_arm": {
+    "base": 0,
+    "count_walk": 2,
+    "replay_ctl7": 1,
+    "zero_root_parent": 0
+   },
+   "rule": "REPLICATED iff hits_c >= 2 AND E_c > E_j for EVERY control j, where an event counts as a hit only if it contains at least one FULL menders episode (score contributes int(10*s + 1e-9) episodes; partial-credit draws are recorded but never counted), hits_c = number of new events whose candidate FULL-EPISODE count is > 0, and E = sum over the four new events of int(10*score + 1e-9) menders episodes per arm; NOT_REPLICATED iff hits_c == 0; AMBIGUOUS otherwise (including any E_c tie with a control, which is not dominance). The 78163 event is prior evidence, never pooled. No fourth state.",
+   "verdict": "AMBIGUOUS"
+  }
+ },
+ "receipts": {
+  "78164": {
+   "base": {
+    "path": "experiments/qwen35_4b_count_walk_menders_confirmation/runs/benchmark/medium_tb1024_seed78164_confirmation/base.json",
+    "sha256": "47edce7aab61b766d1ccd8d13e0e20bcd946816f3858e68153b5de148c53aa48"
+   },
+   "count_walk": {
+    "path": "experiments/qwen35_4b_count_walk_menders_confirmation/runs/benchmark/medium_tb1024_seed78164_confirmation/count_walk.json",
+    "sha256": "e8bd617396212a428b198bacc024e2eaf843b785744f97e285c96ca46e3ad10a"
+   },
+   "replay_ctl7": {
+    "path": "experiments/qwen35_4b_count_walk_menders_confirmation/runs/benchmark/medium_tb1024_seed78164_confirmation/replay_ctl7.json",
+    "sha256": "3be3f071ff639db1d4075e289ffb59b05f9d22d630a6c77bee320543d181cf2a"
+   },
+   "zero_root_parent": {
+    "path": "experiments/qwen35_4b_count_walk_menders_confirmation/runs/benchmark/medium_tb1024_seed78164_confirmation/zero_root_parent.json",
+    "sha256": "73968632e9171d021173b92db4f9aaa8987625e9a3d1dd28031bef6671f3f6ea"
+   }
+  },
+  "78165": {
+   "base": {
+    "path": "experiments/qwen35_4b_count_walk_menders_confirmation/runs/benchmark/medium_tb1024_seed78165_confirmation/base.json",
+    "sha256": "46c9f15ea6c5cf142c7ded7e045433b9b27f2ebb42572ec0f262f37a6c1800b9"
+   },
+   "count_walk": {
+    "path": "experiments/qwen35_4b_count_walk_menders_confirmation/runs/benchmark/medium_tb1024_seed78165_confirmation/count_walk.json",
+    "sha256": "0dc499d0704608f6bedc07554b183eb2efe43cef83cbec1fb8beeafa21056bd8"
+   },
+   "replay_ctl7": {
+    "path": "experiments/qwen35_4b_count_walk_menders_confirmation/runs/benchmark/medium_tb1024_seed78165_confirmation/replay_ctl7.json",
+    "sha256": "295d78bce5c9f1efdbe2a78a390467ddd96099282ed670403f64452b0788dbc8"
+   },
+   "zero_root_parent": {
+    "path": "experiments/qwen35_4b_count_walk_menders_confirmation/runs/benchmark/medium_tb1024_seed78165_confirmation/zero_root_parent.json",
+    "sha256": "fe89ba587f4d8f449d389fc7ad2cf77dcc5833cbe5795b996f3e17d3e8b4645d"
+   }
+  },
+  "78166": {
+   "base": {
+    "path": "experiments/qwen35_4b_count_walk_menders_confirmation/runs/benchmark/medium_tb1024_seed78166_confirmation/base.json",
+    "sha256": "af657adc5ace7b0bf5276beea57ddaac9fb8858e026646488cb6ef579fba307b"
+   },
+   "count_walk": {
+    "path": "experiments/qwen35_4b_count_walk_menders_confirmation/runs/benchmark/medium_tb1024_seed78166_confirmation/count_walk.json",
+    "sha256": "fcbead88a34a574ebb205d39aba13e27c787c0aaf39f7ae5f6f5ad85c9c6dec0"
+   },
+   "replay_ctl7": {
+    "path": "experiments/qwen35_4b_count_walk_menders_confirmation/runs/benchmark/medium_tb1024_seed78166_confirmation/replay_ctl7.json",
+    "sha256": "87496ca13ce41a0bdb6350b9903c19c87dc5107163cfe79a7d02a0f6844a475c"
+   },
+   "zero_root_parent": {
+    "path": "experiments/qwen35_4b_count_walk_menders_confirmation/runs/benchmark/medium_tb1024_seed78166_confirmation/zero_root_parent.json",
+    "sha256": "372fc8ee21f539ffa530d15b49e945c1b4cde764c24eb33d30020c2e03301667"
+   }
+  },
+  "78167": {
+   "base": {
+    "path": "experiments/qwen35_4b_count_walk_menders_confirmation/runs/benchmark/medium_tb1024_seed78167_confirmation/base.json",
+    "sha256": "9c432de41f9d93e1c121f0c03d9da6da9f95371f317e5575de83c3491c7b611b"
+   },
+   "count_walk": {
+    "path": "experiments/qwen35_4b_count_walk_menders_confirmation/runs/benchmark/medium_tb1024_seed78167_confirmation/count_walk.json",
+    "sha256": "25c273c66ea2911bc1e2f1484fec4dc6444b710b1742457fb9efa4bf5f3f6e4f"
+   },
+   "replay_ctl7": {
+    "path": "experiments/qwen35_4b_count_walk_menders_confirmation/runs/benchmark/medium_tb1024_seed78167_confirmation/replay_ctl7.json",
+    "sha256": "22922c4c5c820117ac715ca576655d832ac61b0fd7a609f298e8f7ae2b3f3b38"
+   },
+   "zero_root_parent": {
+    "path": "experiments/qwen35_4b_count_walk_menders_confirmation/runs/benchmark/medium_tb1024_seed78167_confirmation/zero_root_parent.json",
+    "sha256": "ae993c3b14feca72f007416976234a7fb97d1bd2b27de99c74bf813b7c9968ed"
+   }
+  }
+ },
+ "schema_version": 1,
+ "scores": {
+  "78164": {
+   "base": {
+    "aggregate": 0.07770833333333334,
+    "per_family": {
+     "chronicle": 0.1,
+     "lockpick": 0.0,
+     "menders": 0.0,
+     "mirage": 0.0,
+     "rites": 0.0,
+     "siftstack": 0.0,
+     "sirens": 0.3,
+     "stockade": 0.12708333333333333,
+     "toolsmith": 0.25,
+     "warren": 0.0
+    }
+   },
+   "count_walk": {
+    "aggregate": 0.398,
+    "per_family": {
+     "chronicle": 0.7,
+     "lockpick": 0.4,
+     "menders": 0.1,
+     "mirage": 0.5,
+     "rites": 0.0,
+     "siftstack": 0.5,
+     "sirens": 0.4,
+     "stockade": 0.27999999999999997,
+     "toolsmith": 0.8,
+     "warren": 0.3
+    }
+   },
+   "replay_ctl7": {
+    "aggregate": 0.3537797619047619,
+    "per_family": {
+     "chronicle": 0.5,
+     "lockpick": 0.3,
+     "menders": 0.1,
+     "mirage": 0.5,
+     "rites": 0.0,
+     "siftstack": 0.6,
+     "sirens": 0.4,
+     "stockade": 0.11279761904761905,
+     "toolsmith": 0.725,
+     "warren": 0.3
+    }
+   },
+   "zero_root_parent": {
+    "aggregate": 0.32691666666666663,
+    "per_family": {
+     "chronicle": 0.6,
+     "lockpick": 0.1,
+     "menders": 0.0,
+     "mirage": 0.5,
+     "rites": 0.0,
+     "siftstack": 0.5,
+     "sirens": 0.4,
+     "stockade": 0.26666666666666666,
+     "toolsmith": 0.6525000000000001,
+     "warren": 0.25
+    }
+   }
+  },
+  "78165": {
+   "base": {
+    "aggregate": 0.09111111111111111,
+    "per_family": {
+     "chronicle": 0.2,
+     "lockpick": 0.0,
+     "menders": 0.0,
+     "mirage": 0.0,
+     "rites": 0.0,
+     "siftstack": 0.0,
+     "sirens": 0.4,
+     "stockade": 0.04444444444444444,
+     "toolsmith": 0.2,
+     "warren": 0.06666666666666667
+    }
+   },
+   "count_walk": {
+    "aggregate": 0.33728070175438596,
+    "per_family": {
+     "chronicle": 0.5,
+     "lockpick": 0.1,
+     "menders": 0.0,
+     "mirage": 0.6,
+     "rites": 0.1,
+     "siftstack": 0.5,
+     "sirens": 0.4,
+     "stockade": 0.22280701754385962,
+     "toolsmith": 0.8,
+     "warren": 0.15
+    }
+   },
+   "replay_ctl7": {
+    "aggregate": 0.3357755499860763,
+    "per_family": {
+     "chronicle": 0.2,
+     "lockpick": 0.1,
+     "menders": 0.0,
+     "mirage": 0.7,
+     "rites": 0.1,
+     "siftstack": 0.6,
+     "sirens": 0.5,
+     "stockade": 0.29108883319409634,
+     "toolsmith": 0.8,
+     "warren": 0.06666666666666667
+    }
+   },
+   "zero_root_parent": {
+    "aggregate": 0.349238662694472,
+    "per_family": {
+     "chronicle": 0.6,
+     "lockpick": 0.1,
+     "menders": 0.0,
+     "mirage": 0.5,
+     "rites": 0.0,
+     "siftstack": 0.5,
+     "sirens": 0.5,
+     "stockade": 0.2923866269447203,
+     "toolsmith": 0.6,
+     "warren": 0.4
+    }
+   }
+  },
+  "78166": {
+   "base": {
+    "aggregate": 0.09,
+    "per_family": {
+     "chronicle": 0.0,
+     "lockpick": 0.0,
+     "menders": 0.0,
+     "mirage": 0.0,
+     "rites": 0.0,
+     "siftstack": 0.0,
+     "sirens": 0.4,
+     "stockade": 0.0,
+     "toolsmith": 0.5,
+     "warren": 0.0
+    }
+   },
+   "count_walk": {
+    "aggregate": 0.32689519295781977,
+    "per_family": {
+     "chronicle": 0.5,
+     "lockpick": 0.3,
+     "menders": 0.0,
+     "mirage": 0.3,
+     "rites": 0.1,
+     "siftstack": 0.4,
+     "sirens": 0.3,
+     "stockade": 0.2522852629115307,
+     "toolsmith": 0.8,
+     "warren": 0.31666666666666665
+    }
+   },
+   "replay_ctl7": {
+    "aggregate": 0.3282969592949309,
+    "per_family": {
+     "chronicle": 0.4,
+     "lockpick": 0.1,
+     "menders": 0.0,
+     "mirage": 0.4,
+     "rites": 0.0,
+     "siftstack": 0.4,
+     "sirens": 0.5,
+     "stockade": 0.31630292628264234,
+     "toolsmith": 0.8,
+     "warren": 0.36666666666666664
+    }
+   },
+   "zero_root_parent": {
+    "aggregate": 0.32480865449628127,
+    "per_family": {
+     "chronicle": 0.6,
+     "lockpick": 0.3,
+     "menders": 0.0,
+     "mirage": 0.3,
+     "rites": 0.0,
+     "siftstack": 0.6,
+     "sirens": 0.4,
+     "stockade": 0.2680865449628127,
+     "toolsmith": 0.6633333333333333,
+     "warren": 0.11666666666666665
+    }
+   }
+  },
+  "78167": {
+   "base": {
+    "aggregate": 0.08966666666666666,
+    "per_family": {
+     "chronicle": 0.1,
+     "lockpick": 0.0,
+     "menders": 0.0,
+     "mirage": 0.0,
+     "rites": 0.0,
+     "siftstack": 0.0,
+     "sirens": 0.4,
+     "stockade": 0.0,
+     "toolsmith": 0.32999999999999996,
+     "warren": 0.06666666666666667
+    }
+   },
+   "count_walk": {
+    "aggregate": 0.3915757575757576,
+    "per_family": {
+     "chronicle": 0.5,
+     "lockpick": 0.0,
+     "menders": 0.016666666666666666,
+     "mirage": 0.8,
+     "rites": 0.1,
+     "siftstack": 0.7,
+     "sirens": 0.5,
+     "stockade": 0.24909090909090909,
+     "toolsmith": 0.8,
+     "warren": 0.25
+    }
+   },
+   "replay_ctl7": {
+    "aggregate": 0.3681969696969697,
+    "per_family": {
+     "chronicle": 0.5,
+     "lockpick": 0.3,
+     "menders": 0.0,
+     "mirage": 0.8,
+     "rites": 0.2,
+     "siftstack": 0.5,
+     "sirens": 0.4,
+     "stockade": 0.23863636363636367,
+     "toolsmith": 0.5433333333333333,
+     "warren": 0.2
+    }
+   },
+   "zero_root_parent": {
+    "aggregate": 0.3303904428904429,
+    "per_family": {
+     "chronicle": 0.4,
+     "lockpick": 0.1,
+     "menders": 0.0,
+     "mirage": 0.6,
+     "rites": 0.1,
+     "siftstack": 0.6,
+     "sirens": 0.4,
+     "stockade": 0.3639044289044289,
+     "toolsmith": 0.64,
+     "warren": 0.1
+    }
+   }
+  }
+ },
+ "seeds": [
+  78164,
+  78165,
+  78166,
+  78167
+ ],
+ "stage": "count_walk_menders_confirmation_readout",
+ "think_budget": 1024,
+ "tier": "medium",
+ "verdict": "AMBIGUOUS"
+}
