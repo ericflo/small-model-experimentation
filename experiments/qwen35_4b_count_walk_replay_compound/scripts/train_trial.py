@@ -122,7 +122,7 @@ PUBLISHED_ARM_HASHES = {
     # {"adapter_config": "<64hex>", "adapter_weights": "<64hex>",
     # "log": "<64hex>", "receipt": "<64hex>"} — check_design.py's
     # normalized-hash pin canonicalizes exactly this value slot.
-    "replay_compound": None,
+    "replay_compound": {"adapter_config": "d1625592e38be2776e95b1e96ab308676222b02717dda271012828a8f189009f", "adapter_weights": "259c460bd2531a09f28099624fe1792908f09136045cb2752caebf48760849c9", "log": "a5effabe9d5c849f92d6746ca1396b3162241db94bef547466c88a48afafd0f0", "receipt": "6967a0becddb1d14fba04655cbc8a939f217c4716ebda504d3a0c4c0bd2bf9cc"},
 }
 ADAPTER_ROOT = ROOT / "large_artifacts" / EXP.name / "adapters"
 
