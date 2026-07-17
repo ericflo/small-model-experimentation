@@ -1525,3 +1525,27 @@ the committed-file sha) was caught by direct pin-vs-runtime
 verification before the seed was spent. count_walk remains the
 program's best aggregate artifact (0.3626 here, records 0.398/0.392 at
 78164/78167).
+
+## qwen35_4b_state_track_install (2026-07-17 — INSTALLED_TRANSFER: a divergent skill adds where replay bounded; single seed)
+
+After replay compounding BOUNDED at stage 8, the divergent-move-class
+bet paid off at stage 9. A single-kind state-tracking dose (running
+ledger through declarative updates, 160 rows, seed 87, made to look
+nothing like any benchmark family) on the count_walk parent scored
+0.3260 at sealed 78169 vs parent 0.3004 and base 0.1675 — beats both,
+zero families below the one-episode slack -> frozen INSTALLED_TRANSFER.
+LAW (candidate): the divergent-skill move class is NOT bounded where
+replay is — a non-overlapping designed curriculum can still add
+aggregate on a replay-saturated parent, exactly as the
+install-universal-features doctrine predicts. Gains vs parent land on
+agentic families reachable by state-tracking transfer (siftstack +0.2,
+lockpick +0.1, mirage +0.1). HONEST SCOPE: single seed; the parent's
+aggregate swings 0.30-0.36 across seeds and 0.3260 sits in that band,
+so per the confirmation doctrine (which killed the menders reading in
+lifecycle 28) the lift needs a fresh eval-only multi-seed confirmation
+before state_track is the durable reference. The ultimate
+every-family-beats-base bar is still unmet (warren 0.200 < base 0.367,
+count_walk-inherited). The three-lens adversarial workflow found the
+cell clean (zero MAJORs) and the file-sha merge-receipt lesson from
+lifecycle 29 was applied at pinning. Funded successor: multi-seed
+confirmation of the aggregate lift.

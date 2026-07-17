@@ -800,6 +800,28 @@ verdict, and the chain-wide standalone-reproduction violation), and
 direct pin-vs-runtime verification caught a mid-ladder merge-receipt
 pin slip — the verification layers are load-bearing, not ceremonial.
 
+Stage 9 (2026-07-17) delivered the divergent-move-class payoff the
+bounded replay result pointed to. With "just replay again" retired, a
+single-kind state-tracking dose — a universal skill taught through a
+designed curriculum that looks nothing like any benchmark — installed
+on the count_walk parent and ADDED aggregate: 0.3260 vs the parent's
+0.3004 and base's 0.1675 at sealed seed 78169, beating both with no
+family regressing past one episode (INSTALLED_TRANSFER). This is direct
+support for the program's founding doctrine — install universal
+transferable features via designed synthetic curricula and prove by
+transfer to held-out surfaces — and it establishes that the
+divergent-skill move class is not bounded where replay compounding is.
+The gains concentrate on agentic families plausibly reached by
+state-tracking (siftstack, lockpick, mirage). The result is held at
+single-seed strength on purpose: the parent's aggregate varies 0.30-0.36
+seed-to-seed, so an eval-only multi-seed confirmation — the same
+instrument that correctly demoted the menders MECHANISM_ANSWER to noise
+— gates any durable-reference claim, and the ultimate every-family-over-
+base bar remains unmet on the count_walk-inherited warren deficit. The
+portfolio now has a live, believable engine for further aggregate
+gains (divergent designed skills, one per dose) to replace the
+exhausted replay lever.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

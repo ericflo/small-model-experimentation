@@ -50066,29 +50066,27 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Stage 9 (design frozen): a divergent SKILL dose where replay just went BOUNDED",
+     "title": "A divergent skill adds where replay could not (INSTALLED_TRANSFER, single seed)",
      "categories": [
       "base",
-      "stage 6 (zero-root parent)",
-      "stage 7 count_walk (THE PARENT)",
-      "stage 8 replay_compound (BOUNDED)"
+      "count_walk (parent)",
+      "state_track (candidate)"
      ],
      "series": [
       {
-       "label": "sealed medium/tb1024 aggregate (chain history)",
+       "label": "aggregate at sealed seed 78169",
        "values": [
-        0.085,
-        0.325,
-        0.357,
-        0.342
+        0.1675,
+        0.3004,
+        0.326
        ]
       }
      ],
-     "x_label": "documented chain stage",
+     "x_label": "arm",
      "y_label": "aggregate score",
      "y_format": "number",
-     "note": "Design-frozen, no result yet (source: reports/preregistration.md). Chain history: stages 1-6 built the parent from base ~0.085 to ~0.325; stage 7's count_walk skill dose lifted it to 0.357 (the parent this cell trains on); stage 8's replay re-dose went BOUNDED (0.342 < 0.357). Stage 9 tests whether a DIVERGENT transferable skill - state-tracking under declarative updates, a fresh 160-row single-kind curriculum at seed 87 - adds held-out aggregate over the 0.357 parent at sealed seed 78169, under the frozen INSTALLED_TRANSFER / BOUNDED rule. Honest prior P(INSTALLED_TRANSFER) ~0.30-0.40.",
-     "source": "reports/preregistration.md"
+     "note": "The frozen two-state rule fired INSTALLED_TRANSFER: a divergent single-skill dose (state-tracking through declarative updates, 160 rows, seed 87) on the count_walk parent beat both parent (+0.0256) and base on aggregate with NO family below the one-episode slack. This is the first NEW aggregate-adding move class since replay compounding bounded at stage 8, and it validates the core doctrine — install a universal skill via a designed curriculum that looks nothing like the eval, prove by transfer. Gains land on agentic families reachable by state-tracking: siftstack +0.2, lockpick +0.1, mirage +0.1 vs parent; only sub-episode dips elsewhere. TWO HONEST CAVEATS: (1) single seed — the parent's own aggregate swings 0.30-0.36 across sealed seeds (0.3004 here vs 0.3626 at 78168) and state_track's 0.3260 sits inside that band, so the lift needs a fresh eval-only multi-seed confirmation (the same discipline that correctly killed the menders reading) before state_track is crowned the durable reference; (2) the ultimate every-family-beats-base bar is still unmet — warren 0.200 < base 0.367, a count_walk-inherited weakness.",
+     "source": "experiments/qwen35_4b_state_track_install/runs/benchmark/medium_tb1024_seed78169_install/summary.json"
     }
    ]
   }
