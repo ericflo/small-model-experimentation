@@ -1,6 +1,6 @@
 experiment_id: qwen35_4b_count_walk_menders_confirmation
 lifecycle: 28
-status: designed (eval-only; model-free construction frozen; benchmark event pending review)
+status: designed (eval-only; model-free construction frozen, amended pre-event per adversarial review — no seed consumed; benchmark event pending review)
 kind: multi-seed confirmation (no training, no merging, no corpus, no promotion)
 model:
   id: Qwen/Qwen3.5-4B
@@ -37,19 +37,22 @@ arm_pins:
     merge_receipt_sha256: 840edca0638b9e291bb34fde28b4b530df8743faf9b7b18b7f2358ce55ec4c36
 replication_rule:
   scope: the four NEW events only (78163 never pooled)
-  hits_c: number of new events with candidate menders raw score > 0
-  episodes: round(10*score) per arm-event (Python 3 round; partial-credit draws are raw hits with zero episodes)
+  semantics: an event counts as a hit only if it contains at least one FULL menders episode (score contributes int(10*s + 1e-9) episodes); partial-credit draws are recorded but never counted
+  hits_c: number of new events with candidate FULL-EPISODE count > 0
+  episodes: int(10*score + 1e-9) per arm-event (floor semantics; k/60-lattice partial draws contribute zero episodes and are not hits; raw positives recorded descriptively)
   REPLICATED: hits_c >= 2 AND E_c strictly exceeds every control total (ties are not dominance)
-  NOT_REPLICATED: hits_c == 0
+  NOT_REPLICATED: hits_c == 0 (retains probability ~0.24 at a true per-event hit rate of 0.3; a preregistered funding decision, not a nonexistence proof)
   AMBIGUOUS: otherwise
   fourth_state: none
 power_priors:
-  null_arm_event_rate: 0.10 (observed full-episode rate 3/29; raw-positive 5/29)
-  false_replicated: 0.0450 (sensitivity ceiling 0.0947)
+  null_process: FULL-EPISODE draws (9 recorded medium/tb1024 sealed events, 29 arm-events, 3 full-episode draws; the 2 partial draws are rule-invisible, recorded-only)
+  null_arm_event_rate: 0.10 headline; exact observed 3/29
+  false_replicated: 0.0450 at p=0.10; 0.0475 at exact p=3/29 (counterfactual ceiling 0.0947 at p=5/29 if partials were promoted, which the rule forbids)
   power_hits_ge2: {q0.4: 0.5248, q0.5: 0.6875, q0.65: 0.8735}
   power_replicated: {q0.4: 0.4717, q0.5: 0.6289, q0.65: 0.8230}
+  not_replicated_at_q0.3: 0.2401
 provenance:
   copies_dir: data/provenance/
-  production_side: preregistration + runner only (this cell produces no model)
-  composite_reproduction: lifecycle 27 / lifecycle 22 standalone rebuild paths
-  measurement_side: shared trusted gateway per docs/quality_gates.md; benchmarks/ never read
+  production_side: preregistration + runner + the complete in-cell lineage package (data/lineage/, stage-7 production inputs, byte-identical production scripts, scripts/rebuild_lineage.py)
+  composite_reproduction: IN-CELL via scripts/rebuild_lineage.py (stages 1-6 zero-root parent; stage 7 both arms at seed 85); cross-experiment receipt copies are verification aids only
+  measurement_side: shared trusted gateway per docs/quality_gates.md; benchmarks/ contents never parsed or read as data

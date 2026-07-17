@@ -43,10 +43,33 @@ class EpisodeConversionTests(unittest.TestCase):
         self.assertEqual(BENCH.menders_episodes(0.2), 2)
         self.assertEqual(BENCH.menders_episodes(1.0), 10)
 
-    def test_partial_credit_draw_rounds_to_zero_episodes(self) -> None:
-        # The program's recorded partial draw (1/60 = 0.0167) is a raw hit
-        # but contributes zero episodes under the frozen round(10*score).
+    def test_partial_credit_draw_floors_to_zero_episodes(self) -> None:
+        # The program's recorded partial draw (1/60 = 0.0167) is a raw
+        # positive (recorded-only) that contributes zero episodes under
+        # the frozen floor conversion int(10*s + 1e-9).
         self.assertEqual(BENCH.menders_episodes(0.016666666666666666), 0)
+
+    def test_full_k60_lattice_sweep_equals_floor(self) -> None:
+        # Review amendment A1: over the WHOLE menders k/60 lattice
+        # (k = 0..60, via the float k/60 representation the gateway
+        # actually emits) the conversion must equal int(k/6) — every
+        # partial-credit draw contributes ZERO episodes unless it
+        # crosses a full 0.1 step. Sweeps all 61 lattice points.
+        for k in range(61):
+            score = k / 60
+            self.assertEqual(
+                BENCH.menders_episodes(score),
+                int(k / 6),
+                f"lattice point k={k} (score={score!r})",
+            )
+
+    def test_floor_never_rounds_a_partial_up(self) -> None:
+        # These lattice points ROUND to a higher episode count under the
+        # retired round(10*score) semantics; floor must not.
+        for k, floored in ((4, 0), (5, 0), (9, 1), (10, 1), (11, 1), (59, 9)):
+            score = k / 60
+            self.assertEqual(BENCH.menders_episodes(score), floored)
+            self.assertLess(BENCH.menders_episodes(score), round(10 * score))
 
     def test_invalid_scores_fail_closed(self) -> None:
         for bad in (float("nan"), float("inf"), -0.1, 1.1, True, None, "0.1"):
@@ -107,15 +130,56 @@ class ReplicationRuleTruthTableTests(unittest.TestCase):
         self.assertFalse(reading["candidate_dominates_control"]["zero_root_parent"])
         self.assertEqual(reading["verdict"], "AMBIGUOUS")
 
-    def test_two_partial_hits_carry_zero_episodes_and_stay_ambiguous(self) -> None:
+    def test_partial_only_events_are_not_hits_and_close_not_replicated(self) -> None:
+        # Review amendment A2: a partial-credit draw is NOT a hit — with
+        # only partial draws the candidate has hits_c == 0 and the event
+        # closes NOT_REPLICATED; the raw positives are recorded
+        # descriptively, never counted.
         partial = 0.016666666666666666
         reading = BENCH.replication_reading(
             menders(candidate=(partial, partial, 0.0, 0.0))
         )
-        self.assertEqual(reading["hits_c"], 2)
+        self.assertEqual(reading["hits_c"], 0)
         self.assertEqual(reading["episode_totals"][CANDIDATE], 0)
-        self.assertFalse(reading["candidate_dominates_every_control"])
+        self.assertEqual(reading["raw_positive_events_per_arm"][CANDIDATE], 2)
+        self.assertTrue(reading["raw_positive_descriptive_only"])
+        self.assertEqual(reading["verdict"], "NOT_REPLICATED")
+
+    def test_one_full_plus_partials_is_one_hit_and_ambiguous(self) -> None:
+        # One full episode + partial-only events: exactly ONE hit (the
+        # partials are rule-invisible), so the verdict is AMBIGUOUS even
+        # though three events are raw-positive.
+        partial = 0.016666666666666666
+        reading = BENCH.replication_reading(
+            menders(candidate=(0.1, partial, partial, 0.0))
+        )
+        self.assertEqual(reading["hits_c"], 1)
+        self.assertEqual(reading["episode_totals"][CANDIDATE], 1)
+        self.assertEqual(reading["raw_positive_events_per_arm"][CANDIDATE], 3)
         self.assertEqual(reading["verdict"], "AMBIGUOUS")
+
+    def test_per_event_raw_positive_record_is_kept(self) -> None:
+        partial = 0.016666666666666666
+        reading = BENCH.replication_reading(
+            menders(candidate=(partial, 0.1, 0.0, 0.0))
+        )
+        first, second, third, _ = (str(seed) for seed in SEEDS)
+        self.assertTrue(reading["per_event"][first]["raw_positive"][CANDIDATE])
+        self.assertFalse(reading["per_event"][first]["candidate_hit"])
+        self.assertTrue(reading["per_event"][second]["raw_positive"][CANDIDATE])
+        self.assertTrue(reading["per_event"][second]["candidate_hit"])
+        self.assertFalse(reading["per_event"][third]["raw_positive"][CANDIDATE])
+
+    def test_control_partial_draw_never_counts_toward_control_hits(self) -> None:
+        partial = 0.016666666666666666
+        reading = BENCH.replication_reading(
+            menders(candidate=(0.1, 0.1, 0.0, 0.0), replay=(partial, 0.0, 0.0, 0.0))
+        )
+        self.assertEqual(reading["hits_per_arm"]["replay_ctl7"], 0)
+        self.assertEqual(reading["episode_totals"]["replay_ctl7"], 0)
+        self.assertEqual(reading["raw_positive_events_per_arm"]["replay_ctl7"], 1)
+        self.assertTrue(reading["candidate_dominates_control"]["replay_ctl7"])
+        self.assertEqual(reading["verdict"], "REPLICATED")
 
     def test_four_hits_with_dominance_is_replicated(self) -> None:
         reading = BENCH.replication_reading(
@@ -166,14 +230,24 @@ class ReplicationRuleTruthTableTests(unittest.TestCase):
             BENCH.replication_reading(table)
 
     def test_rule_text_is_the_frozen_contract(self) -> None:
-        self.assertIn("round(10*score)", BENCH.REPLICATION_RULE)
+        self.assertIn("int(10*score + 1e-9)", BENCH.REPLICATION_RULE)
+        self.assertIn("at least one FULL", BENCH.REPLICATION_RULE)
+        self.assertIn(
+            "partial-credit draws are recorded but never counted",
+            BENCH.REPLICATION_RULE,
+        )
         self.assertIn("hits_c >= 2", BENCH.REPLICATION_RULE)
         self.assertIn("EVERY control", BENCH.REPLICATION_RULE)
         self.assertIn("never pooled", BENCH.REPLICATION_RULE)
         self.assertIn("No fourth state", BENCH.REPLICATION_RULE)
+        self.assertNotIn("round(10*score)", BENCH.REPLICATION_RULE)
         self.assertEqual(
             set(BENCH.FROZEN_CLAIMS),
             {"REPLICATED", "NOT_REPLICATED", "AMBIGUOUS"},
+        )
+        self.assertIn(
+            "preregistered funding decision, not a nonexistence proof",
+            BENCH.FROZEN_CLAIMS["NOT_REPLICATED"],
         )
 
 

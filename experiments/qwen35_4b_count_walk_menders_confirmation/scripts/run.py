@@ -16,12 +16,13 @@ fourth state) is the terminal artifact.
 receipts, lifecycle 22's zero-root lineage merge receipt, the sha-pinned
 prior-event summary, the trusted gateway, the four byte-identical
 provenance copies in ``data/provenance/``, the preregistered power
-arithmetic via ``power_analysis.py --check``), authenticates any
-published per-seed event artifacts against the k-seed ledger (including
-requiring the terminal confirmation readout once all four seeds are
-closed, byte-verified via ``check_benchmark.py``), compiles every
-script, and runs the unit tests. It runs no model event and does NOT
-require the benchmark design review to exist.
+arithmetic via ``power_analysis.py --check``, and the complete in-cell
+standalone lineage package via ``rebuild_lineage.py --verify-inputs``),
+authenticates any published per-seed event artifacts against the k-seed
+ledger (including requiring the terminal confirmation readout once all
+four seeds are closed, byte-verified via ``check_benchmark.py``),
+compiles every script, and runs the unit tests. It runs no model event
+and does NOT require the benchmark design review to exist.
 
 ``--stage benchmark`` requires the committed-at-HEAD preregistration,
 the adversarial benchmark design review carrying the literal verdict
@@ -267,11 +268,17 @@ def smoke() -> None:
         raise SystemExit(str(error))
     # The preregistered power arithmetic must recompute exactly.
     run([sys.executable, "-B", str(SCRIPTS / "power_analysis.py"), "--check"])
+    # The complete in-cell standalone lineage package (stages 1-6 zero-root
+    # datasets, both stage-7 arm streams, trainers/mergers/wrappers, and
+    # provenance receipts) must authenticate against the extended manifest.
+    run([sys.executable, "-B", str(SCRIPTS / "rebuild_lineage.py"), "--verify-inputs"])
     if BENCH_REVIEW.exists():
         require_verdict(BENCH_REVIEW, BENCH_VERDICT, "benchmark design review")
     smoke_event_receipts(bench)
     with tempfile.TemporaryDirectory() as scratch:
-        for path in sorted(SCRIPTS.glob("*.py")):
+        for path in sorted(SCRIPTS.glob("*.py")) + sorted(
+            (SCRIPTS / "lineage_trainers").glob("*.py")
+        ):
             try:
                 py_compile.compile(
                     str(path),
@@ -288,9 +295,11 @@ def smoke() -> None:
         "authenticated composites (base, zero_root_parent, replay_ctl7, "
         "count_walk), sealed fresh seeds 78164/78165/78166/78167, the "
         "sha-pinned prior 78163 MECHANISM_ANSWER event (never pooled), "
-        "byte-identical provenance copies, the k-seed write-ahead ledger, "
-        "the frozen integer-exact replication rule, and the preregistered "
-        "power arithmetic"
+        "byte-identical provenance copies, the complete in-cell standalone "
+        "lineage package (rebuild_lineage.py --verify-inputs), the k-seed "
+        "write-ahead ledger, the frozen full-episode replication rule "
+        "(floor conversion int(10*s + 1e-9)), and the preregistered power "
+        "arithmetic"
     )
 
 

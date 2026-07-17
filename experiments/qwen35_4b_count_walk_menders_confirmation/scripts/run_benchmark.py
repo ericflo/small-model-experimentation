@@ -47,11 +47,16 @@ count-don't-walk pilot runner and the goal-gate confirmation runner:
   and continues, a mismatch refuses loudly with both digests. Once all
   four seeds close, the confirmation budget is spent and every new
   invocation refuses, resume or not;
-- implementation-signature integrity per seed: the four receipts must
-  share one (runner sha256, source inventory sha256, file count)
-  signature AND match the prior event's pinned block, before the seed's
-  summary is written — all sixteen receipts are thereby anchored to the
-  seed-78163 event, fail closed;
+- implementation-signature integrity per seed: BEFORE a seed's first
+  gateway call the LIVE benchmark implementation signature — computed
+  through the trusted gateway's own hash-only inventory functions
+  (bytes hashed, never parsed) — must equal the prior event's pinned
+  block (pre-consumption; a drifted suite refuses before any GPU run
+  or opened record); afterwards the four receipts must share one
+  (runner sha256, source inventory sha256, file count) signature AND
+  match the same pinned block, before the seed's summary is written —
+  all sixteen receipts are thereby anchored to the seed-78163 event,
+  fail closed;
 - gateway failures leave a safe failure receipt with the sanitized
   diagnostic only; child stdout/stderr never surface here;
 - every score in a gateway receipt must be a finite float in [0, 1]; a
@@ -72,6 +77,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import math
 import os
@@ -268,18 +274,27 @@ CLOSED_RECORD_KEYS = frozenset(
     }
 )
 # THE FROZEN REPLICATION RULE — integer-exact, two-directional, applied
-# over the FOUR NEW events only. hits_c counts new events with candidate
-# menders RAW score > 0; episode totals use round(10*score) (Python 3
-# round, so a partial-credit draw such as 0.0167 is a raw hit that
-# contributes zero episodes); E_c must STRICTLY exceed E_j for EVERY
-# control j. No fourth state.
+# over the FOUR NEW events only. An event counts as a hit ONLY if it
+# contains at least one FULL menders episode: each score contributes
+# int(10*score + 1e-9) episodes (floor semantics — a partial-credit draw
+# on the k/60 lattice such as 0.0167, 0.05, 0.0667, or 0.15 contributes
+# ZERO episodes unless it crosses a full 0.1 step, and a partial-only
+# event is NOT a hit; raw >0 draws are recorded descriptively, never
+# counted). E_c must STRICTLY exceed E_j for EVERY control j. No fourth
+# state. (Review amendment A1+A2, pre-event: hits and episodes now share
+# one full-episode semantics, coinciding with the preregistered pricing
+# model.)
 REPLICATION_RULE = (
     "REPLICATED iff hits_c >= 2 AND E_c > E_j for EVERY control j, where "
-    "hits_c = number of new events with candidate menders > 0 and E = "
-    "sum over the four new events of round(10*score) menders episodes "
-    "per arm; NOT_REPLICATED iff hits_c == 0; AMBIGUOUS otherwise "
-    "(including any E_c tie with a control, which is not dominance). The "
-    "78163 event is prior evidence, never pooled. No fourth state."
+    "an event counts as a hit only if it contains at least one FULL "
+    "menders episode (score contributes int(10*s + 1e-9) episodes; "
+    "partial-credit draws are recorded but never counted), hits_c = "
+    "number of new events whose candidate FULL-EPISODE count is > 0, and "
+    "E = sum over the four new events of int(10*score + 1e-9) menders "
+    "episodes per arm; NOT_REPLICATED iff hits_c == 0; AMBIGUOUS "
+    "otherwise (including any E_c tie with a control, which is not "
+    "dominance). The 78163 event is prior evidence, never pooled. No "
+    "fourth state."
 )
 FROZEN_CLAIMS = {
     "REPLICATED": (
@@ -290,7 +305,9 @@ FROZEN_CLAIMS = {
     "NOT_REPLICATED": (
         "the 78163 reading closes as seed noise; the count-dont-walk dose "
         "did not durably move menders; the expression-cost law stands; the "
-        "composite remains a documented artifact."
+        "composite remains a documented artifact (at a true per-event hit "
+        "rate of 0.3 this outcome retains probability ≈ 0.24 — the closure "
+        "is a preregistered funding decision, not a nonexistence proof)."
     ),
     "AMBIGUOUS": (
         "no claim; further spending on this contrast requires a "
@@ -786,16 +803,22 @@ def load_prior_reference() -> dict:
 
 
 def menders_episodes(score: object) -> int:
-    """Frozen integer conversion: round(10*score) menders episodes.
+    """Frozen integer conversion: int(10*score + 1e-9) menders episodes.
 
-    Python 3 round (banker's) is the frozen semantics; every full-episode
-    draw in program history is an exact multiple of 0.1, and the two
-    recorded partial-credit draws (0.0167) round to zero episodes while
-    still counting as raw hits.
+    FLOOR semantics (review amendment A1, pre-event): a partial-credit
+    draw on the menders k/60 lattice (0.0167, 0.05, 0.0667, 0.15, ...)
+    contributes ZERO episodes unless it crosses a full 0.1 step — for
+    every lattice point k/60 (k = 0..60) the conversion equals int(k/6),
+    unit-tested over the whole lattice via the float k/60 representation.
+    The 1e-9 guard absorbs float error at exact multiples of 0.1 without
+    ever promoting a genuine partial. Every full-episode draw in program
+    history is an exact multiple of 0.1; the two recorded partial-credit
+    draws (0.0167) convert to zero episodes and are NOT hits (they are
+    recorded descriptively as raw positives).
     """
     if not _valid_score(score):
         raise ValueError(f"menders score is not a finite float in [0, 1]: {score!r}")
-    return round(10 * score)
+    return int(10 * score + 1e-9)
 
 
 def goal_gate_row(
@@ -819,12 +842,18 @@ def replication_reading(menders_by_seed: dict[int, dict[str, float]]) -> dict:
     """THE FROZEN REPLICATION RULE over the four new events only.
 
     Integer-exact and two-directional; the prior 78163 event is never
-    pooled. hits_c counts new events with candidate menders RAW score
-    > 0; E totals convert each event's score to round(10*score) episodes
-    per arm; dominance requires E_c STRICTLY above every control's total
-    (a tie is not dominance). Verdict partition, total, no fourth state:
-    REPLICATED iff hits_c >= 2 AND dominance; NOT_REPLICATED iff
-    hits_c == 0; AMBIGUOUS otherwise.
+    pooled. An event counts as a hit ONLY if the arm's FULL-EPISODE
+    count int(10*score + 1e-9) is > 0 — hits and episodes share one
+    full-episode semantics (review amendment A1+A2), so the rule
+    coincides with the preregistered pricing model. Partial-only events
+    (raw score > 0 but zero full episodes) are recorded descriptively in
+    ``raw_positive`` / ``raw_positive_events_per_arm`` and are neither
+    hits nor episodes. E totals convert each event's score to
+    int(10*score + 1e-9) episodes per arm; dominance requires E_c
+    STRICTLY above every control's total (a tie is not dominance).
+    Verdict partition, total, no fourth state: REPLICATED iff
+    hits_c >= 2 AND dominance; NOT_REPLICATED iff hits_c == 0;
+    AMBIGUOUS otherwise.
     """
     if set(menders_by_seed) != set(SEED_ORDER):
         raise ValueError(
@@ -837,14 +866,26 @@ def replication_reading(menders_by_seed: dict[int, dict[str, float]]) -> dict:
             raise ValueError(
                 f"replication reading requires all four arms at seed {seed}"
             )
+        episodes = {label: menders_episodes(arms[label]) for label in MODEL_ORDER}
         per_event[str(seed)] = {
             "scores": {label: arms[label] for label in MODEL_ORDER},
-            "episodes": {
-                label: menders_episodes(arms[label]) for label in MODEL_ORDER
+            "episodes": episodes,
+            "candidate_hit": episodes[CANDIDATE] > 0,
+            # Descriptive only: raw >0 draws (including partial-only
+            # events) are recorded but never counted as hits or episodes.
+            "raw_positive": {
+                label: arms[label] > 0 for label in MODEL_ORDER
             },
-            "candidate_hit": arms[CANDIDATE] > 0,
         }
     hits = {
+        label: sum(
+            1
+            for seed in SEED_ORDER
+            if menders_episodes(menders_by_seed[seed][label]) > 0
+        )
+        for label in MODEL_ORDER
+    }
+    raw_positive_events = {
         label: sum(
             1 for seed in SEED_ORDER if menders_by_seed[seed][label] > 0
         )
@@ -875,6 +916,8 @@ def replication_reading(menders_by_seed: dict[int, dict[str, float]]) -> dict:
         "per_event": per_event,
         "hits_per_arm": hits,
         "hits_c": hits_c,
+        "raw_positive_events_per_arm": raw_positive_events,
+        "raw_positive_descriptive_only": True,
         "episode_totals": totals,
         "candidate_dominates_control": dominance,
         "candidate_dominates_every_control": dominant,
@@ -1016,6 +1059,32 @@ def require_implementation_equality(
             f"(confirmation={implementation}, prior={prior_implementation}); "
             "the preregistered confirmation is not comparable"
         )
+
+
+def current_implementation_signature() -> dict:
+    """Compute the LIVE benchmark implementation signature pre-consumption.
+
+    Computed THROUGH the sha-authenticated trusted gateway's own
+    inventory functions — suite bytes are hashed, never parsed, and no
+    benchmark content ever enters this process as data (the hidden-label
+    firewall holds; this is exactly what the gateway itself does before
+    every event). Used by the per-seed PRE-consumption check so a
+    drifted suite refuses BEFORE any GPU run or opened ledger record
+    instead of after four spent gateway runs.
+    """
+    if not GATEWAY.is_file() or sha256_file(GATEWAY) != GATEWAY_SHA256:
+        raise ValueError("trusted gateway is absent or changed")
+    spec = importlib.util.spec_from_file_location(
+        "count_walk_confirmation_trusted_gateway", GATEWAY
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    inventory = module.benchmark_source_inventory(module.MENAGERIE.parent)
+    return {
+        "runner_sha256": module.sha256_file(module.MENAGERIE),
+        "source_inventory_sha256": inventory["sha256"],
+        "source_file_count": inventory["file_count"],
+    }
 
 
 def build_readout(
@@ -1381,6 +1450,22 @@ def main() -> int:
                     f"partial event directory exists for seed {seed}; use "
                     "--resume after auditing it"
                 )
+        # PRE-CONSUMPTION implementation anchor (review amendment, minor 2):
+        # whenever this seed still has at least one gateway call to make,
+        # the LIVE benchmark implementation signature must equal the prior
+        # event's pinned block BEFORE the first arm runs — a drifted suite
+        # refuses here, before any GPU run or opened ledger record, instead
+        # of burning four gateway runs and wedging at the post-check (which
+        # is kept below).
+        if any(
+            not (output_dir / f"{label}.json").exists() for label in MODEL_ORDER
+        ):
+            try:
+                require_implementation_equality(
+                    current_implementation_signature(), PRIOR_IMPLEMENTATION
+                )
+            except ValueError as error:
+                parser.error(str(error))
         output_dir.mkdir(parents=True, exist_ok=True)
         # Write-ahead record: the seed is spent the moment its first gateway
         # call can start, so a mid-seed crash leaves a permanent trace. A
@@ -1465,7 +1550,10 @@ def main() -> int:
                     label: menders_episodes(value)
                     for label, value in menders.items()
                 },
-                "candidate_hit": menders[CANDIDATE] > 0,
+                # A hit requires at least one FULL episode (floor
+                # semantics); raw positives are recorded, never counted.
+                "candidate_hit": menders_episodes(menders[CANDIDATE]) > 0,
+                "candidate_raw_positive": menders[CANDIDATE] > 0,
                 "verdict_deferred_to_readout": True,
             },
             "promoted": None,

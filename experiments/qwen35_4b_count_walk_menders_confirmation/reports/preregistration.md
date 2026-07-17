@@ -44,9 +44,15 @@ inside this experiment directory.
 - Instrument: only the trusted aggregate gateway
   (`scripts/run_benchmark_aggregate.py`, sha
   `53cf6533dbd710eb167503363c39f73dbf7559a0d91f40a00436a3c218a01c17`) ever
-  runs; the benchmark suite directory is never read. Every one of the
-  sixteen receipts must carry the identical benchmark-implementation
-  signature AND match the prior event's pinned block (runner
+  runs; the benchmark suite's contents are never parsed or read as data.
+  BEFORE each seed's first gateway call the LIVE implementation
+  signature — computed through the sha-authenticated gateway's own
+  hash-only inventory functions (suite bytes hashed, never parsed; the
+  hidden-label firewall holds) — must equal the prior event's pinned
+  block, so a drifted suite refuses pre-consumption instead of after
+  four spent GPU runs. Afterwards every one of the sixteen receipts must
+  carry the identical benchmark-implementation signature AND match the
+  same pinned block (runner
   `a3beecd8b5c89ccfd99a172a6d85321d39b9feb6c29d12f10b2f4d7499e273cb`,
   inventory `218b8615a95f24da962c931e9cd2dba58d853a7bdcd2847cd8e2c42fc2c05f42`,
   56 files), fail closed — all sixteen readings are thereby anchored to
@@ -95,14 +101,27 @@ sha, and NEVER pooled into the rule below.
 
 ## The frozen replication rule (integer-exact, two-directional)
 
-Over the FOUR NEW events only. Let `hits_c` = the number of new events
-with candidate (`count_walk`) menders RAW score > 0. Let `E_c` = the
-candidate's total menders episodes across the four events, where each
-event contributes `round(10*score)` episodes (Python 3 `round`; the
-menders family's observed full-episode granularity is 0.1, and the
-program's two recorded partial-credit draws of 0.0167 each round to ZERO
-episodes while still counting as raw hits). Let `E_j` likewise per
-control arm `j` over base, zero_root_parent, replay_ctl7.
+Over the FOUR NEW events only, under ONE full-episode semantics for
+hits and episodes alike (review amendment A1+A2, pre-event): an event
+counts as a hit only if it contains at least one FULL menders episode
+(score contributes `int(10*s + 1e-9)` episodes); partial-credit draws
+are recorded but never counted.
+
+Let each event contribute `int(10*score + 1e-9)` menders episodes per
+arm — FLOOR semantics: on the menders k/60 lattice (0.0167, 0.05,
+0.0667, 0.15, …) a partial-credit draw contributes ZERO episodes unless
+it crosses a full 0.1 step (the conversion equals `int(k/6)` on every
+lattice point k = 0..60, unit-tested over the whole lattice via the
+float k/60 representation; the 1e-9 guard only absorbs float error at
+exact multiples of 0.1). Let `hits_c` = the number of new events whose
+candidate (`count_walk`) FULL-EPISODE count is > 0, and `E_c` = the
+candidate's episode total across the four events; `E_j` and control
+hits likewise per control arm `j` over base, zero_root_parent,
+replay_ctl7. Raw score > 0 draws that floor to zero episodes
+(partial-only events) are recorded DESCRIPTIVELY per event and per arm
+(`raw_positive`, `raw_positive_events_per_arm`) and are neither hits
+nor episodes — the rule thereby coincides exactly with the priced
+noise model below.
 
 - **REPLICATED** iff `hits_c >= 2` AND `E_c > E_j` for EVERY control `j`
   (a tie is not dominance). Frozen claim: "the count_walk composite
@@ -111,82 +130,182 @@ control arm `j` over base, zero_root_parent, replay_ctl7.
 - **NOT_REPLICATED** iff `hits_c == 0`. Frozen claim: "the 78163 reading
   closes as seed noise; the count-dont-walk dose did not durably move
   menders; the expression-cost law stands; the composite remains a
-  documented artifact."
+  documented artifact (at a true per-event hit rate of 0.3 this outcome
+  retains probability ≈ 0.24 — the closure is a preregistered funding
+  decision, not a nonexistence proof)."
 - **AMBIGUOUS** otherwise. Frozen claim: "no claim; further spending on
   this contrast requires a mechanism-differentiated NEW design, not more
   seeds of the same."
 
 No fourth state. The rule is implemented in
 `run_benchmark.replication_reading`, unit-tested over the full truth
-table (including the `E_c` tie branch), and computed only from
+table (including the `E_c` tie branch, the partial-only NOT_REPLICATED
+branch, and the full 61-point lattice sweep), and computed only from
 ledger-pinned receipts.
 
 Also recorded per event, all DESCRIPTIVE, never gating: the full
 per-family tables, the four aggregates, the strict-win goal gates versus
-base for each treated arm, and the candidate-versus-each-control deltas
-(aggregate, per-family, and menders specifically). Budget integrity
-(`within_budget` / `wall_seconds` per arm per seed) scopes the paired
-comparison and never gates.
+base for each treated arm, the candidate-versus-each-control deltas
+(aggregate, per-family, and menders specifically), and the raw-positive
+records. Budget integrity (`within_budget` / `wall_seconds` per arm per
+seed) scopes the paired comparison and never gates.
 
 ## Power and priors (honest, computed before any event)
 
-Frozen noise model for the null: every arm-event independently draws at
-least one FULL menders episode with probability p ≈ 0.10 — the program's
-observed arm-event rate. Design-time audit over all 8 recorded
-medium/tb1024 sealed events (29 arm-events): 3 arm-events drew a full
-episode (3/29 = 0.1034: seed 78,157 hygiene_explore, seed 78,162
-replay_ctl6, seed 78,163 count_walk — each exactly one episode, 0.1),
-plus 2 partial-credit draws of 0.0167 (raw-positive rate 5/29 = 0.1724)
-which contribute zero episodes under the frozen conversion.
+Frozen noise model for the null — the FULL-EPISODE process: every
+arm-event independently draws at least one FULL menders episode with
+probability p. Because the rule now counts hits and episodes under the
+same full-episode floor semantics, the null IS the priced process — the
+rule and the pricing coincide exactly. Design-time audit over all 9
+recorded medium/tb1024 sealed events (seeds 78,150 / 78,154 / 78,155 /
+78,156 / 78,157 / 78,159 / 78,160 / 78,162 / 78,163; 29 arm-events):
+3 arm-events drew a full episode (3/29 = 0.1034: seed 78,157
+hygiene_explore, seed 78,162 replay_ctl6, seed 78,163 count_walk — each
+exactly one episode, 0.1). The 2 partial-credit draws of 0.0167 (seed
+78,154 hygiene_explore_parent, seed 78,160 statechain_clean) are
+RULE-INVISIBLE under the frozen floor conversion: recorded-only raw
+positives, neither hits nor episodes.
 
-Under the null at p = 0.10 with one episode per hitting arm-event, the
-candidate's total E_c ~ Binomial(4, 0.1) and each control's total
-E_j ~ Binomial(4, 0.1), independent:
+Under the null with one episode per hitting arm-event, the candidate's
+total E_c ~ Binomial(4, p) and each control's total E_j ~ Binomial(4, p),
+independent. Alpha is given at BOTH the frozen headline p = 0.10 and the
+exact observed full-episode rate p = 3/29:
 
-- P(hits_c >= 2) = 1 − 0.9⁴ − 4·(0.1)·0.9³ = 1 − 0.6561 − 0.2916 = **0.0523**.
-- P(false REPLICATED) = Σ_{k=2..4} P(E_c = k) · P(E_j < k)³
-  = 0.0486·(0.9477)³ + 0.0036·(0.9963)³ + 0.0001·(0.9999)³
+- At p = 0.10: P(hits_c >= 2) = 1 − 0.9⁴ − 4·(0.1)·0.9³ = 1 − 0.6561 −
+  0.2916 = **0.0523**; P(false REPLICATED) = Σ_{k=2..4} P(E_c = k) ·
+  P(E_j < k)³ = 0.0486·(0.9477)³ + 0.0036·(0.9963)³ + 0.0001·(0.9999)³
   = 0.04137 + 0.00356 + 0.00010 = **0.0450**.
-- Sensitivity bound: promoting every raw-positive draw to a full episode
-  (p = 5/29 = 0.1724 on all four arms) gives P(false REPLICATED) =
-  **0.0947** — the pessimistic ceiling if partial-credit draws were
-  episodes, which the frozen conversion does not allow.
+- At the exact p = 3/29: P(hits_c >= 2) = **0.0557**; P(false
+  REPLICATED) = **0.0475** — exactly the fraction
+  11885589964581732052992/250246473680347348787521 =
+  0.04749553426180864, computed in exact rational arithmetic and
+  enforced digit-for-digit by `--check`.
+- COUNTERFACTUAL sensitivity ceiling: if every raw-positive draw were
+  (counterfactually) promoted to a full episode (p = 5/29 = 0.1724 on
+  all four arms) then P(false REPLICATED) = **0.0947**. This is
+  explicitly a counterfactual — the frozen floor conversion forbids
+  partial draws from ever being episodes or hits — retained only as the
+  pessimistic ceiling the rule would have under that retired reading.
 
-Under a real effect where the candidate's per-event hit rate is q (one
-episode per hit) and the controls stay at the null p = 0.10:
+Under a real effect where the candidate's per-event FULL-EPISODE hit
+rate is q (one episode per hit) and the controls stay at the headline
+null p = 0.10 (unchanged by the amendment — verified exactly):
 
 - P(hits_c >= 2) = 1 − (1−q)⁴ − 4q(1−q)³ = **0.5248** at q = 0.4,
   **0.6875** at q = 0.5, **0.8735** at q = 0.65.
 - P(REPLICATED) (hits AND dominance over all three controls) =
   Σ_{k=2..4} P(Bin(4,q) = k) · P(Bin(4,0.1) < k)³ = **0.4717** at
   q = 0.4, **0.6289** at q = 0.5, **0.8230** at q = 0.65.
+- P(NOT_REPLICATED) = (1−q)⁴ = **0.2401** at q = 0.3: even a modest real
+  effect leaves a ≈24% chance the four-seed test closes the line — the
+  NOT_REPLICATED consequence is a preregistered funding decision, not a
+  nonexistence proof, and its frozen claim says so.
 
 Every number recomputes exactly from `scripts/power_analysis.py`
-(`--check` runs inside smoke and the unit tests). Stated plainly: a
-REPLICATED verdict carries a ≈4.5% false-positive risk under the
-observed noise rate, and the test has 47–82% power across the plausible
-effect range — an AMBIGUOUS outcome is live and its frozen consequence
-(no claim; a mechanism-differentiated NEW design, never more seeds of
-the same) forbids seed-mining this contrast.
+(`--check` runs inside smoke and the unit tests and enforces every
+printed number, including the exact-fraction alpha). Stated plainly: a
+REPLICATED verdict carries a ≈4.5% (headline p = 0.10) to ≈4.75% (exact
+p = 3/29) false-positive risk under the observed full-episode noise
+rate, and the test has 47–82% power across the plausible effect range —
+an AMBIGUOUS outcome is live and its frozen consequence (no claim; a
+mechanism-differentiated NEW design, never more seeds of the same)
+forbids seed-mining this contrast.
 
 ## Standalone and provenance boundary (stated plainly)
 
-This cell produces NO model: its production side is this preregistration
-plus the frozen runner; the measurement side stays shared per
-`docs/quality_gates.md` (the trusted aggregate gateway is repo-level
-infrastructure referenced in place; `benchmarks/` is never read).
-Reproduction of the four evaluated composites is NOT this cell's path:
-`count_walk` and `replay_ctl7` rebuild from lifecycle 27's own standalone
-clean-chain package
-(`experiments/qwen35_4b_count_dont_walk_enumeration/data/lineage/` +
-`scripts/rebuild_clean_chain.py`, which also carries the zero-root
-parent's six-stage chain), and the zero-root parent from lifecycle 22's
-documented rebuild (`experiments/qwen35_4b_zero_root_lineage_rebuild`).
-The four committed provenance documents are copied byte-identically into
+This cell produces NO model, but it EVALUATES three non-base composites
+and therefore carries the complete model-reproduction package IN ITS OWN
+DIRECTORY per `docs/quality_gates.md` ("new cells must comply, including
+eval-only cells") and AGENTS.md (review amendment B1, pre-event). The
+reproduction path is IN-CELL:
+
+- `data/lineage/` — the six ordered zero-root stage datasets
+  (`stage01_…` through `stage06_…`, byte-identical copies), lifecycle
+  22's seven provenance receipts (`data/lineage/provenance/`), and
+  `lineage_manifest.json` — lifecycle 27's clean-chain manifest copied
+  and EXTENDED with the `stage7_confirmation_arms` block recording BOTH
+  arm streams (both shas recomputed from the copied files:
+  `data/replay_ctl7.jsonl`
+  `94e8259ec03800d0a4dcbf8075252c5180a668e2da74569fcf62497cf0f9de5a`,
+  `data/count_walk.jsonl`
+  `71291542c3c901caccf9586543efb02da319b371244728ecfd1a0fc7cb92ed26`),
+  the fixed training seed 85, the trainer/merger shas, and the final
+  composite tree/weights pins this cell authenticates.
+- Stage-7 production inputs, byte-identical copies: `data/count_walk.jsonl`,
+  `data/replay_ctl7.jsonl`, `data/sft_count_walk.jsonl`,
+  `data/sft_blend.jsonl`, `data/stream_token_receipt.json`.
+- Production scripts, byte-identical copies: `scripts/lineage_trainers/`
+  (all three stage trainers), `scripts/train_think.py`,
+  `scripts/merge_adapter.py`, `scripts/train_trial.py`,
+  `scripts/merge_trained_arm.py`, and `scripts/rebuild_clean_chain.py`
+  (documentation copy of lifecycle 27's single-arm rebuilder).
+- `scripts/rebuild_lineage.py` — this cell's executable rebuild path:
+  stages 1-6 rebuild the zero-root parent (must reproduce its pinned
+  weights on this stack); stage 7 trains the two arms (the
+  `train_trial.py` recipe — fresh rank-32/alpha-64 adapter on the
+  zero-root composite via `--model-path`, fixed seed 85) and merges them
+  (the `merge_trained_arm.py` merge via `merge_adapter.py
+  --base-model`). Its `--verify-inputs` mode authenticates every copied
+  file against the extended manifest's shas and runs inside smoke and
+  the unit tests.
+
+The measurement side stays shared per `docs/quality_gates.md` (the
+trusted aggregate gateway is repo-level infrastructure referenced in
+place; `benchmarks/` contents are never parsed or read as data). The
+four committed provenance documents remain copied byte-identically into
 `data/provenance/` as VERIFICATION AIDS (`replay_ctl7_merge.json`,
 `count_walk_merge.json`, `zero_root_parent_merge.json`,
 `prior_event_seed78163_summary.json`); the seed-consuming boundary and
 smoke both enforce copy-equals-source-equals-pin, fail closed.
+Cross-experiment SHAs (the receipt copies, the committed originals)
+remain verification aids only — never the reproduction path.
+
+## Review amendments (pre-event; provenance)
+
+Applied 2026-07-17 inside the legitimate pre-event amendment window: the
+design was frozen at commit `bd253e48`, the adversarial review returned
+3 MAJOR + 4 minor findings, and NO seed had been consumed (the ledger
+does not exist; no gateway call has ever run from this cell). Every
+change below happened BEFORE the benchmark design review verdict and
+before any model event; nothing was re-read or re-priced after data.
+
+- **A1+A2 (one coherent semantics fix).** The episode conversion moved
+  from `round(10*score)` to FLOOR `int(10*score + 1e-9)` (partial-credit
+  draws on the k/60 lattice contribute zero episodes unless they cross a
+  full 0.1 step; unit-tested over all 61 lattice points), and hits were
+  redefined to count events whose FULL-EPISODE count is > 0 — hits and
+  episodes now share one semantics, so the rule coincides exactly with
+  the already-priced model (hits = events with >= 1 full episode).
+  Partial-only events became rule-invisible (recorded-only
+  `raw_positive` descriptive records). The null was restated as the
+  full-episode process; alpha is given at both p = 0.10 (0.0450) and the
+  exact p = 3/29 (0.0475, exact fraction printed and enforced); the
+  p = 5/29 bound (0.0947) is retained strictly as a counterfactual
+  ceiling; the hits>=2 and REPLICATED power numbers were verified
+  unchanged.
+- **B1 (standalone doctrine).** This eval-only cell now carries the
+  complete in-cell lineage package (see the standalone boundary section
+  above): copied stage datasets, arm streams, production inputs and
+  scripts, the extended `lineage_manifest.json`, and
+  `scripts/rebuild_lineage.py` with `--verify-inputs` wired into smoke
+  and tests. The reproduction path is IN-CELL; receipt copies remain
+  verification aids.
+- **Minor 1.** The design-time audit understated the event count: the 9
+  recorded medium/tb1024 sealed events are seeds 78,150 / 78,154 /
+  78,155 / 78,156 / 78,157 / 78,159 / 78,160 / 78,162 / 78,163 (the
+  arm-event count 29 was and is correct).
+- **Minor 2.** The benchmark implementation-signature equality check now
+  ALSO runs pre-consumption, before each seed's first gateway call
+  (through the trusted gateway's own hash-only inventory functions); the
+  post-arm check is kept.
+- **Minor 3.** The NOT_REPLICATED consequence text now carries its
+  honest retention probability (≈ 0.24 at a true per-event hit rate of
+  0.3): the closure is a preregistered funding decision, not a
+  nonexistence proof.
+- **Minor 4.** The torn-ledger / partial-receipt manual recovery
+  procedure is documented in the README ops section (delete the torn
+  artifact, `--resume` regenerates byte-identically; never edit receipts
+  by hand).
 
 ## Mandatory checkpoint order
 

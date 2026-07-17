@@ -1,0 +1,69 @@
+{
+ "adapter": {
+  "adapter_config_sha256": "ffd5ef97871e98190b2474dabeb7ef865d13d0615d50d6f130e8a0aacd1c919a",
+  "adapter_weights_sha256": "627c8df24937214afa51306d1435bf419d11d5c3406ef5782e2ed5be4fee7926",
+  "path": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_zero_root_lineage_rebuild/adapters/stage06_hygiene_explore",
+  "source": "stage 6 (hygiene_explore), zero-root chain"
+ },
+ "base_model": {
+  "id": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+ },
+ "experiment_id": "qwen35_4b_zero_root_lineage_rebuild",
+ "inner_merge_receipt_sha256": "f8981f4638d901471eb41aff0ffd0bfac88aebd6e3e4d4db1e1c733be16709c0",
+ "manifest_sha256": "1f49cd8b8706c8db858d30af1bf14fe09403971256514919bc24e7b6c47ff121",
+ "merged": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_zero_root_lineage_rebuild/merged/zero_root_hygiene_explore",
+ "merger": {
+  "path": "scripts/merge_adapter.py",
+  "sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672"
+ },
+ "name": "zero_root_hygiene_explore",
+ "original_contrast": {
+  "note": "CONTRAST ONLY: these are the ORIGINAL blend-rooted chain's recorded hashes; the zero-root chain trains from a different root, so its bytes are EXPECTED to differ and these values are never used as verification",
+  "published_tree_sha256": "9eb653d78f05546ca594a831c989fa906d12f3eb7a5a8550d1afcd6bfccc4971",
+  "weights_sha256": "e21123443a230ada2c73ded411e0b5b7c2b1459856b2c38e4f1beea8958dc02f"
+ },
+ "output_files": [
+  {
+   "name": "chat_template.jinja",
+   "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+   "size": 7756
+  },
+  {
+   "name": "config.json",
+   "sha256": "a1c80f0efa6f83f631eaa9c25ffa166e3b1f9db395cc3b14374dfc0962261f60",
+   "size": 2829
+  },
+  {
+   "name": "generation_config.json",
+   "sha256": "0c46d8aa4f0ae5e611c961f70b87c83fb696043c1e319337708e96f882180de1",
+   "size": 116
+  },
+  {
+   "name": "merge_receipt.json",
+   "sha256": "f8981f4638d901471eb41aff0ffd0bfac88aebd6e3e4d4db1e1c733be16709c0",
+   "size": 880
+  },
+  {
+   "name": "model.safetensors",
+   "sha256": "6e9aad251465ca2713fda0238a34aa9f46262053860b867f80189d65c9ee3932",
+   "size": 9078620536
+  },
+  {
+   "name": "tokenizer.json",
+   "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+   "size": 19989325
+  },
+  {
+   "name": "tokenizer_config.json",
+   "sha256": "9cf04fffe3d8c3b85e439fb35c7acad0761ab51c422a8c4256d9f887c3a0be7d",
+   "size": 1125
+  }
+ ],
+ "output_tree_sha256": "414f582950bf60fed2fe462cd141ab98d0f772087b4f9c6bc5aa12f03f379e7d",
+ "schema_version": 1,
+ "stage": "merge",
+ "wall_seconds": 84.98047218495049,
+ "weights_sha256": "6e9aad251465ca2713fda0238a34aa9f46262053860b867f80189d65c9ee3932",
+ "weights_size_bytes": 9078620536
+}

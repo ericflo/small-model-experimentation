@@ -2,6 +2,7 @@ import importlib.util
 import json
 import sys
 import unittest
+from fractions import Fraction
 from pathlib import Path
 
 EXP = Path(__file__).resolve().parents[1]
@@ -294,13 +295,19 @@ class ScoreFinitenessTests(unittest.TestCase):
 class PowerArithmeticTests(unittest.TestCase):
     def test_preregistered_numbers_recompute_exactly(self) -> None:
         self.assertEqual(POWER.computed(), POWER.PREREGISTERED)
+        self.assertEqual(POWER.computed_exact(), POWER.PREREGISTERED_EXACT)
 
     def test_headline_false_positive_and_power_values(self) -> None:
         self.assertEqual(POWER.PREREGISTERED["p_hits_ge2_null"], 0.0523)
+        self.assertEqual(POWER.PREREGISTERED["p_hits_ge2_null_exact"], 0.0557)
         self.assertEqual(POWER.PREREGISTERED["p_false_replicated_null"], 0.0450)
         self.assertEqual(
-            POWER.PREREGISTERED["p_false_replicated_sensitivity"], 0.0947
+            POWER.PREREGISTERED["p_false_replicated_null_exact"], 0.0475
         )
+        self.assertEqual(
+            POWER.PREREGISTERED["p_false_replicated_counterfactual"], 0.0947
+        )
+        self.assertEqual(POWER.PREREGISTERED["p_not_replicated_q30"], 0.2401)
         self.assertEqual(
             POWER.PREREGISTERED["power_hits_ge2"],
             {"0.4": 0.5248, "0.5": 0.6875, "0.65": 0.8735},
@@ -310,13 +317,31 @@ class PowerArithmeticTests(unittest.TestCase):
             {"0.4": 0.4717, "0.5": 0.6289, "0.65": 0.8230},
         )
 
+    def test_exact_null_alpha_is_fraction_derived(self) -> None:
+        self.assertEqual(POWER.PREREGISTERED_EXACT["p"], "3/29")
+        self.assertEqual(
+            POWER.PREREGISTERED_EXACT["p_false_replicated_fraction"],
+            "11885589964581732052992/250246473680347348787521",
+        )
+        self.assertEqual(
+            POWER.PREREGISTERED_EXACT["p_false_replicated_float"],
+            0.04749553426180864,
+        )
+        self.assertEqual(
+            round(POWER.PREREGISTERED_EXACT["p_false_replicated_float"], 4),
+            POWER.PREREGISTERED["p_false_replicated_null_exact"],
+        )
+
     def test_noise_model_matches_the_frozen_audit(self) -> None:
         self.assertEqual(POWER.EVENTS, 4)
         self.assertEqual(POWER.CONTROL_ARMS, 3)
+        self.assertEqual(POWER.OBSERVED_SEALED_EVENTS, 9)
         self.assertEqual(POWER.OBSERVED_ARM_EVENTS, 29)
         self.assertEqual(POWER.OBSERVED_FULL_EPISODE_DRAWS, 3)
         self.assertEqual(POWER.OBSERVED_RAW_POSITIVE_DRAWS, 5)
         self.assertEqual(float(POWER.NULL_P), 0.1)
+        self.assertEqual(POWER.EXACT_NULL_P, Fraction(3, 29))
+        self.assertEqual(POWER.COUNTERFACTUAL_P, Fraction(5, 29))
 
 
 class GoalGateRowTests(unittest.TestCase):

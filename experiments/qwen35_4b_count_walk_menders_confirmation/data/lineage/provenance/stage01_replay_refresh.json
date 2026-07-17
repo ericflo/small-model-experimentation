@@ -1,0 +1,75 @@
+{
+ "adapter": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_zero_root_lineage_rebuild/adapters/stage01_replay_refresh",
+ "command": [
+  "/home/ericflo/Development/small-model-experimentation/.venv/bin/python",
+  "-B",
+  "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_zero_root_lineage_rebuild/scripts/lineage_trainers/train_think_stage12.py",
+  "--train",
+  "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_zero_root_lineage_rebuild/data/lineage/stage01_replay_refresh.jsonl",
+  "--out",
+  "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_zero_root_lineage_rebuild/adapters/stage01_replay_refresh",
+  "--epochs",
+  "1.0",
+  "--lr",
+  "1e-05",
+  "--rank",
+  "32",
+  "--alpha",
+  "64",
+  "--batch-size",
+  "1",
+  "--grad-accum",
+  "8",
+  "--max-length",
+  "4096",
+  "--w-think",
+  "0.2",
+  "--seed",
+  "42"
+ ],
+ "dataset": {
+  "file": "data/lineage/stage01_replay_refresh.jsonl",
+  "rows": 1520,
+  "sha256": "5d5d7c4b8a4b0a4f270fe8b2ecaebe356c771948d71b0f7bbeead6bfc04308b6"
+ },
+ "experiment_id": "qwen35_4b_zero_root_lineage_rebuild",
+ "fresh_init": true,
+ "hyperparameters": {
+  "alpha": 64,
+  "batch_size": 1,
+  "epochs": 1.0,
+  "grad_accum": 8,
+  "lr": 1e-05,
+  "max_length": 4096,
+  "rank": 32,
+  "w_think": 0.2
+ },
+ "lineage": "zero_root",
+ "manifest_sha256": "1f49cd8b8706c8db858d30af1bf14fe09403971256514919bc24e7b6c47ff121",
+ "model": {
+  "id": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+ },
+ "name": "replay_refresh",
+ "original_produced_contrast": {
+  "adapter_config_sha256": "6b91df7d16d9a306ca3f04d84b4f9397394c12062112ce84a8198fe47e39e4d6",
+  "adapter_weights_sha256": "c296c774d20403c7de9c810bfa825dbbe22bd0683c37692a929bd2bb13e3d36a",
+  "note": "CONTRAST ONLY: these are the ORIGINAL blend-rooted chain's recorded hashes; the zero-root chain trains from a different root, so its bytes are EXPECTED to differ and these values are never used as verification"
+ },
+ "produced": {
+  "adapter_config_sha256": "aaa81acb5a73fa9782dda7bc9c148a1502374bc29e761f7a4eef50e9952d1524",
+  "adapter_weights_sha256": "e271e2eab58e153dee4804959e105e766c6ba1aee3b1725194e4cab3755d4584",
+  "adapter_weights_size": 169903320
+ },
+ "schema_version": 1,
+ "seed": 42,
+ "seed_is_inherited_stage_constant": true,
+ "stage": 1,
+ "targeted_close_overrides": null,
+ "trainer": {
+  "path": "scripts/lineage_trainers/train_think_stage12.py",
+  "sha256": "400e4b856a5899db8805510c9f6d8d11da76b35cf30af16856b46f41abdb4e54"
+ },
+ "wall_seconds": 2517.3819807879627,
+ "warm_start": "fresh_zero_init"
+}
