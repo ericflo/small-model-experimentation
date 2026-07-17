@@ -1,0 +1,55 @@
+[train_think] 160 examples (0 skipped as over-length)
+
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/426 [00:00<00:56,  7.51it/s]/home/ericflo/Development/small-model-experimentation/.venv/lib/python3.12/site-packages/bitsandbytes/backends/cuda/ops.py:213: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+
+Loading weights:   1%|▏         | 6/426 [00:00<00:15, 27.01it/s]
+Loading weights:  10%|▉         | 42/426 [00:00<00:02, 160.97it/s]
+Loading weights:  21%|██        | 89/426 [00:00<00:01, 273.57it/s]
+Loading weights:  31%|███       | 133/426 [00:00<00:00, 326.84it/s]
+Loading weights:  41%|████      | 173/426 [00:00<00:00, 348.28it/s]
+Loading weights:  52%|█████▏    | 220/426 [00:00<00:00, 381.64it/s]
+Loading weights:  61%|██████    | 259/426 [00:00<00:00, 376.95it/s]
+Loading weights:  72%|███████▏  | 307/426 [00:00<00:00, 402.54it/s]
+Loading weights:  84%|████████▍ | 357/426 [00:01<00:00, 430.73it/s]
+Loading weights:  94%|█████████▍| 401/426 [00:01<00:00, 420.85it/s]
+Loading weights: 100%|██████████| 426/426 [00:01<00:00, 340.48it/s]
+[transformers] warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+trainable params: 42,467,328 || all params: 4,248,218,624 || trainable%: 0.9997
+
+  0%|          | 0/20 [00:00<?, ?it/s]
+  5%|▌         | 1/20 [00:08<02:49,  8.94s/it]
+ 10%|█         | 2/20 [00:16<02:21,  7.86s/it]
+ 15%|█▌        | 3/20 [00:23<02:09,  7.60s/it]
+ 20%|██        | 4/20 [00:29<01:55,  7.21s/it]
+ 25%|██▌       | 5/20 [00:36<01:42,  6.84s/it]
+ 30%|███       | 6/20 [00:42<01:35,  6.83s/it]
+ 35%|███▌      | 7/20 [00:49<01:27,  6.73s/it]
+ 40%|████      | 8/20 [00:56<01:22,  6.83s/it]
+ 45%|████▌     | 9/20 [01:02<01:12,  6.61s/it]
+ 50%|█████     | 10/20 [01:09<01:08,  6.83s/it]
+
+
+ 50%|█████     | 10/20 [01:09<01:08,  6.83s/it]
+ 55%|█████▌    | 11/20 [01:16<01:00,  6.74s/it]
+ 60%|██████    | 12/20 [01:23<00:53,  6.74s/it]
+ 65%|██████▌   | 13/20 [01:30<00:48,  6.91s/it]
+ 70%|███████   | 14/20 [01:36<00:40,  6.70s/it]
+ 75%|███████▌  | 15/20 [01:42<00:32,  6.53s/it]
+ 80%|████████  | 16/20 [01:50<00:27,  6.78s/it]
+ 85%|████████▌ | 17/20 [01:57<00:20,  6.90s/it]
+ 90%|█████████ | 18/20 [02:05<00:14,  7.29s/it]
+ 95%|█████████▌| 19/20 [02:12<00:07,  7.17s/it]
+100%|██████████| 20/20 [02:20<00:00,  7.38s/it]
+
+
+100%|██████████| 20/20 [02:20<00:00,  7.38s/it]
+
+
+100%|██████████| 20/20 [02:20<00:00,  7.38s/it]
+100%|██████████| 20/20 [02:20<00:00,  7.02s/it]
+{'loss': '1.098', 'grad_norm': '6.908', 'learning_rate': '6.227e-06', 'epoch': '0.5'}
+{'loss': '0.4288', 'grad_norm': '4.654', 'learning_rate': '6.819e-08', 'epoch': '1'}
+{'train_runtime': '140.4', 'train_samples_per_second': '1.14', 'train_steps_per_second': '0.142', 'train_loss': '0.7637', 'epoch': '1'}
+[train_think] saved adapter to /home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_state_track_install/adapters/state_track
