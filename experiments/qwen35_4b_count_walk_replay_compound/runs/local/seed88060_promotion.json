@@ -1,0 +1,235 @@
+{
+  "adjudication_protocol": "pooled_k3",
+  "aggregate_seed": 78168,
+  "aggregate_seed_open": true,
+  "backend": "vllm_merged_composite",
+  "bands_two_sided": true,
+  "benchmark_data_read": false,
+  "candidates": [
+    "replay_compound"
+  ],
+  "checks": {
+    "retention_pooled_cap_contacts_within_3_of_parent": true,
+    "retention_pooled_correct_within_5_of_parent": true,
+    "retention_pooled_parsed_within_3_of_parent": true
+  },
+  "controls": [
+    "count_walk"
+  ],
+  "descriptive_noise": {
+    "deltas_vs_parent": {
+      "replay_compound": {
+        "by_screen": [
+          -2,
+          -3,
+          1
+        ],
+        "pooled_mean": -1.3333333333333333,
+        "sd": 2.0816659994661326,
+        "vs": "count_walk"
+      }
+    },
+    "reported_not_gated": true,
+    "screen_sd_pooled_levels": 3.188521078284832
+  },
+  "design_receipt_sha256": "bd6a8f47f846526730be197a563fcda432f88e926676378841fc146be84d3e3f",
+  "eligible": [
+    "replay_compound"
+  ],
+  "experiment_id": "qwen35_4b_count_walk_replay_compound",
+  "local_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_count_walk_replay_compound/runs/local/seed88060.json",
+  "local_receipt_sha256": "8aec02122a0952ea84fcf09d6b40765a660807d7ce3d62b896aff53120fdd729",
+  "no_absolute_per_kind_floors": true,
+  "no_axis_instrument": "the stage-8 treatment is the full replay pool itself; no new kind exists to hold out, so the local gate is a pure retention non-drift screen and the aggregate question belongs to the sealed benchmark event",
+  "promoted": "replay_compound",
+  "retention_rows_per_screen": 104,
+  "retention_screens": 3,
+  "schema_version": 1,
+  "screen_seeds": [
+    88060,
+    88061,
+    88062
+  ],
+  "summaries": {
+    "count_walk": {
+      "adapter": "count_walk",
+      "retention": {
+        "correct_by_screen": [
+          63,
+          66,
+          58
+        ],
+        "pooled_means": {
+          "cap_contacts": 10.666666666666666,
+          "correct": 62.333333333333336,
+          "parsed": 93.66666666666667,
+          "route_abstentions": 0.0
+        },
+        "screens": {
+          "88060": {
+            "cap_contacts": 13,
+            "correct": 63,
+            "parsed": 91,
+            "per_kind_correct": {
+              "u_abstain": 7,
+              "u_count": 7,
+              "u_execute": 4,
+              "u_induct": 0,
+              "u_optimize": 4,
+              "u_order": 6,
+              "u_probe": 4,
+              "u_repair": 1,
+              "u_route": 7,
+              "u_select": 8,
+              "u_state": 4,
+              "u_trace": 4,
+              "u_verify": 7
+            },
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88061": {
+            "cap_contacts": 8,
+            "correct": 66,
+            "parsed": 96,
+            "per_kind_correct": {
+              "u_abstain": 8,
+              "u_count": 8,
+              "u_execute": 1,
+              "u_induct": 0,
+              "u_optimize": 2,
+              "u_order": 7,
+              "u_probe": 6,
+              "u_repair": 2,
+              "u_route": 8,
+              "u_select": 8,
+              "u_state": 3,
+              "u_trace": 7,
+              "u_verify": 6
+            },
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88062": {
+            "cap_contacts": 11,
+            "correct": 58,
+            "parsed": 94,
+            "per_kind_correct": {
+              "u_abstain": 6,
+              "u_count": 8,
+              "u_execute": 3,
+              "u_induct": 0,
+              "u_optimize": 1,
+              "u_order": 5,
+              "u_probe": 4,
+              "u_repair": 2,
+              "u_route": 8,
+              "u_select": 6,
+              "u_state": 4,
+              "u_trace": 6,
+              "u_verify": 5
+            },
+            "route_abstentions": 0,
+            "rows": 104
+          }
+        },
+        "sums": {
+          "cap_contacts": 32,
+          "correct": 187,
+          "parsed": 281,
+          "route_abstentions": 0
+        }
+      }
+    },
+    "replay_compound": {
+      "adapter": "replay_compound",
+      "retention": {
+        "correct_by_screen": [
+          61,
+          63,
+          59
+        ],
+        "pooled_means": {
+          "cap_contacts": 9.0,
+          "correct": 61.0,
+          "parsed": 95.0,
+          "route_abstentions": 0.0
+        },
+        "screens": {
+          "88060": {
+            "cap_contacts": 6,
+            "correct": 61,
+            "parsed": 98,
+            "per_kind_correct": {
+              "u_abstain": 7,
+              "u_count": 7,
+              "u_execute": 3,
+              "u_induct": 0,
+              "u_optimize": 3,
+              "u_order": 6,
+              "u_probe": 4,
+              "u_repair": 2,
+              "u_route": 7,
+              "u_select": 7,
+              "u_state": 4,
+              "u_trace": 5,
+              "u_verify": 6
+            },
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88061": {
+            "cap_contacts": 10,
+            "correct": 63,
+            "parsed": 94,
+            "per_kind_correct": {
+              "u_abstain": 7,
+              "u_count": 7,
+              "u_execute": 1,
+              "u_induct": 0,
+              "u_optimize": 2,
+              "u_order": 7,
+              "u_probe": 6,
+              "u_repair": 2,
+              "u_route": 7,
+              "u_select": 8,
+              "u_state": 5,
+              "u_trace": 6,
+              "u_verify": 5
+            },
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88062": {
+            "cap_contacts": 11,
+            "correct": 59,
+            "parsed": 93,
+            "per_kind_correct": {
+              "u_abstain": 7,
+              "u_count": 8,
+              "u_execute": 3,
+              "u_induct": 0,
+              "u_optimize": 2,
+              "u_order": 5,
+              "u_probe": 2,
+              "u_repair": 3,
+              "u_route": 8,
+              "u_select": 5,
+              "u_state": 4,
+              "u_trace": 7,
+              "u_verify": 5
+            },
+            "route_abstentions": 0,
+            "rows": 104
+          }
+        },
+        "sums": {
+          "cap_contacts": 27,
+          "correct": 183,
+          "parsed": 285,
+          "route_abstentions": 0
+        }
+      }
+    }
+  }
+}
