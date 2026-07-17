@@ -1,0 +1,83 @@
+{
+  "adapter": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_count_dont_walk_enumeration/adapters/replay_ctl7",
+  "adapter_config_sha256": "a69345bb4f2411dba4d54e2c26fa63c13a953e046a50bbccdd4dcfd8f1569e41",
+  "adapter_weights_sha256": "eca703599bd9f2398329a1f8cd7200ac1dbe635630b45b5ce0b9598a4703c3e5",
+  "aggregate_seed_open": false,
+  "applied_lora_modules": 128,
+  "benchmark_data_read": false,
+  "command": [
+    "/home/ericflo/Development/small-model-experimentation/.venv/bin/python",
+    "-B",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_count_dont_walk_enumeration/scripts/merge_adapter.py",
+    "--adapter",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_count_dont_walk_enumeration/adapters/replay_ctl7",
+    "--out",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_count_dont_walk_enumeration/merged/replay_ctl7",
+    "--base-model",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_zero_root_lineage_rebuild/merged/zero_root_hygiene_explore"
+  ],
+  "experiment_id": "qwen35_4b_count_dont_walk_enumeration",
+  "local_design_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_count_dont_walk_enumeration/data/local_design_receipt.json",
+  "local_design_receipt_sha256": "46eac760630db5f257fcf2d836066412b626ef56300110510ee487fffc539dcc",
+  "log": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_count_dont_walk_enumeration/runs/merges/replay_ctl7.log",
+  "log_sha256": "199771c54fa6d89f7c88ed27e0b571f4be57349beec3fa22aab8dda0e08fa92c",
+  "merge_receipt_sha256": "950f0b1d27df915901a8e665f70cf161adedb4f6475f360e4cc152e94f3a45d7",
+  "merged": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_count_dont_walk_enumeration/merged/replay_ctl7",
+  "merger": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_count_dont_walk_enumeration/scripts/merge_adapter.py",
+  "merger_sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "name": "replay_ctl7",
+  "nonzero_lora_modules": 128,
+  "output_files": [
+    {
+      "name": "chat_template.jinja",
+      "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+      "size": 7756
+    },
+    {
+      "name": "config.json",
+      "sha256": "a1c80f0efa6f83f631eaa9c25ffa166e3b1f9db395cc3b14374dfc0962261f60",
+      "size": 2829
+    },
+    {
+      "name": "generation_config.json",
+      "sha256": "0c46d8aa4f0ae5e611c961f70b87c83fb696043c1e319337708e96f882180de1",
+      "size": 116
+    },
+    {
+      "name": "merge_receipt.json",
+      "sha256": "950f0b1d27df915901a8e665f70cf161adedb4f6475f360e4cc152e94f3a45d7",
+      "size": 956
+    },
+    {
+      "name": "model.safetensors",
+      "sha256": "c5035b4db47e4da582a805ca009747a5618ef5badc35d960ca216e586dd3ab9d",
+      "size": 9078620536
+    },
+    {
+      "name": "tokenizer.json",
+      "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+      "size": 19989325
+    },
+    {
+      "name": "tokenizer_config.json",
+      "sha256": "bee8eba30f0eb4af73c0fe2cd06d0f89b657d7819941c438157ec42f7c80ea87",
+      "size": 1123
+    }
+  ],
+  "output_tree_sha256": "044a4599ac5264e00256f66f65215ea497d3631d8aebd3467b698253648e484a",
+  "preflight_git_branch": "main",
+  "preflight_git_head": "ee3ad6ac176e7e69d89e36304f66e9c14be29135",
+  "preflight_git_status": "",
+  "preflight_origin_main": "ee3ad6ac176e7e69d89e36304f66e9c14be29135",
+  "schema_version": 2,
+  "training_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_count_dont_walk_enumeration/runs/training/replay_ctl7.json",
+  "training_receipt_sha256": "565d542c06108a7a3aaaeb3bb233908ceb6fadef6a6afbe76687da7f59ada968",
+  "weight_files": [
+    {
+      "name": "model.safetensors",
+      "sha256": "c5035b4db47e4da582a805ca009747a5618ef5badc35d960ca216e586dd3ab9d"
+    }
+  ]
+}
