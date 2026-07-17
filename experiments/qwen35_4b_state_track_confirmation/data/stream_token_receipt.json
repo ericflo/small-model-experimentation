@@ -1,0 +1,139 @@
+{
+  "absolute_loss_mass_x5_per_arm": 621239,
+  "aggregate_seed_open": false,
+  "benchmark_data_read": false,
+  "deltas": {
+    "count_walk_minus_replay_ctl7": {
+      "absolute_loss_mass_x5": 0,
+      "answer_target": 0,
+      "close_target": 0,
+      "forward": 0,
+      "masked_context": 86338,
+      "nonzero_target": 0,
+      "parent_prefix": 0,
+      "prompt": 86338,
+      "target_span": -86338,
+      "think_target": -86338
+    }
+  },
+  "encoder": "scripts/train_think.py:encode_row",
+  "encoder_sha256": "e0eca2a230dae5d109d418dcb4cc19af05882a770af14350ffd741a8d5e90f01",
+  "experiment_id": "qwen35_4b_count_dont_walk_enumeration",
+  "files": {
+    "count_walk": {
+      "absolute_loss_mass": 124247.8,
+      "encoded_rows": 1520,
+      "families": {
+        "burrowmaze": 155,
+        "caravan": 24,
+        "ferrier": 315,
+        "foundry_ledger": 23,
+        "gatepost": 89,
+        "glyphgate": 175,
+        "kilnrite": 320,
+        "loomfix": 109,
+        "packhouse": 34,
+        "patchwheel": 48,
+        "runeward": 15,
+        "stallwright": 53,
+        "universal": 160
+      },
+      "kinds": {
+        "atom": 83,
+        "atom_fc": 125,
+        "episode": 903,
+        "oracle_trace": 249,
+        "u_count_walk": 160
+      },
+      "max_sequence_tokens": 3193,
+      "min_sequence_tokens": 299,
+      "path": "data/count_walk.jsonl",
+      "rows": 1520,
+      "sha256": "71291542c3c901caccf9586543efb02da319b371244728ecfd1a0fc7cb92ed26",
+      "skipped": [],
+      "skipped_rows": 0,
+      "spans_per_epoch": {
+        "absolute_loss_mass_x5": 621239,
+        "answer_target": 14215,
+        "close_target": 3040,
+        "forward": 1438010,
+        "masked_context": 638056,
+        "nonzero_target": 564379,
+        "parent_prefix": 0,
+        "prompt": 638056,
+        "target_span": 799954,
+        "think_target": 782699
+      }
+    },
+    "replay_ctl7": {
+      "absolute_loss_mass": 124247.8,
+      "encoded_rows": 1520,
+      "families": {
+        "burrowmaze": 153,
+        "caravan": 25,
+        "ferrier": 425,
+        "foundry_ledger": 26,
+        "gatepost": 87,
+        "glyphgate": 188,
+        "kilnrite": 319,
+        "loomfix": 113,
+        "packhouse": 40,
+        "patchwheel": 49,
+        "runeward": 18,
+        "stallwright": 77
+      },
+      "kinds": {
+        "atom": 76,
+        "atom_fc": 167,
+        "episode": 1004,
+        "oracle_trace": 273
+      },
+      "max_sequence_tokens": 3193,
+      "min_sequence_tokens": 299,
+      "path": "data/replay_ctl7.jsonl",
+      "rows": 1520,
+      "sha256": "94e8259ec03800d0a4dcbf8075252c5180a668e2da74569fcf62497cf0f9de5a",
+      "skipped": [],
+      "skipped_rows": 0,
+      "spans_per_epoch": {
+        "absolute_loss_mass_x5": 621239,
+        "answer_target": 14215,
+        "close_target": 3040,
+        "forward": 1438010,
+        "masked_context": 551718,
+        "nonzero_target": 564379,
+        "parent_prefix": 0,
+        "prompt": 551718,
+        "target_span": 886292,
+        "think_target": 869037
+      }
+    }
+  },
+  "forward_tokens_per_arm": 1438010,
+  "match_axes": [
+    "forward",
+    "nonzero_target",
+    "absolute_loss_mass_x5"
+  ],
+  "max_length": 4096,
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "nonzero_target_tokens_per_arm": 564379,
+  "rows_duplicated_for_matching": false,
+  "rows_per_arm": 1520,
+  "rows_truncated_for_matching": false,
+  "schema_version": 1,
+  "shared_position_aligned_rows": 1280,
+  "skipped_rows": 0,
+  "stage": "independent_exact_exposure_validation",
+  "stream_manifest": "data/stream_manifest.json",
+  "stream_manifest_sha256": "d278a2d32269b9deacff161a0ab390e22f021c6ff499e8e99e5146cd2552d858",
+  "targets_modified_for_matching": false,
+  "tokenizer": {
+    "class": "Qwen2Tokenizer",
+    "eos_token_id": 248046,
+    "think_close_token_id": 248069,
+    "vocab_size": 248077
+  },
+  "training_authorized": false
+}

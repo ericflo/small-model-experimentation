@@ -1,0 +1,46 @@
+# Frozen configuration for the eval-only state_track confirmation (lifecycle 31).
+# Every value here is enforced as a constant in scripts/run_benchmark.py; this
+# file is documentation of the frozen design, not a tunable input.
+experiment_id: "qwen35_4b_state_track_confirmation"
+kind: "eval_only_confirmation"
+model:
+  id: "Qwen/Qwen3.5-4B"
+  revision: "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+event:
+  name: "confirmation"
+  tier: "medium"
+  think_budget: 1024
+  seeds: [78170, 78171, 78172, 78173, 78174, 78175]
+  arms_in_frozen_order: ["count_walk", "state_track"]
+  seed_major: true
+  gateway_runs_total: 12
+instrument:
+  gateway: "scripts/run_benchmark_aggregate.py"
+  gateway_sha256: "53cf6533dbd710eb167503363c39f73dbf7559a0d91f40a00436a3c218a01c17"
+  benchmark_suite_read: false
+arms:
+  count_walk:
+    role: "parent (baseline)"
+    path: "large_artifacts/qwen35_4b_count_dont_walk_enumeration/merged/count_walk"
+    tree_sha256: "d5fdc55c0238ffbe2465bd73a5f9d63f442ad4083ff9eb477c9887e15e3da6b1"
+    weights_sha256: "ddd7bc4b5b8f4f2393996148bcb1b411a8be4d7f03430babe789b3534b9850a3"
+    provenance_copy: "data/provenance/count_walk_merge.json"
+  state_track:
+    role: "candidate"
+    path: "large_artifacts/qwen35_4b_state_track_install/merged/state_track"
+    tree_sha256: "45fd2925e417c82e4848b2ca89907934df9e60503b6529af0bddbd8aa359be7e"
+    weights_sha256: "b4bafbb7d3ff8dedd2fa216bc9c62997d960d43a6cac22a88976245bcc35d1c1"
+    provenance_copy: "data/provenance/state_track_merge.json"
+prior_event:
+  seed: 78169
+  summary_copy: "data/provenance/prior_event_seed78169_summary.json"
+  summary_sha256: "187cc3acfe81016899cb08a8bebf5f6045a6cabba9868edd5379c51708ec1192"
+  paired_lift: 0.02557142857142858
+  pooled_into_verdict: false
+frozen_rule:
+  paired_delta: "state_track_aggregate - count_walk_aggregate"
+  aggregate_tie_epsilon: 1.0e-12
+  wins_threshold: 4  # ceil(2 * 6 / 3)
+  confirmed: "mean_d > 0 AND wins >= 4"
+  not_confirmed: "mean_d <= 0 (dominates the wins >= 4 edge)"
+  ambiguous: "mean_d > 0 AND wins < 4"

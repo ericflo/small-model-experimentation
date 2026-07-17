@@ -177,6 +177,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_state_formation_branch_handoff_recovery` | [README](../experiments/qwen35_4b_state_formation_branch_handoff_recovery/README.md) | [report](../experiments/qwen35_4b_state_formation_branch_handoff_recovery/reports/report.md) |
 | `qwen35_4b_state_formation_branch_recovery` | [README](../experiments/qwen35_4b_state_formation_branch_recovery/README.md) | [report](../experiments/qwen35_4b_state_formation_branch_recovery/reports/report.md) |
 | `qwen35_4b_state_formation_capacity_adjudication` | [README](../experiments/qwen35_4b_state_formation_capacity_adjudication/README.md) | [report](../experiments/qwen35_4b_state_formation_capacity_adjudication/reports/report.md) |
+| `qwen35_4b_state_track_confirmation` | [README](../experiments/qwen35_4b_state_track_confirmation/README.md) | [report](../experiments/qwen35_4b_state_track_confirmation/reports/report.md) |
 | `qwen35_4b_state_track_install` | [README](../experiments/qwen35_4b_state_track_install/README.md) | [report](../experiments/qwen35_4b_state_track_install/reports/report.md) |
 | `qwen35_4b_statechain_only_dose` | [README](../experiments/qwen35_4b_statechain_only_dose/README.md) | [report](../experiments/qwen35_4b_statechain_only_dose/reports/report.md) |
 | `qwen35_4b_static_bridge_ceiling_breaker` | [README](../experiments/qwen35_4b_static_bridge_ceiling_breaker/README.md) | [report](../experiments/qwen35_4b_static_bridge_ceiling_breaker/reports/qwen35_4b_static_bridge_ceiling_breaker_report.md) |

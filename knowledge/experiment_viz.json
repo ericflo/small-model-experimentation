@@ -2,6 +2,35 @@
  "note": "Native chart specs for the research site, extracted from each experiment's own result files (runs/reports/analysis JSON+CSV and README/report tables) by per-experiment agent passes and kept only when every plotted value was located verbatim in the cited source by machine verification. Rendered by scripts/build_site.py (chart_svg/chart_figure); raw matplotlib figures remain available further down each experiment page.",
  "extracted_on": "2026-07-10",
  "experiments": {
+  "qwen35_4b_state_track_confirmation": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Design freeze: the single-seed 78169 lift this cell re-tests across six sealed seeds",
+     "categories": [
+      "base",
+      "count_walk (parent)",
+      "state_track (candidate)"
+     ],
+     "series": [
+      {
+       "label": "prior aggregate at sealed seed 78169",
+       "values": [
+        0.1675,
+        0.3004,
+        0.326
+       ]
+      }
+     ],
+     "x_label": "arm",
+     "y_label": "aggregate score",
+     "y_format": "number",
+     "note": "Design-frozen, eval-only (no seed consumed yet). The bars are the PRIOR single-seed 78169 event that this cell re-tests: state_track beat its count_walk parent by a PAIRED +0.0256 (0.3260 vs 0.3004), the lift that drew lifecycle 30's INSTALLED_TRANSFER. The problem this cell fixes: the parent's own aggregate swings 0.30-0.36 seed-to-seed (0.3004 here vs 0.3626 at 78168), so state_track's 0.3260 sits INSIDE the parent's own band. The frozen paired rule re-forms the delta d = state_track - count_walk on each of six fresh sealed seeds (78170-78175), so the common seed-difficulty cancels: CONFIRMED iff mean_d > 0 AND at least 4 of 6 per-seed wins (1e-12 tie guard); NOT_CONFIRMED iff mean_d <= 0 (dominates the wins clause); AMBIGUOUS otherwise; 78169 is prior evidence, never pooled. Honest calibration: this paired majority rule is a LIBERAL directional check (false-CONFIRMED ~0.31 under the pure null) - the decisive, high-value outcome is NOT_CONFIRMED, and the test has 0.90-0.98 power if the +0.0256 lift is real (sigma_d 0.02-0.03). The 78169 bars are prior evidence reported alongside the eventual verdict, never pooled into it.",
+     "source": "experiments/qwen35_4b_state_track_confirmation/reports/preregistration.md"
+    }
+   ]
+  },
   "qwen35_4b_state_formation_analysis_recovery": {
    "charts": [
     {

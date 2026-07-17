@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 288
+- Experiments: 289
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 201
+- Assigned experiments: 202
 
 ### Seed Evidence
 
@@ -119,6 +119,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_state_formation_branch_handoff_recovery` (new): [README](../experiments/qwen35_4b_state_formation_branch_handoff_recovery/README.md)
 - `qwen35_4b_state_formation_branch_recovery` (new): [README](../experiments/qwen35_4b_state_formation_branch_recovery/README.md)
 - `qwen35_4b_state_formation_capacity_adjudication` (new): [README](../experiments/qwen35_4b_state_formation_capacity_adjudication/README.md)
+- `qwen35_4b_state_track_confirmation` (new): [README](../experiments/qwen35_4b_state_track_confirmation/README.md)
 - `qwen35_4b_state_track_install` (new): [README](../experiments/qwen35_4b_state_track_install/README.md)
 - `qwen35_4b_statechain_only_dose` (new): [README](../experiments/qwen35_4b_statechain_only_dose/README.md)
 - `qwen35_4b_static_bridge_ceiling_breaker` (track-z): [README](../experiments/qwen35_4b_static_bridge_ceiling_breaker/README.md)
@@ -1048,7 +1049,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 Install general agentic capability in Qwen3.5-4B via breadth-first expert iteration on a firewall-clean multi-family gym, arbitrated by the blackbox menagerie instrument.
 
 - Charter: [agentic_breadth_installation](../research_programs/agentic_breadth_installation/charter.md)
-- Assigned experiments: 56
+- Assigned experiments: 57
 
 ### Assigned Experiments
 
@@ -1087,6 +1088,7 @@ Install general agentic capability in Qwen3.5-4B via breadth-first expert iterat
 - `qwen35_4b_same_prefix_advantage_routing` (new): [README](../experiments/qwen35_4b_same_prefix_advantage_routing/README.md)
 - `qwen35_4b_semantic_policy_headroom_tournament` (new): [README](../experiments/qwen35_4b_semantic_policy_headroom_tournament/README.md)
 - `qwen35_4b_specialist_policy_integration` (new): [README](../experiments/qwen35_4b_specialist_policy_integration/README.md)
+- `qwen35_4b_state_track_confirmation` (new): [README](../experiments/qwen35_4b_state_track_confirmation/README.md)
 - `qwen35_4b_state_track_install` (new): [README](../experiments/qwen35_4b_state_track_install/README.md)
 - `qwen35_4b_statechain_only_dose` (new): [README](../experiments/qwen35_4b_statechain_only_dose/README.md)
 - `qwen35_4b_sweep_rate_consolidation` (new): [README](../experiments/qwen35_4b_sweep_rate_consolidation/README.md)

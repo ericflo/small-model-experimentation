@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 260
-- Manifest files: 621
+- Experiments with manifests: 261
+- Manifest files: 623
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 122 |
+| `other` | 123 |
 | `run-data` | 101 |
-| `standard-artifact` | 133 |
+| `standard-artifact` | 134 |
 
 ## Manifests
 
@@ -281,6 +281,8 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_state_formation_branch_handoff_recovery` | `standard-artifact` | [manifest](../experiments/qwen35_4b_state_formation_branch_handoff_recovery/reports/artifact_manifest.yaml) |
 | `qwen35_4b_state_formation_branch_recovery` | `standard-artifact` | [manifest](../experiments/qwen35_4b_state_formation_branch_recovery/reports/artifact_manifest.yaml) |
 | `qwen35_4b_state_formation_capacity_adjudication` | `standard-artifact` | [manifest](../experiments/qwen35_4b_state_formation_capacity_adjudication/reports/artifact_manifest.yaml) |
+| `qwen35_4b_state_track_confirmation` | `other` | [manifest](../experiments/qwen35_4b_state_track_confirmation/data/lineage/lineage_manifest.json) |
+| `qwen35_4b_state_track_confirmation` | `standard-artifact` | [manifest](../experiments/qwen35_4b_state_track_confirmation/reports/artifact_manifest.yaml) |
 | `qwen35_4b_state_track_install` | `other` | [manifest](../experiments/qwen35_4b_state_track_install/data/lineage/lineage_manifest.json) |
 | `qwen35_4b_state_track_install` | `standard-artifact` | [manifest](../experiments/qwen35_4b_state_track_install/reports/artifact_manifest.yaml) |
 | `qwen35_4b_statechain_only_dose` | `other` | [manifest](../experiments/qwen35_4b_statechain_only_dose/data/corpus_manifest.json) |

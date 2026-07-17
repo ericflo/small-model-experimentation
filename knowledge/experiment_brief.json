@@ -2,6 +2,37 @@
  "note": "Plain-language practitioner briefs shown above the fold on each experiment page (verdict + the-one-idea/question/finding/why-it-matters + KPI numbers + per-chart how-to-read/takeaway). Authored per experiment from its own README/report and verified chart specs under a strict no-jargon ban-list; all jargon-precise detail stays below the fold. Regenerate with scripts/enrichment/generate_briefs.workflow.js (see docs/site_maintenance.md).",
  "generated_on": "2026-07-05",
  "experiments": {
+  "qwen35_4b_state_track_confirmation": {
+   "verdict_tag": "Design-frozen: a six-seed paired re-test to tell the single-seed skill lift apart from ordinary exam-to-exam noise",
+   "concept_primer": "The team builds one model through a documented chain of training rounds, each round folded into a sealed-exam score. At the previous step they installed a brand-new skill (keeping a running tally of several named counters as a list of updates is applied) and, on ONE sealed exam, the new model outscored its parent 0.326 to 0.300 - the first score gain since the cheap 'just review the old deck again' lever ran out. But there is a catch they wrote down at once: exams are drawn fresh each time, and the parent's OWN score bounces between 0.30 and 0.36 from one exam to the next. A single 0.026 win could just be the parent having a bad-luck exam. The only honest way to tell a real skill from a lucky draw is to sit the SAME two models six more fresh sealed exams and, on each one, subtract the parent's score from the new model's score - so whatever made that particular exam easy or hard cancels out - then see if the new model stays ahead.",
+   "plain_question": "Across six fresh sealed exams, does the new-skill model keep beating its parent when you compare them head-to-head on the SAME exam each time - or does the one 0.026 win dissolve into the parent's normal exam-to-exam bounce?",
+   "plain_answer": "Not yet answered - this is the frozen design, no exam has been sat. The rule is written down in advance and cannot be changed after the results land. On each of six fresh sealed exams it subtracts the parent's score from the new model's score on that same exam (so the exam's luck cancels), counts how many of the six the new model wins, and averages the six gaps. It declares CONFIRMED only if the average gap is positive AND the new model wins at least four of six; NOT_CONFIRMED the moment the average gap is zero-or-negative (even with four wins); and AMBIGUOUS if the average is positive but the wins fall short. The team is honest that this is a fairly EASY bar to clear by luck alone - under pure chance it would still say CONFIRMED about 31% of the time - so a CONFIRMED here means 'the direction repeats', not 'proven beyond doubt'. The genuinely decisive outcome is NOT_CONFIRMED: if the average gap comes out flat or negative, the earlier headline is retired as noise and the cheaper parent stays the reference. If the 0.026 gain is real, the six-seed test catches it 90-98% of the time.",
+   "why_it_matters": "This is the program's one unbroken habit: every good draw must survive fresh sealed exams before anyone claims it. The exact same six-seed discipline recently caught an earlier headline (a fix-the-procedure win) and correctly showed it was luck. If this lift holds, the newly installed skill becomes the program's reference model and validates the whole 'install a designed skill, prove it by transfer' doctrine; if it folds, the budget is freed for a different move instead of chasing noise.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Prior single-seed lift",
+     "value": "+0.0256",
+     "sub": "state_track 0.326 vs count_walk 0.300 at seed 78169"
+    },
+    {
+     "label": "Confirm rule",
+     "value": "mean>0 & >=4/6",
+     "sub": "paired delta, 1e-12 tie guard; no fourth state"
+    },
+    {
+     "label": "False-CONFIRMED",
+     "value": "~0.31",
+     "sub": "liberal directional check; NOT_CONFIRMED is the decisive outcome"
+    },
+    {
+     "label": "Power if real",
+     "value": "0.90-0.98",
+     "sub": "at sigma_d 0.02-0.03 for the +0.0256 lift"
+    }
+   ],
+   "charts": []
+  },
   "adaptive_cognitive_kernel": {
    "verdict_tag": "Self-rewiring does real work but wins nothing extra",
    "concept_primer": "Picture a calculator that, for each instruction in a program, physically swaps in a fresh set of gears — temporarily rewiring itself — instead of a fixed machine that reads each instruction as an input code. Does the rewiring execute programs any better?",

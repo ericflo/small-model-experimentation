@@ -1,0 +1,264 @@
+{
+  "benchmark_data_read": false,
+  "benchmark_implementation": {
+    "runner_sha256": "a3beecd8b5c89ccfd99a172a6d85321d39b9feb6c29d12f10b2f4d7499e273cb",
+    "source_file_count": 56,
+    "source_inventory_sha256": "218b8615a95f24da962c931e9cd2dba58d853a7bdcd2847cd8e2c42fc2c05f42"
+  },
+  "candidate": "state_track",
+  "candidate_comparisons": {
+    "state_track_minus_count_walk": {
+      "aggregate_delta": 0.02557142857142858,
+      "per_family_delta": {
+        "chronicle": 0.0,
+        "lockpick": 0.1,
+        "menders": 0.0,
+        "mirage": 0.09999999999999998,
+        "rites": 0.0,
+        "siftstack": 0.19999999999999996,
+        "sirens": -0.09999999999999998,
+        "stockade": -0.014285714285714318,
+        "toolsmith": -0.030000000000000027,
+        "warren": 0.0
+      }
+    }
+  },
+  "comparisons": {
+    "count_walk_minus_base": {
+      "aggregate_delta": 0.13288359788359788,
+      "minimum_family_delta": -0.16666666666666663,
+      "nonnegative_families": 9,
+      "per_family_delta": {
+        "chronicle": 0.30000000000000004,
+        "lockpick": 0.0,
+        "menders": 0.0,
+        "mirage": 0.4,
+        "rites": 0.0,
+        "siftstack": 0.4,
+        "sirens": 0.09999999999999998,
+        "stockade": 0.0955026455026455,
+        "toolsmith": 0.19999999999999996,
+        "warren": -0.16666666666666663
+      },
+      "positive_families": 6
+    },
+    "state_track_minus_base": {
+      "aggregate_delta": 0.15845502645502646,
+      "minimum_family_delta": -0.16666666666666663,
+      "nonnegative_families": 9,
+      "per_family_delta": {
+        "chronicle": 0.30000000000000004,
+        "lockpick": 0.1,
+        "menders": 0.0,
+        "mirage": 0.5,
+        "rites": 0.0,
+        "siftstack": 0.6,
+        "sirens": 0.0,
+        "stockade": 0.08121693121693119,
+        "toolsmith": 0.16999999999999993,
+        "warren": -0.16666666666666663
+      },
+      "positive_families": 6
+    }
+  },
+  "consequence": {
+    "aggregate_strictly_beats_base": true,
+    "aggregate_strictly_beats_parent": true,
+    "aggregate_tie_epsilon": 1e-12,
+    "candidate": "state_track",
+    "families_below_slack": [],
+    "family_table": {
+      "chronicle": {
+        "candidate": 0.4,
+        "delta": 0.0,
+        "parent": 0.4,
+        "within_slack": true
+      },
+      "lockpick": {
+        "candidate": 0.1,
+        "delta": 0.1,
+        "parent": 0.0,
+        "within_slack": true
+      },
+      "menders": {
+        "candidate": 0.0,
+        "delta": 0.0,
+        "parent": 0.0,
+        "within_slack": true
+      },
+      "mirage": {
+        "candidate": 0.6,
+        "delta": 0.09999999999999998,
+        "parent": 0.5,
+        "within_slack": true
+      },
+      "rites": {
+        "candidate": 0.1,
+        "delta": 0.0,
+        "parent": 0.1,
+        "within_slack": true
+      },
+      "siftstack": {
+        "candidate": 0.6,
+        "delta": 0.19999999999999996,
+        "parent": 0.4,
+        "within_slack": true
+      },
+      "sirens": {
+        "candidate": 0.4,
+        "delta": -0.09999999999999998,
+        "parent": 0.5,
+        "within_slack": true
+      },
+      "stockade": {
+        "candidate": 0.15978835978835976,
+        "delta": -0.014285714285714318,
+        "parent": 0.17407407407407408,
+        "within_slack": true
+      },
+      "toolsmith": {
+        "candidate": 0.7,
+        "delta": -0.030000000000000027,
+        "parent": 0.73,
+        "within_slack": true
+      },
+      "warren": {
+        "candidate": 0.2,
+        "delta": 0.0,
+        "parent": 0.2,
+        "within_slack": true
+      }
+    },
+    "frozen_claim": "a divergent transferable skill installs and adds aggregate on the replay-saturated parent; state_track becomes the program reference; the divergent-skill move class is not bounded where replay is.",
+    "no_family_below_parent_by_more_than_slack": true,
+    "no_third_state": true,
+    "parent": "count_walk",
+    "per_family_slack": 0.1,
+    "slack_epsilon": 1e-09,
+    "verdict": "INSTALLED_TRANSFER"
+  },
+  "count_walk_parent_merge_receipt_sha256": "840edca0638b9e291bb34fde28b4b530df8743faf9b7b18b7f2358ce55ec4c36",
+  "gateway_sha256": "53cf6533dbd710eb167503363c39f73dbf7559a0d91f40a00436a3c218a01c17",
+  "goal_gate": {
+    "included_in_consequence": false,
+    "per_arm": {
+      "count_walk": {
+        "goal_gate_pass": false,
+        "losses": [
+          "warren"
+        ],
+        "strict_wins": 6,
+        "ties": [
+          "lockpick",
+          "menders",
+          "rites"
+        ],
+        "wins": [
+          "chronicle",
+          "mirage",
+          "siftstack",
+          "sirens",
+          "stockade",
+          "toolsmith"
+        ]
+      },
+      "state_track": {
+        "goal_gate_pass": false,
+        "losses": [
+          "warren"
+        ],
+        "strict_wins": 6,
+        "ties": [
+          "menders",
+          "rites",
+          "sirens"
+        ],
+        "wins": [
+          "chronicle",
+          "lockpick",
+          "mirage",
+          "siftstack",
+          "stockade",
+          "toolsmith"
+        ]
+      }
+    },
+    "recorded_either_way": true
+  },
+  "local_design_receipt_sha256": "48c98bae677e5497e73af0c8991348b1fbd6a6eb6802ffb354e35a001634a0e7",
+  "local_promotion_promoted": "state_track",
+  "local_promotion_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_state_track_install/runs/local/seed88063_promotion.json",
+  "local_promotion_receipt_sha256": "58e29ecccd49e46dc778f4e1a6a78ebb99ed1d4994a395fd85b4c7b023ec4544",
+  "model_order": [
+    "base",
+    "count_walk",
+    "state_track"
+  ],
+  "model_tree_sha256s": {
+    "base": "26d8ee48583adb0fb557d0ff668664949adff0068fa5baafe6f0af68e22fb677",
+    "count_walk": "d5fdc55c0238ffbe2465bd73a5f9d63f442ad4083ff9eb477c9887e15e3da6b1",
+    "state_track": "45fd2925e417c82e4848b2ca89907934df9e60503b6529af0bddbd8aa359be7e"
+  },
+  "model_weight_sha256s": {
+    "base": "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db",
+    "count_walk": "ddd7bc4b5b8f4f2393996148bcb1b411a8be4d7f03430babe789b3534b9850a3",
+    "state_track": "b4bafbb7d3ff8dedd2fa216bc9c62997d960d43a6cac22a88976245bcc35d1c1"
+  },
+  "models": {
+    "base": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized",
+    "count_walk": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_count_dont_walk_enumeration/merged/count_walk",
+    "state_track": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_state_track_install/merged/state_track"
+  },
+  "name": "install",
+  "schema_version": 1,
+  "scores": {
+    "base": {
+      "aggregate": 0.16752380952380952,
+      "per_family": {
+        "chronicle": 0.1,
+        "lockpick": 0.0,
+        "menders": 0.0,
+        "mirage": 0.1,
+        "rites": 0.1,
+        "siftstack": 0.0,
+        "sirens": 0.4,
+        "stockade": 0.07857142857142857,
+        "toolsmith": 0.53,
+        "warren": 0.36666666666666664
+      }
+    },
+    "count_walk": {
+      "aggregate": 0.3004074074074074,
+      "per_family": {
+        "chronicle": 0.4,
+        "lockpick": 0.0,
+        "menders": 0.0,
+        "mirage": 0.5,
+        "rites": 0.1,
+        "siftstack": 0.4,
+        "sirens": 0.5,
+        "stockade": 0.17407407407407408,
+        "toolsmith": 0.73,
+        "warren": 0.2
+      }
+    },
+    "state_track": {
+      "aggregate": 0.325978835978836,
+      "per_family": {
+        "chronicle": 0.4,
+        "lockpick": 0.1,
+        "menders": 0.0,
+        "mirage": 0.6,
+        "rites": 0.1,
+        "siftstack": 0.6,
+        "sirens": 0.4,
+        "stockade": 0.15978835978835976,
+        "toolsmith": 0.7,
+        "warren": 0.2
+      }
+    }
+  },
+  "seed": 78169,
+  "think_budget": 1024,
+  "tier": "medium"
+}

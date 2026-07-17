@@ -5917,6 +5917,40 @@
   },
   {
     "file_counts": {
+      ".json": 12,
+      ".jsonl": 11,
+      ".md": 6,
+      ".py": 23,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_state_track_confirmation",
+    "path": "experiments/qwen35_4b_state_track_confirmation",
+    "primary_readme": "experiments/qwen35_4b_state_track_confirmation/README.md",
+    "primary_report": "experiments/qwen35_4b_state_track_confirmation/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "transferable skill that adds *durable* aggregate on a saturated parent, proven by transfer to held-out benchmark surfaces? (INSTALLED_TRANSFER at seed 78169, +0.0256 paired lift, single seed); lifecycle 28 `qwen35_4b_count_walk_menders_confirmation` (the eval-only multi-seed discipline that correctly retired a single-seed headline as seed noise); lifecycle 29 `qwen35_4b_count_walk_replay_compound` (replay compounding BOUNDED at stage 8).",
+    "tags": [
+      "latent-state",
+      "small-model"
+    ],
+    "title": "Qwen35 4b State Track Confirmation",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 55,
+    "total_size_bytes": 38960221
+  },
+  {
+    "file_counts": {
       ".json": 26,
       ".jsonl": 36,
       ".log": 8,

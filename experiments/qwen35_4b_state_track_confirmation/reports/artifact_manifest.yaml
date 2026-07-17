@@ -1,0 +1,35 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_state_track_confirmation"
+external_artifacts:
+  - name: "count_walk parent composite (eval arm 1)"
+    storage: "large_artifacts/qwen35_4b_count_dont_walk_enumeration/merged/count_walk"
+    required_for: "the six-seed benchmark event (parent arm)"
+    checksum: "tree d5fdc55c0238ffbe2465bd73a5f9d63f442ad4083ff9eb477c9887e15e3da6b1; weights ddd7bc4b5b8f4f2393996148bcb1b411a8be4d7f03430babe789b3534b9850a3"
+    regenerate: "lifecycle 27 (qwen35_4b_count_dont_walk_enumeration) standalone rebuild; this cell's data/lineage stage 1-7 documents the lineage (scripts/rebuild_lineage.py)"
+  - name: "state_track candidate composite (eval arm 2)"
+    storage: "large_artifacts/qwen35_4b_state_track_install/merged/state_track"
+    required_for: "the six-seed benchmark event (candidate arm)"
+    checksum: "tree 45fd2925e417c82e4848b2ca89907934df9e60503b6529af0bddbd8aa359be7e; weights b4bafbb7d3ff8dedd2fa216bc9c62997d960d43a6cac22a88976245bcc35d1c1"
+    regenerate: "lifecycle 30 (qwen35_4b_state_track_install) standalone rebuild; this cell's data/lineage stage 9 documents the lineage (scripts/rebuild_lineage.py)"
+omitted_artifacts:
+  - path: "runs/"
+    reason: "the ledger, per-seed summaries, and confirmation_readout.json are created at event time; the event has not run"
+  - path: "large_artifacts/qwen35_4b_state_track_confirmation/rebuild/"
+    reason: "GPU lineage-rebuild scratch tree (verification aid); never committed"
+reproducibility:
+  smoke_command: ".venv/bin/python -B scripts/run.py --smoke"
+  full_command: ".venv/bin/python -B scripts/run.py --stage benchmark"
+  lineage_verify_command: ".venv/bin/python -B scripts/rebuild_lineage.py --verify-inputs"
+  power_check_command: ".venv/bin/python -B scripts/power_analysis.py --check"
+  required_external_artifacts:
+    - "large_artifacts/qwen35_4b_count_dont_walk_enumeration/merged/count_walk"
+    - "large_artifacts/qwen35_4b_state_track_install/merged/state_track"
+notes: >
+  Eval-only confirmation (lifecycle 31). No model is produced. The two 9GB
+  composites are authenticated fail-closed by full tree+weights sha256
+  against design-time constants and reproduced by their own cells; this
+  cell carries the complete stage 1-9 lineage package in data/lineage as a
+  verification aid per the standalone doctrine. Provenance copies in
+  data/provenance/ are byte-identical to their committed sibling originals
+  (in-cell pins authoritative).
