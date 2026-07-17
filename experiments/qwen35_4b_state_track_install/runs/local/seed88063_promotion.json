@@ -1,0 +1,235 @@
+{
+  "adjudication_protocol": "pooled_k3",
+  "aggregate_seed": 78169,
+  "aggregate_seed_open": true,
+  "backend": "vllm_merged_composite",
+  "bands_two_sided": true,
+  "benchmark_data_read": false,
+  "candidates": [
+    "state_track"
+  ],
+  "checks": {
+    "retention_pooled_cap_contacts_within_3_of_parent": true,
+    "retention_pooled_correct_within_5_of_parent": true,
+    "retention_pooled_parsed_within_3_of_parent": true
+  },
+  "controls": [
+    "count_walk"
+  ],
+  "descriptive_noise": {
+    "deltas_vs_parent": {
+      "state_track": {
+        "by_screen": [
+          1,
+          -5,
+          -2
+        ],
+        "pooled_mean": -2.0,
+        "sd": 3.0,
+        "vs": "count_walk"
+      }
+    },
+    "reported_not_gated": true,
+    "screen_sd_pooled_levels": 2.345207879911715
+  },
+  "design_receipt_sha256": "48c98bae677e5497e73af0c8991348b1fbd6a6eb6802ffb354e35a001634a0e7",
+  "eligible": [
+    "state_track"
+  ],
+  "experiment_id": "qwen35_4b_state_track_install",
+  "local_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_state_track_install/runs/local/seed88063.json",
+  "local_receipt_sha256": "3cd9734a1c2d1ab7da57e5e1313060604d6a401a2a7e45ede4a746458edda95e",
+  "no_absolute_per_kind_floors": true,
+  "no_axis_instrument": "the stage-9 treatment installs a NEW single kind (state_track), but the local gate holds out no axis instrument, so it is a pure retention non-drift screen and the transfer/aggregate question belongs to the sealed benchmark event",
+  "promoted": "state_track",
+  "retention_rows_per_screen": 104,
+  "retention_screens": 3,
+  "schema_version": 1,
+  "screen_seeds": [
+    88063,
+    88064,
+    88065
+  ],
+  "summaries": {
+    "count_walk": {
+      "adapter": "count_walk",
+      "retention": {
+        "correct_by_screen": [
+          56,
+          58,
+          60
+        ],
+        "pooled_means": {
+          "cap_contacts": 9.666666666666666,
+          "correct": 58.0,
+          "parsed": 94.33333333333333,
+          "route_abstentions": 0.0
+        },
+        "screens": {
+          "88063": {
+            "cap_contacts": 11,
+            "correct": 56,
+            "parsed": 93,
+            "per_kind_correct": {
+              "u_abstain": 7,
+              "u_count": 6,
+              "u_execute": 1,
+              "u_induct": 0,
+              "u_optimize": 2,
+              "u_order": 4,
+              "u_probe": 3,
+              "u_repair": 3,
+              "u_route": 7,
+              "u_select": 7,
+              "u_state": 5,
+              "u_trace": 7,
+              "u_verify": 4
+            },
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88064": {
+            "cap_contacts": 11,
+            "correct": 58,
+            "parsed": 93,
+            "per_kind_correct": {
+              "u_abstain": 6,
+              "u_count": 8,
+              "u_execute": 3,
+              "u_induct": 0,
+              "u_optimize": 3,
+              "u_order": 5,
+              "u_probe": 4,
+              "u_repair": 4,
+              "u_route": 6,
+              "u_select": 7,
+              "u_state": 2,
+              "u_trace": 7,
+              "u_verify": 3
+            },
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88065": {
+            "cap_contacts": 7,
+            "correct": 60,
+            "parsed": 97,
+            "per_kind_correct": {
+              "u_abstain": 8,
+              "u_count": 8,
+              "u_execute": 4,
+              "u_induct": 0,
+              "u_optimize": 2,
+              "u_order": 7,
+              "u_probe": 3,
+              "u_repair": 2,
+              "u_route": 5,
+              "u_select": 7,
+              "u_state": 2,
+              "u_trace": 7,
+              "u_verify": 5
+            },
+            "route_abstentions": 0,
+            "rows": 104
+          }
+        },
+        "sums": {
+          "cap_contacts": 29,
+          "correct": 174,
+          "parsed": 283,
+          "route_abstentions": 0
+        }
+      }
+    },
+    "state_track": {
+      "adapter": "state_track",
+      "retention": {
+        "correct_by_screen": [
+          57,
+          53,
+          58
+        ],
+        "pooled_means": {
+          "cap_contacts": 10.666666666666666,
+          "correct": 56.0,
+          "parsed": 93.33333333333333,
+          "route_abstentions": 0.0
+        },
+        "screens": {
+          "88063": {
+            "cap_contacts": 11,
+            "correct": 57,
+            "parsed": 93,
+            "per_kind_correct": {
+              "u_abstain": 6,
+              "u_count": 7,
+              "u_execute": 1,
+              "u_induct": 0,
+              "u_optimize": 2,
+              "u_order": 6,
+              "u_probe": 3,
+              "u_repair": 2,
+              "u_route": 8,
+              "u_select": 8,
+              "u_state": 4,
+              "u_trace": 5,
+              "u_verify": 5
+            },
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88064": {
+            "cap_contacts": 11,
+            "correct": 53,
+            "parsed": 93,
+            "per_kind_correct": {
+              "u_abstain": 5,
+              "u_count": 8,
+              "u_execute": 3,
+              "u_induct": 0,
+              "u_optimize": 3,
+              "u_order": 7,
+              "u_probe": 1,
+              "u_repair": 3,
+              "u_route": 6,
+              "u_select": 7,
+              "u_state": 1,
+              "u_trace": 6,
+              "u_verify": 3
+            },
+            "route_abstentions": 0,
+            "rows": 104
+          },
+          "88065": {
+            "cap_contacts": 10,
+            "correct": 58,
+            "parsed": 94,
+            "per_kind_correct": {
+              "u_abstain": 8,
+              "u_count": 8,
+              "u_execute": 3,
+              "u_induct": 0,
+              "u_optimize": 2,
+              "u_order": 6,
+              "u_probe": 4,
+              "u_repair": 2,
+              "u_route": 6,
+              "u_select": 8,
+              "u_state": 2,
+              "u_trace": 5,
+              "u_verify": 4
+            },
+            "route_abstentions": 0,
+            "rows": 104
+          }
+        },
+        "sums": {
+          "cap_contacts": 32,
+          "correct": 168,
+          "parsed": 280,
+          "route_abstentions": 0
+        }
+      }
+    }
+  }
+}
