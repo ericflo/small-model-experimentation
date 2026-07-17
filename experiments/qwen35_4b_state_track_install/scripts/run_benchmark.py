@@ -160,7 +160,7 @@ FROZEN_TREE_SHA256: dict[str, str | None] = {
     # output_tree_sha256. Fill by replacing None with the quoted 64-hex ON
     # THIS LINE; check_design's normalized-hash pin canonicalizes only this
     # value.
-    "state_track": None,
+    "state_track": "45fd2925e417c82e4848b2ca89907934df9e60503b6529af0bddbd8aa359be7e",
 }
 FROZEN_WEIGHTS_SHA256: dict[str, str | None] = {
     "base": "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db",
@@ -169,12 +169,12 @@ FROZEN_WEIGHTS_SHA256: dict[str, str | None] = {
     ),
     # TODO-PIN(post-merge): runs/merges/state_track.json weight sha256.
     # Fill by replacing None with the quoted 64-hex ON THIS LINE.
-    "state_track": None,
+    "state_track": "b4bafbb7d3ff8dedd2fa216bc9c62997d960d43a6cac22a88976245bcc35d1c1",
 }
 WEIGHTS_SIZE_BYTES = 9_078_620_536
 # TODO-PIN(post-merge): sha256 of the COMMITTED runs/merges/state_track.json.
 # Fill by replacing None with the quoted 64-hex ON THIS LINE.
-STATE_TRACK_MERGE_RECEIPT_SHA256 = None
+STATE_TRACK_MERGE_RECEIPT_SHA256 = "089f280eab1b6f4afd53e636a49f1b4fd92efd5fa1ee42a1a07e35e49a98c94e"
 COMMITTED_MERGE_RECEIPTS: dict[str, tuple[str, object]] = {
     "state_track": (
         f"experiments/{EXP.name}/runs/merges/state_track.json",
