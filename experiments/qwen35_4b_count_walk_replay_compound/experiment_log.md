@@ -153,3 +153,23 @@ code, receipts, and docs moved.
   (shas above); unit tests 127 → 176, all green; `run.py --smoke` green
   end-to-end; `rebuild_lineage.py --verify-inputs` green (now reporting
   sibling-original status); `make check` green from repo root.
+
+## 2026-07-17 — Sealed event 78168: BOUNDED; cell closed
+
+- Three arms at 78168 (medium tb1024): base 0.1040, count_walk parent
+  0.3626, replay_compound candidate 0.3420. The candidate's aggregate
+  fell 0.0206 BELOW the parent (aggregate_strictly_beats_parent=False,
+  tie guard inactive — a real loss, not a tie) AND warren dipped 0.15
+  below parent (families_below_slack=[warren]). Either condition alone
+  fires BOUNDED; both did.
+- Frozen consequence: BOUNDED — "the replay-compounding law hits
+  diminishing returns at stage 8 on this parent; the count_walk
+  composite remains the reference; further aggregate pushes need a
+  different move class." This is the first chain stage where replay
+  compounding failed to add aggregate.
+- Descriptive (never gating): the candidate still beats base by 0.238
+  (goal gate vs base 8 strict wins, tie on menders, one loss on rites);
+  per-family vs parent it is a net-negative reshuffle (lockpick +0.1,
+  toolsmith +0.07; menders -0.1, mirage -0.1, warren -0.15, stockade
+  -0.025). Replay on an already replay-saturated parent redistributes
+  rather than adds.

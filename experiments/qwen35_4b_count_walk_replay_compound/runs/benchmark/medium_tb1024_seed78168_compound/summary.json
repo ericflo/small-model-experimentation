@@ -1,0 +1,265 @@
+{
+  "benchmark_data_read": false,
+  "benchmark_implementation": {
+    "runner_sha256": "a3beecd8b5c89ccfd99a172a6d85321d39b9feb6c29d12f10b2f4d7499e273cb",
+    "source_file_count": 56,
+    "source_inventory_sha256": "218b8615a95f24da962c931e9cd2dba58d853a7bdcd2847cd8e2c42fc2c05f42"
+  },
+  "candidate": "replay_compound",
+  "candidate_comparisons": {
+    "replay_compound_minus_count_walk": {
+      "aggregate_delta": -0.020544802867383527,
+      "per_family_delta": {
+        "chronicle": 0.0,
+        "lockpick": 0.09999999999999998,
+        "menders": -0.1,
+        "mirage": -0.09999999999999998,
+        "rites": 0.0,
+        "siftstack": 0.0,
+        "sirens": 0.0,
+        "stockade": -0.025448028673835138,
+        "toolsmith": 0.07000000000000006,
+        "warren": -0.15
+      }
+    }
+  },
+  "comparisons": {
+    "count_walk_minus_base": {
+      "aggregate_delta": 0.25855555555555554,
+      "minimum_family_delta": -0.1,
+      "nonnegative_families": 9,
+      "per_family_delta": {
+        "chronicle": 0.19999999999999998,
+        "lockpick": 0.2,
+        "menders": 0.1,
+        "mirage": 0.7,
+        "rites": -0.1,
+        "siftstack": 0.7,
+        "sirens": 0.10000000000000003,
+        "stockade": 0.19555555555555557,
+        "toolsmith": 0.2899999999999999,
+        "warren": 0.19999999999999998
+      },
+      "positive_families": 9
+    },
+    "replay_compound_minus_base": {
+      "aggregate_delta": 0.23801075268817204,
+      "minimum_family_delta": -0.1,
+      "nonnegative_families": 9,
+      "per_family_delta": {
+        "chronicle": 0.19999999999999998,
+        "lockpick": 0.3,
+        "menders": 0.0,
+        "mirage": 0.6,
+        "rites": -0.1,
+        "siftstack": 0.7,
+        "sirens": 0.10000000000000003,
+        "stockade": 0.17010752688172043,
+        "toolsmith": 0.36,
+        "warren": 0.04999999999999999
+      },
+      "positive_families": 8
+    }
+  },
+  "consequence": {
+    "aggregate_strictly_beats_base": true,
+    "aggregate_strictly_beats_parent": false,
+    "aggregate_tie_epsilon": 1e-12,
+    "candidate": "replay_compound",
+    "families_below_slack": [
+      "warren"
+    ],
+    "family_table": {
+      "chronicle": {
+        "candidate": 0.3,
+        "delta": 0.0,
+        "parent": 0.3,
+        "within_slack": true
+      },
+      "lockpick": {
+        "candidate": 0.3,
+        "delta": 0.09999999999999998,
+        "parent": 0.2,
+        "within_slack": true
+      },
+      "menders": {
+        "candidate": 0.0,
+        "delta": -0.1,
+        "parent": 0.1,
+        "within_slack": true
+      },
+      "mirage": {
+        "candidate": 0.6,
+        "delta": -0.09999999999999998,
+        "parent": 0.7,
+        "within_slack": true
+      },
+      "rites": {
+        "candidate": 0.0,
+        "delta": 0.0,
+        "parent": 0.0,
+        "within_slack": true
+      },
+      "siftstack": {
+        "candidate": 0.7,
+        "delta": 0.0,
+        "parent": 0.7,
+        "within_slack": true
+      },
+      "sirens": {
+        "candidate": 0.4,
+        "delta": 0.0,
+        "parent": 0.4,
+        "within_slack": true
+      },
+      "stockade": {
+        "candidate": 0.17010752688172043,
+        "delta": -0.025448028673835138,
+        "parent": 0.19555555555555557,
+        "within_slack": true
+      },
+      "toolsmith": {
+        "candidate": 0.8,
+        "delta": 0.07000000000000006,
+        "parent": 0.73,
+        "within_slack": true
+      },
+      "warren": {
+        "candidate": 0.15,
+        "delta": -0.15,
+        "parent": 0.3,
+        "within_slack": false
+      }
+    },
+    "frozen_claim": "the replay-compounding law hits diminishing returns at stage 8 on this parent; the count_walk composite remains the reference; further aggregate pushes need a different move class.",
+    "no_family_below_parent_by_more_than_slack": false,
+    "no_third_state": true,
+    "parent": "count_walk",
+    "per_family_slack": 0.1,
+    "slack_epsilon": 1e-09,
+    "verdict": "BOUNDED"
+  },
+  "count_walk_parent_merge_receipt_sha256": "840edca0638b9e291bb34fde28b4b530df8743faf9b7b18b7f2358ce55ec4c36",
+  "gateway_sha256": "53cf6533dbd710eb167503363c39f73dbf7559a0d91f40a00436a3c218a01c17",
+  "goal_gate": {
+    "included_in_consequence": false,
+    "per_arm": {
+      "count_walk": {
+        "goal_gate_pass": false,
+        "losses": [
+          "rites"
+        ],
+        "strict_wins": 9,
+        "ties": [],
+        "wins": [
+          "chronicle",
+          "lockpick",
+          "menders",
+          "mirage",
+          "siftstack",
+          "sirens",
+          "stockade",
+          "toolsmith",
+          "warren"
+        ]
+      },
+      "replay_compound": {
+        "goal_gate_pass": false,
+        "losses": [
+          "rites"
+        ],
+        "strict_wins": 8,
+        "ties": [
+          "menders"
+        ],
+        "wins": [
+          "chronicle",
+          "lockpick",
+          "mirage",
+          "siftstack",
+          "sirens",
+          "stockade",
+          "toolsmith",
+          "warren"
+        ]
+      }
+    },
+    "recorded_either_way": true
+  },
+  "local_design_receipt_sha256": "bd6a8f47f846526730be197a563fcda432f88e926676378841fc146be84d3e3f",
+  "local_promotion_promoted": "replay_compound",
+  "local_promotion_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_count_walk_replay_compound/runs/local/seed88060_promotion.json",
+  "local_promotion_receipt_sha256": "9f3ce1502a1bbd7e910220e94ce4fdca72f1e286cd5f9e23318b52b38eb8d89d",
+  "model_order": [
+    "base",
+    "count_walk",
+    "replay_compound"
+  ],
+  "model_tree_sha256s": {
+    "base": "26d8ee48583adb0fb557d0ff668664949adff0068fa5baafe6f0af68e22fb677",
+    "count_walk": "d5fdc55c0238ffbe2465bd73a5f9d63f442ad4083ff9eb477c9887e15e3da6b1",
+    "replay_compound": "22a045e066103fb81cb5744f535f5f0275b3280798b7260d357913d0c485135c"
+  },
+  "model_weight_sha256s": {
+    "base": "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db",
+    "count_walk": "ddd7bc4b5b8f4f2393996148bcb1b411a8be4d7f03430babe789b3534b9850a3",
+    "replay_compound": "65d12d18759ef25588172e5e27313f480c7143510e186c75abf9422173d538da"
+  },
+  "models": {
+    "base": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized",
+    "count_walk": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_count_dont_walk_enumeration/merged/count_walk",
+    "replay_compound": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_count_walk_replay_compound/merged/replay_compound"
+  },
+  "name": "compound",
+  "schema_version": 1,
+  "scores": {
+    "base": {
+      "aggregate": 0.10400000000000001,
+      "per_family": {
+        "chronicle": 0.1,
+        "lockpick": 0.0,
+        "menders": 0.0,
+        "mirage": 0.0,
+        "rites": 0.1,
+        "siftstack": 0.0,
+        "sirens": 0.3,
+        "stockade": 0.0,
+        "toolsmith": 0.44000000000000006,
+        "warren": 0.1
+      }
+    },
+    "count_walk": {
+      "aggregate": 0.3625555555555556,
+      "per_family": {
+        "chronicle": 0.3,
+        "lockpick": 0.2,
+        "menders": 0.1,
+        "mirage": 0.7,
+        "rites": 0.0,
+        "siftstack": 0.7,
+        "sirens": 0.4,
+        "stockade": 0.19555555555555557,
+        "toolsmith": 0.73,
+        "warren": 0.3
+      }
+    },
+    "replay_compound": {
+      "aggregate": 0.34201075268817205,
+      "per_family": {
+        "chronicle": 0.3,
+        "lockpick": 0.3,
+        "menders": 0.0,
+        "mirage": 0.6,
+        "rites": 0.0,
+        "siftstack": 0.7,
+        "sirens": 0.4,
+        "stockade": 0.17010752688172043,
+        "toolsmith": 0.8,
+        "warren": 0.15
+      }
+    }
+  },
+  "seed": 78168,
+  "think_budget": 1024,
+  "tier": "medium"
+}
