@@ -14955,6 +14955,37 @@
      "chart_takeaway": "With too little output room the model cannot finish a usable edit at all, but doubling the room flips it to fully fixing the pilot cases."
     }
    ]
+  },
+  "qwen35_4b_count_dont_walk_enumeration": {
+   "verdict_tag": "Design frozen: same enumeration lesson, compact arithmetic answers instead of long walks",
+   "concept_primer": "The previous experiment taught the model a searcher's discipline for fix-the-broken-procedure puzzles: try every legal one-step change in a fixed, documented order, skipping the ones already tried. The discipline genuinely took — untrained models score exactly zero at it — but the model expressed it by narrating the whole march through the list, and on deep puzzles that narration ran out of room: 20 of its 21 unreadable exam answers were cut off mid-march while marching CORRECTLY. The insight this successor acts on: if the tried list already holds k entries in the fixed order, the right next candidate is simply entry k+1 — you can COUNT instead of WALK. Every puzzle now prints how many candidates each step offers (a small table of number ranges), and the model is taught a five-line arithmetic recipe: count the tried entries, add one, find which step's range holds that number, convert to the list slot, answer. The cost of the answer no longer grows with how deep the search is.",
+   "plain_question": "If the model is taught to compute the next candidate's position with arithmetic (five short lines, always the same shape) instead of narrating a walk through the list, does the already-installed search discipline finally express itself within the answer budget — and clear the 50% bar the previous run missed?",
+   "plain_answer": "Not run yet — this is the frozen design. Everything is cloned from the previous experiment except how the answer is expressed: 160 fresh lessons (verified zero overlap with every earlier lesson and exam, including the predecessor's), the same fixed search order now printed with each step's number ranges, and taught answers capped at 120 thinking tokens (the actual lessons measure at most 105, no matter how deep the search). The exam, the fairness matching (both training runs see exactly the same token counts), the promotion rule, and the pre-written win/lose readings are unchanged; a new recorded-only readout will report each model's thinking length and how many answers hit the cap.",
+   "why_it_matters": "The predecessor's autopsy said the failure was expression cost, not the skill: the model searched correctly and ran out of room saying so. If a constant-cost expression clears the pre-set 50% bar, it confirms the skill was there all along and only the phrasing was broken — and it gives the one benchmark family still stuck at zero its best remaining shot. If it still falls short, the compact-expression explanation dies and the enumeration route is genuinely closed, not just badly phrased.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Taught answer budget",
+     "value": "≤ 120 tokens",
+     "sub": "measured max 105, mean 96 — depth-independent"
+    },
+    {
+     "label": "Predecessor's cutoffs",
+     "value": "20 of 21",
+     "sub": "unreadable answers were mid-march truncations"
+    },
+    {
+     "label": "Lesson dose",
+     "value": "160 rows",
+     "sub": "one kind, full concentration, fresh instances"
+    },
+    {
+     "label": "Perfect-searcher need",
+     "value": "27.1 turns",
+     "sub": "mean on the fresh exam; 80% need > 10"
+    }
+   ],
+   "charts": []
   }
  }
 }

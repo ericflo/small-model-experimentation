@@ -1615,6 +1615,39 @@
   },
   {
     "file_counts": {
+      ".json": 14,
+      ".jsonl": 18,
+      ".md": 5,
+      ".py": 30,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_count_dont_walk_enumeration",
+    "path": "experiments/qwen35_4b_count_dont_walk_enumeration",
+    "primary_readme": "experiments/qwen35_4b_count_dont_walk_enumeration/README.md",
+    "primary_report": "experiments/qwen35_4b_count_dont_walk_enumeration/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation"
+    ],
+    "source_track": "new",
+    "summary": "agentic skills into the one 4B \u2014 provably, on fully documented lineage? composite, tree `414f5829\u2026`), lifecycle 25 (`qwen35_4b_clean_gym_mix_dose` \u2014 ONE KIND PER DOSE AT FULL CONCENTRATION), and lifecycle 26 (`qwen35_4b_enumerative_repair_protocol` \u2014 the reference cell: the enumeration discipline INSTALLED, 9/40 canonical-next vs both controls at 0/40, but failed on its own terms at 22.5% fidelity).",
+    "tags": [
+      "repair",
+      "small-model"
+    ],
+    "title": "Count-Don't-Walk Enumeration",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 70,
+    "total_size_bytes": 40827102
+  },
+  {
+    "file_counts": {
       ".json": 9,
       ".jsonl": 6,
       ".log": 10,

@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 256
-- Manifest files: 611
+- Experiments with manifests: 257
+- Manifest files: 615
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 116 |
+| `other` | 119 |
 | `run-data` | 101 |
-| `standard-artifact` | 129 |
+| `standard-artifact` | 130 |
 
 ## Manifests
 
@@ -91,6 +91,10 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_constrained_coverage_dpo` | `large-artifact` | [manifest](../experiments/qwen35_4b_constrained_coverage_dpo/large_artifacts_manifest.md) |
 | `qwen35_4b_context_composition` | `standard-artifact` | [manifest](../experiments/qwen35_4b_context_composition/reports/artifact_manifest.yaml) |
 | `qwen35_4b_context_local_jacobian_clamp` | `standard-artifact` | [manifest](../experiments/qwen35_4b_context_local_jacobian_clamp/reports/artifact_manifest.yaml) |
+| `qwen35_4b_count_dont_walk_enumeration` | `other` | [manifest](../experiments/qwen35_4b_count_dont_walk_enumeration/data/corpus_manifest.json) |
+| `qwen35_4b_count_dont_walk_enumeration` | `other` | [manifest](../experiments/qwen35_4b_count_dont_walk_enumeration/data/lineage/lineage_manifest.json) |
+| `qwen35_4b_count_dont_walk_enumeration` | `other` | [manifest](../experiments/qwen35_4b_count_dont_walk_enumeration/data/stream_manifest.json) |
+| `qwen35_4b_count_dont_walk_enumeration` | `standard-artifact` | [manifest](../experiments/qwen35_4b_count_dont_walk_enumeration/reports/artifact_manifest.yaml) |
 | `qwen35_4b_counterexample_directed_dsl` | `dataset` | [manifest](../experiments/qwen35_4b_counterexample_directed_dsl/data/counterexample/dataset_manifest.json) |
 | `qwen35_4b_counterexample_directed_dsl` | `dataset` | [manifest](../experiments/qwen35_4b_counterexample_directed_dsl/data/dataset_manifest.json) |
 | `qwen35_4b_counterexample_directed_dsl` | `dataset` | [manifest](../experiments/qwen35_4b_counterexample_directed_dsl/data/random/dataset_manifest.json) |

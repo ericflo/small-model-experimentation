@@ -1,0 +1,825 @@
+{
+  "balance": {
+    "count_walk_formalisms": {
+      "balesled": 20,
+      "barrowyoke": 20,
+      "crankwheel": 20,
+      "millround": 20,
+      "sigilslate": 20,
+      "skeinreel": 20,
+      "trinketcord": 20,
+      "troughline": 20
+    },
+    "episode_success_turns_counts": {
+      "10": 1,
+      "100": 1,
+      "105": 1,
+      "11": 7,
+      "12": 5,
+      "123": 1,
+      "124": 1,
+      "125": 1,
+      "13": 5,
+      "14": 6,
+      "15": 6,
+      "16": 4,
+      "17": 8,
+      "18": 5,
+      "19": 5,
+      "2": 1,
+      "20": 4,
+      "21": 3,
+      "22": 3,
+      "23": 3,
+      "24": 2,
+      "25": 1,
+      "27": 1,
+      "28": 5,
+      "29": 3,
+      "3": 2,
+      "30": 2,
+      "31": 1,
+      "32": 1,
+      "33": 4,
+      "34": 2,
+      "35": 4,
+      "37": 2,
+      "39": 2,
+      "4": 1,
+      "40": 2,
+      "41": 1,
+      "43": 2,
+      "44": 1,
+      "45": 1,
+      "47": 2,
+      "49": 1,
+      "5": 5,
+      "50": 1,
+      "51": 2,
+      "57": 1,
+      "58": 2,
+      "6": 2,
+      "60": 3,
+      "62": 1,
+      "63": 2,
+      "64": 1,
+      "65": 2,
+      "66": 1,
+      "68": 1,
+      "69": 1,
+      "7": 2,
+      "74": 1,
+      "75": 2,
+      "77": 1,
+      "78": 1,
+      "8": 3,
+      "82": 1,
+      "85": 1,
+      "88": 1,
+      "89": 1,
+      "9": 4,
+      "90": 1,
+      "95": 2
+    },
+    "k_cycle": [
+      0,
+      1,
+      3,
+      6,
+      10
+    ],
+    "k_tried_by_formalism": {
+      "balesled": {
+        "0": 4,
+        "1": 4,
+        "10": 4,
+        "3": 4,
+        "6": 4
+      },
+      "barrowyoke": {
+        "0": 4,
+        "1": 4,
+        "10": 4,
+        "3": 4,
+        "6": 4
+      },
+      "crankwheel": {
+        "0": 4,
+        "1": 4,
+        "10": 4,
+        "3": 4,
+        "6": 4
+      },
+      "millround": {
+        "0": 4,
+        "1": 4,
+        "10": 4,
+        "3": 4,
+        "6": 4
+      },
+      "sigilslate": {
+        "0": 4,
+        "1": 4,
+        "10": 4,
+        "3": 4,
+        "6": 4
+      },
+      "skeinreel": {
+        "0": 4,
+        "1": 4,
+        "10": 4,
+        "3": 4,
+        "6": 4
+      },
+      "trinketcord": {
+        "0": 4,
+        "1": 4,
+        "10": 4,
+        "3": 4,
+        "6": 4
+      },
+      "troughline": {
+        "0": 4,
+        "1": 4,
+        "10": 4,
+        "3": 4,
+        "6": 4
+      }
+    },
+    "k_tried_counts": {
+      "0": 32,
+      "1": 32,
+      "10": 32,
+      "3": 32,
+      "6": 32
+    },
+    "target_is_true_fix_rows": 2
+  },
+  "banned_vocabulary": {
+    "base_inventory": "gen_feedloop_curriculum.BANNED_PROMPT_TOKENS",
+    "case_insensitive": true,
+    "sha256": "f3aa05d51700b38817c2358dfd08008970325b5ce0d6f667a08535da8ebd1fce",
+    "tokens": 261
+  },
+  "banned_vocabulary_checked": true,
+  "construction_seed": 77191,
+  "corpus": {
+    "kinds": {
+      "u_count_walk": 160
+    },
+    "mix": "count_walk=160",
+    "path": "data/sft_count_walk.jsonl",
+    "rows": 160,
+    "sha256": "21e6f5cb705f447f7a4dfc9bff24673f798f48df312b99a6cf686505855ee096",
+    "surfaces": {
+      "balesled": 20,
+      "barrowyoke": 20,
+      "crankwheel": 20,
+      "millround": 20,
+      "sigilslate": 20,
+      "skeinreel": 20,
+      "trinketcord": 20,
+      "troughline": 20
+    }
+  },
+  "count_walk_contract": {
+    "action_list_rendered_in_every_prompt": true,
+    "answer_format": "STEP <k>: <corrected step>",
+    "canonical_order_rule_text_byte_identical_to_reference_cell": true,
+    "canonical_order_statement": "Single-step changes are worked through in one frozen order: first by step number, lowest first; within a step, by the changed-to action's position in the numbered action list, top to bottom; a change never leaves the step as already written.",
+    "canonical_order_statement_identical_in_every_row": true,
+    "episode_success_turns_counts": {
+      "10": 1,
+      "100": 1,
+      "105": 1,
+      "11": 7,
+      "12": 5,
+      "123": 1,
+      "124": 1,
+      "125": 1,
+      "13": 5,
+      "14": 6,
+      "15": 6,
+      "16": 4,
+      "17": 8,
+      "18": 5,
+      "19": 5,
+      "2": 1,
+      "20": 4,
+      "21": 3,
+      "22": 3,
+      "23": 3,
+      "24": 2,
+      "25": 1,
+      "27": 1,
+      "28": 5,
+      "29": 3,
+      "3": 2,
+      "30": 2,
+      "31": 1,
+      "32": 1,
+      "33": 4,
+      "34": 2,
+      "35": 4,
+      "37": 2,
+      "39": 2,
+      "4": 1,
+      "40": 2,
+      "41": 1,
+      "43": 2,
+      "44": 1,
+      "45": 1,
+      "47": 2,
+      "49": 1,
+      "5": 5,
+      "50": 1,
+      "51": 2,
+      "57": 1,
+      "58": 2,
+      "6": 2,
+      "60": 3,
+      "62": 1,
+      "63": 2,
+      "64": 1,
+      "65": 2,
+      "66": 1,
+      "68": 1,
+      "69": 1,
+      "7": 2,
+      "74": 1,
+      "75": 2,
+      "77": 1,
+      "78": 1,
+      "8": 3,
+      "82": 1,
+      "85": 1,
+      "88": 1,
+      "89": 1,
+      "9": 4,
+      "90": 1,
+      "95": 2
+    },
+    "k_cycle": [
+      0,
+      1,
+      3,
+      6,
+      10
+    ],
+    "k_tried_counts": {
+      "0": 32,
+      "1": 32,
+      "10": 32,
+      "3": 32,
+      "6": 32
+    },
+    "one_kind_per_dose_at_full_concentration": true,
+    "per_row_verification": "exhaustive re-derivation over the full single-step candidate space: the target IS the canonical-next untried legal candidate; exactly ONE candidate repairs both trials; every tried entry is legal, canonically ordered (the canonical prefix), and genuinely failing (each re-simulated against both trials); the rendered per-step ranges equal the enumeration range by range; the think target IS the frozen five-line compact computation under the frozen budget",
+    "range_statement_rendered_in_every_prompt": true,
+    "range_statement_verified_against_enumeration_exactly": true,
+    "target_is_true_fix_rows": 2,
+    "think_budget": {
+      "char_cap": 380,
+      "constant_in_k": true,
+      "line_count": 5,
+      "line_patterns": [
+        "^Tried entries: \\d+\\.$",
+        "^Target: change number \\d+ in the frozen order\\.$",
+        "^Number \\d+ sits in step \\d+'s range \\d+-\\d+: offset \\d+ - \\d+ \\+ 1 = \\d+\\.$",
+        "^Step \\d+'s written action is list number \\d+; skipping it, offset \\d+ is list number \\d+: .+\\.$",
+        "^STEP \\d+: .+$"
+      ],
+      "max_estimated_think_tokens": 72,
+      "max_think_chars": 288,
+      "real_tokenizer_bound_enforced_by": "scripts/measure_source_tokens.py (fail-closed per row over the frozen corpus; stats in data/source_token_lengths.json)",
+      "token_cap": 120
+    }
+  },
+  "experiment_id": "qwen35_4b_count_dont_walk_enumeration",
+  "generator": "scripts/gen_count_walk_curriculum.py",
+  "machinery": {
+    "lesson": "the enumerative-repair cell's SYSTEMATIC-ENUMERATION task shape byte-equivalent, with ONLY the expression pedagogy changed: COUNT, DON'T WALK — the tried list has k entries in canonical order, so the target is entry k+1; the think target is a fixed-shape five-line index computation over the rendered per-step ranges, constant token cost in k",
+    "sha256": "91e55cc3322ac787aa1fdf24aaf114e4b9acbac963ee6af1f4471228bf7bed2a",
+    "source": "scripts/gen_feedloop_curriculum.py — byte-identical copy of the menders dose-scale cell's reviewed generator (machinery imported, never forked): machine builders, describe/apply semantics, legality bounds, banned vocabulary inventory"
+  },
+  "replay": {
+    "byte_identical_to_every_predecessor_copy": true,
+    "path": "data/sft_blend.jsonl",
+    "rows": 2240,
+    "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+  },
+  "row_overlap_audit": {
+    "corpus_messages": 160,
+    "match_rule": "canonical user-message byte equality, zero overlap required",
+    "sources": {
+      "experiments/qwen35_4b_axis_corpus_v2_staged_repair/data/local_tasks_seed88017.jsonl": {
+        "messages_compared": 154,
+        "overlap": 0,
+        "sha256": "746cf1c4efae1cdd6614827f6fe8abb0eb7fb8cf5c2dc0c2c7dac4a6d930db81"
+      },
+      "experiments/qwen35_4b_axis_replay_stack_medium_target_match/data/local_tasks_seed88015.jsonl": {
+        "messages_compared": 144,
+        "overlap": 0,
+        "sha256": "1c019d70751a789a17ef555d51862c5a017f0a3c2bb1ebbce41a1a93496fefd1"
+      },
+      "experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/data/local_tasks_seed88016.jsonl": {
+        "messages_compared": 144,
+        "overlap": 0,
+        "sha256": "13788cc2e6fc237cfb709d2b22ae24dc6263a91f97c4822b856d098f816020b4"
+      },
+      "experiments/qwen35_4b_clean_gym_mix_dose/data/gym_mix.jsonl": {
+        "messages_compared": 1461,
+        "overlap": 0,
+        "sha256": "979cf066115bd37b8b411944e9d3625a5e64f90a7d19a6f79d2619afc7780896"
+      },
+      "experiments/qwen35_4b_clean_gym_mix_dose/data/local_tasks_seed88046.jsonl": {
+        "messages_compared": 40,
+        "overlap": 0,
+        "sha256": "3d4b0b332170f0c22f8f4e3789b58420346414fb0e22f518ea027b1344e6d387"
+      },
+      "experiments/qwen35_4b_clean_gym_mix_dose/data/local_tasks_seed88048.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "f738d88516078bb2c1ee09dec3b134b96f75b532d08f5df136c36e9c0274f0c8"
+      },
+      "experiments/qwen35_4b_clean_gym_mix_dose/data/local_tasks_seed88050.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "bd08e093bdb2399dc44ca3a08d468ebb0295f4f222465143ce892d0876a5e4b1"
+      },
+      "experiments/qwen35_4b_clean_gym_mix_dose/data/local_tasks_seed88051.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "5a13e72e49843ff15b32b6ae51d37966afc14d86b89ce7701e0030af552db34a"
+      },
+      "experiments/qwen35_4b_clean_gym_mix_dose/data/replay_ctl5.jsonl": {
+        "messages_compared": 1433,
+        "overlap": 0,
+        "sha256": "6deebd63cf8309aaf1e691729214bf122df8e8c1108c69a1025f936391ba7247"
+      },
+      "experiments/qwen35_4b_clean_gym_mix_dose/data/sft_gym_mix.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "6295011622096992e889b58a1a004fee26f4f9787bd952d348c0bf8593564a89"
+      },
+      "experiments/qwen35_4b_clean_path_statechain_extension/data/local_tasks_seed88041.jsonl": {
+        "messages_compared": 40,
+        "overlap": 0,
+        "sha256": "ed16ed460799bc9b3f47767d35d4b0cd28a00f58deccf23c6608704aa07cf0d0"
+      },
+      "experiments/qwen35_4b_clean_path_statechain_extension/data/local_tasks_seed88042.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "c9540f614120787ede5afe7454f00ed412fe9edbf8d7f7e5ee078ba9032413d7"
+      },
+      "experiments/qwen35_4b_clean_path_statechain_extension/data/local_tasks_seed88044.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "6119e52c18cdce24ad713d88ca77174f43bdf832550a09e90ac463a232f92faf"
+      },
+      "experiments/qwen35_4b_clean_path_statechain_extension/data/local_tasks_seed88045.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "0ec31a4d5e71e5931cdf5e9d6b9f977bcc9b8dd908f778cd42c20d1832a251f9"
+      },
+      "experiments/qwen35_4b_clean_path_statechain_extension/data/replay_ctl4.jsonl": {
+        "messages_compared": 1440,
+        "overlap": 0,
+        "sha256": "b18e90b25cd9d4ea7341cf5bb27b37b15bd50bdd50dabb927ca2ea19e1b8b39d"
+      },
+      "experiments/qwen35_4b_clean_path_statechain_extension/data/sft_statechain_only.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "ab6c78458eb8a41f42ebee25e79354d42beb558f78bb3d348dd7902ca3a9bad3"
+      },
+      "experiments/qwen35_4b_clean_path_statechain_extension/data/statechain_clean.jsonl": {
+        "messages_compared": 1460,
+        "overlap": 0,
+        "sha256": "bae8af90ebed212a6381b6192ec5a17949630e68d6b7d18edd1d837196efcb55"
+      },
+      "experiments/qwen35_4b_count_dont_walk_enumeration/data/lineage/stage01_replay_refresh.jsonl": {
+        "messages_compared": 1463,
+        "overlap": 0,
+        "sha256": "5d5d7c4b8a4b0a4f270fe8b2ecaebe356c771948d71b0f7bbeead6bfc04308b6"
+      },
+      "experiments/qwen35_4b_count_dont_walk_enumeration/data/lineage/stage02_designed160.jsonl": {
+        "messages_compared": 1473,
+        "overlap": 0,
+        "sha256": "5159cf41b6474bdc8640cdb2a4a168587b59232ca8171c7b7057fc6bfe1b40c8"
+      },
+      "experiments/qwen35_4b_count_dont_walk_enumeration/data/lineage/stage03_close_xi__targeted_standard.jsonl": {
+        "messages_compared": 318,
+        "overlap": 0,
+        "sha256": "12fc613bb31a46bcea9acd49b26467656704aa3b3418dab8d920adf057d14f00"
+      },
+      "experiments/qwen35_4b_count_dont_walk_enumeration/data/lineage/stage04_replay_after_close.jsonl": {
+        "messages_compared": 314,
+        "overlap": 0,
+        "sha256": "541805df2d817707c1e76213e50c8f08fd9caff10d0a3887e1196424b6820be6"
+      },
+      "experiments/qwen35_4b_count_dont_walk_enumeration/data/lineage/stage05_designed_fresh.jsonl": {
+        "messages_compared": 1465,
+        "overlap": 0,
+        "sha256": "6d4dc303bc159c19a1ffd0c60ca7d08ea64b02909366701b345d888482d67f3f"
+      },
+      "experiments/qwen35_4b_count_dont_walk_enumeration/data/lineage/stage06_hygiene_explore.jsonl": {
+        "messages_compared": 1460,
+        "overlap": 0,
+        "sha256": "82aa1a78c0a429a48c3db6b94ac84397cea001b041477e7b137b38c21354112f"
+      },
+      "experiments/qwen35_4b_count_dont_walk_enumeration/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/axis160_direct.jsonl": {
+        "messages_compared": 1478,
+        "overlap": 0,
+        "sha256": "0cbf3abf04781f3217189dd7b2bdf173d83772b0200b283a7c608dc3d386c1ee"
+      },
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/local_tasks_seed88020.jsonl": {
+        "messages_compared": 144,
+        "overlap": 0,
+        "sha256": "8e4dd8b21febf64048fef5cf15541356d4a5808e45caf5d6f19525e154168822"
+      },
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/sft_axis160.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e"
+      },
+      "experiments/qwen35_4b_dose_diversity_mechanism_cell/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_enumerative_repair_protocol/data/enum_repair.jsonl": {
+        "messages_compared": 1465,
+        "overlap": 0,
+        "sha256": "a1d4a8f51d41cc812829fde7fb8d9b75169f35b46a56de7fb0e323cfbb1a1992"
+      },
+      "experiments/qwen35_4b_enumerative_repair_protocol/data/local_tasks_seed88052.jsonl": {
+        "messages_compared": 40,
+        "overlap": 0,
+        "sha256": "7390c384f479f90918c3f4236be5415fb9a44ccd129fb95f5086f369cd88e549"
+      },
+      "experiments/qwen35_4b_enumerative_repair_protocol/data/local_tasks_seed88053.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "0b0a904af5a743f008bef6f14fca43c49a30ea86599847b7131cdcea22e1e7e6"
+      },
+      "experiments/qwen35_4b_enumerative_repair_protocol/data/local_tasks_seed88054.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "bb177ae8948c52c72103a9c050cfd2df248aaf7f43d9f4d051296dfe26f6f9b2"
+      },
+      "experiments/qwen35_4b_enumerative_repair_protocol/data/local_tasks_seed88055.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "bb83c2bff9b23f45c2a311a7895fbedefc4a1c6f90d70c83c382204ea625f699"
+      },
+      "experiments/qwen35_4b_enumerative_repair_protocol/data/replay_ctl6.jsonl": {
+        "messages_compared": 1442,
+        "overlap": 0,
+        "sha256": "3e1f79a4d055e0f262817aa842436b8a6f5c8531ce01cea699a33d5c6ccc34e1"
+      },
+      "experiments/qwen35_4b_enumerative_repair_protocol/data/sft_enum_repair.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "c9b539bf8ce894e92efaafb79e445e9962b3eefe8c1a79e458f082efd1a6744d"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/feedloop_state.jsonl": {
+        "messages_compared": 1462,
+        "overlap": 0,
+        "sha256": "187787a8c6b2d652ba46553cecb8fe451b191e277094268f4df921babf621c2b"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/local_tasks_seed88026.jsonl": {
+        "messages_compared": 40,
+        "overlap": 0,
+        "sha256": "079075e0f51dacac9ea6c87eeea4c2d0e5f9258cb05af885d4cc897479d3866f"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/local_tasks_seed88027.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "f568b7d8cd04ce6e4bf270e46a80b4328978ee53a6c3d34a69b3d1c72a77b79f"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/local_tasks_seed88028.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "09b3d71c8b0fd693a21684f60b21dfa125cf3291b24de5878366026c81d34756"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/local_tasks_seed88030.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "9ff826de30c3b32bae1b63af69c3f2a677f6d876cc1046ea22ad41349dcc3511"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/replay_ctl.jsonl": {
+        "messages_compared": 1442,
+        "overlap": 0,
+        "sha256": "ef6f321f93804081eefb7b8ae3ca84fe39a46127604c69d81b803628d020e63c"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_feedback_loop_state_chain_install/data/sft_feedloop_state.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "e6d45ed45632f7d6bea8e300f469a4d4c076eb4d8be420d677bd14c27471083b"
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/axis_curriculum.jsonl": {
+        "messages_compared": 1459,
+        "overlap": 0,
+        "sha256": "e2561485ae28c9c374b663af4a002ab67e02cc75ec8994d1d89770e6b198e98a"
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/local_tasks_seed88014.jsonl": {
+        "messages_compared": 144,
+        "overlap": 0,
+        "sha256": "4753a277bdcfcab515a8bb5ece541498729107de6002f4be011b57b2eed34873"
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/replay_repeat.jsonl": {
+        "messages_compared": 1435,
+        "overlap": 0,
+        "sha256": "878f501f3c6665982b7b3e9ffb2de675382d6b366b62a61d0a13e6709841c468"
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/sft_axis160.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e"
+      },
+      "experiments/qwen35_4b_goal_gap_axis_curriculum_target_match/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/hygiene_explore.jsonl": {
+        "messages_compared": 1460,
+        "overlap": 0,
+        "sha256": "82aa1a78c0a429a48c3db6b94ac84397cea001b041477e7b137b38c21354112f"
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/local_tasks_seed88018.jsonl": {
+        "messages_compared": 124,
+        "overlap": 0,
+        "sha256": "597f10a44674cc12e5f499be8de6804bb040985019b18aacc5527339a26857eb"
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/replay_clean.jsonl": {
+        "messages_compared": 1441,
+        "overlap": 0,
+        "sha256": "2189d160c9c3007ccbaf935478b3354b597c71945f6dbf1c32bf4e670ace0017"
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_hygiene_explore_destack_medium/data/sft_hygiene_explore.jsonl": {
+        "messages_compared": 80,
+        "overlap": 0,
+        "sha256": "8b3e97919c62cbb0893add281dc1d3ae881aa0138d0d1721043fec26b0c22cf1"
+      },
+      "experiments/qwen35_4b_interleaved_replay_dose_medium/data/local_tasks_seed88019.jsonl": {
+        "messages_compared": 124,
+        "overlap": 0,
+        "sha256": "6e927f591f9ae9d2edad6e263be3f7c0262b39de4854314a64802e656b98c15b"
+      },
+      "experiments/qwen35_4b_menders_dose_scale/data/feedloop_scale.jsonl": {
+        "messages_compared": 2216,
+        "overlap": 0,
+        "sha256": "3aee5f5e8731294e0d8a9b9dd08f014ca34ace9f949c2b46aa09aa1e548adc58"
+      },
+      "experiments/qwen35_4b_menders_dose_scale/data/local_tasks_seed88037.jsonl": {
+        "messages_compared": 40,
+        "overlap": 0,
+        "sha256": "5ec590bf508c5f9e6aa4758d37819e68eaa4807e400a63ac2f980ad975c45519"
+      },
+      "experiments/qwen35_4b_menders_dose_scale/data/local_tasks_seed88038.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "96e03aea5013f871b0ec863590ae5ea62d0620f09b216d0af39eee2bba1d74c9"
+      },
+      "experiments/qwen35_4b_menders_dose_scale/data/local_tasks_seed88039.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "9575b27506011ccb1fd32c1c63579610b80ef2c330629dbcfd930ad442942367"
+      },
+      "experiments/qwen35_4b_menders_dose_scale/data/local_tasks_seed88040.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "7b0223561fe32da48e6b45a280fae1ade96a8546f5429e76f14f607a6716deed"
+      },
+      "experiments/qwen35_4b_menders_dose_scale/data/replay_ctl3.jsonl": {
+        "messages_compared": 1612,
+        "overlap": 0,
+        "sha256": "02275b9553cc7ff6676ed370a91e1e154dd5d768a4ed36ae41a1ae583b92b56b"
+      },
+      "experiments/qwen35_4b_menders_dose_scale/data/sft_feedloop_scale.jsonl": {
+        "messages_compared": 800,
+        "overlap": 0,
+        "sha256": "080c3603cd3bfca2b261b797be356f97684aedc4f65becd9b50cbb45706bd2c2"
+      },
+      "experiments/qwen35_4b_rank_capacity_vehicle_cell/data/axis160_r64.jsonl": {
+        "messages_compared": 1472,
+        "overlap": 0,
+        "sha256": "336a044557cc6802aeffce497634528b844329d872f64d1c54ea4a63311c990c"
+      },
+      "experiments/qwen35_4b_rank_capacity_vehicle_cell/data/local_tasks_seed88021.jsonl": {
+        "messages_compared": 144,
+        "overlap": 0,
+        "sha256": "64754430f3316d1d61fb81727aebbff03c9f32624f38182fbf5407b81e48d707"
+      },
+      "experiments/qwen35_4b_rank_capacity_vehicle_cell/data/sft_axis160.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "e7a95d73c619e7c4f20f18ae98ac193e2f57373bd49dc9aede11fd548831686e"
+      },
+      "experiments/qwen35_4b_rank_capacity_vehicle_cell/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_retention_screen_calibration/data/local_tasks_seed88022.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "e41e47d87b31a1f15dcc3b4978f73730b7acfb690b502388ce497bbed5951114"
+      },
+      "experiments/qwen35_4b_retention_screen_calibration/data/local_tasks_seed88023.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "8b8728960780debe45412b13be5245e1311de71ea3cbdcabdd5e4a2a62469d59"
+      },
+      "experiments/qwen35_4b_retention_screen_calibration/data/local_tasks_seed88024.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "f0cd07500e0be9541bb5c356cf09efdc48c2757e91e21366ef8c34d2e90bb24f"
+      },
+      "experiments/qwen35_4b_retention_screen_calibration/data/local_tasks_seed88025.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "3ca1704960f701382a5c766bc2bdbebc73e30b94113698f0ac39dc7962591f01"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/local_tasks_seed88033.jsonl": {
+        "messages_compared": 40,
+        "overlap": 0,
+        "sha256": "11257caea2557d1fbc1ac86f4f8f061987a1e77cdb448b0bda1fa0a1422c4696"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/local_tasks_seed88034.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "2264646be93e159184602957d21ef5e3ba650ff1cd6743e4e6b15b8d3726b11e"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/local_tasks_seed88035.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "a8634bac86e5e0ef5185ee7e93ae079c57e4d2c79a7273207e0ed83b515847b4"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/local_tasks_seed88036.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "6ff076d7ef8a20093cf2a027f36a0fd8cf26d03fe87e72f9e76d1108b0751b21"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/replay_ctl2.jsonl": {
+        "messages_compared": 1443,
+        "overlap": 0,
+        "sha256": "0fecf519a8981ea71a9842f0c5a3615cfe60f157e58420d1ddc5e019f44e9477"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/sft_statechain_only.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "ab6c78458eb8a41f42ebee25e79354d42beb558f78bb3d348dd7902ca3a9bad3"
+      },
+      "experiments/qwen35_4b_statechain_only_dose/data/statechain_only.jsonl": {
+        "messages_compared": 1462,
+        "overlap": 0,
+        "sha256": "2e3a08bb9a50f572df4e904fc7a08c6e0b06317972af74c2119de35e3f524eec"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/budget_commit.jsonl": {
+        "messages_compared": 1464,
+        "overlap": 0,
+        "sha256": "7dbc084809c6ae6b8dd794465a7057095e02b9d598c414fdad32dee7d361c8d7"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/designed_fresh.jsonl": {
+        "messages_compared": 1465,
+        "overlap": 0,
+        "sha256": "6d4dc303bc159c19a1ffd0c60ca7d08ea64b02909366701b345d888482d67f3f"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/local_tasks_seed88013.jsonl": {
+        "messages_compared": 104,
+        "overlap": 0,
+        "sha256": "be817bd09f80a1fdf045bfb7638634f5f0e0e34ac6a404a34a98283e49dc5c2b"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/replay_repeat.jsonl": {
+        "messages_compared": 1439,
+        "overlap": 0,
+        "sha256": "fa5198c2033dc527fa668f55f8a49865d8015a6d14cc059b319aa058dfad74f0"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/sft_blend.jsonl": {
+        "messages_compared": 2088,
+        "overlap": 0,
+        "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/sft_fresh_budget160.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "ecece8e294f0b1c34a086705b05773d6004c6a9a239283aa26ee1c1bbad39800"
+      },
+      "experiments/qwen35_4b_universal_fresh_surface_budget_commit_target_match/data/sft_fresh_designed160.jsonl": {
+        "messages_compared": 160,
+        "overlap": 0,
+        "sha256": "e599f1563f6e4fe68aa43ce64bbe450c264170fb07dc17dba9ea74e694f284d5"
+      }
+    }
+  },
+  "schema_version": 1,
+  "surface_freshness_audit": {
+    "claim": "EMPTY by design: every surface token in this corpus is inherited from the menders dose-scale cell's eight machine formalisms (byte-identical machinery); nothing new is invented",
+    "inherited_tokens": {
+      "policy": "the eight formalisms' vocabulary (troughline/trinketcord/crankwheel/sigilslate pools inherited by the dose-scale cell, plus its barrowyoke/balesled/millround/skeinreel pools) is retained by design; it appears in the menders dose-scale corpus and is excluded from any fresh-surface claim — ROW-level freshness is the bar, enforced by the overlap audit below and by fresh instances by construction",
+      "sha256": "b15c0e3d65123abae66873d2bf096f0ef2ad4dc77d6ca03e1911d74bf34d8815",
+      "tokens": [
+        "troughline",
+        "trinketcord",
+        "crankwheel",
+        "sigilslate",
+        "brann",
+        "clave",
+        "dorst",
+        "grelm",
+        "murd",
+        "prell",
+        "plome",
+        "quenn",
+        "trell",
+        "vosk",
+        "yorv",
+        "zilk",
+        "drasp",
+        "fyne",
+        "golve",
+        "hilm",
+        "juss",
+        "krev",
+        "morv",
+        "nilt",
+        "pryn",
+        "quav",
+        "rulf",
+        "senn",
+        "trough",
+        "troughs",
+        "trinket",
+        "trinkets",
+        "sigil",
+        "sigils",
+        "barrowyoke",
+        "balesled",
+        "millround",
+        "skeinreel",
+        "askel",
+        "brumm",
+        "dimber",
+        "fluss",
+        "grond",
+        "torvic",
+        "gorbel",
+        "harnik",
+        "jelve",
+        "kimm",
+        "lorsk",
+        "pindle",
+        "ambel",
+        "cresk",
+        "durnic",
+        "hulvet",
+        "ostrel",
+        "twemb",
+        "murled",
+        "ferren",
+        "barrow",
+        "barrows",
+        "sack",
+        "sacks",
+        "heave",
+        "heaved",
+        "yoke",
+        "bale",
+        "bales",
+        "sled",
+        "lash",
+        "lashed",
+        "uncouple",
+        "brand",
+        "brands",
+        "vane",
+        "vanes",
+        "windlass",
+        "creel",
+        "shoe",
+        "reel",
+        "coil",
+        "coils"
+      ]
+    },
+    "sources_checked": 95,
+    "tokens": []
+  }
+}

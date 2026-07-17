@@ -2505,6 +2505,14 @@
     "trace_keyed_symbol_repair/configs/experiment.json: \"date_utc\": \"2026-06-20\"",
     "trace_keyed_symbol_repair/reports/trace_keyed_symbol_repair_paper.md: 2026-06-20"
    ]
+  },
+  "qwen35_4b_count_dont_walk_enumeration": {
+   "start": "2026-07-16",
+   "end": "2026-07-16",
+   "confidence": "high",
+   "sources": [
+    "dated experiment_log.md heading (2026-07-16 design freeze)"
+   ]
   }
  }
 }

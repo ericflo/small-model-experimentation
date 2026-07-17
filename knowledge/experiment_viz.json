@@ -43126,11 +43126,25 @@
      "series": [
       {
        "label": "physically valid first-stop trace",
-       "values": [1, 1, 1, 0, 0, 1]
+       "values": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        1
+       ]
       },
       {
        "label": "strict exact precommit answer",
-       "values": [1, 0, 0, 0, 0, 0]
+       "values": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
       }
      ],
      "x_label": "frozen synthetic boundary case",
@@ -43156,7 +43170,12 @@
      "series": [
       {
        "label": "model-free scaffold count",
-       "values": [7, 8, 0, 0]
+       "values": [
+        7,
+        8,
+        0,
+        0
+       ]
       }
      ],
      "x_label": "scaffold receipt field",
@@ -48032,7 +48051,7 @@
      "x_label": "frozen dose component",
      "y_label": "training rows",
      "y_format": "integer",
-          "note": "All arms shared slot order, contained 1,520 rows, ran 190 optimizer steps, and totaled exactly 1,429,053 forward tokens. All trained cleanly before the fresh local screen.",
+     "note": "All arms shared slot order, contained 1,520 rows, ran 190 optimizer steps, and totaled exactly 1,429,053 forward tokens. All trained cleanly before the fresh local screen.",
      "source": "experiments/qwen35_4b_universal_low_density_token_match/data/dose_manifest.json"
     },
     {
@@ -48341,7 +48360,7 @@
   },
   "qwen35_4b_universal_on_policy_prefix_repair_token_match": {
    "charts": [
-   {
+    {
      "headline": true,
      "kind": "bar",
      "title": "Prefix repair loses to replay and erases every target win",
@@ -48353,11 +48372,19 @@
      "series": [
       {
        "label": "correct of 26",
-       "values": [16, 18, 15]
+       "values": [
+        16,
+        18,
+        15
+       ]
       },
       {
        "label": "target correct of 6",
-       "values": [2, 1, 0]
+       "values": [
+        2,
+        1,
+        0
+       ]
       }
      ],
      "x_label": "same-backend merged-composite arm",
@@ -48418,11 +48445,25 @@
      "series": [
       {
        "label": "reachable failures",
-       "values": [35, 41, 46, 24, 36, 48]
+       "values": [
+        35,
+        41,
+        46,
+        24,
+        36,
+        48
+       ]
       },
       {
        "label": "required quota",
-       "values": [10, 10, 10, 10, 10, 10]
+       "values": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+       ]
       }
      ],
      "x_label": "registered failure class",
@@ -48445,11 +48486,23 @@
      "series": [
       {
        "label": "replay control",
-       "values": [304313, 119305, 181580, 2788, 145404]
+       "values": [
+        304313,
+        119305,
+        181580,
+        2788,
+        145404
+       ]
       },
       {
        "label": "prefix repair",
-       "values": [304313, 152726, 147631, 3316, 111983]
+       "values": [
+        304313,
+        152726,
+        147631,
+        3316,
+        111983
+       ]
       }
      ],
      "x_label": "per-epoch encoded exposure",
@@ -48479,7 +48532,16 @@
      "series": [
       {
        "label": "completed checkpoint",
-       "values": [1, 1, 1, 1, 0, 0, 0, 0]
+       "values": [
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+       ]
       }
      ],
      "x_label": "preregistered experiment stage",
@@ -48512,7 +48574,19 @@
      "series": [
       {
        "label": "completed checkpoint",
-       "values": [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]
+       "values": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
       }
      ],
      "x_label": "preregistered experiment stage",
@@ -48543,11 +48617,39 @@
      "series": [
       {
        "label": "hard greedy failures",
-       "values": [46, 39, 2, 12, 19, 0, 30, 24, 6, 17, 11, 21, 0]
+       "values": [
+        46,
+        39,
+        2,
+        12,
+        19,
+        0,
+        30,
+        24,
+        6,
+        17,
+        11,
+        21,
+        0
+       ]
       },
       {
        "label": "required quota",
-       "values": [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+       "values": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+       ]
       }
      ],
      "x_label": "universal procedural skill",
@@ -48619,7 +48721,15 @@
      "series": [
       {
        "label": "completed checkpoint",
-       "values": [1, 1, 0, 0, 0, 0, 0]
+       "values": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+       ]
       }
      ],
      "x_label": "prospective experiment stage",
@@ -49821,6 +49931,35 @@
      "y_format": "integer",
      "note": "PILOT_NOT_PROMOTED + FAILED_ON_ITS_OWN_TERMS: the discipline installed with the program's starkest contrast (canonical-next 9/40 vs 0/40 for both controls) but at 22.5% fidelity — below the frozen 0.50 precondition — and did not convert at sealed 78162 (candidate menders 0.0; the untrained replay control drew 0.1; pilot 0.3252 lost to both controls at 0.3502). The bottleneck is long-prompt answer formatting (parseable 19/40); ordering discipline 56% once legal-untried. The pure-enumeration SFT route closes at this dose per the preregistered ordered rule; protocols remain the installable class (5-for-5) with conversion the separate wall.",
      "source": "experiments/qwen35_4b_enumerative_repair_protocol/runs/local/seed88052_promotion.json"
+    }
+   ]
+  },
+  "qwen35_4b_count_dont_walk_enumeration": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Expression cost: walk pedagogy truncates, count pedagogy fits the budget",
+     "categories": [
+      "walk: unparseable axis rows (of 21) cut at the 1,024-token cap",
+      "count: max think-target tokens (cap 120)",
+      "count: mean think-target tokens"
+     ],
+     "series": [
+      {
+       "label": "measured",
+       "values": [
+        20,
+        105,
+        95.8
+       ]
+      }
+     ],
+     "x_label": "measurement",
+     "y_label": "rows / tokens",
+     "y_format": "number",
+     "note": "DESIGN FROZEN, pre-event. Predecessor forensics (enumerative_repair, committed generations at seed 88052): 20 of 21 unparseable axis rows were 1,024-token cap truncations caught mid-CORRECT canonical walk — the discipline installed but its expression cost grows with the number of prior attempts. This cell teaches the identical discipline as a constant-cost computation (count the k tried entries → target candidate k+1 → index arithmetic over rendered per-step candidate ranges): every training think target verified ≤ 120 real-tokenizer tokens (max 105, mean 95.8), constant in k. Results land after the gated stages; chart will be replaced by the fidelity cascade per arm.",
+     "source": "experiments/qwen35_4b_count_dont_walk_enumeration/data/design_receipt.json"
     }
    ]
   }

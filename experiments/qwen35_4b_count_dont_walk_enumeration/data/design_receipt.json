@@ -1,0 +1,569 @@
+{
+  "arms": {
+    "control_trains_first": true,
+    "gate_arms": [
+      "zero_root_parent",
+      "replay_ctl7",
+      "count_walk"
+    ],
+    "parent_eval_label": "zero_root_parent",
+    "trained_candidate": "count_walk",
+    "trained_control": "replay_ctl7"
+  },
+  "benchmark_plan": {
+    "aggregate_seed_sealed": 78163,
+    "conditional_on_local_promotion": true,
+    "episode_success_simulation_quoted": {
+      "consequence_stated_plainly": "the family's episode budget is publicly known only as 'bounded'; if it is materially shorter than these needs, a perfectly-installed enumerator converts few or no episodes — the zero draw is ambiguous WITHOUT the fidelity precondition below",
+      "holdout_from_scratch": {
+        "max": 78,
+        "mean": 27.1,
+        "median": 20.5,
+        "min": 4,
+        "share_needing_more_than_10_turns": 0.8
+      },
+      "treatment_from_scratch": {
+        "max": 125,
+        "mean": 32.64375,
+        "median": 22.0,
+        "min": 2,
+        "share_needing_more_than_10_turns": 0.86875
+      }
+    },
+    "goal_gate": "all ten public families strictly > base; recorded from the same event either way, never part of the pilot pass",
+    "menders_reading": "candidate vs base and vs parent on menders specifically — the frozen question: does taught enumeration convert to the family with live rerun feedback? Recorded either way, never part of the pilot gate",
+    "menders_zero_scoping": {
+      "added_pre_freeze_by_review_amendment": true,
+      "fidelity_precondition": "F = the candidate's canonical-next rate on the 40-row axis holdout (from the local promotion receipt's mechanism_reading); the precondition HOLDS iff the candidate promoted locally AND F >= 0.50 AND F strictly exceeds both controls' canonical-next rates (integer-exact comparisons)",
+      "frozen_consequence_order": [
+        "MECHANISM_ANSWER",
+        "TURN_BUDGET_SCOPED",
+        "FAILED_ON_ITS_OWN_TERMS"
+      ],
+      "no_third_state_for_the_zero_draw": true,
+      "rules": {
+        "1_mechanism_answer_takes_precedence": "ANY candidate menders > 0 where the controls sit at 0 is the mechanism answer",
+        "2_turn_budget_scoped": "a menders reading of 0 WITH the fidelity precondition met is TURN_BUDGET_SCOPED — enumeration installed with high fidelity but did not convert within the family's episode budget; the protocol-install mechanism is NOT refuted; what closes is the pure-enumeration route at the family's actual budget",
+        "3_failed_on_its_own_terms": "a menders 0 WITHOUT that precondition reads as the install/conversion failing on its own terms"
+      }
+    },
+    "model_order": [
+      "base",
+      "zero_root_parent",
+      "replay_ctl7",
+      "count_walk"
+    ],
+    "name": "pilot",
+    "pilot_gate": "candidate aggregate strictly > base AND > replay_ctl7 AND > zero_root_parent",
+    "power_statement": "menders has been 0-margin on most draws across the program's sealed events, and the analytic perfect-enumerator simulation says the zero draw is ambiguous: holdout episodes need mean 27.1 turns from scratch (median 20.5, max 78; 80.0% need more than 10; treatment corpus mean 32.6, median 22, max 125; 86.9% > 10) against a family budget publicly known only as 'bounded'. Frozen ordered consequences, positive first: (1) any candidate menders > 0 where the controls sit at 0 is the mechanism answer; (2) a menders 0 WITH the fidelity precondition met (promoted AND holdout canonical-next rate >= 0.50 AND strictly above both controls) is TURN_BUDGET_SCOPED — the protocol-install mechanism is NOT refuted, only the pure-enumeration route at the family's actual budget closes; (3) a menders 0 WITHOUT it fails on its own terms. No third state for the zero draw; a 10/10 goal gate is a menders draw and feeds a fresh confirmation cell before any claim",
+    "think_budget": 1024,
+    "tier": "medium",
+    "trained_arm_pins": "six fail-closed TODO-PIN slots in scripts/run_benchmark.py (tree, weights, committed merge receipt per trained arm), filled post-merge and covered by the normalized-hash pin"
+  },
+  "checkpoint_policy": {
+    "clean_pushed_main_required": true,
+    "full_check_rebase_push_two_workflow_gate_between_expensive_stages": true,
+    "next_authorized_stage": "train-control",
+    "one_stage_per_invocation": true,
+    "preceding_receipt_committed_at_head": true
+  },
+  "clean_chain": {
+    "blend_root_forbidden": {
+      "manifest_must_not_reference": [
+        "ad2ef4fae785debedf5e50932a79bda97869d3efc212f53d48ccb04c59e25d21",
+        "cd764ae869b8a55526e283dd133e1940896b428839c6abf2e55d6ae2a0b32635"
+      ],
+      "must_not_exist": "large_artifacts/qwen35_4b_count_dont_walk_enumeration/lineage_root",
+      "verified_at_receipt_time": true
+    },
+    "framing": "the single-kind count-don't-walk dose trained onto the CLEAN lineage: every training stage of the final model — six zero-root stages + this cell's dose as stage 7 — is documented, receipted, and contamination-free; NO undocumented root exists anywhere in the lineage",
+    "package": {
+      "datasets": {
+        "stage01_replay_refresh.jsonl": {
+          "rows": 1520,
+          "sha256": "5d5d7c4b8a4b0a4f270fe8b2ecaebe356c771948d71b0f7bbeead6bfc04308b6"
+        },
+        "stage02_designed160.jsonl": {
+          "rows": 1520,
+          "sha256": "5159cf41b6474bdc8640cdb2a4a168587b59232ca8171c7b7057fc6bfe1b40c8"
+        },
+        "stage03_close_xi__targeted_standard.jsonl": {
+          "rows": 320,
+          "sha256": "12fc613bb31a46bcea9acd49b26467656704aa3b3418dab8d920adf057d14f00"
+        },
+        "stage04_replay_after_close.jsonl": {
+          "rows": 320,
+          "sha256": "541805df2d817707c1e76213e50c8f08fd9caff10d0a3887e1196424b6820be6"
+        },
+        "stage05_designed_fresh.jsonl": {
+          "rows": 1520,
+          "sha256": "6d4dc303bc159c19a1ffd0c60ca7d08ea64b02909366701b345d888482d67f3f"
+        },
+        "stage06_hygiene_explore.jsonl": {
+          "rows": 1520,
+          "sha256": "82aa1a78c0a429a48c3db6b94ac84397cea001b041477e7b137b38c21354112f"
+        }
+      },
+      "manifest": "experiments/qwen35_4b_count_dont_walk_enumeration/data/lineage/lineage_manifest.json",
+      "manifest_sha256": "31174f0c845f081ba226ceb69ce1e5546b6421ff664903c0fc5ae6cfd32af0d7",
+      "provenance_receipts": {
+        "merge.json": "e906caea7c4b86f4a3eacb96affb7cc2fa9b7cc11e11b634b651cabc5dd01d2b",
+        "stage01_replay_refresh.json": "9fcb4521c2cd7f90a3325a09000ae0766f3a5b7e6f5042cf3ba177a4f6816b53",
+        "stage02_designed160.json": "fac2a348dd1608f82657bc3b0b01491da6a5c7938aa466fa6e9e7979c446cd74",
+        "stage03_close_xi.json": "0bb04493a11c6db879448c61b36f53add0774f4277b9051e3d997cd61f1b0854",
+        "stage04_replay_after_close.json": "94eac7ac9cf0295515a182fe5c4004a5c24fe798bfab252f70b00ae4ead4d6bd",
+        "stage05_designed_fresh.json": "6a7c94dfa0423af9ac15f52a4954885bfbe171bce707d76186ce33e3b7d73f05",
+        "stage06_hygiene_explore.json": "c5d85cf46bfb99b42eaa6d6a965c6e983512c7544da40de4a15c1159ff6fda48"
+      },
+      "rebuild_script": "scripts/rebuild_clean_chain.py",
+      "trainers": {
+        "lineage_trainers/train_think_close_stage3.py": "10b4914cdc6c24858a77750f4ab64074fae5cbf36d98f3e4fc26b8958068fb14",
+        "lineage_trainers/train_think_stage12.py": "400e4b856a5899db8805510c9f6d8d11da76b35cf30af16856b46f41abdb4e54",
+        "lineage_trainers/train_think_stage456.py": "0cfb126feae6d73238c02362066229fff0b6a846625eed167d7681edde322cc4",
+        "merge_adapter.py": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672"
+      }
+    }
+  },
+  "code": {
+    "corpus_builder_sha256": "a8d88e37eddf35d043326d201305adb0d3e8c5007d8c541b52c3e36724bfb1e3",
+    "count_walk_curriculum_generator_sha256": "425b3ec981b7a7d9a5bce5dc672652d1010e83d0449a165b2487caeb235df7b1",
+    "curriculum_generator_sha256": "70fc722a6a69f4f8a64ae4356058421ea44117c7e86d3350abfd72b047ccf080",
+    "feedloop_machinery_sha256": "91e55cc3322ac787aa1fdf24aaf114e4b9acbac963ee6af1f4471228bf7bed2a",
+    "rebuild_script_sha256": "89d0253f2580c0f39c23805464c0e41b8870492c41f63110e6f971488dd4a7b3",
+    "trainer_sha256": "e0eca2a230dae5d109d418dcb4cc19af05882a770af14350ffd741a8d5e90f01",
+    "vendored_merger_sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672"
+  },
+  "corpora": {
+    "banned_vocabulary": {
+      "base_inventory": "gen_feedloop_curriculum.BANNED_PROMPT_TOKENS",
+      "case_insensitive": true,
+      "checked_by_generator": true,
+      "feedloop_inventory_tokens": 261,
+      "sha256": "f3aa05d51700b38817c2358dfd08008970325b5ce0d6f667a08535da8ebd1fce",
+      "tokens": 261
+    },
+    "manifest_sha256": "4343251285ca9f4688cde77a98c956376e2ca38e169cfd5d33ec5a5d34dd3820",
+    "replay": {
+      "inheritance": {
+        "byte_identical_to_every_predecessor_copy": true
+      },
+      "path": "data/sft_blend.jsonl",
+      "rows": 2240,
+      "sha256": "25a9595f2e70e4d5cab0a730f0e2613d314843f2a5dfe96187bc30d5d2abf0c2"
+    },
+    "treatment": {
+      "balance": {
+        "count_walk_formalisms": {
+          "balesled": 20,
+          "barrowyoke": 20,
+          "crankwheel": 20,
+          "millround": 20,
+          "sigilslate": 20,
+          "skeinreel": 20,
+          "trinketcord": 20,
+          "troughline": 20
+        },
+        "episode_success_turns_counts": {
+          "10": 1,
+          "100": 1,
+          "105": 1,
+          "11": 7,
+          "12": 5,
+          "123": 1,
+          "124": 1,
+          "125": 1,
+          "13": 5,
+          "14": 6,
+          "15": 6,
+          "16": 4,
+          "17": 8,
+          "18": 5,
+          "19": 5,
+          "2": 1,
+          "20": 4,
+          "21": 3,
+          "22": 3,
+          "23": 3,
+          "24": 2,
+          "25": 1,
+          "27": 1,
+          "28": 5,
+          "29": 3,
+          "3": 2,
+          "30": 2,
+          "31": 1,
+          "32": 1,
+          "33": 4,
+          "34": 2,
+          "35": 4,
+          "37": 2,
+          "39": 2,
+          "4": 1,
+          "40": 2,
+          "41": 1,
+          "43": 2,
+          "44": 1,
+          "45": 1,
+          "47": 2,
+          "49": 1,
+          "5": 5,
+          "50": 1,
+          "51": 2,
+          "57": 1,
+          "58": 2,
+          "6": 2,
+          "60": 3,
+          "62": 1,
+          "63": 2,
+          "64": 1,
+          "65": 2,
+          "66": 1,
+          "68": 1,
+          "69": 1,
+          "7": 2,
+          "74": 1,
+          "75": 2,
+          "77": 1,
+          "78": 1,
+          "8": 3,
+          "82": 1,
+          "85": 1,
+          "88": 1,
+          "89": 1,
+          "9": 4,
+          "90": 1,
+          "95": 2
+        },
+        "k_cycle": [
+          0,
+          1,
+          3,
+          6,
+          10
+        ],
+        "k_tried_by_formalism": {
+          "balesled": {
+            "0": 4,
+            "1": 4,
+            "10": 4,
+            "3": 4,
+            "6": 4
+          },
+          "barrowyoke": {
+            "0": 4,
+            "1": 4,
+            "10": 4,
+            "3": 4,
+            "6": 4
+          },
+          "crankwheel": {
+            "0": 4,
+            "1": 4,
+            "10": 4,
+            "3": 4,
+            "6": 4
+          },
+          "millround": {
+            "0": 4,
+            "1": 4,
+            "10": 4,
+            "3": 4,
+            "6": 4
+          },
+          "sigilslate": {
+            "0": 4,
+            "1": 4,
+            "10": 4,
+            "3": 4,
+            "6": 4
+          },
+          "skeinreel": {
+            "0": 4,
+            "1": 4,
+            "10": 4,
+            "3": 4,
+            "6": 4
+          },
+          "trinketcord": {
+            "0": 4,
+            "1": 4,
+            "10": 4,
+            "3": 4,
+            "6": 4
+          },
+          "troughline": {
+            "0": 4,
+            "1": 4,
+            "10": 4,
+            "3": 4,
+            "6": 4
+          }
+        },
+        "k_tried_counts": {
+          "0": 32,
+          "1": 32,
+          "10": 32,
+          "3": 32,
+          "6": 32
+        },
+        "target_is_true_fix_rows": 2
+      },
+      "kinds": {
+        "u_count_walk": 160
+      },
+      "path": "data/sft_count_walk.jsonl",
+      "provenance": {
+        "builder": "scripts/build_corpus.py",
+        "canonical_order_statement": "Single-step changes are worked through in one frozen order: first by step number, lowest first; within a step, by the changed-to action's position in the numbered action list, top to bottom; a change never leaves the step as already written.",
+        "construction_seed": 77191,
+        "generator": "scripts/gen_count_walk_curriculum.py",
+        "k_cycle": [
+          0,
+          1,
+          3,
+          6,
+          10
+        ],
+        "machinery": "byte-identical copy of the menders dose-scale cell's reviewed feedloop generator (machinery imported, never forked); the LESSON changes completely — systematic enumeration, not eliminative inference",
+        "per_row_verification": "exhaustive re-derivation over the full single-step candidate space: the target IS the canonical-next untried legal candidate; exactly ONE candidate repairs both trials; every tried entry is legal, canonically ordered (the canonical prefix), and genuinely failing (each re-simulated against both trials); the rendered per-step ranges equal the enumeration range by range; the think target IS the frozen five-line compact computation under the frozen budget",
+        "policy": "fresh_designed_single_kind_count_walk_corpus"
+      },
+      "rows": 160,
+      "sha256": "21e6f5cb705f447f7a4dfc9bff24673f798f48df312b99a6cf686505855ee096",
+      "surfaces": {
+        "balesled": 20,
+        "barrowyoke": 20,
+        "crankwheel": 20,
+        "millround": 20,
+        "sigilslate": 20,
+        "skeinreel": 20,
+        "trinketcord": 20,
+        "troughline": 20
+      }
+    }
+  },
+  "experiment_id": "qwen35_4b_count_dont_walk_enumeration",
+  "firewall": {
+    "aggregate_seed_sealed": true,
+    "benchmark_data_read": false,
+    "benchmark_gateway_exposed": false
+  },
+  "local_gate": {
+    "answer_normalization": {
+      "applied_to": "both the parsed and the expected answer, every arm, the axis holdout and all three retention screens",
+      "definition": "re.sub(r'\\s+', ' ', s).strip(), then re.sub(r'\\s*>\\s*', '>', s), then re.sub(r'\\s*;\\s*', ';', s)",
+      "function": "check_local.normalize_answer",
+      "prospective": true,
+      "rationale": "21 correct-but-rejected whitespace rows across the three prior gate events (seeds 88014/88015/88016), recorded in experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/analysis/three_event_failure_forensics.md; unchanged since the seed-88021 gate"
+    },
+    "arms": [
+      "zero_root_parent",
+      "replay_ctl7",
+      "count_walk"
+    ],
+    "instruments": {
+      "axis_holdout": {
+        "fresh_instances_from_this_cells_generator": true,
+        "generator": "scripts/gen_count_walk_curriculum.py",
+        "kinds": {
+          "u_count_walk": 40
+        },
+        "per_formalism": 5,
+        "rows": 40,
+        "same_invariants_as_the_treatment": true
+      },
+      "retention": {
+        "adjudication": "pooled_k3",
+        "generator": "scripts/gen_curriculum.py",
+        "per_kind": 8,
+        "rows_per_screen": 104,
+        "screens": 3,
+        "skills": 13
+      }
+    },
+    "mechanism_readings": {
+      "enumeration_fidelity": "at eval time every axis row records three booleans about the model's proposed candidate — legal, untried, canonical-next — a mechanism decomposition beyond raw correctness, summarized per arm; never gated",
+      "episode_success_simulation": "for each holdout row's underlying broken machine the generator computes ANALYTICALLY (no model) the number of turns a PERFECT canonical enumerator needs — the canonical index of the unique both-trials fix plus one — and the local design receipt records the distribution; never gated",
+      "expression_cost": "NEW, the reading this lineage owes after the reference cell's truncation forensics: per-arm think-token-length distribution over the 40 axis rows (min/median/mean/max of n_thinking_tokens) plus the truncation count, summarized by check_local.py; a count-don't-walk install should show short, k-independent thinking and zero truncations; never gated"
+    },
+    "promotion": {
+      "axis_total_strictly_beats_parent_and_replay": true,
+      "bands_evaluated_on_pooled_sums_times_screens": true,
+      "bands_on_pooled_means_not_per_screen": true,
+      "no_absolute_per_kind_floors": true,
+      "per_surface_reported_not_gated": true,
+      "retention_pooled_cap_contact_band": 3,
+      "retention_pooled_correct_band": 5,
+      "retention_pooled_parsed_band": 3,
+      "single_kind_no_per_kind_split": true,
+      "ties_fail": true
+    },
+    "rows_per_arm": 352,
+    "screen_seeds": [
+      88057,
+      88058,
+      88059
+    ],
+    "seed": 88056
+  },
+  "mechanism_statement": "lifecycle 26 (the enumerative-repair cell) proved the enumeration DISCIPLINE installs: 9/40 canonical-next on the axis holdout versus BOTH controls at exactly 0/40 — the program's starkest mechanism contrast. Its committed truncation forensics showed the failure was EXPRESSION COST, not discipline: 20 of 21 unparseable gate rows were 1,024-token cap truncations caught mid-CORRECT walk, a token cost that grows with the tried-list depth k. This cell changes ONLY the expression pedagogy: COUNT, DON'T WALK — the tried list has k entries in canonical order, so the target is entry k+1 of the frozen order; the prompt renders the per-step candidate ranges and the think target is a fixed-shape five-line index computation (count -> k+1 -> range lookup -> slot offset -> emit), constant token cost in k, under a frozen think length budget verified with the real tokenizer. Same machinery, same invariants, same gate, same frozen menders consequences — one designed delta",
+  "model": {
+    "calls": 0,
+    "id": "Qwen/Qwen3.5-4B",
+    "loaded": false,
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+  },
+  "parent": {
+    "arm": "zero_root_hygiene_explore",
+    "committed_lineage_merge_receipt_sha256": "e906caea7c4b86f4a3eacb96affb7cc2fa9b7cc11e11b634b651cabc5dd01d2b",
+    "deployment": "explicit_merged_composite",
+    "eval_label": "zero_root_parent",
+    "experiment": "qwen35_4b_zero_root_lineage_rebuild",
+    "inner_merge_receipt_sha256": "f8981f4638d901471eb41aff0ffd0bfac88aebd6e3e4d4db1e1c733be16709c0",
+    "lineage_adapter_receipt_pins": {
+      "config_sha256": "ffd5ef97871e98190b2474dabeb7ef865d13d0615d50d6f130e8a0aacd1c919a",
+      "weights_sha256": "627c8df24937214afa51306d1435bf419d11d5c3406ef5782e2ed5be4fee7926"
+    },
+    "provenance_copy": "data/lineage/provenance/merge.json",
+    "runtime_lora_forbidden": true,
+    "training_base_via_model_path": true,
+    "tree_sha256": "414f582950bf60fed2fe462cd141ab98d0f772087b4f9c6bc5aa12f03f379e7d",
+    "weights_sha256": "6e9aad251465ca2713fda0238a34aa9f46262053860b867f80189d65c9ee3932",
+    "weights_size_bytes": 9078620536
+  },
+  "run_benchmark_normalized_pin": {
+    "call_site_contracts_are_belt_and_braces_only": true,
+    "call_site_contracts_retained": [
+      "        require_todo_pins_filled()",
+      "        require_verdict(BENCH_REVIEW, BENCH_VERDICT, \"benchmark design review\")",
+      "        promotion = authenticate_local_promotion(args.candidate)",
+      "        require_clean_pushed_main(",
+      "        require_unconsumed_ledger(LEDGER, opened_record, args.resume)",
+      "        require_zero_root_parent_provenance(model)"
+    ],
+    "file": "scripts/run_benchmark.py",
+    "mechanism": "NORMALIZED-HASH code pin (lifecycle 22's mechanism): the six trained-arm pin VALUE slots (None pre-fill, the quoted 64-hex post-fill) are canonicalized to the fixed placeholder and the sha256 of the canonicalized bytes is frozen — every byte outside those slots, every guard call site included, is byte-frozen pre- and post-fill and re-checked on every --check, including at the seed-consuming boundary",
+    "normalization_rule": {
+      "fail_closed_on_slot_count_mismatch": true,
+      "placeholder": "__COUNT_WALK_TODO_PIN__",
+      "slots": [
+        {
+          "name": "replay_ctl7_tree_and_weights_dict_entries",
+          "pattern": "^(    \"replay_ctl7\": )(None|\"[0-9a-f]{64}\")(,)$",
+          "required_matches": 2
+        },
+        {
+          "name": "count_walk_tree_and_weights_dict_entries",
+          "pattern": "^(    \"count_walk\": )(None|\"[0-9a-f]{64}\")(,)$",
+          "required_matches": 2
+        },
+        {
+          "name": "replay_ctl7_merge_receipt_constant",
+          "pattern": "^(REPLAY_CTL7_MERGE_RECEIPT_SHA256 = )(None|\"[0-9a-f]{64}\")$",
+          "required_matches": 1
+        },
+        {
+          "name": "count_walk_merge_receipt_constant",
+          "pattern": "^(COUNT_WALK_MERGE_RECEIPT_SHA256 = )(None|\"[0-9a-f]{64}\")$",
+          "required_matches": 1
+        }
+      ],
+      "value_group": 2
+    },
+    "run_benchmark_normalized_sha256": "bc2b4129f782c168e41f4af00f9f13e5a5273b3aeb5d877b93e8690e45e56616"
+  },
+  "schema_version": 1,
+  "seeds": {
+    "aggregate_sealed": 78163,
+    "construction": 77191,
+    "local_gate": 88056,
+    "retention_screens": [
+      88057,
+      88058,
+      88059
+    ],
+    "seed_freshness": {
+      "known_taken_nearby": {
+        "88043": "taken as the retention seed of qwen35_4b_counterfactual_plan_reflection_transfer (documented since lifecycle 23)",
+        "88047": "taken as the reflection seed of qwen35_4b_counterfactual_plan_reflection_transfer",
+        "88049": "taken as the action seed of qwen35_4b_counterfactual_plan_reflection_transfer"
+      },
+      "pinned": [
+        77191,
+        55171,
+        85,
+        88056,
+        88057,
+        88058,
+        88059,
+        78163
+      ],
+      "rule_if_collision": "next free integer, recorded here",
+      "substitution_required": false,
+      "verified": "77191/55171/88056/88057/88058/88059/78163 verified grep-fresh in seed contexts across experiments/, knowledge/, research_programs/, scripts/, configs/, and docs/ at design time (every raw numeric hit is a sha256 or float substring, never a seed); the training seed required ONE next-free substitution: 84 (the next integer after the reference cell's 83) is TAKEN as a task seed of qwen35_4b_hypothesize_verify_wall (eval string d3) and appears in qwen35_4b_meta_induction per-row data fields, so the frozen training seed is 85 — zero seed-context hits anywhere in the repo (paired-trial training-seed sequence 67, 71, 73, 79, 83, 85)"
+    },
+    "stream_slot_matching_namespace": 55171,
+    "training": 85
+  },
+  "stage": "count_walk_protocol_design",
+  "stream_geometry": {
+    "blocks": {
+      "count_walk": {
+        "replay_filler_rows": 80,
+        "treatment_rows": 160
+      },
+      "replay_ctl7": {
+        "replay_rows": 240
+      }
+    },
+    "blocks_and_core_pairwise_disjoint_replay_indices": true,
+    "core_stratified_by": [
+      "family",
+      "kind"
+    ],
+    "exact_match_axes": [
+      "forward",
+      "nonzero_target",
+      "absolute_loss_mass_x5"
+    ],
+    "match_limit": 0,
+    "rows_per_arm": 1520,
+    "shared_core_replay_rows": 1280,
+    "slot_order_seed": 55171,
+    "solver": {
+      "backend": "highs",
+      "filler_and_control_solved_jointly": true,
+      "method": "scipy.optimize.milp",
+      "mip_rel_gap": 0,
+      "time_limit_seconds": 600
+    },
+    "variable_block_rows": 240
+  },
+  "training_plan": {
+    "alpha": 64,
+    "batch_size": 1,
+    "epochs": 1,
+    "fresh_adapter": true,
+    "grad_accum": 8,
+    "lr": 1e-05,
+    "max_length": 4096,
+    "model_path_base_composite": {
+      "path": "large_artifacts/qwen35_4b_zero_root_lineage_rebuild/merged/zero_root_hygiene_explore",
+      "tree_sha256": "414f582950bf60fed2fe462cd141ab98d0f772087b4f9c6bc5aa12f03f379e7d",
+      "weights_sha256": "6e9aad251465ca2713fda0238a34aa9f46262053860b867f80189d65c9ee3932"
+    },
+    "optimizer_steps": 190,
+    "rank": 32,
+    "required_before_training": [
+      "committed exact three-axis stream token receipt",
+      "second adversarial compute review with PASS_CONTROL_TRAINING"
+    ],
+    "rows_per_arm": 1520,
+    "seed": 85,
+    "training_authorized": false,
+    "w_close": 0.2,
+    "w_think": 0.2,
+    "warm_start": null,
+    "zero_skipped_rows_required": true
+  }
+}

@@ -1,0 +1,45 @@
+experiment_id: qwen35_4b_count_dont_walk_enumeration
+status: designed (model-free construction frozen; GPU stages pending review)
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+parent: zero_root_hygiene_explore composite (tree 414f5829..., lifecycle 22)
+arms: [replay_ctl7, count_walk]
+treatment: fresh 160-row single-kind count-don't-walk corpus (21e6f5cb...; 160 u_count_walk, 20 per formalism across all eight reused machine formalisms)
+machinery: byte-identical copy of the menders dose-scale feedloop generator (machinery imported, never forked); task shape byte-equivalent to the enumerative-repair reference cell (lifecycle 26); ONLY the expression pedagogy changes — count-don't-walk index arithmetic, never a walk
+evidence: experiments/qwen35_4b_enumerative_repair_protocol/analysis/truncation_forensics.md — the discipline installed (9/40 vs 0/40) but expressed as a verbose linear walk; 20 of 21 unparseable gate rows were 1,024-token cap truncations mid-correct-walk
+expression_contract:
+  think_shape: fixed five-line compact computation (count -> k+1 -> range lookup -> slot offset -> emit), identical structure in every row, constant token cost in k
+  think_token_cap: 120 (real Qwen tokens per think span, fail-closed in measure_source_tokens.py; measured max 105, mean 95.8)
+  think_char_cap: 380
+  order_statement: byte-identical rule text + rendered per-step candidate counts, verified against the exhaustive enumeration exactly
+seeds:
+  construction: 77191
+  namespace: 55171
+  training: 85
+  axis_gate: 88056
+  retention_screens: [88057, 88058, 88059]
+  known_taken_nearby:
+    88043: taken by qwen35_4b_counterfactual_plan_reflection_transfer (retention)
+    88047: taken by qwen35_4b_counterfactual_plan_reflection_transfer (reflection)
+    88049: taken by qwen35_4b_counterfactual_plan_reflection_transfer (action)
+    88052-88055: taken by qwen35_4b_enumerative_repair_protocol (gate + screens); everything <= 88055 known-taken
+    84: taken by qwen35_4b_hypothesize_verify_wall (task seed) -> training seed substituted to the next free integer 85 (recorded)
+  aggregate_sealed: 78163
+retention_protocol: pooled_k3
+promotion: single-kind — candidate axis total strictly > parent AND > replay_ctl7 (ties fail); pooled retention bands (-15/+9/-9 sums) vs both controls; no per-kind split exists
+mechanism_readings_non_gating:
+  episode_success_simulation: analytic perfect-enumerator turn counts per holdout row (design receipt) — holdout mean 27.1 turns from scratch (median 20.5, max 78; 80.0% > 10), treatment mean 32.6 (median 22, max 125; 86.9% > 10)
+  enumeration_fidelity: per-axis-row legal/untried/canonical-next booleans (eval receipt); feeds the frozen zero-draw scoping
+  expression_cost: NEW — per-arm think-token-length distribution on the axis rows + truncation count (eval receipt); the reading owed after the reference cell's truncation forensics
+conditional_benchmark: {tier: medium, think_budget: 1024, reading: menders}
+menders_frozen_consequences_ordered:
+  1_mechanism_answer: any candidate menders > 0 where the controls sit at 0 (takes precedence)
+  2_turn_budget_scoped: menders 0 WITH fidelity precondition (promoted AND holdout canonical-next rate >= 0.50 AND strictly above both controls) — protocol-install mechanism NOT refuted; the pure-enumeration route at the family's actual budget closes
+  3_failed_on_its_own_terms: menders 0 WITHOUT the precondition
+  no_third_state_for_the_zero_draw: true
+  provenance: inherited verbatim in structure from the reference cell's reviewed frozen contract; the quoted simulation numbers are this cell's own, computed pre-freeze and model-free
+clean_chain:
+  stages: 7
+  package: data/lineage/
+  blend_root: forbidden everywhere (fail-closed)
