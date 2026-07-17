@@ -118,10 +118,10 @@ FROZEN_TREE_SHA256: dict[str, str | None] = {
     # TODO-PIN(post-merge): runs/merges/replay_ctl7.json -> output_tree_sha256.
     # Fill by replacing None with the quoted 64-hex ON THIS LINE; the design
     # receipt's normalized-hash pin canonicalizes only this value.
-    "replay_ctl7": None,
+    "replay_ctl7": "044a4599ac5264e00256f66f65215ea497d3631d8aebd3467b698253648e484a",
     # TODO-PIN(post-merge): runs/merges/count_walk.json ->
     # output_tree_sha256. Fill ON THIS LINE only.
-    "count_walk": None,
+    "count_walk": "d5fdc55c0238ffbe2465bd73a5f9d63f442ad4083ff9eb477c9887e15e3da6b1",
 }
 FROZEN_WEIGHTS_SHA256: dict[str, str | None] = {
     "base": "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db",
@@ -130,19 +130,19 @@ FROZEN_WEIGHTS_SHA256: dict[str, str | None] = {
     ),
     # TODO-PIN(post-merge): runs/merges/replay_ctl7.json weight sha256.
     # Fill by replacing None with the quoted 64-hex ON THIS LINE.
-    "replay_ctl7": None,
+    "replay_ctl7": "c5035b4db47e4da582a805ca009747a5618ef5badc35d960ca216e586dd3ab9d",
     # TODO-PIN(post-merge): runs/merges/count_walk.json weight sha256.
     # Fill by replacing None with the quoted 64-hex ON THIS LINE.
-    "count_walk": None,
+    "count_walk": "ddd7bc4b5b8f4f2393996148bcb1b411a8be4d7f03430babe789b3534b9850a3",
 }
 WEIGHTS_SIZE_BYTES = 9_078_620_536
 # TODO-PIN(post-merge): sha256 of the COMMITTED runs/merges/replay_ctl7.json.
 # Fill by replacing None with the quoted 64-hex ON THIS LINE; the design
 # receipt's normalized-hash pin canonicalizes only this value.
-REPLAY_CTL7_MERGE_RECEIPT_SHA256 = None
+REPLAY_CTL7_MERGE_RECEIPT_SHA256 = "3f65b4c6f4a8b0574a574a89d417c174c3762de6f93508bed8a5a987b91e224c"
 # TODO-PIN(post-merge): sha256 of the COMMITTED
 # runs/merges/count_walk.json. Fill ON THIS LINE only.
-COUNT_WALK_MERGE_RECEIPT_SHA256 = None
+COUNT_WALK_MERGE_RECEIPT_SHA256 = "840edca0638b9e291bb34fde28b4b530df8743faf9b7b18b7f2358ce55ec4c36"
 # The two trained arms carry committed receipts in this experiment (their
 # shas are the two slot constants above); the zero-root parent is
 # authenticated against lifecycle 22's committed lineage merge receipt via
