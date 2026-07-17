@@ -310,6 +310,16 @@
   local-install→family conversion, and hygiene_explore_parent recorded
   the FIRST 10/10 all-families goal-gate pass (menders 0.017, warren
   0.150 vs 0.100 — single-item margins). One seed ≠ a claim.
+- Completed enumerative-repair (FAILED_ON_ITS_OWN_TERMS):
+  `qwen35_4b_enumerative_repair_protocol` — the discipline INSTALLED at
+  the program's starkest contrast (9/40 canonical-next vs 0/40 for both
+  controls; bottleneck = long-prompt answer formatting, parseable 19/40;
+  ordering 56% once legal-untried) but at 22.5% fidelity below the frozen
+  0.50 precondition, and did not convert at sealed 78162 (candidate
+  menders 0.0; the untrained replay control drew 0.1; pilot lost to both
+  controls). The pure-enumeration SFT route closes at this dose on its
+  own preregistered terms. Install-vs-conversion hardens; protocols 5/5
+  on installs. A formatting-targeted variant needs new evidence.
 - Completed clean gym-mix (NOT_PROMOTED — mixture dilution):
   `qwen35_4b_clean_gym_mix_dose` — 15/40 below both controls on its own
   holdout, no kind won, retention in-band (inert). Design rule hardened:

@@ -3136,35 +3136,42 @@
    ]
   },
   "qwen35_4b_enumerative_repair_protocol": {
-   "verdict_tag": "Design frozen: teach the model to enumerate fixes, not to guess them",
+   "verdict_tag": "The discipline installed — untrained models score zero at it — but it didn't reach the benchmark",
    "concept_primer": "One benchmark family — fix-the-broken-procedure episodes — has resisted every teaching attempt. All of those attempts taught the same thing: look at the evidence and INFER which step is wrong. That skill never installed at any dose. But two things the project has proven do work: this model is good at brute-force-style stepping, and it reliably learns turn-by-turn protocols. The family's episodes also give free feedback after every proposed fix. So this experiment teaches the opposite of cleverness: work through every legal one-step change in a fixed, documented order, skip the ones already tried, and propose the next one — letting the episode's own feedback find the winner.",
    "plain_question": "Can 160 lessons teach the model to propose candidate fixes one at a time in a fixed order — and does that discipline finally score on the fix-it benchmark family?",
-   "plain_answer": "Design frozen; the model has not been trained yet. Everything checkable without a GPU is done and green: the 160 lessons regenerate byte-identically and every one is machine-verified (the asked-for next candidate really is the next untried legal one-step change in the documented order, exactly one candidate fixes both example runs, and every already-tried candidate really fails); the two training streams are token-for-token exposure-matched with zero delta; the fresh exam and the three forgetting screens are frozen with zero row overlap against all 76 predecessor datasets; and two extra instruments are preregistered as readings, not gates — how many turns a perfect enumerator would need per exam episode, and per-proposal quality booleans (legal? untried? in-order?) that will say WHICH part of the discipline installed. The benchmark seed stays sealed unless the trained model beats both comparison models on its own exam.",
+   "plain_answer": "A split with the sharpest teaching contrast yet. On the fresh exam, the trained model produced the next-in-order untried candidate on 9 of 40 puzzles while BOTH untrained comparison models scored exactly zero — nobody does systematic enumeration without being taught it. But 9 of 40 (22.5%) fell short of the 50% bar the plan froze in advance for claiming the skill was solidly installed, and at the sealed benchmark the debugging family stayed at zero for the trained model — while, in a twist, the untrained control lucked into one item. By the pre-written rule the verdict is failed-on-its-own-terms: this teaching route closes at this dose. The diagnosis is precise, though: half the exam answers never even parsed (the long prompts break the answer format), and where the model got a legal untried candidate out, its ordering was right 56% of the time — the discipline half-took; the plumbing failed first.",
    "why_it_matters": "This is the last family where the fully documented model scores nothing. If a taught enumeration routine converts, the walled inference skill was never needed — search discipline plus environment feedback substitutes for insight, which would be a new installable mechanism class. If it installs on its own exam but still scores zero on the family, the wall moves to episode integration, and the per-proposal quality readout (legal? untried? in-order?) says exactly which piece failed.",
-   "verdict_tone": "pending",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Dose",
-     "value": "160 rows",
-     "sub": "one kind, full concentration (per the dilution rule)"
+     "label": "Install contrast",
+     "value": "9/40 vs 0/40",
+     "sub": "trained vs both untrained controls"
     },
     {
-     "label": "Tried-list depths",
-     "value": "k = 0-10",
-     "sub": "first-candidate through deep-in-the-list rows"
+     "label": "Fidelity vs frozen bar",
+     "value": "22.5% < 50%",
+     "sub": "the pre-set threshold not met"
     },
     {
-     "label": "Overlap audit",
-     "value": "76 sources, 0 hits",
-     "sub": "row-level freshness vs every predecessor"
+     "label": "Benchmark family",
+     "value": "0.0",
+     "sub": "the untrained control drew 0.1"
     },
     {
-     "label": "Benchmark seeds spent",
-     "value": "0",
-     "sub": "sealed 78,162 stays sealed until promotion"
+     "label": "The bottleneck",
+     "value": "parsing",
+     "sub": "19/40 answers parseable on long prompts"
     }
    ],
-   "charts": []
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "The fidelity cascade: where the taught discipline leaks",
+     "chart_read": "Four bars per model: answers that parsed, were legal, were untried, and were exactly next-in-order.",
+     "chart_takeaway": "The untrained models are at or near zero on every tier; the trained model leaks half its attempts at the parsing step, then orders correctly 56% of the time."
+    }
+   ]
   },
   "qwen35_4b_error_localization": {
    "verdict_tag": "Its confidence dips exactly where it first slipped",

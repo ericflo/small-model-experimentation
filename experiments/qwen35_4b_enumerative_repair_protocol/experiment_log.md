@@ -100,3 +100,19 @@ Created as a new experiment scaffold.
   (menders > 0, controls 0) takes precedence if it fires. Pins filled;
   the normalized hash held; PASS_BENCHMARK_EVENT granted; sealed 78,162
   opens at the next green checkpoint.
+
+## 2026-07-16 — The sealed event and closure
+
+- All four arms ran clean at 78,162. Aggregates 0.0882 / 0.3502 / 0.3502
+  / 0.3252 (base / parent / replay / candidate): pilot NOT promoted
+  (beat base only). The frozen menders rule fired
+  FAILED_ON_ITS_OWN_TERMS: candidate menders 0.0 with fidelity 22.5%
+  below the 0.50 precondition — and the replay control drew a menders
+  item (0.1), denying even the clean zero-contrast. The
+  pure-enumeration SFT route closes at this dose on its own
+  preregistered terms.
+- The mechanism ledger stays valuable: the install contrast (9/40 vs
+  0/40) is the program's starkest; the bottleneck is long-prompt answer
+  formatting (parseable 19/40), not the ordering discipline (56% once
+  legal-untried). Any successor needs new evidence per
+  calibrate-and-diverge; seed 78,162 spent.

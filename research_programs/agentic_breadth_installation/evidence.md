@@ -1419,3 +1419,31 @@ injection instruments need difficulty calibration before they can
 register installs. The retired prefix's three families remain open and
 now require three separate concentrated cells; the enumerative-repair
 dose (queued, single-kind by design) is unaffected and proceeds.
+
+## qwen35_4b_enumerative_repair_protocol (2026-07-16 — installed at the starkest contrast; failed on its own terms at the family)
+
+The anti-cleverness bet ran the full ladder clean. Local gate: PROMOTED
+with the program's starkest mechanism contrast — 9/40 canonical-next on
+fresh instances versus BOTH controls at exactly 0/40 (nobody enumerates
+systematically untrained), retention deep in-band. The fidelity cascade
+localizes the leak: parseable 19/40 (long-prompt answer formatting is
+the bottleneck), legal 18, untried 16, canonical-next 9 (56% ordering
+discipline once a legal untried candidate emerges).
+
+Sealed 78,162: pilot NOT promoted (0.3252 vs both controls at 0.3502;
+the dose cost ~0.025 aggregate). The frozen ordered menders rule —
+installed pre-event after the review caught one-sided consequences —
+fired FAILED_ON_ITS_OWN_TERMS: candidate menders 0.0 at 22.5% fidelity
+(below the frozen 0.50 precondition), and the untrained replay control
+drew a menders item (0.1), denying even the clean zero-contrast. The
+pure-enumeration SFT route closes at this dose on its own preregistered
+terms; a formatting-targeted variant requires new evidence per
+calibrate-and-diverge.
+
+Standing laws sharpened: (1) protocols install 5-for-5 — even this
+partially-installed discipline cleared strict bars against absolute-zero
+controls; (2) INSTALL≠CONVERSION hardens further — the wall between a
+locally-installed skill and a benchmark family stands even for the
+mechanism the corpus's own laws favored; (3) menders draws continue to
+land on arbitrary arms (the replay control this time), re-confirming
+draw-domination at this granularity.

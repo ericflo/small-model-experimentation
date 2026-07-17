@@ -1,6 +1,6 @@
 # Enumerative Repair Protocol
 
-**Status:** in-progress · since 2026-07-16 · model-free design frozen; GPU stages (train-control → train-candidate → merge-arms → local → benchmark) pending
+**Status:** finished · 2026-07-16 · verdict PILOT_NOT_PROMOTED + FAILED_ON_ITS_OWN_TERMS — the enumeration discipline INSTALLED (9/40 canonical-next vs both controls at 0/40, the program's starkest mechanism contrast) but at 22.5% fidelity (below the frozen 0.50 precondition) and did NOT convert (candidate menders 0.0 while the replay control drew 0.1; aggregate 0.3252 lost to both controls at 0.3502); per the preregistered ordered rule the pure-enumeration SFT route closes at this dose; seed 78,162 spent
 
 ## Research Program
 
@@ -141,11 +141,22 @@ Standalone lineage verification (no GPU) / full clean-chain rebuild (GPU):
 
 ## Results
 
-Pending the staged GPU runs.
+Local gate: PROMOTED — the starkest mechanism contrast recorded: enum_repair 9/40 canonical-next on fresh instances versus BOTH controls at exactly 0/40 (fidelity cascade: parseable 19/40, legal 18, untried 16, canonical-next 9 — the bottleneck is answer formatting on long prompts; ordering discipline 9/16 = 56% once legal-untried); retention 57.67 pooled vs 59.33/59.67, deep in-band.
+
+Sealed event at 78,162 (all arms authenticated; the normalized pin held through the fill):
+
+| arm | aggregate | menders | goal gate |
+|---|---|---|---|
+| base | 0.0882 | 0.000 | — |
+| zero_root_parent | 0.3502 | 0.000 | 8/10 (ties menders, rites) |
+| replay_ctl6 | 0.3502 | **0.100** | 8/10 (ties rites, sirens) |
+| enum_repair | 0.3252 | 0.000 | 7/10 (ties menders, sirens; loses rites) |
+
+Pilot: candidate > base only — NOT promoted. The frozen menders rule: candidate_nonzero false, controls_all_zero false (the replay control drew an item), fidelity 22.5% < the 0.50 precondition → **FAILED_ON_ITS_OWN_TERMS**: the pure-enumeration SFT route closes at this dose, on its own preregistered terms.
 
 ## Interpretation
 
-Pending results.
+Three readings. (1) The INSTALL is genuine and unprecedented in contrast: untrained models score literal zero at canonical-next enumeration and the dose lifted it to 9/40 — protocols remain the installable class (now 5-for-5 on installs). (2) The CONVERSION failed on its own terms: 22.5% local fidelity was too low to earn the budget-scoped reading, the family drew 0 for the candidate while the replay control (which trains nothing) drew an item — re-confirming that menders movement at this granularity remains draw-dominated for everything except a genuinely reliable installed skill, which this dose did not reach. (3) The identified bottleneck is upstream of the discipline: half the holdout rows never parsed into the answer format (long-prompt formatting), and where a legal untried candidate emerged the ordering was right 56% of the time. A formatting-targeted variant is a marginal iteration on a mechanism that just failed its preregistered terms — per calibrate-and-diverge it needs new evidence before funding, and the frozen consequence stands.
 
 ## Knowledgebase Update
 
