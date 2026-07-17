@@ -1,0 +1,83 @@
+{
+  "adapter": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_enumerative_repair_protocol/adapters/replay_ctl6",
+  "adapter_config_sha256": "0d9ba325ee471983858caff60951fd94e887222bbabe0c834eb031536870f65d",
+  "adapter_weights_sha256": "1a01af4158eca639eadc0374422ddb28f08c5860343ca8f6d97ddade01f79ed8",
+  "aggregate_seed_open": false,
+  "applied_lora_modules": 128,
+  "benchmark_data_read": false,
+  "command": [
+    "/home/ericflo/Development/small-model-experimentation/.venv/bin/python",
+    "-B",
+    "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_enumerative_repair_protocol/scripts/merge_adapter.py",
+    "--adapter",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_enumerative_repair_protocol/adapters/replay_ctl6",
+    "--out",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_enumerative_repair_protocol/merged/replay_ctl6",
+    "--base-model",
+    "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_zero_root_lineage_rebuild/merged/zero_root_hygiene_explore"
+  ],
+  "experiment_id": "qwen35_4b_enumerative_repair_protocol",
+  "local_design_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_enumerative_repair_protocol/data/local_design_receipt.json",
+  "local_design_receipt_sha256": "5eb2ccb0d90b71430137c525dbd4d68015c2458abee3bab05944030cb0952b26",
+  "log": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_enumerative_repair_protocol/runs/merges/replay_ctl6.log",
+  "log_sha256": "ca7655e878cd05ecfab271df3c3e205f401a158c93c356281fa522cda93683b7",
+  "merge_receipt_sha256": "cc761c07660db35f26a7d1c5103de2a3f72c4f3d987253cb727e1d82d7e447d4",
+  "merged": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_enumerative_repair_protocol/merged/replay_ctl6",
+  "merger": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_enumerative_repair_protocol/scripts/merge_adapter.py",
+  "merger_sha256": "cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "name": "replay_ctl6",
+  "nonzero_lora_modules": 128,
+  "output_files": [
+    {
+      "name": "chat_template.jinja",
+      "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+      "size": 7756
+    },
+    {
+      "name": "config.json",
+      "sha256": "a1c80f0efa6f83f631eaa9c25ffa166e3b1f9db395cc3b14374dfc0962261f60",
+      "size": 2829
+    },
+    {
+      "name": "generation_config.json",
+      "sha256": "0c46d8aa4f0ae5e611c961f70b87c83fb696043c1e319337708e96f882180de1",
+      "size": 116
+    },
+    {
+      "name": "merge_receipt.json",
+      "sha256": "cc761c07660db35f26a7d1c5103de2a3f72c4f3d987253cb727e1d82d7e447d4",
+      "size": 956
+    },
+    {
+      "name": "model.safetensors",
+      "sha256": "6ce03ffd39ee518780390d6c9410278e0d50334d615d3de18fb90cfeefdd26b2",
+      "size": 9078620536
+    },
+    {
+      "name": "tokenizer.json",
+      "sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+      "size": 19989325
+    },
+    {
+      "name": "tokenizer_config.json",
+      "sha256": "bee8eba30f0eb4af73c0fe2cd06d0f89b657d7819941c438157ec42f7c80ea87",
+      "size": 1123
+    }
+  ],
+  "output_tree_sha256": "0b034c1e91c7da83619c668ebcaf612ee907b1c3730f20638c5bd1a1a4cf4d9c",
+  "preflight_git_branch": "main",
+  "preflight_git_head": "a46d0c84d95957f7d441e99833b7f06db6a66662",
+  "preflight_git_status": "",
+  "preflight_origin_main": "a46d0c84d95957f7d441e99833b7f06db6a66662",
+  "schema_version": 2,
+  "training_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_enumerative_repair_protocol/runs/training/replay_ctl6.json",
+  "training_receipt_sha256": "d7813a36351f02403cf1d07315ed36f254d71d2ca560ae9808459cbf7c1bd8be",
+  "weight_files": [
+    {
+      "name": "model.safetensors",
+      "sha256": "6ce03ffd39ee518780390d6c9410278e0d50334d615d3de18fb90cfeefdd26b2"
+    }
+  ]
+}
