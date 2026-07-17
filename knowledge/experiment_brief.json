@@ -15048,6 +15048,37 @@
     }
    ],
    "charts": []
+  },
+  "qwen35_4b_state_track_install": {
+   "verdict_tag": "Design frozen: can a brand-new SKILL add where more replay could not? (sealed seed pending)",
+   "concept_primer": "The team has spent months building one model through a documented chain of training rounds, like coats of varnish: each round trains a small add-on on the current model and folds it in, and each round so far has raised the model's overall score on sealed exams. Two levers exist. The 'replay round' re-teaches the model its own accumulated review deck (nothing new) - and at the previous stage that lever finally STOPPED helping: on a model already saturated with its old notes, more review just shuffles strength between subjects. The other lever is to install a genuinely NEW skill from a freshly designed practice set. The one time the team did that (an enumeration skill) it added about three points. This round bets that a different NEW skill - keeping a running tally of several named counters as a list of update instructions is applied - still adds where replay is now stuck.",
+   "plain_question": "On the chain's best (and replay-saturated) model, does installing one brand-new skill - track 3-6 counters through a short list of updates, then answer a final-state question - raise the sealed-exam score without any subject collapsing, where simply re-teaching the old review deck stopped helping?",
+   "plain_answer": "Not measured yet - this is the frozen plan; no exam has been taken and no seed consumed. The bet: replay compounding just BOUNDED (a re-dose of the review deck dropped the score and tripped a guardrail), but a NEW skill is a different KIND of move, and the only prior new-skill dose beat its parent on 4 of 5 sealed exams by about +0.032. So the team designed a fresh 160-problem practice set for a divergent skill - state-tracking under declarative updates - that deliberately looks like NONE of the exam subjects or any prior practice set (checked by a banned-word audit and zero problem-overlap), trains one small add-on on it at seed 87, folds it in, and prices it on a single fresh sealed exam. Two outcomes are pre-registered with no third state. INSTALLED_TRANSFER: the new model beats the parent's aggregate and no subject falls more than one notch - the new-skill lever adds where replay is bounded, and this composite becomes the program's reference. BOUNDED: it does not beat the parent (or a subject collapses) - the skill installed locally but did not convert to held-out exam gains at this dose, which extends the 'install is not the same as convert' law to this skill. Honest pre-registered odds: about 30-40% INSTALLED_TRANSFER; BOUNDED is the modestly likelier call, because the parent is already the chain's best and the dose is a narrow single skill at just 20 optimizer steps. Either way the answer is a finding, not a re-roll.",
+   "why_it_matters": "The chain is the program's flagship: a fully documented, contamination-free recipe that turned a 0.08 base into a 0.36 model. Its cheapest lever (replay) just hit a ceiling. This one sealed exam tells the program whether the OTHER lever - installing a designed new skill - still raises the floor on a saturated parent, or whether the parent itself is tapped out and the next push needs a different parent or a bigger dose. That decision is worth one exam.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Parent (count_walk)",
+     "value": "0.357 mean",
+     "sub": "the chain's best arm - a hard baseline to beat"
+    },
+    {
+     "label": "P(INSTALLED_TRANSFER)",
+     "value": "0.30-0.40",
+     "sub": "honest pre-registered prior; BOUNDED modestly likelier"
+    },
+    {
+     "label": "New-skill precedent",
+     "value": "+0.032",
+     "sub": "the only prior new-skill dose (count_walk) beat its parent 4/5 draws"
+    },
+    {
+     "label": "Dose",
+     "value": "160 rows / 20 steps",
+     "sub": "single kind u_state_track, seed 87, contamination-audited"
+    }
+   ],
+   "charts": []
   }
  }
 }

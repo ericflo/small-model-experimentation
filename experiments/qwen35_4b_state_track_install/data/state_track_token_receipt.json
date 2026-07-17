@@ -1,0 +1,32 @@
+{
+  "boundary_skips": 0,
+  "corpus": {
+    "file": "data/sft_state_track.jsonl",
+    "rows": 160,
+    "sha256": "66a8d5bec184a8a9cba20c2ea088e0216ac4cdbd0820541ee310170eb386e3ab"
+  },
+  "encoder": "scripts/train_think.py:encode_row",
+  "encoder_sha256": "e0eca2a230dae5d109d418dcb4cc19af05882a770af14350ffd741a8d5e90f01",
+  "experiment_id": "qwen35_4b_state_track_install",
+  "hyperparameters": {
+    "max_length": 4096,
+    "w_close": 0.2,
+    "w_think": 0.2
+  },
+  "max_forward_tokens": 775,
+  "measured_on": "large_artifacts/qwen35_4b_count_dont_walk_enumeration/merged/count_walk (composite tokenizer, chat template, enable_thinking=True)",
+  "min_forward_tokens": 326,
+  "note": "max forward 775 tokens < max-length 4096, so zero rows truncate and zero encoder skips are expected and enforced by train_trial.py (skipped_rows==0, train_rows==160).",
+  "schema_version": 1,
+  "skipped_rows": 0,
+  "spans_per_epoch": {
+    "absolute_loss_mass_x5": 62350,
+    "answer_target": 968,
+    "close_target": 320,
+    "forward": 83919,
+    "nonzero_target": 58478,
+    "prompt": 25441,
+    "think_target": 57190
+  },
+  "zero_skip_guaranteed": true
+}

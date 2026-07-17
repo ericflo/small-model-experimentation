@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 287
-- Anchor-ready: 271
-- Human-authored READMEs: 274
+- Experiments: 288
+- Anchor-ready: 272
+- Human-authored READMEs: 275
 - Generated README stubs: 13
-- Primary reports: 286
-- Experiment logs: 190
-- Smoke commands: 155
-- Artifact manifests: 259
+- Primary reports: 287
+- Experiment logs: 191
+- Smoke commands: 156
+- Artifact manifests: 260
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 173 |
+| `documented-scripts` | 174 |
 | `scripts-undocumented` | 23 |
 | `source-or-analysis` | 53 |
 
@@ -193,6 +193,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_state_formation_branch_handoff_recovery`](../experiments/qwen35_4b_state_formation_branch_handoff_recovery/README.md) | benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_state_formation_branch_handoff_recovery/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_state_formation_branch_recovery`](../experiments/qwen35_4b_state_formation_branch_recovery/README.md) | benchmark_generalization, posttraining_and_adaptation, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_state_formation_branch_recovery/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_state_formation_capacity_adjudication`](../experiments/qwen35_4b_state_formation_capacity_adjudication/README.md) | evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_state_formation_capacity_adjudication/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
+| yes | [`qwen35_4b_state_track_install`](../experiments/qwen35_4b_state_track_install/README.md) | agentic_breadth_installation, benchmark_generalization, posttraining_and_adaptation, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_state_track_install/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen35_4b_statechain_only_dose`](../experiments/qwen35_4b_statechain_only_dose/README.md) | agentic_breadth_installation, algorithmic_memory_and_retrieval, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_statechain_only_dose/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen35_4b_static_bridge_ceiling_breaker`](../experiments/qwen35_4b_static_bridge_ceiling_breaker/README.md) | benchmark_generalization, evidence_conditioned_selection, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_static_bridge_ceiling_breaker/reports/qwen35_4b_static_bridge_ceiling_breaker_report.md) | no | `scripts-undocumented` | no | dataset, large-artifact | add-experiment-log, document-run-path, add-smoke-command |
 | no | [`qwen35_4b_strategy_token_diversity_lora`](../experiments/qwen35_4b_strategy_token_diversity_lora/README.md) | posttraining_and_adaptation, process_control_and_tool_use | `generated-stub` | [report](../experiments/qwen35_4b_strategy_token_diversity_lora/reports/final_report.md) | no | `documented-scripts` | no | run-data | replace-generated-readme, add-experiment-log, add-smoke-command |

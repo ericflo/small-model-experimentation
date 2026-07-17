@@ -1,0 +1,70 @@
+# Frozen configuration for the stage-9 state_track installation trial (lifecycle 30).
+# The load-bearing constants live in the scripts (fail-closed pins); this file
+# documents the frozen design for humans and the catalog.
+experiment_id: qwen35_4b_state_track_install
+lifecycle: 30
+chain_stage: 9
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+treatment:
+  arm: state_track
+  move_class: divergent_single_kind_skill_installation
+  training_data: data/sft_state_track.jsonl
+  training_data_sha256: 66a8d5bec184a8a9cba20c2ea088e0216ac4cdbd0820541ee310170eb386e3ab
+  rows: 160
+  kind: u_state_track
+  curriculum_generator: scripts/gen_state_track_curriculum.py
+  construction_seed: 87
+  seed: 87
+  recipe:
+    epochs: 1.0
+    lr: 1.0e-5
+    rank: 32
+    alpha: 64
+    batch_size: 1
+    grad_accum: 8
+    max_length: 4096
+    w_think: 0.2
+    w_close: 0.2
+    optimizer_steps: 20
+  trainer: scripts/train_think.py
+  trainer_sha256: e0eca2a230dae5d109d418dcb4cc19af05882a770af14350ffd741a8d5e90f01
+  token_exposure_receipt: data/state_track_token_receipt.json
+  max_forward_tokens: 775
+parent_composite:
+  label: count_walk
+  path: large_artifacts/qwen35_4b_count_dont_walk_enumeration/merged/count_walk
+  tree_sha256: d5fdc55c0238ffbe2465bd73a5f9d63f442ad4083ff9eb477c9887e15e3da6b1
+  weights_sha256: ddd7bc4b5b8f4f2393996148bcb1b411a8be4d7f03430babe789b3534b9850a3
+  committed_merge_receipt_sha256: 840edca0638b9e291bb34fde28b4b530df8743faf9b7b18b7f2358ce55ec4c36
+merge:
+  merger: scripts/merge_adapter.py
+  merger_sha256: cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672
+  output: large_artifacts/qwen35_4b_state_track_install/merged/state_track
+local_gate:
+  arms: [count_walk, state_track]
+  screen_seeds: [88063, 88064, 88065]
+  rows_per_screen: 104
+  protocol: pooled_k3
+  bands_two_sided: true
+  correct_band_pooled_mean: 5
+  parsed_band_pooled_mean: 3
+  cap_contact_band_pooled_mean: 3
+benchmark_event:
+  name: install
+  tier: medium
+  think_budget: 1024
+  seed: 78169
+  model_order: [base, count_walk, state_track]
+  gateway: scripts/run_benchmark_aggregate.py
+  gateway_sha256: 53cf6533dbd710eb167503363c39f73dbf7559a0d91f40a00436a3c218a01c17
+consequence:
+  states: [INSTALLED_TRANSFER, BOUNDED]
+  per_family_slack: 0.1
+  slack_epsilon: 1.0e-9
+  aggregate_tie_epsilon: 1.0e-12
+lineage_manifest_sha256: c05b0eb6c29d1e886f70795a26a1b2732c814f60f26b43fad0663a7060f53a89
+run_benchmark_normalized_sha256: 8e2d542056e48865ac099e56b220e53347cbd4848edcac5af2bf037f8b356e3b
+train_trial_normalized_sha256: 9396cff7ed73ef23959394d595d533239d489c7ecaf4ed9c51096452affea2eb
+eval_local_vllm_normalized_sha256: 8350c61a91501f73b8a18681c6f9b88dc6b83126b8228ccc2f70133d2434de48

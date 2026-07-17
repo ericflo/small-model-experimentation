@@ -50060,6 +50060,37 @@
      "source": "experiments/qwen35_4b_count_walk_replay_compound/runs/benchmark/medium_tb1024_seed78168_compound/summary.json"
     }
    ]
+  },
+  "qwen35_4b_state_track_install": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Stage 9 (design frozen): a divergent SKILL dose where replay just went BOUNDED",
+     "categories": [
+      "base",
+      "stage 6 (zero-root parent)",
+      "stage 7 count_walk (THE PARENT)",
+      "stage 8 replay_compound (BOUNDED)"
+     ],
+     "series": [
+      {
+       "label": "sealed medium/tb1024 aggregate (chain history)",
+       "values": [
+        0.085,
+        0.325,
+        0.357,
+        0.342
+       ]
+      }
+     ],
+     "x_label": "documented chain stage",
+     "y_label": "aggregate score",
+     "y_format": "number",
+     "note": "Design-frozen, no result yet (source: reports/preregistration.md). Chain history: stages 1-6 built the parent from base ~0.085 to ~0.325; stage 7's count_walk skill dose lifted it to 0.357 (the parent this cell trains on); stage 8's replay re-dose went BOUNDED (0.342 < 0.357). Stage 9 tests whether a DIVERGENT transferable skill - state-tracking under declarative updates, a fresh 160-row single-kind curriculum at seed 87 - adds held-out aggregate over the 0.357 parent at sealed seed 78169, under the frozen INSTALLED_TRANSFER / BOUNDED rule. Honest prior P(INSTALLED_TRANSFER) ~0.30-0.40.",
+     "source": "reports/preregistration.md"
+    }
+   ]
   }
  }
 }
