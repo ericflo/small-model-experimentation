@@ -1,0 +1,36 @@
+experiment_id: qwen35_4b_enumerative_repair_protocol
+status: designed
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+parent: zero_root_hygiene_explore composite (tree 414f5829..., lifecycle 22)
+arms: [replay_ctl6, enum_repair]
+treatment: fresh 160-row single-kind enum-repair corpus (c9b539bf...; 160 u_enum_repair, 20 per formalism across all eight reused machine formalisms)
+machinery: byte-identical copy of the menders dose-scale feedloop generator (machinery imported, never forked); the LESSON changes completely — systematic enumeration, not eliminative inference
+seeds:
+  construction: 77190
+  namespace: 55170
+  training: 83
+  axis_gate: 88052
+  retention_screens: [88053, 88054, 88055]
+  known_taken_nearby:
+    88043: taken by qwen35_4b_counterfactual_plan_reflection_transfer (retention)
+    88047: taken by qwen35_4b_counterfactual_plan_reflection_transfer (reflection)
+    88049: taken by qwen35_4b_counterfactual_plan_reflection_transfer (action)
+  aggregate_sealed: 78162
+retention_protocol: pooled_k3
+promotion: single-kind — candidate axis total strictly > parent AND > replay_ctl6 (ties fail); pooled retention bands (-15/+9/-9 sums) vs both controls; no per-kind split exists
+mechanism_readings_non_gating:
+  episode_success_simulation: analytic perfect-enumerator turn counts per holdout row (design receipt) — holdout mean 30.4 turns from scratch (median 18.5, max 122; 87.5% > 10), treatment mean 31.4 (median 23, max 125; 88.1% > 10)
+  enumeration_fidelity: per-axis-row legal/untried/canonical-next booleans (eval receipt); feeds the frozen zero-draw scoping
+conditional_benchmark: {tier: medium, think_budget: 1024, reading: menders}
+menders_frozen_consequences_ordered:
+  1_mechanism_answer: any candidate menders > 0 where the controls sit at 0 (takes precedence)
+  2_turn_budget_scoped: menders 0 WITH fidelity precondition (promoted AND holdout canonical-next rate >= 0.50 AND strictly above both controls) — protocol-install mechanism NOT refuted; the pure-enumeration route at the family's actual budget closes
+  3_failed_on_its_own_terms: menders 0 WITHOUT the precondition
+  no_third_state_for_the_zero_draw: true
+  provenance: added pre-freeze by review amendment (no seed consumed)
+clean_chain:
+  stages: 7
+  package: data/lineage/
+  blend_root: forbidden everywhere (fail-closed)

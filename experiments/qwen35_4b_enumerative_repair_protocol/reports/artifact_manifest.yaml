@@ -1,0 +1,28 @@
+# Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
+schema_version: 1
+experiment_id: "qwen35_4b_enumerative_repair_protocol"
+external_artifacts:
+  - name: "zero-root parent composite (training base and parent eval arm)"
+    storage: "large_artifacts/qwen35_4b_zero_root_lineage_rebuild/merged/zero_root_hygiene_explore"
+    required_for: "training both fresh adapters, the parent gate arm, and the benchmark parent arm"
+    checksum: "tree 414f582950bf60fed2fe462cd141ab98d0f772087b4f9c6bc5aa12f03f379e7d; weights 6e9aad251465ca2713fda0238a34aa9f46262053860b867f80189d65c9ee3932"
+    regenerate: ".venv/bin/python -B experiments/qwen35_4b_enumerative_repair_protocol/scripts/rebuild_clean_chain.py"
+  - name: "trained adapters (replay_ctl6, enum_repair)"
+    storage: "large_artifacts/qwen35_4b_enumerative_repair_protocol/adapters/"
+    required_for: "merging the two trained arms"
+    checksum: "pinned post-training in runs/training/<arm>.json and train_trial.PUBLISHED_ARM_HASHES"
+    regenerate: ".venv/bin/python -B experiments/qwen35_4b_enumerative_repair_protocol/scripts/run.py --stage train-control (then train-candidate)"
+  - name: "merged trained composites (replay_ctl6, enum_repair)"
+    storage: "large_artifacts/qwen35_4b_enumerative_repair_protocol/merged/"
+    required_for: "the 12-run local gate and the conditional benchmark event"
+    checksum: "pinned post-merge in runs/merges/<arm>.json and the six run_benchmark.py TODO-PIN slots"
+    regenerate: ".venv/bin/python -B experiments/qwen35_4b_enumerative_repair_protocol/scripts/run.py --stage merge-arms"
+omitted_artifacts:
+  - path: "large_artifacts/qwen35_4b_enumerative_repair_protocol/"
+    reason: "trained adapter and merged composite weights; never checked into git"
+reproducibility:
+  smoke_command: "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -B experiments/qwen35_4b_enumerative_repair_protocol/scripts/run.py --smoke"
+  full_command: ".venv/bin/python -B experiments/qwen35_4b_enumerative_repair_protocol/scripts/run.py --stage train-control  # then train-candidate, merge-arms, local, benchmark"
+  required_external_artifacts:
+    - "large_artifacts/qwen35_4b_zero_root_lineage_rebuild/merged/zero_root_hygiene_explore"
+notes: "Model-free design frozen 2026-07-16; GPU stages pending. The complete clean-chain reproduction package lives in data/lineage/ (verify: scripts/rebuild_clean_chain.py --verify-inputs)."

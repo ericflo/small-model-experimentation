@@ -49774,6 +49774,41 @@
      "source": "experiments/qwen35_4b_clean_gym_mix_dose/runs/local/seed88046_promotion.json"
     }
    ]
+  },
+  "qwen35_4b_enumerative_repair_protocol": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Preregistered stage completion",
+     "categories": [
+      "intake",
+      "corpus + audits frozen",
+      "review (scoping MAJOR fixed)",
+      "train both arms",
+      "pooled_k3 local gate + fidelity",
+      "sealed medium event @78162"
+     ],
+     "series": [
+      {
+       "label": "completed checkpoint",
+       "values": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "x_label": "preregistered experiment stage",
+     "y_label": "completion indicator",
+     "y_format": "integer",
+     "note": "The anti-cleverness attack on the last goal-gating family: 160 rows (one kind, full concentration) teach systematic enumeration — name the next untried legal candidate in a documented canonical order and let rerun feedback verify. Grounded in C34 (brute search dominates) and the protocol-install law (4-for-4). Frozen two-direction consequences with an integer-exact fidelity precondition decide a priori whether a menders=0 draw reads as budget-scoped or failed-on-its-own-terms (a perfect enumerator needs mean ~30 turns on these machines; the family budget is publicly only 'bounded').",
+     "source": "experiments/qwen35_4b_enumerative_repair_protocol/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

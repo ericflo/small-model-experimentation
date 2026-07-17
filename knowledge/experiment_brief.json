@@ -2,46 +2,6 @@
  "note": "Plain-language practitioner briefs shown above the fold on each experiment page (verdict + the-one-idea/question/finding/why-it-matters + KPI numbers + per-chart how-to-read/takeaway). Authored per experiment from its own README/report and verified chart specs under a strict no-jargon ban-list; all jargon-precise detail stays below the fold. Regenerate with scripts/enrichment/generate_briefs.workflow.js (see docs/site_maintenance.md).",
  "generated_on": "2026-07-05",
  "experiments": {
-  "qwen35_4b_menders_dose_scale": {
-   "verdict_tag": "Ten times the lessons, zero learning: the last teaching route closes",
-   "concept_primer": "Nine of the ten benchmark families now beat the untouched base model on every sealed test seed; exactly one family — the one shaped like fix-it-and-check-again work — still ties at zero margin. An earlier experiment tried to teach that skill with 80 practice episodes on invented toy machines and installed nothing (0 of 20 fresh problems solved). Every other cheap route is closed by pre-registered kill rules; the one move still allowed is giving the SAME lesson ten times more data. This cell trains on 800 two-round repair episodes across eight invented machines (the four originals with brand-new instances plus four newly designed ones, every knob explicitly bounded in the written rules), against a matched control that sees exactly the same token exposure, from the same parent model.",
-   "plain_question": "At ten times the dose that scored zero, does ANY fresh-instance transfer of the repair-loop skill appear — and if the trained model passes the calibrated local gate, does the last blocking benchmark family finally move?",
-   "plain_answer": [
-    "The scale bet returned the cleanest possible no. After ten times the training data — eight hundred feedback-repair lessons across eight invented machines — the trained model solved exactly one of forty fresh test episodes, the same single lucky guess as both untrained comparison models. More lessons did not overcome the zero; the skill simply does not install this way. Forgetting also crept past the allowed margin against the parent. With this, every supervised-teaching route to the one family blocking the program's ten-family goal is closed by pre-written rules: three teaching styles, doses from eighty to eight hundred lessons, and the thinking-time levers. What remains: a fundamentally different training class (learning from the model's own attempts with live feedback), or standing on the program's honest position — the full ten-family sweep demonstrated on two of four sealed seeds."
-   ],
-   "why_it_matters": "This is the program's last permitted mechanism at its last blocking family. A nonzero result prices the next dose rung; a zero kills the whole scale class and redirects the budget to genuinely different mechanisms. Either outcome converts an open question into a measured fact.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Fresh-instance transfer",
-     "value": "1/40",
-     "sub": "= both untrained controls exactly"
-    },
-    {
-     "label": "Dose curve",
-     "value": "0/20 → 1/40",
-     "sub": "80 rows → 800 rows: flat at floor"
-    },
-    {
-     "label": "Retention vs parent",
-     "value": "-5.33",
-     "sub": "outside the calibrated ±5 band"
-    },
-    {
-     "label": "SFT routes now closed",
-     "value": "all",
-     "sub": "3 pedagogies × 80-800 rows + budget levers"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Fresh-episode test scores after ten times the training",
-     "chart_read": "Three bars: the model trained on 800 repair lessons beside its untrained parent and a matched control.",
-     "chart_takeaway": "One in forty for all three — the training installed nothing the untrained models did not already have."
-    }
-   ]
-  },
   "adaptive_cognitive_kernel": {
    "verdict_tag": "Self-rewiring does real work but wins nothing extra",
    "concept_primer": "Picture a calculator that, for each instruction in a program, physically swaps in a fresh set of gears — temporarily rewiring itself — instead of a fixed machine that reads each instruction as an input code. Does the rewiring execute programs any better?",
@@ -1473,6 +1433,120 @@
     }
    ]
   },
+  "qwen35_4b_axis_corpus_v2_staged_repair": {
+   "verdict_tag": "Kill rule fired; repair axis closed",
+   "concept_primer": "Last round's autopsy showed exactly why two of four practice blocks failed: the repair lessons stated their conclusion instead of showing the search, and the procedure lessons taught something the model already knew. This round rebuilds those blocks — the lessons now walk through the search, rejected attempts included — and fixes a grading quirk that had thrown away 21 correct answers for spacing.",
+   "plain_question": "Does showing the search — instead of asserting its result — finally install the repair skill, without disturbing the blocks that already work?",
+   "plain_answer": "Even with lessons rebuilt from the autopsy — walking through the search step by step instead of asserting the answer — the repair skills did not stick (a tie and a loss against the comparisons), so the preregistered kill rule closed this approach for good. The screen also revealed something bigger: after three consecutive practice doses on the same model lineage, new practice stopped helping (the practiced model tied its parent and forgot a little), while a third round of plain review won the whole skill test.",
+   "why_it_matters": "Two clean laws: this model cannot learn program-repair from small designed doses no matter how the lesson is written, and stacking practice rounds on one lineage saturates — future practice needs a fresh start from a clean model. Honest kill rules turned what could have been endless rewrites into settled knowledge.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Kill rule",
+     "value": "fired",
+     "sub": "repair lessons: one tie, one loss — axis closed"
+    },
+    {
+     "label": "Skill test",
+     "value": "19 vs 19 vs 25",
+     "sub": "third practice dose tied parent; plain review won"
+    },
+    {
+     "label": "Retention",
+     "value": "66 vs 71",
+     "sub": "third dose cost five retained answers"
+    },
+    {
+     "label": "Benchmark",
+     "value": "never opened",
+     "sub": "seed 78,147 sealed by the frozen rule"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Third practice dose stalls; plain review wins the skill test",
+     "chart_read": "Per-category right answers (of 10) for the practiced model, its parent, and the review model.",
+     "chart_takeaway": "Only hygiene still favors the practiced model; repair never installed and review now leads overall — the lineage is saturated for practice doses."
+    }
+   ]
+  },
+  "qwen35_4b_axis_replay_stack_medium_target_match": {
+   "verdict_tag": "Skills survived the stack; one noisy bar blocked",
+   "concept_primer": "Take the two things that worked last time — the targeted practice set that installed new skills, and the plain-review round that scored highest overall — and put them in one model, then judge it on the bigger, finer-grained version of the benchmark where a full sweep has actually happened before.",
+   "plain_question": "Do the installed skills and the review boost survive together in one model, and does the bigger benchmark tier finally credit the installed skills at the family level?",
+   "plain_answer": "The stacked model kept the installed skills (24 vs 18 and 15 of 40 on unseen tasks, with the cleanest finishing behavior of any model) and lost nothing on the retained skills. But the screen required beating both comparisons on three of four skill types, one type tied at the ceiling for the second straight trial, and another was lost to a one-off spike in a comparison model — so nothing advanced and the bigger-benchmark question was never asked. A second round of plain review made the model noticeably sloppier, undercutting the idea that review keeps compounding.",
+   "why_it_matters": "The installed skills are real and portable across starting models — shown twice now. What blocked promotion was measurement noise, not capability. The queued follow-up re-judges the already-built models with a fairer screen at zero training cost.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "Unseen-task result",
+     "value": "24 vs 18 / 15",
+     "sub": "install replicated on a new starting model"
+    },
+    {
+     "label": "Finishing behavior",
+     "value": "6 run-ons",
+     "sub": "vs 12 and 18 — cleanest in the event"
+    },
+    {
+     "label": "Blocked by",
+     "value": "1 of 10 checks",
+     "sub": "a ceiling tie plus a one-off comparison spike"
+    },
+    {
+     "label": "Review round two",
+     "value": "sloppier",
+     "sub": "86 parsed, 18 run-ons — compounding questioned"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Unseen-task totals: the stack keeps its skills; review round two slips",
+     "chart_read": "Bars show right answers on 40 unseen skill tasks for the stacked model and both comparisons.",
+     "chart_takeaway": "The stacked model leads clearly; the second review round is the weakest arm — but a single noisy sub-check kept the stacked model from advancing."
+    }
+   ]
+  },
+  "qwen35_4b_axis_stack_readjudication_medium_pilot": {
+   "verdict_tag": "Fair screen; half the practice set is dead weight",
+   "concept_primer": "The skill-stacked model already exists and has twice shown its skills are real; both times a measurement quirk — one comparison category stuck at a ceiling where wins are impossible — blocked its advance. This trial re-judges the same three built models on brand-new tasks with that quirk handled explicitly, at zero training cost.",
+   "plain_question": "Judged fairly on new tasks, does the skill-stacked model clear the program's bars — and does the bigger benchmark tier then credit its skills?",
+   "plain_answer": "Judged fairly on brand-new tasks — with the ceiling quirk handled — the stacked model won the overall skill test for the third straight time (22 vs 15 and 18 of 40) with the cleanest finishing behavior again. But it won only two of the four skill categories: document-hygiene and route-finding practice stick every time, while program-repair practice never took (down to 1 of 10) and procedure-following practice teaches nothing the starting model didn't already know. Two wins fell short of the required three, so the bigger benchmark stayed sealed.",
+   "why_it_matters": "Three independent screens now agree: the question is no longer whether designed practice installs skills (it does, without forgetting), but which lessons carry weight. Half this set needs rewriting from the recorded failures — a content problem, not a measurement problem.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "Overall skill test",
+     "value": "22 vs 15 / 18",
+     "sub": "third straight win for the stacked model"
+    },
+    {
+     "label": "Category wins",
+     "value": "2 of 3 needed",
+     "sub": "hygiene and routes; repair and procedure failed"
+    },
+    {
+     "label": "Repair practice trend",
+     "value": "4 -> 2 -> 1",
+     "sub": "of 10 — never installed"
+    },
+    {
+     "label": "Finishing behavior",
+     "value": "5 run-ons",
+     "sub": "vs 12 and 13 — cleanest again"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Fair screen: two lesson types carry everything",
+     "chart_read": "Per-category right answers (of 10) for the stacked model and both comparisons.",
+     "chart_takeaway": "Hygiene and route-finding practice beat both comparisons; program-repair and procedure practice do not — the practice set needs a content revision, not another measurement."
+    }
+   ]
+  },
   "qwen35_4b_balanced_core_answer_potential_sft": {
    "verdict_tag": "Does answer likelihood pick the best reasoning to",
    "concept_primer": "Imagine a student who solves one problem many different ways. To make a study example, do you keep the write-up that best predicts the correct final answer, or just the shortest complete one? This test bakes six such picking rules into six small models.",
@@ -1727,6 +1801,84 @@
      "chart_plain_title": "Solve rate on easy versus hard puzzles",
      "chart_read": "Bars are grouped into an easy family and a hard family; within each group, colored bars compare the strategies and height is the share solved, so taller is better. The answer-peeking bars show how much room exists.",
      "chart_takeaway": "On the easy family every strategy nearly maxes out, but on the hard family the trained model stays near the floor while the peeking strategy climbs, so the unclaimed gap lives there."
+    }
+   ]
+  },
+  "qwen35_4b_clean_gym_mix_dose": {
+   "verdict_tag": "Three lessons in one dose taught none of them: dilution, re-confirmed",
+   "concept_primer": "The retired ancestor adapter was good at exactly three benchmark families — resisting embedded trick instructions, following multi-step procedures, and knowing when a question has no forced answer. The owner's directive: don't bring the ancestor back; rebuild what it knew as fresh, fully documented training data instead. This experiment writes 160 new lessons on invented surfaces covering those three skills and trains them into the clean-lineage model whose every prior step is receipted.",
+   "plain_question": "Can fresh, documented gym-style lessons teach the clean model what the undocumented ancestor knew — and does it show up on the three benchmark families?",
+   "plain_answer": "The mix failed cleanly and instructively. Splitting the standard 160-lesson budget across three skills — sixty trick-instruction episodes, fifty procedure chains, fifty answer-or-abstain puzzles — taught none of them: on its own fresh exam the trained model scored below BOTH untrained comparison models, while forgetting stayed safely inside the calibrated margins (the dose was inert, not harmful). This re-confirms an earlier program law on clean ground: thin slices of many skills dilute below the threshold where anything installs — the one skill that reliably installs (procedure-tracking) always got the full 160 rows in its winning runs. Two bonus findings about the measuring sticks themselves: the answer-or-abstain exam was too easy for untrained models (they nearly aced it, so it can't detect teaching), and the trick-episode exam was too hard for everyone. The three target families now need three separate full-strength experiments; the sealed benchmark seed was never spent.",
+   "why_it_matters": "A win closes the clean lineage's three-family gap without inheriting a single undocumented byte, raising the odds of full ten-family sweeps on fully documented ground; a null sharpens the conversion law — designed substrate versus inherited substrate — either way the map improves.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Candidate on its own exam",
+     "value": "15/40",
+     "sub": "below parent 17 and control 19"
+    },
+    {
+     "label": "Rows per skill",
+     "value": "50-60",
+     "sub": "vs 160 in the winning single-skill runs"
+    },
+    {
+     "label": "Forgetting",
+     "value": "in-band",
+     "sub": "inert, not destructive"
+    },
+    {
+     "label": "Benchmark seeds spent",
+     "value": "0",
+     "sub": "sealed 78,161 never opened"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Fresh-exam scores by skill for the three models",
+     "chart_read": "Grouped bars per skill: the trained mix beside its parent and the matched control.",
+     "chart_takeaway": "The trained model wins nothing — thin multi-skill doses dilute below the installation threshold."
+    }
+   ]
+  },
+  "qwen35_4b_clean_path_statechain_extension": {
+   "verdict_tag": "The skill installs anywhere; the family conversion needed the old ancestor's soil",
+   "concept_primer": "Earlier work proved two things separately: a small 160-example training dose reliably teaches the model to track hidden running state (and that skill carries over to a benchmark family it had always failed), and the program's best model can be rebuilt from scratch using only documented, contamination-free training steps. This experiment combines them: apply the exact proven dose, byte-for-byte, to the clean rebuilt model.",
+   "plain_question": "Does the proven state-tracking dose install just as well on the fully documented clean-lineage model, and does it again unlock the benchmark family it unlocked before?",
+   "plain_answer": [
+    "Split verdict with a clean lesson. The state-tracking dose installed for the THIRD time on its third different parent — the program's most reliable trained effect — and the clean-lineage model beat the untouched base by 2.7 times while keeping its memory inside the calibrated margins. But the headline hope failed: on the original lineage this dose had TRIPLED the protocol-compliance benchmark family, and on the fully clean lineage that conversion vanished (zero, versus the original's 0.30). The pattern reads clearly: that family was one of exactly three the undocumented ancestor adapter was good at, so the taught skill seems to convert into benchmark scores only where the ancestor's training already tilled the soil. One consolation footnote: the clean model scored a strict win on the otherwise-impossible debugging family through a lucky draw. The fully-documented model — every training step receipted from the official base, zero contamination anywhere — stands as the mission's reference artifact."
+   ],
+   "why_it_matters": "If it works, the program has ONE headline model whose every training step is documented, receipted, and reproducible from a blank start — no mystery ingredients anywhere — while carrying the strongest install the program has proven.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Install replications",
+     "value": "3/3",
+     "sub": "three parents, three promotions"
+    },
+    {
+     "label": "Rites conversion on clean ground",
+     "value": "0.0",
+     "sub": "vs 0.30 on the prefix lineage"
+    },
+    {
+     "label": "Clean model vs base",
+     "value": "2.7×",
+     "sub": "0.3333 vs 0.1234 (strongest base draw)"
+    },
+    {
+     "label": "Documented stages",
+     "value": "7",
+     "sub": "fully receipted, zero contamination"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "The four models across the ten families at the sealed event",
+     "chart_read": "Grouped bars per family; note rites, where the clean candidate scored zero.",
+     "chart_takeaway": "The clean lineage wins broadly over base but the taught skill's family conversion did not survive the ancestor's removal."
     }
    ]
   },
@@ -2325,6 +2477,44 @@
     }
    ]
   },
+  "qwen35_4b_counterfactual_plan_reflection_transfer": {
+   "verdict_tag": "Ready for review; no model result",
+   "concept_primer": "The training lesson asks a hypothetical follow-up: name the three-step plan, but do not calculate the answer. Testing then removes that follow-up and asks for the answer directly.",
+   "plain_question": "Can teaching a small model what plan it should describe in a hypothetical pause make it solve the original problem better, even though the answer itself was never trained?",
+   "plain_answer": "Not known yet. The current checkpoint builds and checks fresh list, text, and register puzzles, plus a control where every plan is deliberately assigned to the wrong puzzle. No model has been loaded or trained.",
+   "why_it_matters": "If the idea works, useful problem-solving habits could be taught through explanations on a separate training branch instead of requiring a correct worked answer for every action. The wrong-plan control will show whether the plan's content truly matters.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Checked smoke tasks",
+     "value": "30",
+     "sub": "fresh train, first test, and confirmation examples"
+    },
+    {
+     "label": "Task families",
+     "value": "3",
+     "sub": "integer lists, text strings, and three registers"
+    },
+    {
+     "label": "Cross-split collisions",
+     "value": "zero",
+     "sub": "both exact plans and full behavior signatures"
+    },
+    {
+     "label": "Model or training runs",
+     "value": "zero",
+     "sub": "design review is still required"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Only intake and the construction smoke are complete",
+     "chart_read": "The groups run from intake and task construction through review, model testing, training, confirmation, and the final internal check. A bar at one means that stage is complete; more completed stages are better.",
+     "chart_takeaway": "The first two bars are complete. Every model-facing stage remains blocked until the design is challenged and repaired."
+    }
+   ]
+  },
   "qwen35_4b_coverage_banking": {
    "verdict_tag": "A model self-taught past its own ceiling",
    "concept_primer": "Think of the model as a dart thrower aiming at correct little programs. Sampling more just throws more darts with the same aim. Training it on its own past bullseyes re-aims the arm — sometimes tightening onto a spot it already hits, sometimes reaching a new region of the board.",
@@ -2869,6 +3059,44 @@
     }
    ]
   },
+  "qwen35_4b_dose_diversity_mechanism_cell": {
+   "verdict_tag": "Forgetting is intrinsic; the trade is priced",
+   "concept_primer": "Every practice dose has cost the model about ten retained answers — except one, which used a larger, more varied practice set. After the schedule theory died in a direct test, one measurement remains: teach that larger varied set directly, with no review round, and see whether variety itself is what protects memory.",
+   "plain_question": "Does a bigger, more varied practice set protect retained skills where the small focused set does not — or is forgetting simply the price of practice on this model?",
+   "plain_answer": "Variety does not protect memory: the larger varied practice set also cost nine retained answers, the known ten-point case reproduced exactly, and even pure review cost five on this fresh screen — so the one past case with zero forgetting was measurement luck. Meanwhile the skills themselves keep landing: the hygiene lesson went ten-for-ten, its seventh straight category win, and the varied-dose model posted the best overall skill score with the cleanest finishing behavior.",
+   "why_it_matters": "Four trials of questions collapse into one priced law: on this training setup, teaching new skills costs five to ten retained answers, full stop. The choice ahead is engineering — change the training vehicle, or accept and price the trade — and both paths are preregistered.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "Verdict",
+     "value": "intrinsic",
+     "sub": "variety -9; known case -10 reproduced; review -5"
+    },
+    {
+     "label": "Hygiene lesson",
+     "value": "10 / 10",
+     "sub": "seventh straight category win — perfect record"
+    },
+    {
+     "label": "Best skill score",
+     "value": "26 / 40",
+     "sub": "the varied dose, with the fewest run-ons (5)"
+    },
+    {
+     "label": "Lucky precedent",
+     "value": "resolved",
+     "sub": "the zero-forgetting case was screen fortune"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Every dose pays the memory tax; the skills land anyway",
+     "chart_read": "Bars per model: retained-skill total (of 104) and unseen skill total (of 40).",
+     "chart_takeaway": "The parent keeps the most memory; every trained arm pays five to ten points for its gains — the trade is real, two-sided, and now priced."
+    }
+   ]
+  },
   "qwen35_4b_early_text_hypothesis_forking": {
    "verdict_tag": "A 24-way early-hint test has cleared its model-free checks",
    "concept_primer": "Imagine giving the same puzzle to twenty-four independent scratchpads. Each starts with a different concrete guess about the first transformation, may reject that guess, and must still write the complete two-step rule. Public examples—not the hidden answer—choose one result.",
@@ -2906,6 +3134,37 @@
      "chart_takeaway": "The upcoming model check cannot pass by exploiting two candidates that happen to mean the same thing on a diagnostic input."
     }
    ]
+  },
+  "qwen35_4b_enumerative_repair_protocol": {
+   "verdict_tag": "Design frozen: teach the model to enumerate fixes, not to guess them",
+   "concept_primer": "One benchmark family — fix-the-broken-procedure episodes — has resisted every teaching attempt. All of those attempts taught the same thing: look at the evidence and INFER which step is wrong. That skill never installed at any dose. But two things the project has proven do work: this model is good at brute-force-style stepping, and it reliably learns turn-by-turn protocols. The family's episodes also give free feedback after every proposed fix. So this experiment teaches the opposite of cleverness: work through every legal one-step change in a fixed, documented order, skip the ones already tried, and propose the next one — letting the episode's own feedback find the winner.",
+   "plain_question": "Can 160 lessons teach the model to propose candidate fixes one at a time in a fixed order — and does that discipline finally score on the fix-it benchmark family?",
+   "plain_answer": "Design frozen; the model has not been trained yet. Everything checkable without a GPU is done and green: the 160 lessons regenerate byte-identically and every one is machine-verified (the asked-for next candidate really is the next untried legal one-step change in the documented order, exactly one candidate fixes both example runs, and every already-tried candidate really fails); the two training streams are token-for-token exposure-matched with zero delta; the fresh exam and the three forgetting screens are frozen with zero row overlap against all 76 predecessor datasets; and two extra instruments are preregistered as readings, not gates — how many turns a perfect enumerator would need per exam episode, and per-proposal quality booleans (legal? untried? in-order?) that will say WHICH part of the discipline installed. The benchmark seed stays sealed unless the trained model beats both comparison models on its own exam.",
+   "why_it_matters": "This is the last family where the fully documented model scores nothing. If a taught enumeration routine converts, the walled inference skill was never needed — search discipline plus environment feedback substitutes for insight, which would be a new installable mechanism class. If it installs on its own exam but still scores zero on the family, the wall moves to episode integration, and the per-proposal quality readout (legal? untried? in-order?) says exactly which piece failed.",
+   "verdict_tone": "pending",
+   "key_numbers": [
+    {
+     "label": "Dose",
+     "value": "160 rows",
+     "sub": "one kind, full concentration (per the dilution rule)"
+    },
+    {
+     "label": "Tried-list depths",
+     "value": "k = 0-10",
+     "sub": "first-candidate through deep-in-the-list rows"
+    },
+    {
+     "label": "Overlap audit",
+     "value": "76 sources, 0 hits",
+     "sub": "row-level freshness vs every predecessor"
+    },
+    {
+     "label": "Benchmark seeds spent",
+     "value": "0",
+     "sub": "sealed 78,162 stays sealed until promotion"
+    }
+   ],
+   "charts": []
   },
   "qwen35_4b_error_localization": {
    "verdict_tag": "Its confidence dips exactly where it first slipped",
@@ -2998,6 +3257,44 @@
      "chart_plain_title": "What removing or scrambling the worked steps does to each problem type",
      "chart_read": "Each cluster is one unseen problem type; bar height is the share fully solved. The three bars are a prompt with matching worked steps, no steps, or scrambled steps. Taller is better.",
      "chart_takeaway": "Removing the steps drops the branching type from near-perfect to zero, and even scrambled steps cap it at a fifth — the steps do real work."
+    }
+   ]
+  },
+  "qwen35_4b_feedback_loop_state_chain_install": {
+   "verdict_tag": "Half the lesson took: state-tracking installed, feedback-repair failed a third time",
+   "concept_primer": "The last measurement left the program's best clean model beating the untouched base on eight of ten benchmark families with zero losses — only two zero-zero ties remain. The public one-line descriptions of those two families share a trait every past training set lacked: they are multi-turn episodes, where the model must act, observe feedback, and revise. Every lesson this program ever trained was a single question with a single answer. This experiment teaches the missing loop itself — on six invented toy machines that look nothing like the benchmark — and then takes one shot at the full ten-family sweep.",
+   "plain_question": "Does teaching the act-observe-revise loop and hidden-state tracking on invented machines flip the last two zero-score families without breaking the eight wins?",
+   "plain_answer": "The dose split down the middle. The hidden-state-tracking half installed cleanly — on brand-new test instances the trained model tracked procedures better than both its parent and a matched control. The feedback-repair half failed completely: after eighty lessons on those exact toy machines, the model got zero of twenty fresh ones right, worse than models that never saw a lesson. That is the third teaching method to fail at the repair-style skill. Forgetting was judged for the first time under the new three-quiz averaging rule, which worked exactly as calibrated — and caught the trained model falling just outside the allowed margin against the control. No benchmark shot was taken; the sealed seed stays sealed.",
+   "why_it_matters": "This is the closest the program has been to its goal — one model, every family up. The bet is honest (~15-30%): the mechanism is new (episode protocol, not repair content), the instruments are freshly calibrated, and either outcome sharpens the map.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "State-tracking holdout",
+     "value": "11/20",
+     "sub": "vs parent 7, control 10 — installed"
+    },
+    {
+     "label": "Feedback-repair holdout",
+     "value": "0/20",
+     "sub": "after 80 in-domain lessons — third failed method"
+    },
+    {
+     "label": "Retention vs control",
+     "value": "-5.67",
+     "sub": "0.67 outside the calibrated ±5 band"
+    },
+    {
+     "label": "Instrument check",
+     "value": "4.08",
+     "sub": "event noise SD vs calibration's 4.27"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Fresh-instance holdout scores by lesson half",
+     "chart_read": "Grouped bars: each model's score on twenty fresh feedback-repair tasks and twenty fresh state-tracking tasks.",
+     "chart_takeaway": "State-tracking rose above both controls; feedback-repair fell to zero despite eighty training lessons on those same machines."
     }
    ]
   },
@@ -3631,6 +3928,82 @@
     }
    ]
   },
+  "qwen35_4b_goal_gap_axis_curriculum_target_match": {
+   "verdict_tag": "Skills installed; benchmark chose review",
+   "concept_primer": "Instead of teaching everything at once, teach exactly the four abilities where the held-out benchmark has been stuck for months: fixing a buggy program from its wrong output, finding a route under a strict step budget, ignoring instructions smuggled inside documents, and following a freshly written procedure with interacting switches.",
+   "plain_question": "Can four purpose-built practice sets — each varied across many invented styles — install the four abilities every previous model failed on, without damaging anything else?",
+   "plain_answer": "The targeted practice worked on its own terms — the first screen pass in this program's history (28 vs 22 and 18 of 40 on unseen tasks, with zero forgetting). On the held-out benchmark it beat the untrained model by a wide margin (0.42 vs 0.11) with seven families up, none down, and one stuck family flipped. But plain review of old material scored even higher (0.51), so the frozen rule closed the experiment. Two families never moved for anyone: program repair stayed at zero and injection resistance at exactly one-half, for every model.",
+   "why_it_matters": "Targeted practice installs skills without forgetting, but installed skills and benchmark family scores are separated by more than vocabulary. And the cheapest interventionre-practicing old material — keeps compounding the total score. The goal is now blocked by exactly two frozen families, which is a much sharper question than it was yesterday.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "Screen result",
+     "value": "28 vs 22 / 18",
+     "sub": "first promotion in this line; zero forgetting"
+    },
+    {
+     "label": "Benchmark vs base",
+     "value": "+0.31",
+     "sub": "7 families up, 0 down, warren flipped"
+    },
+    {
+     "label": "But plain review",
+     "value": "0.51",
+     "sub": "beat the candidate's 0.42 — rule closed the trial"
+    },
+    {
+     "label": "Frozen families",
+     "value": "2",
+     "sub": "program repair at 0; injection resistance at exactly 0.5"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Benchmark totals: practice beat base widely, review beat practice",
+     "chart_read": "One bar per model: the untrained base, the axis-practice model, its parent, and the plain-review model.",
+     "chart_takeaway": "Every trained model crushes base; plain review of old material tops the table, so the targeted-practice model did not advance."
+    }
+   ]
+  },
+  "qwen35_4b_goal_gate_confirmation": {
+   "verdict_tag": "Not confirmed at the bar — but the sweep repeated once and the gap narrowed to one family",
+   "concept_primer": "One sealed benchmark event just recorded the program's stated goal for the first time: a clean-trained model beat the untouched base on every one of ten families at once. But two of those family wins rode on single-item margins, and this program's own laws say one seed is a draw until it replicates. This experiment is the replication: the same two models, three brand-new sealed seeds, and a verdict written before the event.",
+   "plain_question": "Does the all-ten-families win replicate across three fresh sealed seeds?",
+   "plain_answer": "The replication returned a split answer. The overall improvement replicated without drama: the trained model beat the base decisively on all three fresh seeds, making four for four all-time. The perfect ten-family sweep repeated on one of the three — two full sweeps across four independent seeds — but the pre-written rule demanded two of three, so the formal verdict is aggregate-only. The near-misses are the striking part: nine-of-ten and eight-of-ten with ZERO losses, blocked purely by zero-zero ties at the debugging-style family that has resisted every teaching method. The goal now hangs on exactly one family, and the queued larger-dose experiment knows precisely what it must produce: any reliable nonzero score there. [Erratum 2026-07-16: the 'two of four seeds' framing omitted the earlier 78,150 reading; over all six recorded readings the sweep rate is 2/6 — see the sweep-rate consolidation cell.]",
+   "why_it_matters": "This is the program goal's final gate: a confirmed pass completes the demonstration-plus-confirmation chain the goal demands; a non-replication prices the discovery honestly and hands the program back its 9-of-10 position with the newly proven skill-to-family conversion mechanism.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Formal verdict",
+     "value": "AGGREGATE_ONLY",
+     "sub": "10/10 on 1/3 seeds vs the 2/3 bar"
+    },
+    {
+     "label": "Aggregate wins",
+     "value": "4/4",
+     "sub": "all-time, never close"
+    },
+    {
+     "label": "Full sweeps",
+     "value": "2 of 4",
+     "sub": "seeds 78,154 and 78,157"
+    },
+    {
+     "label": "The one blocker",
+     "value": "menders",
+     "sub": "0.0 margin on every failing seed"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Family wins against the base on each fresh seed",
+     "chart_read": "One bar per seed: how many of the ten families the trained model strictly won.",
+     "chart_takeaway": "Ten, nine, and eight family wins with zero losses anywhere — the misses are all zero-zero ties at one stubborn family."
+    }
+   ]
+  },
   "qwen35_4b_graphir_self_repair": {
    "verdict_tag": "A fix-it pass catches noise, not real mistakes",
    "concept_primer": "The model writes a program two ways: a dense one-line formula, or an editable step-by-step diagram. A separate fix-it pass proofreads that diagram, but it practiced only on randomly scrambled versions, so it catches obvious damage while missing a clean-looking step that quietly computes the wrong answer.",
@@ -3760,6 +4133,44 @@
      "chart_plain_title": "How well each method picks correct code when no tests can run",
      "chart_read": "Four bars, taller is better, showing how often each method's pick passes the hidden tests across all 164 coding tasks. Left to right: blind random pick (77%), averaging confidence over every code token (79%), one yes-or-no self-verdict (84%), and a flawless picker (87%).",
      "chart_takeaway": "The self-verdict bar clears both averaging and guessing and nearly reaches the flawless-picker ceiling, showing one concentrated judgment carries more correctness signal than the diluted token-by-token average."
+    }
+   ]
+  },
+  "qwen35_4b_hygiene_explore_destack_medium": {
+   "verdict_tag": "Skills came back; forgetting blocked promotion",
+   "concept_primer": "Strip the practice set down to the only two lessons that have stuck in every measurement — ignoring smuggled instructions, and route-finding under a step budget — and teach them to the cleanest earlier model, before the pile-up of later practice rounds that eventually stopped helping.",
+   "plain_question": "Do the two reliable lessons come back cleanly on a fresh start — proving the recent stall was about over-stacking practice, not the lessons — and does the bigger benchmark tier then credit them?",
+   "plain_answer": "On the fresh start, both reliable lessons came back decisively — the best skill-test result of the whole session (15 vs 11 and 8 of 20) — proving the earlier stall was about over-stacking practice on one model, not about the lessons. But this direct dose made the model forget ten retained answers, and the screen correctly refused it. Comparing receipts across trials isolates the cause: the one dose that never forgot had a full review round between practice doses; this one skipped it.",
+   "why_it_matters": "Two questions became one law each: stalling = over-stacking (confirmed by recovery), and forgetting = skipping the review round at the dose boundary. The next recipe — review round, then dose — already has its review-round model built and receipted, making it the highest-probability trial yet.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "Recovery flags",
+     "value": "both TRUE",
+     "sub": "explore 7 vs 4/6; hygiene 8 vs 4/5"
+    },
+    {
+     "label": "Skill test",
+     "value": "15 / 20",
+     "sub": "session's best — vs 11 (review) and 8 (parent)"
+    },
+    {
+     "label": "Retention cost",
+     "value": "-10",
+     "sub": "58 vs 68 — band was -5; screen refused"
+    },
+    {
+     "label": "Isolated cause",
+     "value": "no review round",
+     "sub": "the never-forgot dose had one between doses"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Skills recovered on the fresh start; forgetting cost the promotion",
+     "chart_read": "Left: unseen skill-test results per model. Right: retained-skill results per model.",
+     "chart_takeaway": "The trimmed dose wins the skill test decisively but forgets too much without a review round between doses — the screen refused it, and the fix is already queued."
     }
    ]
   },
@@ -3992,6 +4403,44 @@
      "chart_plain_title": "How much the retrained model gained or lost on each task group",
      "chart_read": "Three bars show the retrained model's score minus the original model's, for trained task families, untouched task families, and basic single-step skills. The zero line means no change; bars above zero are better, below zero are worse.",
      "chart_takeaway": "Both multi-turn task bars plunge far below zero, roughly a quarter to a third of the scale, while the basic-skill bar barely dips — the damage is to in-task decision-making, not underlying knowledge."
+    }
+   ]
+  },
+  "qwen35_4b_interleaved_replay_dose_medium": {
+   "verdict_tag": "Review-round theory refuted; search closed",
+   "concept_primer": "The last trial proved the two reliable lessons come back on a fresh start but cost the model ten retained answers when taught directly. Cross-checking every receipt isolated the fix: the one dose that never caused forgetting had a review round between practice doses. That review-round model is already built — this trial teaches the same verified lessons starting from it.",
+   "plain_question": "Does a review round at the dose boundary let the lessons land without forgetting — completing a deployable recipe — and does the bigger benchmark tier then credit it?",
+   "plain_answer": "The review round did not prevent forgetting: the dosed model lost nine to ten retained answers against both comparisons — almost exactly the cost of dosing directly — so the theory drawn from comparing old receipts is refuted by this direct test. The hygiene lesson won its category for the sixth straight measurement; the route-finding lesson lost this time. Per the preregistered escalation rule, the recipe search is closed: the next step is a mechanics study of WHY doses cost retention, not another schedule shuffle.",
+   "why_it_matters": "A theory built from comparing receipts across trials died the moment it met a controlled test — which is precisely what preregistered direct tests are for. The program keeps the refutation, the six-for-six hygiene result, and a sharply-posed mechanics question, instead of an endless recipe hunt.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Retention cost",
+     "value": "-9 / -10",
+     "sub": "same as dosing directly — theory refuted"
+    },
+    {
+     "label": "Hygiene lesson",
+     "value": "6 / 6",
+     "sub": "won its category in every measurement ever"
+    },
+    {
+     "label": "Escalation rule",
+     "value": "fired",
+     "sub": "recipe search closed; mechanics study next"
+    },
+    {
+     "label": "Benchmark",
+     "value": "never opened",
+     "sub": "seed 78,149 sealed by the frozen rule"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "The review round did not stop the forgetting",
+     "chart_read": "Bars per model: unseen skill-test total (of 20) and retained-skill total (of 104).",
+     "chart_takeaway": "The dosed model leads on new skills but pays the same retention cost as before — the schedule was not the cause, and the preregistered rule closes the recipe hunt."
     }
    ]
   },
@@ -4703,6 +5152,160 @@
      "chart_plain_title": "Concrete-state ranking trails every structured comparison",
      "chart_read": "Each bar is the average share of publicly viable first moves recovered among the top four choices. Compare materialized states with names alone, shuffled states, listwise choice, a surface-only rule, and random ranking.",
      "chart_takeaway": "Materialized ranking beats random but remains below all five structured comparisons, so this cheap ranking route does not justify a larger search."
+    }
+   ]
+  },
+  "qwen35_4b_medium_budget_probe_measurement": {
+   "verdict_tag": "The referee stopped it at the door: eight-fold thinking time exceeds the wall-clock budget",
+   "concept_primer": "Three different teaching methods have now failed at the same benchmark family — the debugging-style episodes where the model must use feedback across turns. Every remaining training idea therefore tops out at nine of ten families. But all previous measurements gave the model a tight thinking allowance, and the two stuck families are exactly the ones needing long multi-step reasoning. This experiment re-runs the same four already-built models on the medium benchmark with eight times the thinking room: if the stuck families move at all, the goal is still fully reachable and the venue just changes; if nothing moves, the wall is real and the next dose proceeds with honest expectations.",
+   "plain_question": "With eight times the thinking allowance, do the two zero-score families finally move for any existing model — is the ten-family goal still reachable?",
+   "plain_answer": "The probe never got to ask its question. The benchmark's own referee enforces a wall-clock budget per model, and the untouched base — deliberately sent first because this risk was written into the plan — blew past it with eight times the thinking allowance and was refused without a score. Zero extra compute was wasted, the sealed seed is recorded as spent, and the rule book says no retry at a lower budget in this experiment. What survives: the question of whether more thinking time moves the stuck families is still open at in-between budgets, and one more probe there is the last believable test of this lever.",
+   "why_it_matters": "This is the cheapest possible test standing between the program and a decision about its goal: fund the next training dose knowing its ceiling is nine, or discover the ceiling is still ten and redirect the venue first.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Arms run before the stop",
+     "value": "1",
+     "sub": "base first, by design"
+    },
+    {
+     "label": "Scores exposed",
+     "value": "0",
+     "sub": "the referee refused before scoring"
+    },
+    {
+     "label": "Base wall time at tb1024",
+     "value": "157s",
+     "sub": "comfortably inside; 8x thinking was not"
+    },
+    {
+     "label": "Lever still open at",
+     "value": "tb2048-4096",
+     "sub": "one more probe, fresh seed"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Where the experiment stopped",
+     "chart_read": "Each bar is a preregistered stage; one means complete.",
+     "chart_takeaway": "Design, review, and freeze completed; the event stopped at the first arm exactly as the preregistered stop outcome specified."
+    }
+   ]
+  },
+  "qwen35_4b_medium_intermediate_budget_probe": {
+   "verdict_tag": "Refused at the door again: the thinking-time lever is closed for good",
+   "concept_primer": "The previous probe asked whether eight times the thinking allowance would move the two stuck benchmark families — and never got an answer, because the benchmark's referee enforces a wall-clock limit per model and refused the very first model at the door. This successor halves the ask: four times the thinking allowance, one fresh seed, same four models. Either the event fits and finally answers the question, or a second refusal proves the thinking-time lever simply does not fit this benchmark's rules and the program accepts a nine-of-ten ceiling for its next training move.",
+   "plain_question": "Does four-times thinking room fit the benchmark's wall-clock rules — and if it fits, do the stuck families finally move?",
+   "plain_answer": "Same outcome as the first probe, one setting lower: the benchmark's wall-clock referee refused the base model at four-times thinking allowance before any trained model ran. Per the plan written before the event, a second refusal closes the thinking-time lever entirely — no more budget probes at any setting. The complete answer cost two sealed seeds and zero exposed scores. The program's honest ceiling with every currently-believable training path is nine of ten families; the stuck debugging-style family now needs a different class of idea, not another variation.",
+   "why_it_matters": "This is the last cheap test standing between the program and an honest strategic fork: a reopened ten-family goal, or a committed nine-family ceiling with the proven state-tracking dose as the next move.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Arms run before the stop",
+     "value": "1",
+     "sub": "base first, by design — again"
+    },
+    {
+     "label": "Budget settings refused",
+     "value": "2",
+     "sub": "8192 and 4096; 1024 fits"
+    },
+    {
+     "label": "Total cost of the full answer",
+     "value": "2 seeds",
+     "sub": "zero scores exposed"
+    },
+    {
+     "label": "Honest ceiling now",
+     "value": "9/10",
+     "sub": "families, with believable training paths"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Where the experiment stopped",
+     "chart_read": "Each bar is a preregistered stage; one means complete.",
+     "chart_takeaway": "Design, review, and freeze completed; the event stopped at the first arm and the pre-written consequence closed the lever."
+    }
+   ]
+  },
+  "qwen35_4b_menders_dose_scale": {
+   "verdict_tag": "Ten times the lessons, zero learning: the last teaching route closes",
+   "concept_primer": "Nine of the ten benchmark families now beat the untouched base model on every sealed test seed; exactly one family — the one shaped like fix-it-and-check-again work — still ties at zero margin. An earlier experiment tried to teach that skill with 80 practice episodes on invented toy machines and installed nothing (0 of 20 fresh problems solved). Every other cheap route is closed by pre-registered kill rules; the one move still allowed is giving the SAME lesson ten times more data. This cell trains on 800 two-round repair episodes across eight invented machines (the four originals with brand-new instances plus four newly designed ones, every knob explicitly bounded in the written rules), against a matched control that sees exactly the same token exposure, from the same parent model.",
+   "plain_question": "At ten times the dose that scored zero, does ANY fresh-instance transfer of the repair-loop skill appear — and if the trained model passes the calibrated local gate, does the last blocking benchmark family finally move?",
+   "plain_answer": [
+    "The scale bet returned the cleanest possible no. After ten times the training data — eight hundred feedback-repair lessons across eight invented machines — the trained model solved exactly one of forty fresh test episodes, the same single lucky guess as both untrained comparison models. More lessons did not overcome the zero; the skill simply does not install this way. Forgetting also crept past the allowed margin against the parent. With this, every supervised-teaching route to the one family blocking the program's ten-family goal is closed by pre-written rules: three teaching styles, doses from eighty to eight hundred lessons, and the thinking-time levers. What remains: a fundamentally different training class (learning from the model's own attempts with live feedback), or standing on the program's honest position — the full ten-family sweep demonstrated on two of four sealed seeds."
+   ],
+   "why_it_matters": "This is the program's last permitted mechanism at its last blocking family. A nonzero result prices the next dose rung; a zero kills the whole scale class and redirects the budget to genuinely different mechanisms. Either outcome converts an open question into a measured fact.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Fresh-instance transfer",
+     "value": "1/40",
+     "sub": "= both untrained controls exactly"
+    },
+    {
+     "label": "Dose curve",
+     "value": "0/20 → 1/40",
+     "sub": "80 rows → 800 rows: flat at floor"
+    },
+    {
+     "label": "Retention vs parent",
+     "value": "-5.33",
+     "sub": "outside the calibrated ±5 band"
+    },
+    {
+     "label": "SFT routes now closed",
+     "value": "all",
+     "sub": "3 pedagogies × 80-800 rows + budget levers"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Fresh-episode test scores after ten times the training",
+     "chart_read": "Three bars: the model trained on 800 repair lessons beside its untrained parent and a matched control.",
+     "chart_takeaway": "One in forty for all three — the training installed nothing the untrained models did not already have."
+    }
+   ]
+  },
+  "qwen35_4b_menders_sirens_tier_forensics": {
+   "verdict_tag": "The two-family wall was the measuring tier, not the model",
+   "concept_primer": "The program's goal needs one trained model to beat the untouched base on every one of ten benchmark families at once. The last attempt failed on exactly two families that looked frozen: one always scored zero, the other always exactly one half, for every model at every attempt on the quick benchmark tier. Before designing another training treatment against that wall, this study dug through every benchmark receipt the repository has ever produced — including hundreds from an older experiment line that also ran the bigger, finer-grained medium tier — to check whether the wall is real or an artifact of the quick tier's coarse scoring.",
+   "plain_question": "Are the two frozen family scores a real model wall, or an artifact of the quick benchmark tier — and on which tier is the all-families goal actually winnable?",
+   "plain_answer": "An artifact. The constants already have committed counterexamples on the line's own instrument, and the all-ten-families-at-once win happened 9 times in 94 historical medium-tier comparisons versus once in 84 quick-tier ones. On medium, the base model never maxes out any family (so strict wins are always available) and the always-one-half family spreads out to a normal range. The catch: those nine winners trained on benchmark-family data, which this program forbids — so the next step is measuring this line's own clean models on medium for the first time.",
+   "why_it_matters": "Every future attempt at the program goal was about to be aimed at two families that cannot be beaten at quick granularity. This redirect — costing zero GPU hours — moves the goal gate to a tier where history says it is winnable.",
+   "verdict_tone": "positive",
+   "key_numbers": [
+    {
+     "label": "Goal-gate passes, medium",
+     "value": "9/94",
+     "sub": "all ten families strictly above base"
+    },
+    {
+     "label": "Goal-gate passes, quick",
+     "value": "1/84",
+     "sub": "the tier the line has been using"
+    },
+    {
+     "label": "GPU hours",
+     "value": "0",
+     "sub": "committed receipts only"
+    },
+    {
+     "label": "Base at a family ceiling, medium",
+     "value": "0/95",
+     "sub": "strict wins always available"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "How many of the ten families a trained model strictly beat the base on, by tier",
+     "chart_read": "Each bar counts historical paired comparisons; the rightmost group (10 of 10) is the program goal.",
+     "chart_takeaway": "Medium-tier comparisons cluster at eight and nine family wins with nine full passes; quick-tier ones cluster at six and seven with one pass."
     }
    ]
   },
@@ -5652,6 +6255,44 @@
     }
    ]
   },
+  "qwen35_4b_rank_capacity_vehicle_cell": {
+   "verdict_tag": "Screen too noisy to judge; guard fired",
+   "concept_primer": "The forgetting tax is now a law: every practice dose costs five to ten retained answers on this training setup. The leading suspect is capacity — the small add-on module carries the whole training history, so new lessons must evict something. This trial doubles the module's size and gives the dose its own fresh module on a frozen base model.",
+   "plain_question": "Does a double-size, fresh add-on module absorb the practice dose without evicting retained skills — or is the forgetting tax deeper than capacity?",
+   "plain_answer": "The trial could not answer the capacity question — by design. Its built-in guard required the known nine-point forgetting case to reproduce before trusting any comparison, and on this fresh screen that case measured only five. Across the last four screens the same models' forgetting scores wobble by three to four points, which rivals the five-point rule itself. The double-size module measured seven points of forgetting and a weaker skill result, but none of that is judgeable until the measuring stick is calibrated.",
+   "why_it_matters": "A measurement rule that can be tripped by luck must be caught by its own guard — and it was. The next step costs no training at all: re-measure the built models on several fresh screens, size the wobble, and set rules that only real effects can pass. Every future forgetting claim depends on it.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "Guard",
+     "value": "fired",
+     "sub": "the known -9 re-measured at -5 — comparison refused"
+    },
+    {
+     "label": "Screen wobble",
+     "value": "±3-4",
+     "sub": "same models across four fresh screens"
+    },
+    {
+     "label": "Rank-64 readings",
+     "value": "-7 / 19",
+     "sub": "retention / skill — recorded, not adjudicated"
+    },
+    {
+     "label": "Next step cost",
+     "value": "eval only",
+     "sub": "no training; calibrate the screen itself"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "The guard refused the comparison: the screen wobbles as much as the rule",
+     "chart_read": "Bars per model: retained-skill totals on this screen.",
+     "chart_takeaway": "The known forgetting case failed to reproduce, so no capacity conclusion was drawn — the measuring stick gets calibrated next, at zero training cost."
+    }
+   ]
+  },
   "qwen35_4b_real_sample_verify_commit": {
    "verdict_tag": "The weak link is writing code",
    "concept_primer": "Think of an editor choosing the best essay from a stack of drafts a writer produced. On easy prompts a good draft always exists, so any editor succeeds. On hard prompts, if not one draft is actually correct, even a flawless editor cannot pick a winner.",
@@ -5895,6 +6536,44 @@
     }
    ]
   },
+  "qwen35_4b_repair_verifier_signal_probe": {
+   "verdict_tag": "Coin-flip: the model cannot even recognize the repair it cannot produce",
+   "concept_primer": "Every teaching route to the one benchmark family blocking the program's ten-family goal is now closed: the model cannot learn debugging-style repair from demonstrations at any tested dose. One training class remains — letting the model learn from its own attempts with live feedback — but that loop only works if the model can at least RECOGNIZE a correct repair when shown one, even though it cannot produce one. This experiment measures exactly that: two hundred puzzles, each showing a broken procedure's failures on two trials plus two candidate one-step fixes, only one of which works for both. Picking the right one requires mentally running each candidate — the model's one reliably strong skill.",
+   "plain_question": "Can the model recognize the correct repair when shown two candidates — the signal an attempt-and-feedback training loop would need?",
+   "plain_answer": "The gate said no, cleanly. Handed two candidate repairs and the full failure evidence — a task solvable by mentally running each candidate through both trials — the model picked the working one 51.5 percent of the time with its reasoning enabled and 49 percent without: coin-flip, below even the best word-matching shortcut the design team pre-computed and pinned at 53 percent. It was not running out of thinking room (only 7.5 percent of items hit the cap); it finishes its reasoning and still cannot tell. With recognition absent, a learn-from-your-own-attempts loop would have no signal to climb, and the last training class for the stubborn family closes by the pre-written rule. The program's map is complete: the ten-family goal stands demonstrated on two of four sealed seeds, every route to making it reliable is closed by rule rather than fatigue, and the one blocking skill is now precisely characterized — the model can neither produce, nor buy with thinking time, nor even recognize multi-constraint eliminative repairs.",
+   "why_it_matters": "This one cheap measurement decides whether the program's last mechanism class gets funded on evidence or closed by rule — the difference between a live path to the ten-family goal and an honestly completed map.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Recognition accuracy",
+     "value": "51.5%",
+     "sub": "with thinking; 49.0% without"
+    },
+    {
+     "label": "Shortcut ceiling",
+     "value": "53.25%",
+     "sub": "pre-pinned; the model scored below it"
+    },
+    {
+     "label": "Thinking-cap contacts",
+     "value": "7.5%",
+     "sub": "not budget-limited"
+    },
+    {
+     "label": "Mechanism classes now closed",
+     "value": "all",
+     "sub": "SFT, budget, and on-policy — by rule"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Repair-recognition accuracy against the pre-registered bars",
+     "chart_read": "Two bars for the model's two modes, with the coin-flip floor, the shortcut ceiling, and the funding bar marked.",
+     "chart_takeaway": "Both modes sit at the coin-flip floor, below the shortcut ceiling and far from the 65 percent funding bar."
+    }
+   ]
+  },
   "qwen35_4b_repo_search_compress_bank": {
    "verdict_tag": "Training on clean wins erases recovery skill",
    "concept_primer": "Imagine training a mechanic only on repairs that went perfectly the first time: inspect, fix, test, done. They nail that tidy four-step routine but never watch a stuck bolt get worked loose — so when a fix is rejected, they just resubmit the same broken move.",
@@ -5936,6 +6615,44 @@
      "chart_plain_title": "Every training example kept all four coding steps equally",
      "chart_read": "Bars count target training rows per step — inspect, patch, verify, commit — in a 20-repository setup check. All four sit at exactly 20 rows, showing compression kept each step in equal amounts. This is a data check, not a model result.",
      "chart_takeaway": "Perfectly level bars confirm the compression balanced how often each step appears — yet equal counts still failed, because they never say when to recover after a failure."
+    }
+   ]
+  },
+  "qwen35_4b_retention_screen_calibration": {
+   "verdict_tag": "The measuring stick wobbles twice as much as the pass/fail rule assumed",
+   "concept_primer": "Every training trial in this program ends with a forgetting check: the new model retakes a 104-task quiz beside its parent, and a drop of more than five tasks fails it. But the quiz itself is regenerated fresh each time, and the guard on the last trial caught the same model's score moving four points between two fresh quizzes. This study re-measured five already-built models on four brand-new quizzes each — twenty measurement runs, zero training — to size that wobble directly.",
+   "plain_question": "How much does a model's forgetting gap versus its parent wobble between fresh screens, what pass/fail margin does that imply, and which past readings survive?",
+   "plain_answer": "The gap wobbles with a standard deviation of 4.3 tasks — the five-task pass/fail margin was barely one wobble wide, so single-quiz forgetting verdicts were close to coin flips. Every historical 'this model forgot 5-10 tasks' reading sits inside the measured noise; averaged over four fresh quizzes the real forgetting is only 1-4 tasks. The frozen fix: future trials must average three fresh quizzes, where the same five-task margin becomes correctly sized.",
+   "why_it_matters": "Every forgetting conclusion this program made — including the priced 5-10-point dose tax and the paused capacity question — was read off a single quiz. This calibration shrinks the tax to 1-4 points, vindicates the guard that paused the last trial, and hands every future trial a sound adjudication rule.",
+   "verdict_tone": "positive",
+   "key_numbers": [
+    {
+     "label": "Gap wobble (SD)",
+     "value": "4.3",
+     "sub": "vs the ±5 pass/fail margin"
+    },
+    {
+     "label": "Historical readings inside noise",
+     "value": "5/5",
+     "sub": "the -9, -10, -10, -7, -5"
+    },
+    {
+     "label": "Real pooled forgetting",
+     "value": "1-4",
+     "sub": "tasks, was read as 5-10"
+    },
+    {
+     "label": "New rule",
+     "value": "3 quizzes",
+     "sub": "±5 margin on their average"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "The same model's forgetting gap on four fresh quizzes",
+     "chart_read": "Each group is one already-built model; the four bars are its gap to the parent on four freshly generated quizzes.",
+     "chart_takeaway": "Single readings swing from -10 to +4 for the same unchanged model — the historical one-quiz forgetting verdicts were reading this noise."
     }
    ]
   },
@@ -6528,6 +7245,44 @@
     }
    ]
   },
+  "qwen35_4b_statechain_only_dose": {
+   "verdict_tag": "The lesson transferred at last — and the parent quietly swept all ten families",
+   "verdict_tone": "positive",
+   "concept_primer": "The previous experiment taught two lessons at once on invented toy machines: an act-observe-revise repair loop and hidden-state tracking. The verdict split cleanly — state-tracking installed (the trained model beat both its parent and a matched control on fresh instances) while the repair loop scored zero and dragged overall retention just outside the allowed band. This successor drops the dead half entirely: all 160 training rows teach state-tracking, on the two machines that already worked (as brand-new instances) plus two newly invented ones, with every knob on every machine explicitly bounded in the written rules. Everything else — the parent model, the matched-exposure control, the calibrated three-screen retention gate, and the one sealed benchmark shot — is inherited unchanged from the reference design.",
+   "plain_question": "Does a state-tracking-only dose (no dead repair rows) install the skill cleanly — beating both parent and control on fresh instances — while staying inside the retention bands the mixed dose failed?",
+   "plain_answer": "Three results in one event. First, the state-tracking dose passed its local gate cleanly — the skill installed again and this time forgetting stayed inside the calibrated margin. Second, on the real benchmark the trained model TRIPLED the protocol-compliance family against both matched controls: the first time in this program a taught skill moved its benchmark family. Third, the surprise: the parent model it trained from beat the untouched base on ALL TEN families at once — the program's stated goal, recorded for the first time ever — on razor-thin margins at the two hardest families. One seed is not a claim: a confirmation run on fresh seeds with a sample-more baseline is the immediate next step.",
+   "why_it_matters": "The split verdict left the obvious question unanswered: was the state-tracking install real and merely taxed by the failing half of the dose, or does any 160-row dose pay the same retention cost? A clean pass here isolates the proven skill and gives the program its best remaining shot at converting one of the two zero-zero benchmark families (the state-tracking-shaped one); a clean fail says the retention tax comes from dosing itself, not from dead rows.",
+   "key_numbers": [
+    {
+     "label": "Goal gate (parent)",
+     "value": "10/10",
+     "sub": "first all-families pass in program history"
+    },
+    {
+     "label": "Rites conversion",
+     "value": "0.30 vs 0.10",
+     "sub": "trained model vs both matched controls"
+    },
+    {
+     "label": "Local gate",
+     "value": "PROMOTED",
+     "sub": "21/40 axis; retention in-band"
+    },
+    {
+     "label": "Pilot vs parent",
+     "value": "-0.017",
+     "sub": "the dose still trades aggregate"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Every model's score on the ten families at the sealed-seed event",
+     "chart_read": "Grouped bars per family; the parent beats base everywhere, the trained model triples rites.",
+     "chart_takeaway": "The parent swept all ten families against base — the program goal, recorded once, awaiting confirmation."
+    }
+   ]
+  },
   "qwen35_4b_static_bridge_ceiling_breaker": {
    "verdict_tag": "A few harder examples double transfer, then stall",
    "concept_primer": "Picture the model as a code mechanic handed a broken tiny program plus a printout that, for each failing test, shows the answer it should have produced beside the wrong one it actually did. Its job: rewrite the program so every hidden test passes.",
@@ -6763,6 +7518,44 @@
      "chart_plain_title": "How many tries each method needed per task",
      "chart_read": "Four bars, one per building method; height is the average number of candidate answers generated per task, so lower is cheaper.",
      "chart_takeaway": "Expanded custom-built parts reached full coverage at about 15 tries per task, far cheaper than the pooled roughly 57."
+    }
+   ]
+  },
+  "qwen35_4b_sweep_rate_consolidation": {
+   "verdict_tag": "Bookkeeping with teeth: the honest sweep rate is one-in-three, not one-in-two",
+   "concept_primer": "As the program closed its campaign, its documents cited a roughly-fifty-percent rate for the flagship result — the trained model beating the base on all ten benchmark families at once. That figure came from a favorable four-seed window and quietly omitted an earlier miss. This cell collected every recorded reading, recomputed each verdict from raw family scores under tamper-proof pins, and corrected the figure everywhere it appears with visible errata.",
+   "plain_question": "Over every recorded all-families reading, how often does the reference model actually sweep — and what blocks it?",
+   "plain_answer": "Two sweeps in six readings — one in three, not one in two — with a wide honest confidence band (roughly 4 to 78 percent at 95%). The texture matters more than the point estimate: the model never lost a single family to the base in sixty comparisons and won the overall score all six times; every failed sweep was a zero-zero tie at the same one family. The corrected figure now stands in every document that carried the old one, as visible errata; no underlying fact changed.",
+   "why_it_matters": "Terminal claims deserve all the evidence. The program's flagship number is now computed over the complete record with proper uncertainty, and the correction trail is public — closed by arithmetic, not by narrative.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Sweep rate, all readings",
+     "value": "2/6",
+     "sub": "was informally ~50% over a 2/4 window"
+    },
+    {
+     "label": "95% CI",
+     "value": "[0.04, 0.78]",
+     "sub": "six readings bound it loosely; reported honestly"
+    },
+    {
+     "label": "Strict family losses",
+     "value": "0/60",
+     "sub": "aggregate win 6/6"
+    },
+    {
+     "label": "Blocker in every miss",
+     "value": "menders",
+     "sub": "always a zero-zero draw"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Family wins against the base on each of the six sealed seeds",
+     "chart_read": "One bar per seed: how many of the ten families the reference model strictly won.",
+     "chart_takeaway": "Eight to ten wins every time, never a loss — the distance to a perfect sweep is always the same single family."
     }
    ]
   },
@@ -7544,6 +8337,87 @@
     }
    ]
   },
+  "qwen35_4b_universal_failure_selected_restart_target_match": {
+   "verdict_tag": "Clean restarts are frozen; model test pending",
+   "concept_primer": "Instead of making a model continue from its own long wrong reasoning, use the mistake only to choose the task, then teach a short correct solution from the original question.",
+   "plain_question": "Can fresh tasks the model actually fails become broadly useful lessons if training restarts before the mistake and matches replay's supervised exposure exactly?",
+   "plain_answer": "The data-selection stage passed: from 624 fresh attempts, the frozen rule selected 52 clean restarts, exactly four for each of 13 skills. Forty correct accuracy or cap failures and twelve correct-but-too-long cases are now frozen; training still waits for an exact exposure match to replay.",
+   "why_it_matters": "The previous real-failure curriculum lost while carrying long wrong prefixes and supervising fewer target tokens. This design removes both confounds before spending another training run.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Fresh selection pool",
+     "value": "624 tasks",
+     "sub": "48 for each of 13 skills"
+    },
+    {
+     "label": "Prospective restart lessons",
+     "value": "52",
+     "sub": "four failures required per skill"
+    },
+    {
+     "label": "Prior-source prompt overlap",
+     "value": "zero",
+     "sub": "574 predecessor and reserved-local messages checked"
+    },
+    {
+     "label": "Parent completions collected",
+     "value": "624 of 624",
+     "sub": "one event with 228 hard failures"
+    },
+    {
+     "label": "Selected hard vs too-long rows",
+     "value": "40 + 12",
+     "sub": "52 total, four per skill"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "The design is complete and every model stage remains gated",
+     "chart_read": "Bars mark whether intake, CPU design, parent rollout, failure selection, exposure matching, paired training, local testing, and broad testing are complete.",
+     "chart_takeaway": "Intake, design, rollout, and balanced failure selection are complete; exposure matching and every model-training stage remain gated."
+    }
+   ]
+  },
+  "qwen35_4b_universal_fresh_surface_budget_commit_target_match": {
+   "verdict_tag": "New words worked; rule-guessing wall stayed",
+   "concept_primer": "Take the practice set that nearly worked before, rewrite every exercise with brand-new vocabulary, and add a new lesson that teaches working to a strict step budget and committing an answer the moment the budget says stop.",
+   "plain_question": "Does the near-miss practice set still work when its vocabulary is completely replaced, and does budget-and-commit practice fix the run-on answers that kept failing the screen?",
+   "plain_answer": "The rewritten practice set beat both comparison models on the big screen — more right answers (69 vs 63 and 62 of 104), many fewer run-on answers (7 vs 18 and 13), and 31 percent shorter output — on vocabulary it had never trained on. But the screen also required four of eight rule-guessing tasks right, and every model scored zero of eight there, so nothing advanced to the benchmark. The budget lesson made things worse, not better.",
+   "why_it_matters": "The practice set's benefit binds to structure, not to specific words — the first positive mechanism reading in this line. And the screen's rule-guessing requirement is now known to be impossible for this model family, so future tests must either attack rule-guessing differently or measure what can actually move.",
+   "verdict_tone": "mixed",
+   "key_numbers": [
+    {
+     "label": "Right answers",
+     "value": "69 / 104",
+     "sub": "vs 63 (parent) and 62 (pure review) — all strict wins"
+    },
+    {
+     "label": "Run-on answers",
+     "value": "7",
+     "sub": "vs 18 (parent) and 13 (review); output 31% shorter"
+    },
+    {
+     "label": "Rule-guessing",
+     "value": "0 / 8",
+     "sub": "every model, including both comparisons"
+    },
+    {
+     "label": "Benchmark",
+     "value": "never opened",
+     "sub": "seed 78,143 sealed by the frozen rule"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "The rewritten practice set wins the screen; the rule-guessing floor blocks everyone",
+     "chart_read": "Grouped bars per model: right answers and cleanly finished answers (of 104), and run-on answers (fewer is better).",
+     "chart_takeaway": "The rewritten set beats both comparisons on every headline number, but the screen's rule-guessing requirement was zero-for-eight for every model, so nothing advanced."
+    }
+   ]
+  },
   "qwen35_4b_universal_low_density_token_match": {
    "verdict_tag": "Low-density doses failed the local gate",
    "concept_primer": "The previous designed mix may have been too dense, and its replay comparison also saw more tokens. This follow-up changes only a tiny number of rows while holding total training exposure exactly equal, so the later difference can be tied much more cleanly to curriculum content.",
@@ -7585,6 +8459,44 @@
      "chart_plain_title": "Every exact-exposure stream missed the local gate",
      "chart_read": "Two bars per model show exact-answer accuracy and answer parse rate on the same 26 fresh cases. The 80-lesson stream is best among the new streams, but neither bar reaches its registered threshold.",
      "chart_takeaway": "Adding 80 lessons modestly improves readable answers over replay alone, yet accuracy only ties the inherited anchor and answer-cap failures remain frequent."
+    }
+   ]
+  },
+  "qwen35_4b_universal_medium_tier_measurement": {
+   "verdict_tag": "Two tie-flips from the goal: eight family wins, zero losses, menders and rites at zero",
+   "concept_primer": "The receipt forensics showed the program's all-families goal has been judged on the wrong benchmark tier: the quick tier's coarse scoring manufactures unbeatable ties, while the bigger medium tier has seen the goal pass nine times historically. But this program's own clean-trained models — the ones forbidden from ever seeing benchmark-like data — have never been measured on medium at all. This experiment runs that measurement: four already-built models, one fresh sealed seed, no training.",
+   "plain_question": "Where do the line's best clean models actually stand on the medium benchmark tier, and which families still block the all-families goal there?",
+   "plain_answer": "The clean models' first medium-tier outing put all three at eight-of-ten family wins over the base — matching the best historical arms — and the top two lost NOTHING: they only tied on two families where both they and the base scored zero. The install-carrier model leads the aggregate and the quick-tier ranking inverted (the old quick champion came last of the trained three). The all-families goal now needs exactly two zeros flipped: menders, a genuine capability gap, and rites, which this very lineage has already scored on elsewhere.",
+   "why_it_matters": "The program goal — one trained model beating base on every family at once — needs the right courtroom. This is the first time the clean line gets judged in it, and whatever happens, the next training dose inherits exact per-family targets instead of two fake walls.",
+   "verdict_tone": "positive",
+   "key_numbers": [
+    {
+     "label": "Strict family wins vs base",
+     "value": "8/10",
+     "sub": "all three trained models"
+    },
+    {
+     "label": "Losses (top two arms)",
+     "value": "0",
+     "sub": "only ties at menders and rites"
+    },
+    {
+     "label": "Best medium aggregate",
+     "value": "0.338",
+     "sub": "hygiene_explore vs base 0.057"
+    },
+    {
+     "label": "Ties left to flip",
+     "value": "2",
+     "sub": "menders and rites, both at zero"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Each model's score on the ten benchmark families at medium tier",
+     "chart_read": "Grouped bars per family: the untouched base beside the three trained models.",
+     "chart_takeaway": "The trained models beat the base almost everywhere; the two zero-zero ties at menders and rites are all that separates the best model from the all-families goal."
     }
    ]
   },
@@ -7698,136 +8610,6 @@
     }
    ]
   },
-  "qwen35_4b_universal_failure_selected_restart_target_match": {
-   "verdict_tag": "Clean restarts are frozen; model test pending",
-   "concept_primer": "Instead of making a model continue from its own long wrong reasoning, use the mistake only to choose the task, then teach a short correct solution from the original question.",
-   "plain_question": "Can fresh tasks the model actually fails become broadly useful lessons if training restarts before the mistake and matches replay's supervised exposure exactly?",
-   "plain_answer": "The data-selection stage passed: from 624 fresh attempts, the frozen rule selected 52 clean restarts, exactly four for each of 13 skills. Forty correct accuracy or cap failures and twelve correct-but-too-long cases are now frozen; training still waits for an exact exposure match to replay.",
-   "why_it_matters": "The previous real-failure curriculum lost while carrying long wrong prefixes and supervising fewer target tokens. This design removes both confounds before spending another training run.",
-   "verdict_tone": "neutral",
-   "key_numbers": [
-    {
-     "label": "Fresh selection pool",
-     "value": "624 tasks",
-     "sub": "48 for each of 13 skills"
-    },
-    {
-     "label": "Prospective restart lessons",
-     "value": "52",
-     "sub": "four failures required per skill"
-    },
-    {
-     "label": "Prior-source prompt overlap",
-     "value": "zero",
-     "sub": "574 predecessor and reserved-local messages checked"
-    },
-    {
-     "label": "Parent completions collected",
-     "value": "624 of 624",
-     "sub": "one event with 228 hard failures"
-    },
-    {
-     "label": "Selected hard vs too-long rows",
-     "value": "40 + 12",
-     "sub": "52 total, four per skill"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "The design is complete and every model stage remains gated",
-     "chart_read": "Bars mark whether intake, CPU design, parent rollout, failure selection, exposure matching, paired training, local testing, and broad testing are complete.",
-     "chart_takeaway": "Intake, design, rollout, and balanced failure selection are complete; exposure matching and every model-training stage remain gated."
-    }
-   ]
-  },
-  "qwen35_4b_universal_successful_sibling_target_match": {
-   "verdict_tag": "Balanced sibling mining cannot start",
-   "concept_primer": "When the model misses a fresh problem on its first try but solves it on another sampled try, that successful attempt may be a better lesson than a hand-written solution because it already uses reasoning the model can produce.",
-   "plain_question": "Can the model learn broadly useful behavior from its own shortest correct sampled attempts on fresh problems it first gets wrong?",
-   "plain_answer": "This version cannot run its second step. Across 624 first attempts it found 227 failures, but counting and routing had none and selection had only two; the plan required four failures in every skill. It therefore stopped before sampled retries or training.",
-   "why_it_matters": "Already-strong skills should not be forced into a repair-only data quota. The next test can focus sampled-success lessons on the ten skills that still fail while ordinary replay protects the skills the model already handles.",
-   "verdict_tone": "neutral",
-   "key_numbers": [
-    {
-     "label": "Fresh design pool",
-     "value": "624 tasks",
-     "sub": "48 for each of 13 skills"
-    },
-    {
-     "label": "Sampled tries per failed task",
-     "value": "16",
-     "sub": "fixed before the first model run"
-    },
-    {
-     "label": "Required supported lessons",
-     "value": "52",
-     "sub": "never constructed because the first availability gate failed"
-    },
-    {
-     "label": "Hard first-attempt failures",
-     "value": "227",
-     "sub": "spread unevenly across the 13 skills"
-    },
-    {
-     "label": "Skills below quota",
-     "value": "3 of 13",
-     "sub": "count 0, route 0, select 2; four required"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Only intake, fresh data, and review are complete",
-     "chart_read": "The groups follow the planned checkpoints from intake through two collection runs, training, local testing, and broad testing. A bar at one means that checkpoint is complete.",
-     "chart_takeaway": "The first five checkpoints completed, but the availability gate failed. Every sampled-retry, training, and evaluation stage correctly stayed closed."
-    },
-    {
-     "index": 1,
-     "chart_plain_title": "Counting, routing, and selection fall short of the quota",
-     "chart_read": "For each skill, the taller or shorter first bar counts hard failures in 48 fresh first attempts, while the second bar marks the fixed requirement of four. A failure bar below four blocks the whole balanced design.",
-     "chart_takeaway": "Ten skills have enough failures, but counting and routing have zero and selection has two, so an all-skill failure-only curriculum is impossible without changing the rules."
-    }
-   ]
-  },
-  "qwen35_4b_universal_residual_successful_sibling_target_match": {
-   "verdict_tag": "Stopped: too few correct retries",
-   "concept_primer": "Use the model’s own correct sampled retries as lessons only where its first answer still fails. Keep ordinary broad practice for skills it already handles, then test every skill again.",
-   "plain_question": "Can short correct retries improve the ten skills that still fail without damaging counting, routing, or selection?",
-   "plain_answer": "Grading the 3,600 retries found 855 short fully-correct ones, and nine of ten weak skills had plenty. But rule-guessing (induction) yielded a usable correct retry on only 2 of its 46 failed tasks, below the required four, so the frozen rule stopped the experiment before any training. No model was trained and no benchmark was touched.",
-   "why_it_matters": "The skill the model most needs to repair is the one where its own retries are never correct: rule-guessing. Together with the earlier stop this closes learning-from-own-retries as the path, and points the program back to purpose-designed practice data that does not depend on the model already being able to succeed.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Qualified retries",
-     "value": "855 / 3,600",
-     "sub": "short, fully correct, cleanly finished"
-    },
-    {
-     "label": "Rule-guessing coverage",
-     "value": "2 / 46",
-     "sub": "failed tasks with any usable correct retry"
-    },
-    {
-     "label": "Required per skill",
-     "value": "4",
-     "sub": "nine of ten skills met it; induction did not"
-    },
-    {
-     "label": "Training and benchmarks",
-     "value": "never opened",
-     "sub": "seeds 50 / 88,012 / 78,142 unconsumed"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Usable correct retries per skill: rule-guessing falls below the bar",
-     "chart_read": "Each bar counts failed tasks where at least one same-model retry was short and fully correct. Four per skill were required.",
-     "chart_takeaway": "Nine skills clear the bar easily; rule-guessing manages two of forty-six, so the preregistered rule stopped the experiment before training."
-    }
-   ]
-  },
   "qwen35_4b_universal_replay_anchor": {
    "verdict_tag": "Designed mix loses; replay-only sets a stronger anchor",
    "concept_primer": "This experiment kept the model practicing broad tasks while adding a smaller set of abstract lessons. A replay-only comparison received the same number of updates, revealing whether any gain came from the designed lessons or simply from continuing broad practice.",
@@ -7869,6 +8651,44 @@
      "chart_plain_title": "Both training streams shared the same broad core",
      "chart_read": "Each bar totals 1,520 rows. Both streams share 1,120 replay rows; the candidate adds 400 designed lessons while the comparison adds 400 more replay examples.",
      "chart_takeaway": "The matched construction isolates designed lessons from the benefit of simply continuing broad practice."
+    }
+   ]
+  },
+  "qwen35_4b_universal_residual_successful_sibling_target_match": {
+   "verdict_tag": "Stopped: too few correct retries",
+   "concept_primer": "Use the model’s own correct sampled retries as lessons only where its first answer still fails. Keep ordinary broad practice for skills it already handles, then test every skill again.",
+   "plain_question": "Can short correct retries improve the ten skills that still fail without damaging counting, routing, or selection?",
+   "plain_answer": "Grading the 3,600 retries found 855 short fully-correct ones, and nine of ten weak skills had plenty. But rule-guessing (induction) yielded a usable correct retry on only 2 of its 46 failed tasks, below the required four, so the frozen rule stopped the experiment before any training. No model was trained and no benchmark was touched.",
+   "why_it_matters": "The skill the model most needs to repair is the one where its own retries are never correct: rule-guessing. Together with the earlier stop this closes learning-from-own-retries as the path, and points the program back to purpose-designed practice data that does not depend on the model already being able to succeed.",
+   "verdict_tone": "negative",
+   "key_numbers": [
+    {
+     "label": "Qualified retries",
+     "value": "855 / 3,600",
+     "sub": "short, fully correct, cleanly finished"
+    },
+    {
+     "label": "Rule-guessing coverage",
+     "value": "2 / 46",
+     "sub": "failed tasks with any usable correct retry"
+    },
+    {
+     "label": "Required per skill",
+     "value": "4",
+     "sub": "nine of ten skills met it; induction did not"
+    },
+    {
+     "label": "Training and benchmarks",
+     "value": "never opened",
+     "sub": "seeds 50 / 88,012 / 78,142 unconsumed"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Usable correct retries per skill: rule-guessing falls below the bar",
+     "chart_read": "Each bar counts failed tasks where at least one same-model retry was short and fully correct. Four per skill were required.",
+     "chart_takeaway": "Nine skills clear the bar easily; rule-guessing manages two of forty-six, so the preregistered rule stopped the experiment before training."
     }
    ]
   },
@@ -7955,6 +8775,55 @@
      "chart_plain_title": "Intake and CPU design are complete",
      "chart_read": "Bars at one mark completed admission stages. Training, local evaluation, and broad evaluation remain at zero.",
      "chart_takeaway": "The generator, exact-compute control, gates, and adversarial review are frozen without creating a model result or consuming an evaluation event."
+    }
+   ]
+  },
+  "qwen35_4b_universal_successful_sibling_target_match": {
+   "verdict_tag": "Balanced sibling mining cannot start",
+   "concept_primer": "When the model misses a fresh problem on its first try but solves it on another sampled try, that successful attempt may be a better lesson than a hand-written solution because it already uses reasoning the model can produce.",
+   "plain_question": "Can the model learn broadly useful behavior from its own shortest correct sampled attempts on fresh problems it first gets wrong?",
+   "plain_answer": "This version cannot run its second step. Across 624 first attempts it found 227 failures, but counting and routing had none and selection had only two; the plan required four failures in every skill. It therefore stopped before sampled retries or training.",
+   "why_it_matters": "Already-strong skills should not be forced into a repair-only data quota. The next test can focus sampled-success lessons on the ten skills that still fail while ordinary replay protects the skills the model already handles.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Fresh design pool",
+     "value": "624 tasks",
+     "sub": "48 for each of 13 skills"
+    },
+    {
+     "label": "Sampled tries per failed task",
+     "value": "16",
+     "sub": "fixed before the first model run"
+    },
+    {
+     "label": "Required supported lessons",
+     "value": "52",
+     "sub": "never constructed because the first availability gate failed"
+    },
+    {
+     "label": "Hard first-attempt failures",
+     "value": "227",
+     "sub": "spread unevenly across the 13 skills"
+    },
+    {
+     "label": "Skills below quota",
+     "value": "3 of 13",
+     "sub": "count 0, route 0, select 2; four required"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Only intake, fresh data, and review are complete",
+     "chart_read": "The groups follow the planned checkpoints from intake through two collection runs, training, local testing, and broad testing. A bar at one means that checkpoint is complete.",
+     "chart_takeaway": "The first five checkpoints completed, but the availability gate failed. Every sampled-retry, training, and evaluation stage correctly stayed closed."
+    },
+    {
+     "index": 1,
+     "chart_plain_title": "Counting, routing, and selection fall short of the quota",
+     "chart_read": "For each skill, the taller or shorter first bar counts hard failures in 48 fresh first attempts, while the second bar marks the fixed requirement of four. A failure bar below four blocks the whole balanced design.",
+     "chart_takeaway": "Ten skills have enough failures, but counting and routing have zero and selection has two, so an all-skill failure-only curriculum is impossible without changing the rules."
     }
    ]
   },
@@ -8581,6 +9450,198 @@
      "chart_plain_title": "More attempts lift two-step solving but never three-step",
      "chart_read": "Lines track the cumulative share of tasks solved as attempts rise from one to sixteen. Two flat lines sit at zero: three-step tasks for both the untrained and self-trained models. One rising line is two-step for the self-trained model. Higher is better.",
      "chart_takeaway": "The two-step line climbs steadily to 36% while both three-step lines stay glued to zero across all sixteen tries — extra sampling never surfaces a single three-step solution."
+    }
+   ]
+  },
+  "qwen35_4b_zero_root_lineage_rebuild": {
+   "verdict_tag": "The mystery ancestor priced: ninety percent of the win was the documented recipe",
+   "concept_primer": "The program's best model was built by six well-documented training steps stacked on top of one mystery ingredient: an old starter adapter nobody kept a recipe for. This experiment rebuilds the model using only the six documented steps, starting from a truly blank adapter, to see whether the mystery ingredient actually mattered.",
+   "plain_question": "If the six documented training steps are replayed from a blank adapter (no undocumented starter), does the rebuilt model still match the original on the sealed ten-skill benchmark?",
+   "plain_answer": [
+    "The rebuild answered the provenance question with numbers. Retracing the six documented training steps from a truly blank starting adapter — same datasets, same seeds, same settings — produced a model with about ninety percent of the original's benchmark gain: 4.9 times the base score, seven of ten families strictly won, nothing lost. The undocumented ancestor adapter turns out to be worth about 0.04 aggregate, concentrated in exactly the three families that match its old training era — and it actually held BACK three other families, where the clean rebuild scores higher. So the formal verdict is 'degraded': the original's perfect sweeps lean on that ancestor's margin, and the clean-provenance upgrade is not available. But the honest headline is the reverse: the program's documented, contamination-free recipe does almost all of the work on its own, and a fully clean lineage extended with the proven skill-converter dose is now a mapped path.",
+    " ",
+    "[",
+    "E",
+    "r",
+    "r",
+    "a",
+    "t",
+    "u",
+    "m",
+    " ",
+    "2",
+    "0",
+    "2",
+    "6",
+    "-",
+    "0",
+    "7",
+    "-",
+    "1",
+    "6",
+    ":",
+    " ",
+    "s",
+    "w",
+    "e",
+    "e",
+    "p",
+    "-",
+    "r",
+    "a",
+    "t",
+    "e",
+    " ",
+    "f",
+    "r",
+    "a",
+    "m",
+    "i",
+    "n",
+    "g",
+    "s",
+    " ",
+    "c",
+    "i",
+    "t",
+    "i",
+    "n",
+    "g",
+    " ",
+    "~",
+    "5",
+    "0",
+    "%",
+    " ",
+    "r",
+    "e",
+    "f",
+    "l",
+    "e",
+    "c",
+    "t",
+    "e",
+    "d",
+    " ",
+    "a",
+    " ",
+    "f",
+    "a",
+    "v",
+    "o",
+    "r",
+    "a",
+    "b",
+    "l",
+    "e",
+    " ",
+    "w",
+    "i",
+    "n",
+    "d",
+    "o",
+    "w",
+    ";",
+    " ",
+    "t",
+    "h",
+    "e",
+    " ",
+    "a",
+    "l",
+    "l",
+    "-",
+    "e",
+    "v",
+    "e",
+    "n",
+    "t",
+    "s",
+    " ",
+    "r",
+    "a",
+    "t",
+    "e",
+    " ",
+    "i",
+    "s",
+    " ",
+    "2",
+    "/",
+    "6",
+    " ",
+    "—",
+    " ",
+    "s",
+    "e",
+    "e",
+    " ",
+    "t",
+    "h",
+    "e",
+    " ",
+    "s",
+    "w",
+    "e",
+    "e",
+    "p",
+    "-",
+    "r",
+    "a",
+    "t",
+    "e",
+    " ",
+    "c",
+    "o",
+    "n",
+    "s",
+    "o",
+    "l",
+    "i",
+    "d",
+    "a",
+    "t",
+    "i",
+    "o",
+    "n",
+    " ",
+    "c",
+    "e",
+    "l",
+    "l",
+    ".",
+    "]"
+   ],
+   "why_it_matters": "The headline result rests on a model whose first ingredient has no recorded origin. If the rebuild matches, the whole result becomes reproducible from committed recipes end-to-end; if it degrades, the program finally learns how much it owes to an ingredient it cannot reproduce.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Zero-root aggregate",
+     "value": "0.3462",
+     "sub": "vs original 0.3824, base 0.0713"
+    },
+    {
+     "label": "Transfer carried by documented stages",
+     "value": "~90%",
+     "sub": "7/10 strict wins, zero losses"
+    },
+    {
+     "label": "The ancestor's worth",
+     "value": "~0.036",
+     "sub": "concentrated in sirens/rites/mirage"
+    },
+    {
+     "label": "Families the ancestor suppressed",
+     "value": "3",
+     "sub": "chronicle, siftstack, stockade"
+    }
+   ],
+   "charts": [
+    {
+     "index": 0,
+     "chart_plain_title": "Original versus clean-rebuild scores on the ten families",
+     "chart_read": "Grouped bars per family: base, the original model, and the zero-root rebuild on the same sealed seed.",
+     "chart_takeaway": "The rebuild matches or beats the original on seven families; the ancestor's edge lives in three."
     }
    ]
   },
@@ -13820,44 +14881,6 @@
     }
    ]
   },
-  "qwen35_4b_counterfactual_plan_reflection_transfer": {
-   "verdict_tag": "Ready for review; no model result",
-   "concept_primer": "The training lesson asks a hypothetical follow-up: name the three-step plan, but do not calculate the answer. Testing then removes that follow-up and asks for the answer directly.",
-   "plain_question": "Can teaching a small model what plan it should describe in a hypothetical pause make it solve the original problem better, even though the answer itself was never trained?",
-   "plain_answer": "Not known yet. The current checkpoint builds and checks fresh list, text, and register puzzles, plus a control where every plan is deliberately assigned to the wrong puzzle. No model has been loaded or trained.",
-   "why_it_matters": "If the idea works, useful problem-solving habits could be taught through explanations on a separate training branch instead of requiring a correct worked answer for every action. The wrong-plan control will show whether the plan's content truly matters.",
-   "verdict_tone": "neutral",
-   "key_numbers": [
-    {
-     "label": "Checked smoke tasks",
-     "value": "30",
-     "sub": "fresh train, first test, and confirmation examples"
-    },
-    {
-     "label": "Task families",
-     "value": "3",
-     "sub": "integer lists, text strings, and three registers"
-    },
-    {
-     "label": "Cross-split collisions",
-     "value": "zero",
-     "sub": "both exact plans and full behavior signatures"
-    },
-    {
-     "label": "Model or training runs",
-     "value": "zero",
-     "sub": "design review is still required"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Only intake and the construction smoke are complete",
-     "chart_read": "The groups run from intake and task construction through review, model testing, training, confirmation, and the final internal check. A bar at one means that stage is complete; more completed stages are better.",
-     "chart_takeaway": "The first two bars are complete. Every model-facing stage remains blocked until the design is challenged and repaired."
-    }
-   ]
-  },
   "trace_keyed_symbol_repair": {
    "verdict_tag": "The fix was hiding in the error message",
    "concept_primer": "Give the code a wrong constant and its tests fail with a message that literally spells out the value it expected — a value found nowhere else, not in the source files, not in the bug report. The only way to fix the code is to read that failure message.",
@@ -13923,998 +14946,6 @@
      "chart_plain_title": "Give the model enough room to write the whole fix",
      "chart_read": "Two runs of the trained model differ only in how much output length it may produce. Bars show whether the edit applies and whether it fixes the code, on a small five-task pilot. Taller is better. The tight-limit run is flat; the roomier one fills up.",
      "chart_takeaway": "With too little output room the model cannot finish a usable edit at all, but doubling the room flips it to fully fixing the pilot cases."
-    }
-   ]
-  },
-  "qwen35_4b_universal_fresh_surface_budget_commit_target_match": {
-   "verdict_tag": "New words worked; rule-guessing wall stayed",
-   "concept_primer": "Take the practice set that nearly worked before, rewrite every exercise with brand-new vocabulary, and add a new lesson that teaches working to a strict step budget and committing an answer the moment the budget says stop.",
-   "plain_question": "Does the near-miss practice set still work when its vocabulary is completely replaced, and does budget-and-commit practice fix the run-on answers that kept failing the screen?",
-   "plain_answer": "The rewritten practice set beat both comparison models on the big screen — more right answers (69 vs 63 and 62 of 104), many fewer run-on answers (7 vs 18 and 13), and 31 percent shorter output — on vocabulary it had never trained on. But the screen also required four of eight rule-guessing tasks right, and every model scored zero of eight there, so nothing advanced to the benchmark. The budget lesson made things worse, not better.",
-   "why_it_matters": "The practice set's benefit binds to structure, not to specific words — the first positive mechanism reading in this line. And the screen's rule-guessing requirement is now known to be impossible for this model family, so future tests must either attack rule-guessing differently or measure what can actually move.",
-   "verdict_tone": "mixed",
-   "key_numbers": [
-    {
-     "label": "Right answers",
-     "value": "69 / 104",
-     "sub": "vs 63 (parent) and 62 (pure review) — all strict wins"
-    },
-    {
-     "label": "Run-on answers",
-     "value": "7",
-     "sub": "vs 18 (parent) and 13 (review); output 31% shorter"
-    },
-    {
-     "label": "Rule-guessing",
-     "value": "0 / 8",
-     "sub": "every model, including both comparisons"
-    },
-    {
-     "label": "Benchmark",
-     "value": "never opened",
-     "sub": "seed 78,143 sealed by the frozen rule"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "The rewritten practice set wins the screen; the rule-guessing floor blocks everyone",
-     "chart_read": "Grouped bars per model: right answers and cleanly finished answers (of 104), and run-on answers (fewer is better).",
-     "chart_takeaway": "The rewritten set beats both comparisons on every headline number, but the screen's rule-guessing requirement was zero-for-eight for every model, so nothing advanced."
-    }
-   ]
-  },
-  "qwen35_4b_goal_gap_axis_curriculum_target_match": {
-   "verdict_tag": "Skills installed; benchmark chose review",
-   "concept_primer": "Instead of teaching everything at once, teach exactly the four abilities where the held-out benchmark has been stuck for months: fixing a buggy program from its wrong output, finding a route under a strict step budget, ignoring instructions smuggled inside documents, and following a freshly written procedure with interacting switches.",
-   "plain_question": "Can four purpose-built practice sets — each varied across many invented styles — install the four abilities every previous model failed on, without damaging anything else?",
-   "plain_answer": "The targeted practice worked on its own terms — the first screen pass in this program's history (28 vs 22 and 18 of 40 on unseen tasks, with zero forgetting). On the held-out benchmark it beat the untrained model by a wide margin (0.42 vs 0.11) with seven families up, none down, and one stuck family flipped. But plain review of old material scored even higher (0.51), so the frozen rule closed the experiment. Two families never moved for anyone: program repair stayed at zero and injection resistance at exactly one-half, for every model.",
-   "why_it_matters": "Targeted practice installs skills without forgetting, but installed skills and benchmark family scores are separated by more than vocabulary. And the cheapest interventionre-practicing old material — keeps compounding the total score. The goal is now blocked by exactly two frozen families, which is a much sharper question than it was yesterday.",
-   "verdict_tone": "mixed",
-   "key_numbers": [
-    {
-     "label": "Screen result",
-     "value": "28 vs 22 / 18",
-     "sub": "first promotion in this line; zero forgetting"
-    },
-    {
-     "label": "Benchmark vs base",
-     "value": "+0.31",
-     "sub": "7 families up, 0 down, warren flipped"
-    },
-    {
-     "label": "But plain review",
-     "value": "0.51",
-     "sub": "beat the candidate's 0.42 — rule closed the trial"
-    },
-    {
-     "label": "Frozen families",
-     "value": "2",
-     "sub": "program repair at 0; injection resistance at exactly 0.5"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Benchmark totals: practice beat base widely, review beat practice",
-     "chart_read": "One bar per model: the untrained base, the axis-practice model, its parent, and the plain-review model.",
-     "chart_takeaway": "Every trained model crushes base; plain review of old material tops the table, so the targeted-practice model did not advance."
-    }
-   ]
-  },
-  "qwen35_4b_axis_replay_stack_medium_target_match": {
-   "verdict_tag": "Skills survived the stack; one noisy bar blocked",
-   "concept_primer": "Take the two things that worked last time — the targeted practice set that installed new skills, and the plain-review round that scored highest overall — and put them in one model, then judge it on the bigger, finer-grained version of the benchmark where a full sweep has actually happened before.",
-   "plain_question": "Do the installed skills and the review boost survive together in one model, and does the bigger benchmark tier finally credit the installed skills at the family level?",
-   "plain_answer": "The stacked model kept the installed skills (24 vs 18 and 15 of 40 on unseen tasks, with the cleanest finishing behavior of any model) and lost nothing on the retained skills. But the screen required beating both comparisons on three of four skill types, one type tied at the ceiling for the second straight trial, and another was lost to a one-off spike in a comparison model — so nothing advanced and the bigger-benchmark question was never asked. A second round of plain review made the model noticeably sloppier, undercutting the idea that review keeps compounding.",
-   "why_it_matters": "The installed skills are real and portable across starting models — shown twice now. What blocked promotion was measurement noise, not capability. The queued follow-up re-judges the already-built models with a fairer screen at zero training cost.",
-   "verdict_tone": "mixed",
-   "key_numbers": [
-    {
-     "label": "Unseen-task result",
-     "value": "24 vs 18 / 15",
-     "sub": "install replicated on a new starting model"
-    },
-    {
-     "label": "Finishing behavior",
-     "value": "6 run-ons",
-     "sub": "vs 12 and 18 — cleanest in the event"
-    },
-    {
-     "label": "Blocked by",
-     "value": "1 of 10 checks",
-     "sub": "a ceiling tie plus a one-off comparison spike"
-    },
-    {
-     "label": "Review round two",
-     "value": "sloppier",
-     "sub": "86 parsed, 18 run-ons — compounding questioned"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Unseen-task totals: the stack keeps its skills; review round two slips",
-     "chart_read": "Bars show right answers on 40 unseen skill tasks for the stacked model and both comparisons.",
-     "chart_takeaway": "The stacked model leads clearly; the second review round is the weakest arm — but a single noisy sub-check kept the stacked model from advancing."
-    }
-   ]
-  },
-  "qwen35_4b_axis_stack_readjudication_medium_pilot": {
-   "verdict_tag": "Fair screen; half the practice set is dead weight",
-   "concept_primer": "The skill-stacked model already exists and has twice shown its skills are real; both times a measurement quirk — one comparison category stuck at a ceiling where wins are impossible — blocked its advance. This trial re-judges the same three built models on brand-new tasks with that quirk handled explicitly, at zero training cost.",
-   "plain_question": "Judged fairly on new tasks, does the skill-stacked model clear the program's bars — and does the bigger benchmark tier then credit its skills?",
-   "plain_answer": "Judged fairly on brand-new tasks — with the ceiling quirk handled — the stacked model won the overall skill test for the third straight time (22 vs 15 and 18 of 40) with the cleanest finishing behavior again. But it won only two of the four skill categories: document-hygiene and route-finding practice stick every time, while program-repair practice never took (down to 1 of 10) and procedure-following practice teaches nothing the starting model didn't already know. Two wins fell short of the required three, so the bigger benchmark stayed sealed.",
-   "why_it_matters": "Three independent screens now agree: the question is no longer whether designed practice installs skills (it does, without forgetting), but which lessons carry weight. Half this set needs rewriting from the recorded failures — a content problem, not a measurement problem.",
-   "verdict_tone": "mixed",
-   "key_numbers": [
-    {
-     "label": "Overall skill test",
-     "value": "22 vs 15 / 18",
-     "sub": "third straight win for the stacked model"
-    },
-    {
-     "label": "Category wins",
-     "value": "2 of 3 needed",
-     "sub": "hygiene and routes; repair and procedure failed"
-    },
-    {
-     "label": "Repair practice trend",
-     "value": "4 -> 2 -> 1",
-     "sub": "of 10 — never installed"
-    },
-    {
-     "label": "Finishing behavior",
-     "value": "5 run-ons",
-     "sub": "vs 12 and 13 — cleanest again"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Fair screen: two lesson types carry everything",
-     "chart_read": "Per-category right answers (of 10) for the stacked model and both comparisons.",
-     "chart_takeaway": "Hygiene and route-finding practice beat both comparisons; program-repair and procedure practice do not — the practice set needs a content revision, not another measurement."
-    }
-   ]
-  },
-  "qwen35_4b_axis_corpus_v2_staged_repair": {
-   "verdict_tag": "Kill rule fired; repair axis closed",
-   "concept_primer": "Last round's autopsy showed exactly why two of four practice blocks failed: the repair lessons stated their conclusion instead of showing the search, and the procedure lessons taught something the model already knew. This round rebuilds those blocks — the lessons now walk through the search, rejected attempts included — and fixes a grading quirk that had thrown away 21 correct answers for spacing.",
-   "plain_question": "Does showing the search — instead of asserting its result — finally install the repair skill, without disturbing the blocks that already work?",
-   "plain_answer": "Even with lessons rebuilt from the autopsy — walking through the search step by step instead of asserting the answer — the repair skills did not stick (a tie and a loss against the comparisons), so the preregistered kill rule closed this approach for good. The screen also revealed something bigger: after three consecutive practice doses on the same model lineage, new practice stopped helping (the practiced model tied its parent and forgot a little), while a third round of plain review won the whole skill test.",
-   "why_it_matters": "Two clean laws: this model cannot learn program-repair from small designed doses no matter how the lesson is written, and stacking practice rounds on one lineage saturates — future practice needs a fresh start from a clean model. Honest kill rules turned what could have been endless rewrites into settled knowledge.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Kill rule",
-     "value": "fired",
-     "sub": "repair lessons: one tie, one loss — axis closed"
-    },
-    {
-     "label": "Skill test",
-     "value": "19 vs 19 vs 25",
-     "sub": "third practice dose tied parent; plain review won"
-    },
-    {
-     "label": "Retention",
-     "value": "66 vs 71",
-     "sub": "third dose cost five retained answers"
-    },
-    {
-     "label": "Benchmark",
-     "value": "never opened",
-     "sub": "seed 78,147 sealed by the frozen rule"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Third practice dose stalls; plain review wins the skill test",
-     "chart_read": "Per-category right answers (of 10) for the practiced model, its parent, and the review model.",
-     "chart_takeaway": "Only hygiene still favors the practiced model; repair never installed and review now leads overall — the lineage is saturated for practice doses."
-    }
-   ]
-  },
-  "qwen35_4b_hygiene_explore_destack_medium": {
-   "verdict_tag": "Skills came back; forgetting blocked promotion",
-   "concept_primer": "Strip the practice set down to the only two lessons that have stuck in every measurement — ignoring smuggled instructions, and route-finding under a step budget — and teach them to the cleanest earlier model, before the pile-up of later practice rounds that eventually stopped helping.",
-   "plain_question": "Do the two reliable lessons come back cleanly on a fresh start — proving the recent stall was about over-stacking practice, not the lessons — and does the bigger benchmark tier then credit them?",
-   "plain_answer": "On the fresh start, both reliable lessons came back decisively — the best skill-test result of the whole session (15 vs 11 and 8 of 20) — proving the earlier stall was about over-stacking practice on one model, not about the lessons. But this direct dose made the model forget ten retained answers, and the screen correctly refused it. Comparing receipts across trials isolates the cause: the one dose that never forgot had a full review round between practice doses; this one skipped it.",
-   "why_it_matters": "Two questions became one law each: stalling = over-stacking (confirmed by recovery), and forgetting = skipping the review round at the dose boundary. The next recipe — review round, then dose — already has its review-round model built and receipted, making it the highest-probability trial yet.",
-   "verdict_tone": "mixed",
-   "key_numbers": [
-    {
-     "label": "Recovery flags",
-     "value": "both TRUE",
-     "sub": "explore 7 vs 4/6; hygiene 8 vs 4/5"
-    },
-    {
-     "label": "Skill test",
-     "value": "15 / 20",
-     "sub": "session's best — vs 11 (review) and 8 (parent)"
-    },
-    {
-     "label": "Retention cost",
-     "value": "-10",
-     "sub": "58 vs 68 — band was -5; screen refused"
-    },
-    {
-     "label": "Isolated cause",
-     "value": "no review round",
-     "sub": "the never-forgot dose had one between doses"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Skills recovered on the fresh start; forgetting cost the promotion",
-     "chart_read": "Left: unseen skill-test results per model. Right: retained-skill results per model.",
-     "chart_takeaway": "The trimmed dose wins the skill test decisively but forgets too much without a review round between doses — the screen refused it, and the fix is already queued."
-    }
-   ]
-  },
-  "qwen35_4b_interleaved_replay_dose_medium": {
-   "verdict_tag": "Review-round theory refuted; search closed",
-   "concept_primer": "The last trial proved the two reliable lessons come back on a fresh start but cost the model ten retained answers when taught directly. Cross-checking every receipt isolated the fix: the one dose that never caused forgetting had a review round between practice doses. That review-round model is already built — this trial teaches the same verified lessons starting from it.",
-   "plain_question": "Does a review round at the dose boundary let the lessons land without forgetting — completing a deployable recipe — and does the bigger benchmark tier then credit it?",
-   "plain_answer": "The review round did not prevent forgetting: the dosed model lost nine to ten retained answers against both comparisons — almost exactly the cost of dosing directly — so the theory drawn from comparing old receipts is refuted by this direct test. The hygiene lesson won its category for the sixth straight measurement; the route-finding lesson lost this time. Per the preregistered escalation rule, the recipe search is closed: the next step is a mechanics study of WHY doses cost retention, not another schedule shuffle.",
-   "why_it_matters": "A theory built from comparing receipts across trials died the moment it met a controlled test — which is precisely what preregistered direct tests are for. The program keeps the refutation, the six-for-six hygiene result, and a sharply-posed mechanics question, instead of an endless recipe hunt.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Retention cost",
-     "value": "-9 / -10",
-     "sub": "same as dosing directly — theory refuted"
-    },
-    {
-     "label": "Hygiene lesson",
-     "value": "6 / 6",
-     "sub": "won its category in every measurement ever"
-    },
-    {
-     "label": "Escalation rule",
-     "value": "fired",
-     "sub": "recipe search closed; mechanics study next"
-    },
-    {
-     "label": "Benchmark",
-     "value": "never opened",
-     "sub": "seed 78,149 sealed by the frozen rule"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "The review round did not stop the forgetting",
-     "chart_read": "Bars per model: unseen skill-test total (of 20) and retained-skill total (of 104).",
-     "chart_takeaway": "The dosed model leads on new skills but pays the same retention cost as before — the schedule was not the cause, and the preregistered rule closes the recipe hunt."
-    }
-   ]
-  },
-  "qwen35_4b_dose_diversity_mechanism_cell": {
-   "verdict_tag": "Forgetting is intrinsic; the trade is priced",
-   "concept_primer": "Every practice dose has cost the model about ten retained answers — except one, which used a larger, more varied practice set. After the schedule theory died in a direct test, one measurement remains: teach that larger varied set directly, with no review round, and see whether variety itself is what protects memory.",
-   "plain_question": "Does a bigger, more varied practice set protect retained skills where the small focused set does not — or is forgetting simply the price of practice on this model?",
-   "plain_answer": "Variety does not protect memory: the larger varied practice set also cost nine retained answers, the known ten-point case reproduced exactly, and even pure review cost five on this fresh screen — so the one past case with zero forgetting was measurement luck. Meanwhile the skills themselves keep landing: the hygiene lesson went ten-for-ten, its seventh straight category win, and the varied-dose model posted the best overall skill score with the cleanest finishing behavior.",
-   "why_it_matters": "Four trials of questions collapse into one priced law: on this training setup, teaching new skills costs five to ten retained answers, full stop. The choice ahead is engineering — change the training vehicle, or accept and price the trade — and both paths are preregistered.",
-   "verdict_tone": "mixed",
-   "key_numbers": [
-    {
-     "label": "Verdict",
-     "value": "intrinsic",
-     "sub": "variety -9; known case -10 reproduced; review -5"
-    },
-    {
-     "label": "Hygiene lesson",
-     "value": "10 / 10",
-     "sub": "seventh straight category win — perfect record"
-    },
-    {
-     "label": "Best skill score",
-     "value": "26 / 40",
-     "sub": "the varied dose, with the fewest run-ons (5)"
-    },
-    {
-     "label": "Lucky precedent",
-     "value": "resolved",
-     "sub": "the zero-forgetting case was screen fortune"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Every dose pays the memory tax; the skills land anyway",
-     "chart_read": "Bars per model: retained-skill total (of 104) and unseen skill total (of 40).",
-     "chart_takeaway": "The parent keeps the most memory; every trained arm pays five to ten points for its gains — the trade is real, two-sided, and now priced."
-    }
-   ]
-  },
-  "qwen35_4b_rank_capacity_vehicle_cell": {
-   "verdict_tag": "Screen too noisy to judge; guard fired",
-   "concept_primer": "The forgetting tax is now a law: every practice dose costs five to ten retained answers on this training setup. The leading suspect is capacity — the small add-on module carries the whole training history, so new lessons must evict something. This trial doubles the module's size and gives the dose its own fresh module on a frozen base model.",
-   "plain_question": "Does a double-size, fresh add-on module absorb the practice dose without evicting retained skills — or is the forgetting tax deeper than capacity?",
-   "plain_answer": "The trial could not answer the capacity question — by design. Its built-in guard required the known nine-point forgetting case to reproduce before trusting any comparison, and on this fresh screen that case measured only five. Across the last four screens the same models' forgetting scores wobble by three to four points, which rivals the five-point rule itself. The double-size module measured seven points of forgetting and a weaker skill result, but none of that is judgeable until the measuring stick is calibrated.",
-   "why_it_matters": "A measurement rule that can be tripped by luck must be caught by its own guard — and it was. The next step costs no training at all: re-measure the built models on several fresh screens, size the wobble, and set rules that only real effects can pass. Every future forgetting claim depends on it.",
-   "verdict_tone": "mixed",
-   "key_numbers": [
-    {
-     "label": "Guard",
-     "value": "fired",
-     "sub": "the known -9 re-measured at -5 — comparison refused"
-    },
-    {
-     "label": "Screen wobble",
-     "value": "±3-4",
-     "sub": "same models across four fresh screens"
-    },
-    {
-     "label": "Rank-64 readings",
-     "value": "-7 / 19",
-     "sub": "retention / skill — recorded, not adjudicated"
-    },
-    {
-     "label": "Next step cost",
-     "value": "eval only",
-     "sub": "no training; calibrate the screen itself"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "The guard refused the comparison: the screen wobbles as much as the rule",
-     "chart_read": "Bars per model: retained-skill totals on this screen.",
-     "chart_takeaway": "The known forgetting case failed to reproduce, so no capacity conclusion was drawn — the measuring stick gets calibrated next, at zero training cost."
-    }
-   ]
-  },
-  "qwen35_4b_retention_screen_calibration": {
-   "verdict_tag": "The measuring stick wobbles twice as much as the pass/fail rule assumed",
-   "concept_primer": "Every training trial in this program ends with a forgetting check: the new model retakes a 104-task quiz beside its parent, and a drop of more than five tasks fails it. But the quiz itself is regenerated fresh each time, and the guard on the last trial caught the same model's score moving four points between two fresh quizzes. This study re-measured five already-built models on four brand-new quizzes each — twenty measurement runs, zero training — to size that wobble directly.",
-   "plain_question": "How much does a model's forgetting gap versus its parent wobble between fresh screens, what pass/fail margin does that imply, and which past readings survive?",
-   "plain_answer": "The gap wobbles with a standard deviation of 4.3 tasks — the five-task pass/fail margin was barely one wobble wide, so single-quiz forgetting verdicts were close to coin flips. Every historical 'this model forgot 5-10 tasks' reading sits inside the measured noise; averaged over four fresh quizzes the real forgetting is only 1-4 tasks. The frozen fix: future trials must average three fresh quizzes, where the same five-task margin becomes correctly sized.",
-   "why_it_matters": "Every forgetting conclusion this program made — including the priced 5-10-point dose tax and the paused capacity question — was read off a single quiz. This calibration shrinks the tax to 1-4 points, vindicates the guard that paused the last trial, and hands every future trial a sound adjudication rule.",
-   "verdict_tone": "positive",
-   "key_numbers": [
-    {
-     "label": "Gap wobble (SD)",
-     "value": "4.3",
-     "sub": "vs the ±5 pass/fail margin"
-    },
-    {
-     "label": "Historical readings inside noise",
-     "value": "5/5",
-     "sub": "the -9, -10, -10, -7, -5"
-    },
-    {
-     "label": "Real pooled forgetting",
-     "value": "1-4",
-     "sub": "tasks, was read as 5-10"
-    },
-    {
-     "label": "New rule",
-     "value": "3 quizzes",
-     "sub": "±5 margin on their average"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "The same model's forgetting gap on four fresh quizzes",
-     "chart_read": "Each group is one already-built model; the four bars are its gap to the parent on four freshly generated quizzes.",
-     "chart_takeaway": "Single readings swing from -10 to +4 for the same unchanged model — the historical one-quiz forgetting verdicts were reading this noise."
-    }
-   ]
-  },
-  "qwen35_4b_menders_sirens_tier_forensics": {
-   "verdict_tag": "The two-family wall was the measuring tier, not the model",
-   "concept_primer": "The program's goal needs one trained model to beat the untouched base on every one of ten benchmark families at once. The last attempt failed on exactly two families that looked frozen: one always scored zero, the other always exactly one half, for every model at every attempt on the quick benchmark tier. Before designing another training treatment against that wall, this study dug through every benchmark receipt the repository has ever produced — including hundreds from an older experiment line that also ran the bigger, finer-grained medium tier — to check whether the wall is real or an artifact of the quick tier's coarse scoring.",
-   "plain_question": "Are the two frozen family scores a real model wall, or an artifact of the quick benchmark tier — and on which tier is the all-families goal actually winnable?",
-   "plain_answer": "An artifact. The constants already have committed counterexamples on the line's own instrument, and the all-ten-families-at-once win happened 9 times in 94 historical medium-tier comparisons versus once in 84 quick-tier ones. On medium, the base model never maxes out any family (so strict wins are always available) and the always-one-half family spreads out to a normal range. The catch: those nine winners trained on benchmark-family data, which this program forbids — so the next step is measuring this line's own clean models on medium for the first time.",
-   "why_it_matters": "Every future attempt at the program goal was about to be aimed at two families that cannot be beaten at quick granularity. This redirect — costing zero GPU hours — moves the goal gate to a tier where history says it is winnable.",
-   "verdict_tone": "positive",
-   "key_numbers": [
-    {
-     "label": "Goal-gate passes, medium",
-     "value": "9/94",
-     "sub": "all ten families strictly above base"
-    },
-    {
-     "label": "Goal-gate passes, quick",
-     "value": "1/84",
-     "sub": "the tier the line has been using"
-    },
-    {
-     "label": "GPU hours",
-     "value": "0",
-     "sub": "committed receipts only"
-    },
-    {
-     "label": "Base at a family ceiling, medium",
-     "value": "0/95",
-     "sub": "strict wins always available"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "How many of the ten families a trained model strictly beat the base on, by tier",
-     "chart_read": "Each bar counts historical paired comparisons; the rightmost group (10 of 10) is the program goal.",
-     "chart_takeaway": "Medium-tier comparisons cluster at eight and nine family wins with nine full passes; quick-tier ones cluster at six and seven with one pass."
-    }
-   ]
-  },
-  "qwen35_4b_universal_medium_tier_measurement": {
-   "verdict_tag": "Two tie-flips from the goal: eight family wins, zero losses, menders and rites at zero",
-   "concept_primer": "The receipt forensics showed the program's all-families goal has been judged on the wrong benchmark tier: the quick tier's coarse scoring manufactures unbeatable ties, while the bigger medium tier has seen the goal pass nine times historically. But this program's own clean-trained models — the ones forbidden from ever seeing benchmark-like data — have never been measured on medium at all. This experiment runs that measurement: four already-built models, one fresh sealed seed, no training.",
-   "plain_question": "Where do the line's best clean models actually stand on the medium benchmark tier, and which families still block the all-families goal there?",
-   "plain_answer": "The clean models' first medium-tier outing put all three at eight-of-ten family wins over the base — matching the best historical arms — and the top two lost NOTHING: they only tied on two families where both they and the base scored zero. The install-carrier model leads the aggregate and the quick-tier ranking inverted (the old quick champion came last of the trained three). The all-families goal now needs exactly two zeros flipped: menders, a genuine capability gap, and rites, which this very lineage has already scored on elsewhere.",
-   "why_it_matters": "The program goal — one trained model beating base on every family at once — needs the right courtroom. This is the first time the clean line gets judged in it, and whatever happens, the next training dose inherits exact per-family targets instead of two fake walls.",
-   "verdict_tone": "positive",
-   "key_numbers": [
-    {
-     "label": "Strict family wins vs base",
-     "value": "8/10",
-     "sub": "all three trained models"
-    },
-    {
-     "label": "Losses (top two arms)",
-     "value": "0",
-     "sub": "only ties at menders and rites"
-    },
-    {
-     "label": "Best medium aggregate",
-     "value": "0.338",
-     "sub": "hygiene_explore vs base 0.057"
-    },
-    {
-     "label": "Ties left to flip",
-     "value": "2",
-     "sub": "menders and rites, both at zero"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Each model's score on the ten benchmark families at medium tier",
-     "chart_read": "Grouped bars per family: the untouched base beside the three trained models.",
-     "chart_takeaway": "The trained models beat the base almost everywhere; the two zero-zero ties at menders and rites are all that separates the best model from the all-families goal."
-    }
-   ]
-  },
-  "qwen35_4b_feedback_loop_state_chain_install": {
-   "verdict_tag": "Half the lesson took: state-tracking installed, feedback-repair failed a third time",
-   "concept_primer": "The last measurement left the program's best clean model beating the untouched base on eight of ten benchmark families with zero losses — only two zero-zero ties remain. The public one-line descriptions of those two families share a trait every past training set lacked: they are multi-turn episodes, where the model must act, observe feedback, and revise. Every lesson this program ever trained was a single question with a single answer. This experiment teaches the missing loop itself — on six invented toy machines that look nothing like the benchmark — and then takes one shot at the full ten-family sweep.",
-   "plain_question": "Does teaching the act-observe-revise loop and hidden-state tracking on invented machines flip the last two zero-score families without breaking the eight wins?",
-   "plain_answer": "The dose split down the middle. The hidden-state-tracking half installed cleanly — on brand-new test instances the trained model tracked procedures better than both its parent and a matched control. The feedback-repair half failed completely: after eighty lessons on those exact toy machines, the model got zero of twenty fresh ones right, worse than models that never saw a lesson. That is the third teaching method to fail at the repair-style skill. Forgetting was judged for the first time under the new three-quiz averaging rule, which worked exactly as calibrated — and caught the trained model falling just outside the allowed margin against the control. No benchmark shot was taken; the sealed seed stays sealed.",
-   "why_it_matters": "This is the closest the program has been to its goal — one model, every family up. The bet is honest (~15-30%): the mechanism is new (episode protocol, not repair content), the instruments are freshly calibrated, and either outcome sharpens the map.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "State-tracking holdout",
-     "value": "11/20",
-     "sub": "vs parent 7, control 10 — installed"
-    },
-    {
-     "label": "Feedback-repair holdout",
-     "value": "0/20",
-     "sub": "after 80 in-domain lessons — third failed method"
-    },
-    {
-     "label": "Retention vs control",
-     "value": "-5.67",
-     "sub": "0.67 outside the calibrated ±5 band"
-    },
-    {
-     "label": "Instrument check",
-     "value": "4.08",
-     "sub": "event noise SD vs calibration's 4.27"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Fresh-instance holdout scores by lesson half",
-     "chart_read": "Grouped bars: each model's score on twenty fresh feedback-repair tasks and twenty fresh state-tracking tasks.",
-     "chart_takeaway": "State-tracking rose above both controls; feedback-repair fell to zero despite eighty training lessons on those same machines."
-    }
-   ]
-  },
-  "qwen35_4b_medium_budget_probe_measurement": {
-   "verdict_tag": "The referee stopped it at the door: eight-fold thinking time exceeds the wall-clock budget",
-   "concept_primer": "Three different teaching methods have now failed at the same benchmark family — the debugging-style episodes where the model must use feedback across turns. Every remaining training idea therefore tops out at nine of ten families. But all previous measurements gave the model a tight thinking allowance, and the two stuck families are exactly the ones needing long multi-step reasoning. This experiment re-runs the same four already-built models on the medium benchmark with eight times the thinking room: if the stuck families move at all, the goal is still fully reachable and the venue just changes; if nothing moves, the wall is real and the next dose proceeds with honest expectations.",
-   "plain_question": "With eight times the thinking allowance, do the two zero-score families finally move for any existing model — is the ten-family goal still reachable?",
-   "plain_answer": "The probe never got to ask its question. The benchmark's own referee enforces a wall-clock budget per model, and the untouched base — deliberately sent first because this risk was written into the plan — blew past it with eight times the thinking allowance and was refused without a score. Zero extra compute was wasted, the sealed seed is recorded as spent, and the rule book says no retry at a lower budget in this experiment. What survives: the question of whether more thinking time moves the stuck families is still open at in-between budgets, and one more probe there is the last believable test of this lever.",
-   "why_it_matters": "This is the cheapest possible test standing between the program and a decision about its goal: fund the next training dose knowing its ceiling is nine, or discover the ceiling is still ten and redirect the venue first.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Arms run before the stop",
-     "value": "1",
-     "sub": "base first, by design"
-    },
-    {
-     "label": "Scores exposed",
-     "value": "0",
-     "sub": "the referee refused before scoring"
-    },
-    {
-     "label": "Base wall time at tb1024",
-     "value": "157s",
-     "sub": "comfortably inside; 8x thinking was not"
-    },
-    {
-     "label": "Lever still open at",
-     "value": "tb2048-4096",
-     "sub": "one more probe, fresh seed"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Where the experiment stopped",
-     "chart_read": "Each bar is a preregistered stage; one means complete.",
-     "chart_takeaway": "Design, review, and freeze completed; the event stopped at the first arm exactly as the preregistered stop outcome specified."
-    }
-   ]
-  },
-  "qwen35_4b_medium_intermediate_budget_probe": {
-   "verdict_tag": "Refused at the door again: the thinking-time lever is closed for good",
-   "concept_primer": "The previous probe asked whether eight times the thinking allowance would move the two stuck benchmark families — and never got an answer, because the benchmark's referee enforces a wall-clock limit per model and refused the very first model at the door. This successor halves the ask: four times the thinking allowance, one fresh seed, same four models. Either the event fits and finally answers the question, or a second refusal proves the thinking-time lever simply does not fit this benchmark's rules and the program accepts a nine-of-ten ceiling for its next training move.",
-   "plain_question": "Does four-times thinking room fit the benchmark's wall-clock rules — and if it fits, do the stuck families finally move?",
-   "plain_answer": "Same outcome as the first probe, one setting lower: the benchmark's wall-clock referee refused the base model at four-times thinking allowance before any trained model ran. Per the plan written before the event, a second refusal closes the thinking-time lever entirely — no more budget probes at any setting. The complete answer cost two sealed seeds and zero exposed scores. The program's honest ceiling with every currently-believable training path is nine of ten families; the stuck debugging-style family now needs a different class of idea, not another variation.",
-   "why_it_matters": "This is the last cheap test standing between the program and an honest strategic fork: a reopened ten-family goal, or a committed nine-family ceiling with the proven state-tracking dose as the next move.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Arms run before the stop",
-     "value": "1",
-     "sub": "base first, by design — again"
-    },
-    {
-     "label": "Budget settings refused",
-     "value": "2",
-     "sub": "8192 and 4096; 1024 fits"
-    },
-    {
-     "label": "Total cost of the full answer",
-     "value": "2 seeds",
-     "sub": "zero scores exposed"
-    },
-    {
-     "label": "Honest ceiling now",
-     "value": "9/10",
-     "sub": "families, with believable training paths"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Where the experiment stopped",
-     "chart_read": "Each bar is a preregistered stage; one means complete.",
-     "chart_takeaway": "Design, review, and freeze completed; the event stopped at the first arm and the pre-written consequence closed the lever."
-    }
-   ]
-  },
-  "qwen35_4b_statechain_only_dose": {
-   "verdict_tag": "The lesson transferred at last — and the parent quietly swept all ten families",
-   "verdict_tone": "positive",
-   "concept_primer": "The previous experiment taught two lessons at once on invented toy machines: an act-observe-revise repair loop and hidden-state tracking. The verdict split cleanly — state-tracking installed (the trained model beat both its parent and a matched control on fresh instances) while the repair loop scored zero and dragged overall retention just outside the allowed band. This successor drops the dead half entirely: all 160 training rows teach state-tracking, on the two machines that already worked (as brand-new instances) plus two newly invented ones, with every knob on every machine explicitly bounded in the written rules. Everything else — the parent model, the matched-exposure control, the calibrated three-screen retention gate, and the one sealed benchmark shot — is inherited unchanged from the reference design.",
-   "plain_question": "Does a state-tracking-only dose (no dead repair rows) install the skill cleanly — beating both parent and control on fresh instances — while staying inside the retention bands the mixed dose failed?",
-   "plain_answer": "Three results in one event. First, the state-tracking dose passed its local gate cleanly — the skill installed again and this time forgetting stayed inside the calibrated margin. Second, on the real benchmark the trained model TRIPLED the protocol-compliance family against both matched controls: the first time in this program a taught skill moved its benchmark family. Third, the surprise: the parent model it trained from beat the untouched base on ALL TEN families at once — the program's stated goal, recorded for the first time ever — on razor-thin margins at the two hardest families. One seed is not a claim: a confirmation run on fresh seeds with a sample-more baseline is the immediate next step.",
-   "why_it_matters": "The split verdict left the obvious question unanswered: was the state-tracking install real and merely taxed by the failing half of the dose, or does any 160-row dose pay the same retention cost? A clean pass here isolates the proven skill and gives the program its best remaining shot at converting one of the two zero-zero benchmark families (the state-tracking-shaped one); a clean fail says the retention tax comes from dosing itself, not from dead rows.",
-   "key_numbers": [
-    {
-     "label": "Goal gate (parent)",
-     "value": "10/10",
-     "sub": "first all-families pass in program history"
-    },
-    {
-     "label": "Rites conversion",
-     "value": "0.30 vs 0.10",
-     "sub": "trained model vs both matched controls"
-    },
-    {
-     "label": "Local gate",
-     "value": "PROMOTED",
-     "sub": "21/40 axis; retention in-band"
-    },
-    {
-     "label": "Pilot vs parent",
-     "value": "-0.017",
-     "sub": "the dose still trades aggregate"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Every model's score on the ten families at the sealed-seed event",
-     "chart_read": "Grouped bars per family; the parent beats base everywhere, the trained model triples rites.",
-     "chart_takeaway": "The parent swept all ten families against base — the program goal, recorded once, awaiting confirmation."
-    }
-   ]
-  },
-  "qwen35_4b_goal_gate_confirmation": {
-   "verdict_tag": "Not confirmed at the bar — but the sweep repeated once and the gap narrowed to one family",
-   "concept_primer": "One sealed benchmark event just recorded the program's stated goal for the first time: a clean-trained model beat the untouched base on every one of ten families at once. But two of those family wins rode on single-item margins, and this program's own laws say one seed is a draw until it replicates. This experiment is the replication: the same two models, three brand-new sealed seeds, and a verdict written before the event.",
-   "plain_question": "Does the all-ten-families win replicate across three fresh sealed seeds?",
-   "plain_answer": "The replication returned a split answer. The overall improvement replicated without drama: the trained model beat the base decisively on all three fresh seeds, making four for four all-time. The perfect ten-family sweep repeated on one of the three — two full sweeps across four independent seeds — but the pre-written rule demanded two of three, so the formal verdict is aggregate-only. The near-misses are the striking part: nine-of-ten and eight-of-ten with ZERO losses, blocked purely by zero-zero ties at the debugging-style family that has resisted every teaching method. The goal now hangs on exactly one family, and the queued larger-dose experiment knows precisely what it must produce: any reliable nonzero score there. [Erratum 2026-07-16: the 'two of four seeds' framing omitted the earlier 78,150 reading; over all six recorded readings the sweep rate is 2/6 — see the sweep-rate consolidation cell.]",
-   "why_it_matters": "This is the program goal's final gate: a confirmed pass completes the demonstration-plus-confirmation chain the goal demands; a non-replication prices the discovery honestly and hands the program back its 9-of-10 position with the newly proven skill-to-family conversion mechanism.",
-   "verdict_tone": "neutral",
-   "key_numbers": [
-    {
-     "label": "Formal verdict",
-     "value": "AGGREGATE_ONLY",
-     "sub": "10/10 on 1/3 seeds vs the 2/3 bar"
-    },
-    {
-     "label": "Aggregate wins",
-     "value": "4/4",
-     "sub": "all-time, never close"
-    },
-    {
-     "label": "Full sweeps",
-     "value": "2 of 4",
-     "sub": "seeds 78,154 and 78,157"
-    },
-    {
-     "label": "The one blocker",
-     "value": "menders",
-     "sub": "0.0 margin on every failing seed"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Family wins against the base on each fresh seed",
-     "chart_read": "One bar per seed: how many of the ten families the trained model strictly won.",
-     "chart_takeaway": "Ten, nine, and eight family wins with zero losses anywhere — the misses are all zero-zero ties at one stubborn family."
-    }
-   ]
-  },
-  "qwen35_4b_repair_verifier_signal_probe": {
-   "verdict_tag": "Coin-flip: the model cannot even recognize the repair it cannot produce",
-   "concept_primer": "Every teaching route to the one benchmark family blocking the program's ten-family goal is now closed: the model cannot learn debugging-style repair from demonstrations at any tested dose. One training class remains — letting the model learn from its own attempts with live feedback — but that loop only works if the model can at least RECOGNIZE a correct repair when shown one, even though it cannot produce one. This experiment measures exactly that: two hundred puzzles, each showing a broken procedure's failures on two trials plus two candidate one-step fixes, only one of which works for both. Picking the right one requires mentally running each candidate — the model's one reliably strong skill.",
-   "plain_question": "Can the model recognize the correct repair when shown two candidates — the signal an attempt-and-feedback training loop would need?",
-   "plain_answer": "The gate said no, cleanly. Handed two candidate repairs and the full failure evidence — a task solvable by mentally running each candidate through both trials — the model picked the working one 51.5 percent of the time with its reasoning enabled and 49 percent without: coin-flip, below even the best word-matching shortcut the design team pre-computed and pinned at 53 percent. It was not running out of thinking room (only 7.5 percent of items hit the cap); it finishes its reasoning and still cannot tell. With recognition absent, a learn-from-your-own-attempts loop would have no signal to climb, and the last training class for the stubborn family closes by the pre-written rule. The program's map is complete: the ten-family goal stands demonstrated on two of four sealed seeds, every route to making it reliable is closed by rule rather than fatigue, and the one blocking skill is now precisely characterized — the model can neither produce, nor buy with thinking time, nor even recognize multi-constraint eliminative repairs.",
-   "why_it_matters": "This one cheap measurement decides whether the program's last mechanism class gets funded on evidence or closed by rule — the difference between a live path to the ten-family goal and an honestly completed map.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Recognition accuracy",
-     "value": "51.5%",
-     "sub": "with thinking; 49.0% without"
-    },
-    {
-     "label": "Shortcut ceiling",
-     "value": "53.25%",
-     "sub": "pre-pinned; the model scored below it"
-    },
-    {
-     "label": "Thinking-cap contacts",
-     "value": "7.5%",
-     "sub": "not budget-limited"
-    },
-    {
-     "label": "Mechanism classes now closed",
-     "value": "all",
-     "sub": "SFT, budget, and on-policy — by rule"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Repair-recognition accuracy against the pre-registered bars",
-     "chart_read": "Two bars for the model's two modes, with the coin-flip floor, the shortcut ceiling, and the funding bar marked.",
-     "chart_takeaway": "Both modes sit at the coin-flip floor, below the shortcut ceiling and far from the 65 percent funding bar."
-    }
-   ]
-  },
-  "qwen35_4b_zero_root_lineage_rebuild": {
-   "verdict_tag": "The mystery ancestor priced: ninety percent of the win was the documented recipe",
-   "concept_primer": "The program's best model was built by six well-documented training steps stacked on top of one mystery ingredient: an old starter adapter nobody kept a recipe for. This experiment rebuilds the model using only the six documented steps, starting from a truly blank adapter, to see whether the mystery ingredient actually mattered.",
-   "plain_question": "If the six documented training steps are replayed from a blank adapter (no undocumented starter), does the rebuilt model still match the original on the sealed ten-skill benchmark?",
-   "plain_answer": [
-    "The rebuild answered the provenance question with numbers. Retracing the six documented training steps from a truly blank starting adapter — same datasets, same seeds, same settings — produced a model with about ninety percent of the original's benchmark gain: 4.9 times the base score, seven of ten families strictly won, nothing lost. The undocumented ancestor adapter turns out to be worth about 0.04 aggregate, concentrated in exactly the three families that match its old training era — and it actually held BACK three other families, where the clean rebuild scores higher. So the formal verdict is 'degraded': the original's perfect sweeps lean on that ancestor's margin, and the clean-provenance upgrade is not available. But the honest headline is the reverse: the program's documented, contamination-free recipe does almost all of the work on its own, and a fully clean lineage extended with the proven skill-converter dose is now a mapped path.",
-    " ",
-    "[",
-    "E",
-    "r",
-    "r",
-    "a",
-    "t",
-    "u",
-    "m",
-    " ",
-    "2",
-    "0",
-    "2",
-    "6",
-    "-",
-    "0",
-    "7",
-    "-",
-    "1",
-    "6",
-    ":",
-    " ",
-    "s",
-    "w",
-    "e",
-    "e",
-    "p",
-    "-",
-    "r",
-    "a",
-    "t",
-    "e",
-    " ",
-    "f",
-    "r",
-    "a",
-    "m",
-    "i",
-    "n",
-    "g",
-    "s",
-    " ",
-    "c",
-    "i",
-    "t",
-    "i",
-    "n",
-    "g",
-    " ",
-    "~",
-    "5",
-    "0",
-    "%",
-    " ",
-    "r",
-    "e",
-    "f",
-    "l",
-    "e",
-    "c",
-    "t",
-    "e",
-    "d",
-    " ",
-    "a",
-    " ",
-    "f",
-    "a",
-    "v",
-    "o",
-    "r",
-    "a",
-    "b",
-    "l",
-    "e",
-    " ",
-    "w",
-    "i",
-    "n",
-    "d",
-    "o",
-    "w",
-    ";",
-    " ",
-    "t",
-    "h",
-    "e",
-    " ",
-    "a",
-    "l",
-    "l",
-    "-",
-    "e",
-    "v",
-    "e",
-    "n",
-    "t",
-    "s",
-    " ",
-    "r",
-    "a",
-    "t",
-    "e",
-    " ",
-    "i",
-    "s",
-    " ",
-    "2",
-    "/",
-    "6",
-    " ",
-    "—",
-    " ",
-    "s",
-    "e",
-    "e",
-    " ",
-    "t",
-    "h",
-    "e",
-    " ",
-    "s",
-    "w",
-    "e",
-    "e",
-    "p",
-    "-",
-    "r",
-    "a",
-    "t",
-    "e",
-    " ",
-    "c",
-    "o",
-    "n",
-    "s",
-    "o",
-    "l",
-    "i",
-    "d",
-    "a",
-    "t",
-    "i",
-    "o",
-    "n",
-    " ",
-    "c",
-    "e",
-    "l",
-    "l",
-    ".",
-    "]"
-   ],
-   "why_it_matters": "The headline result rests on a model whose first ingredient has no recorded origin. If the rebuild matches, the whole result becomes reproducible from committed recipes end-to-end; if it degrades, the program finally learns how much it owes to an ingredient it cannot reproduce.",
-   "verdict_tone": "neutral",
-   "key_numbers": [
-    {
-     "label": "Zero-root aggregate",
-     "value": "0.3462",
-     "sub": "vs original 0.3824, base 0.0713"
-    },
-    {
-     "label": "Transfer carried by documented stages",
-     "value": "~90%",
-     "sub": "7/10 strict wins, zero losses"
-    },
-    {
-     "label": "The ancestor's worth",
-     "value": "~0.036",
-     "sub": "concentrated in sirens/rites/mirage"
-    },
-    {
-     "label": "Families the ancestor suppressed",
-     "value": "3",
-     "sub": "chronicle, siftstack, stockade"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Original versus clean-rebuild scores on the ten families",
-     "chart_read": "Grouped bars per family: base, the original model, and the zero-root rebuild on the same sealed seed.",
-     "chart_takeaway": "The rebuild matches or beats the original on seven families; the ancestor's edge lives in three."
-    }
-   ]
-  },
-  "qwen35_4b_clean_path_statechain_extension": {
-   "verdict_tag": "The skill installs anywhere; the family conversion needed the old ancestor's soil",
-   "concept_primer": "Earlier work proved two things separately: a small 160-example training dose reliably teaches the model to track hidden running state (and that skill carries over to a benchmark family it had always failed), and the program's best model can be rebuilt from scratch using only documented, contamination-free training steps. This experiment combines them: apply the exact proven dose, byte-for-byte, to the clean rebuilt model.",
-   "plain_question": "Does the proven state-tracking dose install just as well on the fully documented clean-lineage model, and does it again unlock the benchmark family it unlocked before?",
-   "plain_answer": [
-    "Split verdict with a clean lesson. The state-tracking dose installed for the THIRD time on its third different parent — the program's most reliable trained effect — and the clean-lineage model beat the untouched base by 2.7 times while keeping its memory inside the calibrated margins. But the headline hope failed: on the original lineage this dose had TRIPLED the protocol-compliance benchmark family, and on the fully clean lineage that conversion vanished (zero, versus the original's 0.30). The pattern reads clearly: that family was one of exactly three the undocumented ancestor adapter was good at, so the taught skill seems to convert into benchmark scores only where the ancestor's training already tilled the soil. One consolation footnote: the clean model scored a strict win on the otherwise-impossible debugging family through a lucky draw. The fully-documented model — every training step receipted from the official base, zero contamination anywhere — stands as the mission's reference artifact."
-   ],
-   "why_it_matters": "If it works, the program has ONE headline model whose every training step is documented, receipted, and reproducible from a blank start — no mystery ingredients anywhere — while carrying the strongest install the program has proven.",
-   "verdict_tone": "neutral",
-   "key_numbers": [
-    {
-     "label": "Install replications",
-     "value": "3/3",
-     "sub": "three parents, three promotions"
-    },
-    {
-     "label": "Rites conversion on clean ground",
-     "value": "0.0",
-     "sub": "vs 0.30 on the prefix lineage"
-    },
-    {
-     "label": "Clean model vs base",
-     "value": "2.7×",
-     "sub": "0.3333 vs 0.1234 (strongest base draw)"
-    },
-    {
-     "label": "Documented stages",
-     "value": "7",
-     "sub": "fully receipted, zero contamination"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "The four models across the ten families at the sealed event",
-     "chart_read": "Grouped bars per family; note rites, where the clean candidate scored zero.",
-     "chart_takeaway": "The clean lineage wins broadly over base but the taught skill's family conversion did not survive the ancestor's removal."
-    }
-   ]
-  },
-  "qwen35_4b_sweep_rate_consolidation": {
-   "verdict_tag": "Bookkeeping with teeth: the honest sweep rate is one-in-three, not one-in-two",
-   "concept_primer": "As the program closed its campaign, its documents cited a roughly-fifty-percent rate for the flagship result — the trained model beating the base on all ten benchmark families at once. That figure came from a favorable four-seed window and quietly omitted an earlier miss. This cell collected every recorded reading, recomputed each verdict from raw family scores under tamper-proof pins, and corrected the figure everywhere it appears with visible errata.",
-   "plain_question": "Over every recorded all-families reading, how often does the reference model actually sweep — and what blocks it?",
-   "plain_answer": "Two sweeps in six readings — one in three, not one in two — with a wide honest confidence band (roughly 4 to 78 percent at 95%). The texture matters more than the point estimate: the model never lost a single family to the base in sixty comparisons and won the overall score all six times; every failed sweep was a zero-zero tie at the same one family. The corrected figure now stands in every document that carried the old one, as visible errata; no underlying fact changed.",
-   "why_it_matters": "Terminal claims deserve all the evidence. The program's flagship number is now computed over the complete record with proper uncertainty, and the correction trail is public — closed by arithmetic, not by narrative.",
-   "verdict_tone": "neutral",
-   "key_numbers": [
-    {
-     "label": "Sweep rate, all readings",
-     "value": "2/6",
-     "sub": "was informally ~50% over a 2/4 window"
-    },
-    {
-     "label": "95% CI",
-     "value": "[0.04, 0.78]",
-     "sub": "six readings bound it loosely; reported honestly"
-    },
-    {
-     "label": "Strict family losses",
-     "value": "0/60",
-     "sub": "aggregate win 6/6"
-    },
-    {
-     "label": "Blocker in every miss",
-     "value": "menders",
-     "sub": "always a zero-zero draw"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Family wins against the base on each of the six sealed seeds",
-     "chart_read": "One bar per seed: how many of the ten families the reference model strictly won.",
-     "chart_takeaway": "Eight to ten wins every time, never a loss — the distance to a perfect sweep is always the same single family."
-    }
-   ]
-  },
-  "qwen35_4b_clean_gym_mix_dose": {
-   "verdict_tag": "Three lessons in one dose taught none of them: dilution, re-confirmed",
-   "concept_primer": "The retired ancestor adapter was good at exactly three benchmark families — resisting embedded trick instructions, following multi-step procedures, and knowing when a question has no forced answer. The owner's directive: don't bring the ancestor back; rebuild what it knew as fresh, fully documented training data instead. This experiment writes 160 new lessons on invented surfaces covering those three skills and trains them into the clean-lineage model whose every prior step is receipted.",
-   "plain_question": "Can fresh, documented gym-style lessons teach the clean model what the undocumented ancestor knew — and does it show up on the three benchmark families?",
-   "plain_answer": "The mix failed cleanly and instructively. Splitting the standard 160-lesson budget across three skills — sixty trick-instruction episodes, fifty procedure chains, fifty answer-or-abstain puzzles — taught none of them: on its own fresh exam the trained model scored below BOTH untrained comparison models, while forgetting stayed safely inside the calibrated margins (the dose was inert, not harmful). This re-confirms an earlier program law on clean ground: thin slices of many skills dilute below the threshold where anything installs — the one skill that reliably installs (procedure-tracking) always got the full 160 rows in its winning runs. Two bonus findings about the measuring sticks themselves: the answer-or-abstain exam was too easy for untrained models (they nearly aced it, so it can't detect teaching), and the trick-episode exam was too hard for everyone. The three target families now need three separate full-strength experiments; the sealed benchmark seed was never spent.",
-   "why_it_matters": "A win closes the clean lineage's three-family gap without inheriting a single undocumented byte, raising the odds of full ten-family sweeps on fully documented ground; a null sharpens the conversion law — designed substrate versus inherited substrate — either way the map improves.",
-   "verdict_tone": "negative",
-   "key_numbers": [
-    {
-     "label": "Candidate on its own exam",
-     "value": "15/40",
-     "sub": "below parent 17 and control 19"
-    },
-    {
-     "label": "Rows per skill",
-     "value": "50-60",
-     "sub": "vs 160 in the winning single-skill runs"
-    },
-    {
-     "label": "Forgetting",
-     "value": "in-band",
-     "sub": "inert, not destructive"
-    },
-    {
-     "label": "Benchmark seeds spent",
-     "value": "0",
-     "sub": "sealed 78,161 never opened"
-    }
-   ],
-   "charts": [
-    {
-     "index": 0,
-     "chart_plain_title": "Fresh-exam scores by skill for the three models",
-     "chart_read": "Grouped bars per skill: the trained mix beside its parent and the matched control.",
-     "chart_takeaway": "The trained model wins nothing — thin multi-skill doses dilute below the installation threshold."
     }
    ]
   }

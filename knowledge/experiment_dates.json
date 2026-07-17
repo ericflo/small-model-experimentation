@@ -531,6 +531,14 @@
     "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
+  "qwen35_4b_enumerative_repair_protocol": {
+   "start": "2026-07-16",
+   "end": "2026-07-16",
+   "confidence": "high",
+   "sources": [
+    "dated experiment_log.md heading (2026-07-16 design freeze)"
+   ]
+  },
   "qwen35_4b_error_localization": {
    "start": "2026-07-07",
    "end": "2026-07-07",

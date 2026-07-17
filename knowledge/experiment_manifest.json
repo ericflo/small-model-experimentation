@@ -2265,6 +2265,39 @@
   },
   {
     "file_counts": {
+      ".json": 14,
+      ".jsonl": 18,
+      ".md": 8,
+      ".py": 30,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_enumerative_repair_protocol",
+    "path": "experiments/qwen35_4b_enumerative_repair_protocol",
+    "primary_readme": "experiments/qwen35_4b_enumerative_repair_protocol/README.md",
+    "primary_report": "experiments/qwen35_4b_enumerative_repair_protocol/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation"
+    ],
+    "source_track": "new",
+    "summary": "agentic skills into the one 4B \u2014 provably, on fully documented lineage? composite, tree `414f5829\u2026`), lifecycle 24 (`qwen35_4b_menders_dose_scale` \u2014 the 10\u00d7 dose closed the dose-scale mechanism class for the eliminative-inference lesson), and lifecycle 25 (`qwen35_4b_clean_gym_mix_dose` \u2014 mixture dilution hardened the design rule: ONE KIND PER DOSE AT FULL CONCENTRATION).",
+    "tags": [
+      "repair",
+      "small-model"
+    ],
+    "title": "Enumerative Repair Protocol",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 73,
+    "total_size_bytes": 40818415
+  },
+  {
+    "file_counts": {
       ".json": 5,
       ".log": 2,
       ".md": 5,

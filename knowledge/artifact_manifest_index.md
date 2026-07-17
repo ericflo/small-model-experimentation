@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 255
-- Manifest files: 607
+- Experiments with manifests: 256
+- Manifest files: 611
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 113 |
+| `other` | 116 |
 | `run-data` | 101 |
-| `standard-artifact` | 128 |
+| `standard-artifact` | 129 |
 
 ## Manifests
 
@@ -121,6 +121,10 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_dose_diversity_mechanism_cell` | `other` | [manifest](../experiments/qwen35_4b_dose_diversity_mechanism_cell/data/stream_manifest.json) |
 | `qwen35_4b_dose_diversity_mechanism_cell` | `standard-artifact` | [manifest](../experiments/qwen35_4b_dose_diversity_mechanism_cell/reports/artifact_manifest.yaml) |
 | `qwen35_4b_early_text_hypothesis_forking` | `standard-artifact` | [manifest](../experiments/qwen35_4b_early_text_hypothesis_forking/reports/artifact_manifest.yaml) |
+| `qwen35_4b_enumerative_repair_protocol` | `other` | [manifest](../experiments/qwen35_4b_enumerative_repair_protocol/data/corpus_manifest.json) |
+| `qwen35_4b_enumerative_repair_protocol` | `other` | [manifest](../experiments/qwen35_4b_enumerative_repair_protocol/data/lineage/lineage_manifest.json) |
+| `qwen35_4b_enumerative_repair_protocol` | `other` | [manifest](../experiments/qwen35_4b_enumerative_repair_protocol/data/stream_manifest.json) |
+| `qwen35_4b_enumerative_repair_protocol` | `standard-artifact` | [manifest](../experiments/qwen35_4b_enumerative_repair_protocol/reports/artifact_manifest.yaml) |
 | `qwen35_4b_error_localization` | `standard-artifact` | [manifest](../experiments/qwen35_4b_error_localization/reports/artifact_manifest.yaml) |
 | `qwen35_4b_executable_program_posttraining` | `dataset` | [manifest](../experiments/qwen35_4b_executable_program_posttraining/data/and_bridge/dataset_manifest.json) |
 | `qwen35_4b_executable_program_posttraining` | `dataset` | [manifest](../experiments/qwen35_4b_executable_program_posttraining/data/dataset_manifest.json) |
