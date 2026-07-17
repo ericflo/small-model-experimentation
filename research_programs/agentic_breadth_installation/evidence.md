@@ -1477,3 +1477,26 @@ seed; and whatever converted is NOT the taught compact computation
 mirage +0.4, stockade +0.21) are all single-seed. The confirmation
 doctrine funds an EVAL-ONLY multi-seed confirmation on the same two
 committed composites before any claim.
+
+## qwen35_4b_count_walk_menders_confirmation (2026-07-17 — AMBIGUOUS: the menders reading does not replicate; no claim)
+
+The eval-only four-seed confirmation (78164-78167, 16 sealed runs, all
+budget-clean, implementation signature identical across every receipt
+and the prior event) read out mechanically: candidate one full episode
+(78164) + one partial (78167, recorded-never-counted), replay control
+ALSO one full episode (78164) — hits 1 of the required 2, episode
+totals tied 1-1 with a control, verdict AMBIGUOUS. Frozen claim
+applied: no claim; further spending on this contrast requires a
+mechanism-differentiated NEW design, not more seeds of the same. The
+pre-GPU review earned its keep twice: banker's-rounding episode
+conversion would have manufactured phantom episodes from partial draws
+(fixed to floor semantics before any seed was spent — the 78167
+partial is exactly the input class that could have corrupted the
+verdict), and the noise pricing (background full-episode rate ~3/29
+per arm-event) is what makes the honest reading unambiguous: the
+untreated control's hit is the priced coincidence, and 78163's
+MECHANISM_ANSWER was most likely the same coincidence landing on the
+candidate. MENDERS REMAINS WITHOUT A CONFIRMED MOVER; single-episode
+draws at the family are noise until a design clears a multi-event bar.
+Descriptive, never gating: count_walk topped the aggregate at 2 of 4
+seeds (0.398, 0.392 — the program's best aggregate readings to date).

@@ -761,6 +761,25 @@ seed, an untreated control once matched it elsewhere; an eval-only
 multi-seed confirmation on the same committed composites is the funded
 next step, and no capability claim exists until it replicates.
 
+The four-seed confirmation (2026-07-17) resolved the count-don't-walk
+menders reading the only honest way: AMBIGUOUS, no claim. The candidate
+hit one full episode in four events (two were required) and the replay
+control hit one too, tying episode totals — so the preregistered rule
+withheld both the capability claim and the seed-noise closure, and its
+frozen consequence forbids re-rolling seeds on this contrast. The
+program's menders ledger now reads: single-episode draws occur at a
+~10% background rate per arm-event regardless of treatment, one
+MECHANISM_ANSWER event (78163) that did not replicate, and no confirmed
+mover. Two portfolio-grade morals: preregistered multi-event
+confirmation is the difference between a headline and a finding (the
+78163 pattern looked historic and was probably noise); and the
+adversarial-review layer is load-bearing (banker's rounding in the
+episode conversion would have counted a partial draw the very next
+event produced). The count_walk composite remains the program's best
+aggregate artifact descriptively — it topped all arms at two of the
+four confirmation seeds (0.398, 0.392, both program records) — and any
+future menders attempt must differentiate its mechanism, not its seed.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

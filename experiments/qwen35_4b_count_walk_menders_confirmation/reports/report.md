@@ -2,28 +2,22 @@
 
 ## Summary
 
-Design-frozen (amended pre-event per the adversarial review; no seed consumed),
-events pending. Lifecycle 28 is the eval-only multi-seed confirmation owed to
-lifecycle 27's MECHANISM_ANSWER: at sealed seed 78,163 the count_walk composite
-drew menders 0.1 while base, zero_root_parent, and replay_ctl7 all drew exactly
-0.0 — but single-episode menders draws by untreated arms have happened before
-(replay_ctl6 at seed 78,162), so one such event has non-trivial probability
-under seed noise (observed full-episode arm-event rate 3/29 ≈ 0.10). Four fresh
-sealed medium/tb1024 seeds (78,164–78,167), four authenticated pre-existing
-arms per seed, and one frozen integer-exact rule decide it under a single
-FULL-EPISODE semantics: an event is a hit only if it contains at least one full
-menders episode (score contributes int(10*s + 1e-9) episodes, floor semantics;
-partial-credit draws are recorded but never counted). REPLICATED iff the
-candidate hits on at least two of the four events AND its episode total
-strictly exceeds every control's; NOT_REPLICATED iff it hits none (a
-preregistered funding decision, not a nonexistence proof — that outcome retains
-probability ≈ 0.24 even at a true per-event hit rate of 0.3); AMBIGUOUS
-otherwise — no fourth state, with all three claims frozen verbatim in the
-preregistration. Preregistered arithmetic: false-REPLICATED 0.0450 at the
-headline p = 0.10 and 0.0475 at the exact observed p = 3/29 (counterfactual
-ceiling 0.0947 if partials were episodes, which the rule forbids); power
-0.47–0.82 across candidate hit rates 0.4–0.65. The 78,163 event is prior
-evidence — reported, sha-pinned, never pooled.
+AMBIGUOUS — no claim, by the frozen rule. Across the four fresh sealed
+events (78164-78167) the count_walk candidate hit one full menders
+episode (78164) plus one partial (78167, recorded-never-counted per the
+review-amended floor semantics); the replay control ALSO hit a full
+episode at 78164. hits_c = 1 (rule required ≥ 2) and episode totals tie
+replay 1-1 (strict dominance required) → the preregistered middle
+verdict with its frozen claim text: no claim; further spending on this
+contrast requires a mechanism-differentiated NEW design, not more seeds
+of the same. The honest reading: the untreated control's episode is the
+~10% background noise process the preregistration priced, and lifecycle
+27's MECHANISM_ANSWER (78163) is now best read as that coincidence
+landing photogenically. Menders remains without a confirmed mover.
+Descriptive only: count_walk topped the aggregate at 2 of 4 seeds
+(0.398 at 78164 and 0.392 at 78167 — its best readings on record), and
+lost narrowly at the other two (parent 0.3492 vs 0.3373; replay 0.3283
+vs 0.3269).
 
 ## Research Program Fit
 

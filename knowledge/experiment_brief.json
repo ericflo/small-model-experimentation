@@ -14988,32 +14988,32 @@
    "charts": []
   },
   "qwen35_4b_count_walk_menders_confirmation": {
-   "verdict_tag": "Design frozen: a four-seed replay decides whether the first menders win was real or a lucky roll",
+   "verdict_tag": "Ambiguous: the menders hit did not replicate — a control drew the same score, so no claim is made",
    "concept_primer": "The previous experiment produced a first: on one sealed exam, its trained model solved a fix-the-broken-procedure puzzle (the 'menders' family) that all three of its comparison models scored exactly zero on. That pattern - trained model above zero, every comparison at zero - was the pre-declared positive outcome, and it had never happened before in this program. But there is a catch the team wrote down immediately: exams are drawn fresh each time, and roughly one untrained model in ten also lands a single menders solve on any given draw. One good draw can be luck. The only honest way to tell luck from skill is to run the same head-to-head again on fresh sealed exams and count.",
    "plain_question": "If the same four models sit four fresh sealed exams, does the trained model keep solving menders puzzles while the three comparison models keep scoring zero - or does the one win from last time dissolve into ordinary exam-to-exam noise?",
-   "plain_answer": "Not yet known - this is the frozen design, written and locked before any exam is sat (and amended once, pre-event, after an adversarial review - before any exam was purchased). The decision rule is pre-committed and has exactly three outcomes, all counted in FULL solved puzzles only - partial credit on a puzzle is recorded but never counts: REPLICATED if the trained model fully solves a menders puzzle on at least two of the four exams AND its solved-puzzle total strictly beats every comparison model's total; NOT_REPLICATED if it fully solves none (the earlier win then closes as seed noise - a preregistered funding decision, not proof the effect is impossible: even a modestly real effect would land here about a quarter of the time); AMBIGUOUS for anything in between, which forbids buying more exams and demands a genuinely new experiment instead. The arithmetic is also pre-committed: under the observed noise rate there is only about a 4.5% chance of a false REPLICATED (4.75% at the exactly observed 3-in-29 rate), and if the model really does solve menders at the rate the first win suggests, the test catches it roughly half to four-fifths of the time.",
+   "plain_answer": "The answer the rule was built to force out, delivered without wiggle room. Across the four fresh exams the trained model solved a fix-the-procedure episode exactly once (plus one partial credit that the rules pre-declared doesn't count) — and on that same exam, the comparison model trained WITHOUT the special lessons solved one too. One hit when two were required, and a dead tie against a control, is the pre-written middle verdict: no claim. The clean interpretation is that occasional single-episode solves are background luck this family hands out to roughly one run in ten — the pre-registered noise rate — and the earlier headline result (the trained model scoring while all three controls sat at zero) was most likely that luck landing photogenically. The rule also pre-committed the consequence: no more exam seeds for this comparison; any future attempt at this family must be a genuinely different design, not a re-roll. One quietly encouraging descriptive note: the trained model posted the best overall score on two of the four exams (0.398 and 0.392, its two best readings ever), though those readings carry no claim.",
    "why_it_matters": "The program's one unbroken habit is pricing good news honestly: every favorable draw must survive fresh sealed exams before anyone may claim it. Menders is the single exam family that has blocked the program's headline goal on every previous attempt, so a confirmed movement there would be the first durable capability gain on the hardest surface - and a clean failure to replicate is nearly as valuable, because it closes the line and frees the budget for a different mechanism.",
-   "verdict_tone": "neutral",
+   "verdict_tone": "negative",
    "key_numbers": [
     {
-     "label": "Prior event (sealed 78163)",
-     "value": "0.1 vs 0 / 0 / 0",
-     "sub": "count_walk menders vs base, parent, replay control"
+     "label": "Candidate hits",
+     "value": "1 of 4 events",
+     "sub": "rule required ≥ 2; partial at 78167 recorded, not counted"
     },
     {
-     "label": "Fresh sealed exams",
-     "value": "4",
-     "sub": "seeds 78164-78167; each consumable exactly once"
+     "label": "Control tie",
+     "value": "1 – 1",
+     "sub": "replay control also solved an episode at 78164"
     },
     {
-     "label": "False-positive risk",
-     "value": "4.5-4.75%",
-     "sub": "chance of REPLICATED under pure seed noise (p=0.10 headline; exact 3/29)"
+     "label": "Verdict",
+     "value": "AMBIGUOUS",
+     "sub": "frozen: no claim; no more seeds of this design"
     },
     {
-     "label": "Power",
-     "value": "0.47-0.82",
-     "sub": "chance of REPLICATED if the real per-exam hit rate is 0.4-0.65"
+     "label": "Aggregate (desc.)",
+     "value": "0.398 / 0.392",
+     "sub": "count_walk tops 2 of 4 seeds — descriptive only"
     }
    ],
    "charts": []
