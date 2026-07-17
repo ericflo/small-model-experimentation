@@ -14986,6 +14986,37 @@
     }
    ],
    "charts": []
+  },
+  "qwen35_4b_count_walk_menders_confirmation": {
+   "verdict_tag": "Design frozen: a four-seed replay decides whether the first menders win was real or a lucky roll",
+   "concept_primer": "The previous experiment produced a first: on one sealed exam, its trained model solved a fix-the-broken-procedure puzzle (the 'menders' family) that all three of its comparison models scored exactly zero on. That pattern - trained model above zero, every comparison at zero - was the pre-declared positive outcome, and it had never happened before in this program. But there is a catch the team wrote down immediately: exams are drawn fresh each time, and roughly one untrained model in ten also lands a single menders solve on any given draw. One good draw can be luck. The only honest way to tell luck from skill is to run the same head-to-head again on fresh sealed exams and count.",
+   "plain_question": "If the same four models sit four fresh sealed exams, does the trained model keep solving menders puzzles while the three comparison models keep scoring zero - or does the one win from last time dissolve into ordinary exam-to-exam noise?",
+   "plain_answer": "Not yet known - this is the frozen design, written and locked before any exam is sat. The decision rule is pre-committed and has exactly three outcomes: REPLICATED if the trained model scores on at least two of the four exams AND its solved-puzzle total strictly beats every comparison model's total; NOT_REPLICATED if it scores on none (the earlier win then closes as seed noise); AMBIGUOUS for anything in between, which forbids buying more exams and demands a genuinely new experiment instead. The arithmetic is also pre-committed: under the observed noise rate there is only about a 4.5% chance of a false REPLICATED, and if the model really does solve menders at the rate the first win suggests, the test catches it roughly half to four-fifths of the time.",
+   "why_it_matters": "The program's one unbroken habit is pricing good news honestly: every favorable draw must survive fresh sealed exams before anyone may claim it. Menders is the single exam family that has blocked the program's headline goal on every previous attempt, so a confirmed movement there would be the first durable capability gain on the hardest surface - and a clean failure to replicate is nearly as valuable, because it closes the line and frees the budget for a different mechanism.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Prior event (sealed 78163)",
+     "value": "0.1 vs 0 / 0 / 0",
+     "sub": "count_walk menders vs base, parent, replay control"
+    },
+    {
+     "label": "Fresh sealed exams",
+     "value": "4",
+     "sub": "seeds 78164-78167; each consumable exactly once"
+    },
+    {
+     "label": "False-positive risk",
+     "value": "4.5%",
+     "sub": "chance of REPLICATED under pure seed noise (p=0.10)"
+    },
+    {
+     "label": "Power",
+     "value": "0.47-0.82",
+     "sub": "chance of REPLICATED if the real per-exam hit rate is 0.4-0.65"
+    }
+   ],
+   "charts": []
   }
  }
 }

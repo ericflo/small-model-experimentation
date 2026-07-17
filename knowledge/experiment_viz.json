@@ -49973,6 +49973,45 @@
      "source": "experiments/qwen35_4b_count_dont_walk_enumeration/runs/benchmark/medium_tb1024_seed78163_pilot/summary.json"
     }
    ]
+  },
+  "qwen35_4b_count_walk_menders_confirmation": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "The prior 78163 event this cell must replicate: menders and aggregate per arm",
+     "categories": [
+      "base",
+      "zero_root_parent",
+      "replay_ctl7",
+      "count_walk"
+     ],
+     "series": [
+      {
+       "label": "menders",
+       "values": [
+        0.0,
+        0.0,
+        0.0,
+        0.1
+       ]
+      },
+      {
+       "label": "aggregate",
+       "values": [
+        0.0753,
+        0.295,
+        0.3298,
+        0.3312
+       ]
+      }
+     ],
+     "x_label": "arm (sealed medium seed 78163, tb 1024)",
+     "y_label": "gateway score",
+     "note": "Design-frozen confirmation cell (no new events yet): lifecycle 27's sealed seed-78163 draw put count_walk menders at 0.1 with base, zero_root_parent, and replay_ctl7 all at exactly 0.0 — the preregistered positive branch, first in program history. Because untreated arms draw a single menders episode at an observed rate of ~0.10 per arm-event, this cell replays the four-arm contrast on FOUR fresh sealed seeds (78164-78167) under a frozen integer-exact rule: REPLICATED iff the candidate hits menders on >= 2 of 4 events AND its episode total strictly exceeds every control's; NOT_REPLICATED iff it hits none (78163 closes as seed noise); AMBIGUOUS otherwise (no claim; no more seeds of the same). False-REPLICATED 0.0450 under the noise model; the 78163 event is prior evidence, never pooled.",
+     "source": "experiments/qwen35_4b_count_walk_menders_confirmation/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

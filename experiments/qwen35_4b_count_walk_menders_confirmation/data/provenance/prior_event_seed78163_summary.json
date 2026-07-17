@@ -1,0 +1,335 @@
+{
+  "benchmark_data_read": false,
+  "benchmark_implementation": {
+    "runner_sha256": "a3beecd8b5c89ccfd99a172a6d85321d39b9feb6c29d12f10b2f4d7499e273cb",
+    "source_file_count": 56,
+    "source_inventory_sha256": "218b8615a95f24da962c931e9cd2dba58d853a7bdcd2847cd8e2c42fc2c05f42"
+  },
+  "candidate": "count_walk",
+  "candidate_comparisons": {
+    "count_walk": {
+      "count_walk_minus_replay_ctl7": {
+        "aggregate_delta": 0.001340281627616069,
+        "per_family_delta": {
+          "chronicle": -0.09999999999999998,
+          "lockpick": -0.09999999999999998,
+          "menders": 0.1,
+          "mirage": 0.4,
+          "rites": -0.1,
+          "siftstack": -0.3,
+          "sirens": 0.0,
+          "stockade": 0.21256948294282696,
+          "toolsmith": -0.03249999999999997,
+          "warren": -0.06666666666666665
+        }
+      },
+      "count_walk_minus_zero_root_parent": {
+        "aggregate_delta": 0.03616604334992951,
+        "per_family_delta": {
+          "chronicle": 0.0,
+          "lockpick": 0.2,
+          "menders": 0.1,
+          "mirage": 0.20000000000000007,
+          "rites": -0.1,
+          "siftstack": -0.2,
+          "sirens": 0.0,
+          "stockade": 0.19416043349929477,
+          "toolsmith": 0.0675,
+          "warren": -0.1
+        }
+      }
+    }
+  },
+  "comparisons": {
+    "count_walk_minus_base": {
+      "aggregate_delta": 0.2558429271302616,
+      "minimum_family_delta": 0.0,
+      "nonnegative_families": 10,
+      "per_family_delta": {
+        "chronicle": 0.30000000000000004,
+        "lockpick": 0.2,
+        "menders": 0.1,
+        "mirage": 0.8,
+        "rites": 0.0,
+        "siftstack": 0.3,
+        "sirens": 0.10000000000000003,
+        "stockade": 0.33426260463594865,
+        "toolsmith": 0.32416666666666666,
+        "warren": 0.1
+      },
+      "positive_families": 9
+    },
+    "replay_ctl7_minus_base": {
+      "aggregate_delta": 0.25450264550264545,
+      "minimum_family_delta": 0.0,
+      "nonnegative_families": 10,
+      "per_family_delta": {
+        "chronicle": 0.4,
+        "lockpick": 0.3,
+        "menders": 0.0,
+        "mirage": 0.4,
+        "rites": 0.1,
+        "siftstack": 0.6,
+        "sirens": 0.10000000000000003,
+        "stockade": 0.12169312169312167,
+        "toolsmith": 0.35666666666666663,
+        "warren": 0.16666666666666666
+      },
+      "positive_families": 9
+    },
+    "zero_root_parent_minus_base": {
+      "aggregate_delta": 0.21967688378033204,
+      "minimum_family_delta": 0.0,
+      "nonnegative_families": 10,
+      "per_family_delta": {
+        "chronicle": 0.30000000000000004,
+        "lockpick": 0.0,
+        "menders": 0.0,
+        "mirage": 0.6,
+        "rites": 0.1,
+        "siftstack": 0.5,
+        "sirens": 0.10000000000000003,
+        "stockade": 0.14010217113665388,
+        "toolsmith": 0.25666666666666665,
+        "warren": 0.2
+      },
+      "positive_families": 8
+    }
+  },
+  "design_receipt_sha256": "d835fc5c384912f96558eafd64b00cea0a81c0db15ccf6aa2a08c761b048d53a",
+  "gateway_sha256": "53cf6533dbd710eb167503363c39f73dbf7559a0d91f40a00436a3c218a01c17",
+  "goal_gate": {
+    "included_in_pilot_gate": false,
+    "per_arm": {
+      "count_walk": {
+        "goal_gate_pass": false,
+        "losses": [],
+        "strict_wins": 9,
+        "ties": [
+          "rites"
+        ],
+        "wins": [
+          "chronicle",
+          "lockpick",
+          "menders",
+          "mirage",
+          "siftstack",
+          "sirens",
+          "stockade",
+          "toolsmith",
+          "warren"
+        ]
+      },
+      "replay_ctl7": {
+        "goal_gate_pass": false,
+        "losses": [],
+        "strict_wins": 9,
+        "ties": [
+          "menders"
+        ],
+        "wins": [
+          "chronicle",
+          "lockpick",
+          "mirage",
+          "rites",
+          "siftstack",
+          "sirens",
+          "stockade",
+          "toolsmith",
+          "warren"
+        ]
+      },
+      "zero_root_parent": {
+        "goal_gate_pass": false,
+        "losses": [],
+        "strict_wins": 8,
+        "ties": [
+          "lockpick",
+          "menders"
+        ],
+        "wins": [
+          "chronicle",
+          "mirage",
+          "rites",
+          "siftstack",
+          "sirens",
+          "stockade",
+          "toolsmith",
+          "warren"
+        ]
+      }
+    },
+    "power_statement": "menders has been 0-margin on most draws across the program's sealed events, and the analytic perfect-enumerator simulation says the zero draw is ambiguous: holdout episodes need mean 27.1 turns from scratch (median 20.5, max 78; 80.0% need more than 10; treatment corpus mean 32.6, median 22, max 125; 86.9% > 10) against a family budget publicly known only as 'bounded' — if that budget is materially shorter than these needs, a perfectly-installed enumerator converts few or no episodes. Frozen ORDERED consequences for the menders reading, positive first: (1) ANY candidate menders > 0 where the controls sit at 0 is the mechanism answer; (2) a menders reading of 0 WITH the fidelity precondition met (locally promoted AND holdout canonical-next rate >= 0.50 AND strictly above both controls' rates) is TURN_BUDGET_SCOPED — enumeration installed with high fidelity but did not convert within the family's episode budget; the protocol-install mechanism is NOT refuted; what closes is the pure-enumeration route at the family's actual budget; (3) a menders 0 WITHOUT that precondition reads as the install/conversion failing on its own terms. No third state for the zero draw; the precedence order is frozen. A 10/10 goal gate is a menders draw and feeds a fresh confirmation cell before any claim",
+    "recorded_either_way": true
+  },
+  "local_design_receipt_sha256": "46eac760630db5f257fcf2d836066412b626ef56300110510ee487fffc539dcc",
+  "local_promotion_promoted": "count_walk",
+  "local_promotion_receipt": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_count_dont_walk_enumeration/runs/local/seed88056_promotion.json",
+  "local_promotion_receipt_sha256": "33755a01832e7589914f209b733ed7ac8a01e62787a65bb2dfc264c2e7c1fe12",
+  "menders_reading": {
+    "candidate_minus_base": 0.1,
+    "candidate_minus_parent": 0.1,
+    "candidate_minus_replay": 0.1,
+    "candidate_nonzero": true,
+    "controls_all_zero": true,
+    "episode_success_simulation": {
+      "holdout_from_scratch": {
+        "max": 78,
+        "mean": 27.1,
+        "median": 20.5,
+        "min": 4,
+        "share_needing_more_than_10_turns": 0.8
+      },
+      "source": "analytic, model-free perfect-enumerator simulation: canonical index of the unique both-trials fix + 1, per episode (frozen in data/local_design_receipt.json episode_success_simulation and data/corpus_manifest.json episode_success_turns_counts)",
+      "treatment_from_scratch": {
+        "max": 125,
+        "mean": 32.64375,
+        "median": 22.0,
+        "min": 2,
+        "share_needing_more_than_10_turns": 0.86875
+      }
+    },
+    "family": "menders",
+    "fidelity_precondition": {
+      "candidate_promoted": true,
+      "candidate_rate": 0.175,
+      "canonical_next_counts": {
+        "count_walk": {
+          "canonical_next": 7,
+          "rows_with_readout": 40
+        },
+        "replay_ctl7": {
+          "canonical_next": 5,
+          "rows_with_readout": 40
+        },
+        "zero_root_parent": {
+          "canonical_next": 1,
+          "rows_with_readout": 40
+        }
+      },
+      "definition": "candidate canonical-next rate on the 40-row axis holdout >= 0.50 AND strictly above both controls' rates, with the candidate locally promoted; integer-exact comparisons",
+      "holds": false,
+      "meets_min_rate": false,
+      "strictly_beats_parent_rate": true,
+      "strictly_beats_replay_rate": true
+    },
+    "frozen_consequence_order": [
+      "MECHANISM_ANSWER",
+      "TURN_BUDGET_SCOPED",
+      "FAILED_ON_ITS_OWN_TERMS"
+    ],
+    "frozen_interpretation": "MECHANISM_ANSWER",
+    "frozen_question": "does taught enumeration convert to the menders family with live rerun feedback?",
+    "included_in_pilot_gate": false,
+    "interpretation": "the mechanism answer: taught enumeration converts to the family with live rerun feedback where every control sits at 0",
+    "mechanism_answer": true,
+    "per_arm": {
+      "base": 0.0,
+      "count_walk": 0.1,
+      "replay_ctl7": 0.0,
+      "zero_root_parent": 0.0
+    },
+    "power_statement": "menders has been 0-margin on most draws across the program's sealed events, and the analytic perfect-enumerator simulation says the zero draw is ambiguous: holdout episodes need mean 27.1 turns from scratch (median 20.5, max 78; 80.0% need more than 10; treatment corpus mean 32.6, median 22, max 125; 86.9% > 10) against a family budget publicly known only as 'bounded' — if that budget is materially shorter than these needs, a perfectly-installed enumerator converts few or no episodes. Frozen ORDERED consequences for the menders reading, positive first: (1) ANY candidate menders > 0 where the controls sit at 0 is the mechanism answer; (2) a menders reading of 0 WITH the fidelity precondition met (locally promoted AND holdout canonical-next rate >= 0.50 AND strictly above both controls' rates) is TURN_BUDGET_SCOPED — enumeration installed with high fidelity but did not convert within the family's episode budget; the protocol-install mechanism is NOT refuted; what closes is the pure-enumeration route at the family's actual budget; (3) a menders 0 WITHOUT that precondition reads as the install/conversion failing on its own terms. No third state for the zero draw; the precedence order is frozen. A 10/10 goal gate is a menders draw and feeds a fresh confirmation cell before any claim",
+    "recorded_either_way": true
+  },
+  "model_order": [
+    "base",
+    "zero_root_parent",
+    "replay_ctl7",
+    "count_walk"
+  ],
+  "model_tree_sha256s": {
+    "base": "26d8ee48583adb0fb557d0ff668664949adff0068fa5baafe6f0af68e22fb677",
+    "count_walk": "d5fdc55c0238ffbe2465bd73a5f9d63f442ad4083ff9eb477c9887e15e3da6b1",
+    "replay_ctl7": "044a4599ac5264e00256f66f65215ea497d3631d8aebd3467b698253648e484a",
+    "zero_root_parent": "414f582950bf60fed2fe462cd141ab98d0f772087b4f9c6bc5aa12f03f379e7d"
+  },
+  "model_weight_sha256s": {
+    "base": "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db",
+    "count_walk": "ddd7bc4b5b8f4f2393996148bcb1b411a8be4d7f03430babe789b3534b9850a3",
+    "replay_ctl7": "c5035b4db47e4da582a805ca009747a5618ef5badc35d960ca216e586dd3ab9d",
+    "zero_root_parent": "6e9aad251465ca2713fda0238a34aa9f46262053860b867f80189d65c9ee3932"
+  },
+  "models": {
+    "base": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized",
+    "count_walk": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_count_dont_walk_enumeration/merged/count_walk",
+    "replay_ctl7": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_count_dont_walk_enumeration/merged/replay_ctl7",
+    "zero_root_parent": "/home/ericflo/Development/small-model-experimentation/large_artifacts/qwen35_4b_zero_root_lineage_rebuild/merged/zero_root_hygiene_explore"
+  },
+  "name": "pilot",
+  "promotions": {
+    "count_walk": {
+      "passes_pilot_gate": true,
+      "strictly_beats_base_aggregate": true,
+      "strictly_beats_immediate_parent_aggregate": true,
+      "strictly_beats_replay_control_aggregate": true
+    }
+  },
+  "schema_version": 1,
+  "scores": {
+    "base": {
+      "aggregate": 0.07533333333333334,
+      "per_family": {
+        "chronicle": 0.1,
+        "lockpick": 0.0,
+        "menders": 0.0,
+        "mirage": 0.0,
+        "rites": 0.0,
+        "siftstack": 0.0,
+        "sirens": 0.3,
+        "stockade": 0.0,
+        "toolsmith": 0.35333333333333333,
+        "warren": 0.0
+      }
+    },
+    "count_walk": {
+      "aggregate": 0.3311762604635949,
+      "per_family": {
+        "chronicle": 0.4,
+        "lockpick": 0.2,
+        "menders": 0.1,
+        "mirage": 0.8,
+        "rites": 0.0,
+        "siftstack": 0.3,
+        "sirens": 0.4,
+        "stockade": 0.33426260463594865,
+        "toolsmith": 0.6775,
+        "warren": 0.1
+      }
+    },
+    "replay_ctl7": {
+      "aggregate": 0.3298359788359788,
+      "per_family": {
+        "chronicle": 0.5,
+        "lockpick": 0.3,
+        "menders": 0.0,
+        "mirage": 0.4,
+        "rites": 0.1,
+        "siftstack": 0.6,
+        "sirens": 0.4,
+        "stockade": 0.12169312169312167,
+        "toolsmith": 0.71,
+        "warren": 0.16666666666666666
+      }
+    },
+    "zero_root_parent": {
+      "aggregate": 0.2950102171136654,
+      "per_family": {
+        "chronicle": 0.4,
+        "lockpick": 0.0,
+        "menders": 0.0,
+        "mirage": 0.6,
+        "rites": 0.1,
+        "siftstack": 0.5,
+        "sirens": 0.4,
+        "stockade": 0.14010217113665388,
+        "toolsmith": 0.61,
+        "warren": 0.2
+      }
+    }
+  },
+  "seed": 78163,
+  "think_budget": 1024,
+  "tier": "medium",
+  "zero_root_parent_merge_receipt_sha256": "e906caea7c4b86f4a3eacb96affb7cc2fa9b7cc11e11b634b651cabc5dd01d2b"
+}
