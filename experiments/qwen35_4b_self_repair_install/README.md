@@ -1,6 +1,6 @@
 # Qwen35 4B Self-Repair Install
 
-**Status:** in-progress · since 2026-07-18 · cognitive-core coding bet #2 (self-repair loop); design frozen, GPU train/merge/measure stages pending staged reviews
+**Status:** finished · 2026-07-18 · WEAK POSITIVE (first non-null) — HumanEval +3, agentic 8/35->10/35 (3v1 discordant, adding); underpowered, not significant; loop-behavior > passive-skill
 
 ## Research Program
 

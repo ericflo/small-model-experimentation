@@ -50196,7 +50196,7 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Bet #2 (self-repair): install the check-and-repair loop — design frozen, awaiting the run",
+     "title": "Bet #2 (self-repair): first non-null — weak but directionally positive",
      "categories": [
       "HumanEval",
       "MBPP",
@@ -50204,19 +50204,27 @@
      ],
      "series": [
       {
-       "label": "base (target to beat)",
+       "label": "base",
        "values": [
         0.7622,
         0.565,
-        0.229
+        8
+       ]
+      },
+      {
+       "label": "self_repair",
+       "values": [
+        0.7805,
+        0.555,
+        10
        ]
       }
      ],
-     "x_label": "coding fitness signal",
-     "y_label": "pass rate",
+     "x_label": "coding fitness signal (agentic in raw count of 35)",
+     "y_label": "pass rate / count",
      "y_format": "number",
-     "note": "Second cognitive-core coding bet, after bet #1 (execution-tracing) came back NULL (reshuffled coding tasks without raising the count; agentic 8/35 flat). This cell installs the CHECK-AND-REPAIR loop directly, targeting the observed agentic failure mode (one shot, a check fails, the model STOPS instead of verifying and repairing): a fresh r32/a64 LoRA trains on 504 self-repair debugging episodes — a synthetic function with a bug INJECTED by AST mutation (so the fix is KNOWN) plus its concrete failing test, targeting a localized diagnosis + the corrected code. Self-generated and execution-verified (no teacher), contamination-clean (0 banned benchmark names, 0 distinctive code n-grams). The transfer rule is TIGHTENED from bet #1: INSTALLED_CODING now requires a >= 3-problem pass@1 gain (a +1 bump near ceiling reads NULL), with the agentic duet-eval (base 8/35) the primary real target measured by hand. Honest prior on a meaningful install ~25-30%; if NULL, the pre-committed pivot is reinforcement learning on the plan-act-verify-repair loop, not a fourth static-SFT curriculum. Bars show the base targets to beat; treatment values are appended after the sealed measurement.",
-     "source": "experiments/qwen35_4b_self_repair_install/reports/preregistration.md"
+     "note": "Cognitive-core bet #2: install the check-and-repair loop via 504 mutation-injected self-repair rows (buggy code + real test-failure output -> diagnosis + fix; provenance-clean, execution-verified). First bet that is NOT flat: HumanEval +3 problems (76.2->78.0%, meets the tightened >=3 rule), MBPP -2 (retention OK), and the agentic real target 8/35->10/35 with an ASYMMETRIC discordant (3 self_repair-only vs 1 base-only) — adding, not the symmetric 5v5 reshuffle execution-tracing showed. HONEST: weak and underpowered — no delta is individually significant (agentic McNemar p~0.63, 4 discordant; +3/164 marginal). Not a confirmed win, but a promising DIRECTION: loop-behavior curricula (repair) outperform passive-skill curricula (tracing), consistent with the agentic-gap-is-behavior hypothesis. Kept as an ingredient to stack with the WHY-family bets and confirm with larger N.",
+     "source": "experiments/qwen35_4b_self_repair_install/reports/measure_review.md"
     }
    ]
   }

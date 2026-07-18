@@ -884,6 +884,25 @@ missing LOOP behavior — the model takes one pass at a multi-step task
 and stops rather than planning, verifying, and repairing. Bet #2 targets
 that loop directly. See experiments/qwen35_4b_exec_trace_install.
 
+Cognitive-core bet #2 (self-repair, 2026-07-18) is the first non-null,
+and it splits cleanly from bet #1 in a way that shapes the whole program.
+Execution-tracing (a PASSIVE-skill install) was a symmetric 5v5 reshuffle
+— exactly flat on every signal. Self-repair (a LOOP-BEHAVIOR install: 504
+mutation-injected [buggy code + real test failure] -> [diagnosis + fix]
+rows) came back weakly POSITIVE and, importantly, ASYMMETRICALLY: HumanEval
++3 problems (meets the tightened rule), MBPP -2, and the agentic real
+target 8/35 -> 10/35 with a 3-vs-1 discordant (adding, not trading). The
+effect is small and individually non-significant (agentic McNemar p~0.63),
+so it is a DIRECTION not a proven win — but it is the first evidence that
+targeting the agentic LOOP (the observed one-shot-and-stop failure mode)
+moves real coding where installing a passive cognitive component did not.
+This promotes loop/behavior-shaped curricula over component-skill curricula
+and keeps self-repair as a stackable ingredient. The next bets (owner-
+specified WHY-not-WHAT family: mechanically-derived rationale that teaches
+the generating process, tested cleanest via inert-to-grading inline #WHY:
+comments) push the same lever — teach WHY the answer follows, not just what
+it is. See experiments/qwen35_4b_self_repair_install.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

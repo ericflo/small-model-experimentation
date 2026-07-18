@@ -61,3 +61,20 @@ plan-act-verify-repair loop (self-generated rollouts graded by real test
 execution, provenance-clean).
 
 GPU stages (train/merge/measure) are pending their staged reviews.
+
+## 2026-07-18 — Transfer measurement: WEAK POSITIVE (first non-null)
+
+- self_repair vs base: HumanEval 0.7622->0.7805 (+3), MBPP 0.5650->
+  0.5550 (-2), agentic 8/35->10/35 (discordant 1 base-only / 3
+  self_repair-only). Frozen tightened rule fires INSTALLED_CODING on the
+  +3 HumanEval. HONEST: weak, underpowered, not individually significant
+  - but directionally positive on HE + agentic with an asymmetric
+  agentic discordant (adding, not the flat 5v5 reshuffle of bet #1).
+- FINDING: loop-behavior curricula (self-repair) outperform passive-
+  skill curricula (execution-tracing) for coding. First evidence that
+  targeting the LOOP (the observed one-shot-and-stop failure mode) does
+  something the passive-component install did not. self_repair kept as a
+  candidate ingredient to stack + confirm with larger agentic N.
+- NEXT: the owner-specified WHY-not-WHAT family (bet #4 inline #WHY:
+  comments first - cleanest test since comments are inert to grading;
+  then bet #3 think-block; anneal on whichever earns it).
