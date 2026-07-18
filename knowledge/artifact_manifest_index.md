@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 263
-- Manifest files: 625
+- Experiments with manifests: 264
+- Manifest files: 626
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 123 |
 | `run-data` | 101 |
-| `standard-artifact` | 136 |
+| `standard-artifact` | 137 |
 
 ## Manifests
 
@@ -271,6 +271,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_sampler_portfolio_scheduler` | `run-data` | [manifest](../experiments/qwen35_4b_sampler_portfolio_scheduler/data/subset_constrained_dpo_k4_records.manifest.json) |
 | `qwen35_4b_sampler_portfolio_scheduler` | `run-data` | [manifest](../experiments/qwen35_4b_sampler_portfolio_scheduler/data/train_policy_pool_records.manifest.json) |
 | `qwen35_4b_sampler_portfolio_scheduler` | `large-artifact` | [manifest](../experiments/qwen35_4b_sampler_portfolio_scheduler/large_artifacts_manifest.md) |
+| `qwen35_4b_self_repair_install` | `standard-artifact` | [manifest](../experiments/qwen35_4b_self_repair_install/reports/artifact_manifest.yaml) |
 | `qwen35_4b_semantic_anchor_coordinate_branching` | `standard-artifact` | [manifest](../experiments/qwen35_4b_semantic_anchor_coordinate_branching/reports/artifact_manifest.yaml) |
 | `qwen35_4b_semantic_policy_headroom_tournament` | `standard-artifact` | [manifest](../experiments/qwen35_4b_semantic_policy_headroom_tournament/reports/artifact_manifest.yaml) |
 | `qwen35_4b_simulation_keystone_repair` | `standard-artifact` | [manifest](../experiments/qwen35_4b_simulation_keystone_repair/reports/artifact_manifest.yaml) |

@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 291
-- Anchor-ready: 274
-- Human-authored READMEs: 278
+- Experiments: 292
+- Anchor-ready: 275
+- Human-authored READMEs: 279
 - Generated README stubs: 13
-- Primary reports: 289
-- Experiment logs: 193
-- Smoke commands: 159
-- Artifact manifests: 263
+- Primary reports: 290
+- Experiment logs: 194
+- Smoke commands: 160
+- Artifact manifests: 264
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 177 |
+| `documented-scripts` | 178 |
 | `scripts-undocumented` | 23 |
 | `source-or-analysis` | 53 |
 
@@ -184,6 +184,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_retrieval_adapt_verify_scale`](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety | `human-authored` | [report](../experiments/qwen35_4b_retrieval_adapt_verify_scale/reports/final_report.md) | no | `scripts-undocumented` | no | large-artifact, run-data | add-experiment-log, document-run-path, add-smoke-command |
 | yes | [`qwen35_4b_same_prefix_advantage_routing`](../experiments/qwen35_4b_same_prefix_advantage_routing/README.md) | agentic_breadth_installation, benchmark_generalization, evidence_conditioned_selection, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_same_prefix_advantage_routing/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_sampler_portfolio_scheduler`](../experiments/qwen35_4b_sampler_portfolio_scheduler/README.md) | collective_experimentation_infrastructure, posttraining_and_adaptation, process_control_and_tool_use | `human-authored` | [report](../experiments/qwen35_4b_sampler_portfolio_scheduler/reports/final_report.md) | no | `scripts-undocumented` | no | large-artifact, run-data | add-experiment-log, document-run-path, add-smoke-command |
+| yes | [`qwen35_4b_self_repair_install`](../experiments/qwen35_4b_self_repair_install/README.md) | agentic_breadth_installation, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_self_repair_install/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_semantic_anchor_coordinate_branching`](../experiments/qwen35_4b_semantic_anchor_coordinate_branching/README.md) | benchmark_generalization, interpretability_and_diagnostics, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_semantic_anchor_coordinate_branching/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_semantic_policy_headroom_tournament`](../experiments/qwen35_4b_semantic_policy_headroom_tournament/README.md) | active_evidence_acquisition, agentic_breadth_installation, benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_semantic_policy_headroom_tournament/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_simulation_keystone_repair`](../experiments/qwen35_4b_simulation_keystone_repair/README.md) | structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_simulation_keystone_repair/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |

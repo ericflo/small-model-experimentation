@@ -1,0 +1,54 @@
+{
+  "contamination": {
+    "banned_function_names": 663,
+    "banned_hits": 0,
+    "ngram_overlap": {
+      "benchmark_ngrams": 43645,
+      "corpus_ngrams": 2139,
+      "ngram_n": 7,
+      "note": "code-only n-grams; docstring spec prose excluded (audited by the banned-name gate)",
+      "shared_ngrams_distinctive": 0,
+      "shared_ngrams_structural_idiom": 81,
+      "status": "checked"
+    }
+  },
+  "corpus_sha256": "920cb228172677f005bdbc4501f593ce60dc7a9c4f22cbf177f05660ffc392cb",
+  "experiment_id": "qwen35_4b_self_repair_install",
+  "kinds": {
+    "self_repair": 504
+  },
+  "mix_retention": 0,
+  "mutation_kinds": {
+    "arith_op": 123,
+    "compare_op": 83,
+    "const_offset": 107,
+    "index_shift": 10,
+    "operand_swap": 9,
+    "range_bound": 65,
+    "return_offset": 107
+  },
+  "out": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_self_repair_install/data/sft_self_repair.jsonl",
+  "rows": 504,
+  "schema_version": 1,
+  "seed": 91330,
+  "tier_schedule": [
+    [
+      "short",
+      120
+    ],
+    [
+      "medium",
+      192
+    ],
+    [
+      "long",
+      192
+    ]
+  ],
+  "tiers": {
+    "long": 192,
+    "medium": 192,
+    "short": 120
+  },
+  "unique_code_pairs": 504
+}

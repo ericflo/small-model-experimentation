@@ -50190,6 +50190,35 @@
      "source": "experiments/qwen35_4b_exec_trace_install/reports/measure_review.md"
     }
    ]
+  },
+  "qwen35_4b_self_repair_install": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Bet #2 (self-repair): install the check-and-repair loop — design frozen, awaiting the run",
+     "categories": [
+      "HumanEval",
+      "MBPP",
+      "Agentic (of 35)"
+     ],
+     "series": [
+      {
+       "label": "base (target to beat)",
+       "values": [
+        0.7622,
+        0.565,
+        0.229
+       ]
+      }
+     ],
+     "x_label": "coding fitness signal",
+     "y_label": "pass rate",
+     "y_format": "number",
+     "note": "Second cognitive-core coding bet, after bet #1 (execution-tracing) came back NULL (reshuffled coding tasks without raising the count; agentic 8/35 flat). This cell installs the CHECK-AND-REPAIR loop directly, targeting the observed agentic failure mode (one shot, a check fails, the model STOPS instead of verifying and repairing): a fresh r32/a64 LoRA trains on 504 self-repair debugging episodes — a synthetic function with a bug INJECTED by AST mutation (so the fix is KNOWN) plus its concrete failing test, targeting a localized diagnosis + the corrected code. Self-generated and execution-verified (no teacher), contamination-clean (0 banned benchmark names, 0 distinctive code n-grams). The transfer rule is TIGHTENED from bet #1: INSTALLED_CODING now requires a >= 3-problem pass@1 gain (a +1 bump near ceiling reads NULL), with the agentic duet-eval (base 8/35) the primary real target measured by hand. Honest prior on a meaningful install ~25-30%; if NULL, the pre-committed pivot is reinforcement learning on the plan-act-verify-repair loop, not a fourth static-SFT curriculum. Bars show the base targets to beat; treatment values are appended after the sealed measurement.",
+     "source": "experiments/qwen35_4b_self_repair_install/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

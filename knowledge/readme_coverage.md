@@ -168,6 +168,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_retrieval_adapt_verify_scale` | [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md) | [report](../experiments/qwen35_4b_retrieval_adapt_verify_scale/reports/final_report.md) |
 | `qwen35_4b_same_prefix_advantage_routing` | [README](../experiments/qwen35_4b_same_prefix_advantage_routing/README.md) | [report](../experiments/qwen35_4b_same_prefix_advantage_routing/reports/report.md) |
 | `qwen35_4b_sampler_portfolio_scheduler` | [README](../experiments/qwen35_4b_sampler_portfolio_scheduler/README.md) | [report](../experiments/qwen35_4b_sampler_portfolio_scheduler/reports/final_report.md) |
+| `qwen35_4b_self_repair_install` | [README](../experiments/qwen35_4b_self_repair_install/README.md) | [report](../experiments/qwen35_4b_self_repair_install/reports/report.md) |
 | `qwen35_4b_semantic_anchor_coordinate_branching` | [README](../experiments/qwen35_4b_semantic_anchor_coordinate_branching/README.md) | [report](../experiments/qwen35_4b_semantic_anchor_coordinate_branching/reports/report.md) |
 | `qwen35_4b_semantic_policy_headroom_tournament` | [README](../experiments/qwen35_4b_semantic_policy_headroom_tournament/README.md) | [report](../experiments/qwen35_4b_semantic_policy_headroom_tournament/reports/report.md) |
 | `qwen35_4b_simulation_keystone_repair` | [README](../experiments/qwen35_4b_simulation_keystone_repair/README.md) | [report](../experiments/qwen35_4b_simulation_keystone_repair/reports/report.md) |

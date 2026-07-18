@@ -1,0 +1,54 @@
+# Lifecycle-33 self-repair installation — frozen configuration.
+experiment_id: qwen35_4b_self_repair_install
+lifecycle: 33
+program: agentic_breadth_installation
+
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  base_composite: large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized
+  base_tree_sha256: 26d8ee48583adb0fb557d0ff668664949adff0068fa5baafe6f0af68e22fb677
+  base_weights_sha256: b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db
+
+curriculum:
+  generator: scripts/gen_self_repair_curriculum.py
+  construction_seed: 91330
+  rows: 504
+  tier_schedule: {short: 120, medium: 192, long: 192}
+  out: data/sft_self_repair.jsonl
+  corpus_sha256: 920cb228172677f005bdbc4501f593ce60dc7a9c4f22cbf177f05660ffc392cb
+  mix_retention_default: 0  # forgetting guard; OFF for the pure-repair probe
+  mutation_kinds: [compare_op, arith_op, operand_swap, range_bound, return_offset, const_offset, index_shift]
+
+training:
+  trainer: scripts/train_think.py  # vendored, sha e0eca2a230dae5d109d418dcb4cc19af05882a770af14350ffd741a8d5e90f01
+  arm: self_repair
+  rank: 32
+  alpha: 64
+  epochs: 1
+  lr: 1.0e-5
+  batch_size: 1
+  grad_accum: 8
+  max_length: 4096
+  w_think: 0.2
+  w_close: 0.2
+  seed: 91331
+  optimizer_steps: 63
+
+merge:
+  merger: scripts/merge_adapter.py  # vendored, sha cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672
+  out: large_artifacts/qwen35_4b_self_repair_install/merged/self_repair
+
+measurement:
+  harness: experiments/qwen35_4b_coding_fitness_harness/scripts/eval_pass1.py  # referenced, not copied
+  datasets: {humaneval: 164, mbpp: 200}
+  greedy: true
+  retention_tolerance: 0.02
+  min_gain_problems: 3  # tightened install bar (fixes bet #1's +1-problem false positive)
+  consequence: [INSTALLED_CODING, RETENTION_FAIL, NULL]
+  agentic_target: manual follow-on duet-eval confirm (base 8/35); not gated here
+
+baselines:
+  humaneval_pass_at_1: 0.7622
+  mbpp_pass_at_1: 0.5650
+  agentic_duet_eval: 0.229

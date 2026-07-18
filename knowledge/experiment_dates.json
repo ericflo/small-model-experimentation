@@ -2561,6 +2561,14 @@
       "sources": [
         "dated experiment_log.md heading (2026-07-17 model-free construction freeze; GPU stages pending staged reviews, no seed consumed)"
       ]
+    },
+    "qwen35_4b_self_repair_install": {
+      "start": "2026-07-18",
+      "end": "2026-07-18",
+      "confidence": "high",
+      "sources": [
+        "dated experiment_log.md heading (2026-07-18 model-free construction freeze; GPU train/merge/measure stages pending staged reviews, no seed consumed)"
+      ]
     }
   }
 }

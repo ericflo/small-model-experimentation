@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 291
+- Experiments: 292
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 204
+- Assigned experiments: 205
 
 ### Seed Evidence
 
@@ -112,6 +112,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_reliability_exec_opsd_audit` (track-z): [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md)
 - `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_same_prefix_advantage_routing` (new): [README](../experiments/qwen35_4b_same_prefix_advantage_routing/README.md)
+- `qwen35_4b_self_repair_install` (new): [README](../experiments/qwen35_4b_self_repair_install/README.md)
 - `qwen35_4b_semantic_anchor_coordinate_branching` (new): [README](../experiments/qwen35_4b_semantic_anchor_coordinate_branching/README.md)
 - `qwen35_4b_semantic_policy_headroom_tournament` (new): [README](../experiments/qwen35_4b_semantic_policy_headroom_tournament/README.md)
 - `qwen35_4b_simulation_keystone_repair` (new): [README](../experiments/qwen35_4b_simulation_keystone_repair/README.md)
@@ -232,7 +233,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 Turn candidate-pool coverage into deployable decisions under visible evidence.
 
 - Charter: [evidence_conditioned_selection](../research_programs/evidence_conditioned_selection/charter.md)
-- Assigned experiments: 104
+- Assigned experiments: 105
 
 ### Seed Evidence
 
@@ -296,6 +297,7 @@ Turn candidate-pool coverage into deployable decisions under visible evidence.
 - `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_retrieval_adapt_verify_scale` (track-z): [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)
 - `qwen35_4b_same_prefix_advantage_routing` (new): [README](../experiments/qwen35_4b_same_prefix_advantage_routing/README.md)
+- `qwen35_4b_self_repair_install` (new): [README](../experiments/qwen35_4b_self_repair_install/README.md)
 - `qwen35_4b_semantic_policy_headroom_tournament` (new): [README](../experiments/qwen35_4b_semantic_policy_headroom_tournament/README.md)
 - `qwen35_4b_sketch_coverage_shift_probe` (track-z): [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md)
 - `qwen35_4b_specialist_policy_integration` (new): [README](../experiments/qwen35_4b_specialist_policy_integration/README.md)
@@ -796,7 +798,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 Measure why methods work or fail through attribution, probes, pressure audits, and controlled ablations.
 
 - Charter: [interpretability_and_diagnostics](../research_programs/interpretability_and_diagnostics/charter.md)
-- Assigned experiments: 88
+- Assigned experiments: 89
 
 ### Seed Evidence
 
@@ -852,6 +854,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 - `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_retention_screen_calibration` (new): [README](../experiments/qwen35_4b_retention_screen_calibration/README.md)
 - `qwen35_4b_retrieval_adapt_verify_scale` (track-z): [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)
+- `qwen35_4b_self_repair_install` (new): [README](../experiments/qwen35_4b_self_repair_install/README.md)
 - `qwen35_4b_semantic_anchor_coordinate_branching` (new): [README](../experiments/qwen35_4b_semantic_anchor_coordinate_branching/README.md)
 - `qwen35_4b_semantic_policy_headroom_tournament` (new): [README](../experiments/qwen35_4b_semantic_policy_headroom_tournament/README.md)
 - `qwen35_4b_sketch_coverage_shift_probe` (track-z): [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md)
@@ -901,7 +904,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 Improve precision, abstention, robustness, reproducibility, and safe artifact handling.
 
 - Charter: [reliability_and_safety](../research_programs/reliability_and_safety/charter.md)
-- Assigned experiments: 82
+- Assigned experiments: 83
 
 ### Seed Evidence
 
@@ -948,6 +951,7 @@ Improve precision, abstention, robustness, reproducibility, and safe artifact ha
 - `qwen35_4b_retention_screen_calibration` (new): [README](../experiments/qwen35_4b_retention_screen_calibration/README.md)
 - `qwen35_4b_retrieval_adapt_verify_scale` (track-z): [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md)
 - `qwen35_4b_same_prefix_advantage_routing` (new): [README](../experiments/qwen35_4b_same_prefix_advantage_routing/README.md)
+- `qwen35_4b_self_repair_install` (new): [README](../experiments/qwen35_4b_self_repair_install/README.md)
 - `qwen35_4b_semantic_policy_headroom_tournament` (new): [README](../experiments/qwen35_4b_semantic_policy_headroom_tournament/README.md)
 - `qwen35_4b_sketch_coverage_shift_probe` (track-z): [README](../experiments/qwen35_4b_sketch_coverage_shift_probe/README.md)
 - `qwen35_4b_specialist_policy_integration` (new): [README](../experiments/qwen35_4b_specialist_policy_integration/README.md)
@@ -1053,7 +1057,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 Install general agentic capability in Qwen3.5-4B via breadth-first expert iteration on a firewall-clean multi-family gym, arbitrated by the blackbox menagerie instrument.
 
 - Charter: [agentic_breadth_installation](../research_programs/agentic_breadth_installation/charter.md)
-- Assigned experiments: 58
+- Assigned experiments: 59
 
 ### Assigned Experiments
 
@@ -1091,6 +1095,7 @@ Install general agentic capability in Qwen3.5-4B via breadth-first expert iterat
 - `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_retention_screen_calibration` (new): [README](../experiments/qwen35_4b_retention_screen_calibration/README.md)
 - `qwen35_4b_same_prefix_advantage_routing` (new): [README](../experiments/qwen35_4b_same_prefix_advantage_routing/README.md)
+- `qwen35_4b_self_repair_install` (new): [README](../experiments/qwen35_4b_self_repair_install/README.md)
 - `qwen35_4b_semantic_policy_headroom_tournament` (new): [README](../experiments/qwen35_4b_semantic_policy_headroom_tournament/README.md)
 - `qwen35_4b_specialist_policy_integration` (new): [README](../experiments/qwen35_4b_specialist_policy_integration/README.md)
 - `qwen35_4b_state_track_confirmation` (new): [README](../experiments/qwen35_4b_state_track_confirmation/README.md)
