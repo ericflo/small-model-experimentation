@@ -59,7 +59,7 @@
       "rows": 2000,
       "seed": 94100,
       "unique_programs": 2000,
-      "wall_seconds": 3.4
+      "wall_seconds": 3.52
     },
     {
       "categories": {
@@ -109,7 +109,7 @@
       "rows": 5000,
       "seed": 94100,
       "unique_programs": 5000,
-      "wall_seconds": 8.68
+      "wall_seconds": 8.96
     },
     {
       "categories": {
@@ -159,7 +159,7 @@
       "rows": 10000,
       "seed": 94100,
       "unique_programs": 10000,
-      "wall_seconds": 17.93
+      "wall_seconds": 18.57
     },
     {
       "categories": {
@@ -209,7 +209,7 @@
       "rows": 20000,
       "seed": 94100,
       "unique_programs": 20000,
-      "wall_seconds": 37.83
+      "wall_seconds": 38.96
     }
   ],
   "schema_version": 1
