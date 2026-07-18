@@ -63,7 +63,7 @@
       "rows": 2000,
       "seed": 95200,
       "unique_programs": 2000,
-      "wall_seconds": 7.1
+      "wall_seconds": 5.53
     },
     {
       "categories": {
@@ -116,7 +116,7 @@
       "rows": 5000,
       "seed": 95200,
       "unique_programs": 5000,
-      "wall_seconds": 17.15
+      "wall_seconds": 13.96
     },
     {
       "categories": {
@@ -169,7 +169,7 @@
       "rows": 10000,
       "seed": 95200,
       "unique_programs": 10000,
-      "wall_seconds": 35.4
+      "wall_seconds": 28.38
     },
     {
       "categories": {
@@ -222,7 +222,7 @@
       "rows": 20000,
       "seed": 95200,
       "unique_programs": 20000,
-      "wall_seconds": 73.85
+      "wall_seconds": 59.42
     },
     {
       "categories": {
@@ -275,7 +275,7 @@
       "rows": 40000,
       "seed": 95200,
       "unique_programs": 40000,
-      "wall_seconds": 160.18
+      "wall_seconds": 127.68
     }
   ],
   "schema_version": 1
