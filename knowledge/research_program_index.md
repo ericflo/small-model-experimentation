@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 289
+- Experiments: 290
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 202
+- Assigned experiments: 203
 
 ### Seed Evidence
 
@@ -49,6 +49,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_code_abi_compiler_heldout_primitive_pilot` (track-z): [README](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/README.md)
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
 - `qwen35_4b_code_confidence` (new): [README](../experiments/qwen35_4b_code_confidence/README.md)
+- `qwen35_4b_coding_fitness_harness` (new): [README](../experiments/qwen35_4b_coding_fitness_harness/README.md)
 - `qwen35_4b_commit_slot_jacobian_value_transport` (new): [README](../experiments/qwen35_4b_commit_slot_jacobian_value_transport/README.md)
 - `qwen35_4b_commit_slot_semantic_power_replication` (new): [README](../experiments/qwen35_4b_commit_slot_semantic_power_replication/README.md)
 - `qwen35_4b_confidence_policy` (new): [README](../experiments/qwen35_4b_confidence_policy/README.md)
@@ -460,7 +461,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and other update mechanisms.
 
 - Charter: [posttraining_and_adaptation](../research_programs/posttraining_and_adaptation/charter.md)
-- Assigned experiments: 99
+- Assigned experiments: 100
 
 ### Seed Evidence
 
@@ -483,6 +484,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 - `qwen35_4b_banking_thinking_stack` (new): [README](../experiments/qwen35_4b_banking_thinking_stack/README.md)
 - `qwen35_4b_bucket_belief_probe_ranker` (track-z): [README](../experiments/qwen35_4b_bucket_belief_probe_ranker/README.md)
 - `qwen35_4b_clean_path_statechain_extension` (new): [README](../experiments/qwen35_4b_clean_path_statechain_extension/README.md)
+- `qwen35_4b_coding_fitness_harness` (new): [README](../experiments/qwen35_4b_coding_fitness_harness/README.md)
 - `qwen35_4b_confidence_policy` (new): [README](../experiments/qwen35_4b_confidence_policy/README.md)
 - `qwen35_4b_constrained_coverage_dpo` (track-z): [README](../experiments/qwen35_4b_constrained_coverage_dpo/README.md)
 - `qwen35_4b_context_local_jacobian_clamp` (new): [README](../experiments/qwen35_4b_context_local_jacobian_clamp/README.md)
@@ -648,7 +650,7 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 Stress whether mechanisms transfer across substrates, families, lengths, distributions, and real tasks.
 
 - Charter: [benchmark_generalization](../research_programs/benchmark_generalization/charter.md)
-- Assigned experiments: 127
+- Assigned experiments: 128
 
 ### Seed Evidence
 
@@ -672,6 +674,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 - `qwen35_4b_bank_the_thoughts` (new): [README](../experiments/qwen35_4b_bank_the_thoughts/README.md)
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
 - `qwen35_4b_code_confidence` (new): [README](../experiments/qwen35_4b_code_confidence/README.md)
+- `qwen35_4b_coding_fitness_harness` (new): [README](../experiments/qwen35_4b_coding_fitness_harness/README.md)
 - `qwen35_4b_confidence_guided_compute` (new): [README](../experiments/qwen35_4b_confidence_guided_compute/README.md)
 - `qwen35_4b_counterexample_directed_dsl` (track-z): [README](../experiments/qwen35_4b_counterexample_directed_dsl/README.md)
 - `qwen35_4b_counterfactual_evidence_acquisition_curriculum` (new): [README](../experiments/qwen35_4b_counterfactual_evidence_acquisition_curriculum/README.md)

@@ -1,0 +1,38 @@
+# Standard artifact manifest — shared measurement harness (no trained model of its own).
+schema_version: 1
+experiment_id: "qwen35_4b_coding_fitness_harness"
+external_artifacts:
+  - name: "base Qwen/Qwen3.5-4B (raw HF revision, the baseline arm)"
+    storage: "Qwen/Qwen3.5-4B @ 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a (HF cache)"
+    required_for: "the base pass@1 baseline (default when --model-override is omitted)"
+    checksum: "HF revision 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+    regenerate: "pinned HF revision; no regeneration needed"
+  - name: "HumanEval + MBPP datasets (offline HF cache)"
+    storage: "~/.cache/huggingface/datasets/{openai___openai_humaneval, google-research-datasets___mbpp}"
+    required_for: "the fitness problems + hidden tests (execution grading)"
+    checksum: "openai/openai_humaneval; google-research-datasets/mbpp (full test split)"
+    regenerate: "HF_DATASETS_OFFLINE=1 uses the local cache; else load_dataset re-downloads the pinned datasets"
+  - name: "any trained composite under test (measurement target)"
+    storage: "large_artifacts/<exp>/merged/<composite> (passed via --model-override)"
+    required_for: "grading a curriculum's trained arm on the identical greedy execution path"
+    checksum: "per-composite (each cell pins its own tree/weights)"
+    regenerate: "produced by the owning curriculum lifecycle; this harness only READS it"
+omitted_artifacts:
+  - path: "large_artifacts/ and the HF model/dataset caches"
+    reason: "9GB weights + dataset caches; never checked into git; the harness reads them read-only"
+reproducibility:
+  smoke_command: ".venv-vllm/bin/python experiments/qwen35_4b_coding_fitness_harness/scripts/eval_pass1.py --dataset humaneval --smoke --out /tmp/smoke.json"
+  full_command: ".venv-vllm/bin/python experiments/qwen35_4b_coding_fitness_harness/scripts/eval_pass1.py --dataset {humaneval,mbpp} --n N [--model-override /path/to/merged/composite] --out FILE"
+  required_external_artifacts:
+    - "Qwen/Qwen3.5-4B @ 851bf6e8..."
+    - "~/.cache/huggingface/datasets/{openai___openai_humaneval, google-research-datasets___mbpp}"
+notes: >
+  Shared fitness infrastructure for the cognitive-core coding program (owner
+  pivot 2026-07-17). Standalone: src/ vendors the pinned model_override vLLM
+  runner + the C46 coverage/prompt/execution-grading machinery (copied), so
+  base and every trained composite are graded on the identical greedy path
+  (temperature 0, seed 0, execution-graded against hidden tests). Base
+  baselines recorded in runs/: HumanEval 0.7622 (125/164, HF-cross-checked to
+  1/164), MBPP 0.5650 (113/200). Validated: determinism (n=20 twice identical),
+  grader sanity (canonical pass, wrong fail), adapter eval end-to-end. vLLM
+  numbers are not comparable to HF numbers — keep every arm on this harness.

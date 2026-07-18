@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 261
-- Manifest files: 623
+- Experiments with manifests: 262
+- Manifest files: 624
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 123 |
 | `run-data` | 101 |
-| `standard-artifact` | 134 |
+| `standard-artifact` | 135 |
 
 ## Manifests
 
@@ -80,6 +80,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_code_abi_compiler_heldout_primitive_pilot` | `large-artifact` | [manifest](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/large_artifacts_manifest.md) |
 | `qwen35_4b_code_abi_oracle_coverage_ladder` | `large-artifact` | [manifest](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/large_artifacts_manifest.md) |
 | `qwen35_4b_code_confidence` | `standard-artifact` | [manifest](../experiments/qwen35_4b_code_confidence/reports/artifact_manifest.yaml) |
+| `qwen35_4b_coding_fitness_harness` | `standard-artifact` | [manifest](../experiments/qwen35_4b_coding_fitness_harness/reports/artifact_manifest.yaml) |
 | `qwen35_4b_commit_slot_jacobian_value_transport` | `standard-artifact` | [manifest](../experiments/qwen35_4b_commit_slot_jacobian_value_transport/reports/artifact_manifest.yaml) |
 | `qwen35_4b_commit_slot_semantic_power_replication` | `standard-artifact` | [manifest](../experiments/qwen35_4b_commit_slot_semantic_power_replication/reports/artifact_manifest.yaml) |
 | `qwen35_4b_confidence_guided_compute` | `standard-artifact` | [manifest](../experiments/qwen35_4b_confidence_guided_compute/reports/artifact_manifest.yaml) |

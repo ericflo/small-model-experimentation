@@ -1,0 +1,64 @@
+{
+  "dataset": "humaneval",
+  "n": 4,
+  "model": "base",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "pass_at_1": 1.0,
+  "passed": 4,
+  "total": 4,
+  "per_problem": [
+    {
+      "task_id": "HumanEval/0",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 188,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/1",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 214,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/2",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 98,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/3",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 158,
+      "truncated": false
+    }
+  ],
+  "greedy": true,
+  "seed": 0,
+  "thinking": "off",
+  "max_new_tokens": 512,
+  "visible_tests": 1,
+  "timeout_s": 5.0,
+  "mbpp_config": null,
+  "offset": 0,
+  "n_parse_failed": 0,
+  "n_truncated": 0,
+  "runner_sha256": "cf1a766a70df8e3aacae18fc52a1a2186f2f8fc20161a6ef679b3dd51f60fcd2",
+  "resolved_sampling": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "top_k": 0,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "frequency_penalty": 0.0,
+    "repetition_penalty": 1.0
+  },
+  "generation_seconds": 5.9841226630378515,
+  "sampled_tokens_per_second": 110.62607457714351,
+  "model_load_seconds": 111.95083298604004,
+  "wall_seconds": 133.71673452993855
+}

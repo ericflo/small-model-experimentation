@@ -1,0 +1,176 @@
+{
+  "dataset": "humaneval",
+  "n": 20,
+  "model": "base",
+  "model_id": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "pass_at_1": 1.0,
+  "passed": 20,
+  "total": 20,
+  "per_problem": [
+    {
+      "task_id": "HumanEval/0",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 188,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/1",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 214,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/2",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 98,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/3",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 158,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/4",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 170,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/5",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 150,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/6",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 215,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/7",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 113,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/8",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 180,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/9",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 164,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/10",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 242,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/11",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 114,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/12",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 132,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/13",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 96,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/14",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 80,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/15",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 93,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/16",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 82,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/17",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 240,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/18",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 172,
+      "truncated": false
+    },
+    {
+      "task_id": "HumanEval/19",
+      "passed": true,
+      "parse_ok": true,
+      "n_answer_tokens": 233,
+      "truncated": false
+    }
+  ],
+  "greedy": true,
+  "seed": 0,
+  "thinking": "off",
+  "max_new_tokens": 512,
+  "visible_tests": 1,
+  "timeout_s": 5.0,
+  "mbpp_config": null,
+  "offset": 0,
+  "n_parse_failed": 0,
+  "n_truncated": 0,
+  "runner_sha256": "cf1a766a70df8e3aacae18fc52a1a2186f2f8fc20161a6ef679b3dd51f60fcd2",
+  "resolved_sampling": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "top_k": 0,
+    "min_p": 0.0,
+    "presence_penalty": 0.0,
+    "frequency_penalty": 0.0,
+    "repetition_penalty": 1.0
+  },
+  "generation_seconds": 5.762411963893101,
+  "sampled_tokens_per_second": 547.3402491461491,
+  "model_load_seconds": 21.12240899493918,
+  "wall_seconds": 40.80378202605061
+}

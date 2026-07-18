@@ -58,6 +58,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_code_abi_compiler_heldout_primitive_pilot` | [README](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/README.md) | [report](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/reports/final_report.md) |
 | `qwen35_4b_code_abi_oracle_coverage_ladder` | [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md) | [report](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/reports/final_report.md) |
 | `qwen35_4b_code_confidence` | [README](../experiments/qwen35_4b_code_confidence/README.md) | [report](../experiments/qwen35_4b_code_confidence/reports/report.md) |
+| `qwen35_4b_coding_fitness_harness` | [README](../experiments/qwen35_4b_coding_fitness_harness/README.md) |  |
 | `qwen35_4b_commit_slot_jacobian_value_transport` | [README](../experiments/qwen35_4b_commit_slot_jacobian_value_transport/README.md) | [report](../experiments/qwen35_4b_commit_slot_jacobian_value_transport/reports/report.md) |
 | `qwen35_4b_commit_slot_semantic_power_replication` | [README](../experiments/qwen35_4b_commit_slot_semantic_power_replication/README.md) | [report](../experiments/qwen35_4b_commit_slot_semantic_power_replication/reports/report.md) |
 | `qwen35_4b_confidence_guided_compute` | [README](../experiments/qwen35_4b_confidence_guided_compute/README.md) | [report](../experiments/qwen35_4b_confidence_guided_compute/reports/report.md) |

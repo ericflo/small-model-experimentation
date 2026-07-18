@@ -15110,6 +15110,37 @@
     }
    ],
    "charts": []
+  },
+  "qwen35_4b_coding_fitness_harness": {
+   "verdict_tag": "Foundation of the coding-install program: base is a strong function coder (76%) but weak agent (23%)",
+   "concept_primer": "After proving the menagerie proxy does not transfer to real coding, the mission became installing real coding ability into the 4B, measured directly. This is the measuring stick: a fast HumanEval+MBPP pass@1 harness that runs actual tests against the model's code, and can grade any trained version the same way.",
+   "plain_question": "How good is the raw 4B at coding, on signals we can iterate against fast?",
+   "plain_answer": "Surprisingly good at writing single functions (HumanEval 76.2%, MBPP 56.5%) but weak at driving a multi-step coding task in a real agent loop (23%). The harness is validated: it agrees with an independent run to within 1 problem in 164, is deterministic, and correctly passes canonical solutions while failing wrong ones. The 76-vs-23 gap tells us exactly where to aim: not function-writing, which is nearly maxed, but the agentic cognition — planning, tracking state across edits, debugging — that turns a function writer into a coding agent.",
+   "why_it_matters": "You cannot install a capability you cannot measure. This fixes the fitness signal to the real target (running code) instead of a proxy, and pinpoints the gap worth attacking.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "HumanEval",
+     "value": "76.2%",
+     "sub": "125/164, cross-validated to 1/164"
+    },
+    {
+     "label": "MBPP",
+     "value": "56.5%",
+     "sub": "113/200 (full test split)"
+    },
+    {
+     "label": "Agentic",
+     "value": "23%",
+     "sub": "8/35 duet-eval — the real gap"
+    },
+    {
+     "label": "Validation",
+     "value": "deterministic",
+     "sub": "grader sanity-checked; adapter-evaluable"
+    }
+   ],
+   "charts": []
   }
  }
 }

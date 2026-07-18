@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 289
+- Experiments: 290
 - Anchor-ready: 273
-- Human-authored READMEs: 276
+- Human-authored READMEs: 277
 - Generated README stubs: 13
 - Primary reports: 288
 - Experiment logs: 192
-- Smoke commands: 157
-- Artifact manifests: 261
+- Smoke commands: 158
+- Artifact manifests: 262
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 175 |
+| `documented-scripts` | 176 |
 | `scripts-undocumented` | 23 |
 | `source-or-analysis` | 53 |
 
@@ -27,12 +27,12 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | Need | Experiments |
 | --- | ---: |
 | `add-smoke-command` | 132 |
-| `add-experiment-log` | 97 |
+| `add-experiment-log` | 98 |
 | `document-run-path` | 76 |
 | `add-artifact-manifest` | 28 |
 | `replace-generated-readme` | 13 |
+| `add-primary-report` | 2 |
 | `review-program-assignment` | 2 |
-| `add-primary-report` | 1 |
 
 ## Matrix
 
@@ -74,6 +74,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_code_abi_compiler_heldout_primitive_pilot`](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/README.md) | structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_code_abi_compiler_heldout_primitive_pilot/reports/final_report.md) | no | `documented-scripts` | no | large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_code_abi_oracle_coverage_ladder`](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md) | algorithmic_memory_and_retrieval, benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/reports/final_report.md) | no | `documented-scripts` | no | large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_code_confidence`](../experiments/qwen35_4b_code_confidence/README.md) | benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_code_confidence/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
+| no | [`qwen35_4b_coding_fitness_harness`](../experiments/qwen35_4b_coding_fitness_harness/README.md) | benchmark_generalization, posttraining_and_adaptation, structured_execution_and_compilers | `human-authored` |  | no | `documented-scripts` | yes | standard-artifact | add-primary-report, add-experiment-log |
 | yes | [`qwen35_4b_commit_slot_jacobian_value_transport`](../experiments/qwen35_4b_commit_slot_jacobian_value_transport/README.md) | interpretability_and_diagnostics, structured_execution_and_compilers, test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_commit_slot_jacobian_value_transport/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_commit_slot_semantic_power_replication`](../experiments/qwen35_4b_commit_slot_semantic_power_replication/README.md) | interpretability_and_diagnostics, structured_execution_and_compilers, test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_commit_slot_semantic_power_replication/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_confidence_guided_compute`](../experiments/qwen35_4b_confidence_guided_compute/README.md) | benchmark_generalization | `human-authored` | [report](../experiments/qwen35_4b_confidence_guided_compute/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |

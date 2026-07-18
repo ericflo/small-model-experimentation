@@ -50124,6 +50124,35 @@
      "source": "experiments/qwen35_4b_state_track_install/runs/benchmark/medium_tb1024_seed78169_install/summary.json"
     }
    ]
+  },
+  "qwen35_4b_coding_fitness_harness": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Base Qwen3.5-4B coding baselines: strong at functions, weak as an agent",
+     "categories": [
+      "HumanEval pass@1",
+      "MBPP pass@1",
+      "Agentic (duet-eval gen4)"
+     ],
+     "series": [
+      {
+       "label": "base Qwen3.5-4B",
+       "values": [
+        0.7622,
+        0.565,
+        0.229
+       ]
+      }
+     ],
+     "x_label": "coding fitness signal",
+     "y_label": "pass rate",
+     "y_format": "number",
+     "note": "The foundation of the cognitive-core program. Base Qwen3.5-4B is ALREADY a strong single-function coder (HumanEval 76.2%, 125/164, cross-validated to 1/164 against an independent HF run) and a decent one on MBPP (56.5%), but a WEAK multi-step coding agent (23%, 8/35 on the real filesystem-graded duet-eval harness). That 76-vs-23 gap is the program's target: the 4B can write a function but cannot drive a multi-step coding task, so curricula aim at the agentic cognition gap (planning, state-tracking across steps, debugging loops), not single-function ability. HumanEval/MBPP serve as fast retention + signal; the agentic eval is the real transfer target. This harness grades base and every trained composite on the identical greedy execution-graded path.",
+     "source": "experiments/qwen35_4b_coding_fitness_harness/reports/artifact_manifest.yaml"
+    }
+   ]
   }
  }
 }
