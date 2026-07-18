@@ -93,7 +93,7 @@ GRAD_ACCUM = 8
 
 # TODO-PIN per rung after training: the SINGLE-LINE sorted-key dict of the four
 # published sha256 values {"adapter_config","adapter_weights","log","receipt"}.
-PUBLISHED_RUNG_HASHES: dict[int, dict | None] = {2000: None, 5000: None, 10000: None, 20000: None, 40000: None}
+PUBLISHED_RUNG_HASHES: dict[int, dict | None] = {2000: {"adapter_config": "3e286a2ee95fb30f52a822c5bae935b67d833e8ba39611b9d497f3298a393fe8", "adapter_weights": "1a0334c94573f4e4dc408ee361f21168c26f868c72464ad54998f82230707cd1", "log": "045c10080818896fa16bc861329e5fcb1767e57a789b19a07f955507d4b57aff", "receipt": "a8046edad13658d77cac67c3225373523e18cc70ab86d9a3fcd2c63b6e9954ec"}, 5000: None, 10000: None, 20000: None, 40000: None}
 ADAPTER_ROOT = ROOT / "large_artifacts" / EXP.name / "adapters"
 
 
