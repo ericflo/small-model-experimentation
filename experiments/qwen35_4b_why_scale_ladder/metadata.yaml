@@ -25,10 +25,10 @@ top_level_dirs:
   - "scripts"
   - "tests"
 file_counts:
-  json: 4
-  log: 1
+  json: 5
+  log: 2
   md: 7
   py: 12
   yaml: 3
-total_files: 27
-total_size_bytes: 302738
+total_files: 29
+total_size_bytes: 356291

@@ -93,7 +93,7 @@ GRAD_ACCUM = 8
 
 # TODO-PIN per rung after training: the SINGLE-LINE sorted-key dict of the four
 # published sha256 values {"adapter_config","adapter_weights","log","receipt"}.
-PUBLISHED_RUNG_HASHES: dict[int, dict | None] = {2000: {"adapter_config": "8f60f6e3d240e27da39964a2b252fc97d8a02bacec523f0f8943b696a5a48a20", "adapter_weights": "db83588cce127dd3cee26de0507c0da85dd0f146715a96cda38354be45cb006f", "log": "70e6a338919fd2a0aeab585754d57c0649a9fd96c7efba203cdc1b9bd60e898f", "receipt": "3dd24dcf84713684ef614ad32b1d77cc9c9b2b8b1e440d53fc964af684c02397"}, 5000: None, 10000: None, 20000: None, 40000: None}
+PUBLISHED_RUNG_HASHES: dict[int, dict | None] = {2000: {"adapter_config": "8f60f6e3d240e27da39964a2b252fc97d8a02bacec523f0f8943b696a5a48a20", "adapter_weights": "db83588cce127dd3cee26de0507c0da85dd0f146715a96cda38354be45cb006f", "log": "70e6a338919fd2a0aeab585754d57c0649a9fd96c7efba203cdc1b9bd60e898f", "receipt": "3dd24dcf84713684ef614ad32b1d77cc9c9b2b8b1e440d53fc964af684c02397"}, 5000: {"adapter_config": "a7a3a9019bc920203f68c5d5f288ca95465d2b3b1b94d03a53fdc66e7ff8fb23", "adapter_weights": "02cec57d17bb4b53c6bd414ab7d9291725cb48a35481e206544d42ba4c439d67", "log": "3f7f5e52a622e91214f75f294942ebb023eda3108d40f411f17aa4678b36a85a", "receipt": "67e7ec4a9590e2dbd92ea9c6a14ead53cc953e2b5c4cb2517d0134e2586fd3d7"}, 10000: None, 20000: None, 40000: None}
 ADAPTER_ROOT = ROOT / "large_artifacts" / EXP.name / "adapters"
 
 
