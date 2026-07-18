@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Checkpointed harness for the WHY scale-ladder sweep (Phase A: scale-then-RLVR).
 
-The ladder trains the SAME high-diversity WHY curriculum at four rung sizes
-(2000, 5000, 10000, 20000) to find the PEAK of the scaling curve before
+The ladder trains the SAME high-diversity WHY curriculum at five rung sizes
+(2000, 5000, 10000, 20000, 40000) to find the PEAK of the scaling curve before
 overfit/collapse; the best rung becomes the SFT foundation for the subsequent
 RLVR phase. This is a SWEEP: the orchestrator runs each rung's stages and records
 the pass@1-vs-rows curve. This harness does NOT run all rungs automatically.
@@ -16,7 +16,7 @@ staged review + the committed ladder manifest):
   --stage merge   --rows N      needs reports/merge_review.md    PASS_CONTROL_MERGE
   --stage measure --rows N      needs reports/measure_review.md  PASS_MEASURE
 
-Every GPU stage is per-rung (``--rows`` in {2000, 5000, 10000, 20000}); the
+Every GPU stage is per-rung (``--rows`` in {2000, 5000, 10000, 20000, 40000}); the
 orchestrator sweeps the rungs and assembles the curve.
 """
 
@@ -165,7 +165,7 @@ def smoke() -> None:
         "contamination-clean (zero banned-name hits, zero distinctive code 7-grams), "
         "and diverse at scale (>=50 families, >=300 normalized WHY templates, >=95% "
         "unique programs at 20000 rows, every render <4096 tokens); a sha-pinned "
-        "four-rung ladder (2000/5000/10000/20000) with a fail-closed per-rung trainer "
+        "five-rung ladder (2000/5000/10000/20000/40000) with a fail-closed per-rung trainer "
         "from the authenticated base_reserialized composite (fresh r32/a64, seed 95201, "
         "epochs=1 for all rungs), the vendored external merger, and a per-rung "
         "transfer sweep on the shared HumanEval+MBPP fitness harness (comments IGNORED "
