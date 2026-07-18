@@ -183,7 +183,26 @@ def longest_parseable_prefix(text: str, entry_point: str) -> str | None:
     return None
 
 
+def strip_think(text: str) -> str:
+    """Drop the model's reasoning trace before code parsing.
+
+    Qwen3.5 is a thinking model: a completion looks like
+    ``<think> reasoning... </think>\\n\\n<code answer>``. The code answer is
+    whatever follows the FINAL ``</think>``. Split on the last close tag so
+    stray/nested close tags inside the reasoning cannot leak into the parsed
+    code. If no ``</think>`` is present (thinking never fired / was truncated
+    before closing), return the text unchanged so the whole completion is
+    still parsed.
+    """
+    marker = "</think>"
+    index = text.rfind(marker)
+    if index == -1:
+        return text
+    return text[index + len(marker):]
+
+
 def extract_candidate_code(raw_completion: str, entry_point: str, continuation_prompt: str | None = None) -> tuple[str | None, str]:
+    raw_completion = strip_think(raw_completion)
     cleaned = strip_markdown(raw_completion)
     attempts = [cleaned]
     if continuation_prompt:

@@ -1,0 +1,62 @@
+# Dual-channel WHY-think scale ladder — frozen construction + recipe config.
+# This file DOCUMENTS the frozen contract; the executable source of truth is the
+# in-cell generator (seed 95200), scripts/train_trial.py, and data/ladder_manifest.json.
+experiment_id: qwen35_4b_why_think_scale
+research_program: agentic_breadth_installation
+phase: "Phase A of scale-then-RLVR (dual-channel corrected WHY curriculum)"
+
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+  # ONLY ever Qwen3.5-4B (repo non-negotiable). It is a THINKING model; measured
+  # + trained WITH thinking on. Empty-think WHY training would risk destroying it.
+  base_composite: large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized
+  base_tree_sha256: "26d8ee48583adb0fb557d0ff668664949adff0068fa5baafe6f0af68e22fb677"
+  base_weights_sha256: "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db"
+
+curriculum:
+  generator: scripts/gen_why_think_curriculum.py
+  construction_seed: 95200
+  families: 59
+  categories: 13
+  # Dual channel per row:
+  #   messages: plain "write a function" (spec + signature + public asserts), NO
+  #             instruction to think or comment (both behaviours must be default).
+  #   think:    a GENUINE forward derivation (parse spec -> choose approach from the
+  #             code SHAPE -> build step by step -> trace a REAL worked example line
+  #             by line, values byte-verified -> conclude). NOT the joined #WHY.
+  #   answer:   clean correct code WITH inline #WHY: comments (strippable marker).
+  channels: [messages, think, answer]
+  why_marker: "#WHY:"
+  min_why_per_row: 3
+  token_reject_estimate: 3500   # reject any row whose >=3-char/token render estimate exceeds this
+
+ladder:
+  rungs: [2000, 5000, 10000, 20000, 40000]
+  manifest: data/ladder_manifest.json          # sha-pins generator + fixture + per-rung corpus
+  corpora: large_artifacts/qwen35_4b_why_think_scale/corpora/why_think_<rows>.jsonl  # gitignored, regenerable
+
+training:                                       # frozen, identical across rungs
+  trainer: scripts/train_think.py               # vendored, sha e0eca2a2...
+  epochs: 1                                      # owner directive: 1 epoch every rung (unlimited unique data, never re-show)
+  lr: 1.0e-5
+  lora_rank: 32
+  lora_alpha: 64
+  lora_target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+  batch_size: 1
+  grad_accum: 8
+  max_length: 4096
+  w_think: 0.2                                   # loss weight on the think channel (>0: preserves + shapes thinking)
+  w_close: 0.2
+  seed: 95201
+
+merge:
+  merger: scripts/merge_adapter.py              # vendored, sha cb9af8b4...
+  base_model: same base_reserialized composite
+
+measure:
+  harness: experiments/qwen35_4b_coding_fitness_harness/scripts/eval_pass1.py  # SHARED, referenced not copied
+  datasets: {humaneval: 164, mbpp: 200}
+  decode: greedy pass@1
+  thinking: on                                  # harness fixed to thinking-on + 8192 budget
+  base_anchor: null                             # base is CO-MEASURED thinking-on per rung; NO hardcoded thinking-off 76.2%

@@ -1350,7 +1350,7 @@
   },
   {
     "file_counts": {
-      ".json": 6,
+      ".json": 10,
       ".md": 1,
       ".py": 7,
       ".yaml": 2,
@@ -1381,8 +1381,8 @@
       "scripts",
       "src"
     ],
-    "total_files": 17,
-    "total_size_bytes": 210110
+    "total_files": 21,
+    "total_size_bytes": 277981
   },
   {
     "file_counts": {
@@ -8088,8 +8088,8 @@
   },
   {
     "file_counts": {
-      ".json": 5,
-      ".log": 2,
+      ".json": 6,
+      ".log": 3,
       ".md": 7,
       ".py": 12,
       ".yaml": 3
@@ -8122,8 +8122,45 @@
       "scripts",
       "tests"
     ],
-    "total_files": 29,
-    "total_size_bytes": 356291
+    "total_files": 31,
+    "total_size_bytes": 375834
+  },
+  {
+    "file_counts": {
+      ".json": 3,
+      ".md": 4,
+      ".py": 12,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_why_think_scale",
+    "path": "experiments/qwen35_4b_why_think_scale",
+    "primary_readme": "experiments/qwen35_4b_why_think_scale/README.md",
+    "primary_report": "experiments/qwen35_4b_why_think_scale/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "benchmark_generalization",
+      "posttraining_and_adaptation",
+      "process_control_and_tool_use",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "`Qwen/Qwen3.5-4B` by designed, contamination-free curricula, proven by transfer \u2014 and specifically, does teaching the 4B WHY a correct answer is correct SCALE to a peak worth an RLVR foundation, WITHOUT destroying the model's native thinking? being fixed to thinking-on + 8192 budget). Bet #4 (`qwen35_4b_why_comment_install`) gave the program's biggest fast gain \u2014 HumanEval +5 on the clean, comment-inert test \u2014 but was underpowered and did not stack. `qwen35_4b_why_scale_ladder` scaled that WHY curriculum but with a MINIMAL think block.",
+    "tags": [
+      "curriculum",
+      "execution",
+      "policy",
+      "small-model"
+    ],
+    "title": "Qwen35 4B WHY-Think Scale",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "tests"
+    ],
+    "total_files": 22,
+    "total_size_bytes": 305020
   },
   {
     "file_counts": {

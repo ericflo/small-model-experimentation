@@ -11,23 +11,26 @@ harness (greedy, execution-graded) reusing the C46 record/prompt/execute
 machinery through the pinned model_override vLLM runner, so base and
 every trained composite are graded on the identical path.
 
-**Status:** finished · since 2026-07-17 · harness built, validated
-(HF-vs-vLLM cross-check to 1/164, determinism confirmed, grader
-sanity-checked), base baselines recorded; reused as-is by every
-curriculum lifecycle.
+**Status:** finished · CORRECTED 2026-07-18 · was mistakenly measuring THINKING-OFF at a 512-token budget (suppressed base ~13-19pp); FIXED to thinking-on, 8192 budget, <think>-aware extraction. Base thinking-on: HumanEval 147/164 (89.6%), MBPP 151/200 (75.5%). ALL prior coding-program measurements were thinking-off-suppressed and are superseded.
 
 ## Base Qwen/Qwen3.5-4B baselines (greedy pass@1, this harness)
 
-- HumanEval: 0.7622 (125/164) — cross-validated vs the C46 HF run
-  (126/164); the base is ALREADY a strong single-function coder.
-- MBPP (full test, first 200): 0.5650 (113/200).
-- Agentic (duet-eval gen4, external, measurement-only): 8/35 = 0.229 —
-  the base is a WEAK multi-step coding agent.
+CORRECTED 2026-07-18 — thinking-on, 8192-token budget (the harness had
+been mistakenly measuring thinking-OFF at 512 tokens, suppressing base
+~13-19pp; all prior coding-program numbers are superseded):
 
-The 76% vs 23% gap is the program's target: the 4B can write a function
-but cannot drive a multi-step coding task. Curricula aim at that gap
-(planning, state-tracking across steps, debugging loops), measured here
-for retention + fast signal and on the agentic eval for the real target.
+- HumanEval: 0.8963 (147/164) — thinking-on; NEAR CEILING (little SFT
+  headroom). Was 0.7622 thinking-off.
+- MBPP (full test, first 200): 0.7550 (151/200) — thinking-on; some
+  headroom (53% of traces hit the 8k cap / force-close). Was 0.5650.
+- Agentic (duet-eval gen4, external, measurement-only): 8/35 = 0.229 —
+  already thinking-on; the base is a WEAK multi-step coding agent.
+
+The 90% vs 23% gap is the program's target: the 4B writes functions well
+but cannot drive a multi-step coding task. Function completion is nearly
+maxed; the agentic gap is the real prize (RLVR). Curricula are measured
+here thinking-on for retention + fast signal, and on the agentic eval
+for the real target.
 
 ## Interface
 

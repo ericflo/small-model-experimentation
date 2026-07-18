@@ -2593,6 +2593,14 @@
       "sources": [
         "dated experiment_log.md heading (2026-07-18 model-free design freeze; generator + sha-pinned ladder + harness + tests; no GPU stage run, seeds 94100/94101 consumed by design only)"
       ]
+    },
+    "qwen35_4b_why_think_scale": {
+      "start": "2026-07-18",
+      "end": "",
+      "confidence": "high",
+      "sources": [
+        "dated experiment_log.md heading (2026-07-18 dual-channel design freeze; generator + sha-pinned ladder + harness + tests; no GPU stage run, seeds 95200/95201 consumed by design only)"
+      ]
     }
   }
 }

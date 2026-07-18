@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 295
+- Experiments: 296
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 208
+- Assigned experiments: 209
 
 ### Seed Evidence
 
@@ -162,6 +162,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_wall_climbing` (new): [README](../experiments/qwen35_4b_wall_climbing/README.md)
 - `qwen35_4b_why_comment_install` (new): [README](../experiments/qwen35_4b_why_comment_install/README.md)
 - `qwen35_4b_why_scale_ladder` (new): [README](../experiments/qwen35_4b_why_scale_ladder/README.md)
+- `qwen35_4b_why_think_scale` (new): [README](../experiments/qwen35_4b_why_think_scale/README.md)
 - `qwen35_4b_zero_root_lineage_rebuild` (new): [README](../experiments/qwen35_4b_zero_root_lineage_rebuild/README.md)
 - `qwen_action_conditioned_vm_echo_policy_iteration` (track-y): [README](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/README.md)
 - `qwen_active_crystallizer_public_gate` (track-y): [README](../experiments/qwen_active_crystallizer_public_gate/README.md)
@@ -467,7 +468,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and other update mechanisms.
 
 - Charter: [posttraining_and_adaptation](../research_programs/posttraining_and_adaptation/charter.md)
-- Assigned experiments: 101
+- Assigned experiments: 102
 
 ### Seed Evidence
 
@@ -557,6 +558,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 - `qwen35_4b_verifier_free_banking` (new): [README](../experiments/qwen35_4b_verifier_free_banking/README.md)
 - `qwen35_4b_verifier_guided_self_improvement` (track-z): [README](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md)
 - `qwen35_4b_why_scale_ladder` (new): [README](../experiments/qwen35_4b_why_scale_ladder/README.md)
+- `qwen35_4b_why_think_scale` (new): [README](../experiments/qwen35_4b_why_think_scale/README.md)
 - `qwen35_4b_zero_root_lineage_rebuild` (new): [README](../experiments/qwen35_4b_zero_root_lineage_rebuild/README.md)
 - `qwen_action_conditioned_vm_echo_policy_iteration` (track-y): [README](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/README.md)
 - `qwen_counterfactual_episodic_icl` (track-y): [README](../experiments/qwen_counterfactual_episodic_icl/README.md)
@@ -585,7 +587,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 Train or evaluate small models as controllers over tools, verifiers, budgets, and intermediate actions.
 
 - Charter: [process_control_and_tool_use](../research_programs/process_control_and_tool_use/charter.md)
-- Assigned experiments: 56
+- Assigned experiments: 57
 
 ### Seed Evidence
 
@@ -644,6 +646,7 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 - `qwen35_4b_validation_policy_counterexample_curriculum` (new): [README](../experiments/qwen35_4b_validation_policy_counterexample_curriculum/README.md)
 - `qwen35_4b_verifier_conditioned_recovery_bank` (new): [README](../experiments/qwen35_4b_verifier_conditioned_recovery_bank/README.md)
 - `qwen35_4b_why_scale_ladder` (new): [README](../experiments/qwen35_4b_why_scale_ladder/README.md)
+- `qwen35_4b_why_think_scale` (new): [README](../experiments/qwen35_4b_why_think_scale/README.md)
 - `qwen_action_conditioned_vm_echo_policy_iteration` (track-y): [README](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/README.md)
 - `qwen_fuyu_vm_grpo_echo` (track-y): [README](../experiments/qwen_fuyu_vm_grpo_echo/README.md)
 - `qwen_hidden_vm_onpolicy_canonical_repair` (track-y): [README](../experiments/qwen_hidden_vm_onpolicy_canonical_repair/README.md)
@@ -658,7 +661,7 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 Stress whether mechanisms transfer across substrates, families, lengths, distributions, and real tasks.
 
 - Charter: [benchmark_generalization](../research_programs/benchmark_generalization/charter.md)
-- Assigned experiments: 129
+- Assigned experiments: 130
 
 ### Seed Evidence
 
@@ -750,6 +753,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 - `qwen35_4b_verified_macro_long_context_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_long_context_rerun/README.md)
 - `qwen35_4b_verifier_conditioned_recovery_bank` (new): [README](../experiments/qwen35_4b_verifier_conditioned_recovery_bank/README.md)
 - `qwen35_4b_why_scale_ladder` (new): [README](../experiments/qwen35_4b_why_scale_ladder/README.md)
+- `qwen35_4b_why_think_scale` (new): [README](../experiments/qwen35_4b_why_think_scale/README.md)
 - `qwen_active_crystallizer_public_gate` (track-y): [README](../experiments/qwen_active_crystallizer_public_gate/README.md)
 - `qwen_active_example_acquisition` (track-y): [README](../experiments/qwen_active_example_acquisition/README.md)
 - `qwen_batched_transduction_consistency` (track-y): [README](../experiments/qwen_batched_transduction_consistency/README.md)
@@ -1063,7 +1067,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 Install general agentic capability in Qwen3.5-4B via breadth-first expert iteration on a firewall-clean multi-family gym, arbitrated by the blackbox menagerie instrument.
 
 - Charter: [agentic_breadth_installation](../research_programs/agentic_breadth_installation/charter.md)
-- Assigned experiments: 62
+- Assigned experiments: 63
 
 ### Assigned Experiments
 
@@ -1128,6 +1132,7 @@ Install general agentic capability in Qwen3.5-4B via breadth-first expert iterat
 - `qwen35_4b_verifier_conditioned_recovery_bank` (new): [README](../experiments/qwen35_4b_verifier_conditioned_recovery_bank/README.md)
 - `qwen35_4b_why_comment_install` (new): [README](../experiments/qwen35_4b_why_comment_install/README.md)
 - `qwen35_4b_why_scale_ladder` (new): [README](../experiments/qwen35_4b_why_scale_ladder/README.md)
+- `qwen35_4b_why_think_scale` (new): [README](../experiments/qwen35_4b_why_think_scale/README.md)
 - `qwen35_4b_zero_root_lineage_rebuild` (new): [README](../experiments/qwen35_4b_zero_root_lineage_rebuild/README.md)
 
 ## Program Review Needed

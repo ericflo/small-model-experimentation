@@ -1,0 +1,282 @@
+{
+  "construction_seed": 95200,
+  "contamination_fixture_sha256": "aa1b727806be7247b720dda6ef25582c7f775e7bcec8b56fd664c6d00e894f44",
+  "experiment_id": "qwen35_4b_why_think_scale",
+  "generator": "experiments/qwen35_4b_why_think_scale/scripts/gen_why_think_curriculum.py",
+  "generator_sha256": "b771109dde4f847f6484767e1faf77b0d32f00e45cacde27885d71ff53a0b56f",
+  "ladder_sizes": [
+    2000,
+    5000,
+    10000,
+    20000,
+    40000
+  ],
+  "rungs": [
+    {
+      "categories": {
+        "arith": 198,
+        "branch": 163,
+        "dict": 94,
+        "digit": 75,
+        "interval": 36,
+        "modular": 113,
+        "nested": 141,
+        "pairwise": 148,
+        "reduce": 397,
+        "search": 60,
+        "state": 65,
+        "string": 132,
+        "transform": 378
+      },
+      "contamination": {
+        "banned_function_names": 663,
+        "banned_hits": 0,
+        "ngram_overlap": {
+          "benchmark_ngrams": 43645,
+          "corpus_ngrams": 12448,
+          "ngram_n": 7,
+          "shared_ngrams_distinctive": 0,
+          "shared_ngrams_structural_idiom": 78,
+          "status": "checked"
+        }
+      },
+      "corpus_sha256": "0555740d3eb536bbc77e290cd406bf6eb586af6a2009997f242cf016590b3407",
+      "diversity": {
+        "distinct_categories": 13,
+        "distinct_families": 59,
+        "distinct_normalized_why_templates": 1173,
+        "distinct_think_templates": 2000,
+        "unique_program_pct": 100.0
+      },
+      "length_stats": {
+        "chars_max": 2088,
+        "chars_median": 1467,
+        "chars_min": 1138,
+        "chars_p95": 1913,
+        "est_tokens_max_chars_over_3": 696,
+        "est_tokens_p95_chars_over_3": 638,
+        "note": "conservative >=3 chars/token estimate; the measured tokenizer max is recorded in reports/report.md",
+        "render": "prompt+think+answer characters",
+        "train_max_length_tokens": 4096
+      },
+      "path": "large_artifacts/qwen35_4b_why_think_scale/corpora/why_think_2000.jsonl",
+      "rows": 2000,
+      "seed": 95200,
+      "unique_programs": 2000,
+      "wall_seconds": 7.1
+    },
+    {
+      "categories": {
+        "arith": 524,
+        "branch": 336,
+        "dict": 249,
+        "digit": 201,
+        "interval": 87,
+        "modular": 279,
+        "nested": 353,
+        "pairwise": 369,
+        "reduce": 1000,
+        "search": 150,
+        "state": 175,
+        "string": 357,
+        "transform": 920
+      },
+      "contamination": {
+        "banned_function_names": 663,
+        "banned_hits": 0,
+        "ngram_overlap": {
+          "benchmark_ngrams": 43645,
+          "corpus_ngrams": 19212,
+          "ngram_n": 7,
+          "shared_ngrams_distinctive": 0,
+          "shared_ngrams_structural_idiom": 78,
+          "status": "checked"
+        }
+      },
+      "corpus_sha256": "59373c38c06ff4a1abe66994f364af954700f1da9d0d640532c97e937f157d24",
+      "diversity": {
+        "distinct_categories": 13,
+        "distinct_families": 59,
+        "distinct_normalized_why_templates": 1196,
+        "distinct_think_templates": 4997,
+        "unique_program_pct": 100.0
+      },
+      "length_stats": {
+        "chars_max": 2088,
+        "chars_median": 1468,
+        "chars_min": 1138,
+        "chars_p95": 1906,
+        "est_tokens_max_chars_over_3": 696,
+        "est_tokens_p95_chars_over_3": 636,
+        "note": "conservative >=3 chars/token estimate; the measured tokenizer max is recorded in reports/report.md",
+        "render": "prompt+think+answer characters",
+        "train_max_length_tokens": 4096
+      },
+      "path": "large_artifacts/qwen35_4b_why_think_scale/corpora/why_think_5000.jsonl",
+      "rows": 5000,
+      "seed": 95200,
+      "unique_programs": 5000,
+      "wall_seconds": 17.15
+    },
+    {
+      "categories": {
+        "arith": 1109,
+        "branch": 521,
+        "dict": 512,
+        "digit": 444,
+        "interval": 178,
+        "modular": 577,
+        "nested": 717,
+        "pairwise": 708,
+        "reduce": 2035,
+        "search": 314,
+        "state": 367,
+        "string": 709,
+        "transform": 1809
+      },
+      "contamination": {
+        "banned_function_names": 663,
+        "banned_hits": 0,
+        "ngram_overlap": {
+          "benchmark_ngrams": 43645,
+          "corpus_ngrams": 26203,
+          "ngram_n": 7,
+          "shared_ngrams_distinctive": 0,
+          "shared_ngrams_structural_idiom": 78,
+          "status": "checked"
+        }
+      },
+      "corpus_sha256": "e7638862a1d32796224426ec41d32c89ff4b181fbd5aa894d2a83ad214cbdaa2",
+      "diversity": {
+        "distinct_categories": 13,
+        "distinct_families": 59,
+        "distinct_normalized_why_templates": 1197,
+        "distinct_think_templates": 9985,
+        "unique_program_pct": 100.0
+      },
+      "length_stats": {
+        "chars_max": 2088,
+        "chars_median": 1467,
+        "chars_min": 1133,
+        "chars_p95": 1906,
+        "est_tokens_max_chars_over_3": 696,
+        "est_tokens_p95_chars_over_3": 636,
+        "note": "conservative >=3 chars/token estimate; the measured tokenizer max is recorded in reports/report.md",
+        "render": "prompt+think+answer characters",
+        "train_max_length_tokens": 4096
+      },
+      "path": "large_artifacts/qwen35_4b_why_think_scale/corpora/why_think_10000.jsonl",
+      "rows": 10000,
+      "seed": 95200,
+      "unique_programs": 10000,
+      "wall_seconds": 35.4
+    },
+    {
+      "categories": {
+        "arith": 2352,
+        "branch": 789,
+        "dict": 954,
+        "digit": 971,
+        "interval": 375,
+        "modular": 1229,
+        "nested": 1516,
+        "pairwise": 1381,
+        "reduce": 4152,
+        "search": 570,
+        "state": 679,
+        "string": 1390,
+        "transform": 3642
+      },
+      "contamination": {
+        "banned_function_names": 663,
+        "banned_hits": 0,
+        "ngram_overlap": {
+          "benchmark_ngrams": 43645,
+          "corpus_ngrams": 34162,
+          "ngram_n": 7,
+          "shared_ngrams_distinctive": 0,
+          "shared_ngrams_structural_idiom": 78,
+          "status": "checked"
+        }
+      },
+      "corpus_sha256": "e58d36c1e6deff2754b8a4d8992e4414d001f896d0f0056da6ff5d07a6783432",
+      "diversity": {
+        "distinct_categories": 13,
+        "distinct_families": 59,
+        "distinct_normalized_why_templates": 1197,
+        "distinct_think_templates": 19946,
+        "unique_program_pct": 100.0
+      },
+      "length_stats": {
+        "chars_max": 2088,
+        "chars_median": 1466,
+        "chars_min": 1133,
+        "chars_p95": 1894,
+        "est_tokens_max_chars_over_3": 696,
+        "est_tokens_p95_chars_over_3": 632,
+        "note": "conservative >=3 chars/token estimate; the measured tokenizer max is recorded in reports/report.md",
+        "render": "prompt+think+answer characters",
+        "train_max_length_tokens": 4096
+      },
+      "path": "large_artifacts/qwen35_4b_why_think_scale/corpora/why_think_20000.jsonl",
+      "rows": 20000,
+      "seed": 95200,
+      "unique_programs": 20000,
+      "wall_seconds": 73.85
+    },
+    {
+      "categories": {
+        "arith": 5227,
+        "branch": 1217,
+        "dict": 1671,
+        "digit": 2044,
+        "interval": 884,
+        "modular": 2867,
+        "nested": 3213,
+        "pairwise": 2530,
+        "reduce": 8612,
+        "search": 804,
+        "state": 1254,
+        "string": 2733,
+        "transform": 6944
+      },
+      "contamination": {
+        "banned_function_names": 663,
+        "banned_hits": 0,
+        "ngram_overlap": {
+          "benchmark_ngrams": 43645,
+          "corpus_ngrams": 40910,
+          "ngram_n": 7,
+          "shared_ngrams_distinctive": 0,
+          "shared_ngrams_structural_idiom": 78,
+          "status": "checked"
+        }
+      },
+      "corpus_sha256": "dcb8ee6d24faf6cbe2d45c539bea28fb73d0285a19ff9f2fe2949c1279b12093",
+      "diversity": {
+        "distinct_categories": 13,
+        "distinct_families": 59,
+        "distinct_normalized_why_templates": 1197,
+        "distinct_think_templates": 39788,
+        "unique_program_pct": 100.0
+      },
+      "length_stats": {
+        "chars_max": 2088,
+        "chars_median": 1459,
+        "chars_min": 1133,
+        "chars_p95": 1880,
+        "est_tokens_max_chars_over_3": 696,
+        "est_tokens_p95_chars_over_3": 627,
+        "note": "conservative >=3 chars/token estimate; the measured tokenizer max is recorded in reports/report.md",
+        "render": "prompt+think+answer characters",
+        "train_max_length_tokens": 4096
+      },
+      "path": "large_artifacts/qwen35_4b_why_think_scale/corpora/why_think_40000.jsonl",
+      "rows": 40000,
+      "seed": 95200,
+      "unique_programs": 40000,
+      "wall_seconds": 160.18
+    }
+  ],
+  "schema_version": 1
+}

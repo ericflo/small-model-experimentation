@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 267
-- Manifest files: 630
+- Experiments with manifests: 268
+- Manifest files: 632
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 124 |
+| `other` | 125 |
 | `run-data` | 101 |
-| `standard-artifact` | 140 |
+| `standard-artifact` | 141 |
 
 ## Manifests
 
@@ -424,6 +424,8 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_why_comment_install` | `standard-artifact` | [manifest](../experiments/qwen35_4b_why_comment_install/reports/artifact_manifest.yaml) |
 | `qwen35_4b_why_scale_ladder` | `other` | [manifest](../experiments/qwen35_4b_why_scale_ladder/data/ladder_manifest.json) |
 | `qwen35_4b_why_scale_ladder` | `standard-artifact` | [manifest](../experiments/qwen35_4b_why_scale_ladder/reports/artifact_manifest.yaml) |
+| `qwen35_4b_why_think_scale` | `other` | [manifest](../experiments/qwen35_4b_why_think_scale/data/ladder_manifest.json) |
+| `qwen35_4b_why_think_scale` | `standard-artifact` | [manifest](../experiments/qwen35_4b_why_think_scale/reports/artifact_manifest.yaml) |
 | `qwen35_4b_zero_root_lineage_rebuild` | `other` | [manifest](../experiments/qwen35_4b_zero_root_lineage_rebuild/data/lineage/lineage_manifest.json) |
 | `qwen35_4b_zero_root_lineage_rebuild` | `standard-artifact` | [manifest](../experiments/qwen35_4b_zero_root_lineage_rebuild/reports/artifact_manifest.yaml) |
 | `qwen_action_conditioned_vm_echo_policy_iteration` | `checkpoint` | [manifest](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/checkpoint_manifest.csv) |

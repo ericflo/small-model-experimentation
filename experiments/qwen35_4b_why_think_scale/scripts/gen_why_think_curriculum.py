@@ -1,0 +1,2540 @@
+#!/usr/bin/env python3
+"""DUAL-CHANNEL, scale-capable, truth-audited WHY-rationale curriculum (why_think).
+
+The CORRECTED WHY curriculum (owner directive). The prior WHY curriculum put its
+reasoning in inline ``#WHY:`` comments and left the ``<think>`` block minimal.
+Qwen3.5-4B is a THINKING model whose coding performance depends on its ``<think>``
+trace (the repo's most-replicated finding), so training it with an empty think
+risks DESTROYING its native thinking. This generator keeps every guarantee of the
+scale-ladder WHY generator AND puts a GENUINE step-by-step derivation in the
+``<think>`` channel, so each row teaches: think richly (derive the solution and
+verify it with a real worked example) in the native channel, then emit clean-but-
+``#WHY:``-annotated code. Both channels carry TRUE reasoning; the comments remain
+strippable for a later anneal.
+
+Each row is (all verified PER ROW at generation, any failure -> rejected + re-drawn):
+
+  * ``messages``: a plain ``write a function`` user prompt (spec + signature +
+    public asserts), with NO instruction to think or to comment — the behaviours
+    must be the model's DEFAULT so they transfer to a plain eval prompt.
+  * ``think``: a GENUINE forward derivation emitted MECHANICALLY from the family's
+    AST/shape — parse the spec (goal/inputs/output) -> choose an approach from the
+    code SHAPE (accumulator? builder? branch? search?) phrased as a decision ->
+    build the solution step by step in construction order -> trace a REAL worked
+    example (one of the task's asserts, executed line by line, every value byte-
+    true) -> conclude into the answer. It is NOT the ``#WHY:`` comments joined (a
+    test enforces non-equality and requires the approach + trace sections present).
+  * ``answer``: the CLEAN correct code WITH inline ``#WHY:`` comments, strippable
+    via the distinctive ``#WHY:`` marker.
+
+Per-row truth audit by REAL CPython execution:
+
+1. STRIP the ``#WHY:`` comments -> the CLEAN code passes ALL asserts; the commented
+   code runs IDENTICALLY; the marker is mechanically strippable.
+2. Every ``#WHY:`` is TRUE, line-specific, non-boilerplate, emitted BY CONSTRUCTION
+   (never a teacher model).
+3. The think's worked-example trace matches ACTUAL execution of that input — the
+   trace CORE is a deterministic rng-free string RECOMPUTED at verification and
+   byte-verified (values + final result); the think has an approach-decision phrase
+   and is not the joined ``#WHY:`` comments.
+4. Safety/termination: restricted builtins, no imports/I/O, only bounded for-loops
+   (never ``while``), a per-call step cap that ABORTS and DISCARDS.
+5. Determinism: the corpus is a pure function of (seed 95200, N); byte-identical.
+6. Token budget: the FULL render (chat + think + ``</think>`` + answer) stays well
+   under the 4096 max-length cap; a per-row estimate rejects any oversize render.
+
+Contamination is unchanged: the whole-word banned-benchmark-name gate (668 names)
+audits the prompt, the THINK, and the answer with ZERO hits; the present-only
+code-only distinctive 7-gram aid finds ZERO shared spans vs benchmark solution
+code (comments/prose governed by the banned-name gate). The prompt never asks for
+comments or thinking, so both behaviours are the model's DEFAULT.
+"""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import random
+import re
+import sys
+from collections import Counter
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import contamination as contam  # noqa: E402
+
+EXP = Path(__file__).resolve().parents[1]
+
+# Construction seed (verify grep-fresh). The corpus is a pure function of it + N.
+CONSTRUCTION_SEED = 95200
+
+STEP_CAP = 4000  # line events per function call; exceeding ABORTS and discards.
+DEFAULT_ROWS = 5000
+
+# The inline-rationale marker. Distinctive and mechanically strippable.
+WHY_MARKER = "#WHY:"
+WHY_JOIN = "  " + WHY_MARKER + " "  # two spaces before '#', one after the colon
+MIN_WHY_PER_ROW = 3  # every solution carries at least this many rationale lines
+
+# A natural spec -> function prompt matching how the eval prompts. It does NOT
+# ask for #WHY comments: the WHY-writing behavior must be the model's DEFAULT so
+# it fires on a plain HumanEval/MBPP prompt (transfer), not only when instructed.
+PROMPT_HEAD = (
+    "Write a Python function that satisfies this specification and passes the "
+    "tests. Return only the function."
+)
+
+# ---- Contamination-clean identifier pools (asserted against the banned set by
+# the unit tests; audited whole-word per row). None collide with a benchmark def
+# name, and the accumulator pool avoids the ``total``/``res``/``prod`` names the
+# why_comment cell documented as code n-gram collisions with the benchmarks.
+FUNC_NAMES = (
+    "compute", "combine", "fold", "grow", "mix", "accumulate", "aggregate",
+    "transform", "evaluate", "process", "derive", "resolve", "gather", "blend",
+    "condense", "tabulate", "scan", "distill", "fuse", "morph", "crunch",
+    "tally_up", "roll_up", "scale_up", "assemble", "coalesce", "collate",
+    "digest", "compact", "meld", "weave", "knead", "churn", "sift", "winnow",
+    "marshal", "sweep_over", "traverse", "boil_down", "reduce_over", "temper",
+    "forge", "render_out",
+)
+LIST_PARAMS = ("seq", "vec", "buf", "bag", "feed", "stream", "series", "lane", "rack", "reel")
+INT_PARAMS = ("n", "k", "m", "p", "q", "t")
+STR_PARAMS = ("s", "txt", "word", "line", "tok")
+# Accumulator / scratch names (contamination-clean AND absent from benchmark code
+# idioms). ``total``/``res``/``prod`` are deliberately excluded (universal
+# accumulator n-grams collide with the benchmarks).
+ACC_NAMES = ("acc", "tally", "cur", "carry", "amt", "gain", "kitty", "purse", "pot", "stash", "hoard", "heap")
+# Non-accumulator scratch identifiers used in code bodies.
+SCRATCH_NAMES = (
+    "out", "best", "top", "bot", "hi", "lo", "avg", "prev", "flag", "spot",
+    "edge", "mark", "rem", "step", "wide", "span", "cnt", "hits", "ch", "key",
+    "d", "x", "y", "z", "v", "w", "g", "h", "r",
+)
+
+
+# --------------------------------------------------------------- safe execution
+class StepCapExceeded(RuntimeError):
+    pass
+
+
+SAFE_BUILTINS = {
+    "range": range, "len": len, "abs": abs, "min": min, "max": max,
+    "sum": sum, "str": str, "int": int, "bool": bool, "list": list,
+}
+
+
+def _define_function(source: str, name: str):
+    namespace: dict = {"__builtins__": SAFE_BUILTINS}
+    code = compile(source, "<why_think_fn>", "exec")
+    exec(code, namespace)  # noqa: S102 (sandboxed: restricted builtins, no imports)
+    fn = namespace.get(name)
+    if fn is None or not callable(fn):
+        raise ValueError(f"source did not define callable {name!r}")
+    return fn, namespace
+
+
+def _run_capped(callable_zero_arg):
+    """Run a zero-arg callable under a real-CPython step cap (bounded loops)."""
+    state = {"count": 0}
+
+    def tracer(frame, event, arg):  # noqa: ARG001
+        if event == "line":
+            state["count"] += 1
+            if state["count"] > STEP_CAP:
+                raise StepCapExceeded("step cap")
+        return tracer
+
+    old = sys.gettrace()
+    sys.settrace(tracer)
+    try:
+        return callable_zero_arg()
+    finally:
+        sys.settrace(old)
+
+
+def _jsonable_value(value) -> bool:
+    if isinstance(value, bool):
+        return False
+    if isinstance(value, int):
+        return -10**6 < value < 10**6
+    if isinstance(value, str):
+        return len(value) <= 64
+    if isinstance(value, list):
+        return all(_jsonable_value(v) for v in value) and len(value) <= 64
+    return False
+
+
+def call_function(source: str, name: str, args: tuple):
+    """Call ``name(*args)`` defined by ``source`` under safe builtins + step cap."""
+    fn, _ = _define_function(source, name)
+    return _run_capped(lambda: fn(*args))
+
+
+# --------------------------------------------------------------- rendering
+def render_call(name: str, args: tuple) -> str:
+    return f"{name}(" + ", ".join(repr(a) for a in args) + ")"
+
+
+def render_assert(name: str, args: tuple, expected) -> str:
+    return f"assert {render_call(name, args)} == {expected!r}"
+
+
+def _distinct_reprs(values) -> int:
+    return len({repr(v) for v in values})
+
+
+_BANNED_CACHE: frozenset[str] | None = None
+
+
+def _banned() -> frozenset[str]:
+    """The committed banned-benchmark-name set, loaded once (generation self-heal)."""
+    global _BANNED_CACHE
+    if _BANNED_CACHE is None:
+        _BANNED_CACHE = contam.banned_names()
+    return _BANNED_CACHE
+
+
+# ---------------------------------------------------------------- #WHY: handling
+def strip_why_comments(code: str) -> str:
+    """Remove every trailing ``#WHY:`` comment, reproducing the clean code.
+
+    ``#WHY:`` is the ONLY ``#`` the generator ever emits (no string literal in any
+    family contains ``#``), so cutting each line at the marker and rstripping the
+    two spaces that precede it recovers the executable code exactly.
+    """
+    out: list[str] = []
+    for line in code.split("\n"):
+        idx = line.find(WHY_MARKER)
+        out.append(line[:idx].rstrip() if idx >= 0 else line)
+    return "\n".join(out)
+
+
+_TOKEN_WORD_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_]*|\d+")
+
+
+def _line_specific_tokens(code_line: str) -> set[str]:
+    """Identifiers/constants on a code line that identify THAT line (keywords out)."""
+    return {t for t in _TOKEN_WORD_RE.findall(code_line) if t not in contam.PY_KEYWORDS}
+
+
+def _why_references_line(code_line: str, why_text: str) -> bool:
+    """A #WHY comment must share a line-specific token (var/constant) with its line."""
+    return bool(_line_specific_tokens(code_line) & set(_TOKEN_WORD_RE.findall(why_text)))
+
+
+def render_commented(name: str, params: list[str], lines: list[tuple]) -> tuple[str, str, list[str]]:
+    """Assemble (clean_source, commented_source, why_reasons) from body line specs."""
+    header = f"def {name}({', '.join(params)}):"
+    clean = [header]
+    commented = [header]
+    reasons: list[str] = []
+    for code, why in lines:
+        clean.append(code)
+        if why is None:
+            commented.append(code)
+        else:
+            reasons.append(why)
+            commented.append(f"{code}{WHY_JOIN}{why}")
+    clean_source = "\n".join(clean) + "\n"
+    commented_source = "\n".join(commented) + "\n"
+    return clean_source, commented_source, reasons
+
+
+# ------------------------------------------------ WHY-template normalization
+_POOL_TOKENS = (
+    set(FUNC_NAMES) | set(LIST_PARAMS) | set(INT_PARAMS) | set(STR_PARAMS)
+    | set(ACC_NAMES) | set(SCRATCH_NAMES) | set("abcdefghijklmnopqrstuvwxyz")
+)
+
+
+def normalize_why(text: str) -> str:
+    """A WHY reasoning PATTERN: numbers and variable/identifier tokens removed.
+
+    Numbers -> ``N``; any single-letter or pool identifier (a var/param/acc/func
+    name or scratch name) -> ``V``; every other (English) word is kept. Two
+    rationales that differ only in which variable or constant they mention collapse
+    to the same pattern, so counting distinct normalized strings counts distinct
+    REASONING skeletons, not surface variants.
+    """
+    words = re.findall(r"[A-Za-z_][A-Za-z0-9_]*|\d+", text.lower())
+    norm: list[str] = []
+    for w in words:
+        if w.isdigit():
+            norm.append("N")
+        elif w in _POOL_TOKENS:
+            norm.append("V")
+        else:
+            norm.append(w)
+    return " ".join(norm)
+
+
+# =====================================================================
+# Phrase-pool reason helpers. Each returns a TRUE, line-specific rationale for a
+# recurring code construct, choosing among many WORD-distinct variants (so the
+# normalized-template count is large). Every variant references the passed token,
+# so it always shares a line-specific token with its code line.
+# =====================================================================
+def _pick(rng: random.Random, *variants: str) -> str:
+    return rng.choice(variants)
+
+
+def r_init_zero(rng, acc):
+    return _pick(
+        rng,
+        f"{acc} starts at 0 so nothing is tallied before the loop begins",
+        f"{acc} is seeded to 0, the additive identity, leaving the running total unbiased",
+        f"opening {acc} at 0 means only values seen inside the loop contribute",
+        f"{acc} begins empty at 0 so the very step sets its true starting value",
+        f"a zero start for {acc} guarantees no phantom amount before iteration",
+        f"{acc} holds 0 up front, so the total reflects only what the loop folds in",
+        f"initializing {acc} to 0 keeps the running total clean before any element",
+        f"{acc} is 0 to begin with, giving the accumulation an honest baseline",
+        f"{acc} opens at 0 because a fresh total must carry no earlier weight",
+        f"setting {acc} to 0 primes an empty running total for the pass ahead",
+        f"{acc} at 0 ensures the loop alone builds the quantity the spec wants",
+        f"{acc} is grounded at 0 so the earliest value is the whole total so far",
+    )
+
+
+def r_init_one(rng, acc):
+    return _pick(
+        rng,
+        f"{acc} starts at 1, the multiplicative identity, so the running product is unbiased",
+        f"{acc} is seeded to 1 because scaling from 0 would wipe the product to 0",
+        f"opening {acc} at 1 leaves the earliest factor as the whole product so far",
+        f"{acc} begins at 1 so every factor scales a neutral starting value",
+        f"a 1 start for {acc} keeps the product faithful to its factors alone",
+        f"{acc} holds 1 up front, the identity under times, before any factor lands",
+        f"initializing {acc} to 1 primes an empty running product",
+        f"{acc} is 1 to begin with so the loop builds the product cleanly",
+    )
+
+
+def r_init_seed_first(rng, acc, lp):
+    return _pick(
+        rng,
+        f"{lp}[0] seeds {acc}, since a running best value needs a real starting element",
+        f"{acc} takes {lp}[0] up front so the extreme is tracked against a genuine value",
+        f"{acc} is seeded from {lp}[0] because there is no neutral bound to open with",
+        f"{lp}[0] gives {acc} an honest starting point drawn from the data itself",
+        f"{acc} opens at {lp}[0] so the running extreme is always a real element seen",
+        f"seeding {acc} with {lp}[0] avoids an arbitrary sentinel the data might beat",
+        f"{acc} begins as {lp}[0], the earliest element, a valid candidate to improve on",
+        f"{lp}[0] primes {acc} with a concrete value the rest of the pass refines",
+    )
+
+
+def r_init_empty_list(rng, out):
+    return _pick(
+        rng,
+        f"{out} starts empty so results are appended in the input's original order",
+        f"{out} opens as [] and grows one entry per element, preserving order",
+        f"an empty {out} collects the transformed values as the loop yields them",
+        f"{out} begins as [] so the output length tracks the input exactly",
+        f"{out} is emptied up front, then each step appends its own result",
+        f"{out} holds [] to gather outputs left to right with no leftover entries",
+        f"{out} starts as an empty list, the base to build the ordered output on",
+        f"initializing {out} to [] guarantees a clean container for the results",
+        f"{out} opens empty so nothing precedes the values the loop produces",
+        f"{out} is a fresh [] so every appended value comes from this pass alone",
+    )
+
+
+def r_loop_over(rng, v, lp):
+    return _pick(
+        rng,
+        f"every {v} in {lp} is examined, so no element is skipped",
+        f"the loop visits each {v} of {lp} exactly once, covering the whole input",
+        f"walking {lp} binds {v} to each element in turn for the body to handle",
+        f"each {v} drawn from {lp} gets its own pass through the body",
+        f"{v} ranges over all of {lp} so the computation sees every value",
+        f"iterating {lp} exposes each {v} once, which the spec needs for a full pass",
+        f"the body runs per {v} in {lp}, one visit per element, left to right",
+        f"scanning {lp} element by element gives {v} to the body without omission",
+        f"{v} takes each value of {lp} so the loop touches the entire list",
+        f"looping over {lp} yields {v} for every entry, the full traversal required",
+        f"every entry of {lp} becomes {v} once, so all elements are folded in",
+        f"the pass over {lp} hands {v} each element so none is left out",
+    )
+
+
+def r_loop_range_n(rng, i, ip):
+    return _pick(
+        rng,
+        f"range({ip}) drives {i} from 0 to {ip}-1, the domain the spec walks",
+        f"{i} steps over range({ip}), covering every index 0 through {ip}-1",
+        f"range({ip}) yields {i} for each position below {ip}, the full span",
+        f"{i} runs across range({ip}) so all {ip} positions are handled once",
+        f"the loop over range({ip}) gives {i} = 0,1,...,{ip}-1 as required",
+        f"range({ip}) bounds {i} to the {ip} valid indices and no more",
+        f"{i} traverses range({ip}), so each of the {ip} steps happens exactly once",
+        f"walking range({ip}) exposes {i} at every value from 0 up to {ip}-1",
+        f"{i} advances through range({ip}) to cover the whole 0..{ip}-1 domain",
+        f"range({ip}) fixes {i} to the {ip} positions the spec iterates over",
+    )
+
+
+def r_loop_range1(rng, i, ip):
+    return _pick(
+        rng,
+        f"range(1, {ip} + 1) covers {i} from 1 through {ip} inclusive, per the spec",
+        f"{i} runs 1..{ip} because range(1, {ip} + 1) stops one past {ip}",
+        f"range(1, {ip} + 1) makes {i} take every whole value from 1 to {ip}",
+        f"{i} steps from 1 up to {ip} inclusive via range(1, {ip} + 1)",
+        f"the +1 in range(1, {ip} + 1) keeps {ip} itself in the loop for {i}",
+        f"range(1, {ip} + 1) gives {i} the inclusive 1-to-{ip} range the spec names",
+        f"{i} spans 1 through {ip} so the endpoint {ip} contributes, not just {ip}-1",
+        f"starting at 1 and ending at {ip}, range(1, {ip} + 1) sets {i} over the terms",
+    )
+
+
+def r_loop_indices(rng, i, lp):
+    return _pick(
+        rng,
+        f"{i} walks every index of {lp} via range(len({lp})), so each position is reachable",
+        f"range(len({lp})) gives {i} = 0..len({lp})-1, every valid index of {lp}",
+        f"{i} ranges over range(len({lp})) so both the value and its position are known",
+        f"iterating range(len({lp})) lets {i} address each slot of {lp} directly",
+        f"{i} covers range(len({lp})) so index arithmetic on {lp} stays in bounds",
+        f"range(len({lp})) bounds {i} to the exact positions {lp} has",
+        f"{i} steps through range(len({lp})), visiting each index of {lp} once",
+        f"walking range(len({lp})) exposes {i} for every element position in {lp}",
+        f"{i} enumerates the indices of {lp} so position-aware logic can run",
+        f"range(len({lp})) ties {i} to the length of {lp}, never past its last index",
+    )
+
+
+def r_return_acc(rng, acc):
+    return _pick(
+        rng,
+        f"{acc} now holds the quantity the spec asked for, so it is the return value",
+        f"after the pass {acc} is the finished total, which the function returns",
+        f"{acc} carries the accumulated result at the end, so returning it is correct",
+        f"the loop leaves the answer in {acc}, and returning {acc} reports it",
+        f"{acc} equals the requested value once iteration ends, so it is returned",
+        f"returning {acc} yields the running total the whole loop built up",
+        f"{acc} holds the complete result here, so the function hands back {acc}",
+        f"by the final step {acc} is exactly the spec's quantity, hence the return",
+        f"{acc} is the settled accumulation, so returning it closes the computation",
+        f"the result lives in {acc} after the loop, and {acc} is what the spec wants",
+        f"{acc} has folded in every contribution, so it is the value to return",
+        f"returning {acc} delivers the total the accumulation was designed to form",
+    )
+
+
+def r_return_expr(rng, tok, meaning):
+    return _pick(
+        rng,
+        f"{tok} is {meaning}, so returning it answers the spec",
+        f"returning {tok} reports {meaning} as the function's result",
+        f"{tok} now equals {meaning}, the value the spec requests",
+        f"the result is {tok}, which is {meaning}",
+        f"{tok} holds {meaning} at this point, so it is returned",
+        f"handing back {tok} gives the caller {meaning}",
+    )
+
+
+def r_acc_add(rng, acc, term, meaning):
+    return _pick(
+        rng,
+        f"{acc} grows by {term}, folding {meaning} into the running total",
+        f"{acc} gains {term} here, so the total picks up {meaning}",
+        f"adding {term} to {acc} accumulates {meaning} across the loop",
+        f"{acc} takes on {term}, extending the total by {meaning}",
+        f"each step {acc} increases by {term}, which is {meaning}",
+        f"{acc} folds in {term}, the contribution of {meaning}",
+        f"{term} joins {acc}, growing the running total by {meaning}",
+        f"{acc} rises by {term} so {meaning} lands in the accumulation",
+        f"the running {acc} absorbs {term}, i.e. {meaning}",
+        f"{acc} = {acc} + {term} records {meaning} into the total",
+    )
+
+
+def r_acc_mul(rng, acc, term, meaning):
+    return _pick(
+        rng,
+        f"{acc} is scaled by {term}, building the product of {meaning}",
+        f"{acc} times {term} extends the running product by {meaning}",
+        f"scaling {acc} by {term} folds {meaning} into the product",
+        f"{acc} = {acc} * {term} multiplies {meaning} into the running product",
+        f"{acc} grows multiplicatively by {term}, the factor {meaning}",
+        f"each factor {term} scales {acc}, accumulating the product of {meaning}",
+    )
+
+
+def r_if_gt(rng, a, b, why):
+    return _pick(
+        rng,
+        f"{a} > {b} is strictly greater, so {why}",
+        f"testing {a} > {b} catches only the strictly-larger case, so {why}",
+        f"when {a} exceeds {b}, {why}",
+        f"{a} > {b} excludes ties at {b}, and {why}",
+        f"the strict {a} > {b} fires only above {b}, so {why}",
+        f"{a} standing above {b} means {why}",
+        f"a strictly greater {a} than {b} is the one case where {why}",
+        f"{a} > {b} guards the over-{b} branch, so {why}",
+    )
+
+
+def r_if_lt(rng, a, b, why):
+    return _pick(
+        rng,
+        f"{a} < {b} is strictly less, so {why}",
+        f"testing {a} < {b} catches only the strictly-smaller case, so {why}",
+        f"when {a} falls below {b}, {why}",
+        f"{a} < {b} excludes ties at {b}, and {why}",
+        f"the strict {a} < {b} fires only under {b}, so {why}",
+        f"{a} sitting below {b} means {why}",
+        f"a strictly smaller {a} than {b} is the one case where {why}",
+        f"{a} < {b} guards the under-{b} branch, so {why}",
+    )
+
+
+def r_if_ge(rng, a, b, why):
+    return _pick(
+        rng,
+        f"{a} >= {b} holds at or above {b}, so {why}",
+        f"{a} at least {b} (ties included) is when {why}",
+        f"the inclusive {a} >= {b} keeps the {b} boundary, so {why}",
+        f"when {a} reaches {b} or more, {why}",
+        f"{a} >= {b} covers the on-or-above case, and {why}",
+        f"non-strict {a} >= {b} lets equality through, so {why}",
+    )
+
+
+def r_if_le(rng, a, b, why):
+    return _pick(
+        rng,
+        f"{a} <= {b} holds at or below {b}, so {why}",
+        f"{a} at most {b} (ties included) is when {why}",
+        f"the inclusive {a} <= {b} keeps the {b} boundary, so {why}",
+        f"when {a} is {b} or less, {why}",
+        f"{a} <= {b} covers the on-or-below case, and {why}",
+        f"non-strict {a} <= {b} lets equality through, so {why}",
+    )
+
+
+def r_if_eq(rng, a, b, why):
+    return _pick(
+        rng,
+        f"{a} == {b} is exact equality, so {why}",
+        f"only when {a} equals {b} does the branch fire, so {why}",
+        f"{a} == {b} singles out the values that line up, and {why}",
+        f"the equality {a} == {b} selects agreeing values, so {why}",
+        f"{a} being equal to {b} is precisely when {why}",
+        f"{a} == {b} tests exact agreement, so {why}",
+    )
+
+
+def r_if_mod(rng, x, k, rem, why):
+    return _pick(
+        rng,
+        f"{x} % {k} == {rem} tests the remainder, so {why}",
+        f"the modulo {x} % {k} equalling {rem} means {why}",
+        f"when {x} leaves remainder {rem} under {k}, {why}",
+        f"{x} % {k} == {rem} selects the right residue class, so {why}",
+        f"checking {x} % {k} against {rem} is exactly when {why}",
+        f"a remainder of {rem} from {x} % {k} is the case where {why}",
+    )
+
+
+def r_assign(rng, dst, src, why):
+    return _pick(
+        rng,
+        f"{dst} takes {src} so {why}",
+        f"{dst} = {src} updates the tracked value, and {why}",
+        f"assigning {src} to {dst} means {why}",
+        f"{dst} becomes {src}, so {why}",
+        f"{dst} is set to {src} because {why}",
+        f"storing {src} in {dst} keeps it current, so {why}",
+    )
+
+
+def r_append(rng, out, expr, why):
+    return _pick(
+        rng,
+        f"appending {expr} to {out} records {why}",
+        f"{out}.append({expr}) logs {why} in order",
+        f"{expr} joins {out}, capturing {why} at this step",
+        f"pushing {expr} onto {out} preserves {why}",
+        f"{out} gains {expr}, which is {why}",
+        f"adding {expr} to {out} stores {why} for this element",
+    )
+
+
+# --------------------------------------------------------------- function families
+def _distinct_names(rng, pool, count):
+    picks = list(pool)
+    rng.shuffle(picks)
+    return picks[:count]
+
+
+# ============================ arithmetic accumulation ============================
+def fam_sum_scaled(rng, name):
+    c = rng.randint(2, 9)
+    ip = rng.choice(INT_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for i in range(1, {ip} + 1):", r_loop_range1(rng, "i", ip)),
+        (f"        {acc} = {acc} + i * {c}", r_acc_add(rng, acc, f"i * {c}", f"i scaled by {c}")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return the sum of i * {c} for i from 1 to {ip} inclusive."
+    inputs = [(v,) for v in sorted({rng.randint(2, 8) for _ in range(6)})][:4]
+    return dict(name=name, params=[ip], lines=lines, spec=spec, inputs=inputs, cat="arith")
+
+
+def fam_factorial(rng, name):
+    ip = rng.choice(INT_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 1", r_init_one(rng, acc)),
+        (f"    for i in range(1, {ip} + 1):", r_loop_range1(rng, "i", ip)),
+        (f"        {acc} = {acc} * i", r_acc_mul(rng, acc, "i", f"the factors 1..{ip}")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return the product 1 * 2 * ... * {ip} (the factorial of {ip})."
+    inputs = [(v,) for v in sorted({rng.randint(2, 6) for _ in range(6)})][:4]
+    return dict(name=name, params=[ip], lines=lines, spec=spec, inputs=inputs, cat="arith")
+
+
+def fam_sum_squares(rng, name):
+    ip = rng.choice(INT_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for i in range(1, {ip} + 1):", r_loop_range1(rng, "i", ip)),
+        (f"        {acc} = {acc} + i * i", r_acc_add(rng, acc, "i * i", "the square of i")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return the sum of the squares i*i for i from 1 to {ip} inclusive."
+    inputs = [(v,) for v in sorted({rng.randint(2, 8) for _ in range(6)})][:4]
+    return dict(name=name, params=[ip], lines=lines, spec=spec, inputs=inputs, cat="arith")
+
+
+def fam_arith_series(rng, name):
+    a0 = rng.randint(1, 6)
+    d = rng.randint(2, 6)
+    ip = rng.choice(INT_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for i in range({ip}):", r_loop_range_n(rng, "i", ip)),
+        (f"        {acc} = {acc} + {a0} + i * {d}",
+         r_acc_add(rng, acc, f"{a0} + i * {d}", f"the term {a0} plus i steps of {d}")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"For i from 0 to {ip}-1, sum the term {a0} + i * {d}; return the total."
+    inputs = [(v,) for v in sorted({rng.randint(2, 8) for _ in range(6)})][:4]
+    return dict(name=name, params=[ip], lines=lines, spec=spec, inputs=inputs, cat="arith")
+
+
+def fam_power_accumulate(rng, name):
+    c = rng.randint(2, 3)
+    ip = rng.choice(INT_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 1", r_init_one(rng, acc)),
+        (f"    for i in range({ip}):", r_loop_range_n(rng, "i", ip)),
+        (f"        {acc} = {acc} * {c}", r_acc_mul(rng, acc, f"{c}", f"{ip} factors of {c}")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return the value of a running product that starts at 1 and is scaled by {c} exactly {ip} times."
+    inputs = [(v,) for v in sorted({rng.randint(1, 7) for _ in range(6)})][:4]
+    return dict(name=name, params=[ip], lines=lines, spec=spec, inputs=inputs, cat="arith")
+
+
+def fam_alternating_sum(rng, name):
+    ip = rng.choice(INT_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for i in range(1, {ip} + 1):", r_loop_range1(rng, "i", ip)),
+        ("        if i % 2 == 0:", r_if_mod(rng, "i", "2", "0", "i is an even term subtracted")),
+        (f"            {acc} = {acc} - i", r_acc_add(rng, acc, f"-i", "the negated even term i")),
+        ("        else:", None),
+        (f"            {acc} = {acc} + i", r_acc_add(rng, acc, "i", "the positive odd term i")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"For i from 1 to {ip}, sum i with a sign that is minus on even i and plus on odd i; return the total."
+    inputs = [(v,) for v in sorted({rng.randint(2, 8) for _ in range(6)})][:4]
+    return dict(name=name, params=[ip], lines=lines, spec=spec, inputs=inputs, cat="arith")
+
+
+# ============================ list reduce ============================
+def fam_list_sum(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        (f"        {acc} = {acc} + v", r_acc_add(rng, acc, "v", "each element v")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return the sum of all values in {lp}."
+    inputs = [([rng.randint(0, 12) for _ in range(rng.randint(4, 6))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="reduce")
+
+
+def fam_list_product(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 1", r_init_one(rng, acc)),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        (f"        {acc} = {acc} * v", r_acc_mul(rng, acc, "v", "every element v")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return the product of all values in {lp}."
+    inputs = [([rng.randint(1, 5) for _ in range(rng.randint(3, 5))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="reduce")
+
+
+def fam_largest(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    lines = [
+        (f"    best = {lp}[0]", r_init_seed_first(rng, "best", lp)),
+        (f"    for i in range(1, len({lp})):",
+         "starting i at 1 skips the element already held in best, avoiding a wasted step"),
+        (f"        if {lp}[i] > best:", r_if_gt(rng, f"{lp}[i]", "best", "best must rise to this new high")),
+        (f"            best = {lp}[i]", r_assign(rng, "best", f"{lp}[i]", "best always holds the greatest value seen")),
+        ("    return best", r_return_expr(rng, "best", "the greatest element of " + lp)),
+    ]
+    spec = f"Return the largest value in {lp} (assume {lp} is non-empty)."
+    inputs = [([rng.randint(0, 20) for _ in range(rng.randint(4, 6))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="reduce")
+
+
+def fam_smallest(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    lines = [
+        (f"    lo = {lp}[0]", r_init_seed_first(rng, "lo", lp)),
+        (f"    for i in range(1, len({lp})):",
+         "i opens at 1 so the element seeding lo is not re-examined"),
+        (f"        if {lp}[i] < lo:", r_if_lt(rng, f"{lp}[i]", "lo", "lo must drop to this new low")),
+        (f"            lo = {lp}[i]", r_assign(rng, "lo", f"{lp}[i]", "lo always holds the smallest value seen")),
+        ("    return lo", r_return_expr(rng, "lo", "the smallest element of " + lp)),
+    ]
+    spec = f"Return the smallest value in {lp} (assume {lp} is non-empty)."
+    inputs = [([rng.randint(0, 20) for _ in range(rng.randint(4, 6))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="reduce")
+
+
+def fam_spread(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    lines = [
+        (f"    hi = {lp}[0]", r_init_seed_first(rng, "hi", lp)),
+        (f"    lo = {lp}[0]", r_init_seed_first(rng, "lo", lp)),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        ("        if v > hi:", r_if_gt(rng, "v", "hi", "hi tracks the greatest value")),
+        ("            hi = v", r_assign(rng, "hi", "v", "hi holds the running high-water value")),
+        ("        if v < lo:", r_if_lt(rng, "v", "lo", "lo tracks the smallest value")),
+        ("            lo = v", r_assign(rng, "lo", "v", "lo holds the running low-water value")),
+        ("    return hi - lo", r_return_expr(rng, "hi", "the greatest value, minus lo the smallest")),
+    ]
+    spec = f"Return the spread of {lp}: its largest value minus its smallest (assume {lp} is non-empty)."
+    inputs = [([rng.randint(0, 20) for _ in range(rng.randint(4, 6))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="reduce")
+
+
+def fam_even_idx_sum(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for i in range(len({lp})):", r_loop_indices(rng, "i", lp)),
+        ("        if i % 2 == 0:", r_if_mod(rng, "i", "2", "0", "these are the even positions 0, 2, 4, ...")),
+        (f"            {acc} = {acc} + {lp}[i]", r_acc_add(rng, acc, f"{lp}[i]", "the value at an even index")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return the sum of the values at even positions (0, 2, 4, ...) of {lp}."
+    inputs = [([rng.randint(0, 9) for _ in range(rng.randint(4, 7))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="reduce")
+
+
+def fam_odd_idx_sum(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for i in range(len({lp})):", r_loop_indices(rng, "i", lp)),
+        ("        if i % 2 == 1:", r_if_mod(rng, "i", "2", "1", "these are the odd positions 1, 3, 5, ...")),
+        (f"            {acc} = {acc} + {lp}[i]", r_acc_add(rng, acc, f"{lp}[i]", "the value at an odd index")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return the sum of the values at odd positions (1, 3, 5, ...) of {lp}."
+    inputs = [([rng.randint(0, 9) for _ in range(rng.randint(4, 7))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="reduce")
+
+
+def fam_weighted_index(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for i in range(len({lp})):", r_loop_indices(rng, "i", lp)),
+        (f"        {acc} = {acc} + {lp}[i] * i", r_acc_add(rng, acc, f"{lp}[i] * i", "the value weighted by its index i")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return the sum of {lp}[i] * i over every position i of {lp}."
+    inputs = [([rng.randint(0, 9) for _ in range(rng.randint(4, 6))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="reduce")
+
+
+def fam_over_k(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        ("        if v > k:", r_if_gt(rng, "v", "k", "this v clears the bar k and is tallied")),
+        (f"        {acc} = {acc} + 1", r_acc_add(rng, acc, "1", "one more value above k")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    # note: the increment sits inside the if-body via indentation on the tally line
+    lines[3] = (f"            {acc} = {acc} + 1", lines[3][1])
+    spec = f"Return how many values in {lp} are strictly greater than k."
+    inputs = [([rng.randint(0, 9) for _ in range(rng.randint(4, 6))], rng.randint(2, 6)) for _ in range(4)]
+    return dict(name=name, params=[lp, "k"], lines=lines, spec=spec, inputs=inputs, cat="reduce")
+
+
+def fam_under_k(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        ("        if v < k:", r_if_lt(rng, "v", "k", "this v sits under k and is tallied")),
+        (f"            {acc} = {acc} + 1", r_acc_add(rng, acc, "1", "one more value below k")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return how many values in {lp} are strictly less than k."
+    inputs = [([rng.randint(0, 9) for _ in range(rng.randint(4, 6))], rng.randint(2, 6)) for _ in range(4)]
+    return dict(name=name, params=[lp, "k"], lines=lines, spec=spec, inputs=inputs, cat="reduce")
+
+
+def fam_equal_target_count(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        ("        if v == t:", r_if_eq(rng, "v", "t", "this v equals the target t and is tallied")),
+        (f"            {acc} = {acc} + 1", r_acc_add(rng, acc, "1", "one more occurrence of t")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return how many values in {lp} are exactly equal to t."
+    inputs = [([rng.randint(0, 4) for _ in range(rng.randint(4, 7))], rng.randint(0, 4)) for _ in range(4)]
+    return dict(name=name, params=[lp, "t"], lines=lines, spec=spec, inputs=inputs, cat="reduce")
+
+
+def fam_range_membership_count(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        ("        if v >= lo:", r_if_ge(rng, "v", "lo", "v is not below the low end lo")),
+        ("            if v <= hi:", r_if_le(rng, "v", "hi", "v is also not above the high end hi")),
+        (f"                {acc} = {acc} + 1", r_acc_add(rng, acc, "1", "one more value inside the band")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return how many values in {lp} lie within the inclusive band [lo, hi]."
+    inputs = []
+    for _ in range(4):
+        lo = rng.randint(1, 4)
+        hi = lo + rng.randint(2, 5)
+        inputs.append(([rng.randint(0, 10) for _ in range(rng.randint(4, 6))], lo, hi))
+    return dict(name=name, params=[lp, "lo", "hi"], lines=lines, spec=spec, inputs=inputs, cat="interval")
+
+
+# ============================ list transform (by hand) ============================
+def fam_scale_list(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    c = rng.randint(2, 6)
+    d = rng.randint(1, 7)
+    lines = [
+        ("    out = []", r_init_empty_list(rng, "out")),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        (f"        out.append(v * {c} + {d})",
+         r_append(rng, "out", f"v * {c} + {d}", f"v scaled by {c} then shifted by {d}")),
+        ("    return out", r_return_expr(rng, "out", "the list of transformed values")),
+    ]
+    spec = f"Return a new list where each value v of {lp} is replaced by v * {c} + {d}."
+    inputs = [([rng.randint(0, 9) for _ in range(rng.randint(3, 5))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="transform")
+
+
+def fam_abs_list(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    lines = [
+        ("    out = []", r_init_empty_list(rng, "out")),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        ("        out.append(abs(v))", r_append(rng, "out", "abs(v)", "the magnitude of v with its sign dropped")),
+        ("    return out", r_return_expr(rng, "out", "the list of absolute values")),
+    ]
+    spec = f"Return a new list holding the absolute value of each element of {lp}."
+    inputs = [([rng.randint(-9, 9) for _ in range(rng.randint(3, 5))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="transform")
+
+
+def fam_clamp_list(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    cap = rng.randint(5, 12)
+    lines = [
+        ("    out = []", r_init_empty_list(rng, "out")),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        (f"        if v > {cap}:", r_if_gt(rng, "v", f"{cap}", f"v is pinned down to the ceiling {cap}")),
+        (f"            out.append({cap})", r_append(rng, "out", f"{cap}", f"the ceiling {cap} in place of an over-range v")),
+        ("        else:", None),
+        ("            out.append(v)", r_append(rng, "out", "v", "the value unchanged when within range")),
+        ("    return out", r_return_expr(rng, "out", "the list with each value held to the ceiling")),
+    ]
+    spec = f"Return a new list where each value of {lp} is held down to at most {cap}."
+    inputs = [([rng.randint(0, 18) for _ in range(rng.randint(3, 5))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="transform")
+
+
+def fam_running_sum(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        ("    out = []", r_init_empty_list(rng, "out")),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        (f"        {acc} = {acc} + v", r_acc_add(rng, acc, "v", "this element")),
+        (f"        out.append({acc})", r_append(rng, "out", f"{acc}", "the prefix total up to here")),
+        ("    return out", r_return_expr(rng, "out", "the list of prefix sums")),
+    ]
+    spec = f"Return the list of running (prefix) sums of {lp}, one entry per element."
+    inputs = [([rng.randint(0, 7) for _ in range(rng.randint(3, 5))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="transform")
+
+
+def fam_running_cap(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    cap = rng.randint(8, 15)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        ("    out = []", r_init_empty_list(rng, "out")),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        (f"        {acc} = {acc} + v", r_acc_add(rng, acc, "v", "this element")),
+        (f"        if {acc} > {cap}:", r_if_gt(rng, acc, f"{cap}", f"the running total is pinned to the cap {cap}")),
+        (f"            {acc} = {cap}", r_assign(rng, acc, f"{cap}", f"{acc} never exceeds {cap}")),
+        (f"        out.append({acc})", r_append(rng, "out", f"{acc}", "the capped running value at this step")),
+        ("    return out", r_return_expr(rng, "out", "the list of capped running values")),
+    ]
+    spec = f"Walk {lp} keeping a running sum held down to at most {cap}; return the list of running values."
+    inputs = [([rng.randint(0, 6) for _ in range(rng.randint(4, 6))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="transform")
+
+
+def fam_countdown(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    budget = rng.randint(15, 25)
+    lines = [
+        (f"    rem = {budget}", f"rem opens at the budget {budget}, the amount available before spending"),
+        ("    out = []", r_init_empty_list(rng, "out")),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        ("        rem = rem - v", r_assign(rng, "rem", "rem - v", "rem drops by the spend v for this element")),
+        ("        out.append(rem)", r_append(rng, "out", "rem", "the remaining budget after spending v")),
+        ("    return out", r_return_expr(rng, "out", "the list of running remainders")),
+    ]
+    spec = f"Start from {budget} and, for each value v of {lp}, subtract v; return the list of running remainders."
+    inputs = [([rng.randint(0, 6) for _ in range(rng.randint(3, 5))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="transform")
+
+
+def fam_reverse_list(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    lines = [
+        ("    out = []", r_init_empty_list(rng, "out")),
+        (f"    for i in range(len({lp})):", r_loop_indices(rng, "i", lp)),
+        (f"        out.append({lp}[len({lp}) - 1 - i])",
+         r_append(rng, "out", f"{lp}[len({lp}) - 1 - i]", "the element mirrored from the far end")),
+        ("    return out", r_return_expr(rng, "out", "the input read back to front")),
+    ]
+    spec = f"Return a new list holding the elements of {lp} in reverse order."
+    inputs = [([rng.randint(0, 9) for _ in range(rng.randint(3, 5))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="transform")
+
+
+def fam_rotate_left(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    lines = [
+        ("    out = []", r_init_empty_list(rng, "out")),
+        (f"    for i in range(len({lp})):", r_loop_indices(rng, "i", lp)),
+        (f"        out.append({lp}[(i + 1) % len({lp})])",
+         r_append(rng, "out", f"{lp}[(i + 1) % len({lp})]", "the next element, wrapping the head to the tail")),
+        ("    return out", r_return_expr(rng, "out", "the list rotated one step to the left")),
+    ]
+    spec = f"Return {lp} rotated one place to the left (each element takes its right neighbour, the head wraps to the end)."
+    inputs = [([rng.randint(0, 9) for _ in range(rng.randint(3, 5))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="transform")
+
+
+def fam_filter_even(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    lines = [
+        ("    out = []", r_init_empty_list(rng, "out")),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        ("        if v % 2 == 0:", r_if_mod(rng, "v", "2", "0", "v is even and kept")),
+        ("            out.append(v)", r_append(rng, "out", "v", "an even value that survives the filter")),
+        ("    return out", r_return_expr(rng, "out", "only the even values, in order")),
+    ]
+    spec = f"Return a new list holding only the even values of {lp}, in their original order."
+    inputs = [([rng.randint(0, 9) for _ in range(rng.randint(4, 6))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="transform")
+
+
+def fam_replace_negatives(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    lines = [
+        ("    out = []", r_init_empty_list(rng, "out")),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        ("        if v < 0:", r_if_lt(rng, "v", "0", "a below-zero v is floored to 0")),
+        ("            out.append(0)", r_append(rng, "out", "0", "the floor 0 in place of a negative")),
+        ("        else:", None),
+        ("            out.append(v)", r_append(rng, "out", "v", "the value kept when already non-negative")),
+        ("    return out", r_return_expr(rng, "out", "the list with negatives raised to 0")),
+    ]
+    spec = f"Return a new list where every negative value of {lp} becomes 0 and the rest are unchanged."
+    inputs = [([rng.randint(-6, 6) for _ in range(rng.randint(4, 6))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="transform")
+
+
+def fam_diff_adjacent(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    lines = [
+        ("    out = []", r_init_empty_list(rng, "out")),
+        (f"    for i in range(len({lp}) - 1):",
+         f"range(len({lp}) - 1) stops one early so i + 1 stays a valid index of {lp}"),
+        (f"        out.append({lp}[i + 1] - {lp}[i])",
+         r_append(rng, "out", f"{lp}[i + 1] - {lp}[i]", "the step from one element to the next")),
+        ("    return out", r_return_expr(rng, "out", "the successive differences")),
+    ]
+    spec = f"Return the list of successive differences {lp}[i+1] - {lp}[i] over {lp}."
+    inputs = [([rng.randint(0, 12) for _ in range(rng.randint(3, 5))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="pairwise")
+
+
+# ============================ conditional / branch ============================
+def fam_clamp(rng, name):
+    lo = rng.randint(0, 4)
+    hi = lo + rng.randint(3, 8)
+    lines = [
+        ("    if x < low:", r_if_lt(rng, "x", "low", "x sits below the band and is pinned to the low edge")),
+        ("        return low", r_return_expr(rng, "low", "the low bound for an under-range x")),
+        ("    if x > high:", r_if_gt(rng, "x", "high", "x sits above the band and is pinned to the high edge")),
+        ("        return high", r_return_expr(rng, "high", "the high bound for an over-range x")),
+        ("    return x", r_return_expr(rng, "x", "x itself, already inside the band")),
+    ]
+    spec = "Return x limited to the band [low, high]: low if x is under low, high if x is over high, else x."
+    xs = [lo - rng.randint(1, 3), hi + rng.randint(1, 3), rng.randint(lo, hi), rng.randint(lo, hi)]
+    inputs = [(x, lo, hi) for x in xs]
+    return dict(name=name, params=["x", "low", "high"], lines=lines, spec=spec, inputs=inputs, cat="branch")
+
+
+def fam_gap(rng, name):
+    lines = [
+        ("    if a > b:", r_if_gt(rng, "a", "b", "a is the larger side so a - b is already non-negative")),
+        ("        return a - b", r_return_expr(rng, "a", "the gap a - b with a the larger value")),
+        ("    return b - a", r_return_expr(rng, "b", "the gap b - a when b is at least a")),
+    ]
+    spec = "Return the absolute gap between a and b (the larger minus the smaller)."
+    inputs = [(rng.randint(0, 15), rng.randint(0, 15)) for _ in range(4)]
+    return dict(name=name, params=["a", "b"], lines=lines, spec=spec, inputs=inputs, cat="branch")
+
+
+def fam_sign(rng, name):
+    lines = [
+        ("    if x > 0:", r_if_gt(rng, "x", "0", "a positive x reports a sign of 1")),
+        ("        return 1", r_return_expr(rng, "1", "the sign of a positive number")),
+        ("    if x < 0:", r_if_lt(rng, "x", "0", "a negative x reports a sign of -1")),
+        ("        return -1", "returning -1 gives the sign of a negative x, which is minus one"),
+        ("    return 0", r_return_expr(rng, "0", "the sign of zero itself")),
+    ]
+    spec = "Return the sign of x: 1 if x is positive, -1 if negative, 0 if x is zero."
+    inputs = [(rng.randint(-6, 6),) for _ in range(6)]
+    inputs = list(dict.fromkeys(inputs))[:4]
+    return dict(name=name, params=["x"], lines=lines, spec=spec, inputs=inputs, cat="branch")
+
+
+def fam_grade_bucket(rng, name):
+    hi = rng.randint(12, 16)
+    mid = rng.randint(6, 9)
+    lines = [
+        (f"    if x >= {hi}:", r_if_ge(rng, "x", f"{hi}", f"x reaching {hi} lands in the top bucket 2")),
+        ("        return 2", r_return_expr(rng, "2", "the top bucket label")),
+        (f"    if x >= {mid}:", r_if_ge(rng, "x", f"{mid}", f"x reaching {mid} but under {hi} is the middle bucket 1")),
+        ("        return 1", r_return_expr(rng, "1", "the middle bucket label")),
+        ("    return 0", r_return_expr(rng, "0", "the low bucket label for the smallest x")),
+    ]
+    spec = f"Return a bucket for x: 2 if x >= {hi}, else 1 if x >= {mid}, else 0."
+    inputs = [(rng.randint(0, 20),) for _ in range(6)]
+    inputs = list(dict.fromkeys(inputs))[:4]
+    return dict(name=name, params=["x"], lines=lines, spec=spec, inputs=inputs, cat="branch")
+
+
+def fam_branch_sum(rng, name):
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        ("    for i in range(n):", r_loop_range_n(rng, "i", "n")),
+        ("        if i < k:", r_if_lt(rng, "i", "k", "a small index i is taken whole into the total")),
+        (f"            {acc} = {acc} + i", r_acc_add(rng, acc, "i", "the index i itself on the lower branch")),
+        ("        else:", None),
+        (f"            {acc} = {acc} + 1", r_acc_add(rng, acc, "1", "a flat 1 on the upper branch")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = "For i from 0 to n-1, grow a running sum by i while i is below k and by 1 otherwise; return the total."
+    inputs = []
+    for _ in range(4):
+        n = rng.randint(4, 7)
+        inputs.append((n, rng.randint(1, n)))
+    return dict(name=name, params=["n", "k"], lines=lines, spec=spec, inputs=inputs, cat="branch")
+
+
+def fam_max_of_three(rng, name):
+    lines = [
+        ("    best = a", r_assign(rng, "best", "a", "best opens as a, a concrete starting candidate")),
+        ("    if b > best:", r_if_gt(rng, "b", "best", "b overtakes best when it is larger")),
+        ("        best = b", r_assign(rng, "best", "b", "best rises to b, the larger so far")),
+        ("    if c > best:", r_if_gt(rng, "c", "best", "c overtakes best when it is larger still")),
+        ("        best = c", r_assign(rng, "best", "c", "best rises to c, the largest of the three")),
+        ("    return best", r_return_expr(rng, "best", "the greatest of a, b and c")),
+    ]
+    spec = "Return the largest of the three values a, b and c."
+    inputs = [(rng.randint(0, 12), rng.randint(0, 12), rng.randint(0, 12)) for _ in range(4)]
+    return dict(name=name, params=["a", "b", "c"], lines=lines, spec=spec, inputs=inputs, cat="branch")
+
+
+# ============================ parity / modular / digit ============================
+def fam_count_multiples(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    k = rng.randint(2, 5)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        (f"        if v % {k} == 0:", r_if_mod(rng, "v", f"{k}", "0", f"v is an exact multiple of {k}")),
+        (f"            {acc} = {acc} + 1", r_acc_add(rng, acc, "1", f"one more multiple of {k}")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return how many values in {lp} are exact multiples of {k}."
+    inputs = [([rng.randint(0, 12) for _ in range(rng.randint(4, 6))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="modular")
+
+
+def fam_sum_evens(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        ("        if v % 2 == 0:", r_if_mod(rng, "v", "2", "0", "v is even and joins the total")),
+        (f"            {acc} = {acc} + v", r_acc_add(rng, acc, "v", "an even element")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return the sum of the even values in {lp}."
+    inputs = [([rng.randint(0, 9) for _ in range(rng.randint(4, 6))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="modular")
+
+
+def fam_mod_reduce(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    mdiv = rng.randint(5, 9)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        (f"        {acc} = {acc} + v", r_acc_add(rng, acc, "v", "each element")),
+        (f"    return {acc} % {mdiv}", r_return_expr(rng, acc, f"the raw total reduced modulo {mdiv}")),
+    ]
+    spec = f"Return the sum of {lp} reduced modulo {mdiv} (the remainder after dividing by {mdiv})."
+    inputs = [([rng.randint(0, 12) for _ in range(rng.randint(4, 6))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="modular")
+
+
+def fam_digit_sum(rng, name):
+    ip = rng.choice(INT_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for ch in str({ip}):", f"iterating str({ip}) yields each digit character ch of {ip} in turn"),
+        (f"        {acc} = {acc} + int(ch)", r_acc_add(rng, acc, "int(ch)", "the numeric value of one digit ch")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return the sum of the decimal digit values of the non-negative integer {ip}."
+    inputs = [(v,) for v in sorted({rng.randint(0, 9999) for _ in range(8)})][:4]
+    return dict(name=name, params=[ip], lines=lines, spec=spec, inputs=inputs, cat="digit")
+
+
+def fam_digit_length(rng, name):
+    ip = rng.choice(INT_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for ch in str({ip}):", f"scanning str({ip}) exposes each digit character ch of {ip}"),
+        (f"        {acc} = {acc} + 1", r_acc_add(rng, acc, "1", "one more digit position")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return how many decimal digit places the non-negative integer {ip} has."
+    inputs = [(v,) for v in sorted({rng.randint(0, 99999) for _ in range(8)})][:4]
+    return dict(name=name, params=[ip], lines=lines, spec=spec, inputs=inputs, cat="digit")
+
+
+def fam_count_target_digit(rng, name):
+    ip = rng.choice(INT_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for ch in str({ip}):", f"walking str({ip}) hands each digit character ch of {ip} to the body"),
+        ("        if int(ch) == d:", r_if_eq(rng, "int(ch)", "d", "this digit ch equals the target digit d")),
+        (f"            {acc} = {acc} + 1", r_acc_add(rng, acc, "1", "one more occurrence of the digit d")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return how many times the digit d appears in the decimal form of the non-negative integer {ip}."
+    inputs = [(rng.randint(0, 9999), rng.randint(0, 9)) for _ in range(4)]
+    return dict(name=name, params=[ip, "d"], lines=lines, spec=spec, inputs=inputs, cat="digit")
+
+
+# ============================ nested loops ============================
+def fam_nested_tri(rng, name):
+    ip = rng.choice(INT_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for i in range({ip}):", r_loop_range_n(rng, "i", ip)),
+        ("        for j in range(i + 1):", "range(i + 1) runs j from 0 through i inclusive, the inner triangle row"),
+        (f"            {acc} = {acc} + j", r_acc_add(rng, acc, "j", "the inner index j summed across every i")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"For i from 0 to {ip}-1, take every j from 0 to i and grow a running sum by j; return the sum."
+    inputs = [(v,) for v in sorted({rng.randint(3, 7) for _ in range(6)})][:4]
+    return dict(name=name, params=[ip], lines=lines, spec=spec, inputs=inputs, cat="nested")
+
+
+def fam_grid_sum(rng, name):
+    ip = rng.choice(INT_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for i in range({ip}):", r_loop_range_n(rng, "i", ip)),
+        (f"        for j in range({ip}):", f"the inner range({ip}) pairs every j with the current i over the full grid"),
+        (f"            {acc} = {acc} + i * j", r_acc_add(rng, acc, "i * j", "the product of the grid coordinates i and j")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return the sum of i * j over all pairs i, j each from 0 to {ip}-1."
+    inputs = [(v,) for v in sorted({rng.randint(2, 6) for _ in range(6)})][:4]
+    return dict(name=name, params=[ip], lines=lines, spec=spec, inputs=inputs, cat="nested")
+
+
+def fam_pair_over_count(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for i in range(len({lp})):", r_loop_indices(rng, "i", lp)),
+        (f"        for j in range(i + 1, len({lp})):",
+         f"the inner j starts at i + 1 so each unordered pair of {lp} is taken once"),
+        (f"            if {lp}[i] + {lp}[j] > t:",
+         r_if_gt(rng, f"{lp}[i] + {lp}[j]", "t", "this pair's sum clears the target t and is tallied")),
+        (f"                {acc} = {acc} + 1", r_acc_add(rng, acc, "1", "one more qualifying pair")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return how many index pairs i < j of {lp} have {lp}[i] + {lp}[j] strictly greater than t."
+    inputs = [([rng.randint(0, 8) for _ in range(rng.randint(4, 6))], rng.randint(4, 10)) for _ in range(4)]
+    return dict(name=name, params=[lp, "t"], lines=lines, spec=spec, inputs=inputs, cat="nested")
+
+
+def fam_count_inversions(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for i in range(len({lp})):", r_loop_indices(rng, "i", lp)),
+        (f"        for j in range(i + 1, len({lp})):",
+         f"j starts at i + 1 so each ordered pair (i, j) with i < j of {lp} is visited once"),
+        (f"            if {lp}[i] > {lp}[j]:",
+         r_if_gt(rng, f"{lp}[i]", f"{lp}[j]", "an earlier element outranks a later one, an out-of-order pair")),
+        (f"                {acc} = {acc} + 1", r_acc_add(rng, acc, "1", "one more out-of-order pair")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return how many pairs i < j of {lp} are out of order, i.e. {lp}[i] > {lp}[j]."
+    inputs = [([rng.randint(0, 8) for _ in range(rng.randint(4, 6))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="nested")
+
+
+# ============================ pairwise / adjacent ============================
+def fam_ascending_steps(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for i in range(len({lp}) - 1):",
+         f"range(len({lp}) - 1) stops one short so i + 1 is always a real index of {lp}"),
+        (f"        if {lp}[i] < {lp}[i + 1]:",
+         r_if_lt(rng, f"{lp}[i]", f"{lp}[i + 1]", "this neighbour pair goes uphill and is tallied")),
+        (f"            {acc} = {acc} + 1", r_acc_add(rng, acc, "1", "one more ascending step")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return how many adjacent pairs of {lp} ascend, i.e. {lp}[i] < {lp}[i+1]."
+    inputs = [([rng.randint(0, 8) for _ in range(rng.randint(4, 6))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="pairwise")
+
+
+def fam_adjacent_equal(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for i in range(len({lp}) - 1):",
+         f"range(len({lp}) - 1) keeps i + 1 in range so each neighbour pair of {lp} is seen"),
+        (f"        if {lp}[i] == {lp}[i + 1]:",
+         r_if_eq(rng, f"{lp}[i]", f"{lp}[i + 1]", "the two neighbours are equal, a repeat pair")),
+        (f"            {acc} = {acc} + 1", r_acc_add(rng, acc, "1", "one more equal-neighbour pair")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return how many adjacent pairs of {lp} are equal, i.e. {lp}[i] == {lp}[i+1]."
+    inputs = [([rng.randint(0, 3) for _ in range(rng.randint(4, 7))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="pairwise")
+
+
+def fam_max_adjacent_sum(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    lines = [
+        (f"    best = {lp}[0] + {lp}[1]",
+         f"best opens as the sum of the earliest neighbour pair {lp}[0] + {lp}[1], a real candidate"),
+        (f"    for i in range(1, len({lp}) - 1):",
+         f"i runs 1..len({lp})-2 so each later neighbour pair is weighed once"),
+        (f"        if {lp}[i] + {lp}[i + 1] > best:",
+         r_if_gt(rng, f"{lp}[i] + {lp}[i + 1]", "best", "a richer neighbour pair lifts best")),
+        (f"            best = {lp}[i] + {lp}[i + 1]",
+         r_assign(rng, "best", f"{lp}[i] + {lp}[i + 1]", "best tracks the greatest neighbour-pair sum")),
+        ("    return best", r_return_expr(rng, "best", "the largest sum of two adjacent elements")),
+    ]
+    spec = f"Return the largest sum of two adjacent elements of {lp} (assume {lp} has at least two values)."
+    inputs = [([rng.randint(0, 9) for _ in range(rng.randint(4, 6))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="pairwise")
+
+
+# ============================ bounded search / state ============================
+def fam_first_index_over(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    lines = [
+        (f"    for i in range(len({lp})):", r_loop_indices(rng, "i", lp)),
+        (f"        if {lp}[i] > k:",
+         r_if_gt(rng, f"{lp}[i]", "k", "the earliest element above k is located here")),
+        ("            return i", r_return_expr(rng, "i", "the index of the earliest value above k")),
+        ("    return -1", "returning -1 signals no element ever cleared k, the miss case"),
+    ]
+    spec = f"Return the index of the earliest value in {lp} that is strictly greater than k, or -1 if none is."
+    inputs = [([rng.randint(0, 8) for _ in range(rng.randint(4, 6))], rng.randint(3, 7)) for _ in range(4)]
+    return dict(name=name, params=[lp, "k"], lines=lines, spec=spec, inputs=inputs, cat="search")
+
+
+def fam_index_of_target(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    lines = [
+        (f"    for i in range(len({lp})):", r_loop_indices(rng, "i", lp)),
+        (f"        if {lp}[i] == t:",
+         r_if_eq(rng, f"{lp}[i]", "t", "the earliest slot equal to the target t is located here")),
+        ("            return i", r_return_expr(rng, "i", "the index of the earliest slot equal to t")),
+        ("    return -1", "returning -1 reports that t never appears, the miss case"),
+    ]
+    spec = f"Return the index of the earliest occurrence of t in {lp}, or -1 if t does not appear."
+    inputs = [([rng.randint(0, 5) for _ in range(rng.randint(4, 6))], rng.randint(0, 5)) for _ in range(4)]
+    return dict(name=name, params=[lp, "t"], lines=lines, spec=spec, inputs=inputs, cat="search")
+
+
+def fam_state_toggle(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        ("    flag = 0", "flag opens at 0, the starting state before any element flips it"),
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        ("        if v == 0:", r_if_eq(rng, "v", "0", "a zero element triggers a state flip")),
+        ("            flag = 1 - flag", r_assign(rng, "flag", "1 - flag", "flag toggles between 0 and 1")),
+        (f"            {acc} = {acc} + 1", r_acc_add(rng, acc, "1", "one more toggle event")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Walk {lp}; each 0 flips a state flag between 0 and 1. Return how many times the flag toggled."
+    inputs = [([rng.randint(0, 2) for _ in range(rng.randint(4, 7))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="state")
+
+
+def fam_longest_positive_run(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    lines = [
+        ("    best = 0", "best opens at 0, the length of the greatest positive run seen so far"),
+        ("    run = 0", "run opens at 0, the length of the current unbroken positive stretch"),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        ("        if v > 0:", r_if_gt(rng, "v", "0", "a positive v extends the current run")),
+        ("            run = run + 1", r_assign(rng, "run", "run + 1", "run grows by one for the ongoing stretch")),
+        ("        else:", None),
+        ("            run = 0", r_assign(rng, "run", "0", "a non-positive v breaks the run back to 0")),
+        ("        if run > best:", r_if_gt(rng, "run", "best", "the current run beats the best length so far")),
+        ("            best = run", r_assign(rng, "best", "run", "best rises to the greatest run yet seen")),
+        ("    return best", r_return_expr(rng, "best", "the length of the greatest positive run")),
+    ]
+    spec = f"Return the length of the greatest unbroken run of strictly positive values in {lp}."
+    inputs = [([rng.randint(-2, 4) for _ in range(rng.randint(5, 8))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="state")
+
+
+# ============================ string ============================
+def _rand_string(rng, alphabet, lo=3, hi=6):
+    return "".join(rng.choice(alphabet) for _ in range(rng.randint(lo, hi)))
+
+
+def fam_char_equal_count(rng, name):
+    sp = rng.choice(STR_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    alpha = "abcde"
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for ch in {sp}:", f"iterating {sp} hands each character ch of {sp} to the body in turn"),
+        ("        if ch == c:", r_if_eq(rng, "ch", "c", "this character ch equals the target letter c")),
+        (f"            {acc} = {acc} + 1", r_acc_add(rng, acc, "1", "one more occurrence of the letter c")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return how many characters of the string {sp} equal the single character c."
+    inputs = [(_rand_string(rng, alpha, 4, 7), rng.choice(alpha)) for _ in range(4)]
+    return dict(name=name, params=[sp, "c"], lines=lines, spec=spec, inputs=inputs, cat="string")
+
+
+def fam_vowel_count(rng, name):
+    sp = rng.choice(STR_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    alpha = "abcdefgio"
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for ch in {sp}:", f"scanning {sp} exposes each character ch of {sp}"),
+        ("        if ch in 'aeiou':", "membership in 'aeiou' marks ch as a vowel to be tallied"),
+        (f"            {acc} = {acc} + 1", r_acc_add(rng, acc, "1", "one more vowel character")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return how many characters of the string {sp} are vowels (one of a, e, i, o, u)."
+    inputs = [(_rand_string(rng, alpha, 4, 8),) for _ in range(4)]
+    return dict(name=name, params=[sp], lines=lines, spec=spec, inputs=inputs, cat="string")
+
+
+def fam_string_reverse(rng, name):
+    sp = rng.choice(STR_PARAMS)
+    alpha = "abcde"
+    lines = [
+        ("    out = ''", "out opens as the empty string, the base the reversed text is built on"),
+        (f"    for ch in {sp}:", f"each character ch of {sp} is taken in forward order"),
+        ("        out = ch + out", r_assign(rng, "out", "ch + out", "prefixing ch reverses the order in out")),
+        ("    return out", r_return_expr(rng, "out", "the input string read back to front")),
+    ]
+    spec = f"Return the string {sp} reversed."
+    inputs = [(_rand_string(rng, alpha, 3, 6),) for _ in range(4)]
+    inputs = list(dict.fromkeys(inputs))[:4]
+    return dict(name=name, params=[sp], lines=lines, spec=spec, inputs=inputs, cat="string")
+
+
+def fam_char_before_count(rng, name):
+    sp = rng.choice(STR_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    alpha = "abcdef"
+    lines = [
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for ch in {sp}:", f"walking {sp} yields each character ch for the ordering test"),
+        ("        if ch < c:", r_if_lt(rng, "ch", "c", "ch orders before the pivot letter c alphabetically")),
+        (f"            {acc} = {acc} + 1", r_acc_add(rng, acc, "1", "one more character ahead of c")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return how many characters of the string {sp} come alphabetically before the letter c."
+    inputs = [(_rand_string(rng, alpha, 4, 7), rng.choice("cde")) for _ in range(4)]
+    return dict(name=name, params=[sp, "c"], lines=lines, spec=spec, inputs=inputs, cat="string")
+
+
+# ============================ dict aggregation ============================
+def fam_distinct_count(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    acc = rng.choice(ACC_NAMES)
+    lines = [
+        ("    d = {}", "d opens as an empty dict, a set of the distinct values seen so far"),
+        (f"    {acc} = 0", r_init_zero(rng, acc)),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        ("        if v not in d:", "a v absent from d is a value never seen before"),
+        ("            d[v] = 1", r_assign(rng, "d[v]", "1", "recording v in d marks it as seen")),
+        (f"            {acc} = {acc} + 1", r_acc_add(rng, acc, "1", "one more distinct value")),
+        (f"    return {acc}", r_return_acc(rng, acc)),
+    ]
+    spec = f"Return how many distinct values appear in {lp}."
+    inputs = [([rng.randint(0, 4) for _ in range(rng.randint(4, 7))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="dict")
+
+
+def fam_most_frequent_count(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    lines = [
+        ("    d = {}", "d opens as an empty dict mapping each value to its running tally"),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        ("        if v in d:", "a v already in d has been seen before, so its tally grows"),
+        ("            d[v] = d[v] + 1", r_assign(rng, "d[v]", "d[v] + 1", "the tally for v rises by one")),
+        ("        else:", None),
+        ("            d[v] = 1", r_assign(rng, "d[v]", "1", "an opening sighting of v starts its tally at 1")),
+        ("    best = 0", "best opens at 0, the largest tally found so far"),
+        ("    for key in d:", "iterating d visits each distinct value's tally"),
+        ("        if d[key] > best:", r_if_gt(rng, "d[key]", "best", "this value's tally is the largest yet")),
+        ("            best = d[key]", r_assign(rng, "best", "d[key]", "best rises to the greatest tally")),
+        ("    return best", r_return_expr(rng, "best", "the highest occurrence tally of any value")),
+    ]
+    spec = f"Return the highest number of times any single value repeats in {lp}."
+    inputs = [([rng.randint(0, 3) for _ in range(rng.randint(4, 7))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="dict")
+
+
+def fam_parity_group_max(rng, name):
+    lp = rng.choice(LIST_PARAMS)
+    lines = [
+        ("    d = {}", "d opens as an empty dict holding a running total for each parity group"),
+        ("    d[0] = 0", r_assign(rng, "d[0]", "0", "the even-parity bucket starts empty at 0")),
+        ("    d[1] = 0", r_assign(rng, "d[1]", "0", "the odd-parity bucket starts empty at 0")),
+        (f"    for v in {lp}:", r_loop_over(rng, "v", lp)),
+        ("        d[v % 2] = d[v % 2] + v", r_assign(rng, "d[v % 2]", "d[v % 2] + v", "v joins the total for its own parity")),
+        ("    if d[0] > d[1]:", r_if_gt(rng, "d[0]", "d[1]", "the even group's total is the larger of the two")),
+        ("        return d[0]", r_return_expr(rng, "d[0]", "the even-group total when it is larger")),
+        ("    return d[1]", r_return_expr(rng, "d[1]", "the odd-group total otherwise")),
+    ]
+    spec = f"Split {lp} into even and odd values, sum each group, and return the larger group total."
+    inputs = [([rng.randint(0, 9) for _ in range(rng.randint(4, 6))],) for _ in range(4)]
+    return dict(name=name, params=[lp], lines=lines, spec=spec, inputs=inputs, cat="dict")
+
+
+FAMILIES = (
+    fam_sum_scaled, fam_factorial, fam_sum_squares, fam_arith_series,
+    fam_power_accumulate, fam_alternating_sum,
+    fam_list_sum, fam_list_product, fam_largest, fam_smallest, fam_spread,
+    fam_even_idx_sum, fam_odd_idx_sum, fam_weighted_index, fam_over_k, fam_under_k,
+    fam_equal_target_count, fam_range_membership_count,
+    fam_scale_list, fam_abs_list, fam_clamp_list, fam_running_sum, fam_running_cap,
+    fam_countdown, fam_reverse_list, fam_rotate_left, fam_filter_even,
+    fam_replace_negatives, fam_diff_adjacent,
+    fam_clamp, fam_gap, fam_sign, fam_grade_bucket, fam_branch_sum, fam_max_of_three,
+    fam_count_multiples, fam_sum_evens, fam_mod_reduce, fam_digit_sum,
+    fam_digit_length, fam_count_target_digit,
+    fam_nested_tri, fam_grid_sum, fam_pair_over_count, fam_count_inversions,
+    fam_ascending_steps, fam_adjacent_equal, fam_max_adjacent_sum,
+    fam_first_index_over, fam_index_of_target, fam_state_toggle, fam_longest_positive_run,
+    fam_char_equal_count, fam_vowel_count, fam_string_reverse, fam_char_before_count,
+    fam_distinct_count, fam_most_frequent_count, fam_parity_group_max,
+)
+FAMILY_NAMES = tuple(f.__name__ for f in FAMILIES)
+
+
+def build_family(rng: random.Random) -> dict:
+    name = rng.choice(FUNC_NAMES)
+    family = rng.choice(FAMILIES)
+    out = family(rng, name)
+    out["family_fn"] = family.__name__
+    return out
+
+
+# =====================================================================
+# DUAL-CHANNEL: the synthetic <think> derivation (the NEW part of this cell).
+#
+# Each row's think target is a GENUINE forward derivation emitted MECHANICALLY
+# from the family's AST/shape plus a REAL worked example — it is NOT the #WHY
+# comment strings joined. It reads: parse the spec (goal / inputs / output) ->
+# choose an approach FROM THE CODE SHAPE (accumulator? builder? branch? search?)
+# phrased as a decision -> build the solution step by step (each construction
+# decision, in construction order, phrased FORWARD) -> trace a REAL worked
+# example (one of the task's asserts, executed line by line, every value byte-
+# true) -> conclude into the answer. The worked-example CORE is a deterministic,
+# rng-free string that is recomputed INDEPENDENTLY at verification, so substring-
+# matching it against the shipped think byte-verifies every traced value and the
+# final result. The whole think must NOT equal the joined #WHY comments (a test
+# enforces non-equality and requires the approach + trace sections present).
+#
+# The think derivation's phrasing and step order VARY across families (different
+# code -> different derivation) and across rows (phrase pools), so the corpus
+# carries many distinct think skeletons, not one template.
+# =====================================================================
+
+TRACE_LABEL = "Trace"  # deterministic worked-example core prefix (banned-clean)
+_TRACE_STEP_CAP = 20000
+THINK_TOKEN_REJECT = 3500  # reject a row whose full render's >=3-char/token estimate exceeds this (headroom under 4096)
+
+
+class TraceStepCapExceeded(RuntimeError):
+    pass
+
+
+def _capture_trajectories(source: str, name: str, args: tuple, varnames):
+    """Run ``name(*args)`` and return ({var: [repr, ...]}, returned_value).
+
+    The trajectory of each tracked variable is its value at each line event with
+    consecutive equal reprs collapsed — a real execution trace. Bounded by a
+    dedicated step cap (these programs already passed the capped correctness run)."""
+    fn, _ = _define_function(source, name)
+    traj: dict[str, list[str]] = {v: [] for v in varnames}
+    box: dict = {"value": None}
+    steps = {"n": 0}
+
+    def tracer(frame, event, arg):  # noqa: ARG001
+        if frame.f_code.co_name != name:
+            return tracer
+        if event == "line":
+            steps["n"] += 1
+            if steps["n"] > _TRACE_STEP_CAP:
+                raise TraceStepCapExceeded("trace step cap")
+            loc = frame.f_locals
+            for v in varnames:
+                if v in loc:
+                    r = repr(loc[v])
+                    seq = traj[v]
+                    if not seq or seq[-1] != r:
+                        seq.append(r)
+        elif event == "return":
+            box["value"] = arg
+        return tracer
+
+    old = sys.gettrace()
+    sys.settrace(tracer)
+    try:
+        fn(*args)
+    finally:
+        sys.settrace(old)
+    return traj, box["value"]
+
+
+def _body_lines(clean_source: str) -> list[str]:
+    """The function body lines (header dropped, blank lines dropped)."""
+    return [line for line in clean_source.split("\n")[1:] if line.strip() != ""]
+
+
+_SIMPLE_NAME = re.compile(r"[A-Za-z_][A-Za-z0-9_]*")
+
+
+def analyze_shape(body: list[str]) -> dict:
+    """Classify a function body by SHAPE from its (clean) lines alone.
+
+    Recomputed identically at verification from the shipped clean code, so the
+    generator and the verifier derive the same worked-example core."""
+    stripped = [line.strip() for line in body]
+    indent = [len(line) - len(line.lstrip()) for line in body]
+    is_loop = any(s.startswith("for ") for s in stripped)
+    returns = [s[len("return "):] for s in stripped if s.startswith("return ")]
+    if not returns:
+        raise ValueError("body has no return")
+    last_ret = returns[-1]
+    top_inits: list[tuple[str, str]] = []
+    for i, s in enumerate(stripped):
+        if indent[i] == 4 and " = " in s and not s.startswith(("if ", "for ", "return", "else")):
+            lhs, rhs = s.split(" = ", 1)
+            top_inits.append((lhs.strip(), rhs.strip()))
+    init_names = [lhs for lhs, _ in top_inits]
+    init_expr = {lhs: rhs for lhs, rhs in top_inits}
+    builds_list = any(rhs == "[]" for _, rhs in top_inits)
+    builds_str = any(rhs == "''" for _, rhs in top_inits)
+
+    def is_name(x: str) -> bool:
+        return bool(_SIMPLE_NAME.fullmatch(x))
+
+    if last_ret.startswith("d["):
+        return {"kind": "dict_pair", "capture": ["d"], "last_ret": last_ret}
+    if builds_list or builds_str:
+        primary = next(lhs for lhs, rhs in top_inits if rhs in ("[]", "''"))
+        return {"kind": "builder", "primary": primary,
+                "subtype": "str" if init_expr.get(primary) == "''" else "list", "last_ret": last_ret}
+    if not is_loop:
+        if is_name(last_ret) and last_ret in init_names:
+            return {"kind": "chain_scalar", "primary": last_ret, "capture": [last_ret], "last_ret": last_ret}
+        return {"kind": "branch", "last_ret": last_ret}
+    if last_ret == "hi - lo":
+        return {"kind": "spread", "capture": ["hi", "lo"], "last_ret": last_ret}
+    if is_name(last_ret) and last_ret in init_names:
+        return {"kind": "scalar", "primary": last_ret, "capture": [last_ret], "last_ret": last_ret, "final_expr": None}
+    mod = re.fullmatch(r"([A-Za-z_][A-Za-z0-9_]*)\s*%\s*(.+)", last_ret)
+    if mod and mod.group(1) in init_names:
+        return {"kind": "scalar", "primary": mod.group(1), "capture": [mod.group(1)],
+                "last_ret": last_ret, "final_expr": last_ret}
+    return {"kind": "search", "last_ret": last_ret}
+
+
+def _arrows(seq: list[str]) -> str:
+    return " -> ".join(seq)
+
+
+def _branch_evolution(body: list[str], params: list, args: tuple, result) -> str:
+    binding = {p: a for p, a in zip(params, args)}
+    header = "with " + ", ".join(f"{p}={a!r}" for p, a in zip(params, args)) + ", "
+    checks: list[str] = []
+    for line in body:
+        s = line.strip()
+        if s.startswith("if ") and s.endswith(":"):
+            cond = s[3:-1]
+            val = bool(eval(compile(cond, "<cond>", "eval"), {"__builtins__": SAFE_BUILTINS}, dict(binding)))  # noqa: S307
+            checks.append(f"{cond} is {val}")
+            if val:
+                break
+    return header + "; ".join(checks) if checks else header + "no branch fires"
+
+
+def _search_evolution(body: list[str], params: list, args: tuple, result) -> str:
+    cond = None
+    for line in body:
+        s = line.strip()
+        if s.startswith("if ") and s.endswith(":"):
+            cond = s[3:-1]
+            break
+    lp = params[0]
+    if result == -1:
+        return f"scanning {lp} left to right, no position satisfies {cond}"
+    seq_val = args[0][result]
+    return (f"scanning {lp} left to right, index {result} is the earliest where "
+            f"{cond} holds ({lp}[{result}] = {seq_val!r})")
+
+
+def worked_example_core(clean_source: str, name: str, params: list, args: tuple):
+    """Deterministic (rng-free) worked-example trace CORE + the real result.
+
+    Recomputed byte-for-byte at verification, so a substring match against the
+    shipped think proves every traced value and the final result are true. One
+    execution per call (the tracer's return event supplies the result for the
+    traced shapes; branch/search shapes need no per-line trajectory)."""
+    body = _body_lines(clean_source)
+    shape = analyze_shape(body)
+    kind = shape["kind"]
+    call = render_call(name, args)
+    if kind in ("scalar", "chain_scalar", "builder", "spread", "dict_pair"):
+        cap = ["hi", "lo"] if kind == "spread" else (["d"] if kind == "dict_pair" else [shape["primary"]])
+        traj, result = _capture_trajectories(clean_source, name, args, cap)
+        if kind in ("scalar", "chain_scalar"):
+            seq = traj[shape["primary"]]
+            if shape.get("final_expr"):
+                ev = f"{shape['primary']} moves {_arrows(seq)}, then {shape['final_expr']} = {result!r}"
+            else:
+                ev = f"{shape['primary']} moves {_arrows(seq)}"
+        elif kind == "builder":
+            ev = f"{shape['primary']} builds up {_arrows(traj[shape['primary']])}"
+        elif kind == "spread":
+            ev = (f"hi moves {_arrows(traj['hi'])} while lo moves {_arrows(traj['lo'])}, "
+                  f"giving hi - lo = {result!r}")
+        else:  # dict_pair
+            final_d = traj["d"][-1] if traj["d"] else "{}"
+            ev = f"the buckets end at d = {final_d}"
+    else:
+        result = call_function(clean_source, name, args)
+        if kind == "branch":
+            ev = _branch_evolution(body, params, args, result)
+        elif kind == "search":
+            ev = _search_evolution(body, params, args, result)
+        else:  # pragma: no cover - analyze_shape is exhaustive
+            raise ValueError(f"unhandled shape {kind}")
+    core = f"{TRACE_LABEL} {call}: {ev}, so it returns {result!r}."
+    return core, result
+
+
+# ------------------------------------------------- think derivation phrasing
+def _param_desc(p: str) -> str:
+    if p in LIST_PARAMS:
+        return f"a list {p}"
+    if p in INT_PARAMS:
+        return f"a number {p}"
+    if p in STR_PARAMS:
+        return f"a string {p}"
+    return f"the value {p}"
+
+
+def _out_desc(result) -> str:
+    if isinstance(result, bool):
+        return "a truth value"
+    if isinstance(result, int):
+        return "a number"
+    if isinstance(result, str):
+        return "a string"
+    if isinstance(result, list):
+        return "a list"
+    return "a value"
+
+
+def _think_spec(rng, spec: str, params: list, result) -> str:
+    inp = " and ".join(_param_desc(p) for p in params)
+    out = _out_desc(result)
+    return _pick(
+        rng,
+        f"Reading the spec: {spec} The input is {inp}, and the result is {out}.",
+        f"To begin, the goal. {spec} I take {inp} and produce {out}.",
+        f"Let me parse what is asked. {spec} Input: {inp}; output: {out}.",
+        f"The task states: {spec} So I work from {inp} to {out}.",
+        f"Understanding the request: {spec} That means turning {inp} into {out}.",
+    )
+
+
+def _think_approach(rng, shape: dict) -> str:
+    kind = shape["kind"]
+    if kind in ("scalar", "chain_scalar"):
+        return _pick(
+            rng,
+            "My plan: I'll keep one running value and update it as I go, then return it.",
+            "So I'll carry a single running quantity through a loop and hand it back at the end.",
+            "I'll fold every contribution into one running variable step by step and return that.",
+            "The approach is simple: I'll accumulate into one value, then return it.",
+        )
+    if kind == "builder":
+        noun = "string" if shape.get("subtype") == "str" else "list"
+        return _pick(
+            rng,
+            f"My plan: I'll build a fresh {noun} and grow it one entry at a time inside a loop.",
+            f"So I'll open an empty {noun} and append to it as I walk the input.",
+            f"I'll assemble the output {noun} piece by piece, one step per element.",
+        )
+    if kind == "spread":
+        return _pick(
+            rng,
+            "My plan: I'll track a running high and a running low, then subtract at the end.",
+            "So I'll keep both the biggest and the smallest seen, then take their difference.",
+        )
+    if kind == "dict_pair":
+        return _pick(
+            rng,
+            "My plan: I'll tally into buckets held in a dict, then return the winning bucket.",
+            "So I'll group values into a small dict of running totals and pick the larger one.",
+        )
+    if kind == "branch":
+        return _pick(
+            rng,
+            "My plan: I'll test the boundary cases in order and return the one that fits.",
+            "So I'll handle each case with an if and return as soon as one holds.",
+            "I'll weigh the cases one by one and return the value the spec assigns.",
+        )
+    if kind == "search":
+        return _pick(
+            rng,
+            "My plan: I'll scan left to right and return the earliest position that qualifies.",
+            "So I'll walk the input in order and stop at the earliest hit, or report a miss.",
+        )
+    return "My plan: I'll build the result directly and return it."  # pragma: no cover
+
+
+def _think_step(rng, code: str) -> str:
+    s = code.strip()
+    m = re.fullmatch(r"return (.+)", s)
+    if m:
+        return _pick(rng, f"at the end I return {m.group(1)}", f"finally handing back {m.group(1)}",
+                     f"then I return {m.group(1)}")
+    m = re.fullmatch(r"(\w+) = 0", s)
+    if m:
+        return _pick(rng, f"I start {m.group(1)} at 0", f"opening {m.group(1)} at 0",
+                     f"I set {m.group(1)} to 0 to begin")
+    m = re.fullmatch(r"(\w+) = 1", s)
+    if m:
+        return _pick(rng, f"I start {m.group(1)} at 1 so scaling stays honest",
+                     f"seeding {m.group(1)} at 1 for a running product")
+    m = re.fullmatch(r"(\w+) = (\w+)\[0\]", s)
+    if m:
+        return _pick(rng, f"I seed {m.group(1)} with the opening element {m.group(2)}[0]",
+                     f"{m.group(1)} starts from {m.group(2)}[0]")
+    m = re.fullmatch(r"(\w+) = (\w+)\[0\] \+ (\w+)\[1\]", s)
+    if m:
+        return f"I seed {m.group(1)} with the opening pair {m.group(2)}[0] + {m.group(2)}[1]"
+    m = re.fullmatch(r"(\w+) = \[\]", s)
+    if m:
+        return _pick(rng, f"I open an empty list {m.group(1)}", f"{m.group(1)} starts empty")
+    if s == "out = ''":
+        return _pick(rng, "I open an empty string out", "out starts as the empty string")
+    if s == "d = {}":
+        return _pick(rng, "I open an empty dict d", "d starts as an empty dict")
+    m = re.fullmatch(r"for (\w+) in range\(1, (\w+) \+ 1\):", s)
+    if m:
+        return _pick(rng, f"I loop {m.group(1)} from 1 through {m.group(2)} inclusive",
+                     f"looping {m.group(1)} over 1..{m.group(2)}")
+    m = re.fullmatch(r"for (\w+) in range\((\w+)\):", s)
+    if m:
+        return _pick(rng, f"I loop {m.group(1)} from 0 up to {m.group(2)} - 1",
+                     f"{m.group(1)} runs over range({m.group(2)})")
+    m = re.fullmatch(r"for (\w+) in range\(len\((\w+)\)\):", s)
+    if m:
+        return _pick(rng, f"I loop {m.group(1)} over every index of {m.group(2)}",
+                     f"{m.group(1)} walks the indices of {m.group(2)}")
+    m = re.fullmatch(r"for (\w+) in range\(len\((\w+)\) - 1\):", s)
+    if m:
+        return _pick(rng, f"I loop {m.group(1)} over adjacent-pair positions of {m.group(2)}",
+                     f"{m.group(1)} stops one short so {m.group(1)} + 1 stays inside {m.group(2)}")
+    m = re.fullmatch(r"for (\w+) in range\((\w+) \+ 1, len\((\w+)\)\):", s)
+    if m:
+        return f"an inner loop takes {m.group(1)} from {m.group(2)} + 1 to the end of {m.group(3)}"
+    m = re.fullmatch(r"for (\w+) in range\((\w+) \+ 1\):", s)
+    if m:
+        return f"an inner loop runs {m.group(1)} from 0 through {m.group(2)}"
+    m = re.fullmatch(r"for (\w+) in str\((\w+)\):", s)
+    if m:
+        return f"I walk each digit {m.group(1)} of str({m.group(2)})"
+    m = re.fullmatch(r"for (\w+) in (\w+):", s)
+    if m:
+        return _pick(rng, f"I walk each {m.group(1)} of {m.group(2)}",
+                     f"stepping through {m.group(2)} as {m.group(1)}")
+    m = re.fullmatch(r"(\w+) = \1 \+ (.+)", s)
+    if m:
+        return _pick(rng, f"each step I grow {m.group(1)} by {m.group(2)}",
+                     f"{m.group(1)} takes on {m.group(2)} each pass")
+    m = re.fullmatch(r"(\w+) = \1 \* (.+)", s)
+    if m:
+        return f"each step I scale {m.group(1)} by {m.group(2)}"
+    m = re.fullmatch(r"(\w+) = \1 - (.+)", s)
+    if m:
+        return f"each step I lower {m.group(1)} by {m.group(2)}"
+    m = re.fullmatch(r"(\w+)\.append\((.+)\)", s)
+    if m:
+        return _pick(rng, f"I append {m.group(2)} to {m.group(1)}",
+                     f"pushing {m.group(2)} onto {m.group(1)}")
+    m = re.fullmatch(r"if (.+):", s)
+    if m:
+        return _pick(rng, f"when {m.group(1)}", f"testing whether {m.group(1)}", f"if {m.group(1)}")
+    m = re.fullmatch(r"(.+) = (.+)", s)
+    if m:
+        return _pick(rng, f"I update {m.group(1)} to {m.group(2)}", f"setting {m.group(1)} to {m.group(2)}")
+    return f"then {s}"
+
+
+def _think_conclude(rng) -> str:
+    return _pick(
+        rng,
+        "That reproduces the required output, so the function is the one below.",
+        "So the function is the code that follows.",
+        "Putting the pieces together, the function is written below.",
+        "That yields the wanted result, so here is the function.",
+    )
+
+
+def _input_size(args: tuple) -> int:
+    """Cheap proxy for a traced example's length: shorter inputs -> shorter trace."""
+    total = 0
+    for a in args:
+        if isinstance(a, (list, str)):
+            total += 4 * len(a)
+        elif isinstance(a, int) and not isinstance(a, bool):
+            total += abs(a)
+    return total
+
+
+def build_think(rng, prog: dict, inputs: list, expected: list) -> str | None:
+    """The dual-channel think target: parse -> approach -> build -> trace -> close.
+
+    The worked example is traced on the SMALLEST assert input (compact + under
+    budget), so exactly ONE traced execution is spent per row. Returns ``None`` if
+    that trace's result disagrees with its assert (never expected)."""
+    clean = prog["clean_source"]
+    name = prog["name"]
+    params = prog["params"]
+    shape = analyze_shape(_body_lines(clean))
+    chosen = min(range(len(inputs)), key=lambda k: (_input_size(tuple(inputs[k])), k))
+    core, result = worked_example_core(clean, name, params, tuple(inputs[chosen]))
+    if repr(result) != repr(expected[chosen]):
+        return None
+    p1 = _think_spec(rng, prog["spec"], params, expected[chosen])
+    p2 = _think_approach(rng, shape)
+    steps = [_think_step(rng, code) for code, _why in prog["lines"] if code.strip() != "else:"]
+    p3 = _pick(rng, "Building it up: ", "Constructing the body: ", "Step by step: ") + "; ".join(steps) + "."
+    lead = _pick(rng, "Let me walk one example by hand. ", "Now a concrete example. ",
+                 "Sanity trace on a real input. ")
+    p4 = lead + core
+    p5 = _think_conclude(rng)
+    return "\n".join([p1, p2, p3, p4, p5])
+
+
+def normalize_think(text: str) -> str:
+    """A think reasoning SKELETON (numbers/vars removed) for diversity counting."""
+    return normalize_why(text)
+
+
+# --------------------------------------------------- independent think re-check
+def _params_from_code(code: str) -> list:
+    for line in code.split("\n"):
+        s = line.strip()
+        if s.startswith("def "):
+            inside = s[s.index("(") + 1:s.rindex(")")]
+            return [p.strip() for p in inside.split(",") if p.strip()]
+    raise ValueError("no def in code")
+
+
+def _args_from_call(call_src: str, name: str) -> tuple:
+    inner = call_src.strip()
+    if not inner.startswith(name + "(") or not inner.endswith(")"):
+        raise ValueError(f"unexpected call: {call_src!r}")
+    inner = inner[len(name) + 1:-1]
+    return eval(compile("(" + inner + ",)", "<args>", "eval"), {"__builtins__": SAFE_BUILTINS})  # noqa: S307
+
+
+_APPROACH_MARKER = re.compile(r"\bI'll\b|\bMy plan\b|\bI need to\b")
+
+
+def verify_think(think: str, clean_code: str, name: str, tests: list, reasons: list, index: int) -> None:
+    """Independently re-verify the think channel of a shipped row.
+
+    (a) it carries an approach-decision phrase; (b) it carries a REAL worked-
+    example trace whose values + final result are recomputed byte-for-byte here
+    and must appear verbatim; (c) it is NOT the joined #WHY comments."""
+    if not think.strip():
+        raise ValueError(f"row {index} empty think")
+    if not _APPROACH_MARKER.search(think):
+        raise ValueError(f"row {index} think lacks an approach-decision phrase")
+    if TRACE_LABEL not in think:
+        raise ValueError(f"row {index} think missing the worked-example trace section")
+    for joined in ("\n".join(reasons), " ".join(reasons), WHY_JOIN.join(reasons)):
+        if think.strip() == joined.strip():
+            raise ValueError(f"row {index} think is the joined #WHY comments")
+    if normalize_think(think) == normalize_think(" ".join(reasons)):
+        raise ValueError(f"row {index} think normalizes to the joined #WHY comments")
+    params = _params_from_code(clean_code)
+    matched = 0
+    for line in tests:
+        call_src, expected_src = _split_assert(line)
+        args = _args_from_call(call_src, name)
+        expected = eval(compile(expected_src, "<exp>", "eval"), {"__builtins__": SAFE_BUILTINS})  # noqa: S307
+        core, result = worked_example_core(clean_code, name, params, args)
+        if repr(result) != repr(expected):
+            raise ValueError(f"row {index} trace result disagrees with an assert")
+        if core in think:
+            matched += 1
+    if matched < 1:
+        raise ValueError(f"row {index} think has no real worked-example trace matching an assert")
+
+
+# --------------------------------------------------------------- row build
+def build_program(rng: random.Random) -> dict | None:
+    """Build ONE candidate program dict (structure only, no execution)."""
+    family = build_family(rng)
+    name = family["name"]
+    params = family["params"]
+    inputs = [tuple(a) for a in family["inputs"]]
+    if len(inputs) < 3:
+        return None
+    clean_source, commented_source, reasons = render_commented(name, params, family["lines"])
+    if len(reasons) < MIN_WHY_PER_ROW:
+        return None
+    if WHY_MARKER in clean_source:
+        return None  # a family line accidentally embedded the marker
+    if strip_why_comments(commented_source) != clean_source:
+        return None  # marker is not cleanly strippable
+    return {
+        "name": name, "params": params, "inputs": inputs, "spec": family["spec"],
+        "cat": family["cat"], "family_fn": family["family_fn"],
+        "clean_source": clean_source, "commented_source": commented_source, "reasons": reasons,
+        "lines": family["lines"],
+    }
+
+
+def build_row(rng: random.Random, index: int) -> dict | None:
+    prog = build_program(rng)
+    if prog is None:
+        return None
+    name, params, inputs = prog["name"], prog["params"], prog["inputs"]
+    clean_source, commented_source, reasons = prog["clean_source"], prog["commented_source"], prog["reasons"]
+
+    # Correctness: the CLEAN function passes ALL tests, and the outputs discriminate.
+    try:
+        expected = [call_function(clean_source, name, args) for args in inputs]
+    except Exception:  # noqa: BLE001
+        return None
+    if not all(_jsonable_value(v) for v in expected):
+        return None
+    if _distinct_reprs(expected) < 2:
+        return None  # a constant-output function makes a weak test suite
+    # The COMMENTED function must run and produce IDENTICAL outputs (comments inert).
+    try:
+        commented_out = [call_function(commented_source, name, args) for args in inputs]
+    except Exception:  # noqa: BLE001
+        return None
+    if commented_out != expected:
+        return None
+
+    # Every #WHY comment is line-specific and the comments vary within the row.
+    seen_reasons: set[str] = set()
+    for line in commented_source.split("\n"):
+        idx = line.find(WHY_MARKER)
+        if idx < 0:
+            continue
+        code_part = line[:idx]
+        why_text = line[idx + len(WHY_MARKER):].strip()
+        if not why_text or why_text in seen_reasons:
+            return None  # empty or duplicated rationale within the row
+        seen_reasons.add(why_text)
+        if not _why_references_line(code_part, why_text):
+            return None  # generic/boilerplate comment: no line-specific token
+
+    tests = [render_assert(name, args, expected[i]) for i, args in enumerate(inputs)]
+    signature = f"def {name}({', '.join(params)}):"
+    prompt = (
+        f"{PROMPT_HEAD}\n\n"
+        f"Specification: {prog['spec']}\n\n"
+        f"Signature:\n\n```python\n{signature}\n    ...\n```\n\n"
+        "Tests:\n\n"
+        f"```python\n{chr(10).join(tests)}\n```"
+    )
+    think = build_think(rng, prog, inputs, expected)
+    if think is None:
+        return None  # no assert input yielded a valid worked trace
+    answer = f"```python\n{commented_source.rstrip()}\n```"
+
+    # Fail-closed contamination self-heal: no banned benchmark vocabulary may ship
+    # in the prompt, think, or answer (code identifiers, spec prose, or #WHY prose).
+    if contam.whole_word_hits(prompt + "\n" + think + "\n" + answer, _banned()):
+        return None
+
+    # Token budget: the think adds length, so reject any render whose
+    # conservative >=3-char/token estimate exceeds the headroom cap (none should).
+    est_tokens = (len(prompt) + len(think) + len(answer) + 2) // 3
+    if est_tokens > THINK_TOKEN_REJECT:
+        return None
+
+    return {
+        "messages": [{"role": "user", "content": prompt}],
+        "think": think,
+        "answer": answer,
+        "kind": "why_think",
+        "family": "cognitive_core",
+        "cat": prog["cat"],
+        "family_fn": prog["family_fn"],
+        "n_tests": len(tests),
+        "n_why_comments": len(reasons),
+        "row_weight": 1.0,
+        "task_id": f"why_think_{index:06d}",
+        "_audit": {
+            "truth_valid": True,
+            "reexec_verified": True,
+            "func_name": name,
+            "clean_code": clean_source,
+            "commented_code": commented_source,
+            "tests": tests,
+            "why_reasons": reasons,
+            "think": think,
+        },
+    }
+
+
+# --------------------------------------------------------------- curriculum
+def generate_curriculum(seed: int, rows: int):
+    """Exactly ``rows`` verified, deduped rows. Pure function of (seed, rows)."""
+    rng = random.Random(seed)
+    out: list[dict] = []
+    index = 0
+    # Every row must be a UNIQUE program AND a UNIQUE prompt: two rows of the same
+    # family can share a spec+signature+tests prompt while their clean code differs
+    # only by accumulator name, so deduping on the program alone leaves prompt
+    # collisions. Reject a candidate if either its clean program or its prompt has
+    # been seen.
+    seen_programs: set[str] = set()
+    seen_prompts: set[str] = set()
+    attempts = 0
+    cap = rows * 60 + 5000
+    while len(out) < rows:
+        attempts += 1
+        if attempts > cap:
+            raise RuntimeError(f"could not synthesize {rows} unique rows (attempts {attempts})")
+        row = build_row(rng, index)
+        if row is None:
+            continue
+        program = row["_audit"]["clean_code"]
+        prompt = row["messages"][0]["content"]
+        if program in seen_programs or prompt in seen_prompts:
+            continue
+        seen_programs.add(program)
+        seen_prompts.add(prompt)
+        out.append(row)
+        index += 1
+    rng.shuffle(out)
+    return out
+
+
+def public_row(row: dict) -> dict:
+    return {key: value for key, value in row.items() if not key.startswith("_")}
+
+
+# --------------------------------------------- diversity measurement (fast, raw)
+def sample_raw_programs(seed: int, count: int) -> list[str]:
+    """Draw ``count`` raw CLEAN programs WITHOUT execution (fast capacity probe)."""
+    rng = random.Random(seed)
+    progs: list[str] = []
+    while len(progs) < count:
+        prog = build_program(rng)
+        if prog is not None:
+            progs.append(prog["clean_source"])
+    return progs
+
+
+def diversity_report(rows: list[dict]) -> dict:
+    families = Counter(row["family_fn"] for row in rows)
+    cats = Counter(row["cat"] for row in rows)
+    clean_programs = [row["_audit"]["clean_code"] for row in rows]
+    unique_programs = len(set(clean_programs))
+    templates: set[str] = set()
+    for row in rows:
+        for why in row["_audit"]["why_reasons"]:
+            templates.add(normalize_why(why))
+    think_templates = {normalize_think(row["think"]) for row in rows}
+    return {
+        "rows": len(rows),
+        "distinct_families": len(families),
+        "distinct_categories": len(cats),
+        "unique_programs": unique_programs,
+        "unique_program_pct": round(100.0 * unique_programs / len(rows), 3) if rows else 0.0,
+        "distinct_normalized_why_templates": len(templates),
+        "distinct_think_templates": len(think_templates),
+        "families_exercised": dict(sorted(families.items())),
+        "categories": dict(sorted(cats.items())),
+    }
+
+
+# ------------------------------------------------------- independent grading
+def extract_python_blocks(text: str) -> list[str]:
+    blocks: list[str] = []
+    marker = "```python\n"
+    idx = 0
+    while True:
+        start = text.find(marker, idx)
+        if start < 0:
+            break
+        start += len(marker)
+        end = text.find("\n```", start)
+        if end < 0:
+            break
+        blocks.append(text[start:end])
+        idx = end + len("\n```")
+    return blocks
+
+
+def _split_assert(line: str) -> tuple[str, str]:
+    body = line.strip()
+    if not body.startswith("assert "):
+        raise ValueError(f"not an assert line: {line!r}")
+    body = body[len("assert "):]
+    call_src, expected_src = body.rsplit(" == ", 1)
+    return call_src.strip(), expected_src.strip()
+
+
+def grade_by_asserts(code: str, name: str, tests: list[str]) -> dict:
+    """Independently execute the code + evaluate each rendered assert (different
+    code path from generation: shipped assert STRINGS are parsed and eval'd)."""
+    fn, namespace = _define_function(code, name)
+    outcomes: list[dict] = []
+    for line in tests:
+        call_src, expected_src = _split_assert(line)
+        raised = None
+        got = None
+        expected = None
+        try:
+            expected = eval(compile(expected_src, "<expected>", "eval"), {"__builtins__": SAFE_BUILTINS})  # noqa: S307
+            got = _run_capped(lambda: eval(  # noqa: S307
+                compile(call_src, "<call>", "eval"), namespace))
+        except Exception as exc:  # noqa: BLE001
+            raised = type(exc).__name__
+        passed = raised is None and got == expected
+        outcomes.append({"line": line, "passed": passed, "raised": raised, "got": got, "expected": expected})
+    n_fail = sum(1 for o in outcomes if not o["passed"])
+    return {"outcomes": outcomes, "n_fail": n_fail}
+
+
+def _func_name_from_code(code: str) -> str:
+    for line in code.split("\n"):
+        stripped = line.strip()
+        if stripped.startswith("def "):
+            return stripped[len("def "):].split("(", 1)[0]
+    raise ValueError("no def in code block")
+
+
+def verify_row_reexecution(row: dict, index: int) -> None:
+    """Independently re-execute a shipped row: strip->clean passes, commented passes identically."""
+    prompt = row["messages"][0]["content"]
+    prompt_blocks = extract_python_blocks(prompt)
+    answer_blocks = extract_python_blocks(row["answer"])
+    if len(prompt_blocks) != 2 or len(answer_blocks) != 1:
+        raise ValueError(f"row {index} unexpected code-block layout")
+    _signature_block, tests_block = prompt_blocks
+    commented_code = answer_blocks[0]
+    tests = [line for line in tests_block.split("\n") if line.strip()]
+    if not tests:
+        raise ValueError(f"row {index} has no tests")
+
+    if WHY_MARKER not in commented_code:
+        raise ValueError(f"row {index} answer carries no {WHY_MARKER} comments")
+    clean_code = strip_why_comments(commented_code)
+    if WHY_MARKER in clean_code:
+        raise ValueError(f"row {index} clean code still contains {WHY_MARKER}")
+    if clean_code == commented_code:
+        raise ValueError(f"row {index} stripping removed nothing (no real comments)")
+
+    name = _func_name_from_code(commented_code)
+    if _func_name_from_code(clean_code) != name:
+        raise ValueError(f"row {index} clean/commented function names differ")
+
+    clean_grade = grade_by_asserts(clean_code, name, tests)
+    if clean_grade["n_fail"] != 0:
+        raise ValueError(f"row {index} stripped code does not pass all tests")
+    commented_grade = grade_by_asserts(commented_code, name, tests)
+    if commented_grade["n_fail"] != 0:
+        raise ValueError(f"row {index} commented code does not pass all tests")
+    for clean_o, comm_o in zip(clean_grade["outcomes"], commented_grade["outcomes"], strict=True):
+        if clean_o["got"] != comm_o["got"]:
+            raise ValueError(f"row {index} commented output differs from clean output")
+
+    reasons: list[str] = []
+    n_meaningful = 0
+    for line in commented_code.split("\n"):
+        idx = line.find(WHY_MARKER)
+        if idx < 0:
+            continue
+        n_meaningful += 1
+        code_part = line[:idx]
+        why_text = line[idx + len(WHY_MARKER):].strip()
+        if not why_text:
+            raise ValueError(f"row {index} has an empty {WHY_MARKER} comment")
+        if not _why_references_line(code_part, why_text):
+            raise ValueError(f"row {index} has a generic (non-line-specific) {WHY_MARKER} comment")
+        reasons.append(why_text)
+    if n_meaningful < MIN_WHY_PER_ROW:
+        raise ValueError(f"row {index} has too few {WHY_MARKER} comments ({n_meaningful})")
+    if len(set(reasons)) != len(reasons):
+        raise ValueError(f"row {index} repeats a {WHY_MARKER} comment (boilerplate)")
+
+    # Dual-channel: the think is a genuine derivation with a REAL worked-example
+    # trace (recomputed byte-for-byte here) and is not the joined #WHY comments.
+    verify_think(row.get("think", ""), clean_code, name, tests, reasons, index)
+
+
+# ----------------------------------------------------------------- validation
+def code_grams_no_comments(code: str) -> set[tuple[str, ...]]:
+    """Code n-grams over the CLEAN code (``#WHY:`` comments stripped)."""
+    return contam.code_ngrams(strip_why_comments(code))
+
+
+def validate_generated(rows: list[dict], *, expected_rows: int | None = None) -> dict:
+    if not rows:
+        raise ValueError("curriculum is empty")
+    if expected_rows is not None and len(rows) != expected_rows:
+        raise ValueError(f"expected {expected_rows} rows, got {len(rows)}")
+    required = {
+        "messages", "think", "answer", "kind", "family", "cat", "family_fn",
+        "n_tests", "n_why_comments", "row_weight", "task_id", "_audit",
+    }
+    banned = contam.banned_names()
+    prompts: set[str] = set()
+    task_ids: set[str] = set()
+    programs: set[str] = set()
+    cats: Counter = Counter()
+    kinds: Counter = Counter()
+    for i, row in enumerate(rows):
+        if set(row) != required:
+            raise ValueError(f"row {i} schema mismatch: {sorted(row)}")
+        if row["family"] != "cognitive_core" or row["row_weight"] != 1.0:
+            raise ValueError(f"row {i} family/weight mismatch")
+        if row["kind"] != "why_think":
+            raise ValueError(f"row {i} unexpected kind: {row['kind']!r}")
+        if len(row["messages"]) != 1 or row["messages"][0].get("role") != "user":
+            raise ValueError(f"row {i} message schema mismatch")
+        if not row["think"].strip() or not row["answer"].strip():
+            raise ValueError(f"row {i} empty target")
+        if row["_audit"].get("truth_valid") is not True:
+            raise ValueError(f"row {i} lacks truth audit")
+        if row["n_why_comments"] < MIN_WHY_PER_ROW:
+            raise ValueError(f"row {i} too few why comments")
+        kinds[row["kind"]] += 1
+        cats[row["cat"]] += 1
+        verify_row_reexecution(row, i)  # independent re-execution
+        blob = row["messages"][0]["content"] + "\n" + row["think"] + "\n" + row["answer"]
+        hits = contam.whole_word_hits(blob, banned)
+        if hits:
+            raise ValueError(f"row {i} uses banned benchmark vocabulary: {sorted(hits)}")
+        prompt = row["messages"][0]["content"]
+        if prompt in prompts or row["task_id"] in task_ids:
+            raise ValueError(f"row {i} duplicate prompt/task_id")
+        prompts.add(prompt)
+        task_ids.add(row["task_id"])
+        program = row["_audit"]["clean_code"]
+        if program in programs:
+            raise ValueError(f"row {i} duplicate clean program")
+        programs.add(program)
+    return {
+        "rows": len(rows),
+        "kinds": dict(sorted(kinds.items())),
+        "categories": dict(sorted(cats.items())),
+        "unique_programs": len(programs),
+    }
+
+
+def sha256_text(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def _length_stats(rows: list[dict]) -> dict:
+    lengths = []
+    for row in rows:
+        blob = row["messages"][0]["content"] + row["think"] + row["answer"]
+        lengths.append(len(blob))
+    lengths.sort()
+    n = len(lengths)
+
+    def _q(p):
+        return lengths[min(n - 1, int(p * n))]
+
+    return {
+        "render": "prompt+think+answer characters",
+        "chars_min": lengths[0],
+        "chars_median": lengths[n // 2],
+        "chars_p95": _q(0.95),
+        "chars_max": lengths[-1],
+        "est_tokens_p95_chars_over_3": (_q(0.95) + 2) // 3,
+        "est_tokens_max_chars_over_3": (lengths[-1] + 2) // 3,
+        "train_max_length_tokens": 4096,
+        "note": "conservative >=3 chars/token estimate; the measured tokenizer max is recorded in reports/report.md",
+    }
+
+
+def _print_example(row: dict) -> None:
+    print("=" * 78)
+    print(f"[{row['cat']}/{row['family_fn']}] {row['task_id']} "
+          f"(n_tests={row['n_tests']}, n_why={row['n_why_comments']})")
+    print("--- PROMPT (spec + signature + tests) ---")
+    print(row["messages"][0]["content"])
+    print("--- THINK (dual-channel derivation) ---")
+    print(row["think"])
+    print("--- ANSWER (correct solution with #WHY: comments) ---")
+    print(row["answer"])
+
+
+def contamination_ngram_overlap(rows: list[dict]) -> dict:
+    """Present-only code-only distinctive 7-gram overlap vs the benchmark solutions."""
+    try:
+        streams = contam.build_code_tokens_from_cache()
+    except Exception as exc:  # noqa: BLE001 (datasets/cache unavailable -> skip aid)
+        return {"status": "skipped", "reason": type(exc).__name__}
+    bench_grams = contam.benchmark_ngrams(streams)
+    corpus_grams: set = set()
+    for row in rows:
+        corpus_grams |= code_grams_no_comments(row["_audit"]["clean_code"])
+    shared = corpus_grams & bench_grams
+    distinctive = contam.distinctive_overlap(corpus_grams, bench_grams)
+    result = {
+        "status": "checked",
+        "ngram_n": contam.NGRAM_N,
+        "note": "code-only n-grams; #WHY: rationale prose excluded (audited by the banned-name gate)",
+        "benchmark_ngrams": len(bench_grams),
+        "corpus_ngrams": len(corpus_grams),
+        "shared_ngrams_structural_idiom": len(shared),
+        "shared_ngrams_distinctive": len(distinctive),
+    }
+    if distinctive:
+        result["distinctive_examples"] = sorted(list(distinctive))[:3]
+    return result
+
+
+def build_receipt(seed: int, rows: list[dict], out: Path, *, run_ngram: bool) -> dict:
+    summary = validate_generated(rows)
+    diversity = diversity_report(rows)
+    banned = contam.banned_names()
+    overlap = {"status": "not_run"}
+    if run_ngram:
+        overlap = contamination_ngram_overlap(rows)
+        if overlap.get("shared_ngrams_distinctive"):
+            raise SystemExit(
+                f"benchmark n-gram overlap detected: {overlap['shared_ngrams_distinctive']} "
+                f"shared distinctive {contam.NGRAM_N}-grams"
+            )
+    payload = "".join(json.dumps(public_row(row), ensure_ascii=False) + "\n" for row in rows)
+    return {
+        "schema_version": 1,
+        "experiment_id": EXP.name,
+        "seed": seed,
+        "rows": len(rows),
+        "out": str(out),
+        "corpus_sha256": sha256_text(payload),
+        "length_stats": _length_stats(rows),
+        "diversity": diversity,
+        "contamination": {
+            "banned_function_names": len(banned),
+            "banned_hits": 0,
+            "ngram_overlap": overlap,
+        },
+        **summary,
+    }
+
+
+def verify_public_corpus(path: Path, expected_sha: str | None = None) -> dict:
+    """Independently re-execute EVERY shipped row (no ``_audit``). Standalone."""
+    payload = path.read_text(encoding="utf-8")
+    rows = [json.loads(line) for line in payload.splitlines() if line.strip()]
+    if not rows:
+        raise ValueError("committed corpus is empty")
+    banned = contam.banned_names()
+    prompts: set[str] = set()
+    task_ids: set[str] = set()
+    cats: Counter = Counter()
+    for i, row in enumerate(rows):
+        cats[row["cat"]] += 1
+        prompt = row["messages"][0]["content"]
+        if prompt in prompts or row["task_id"] in task_ids:
+            raise ValueError(f"row {i} duplicate in committed corpus")
+        prompts.add(prompt)
+        task_ids.add(row["task_id"])
+        blob = prompt + "\n" + row["think"] + "\n" + row["answer"]
+        hits = contam.whole_word_hits(blob, banned)
+        if hits:
+            raise ValueError(f"row {i} banned vocabulary in committed corpus: {sorted(hits)}")
+        verify_row_reexecution(row, i)
+    if expected_sha is not None and sha256_text(payload) != expected_sha:
+        raise ValueError("committed corpus sha256 disagrees with the expected pin")
+    return {"rows": len(rows), "categories": dict(sorted(cats.items()))}
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--seed", type=int, default=CONSTRUCTION_SEED)
+    parser.add_argument("--rows", type=int, default=DEFAULT_ROWS)
+    parser.add_argument("--out", type=Path, default=None)
+    parser.add_argument("--receipt", type=Path, default=None)
+    parser.add_argument("--no-ngram", action="store_true", help="skip the present-only n-gram overlap aid")
+    parser.add_argument("--examples", type=int, default=0, help="print N example rows across families and exit")
+    parser.add_argument("--diversity", action="store_true", help="print the diversity report for --rows and exit")
+    parser.add_argument("--verify-corpus", type=Path, default=None,
+                        help="independently re-execute a committed corpus JSONL (no write, no GPU)")
+    parser.add_argument("--expected-sha", type=str, default=None)
+    args = parser.parse_args()
+
+    if args.verify_corpus is not None:
+        summary = verify_public_corpus(args.verify_corpus, args.expected_sha)
+        print(json.dumps({"verify_corpus": str(args.verify_corpus), **summary}, indent=2, sort_keys=True))
+        return 0
+
+    rows = generate_curriculum(args.seed, args.rows)
+
+    if args.examples:
+        shown = 0
+        seen_fams: set[str] = set()
+        for row in rows:
+            if row["family_fn"] not in seen_fams:
+                seen_fams.add(row["family_fn"])
+                _print_example(row)
+                shown += 1
+            if shown >= args.examples:
+                break
+        return 0
+
+    if args.diversity:
+        validate_generated(rows)
+        print(json.dumps(diversity_report(rows), indent=2, sort_keys=True))
+        return 0
+
+    receipt = build_receipt(args.seed, rows, args.out or Path("-"), run_ngram=not args.no_ngram)
+    if args.out is not None:
+        payload = "".join(json.dumps(public_row(row), ensure_ascii=False) + "\n" for row in rows)
+        args.out.parent.mkdir(parents=True, exist_ok=True)
+        args.out.write_text(payload, encoding="utf-8")
+    if args.receipt is not None:
+        args.receipt.parent.mkdir(parents=True, exist_ok=True)
+        args.receipt.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    print(json.dumps(receipt, indent=2, sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

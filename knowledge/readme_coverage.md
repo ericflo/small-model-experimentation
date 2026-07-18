@@ -233,6 +233,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_wall_climbing` | [README](../experiments/qwen35_4b_wall_climbing/README.md) | [report](../experiments/qwen35_4b_wall_climbing/reports/report.md) |
 | `qwen35_4b_why_comment_install` | [README](../experiments/qwen35_4b_why_comment_install/README.md) | [report](../experiments/qwen35_4b_why_comment_install/reports/report.md) |
 | `qwen35_4b_why_scale_ladder` | [README](../experiments/qwen35_4b_why_scale_ladder/README.md) | [report](../experiments/qwen35_4b_why_scale_ladder/reports/report.md) |
+| `qwen35_4b_why_think_scale` | [README](../experiments/qwen35_4b_why_think_scale/README.md) | [report](../experiments/qwen35_4b_why_think_scale/reports/report.md) |
 | `qwen35_4b_zero_root_lineage_rebuild` | [README](../experiments/qwen35_4b_zero_root_lineage_rebuild/README.md) | [report](../experiments/qwen35_4b_zero_root_lineage_rebuild/reports/report.md) |
 | `qwen_action_conditioned_vm_echo_policy_iteration` | [README](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/README.md) | [report](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/reports/qwen_action_conditioned_vm_echo_policy_iteration_report.md) |
 | `qwen_active_crystallizer_public_gate` | [README](../experiments/qwen_active_crystallizer_public_gate/README.md) | [report](../experiments/qwen_active_crystallizer_public_gate/reports/qwen_active_crystallizer_public_gate_report.md) |

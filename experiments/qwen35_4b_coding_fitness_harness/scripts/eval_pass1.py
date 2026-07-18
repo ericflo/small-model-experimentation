@@ -15,7 +15,9 @@ Design (reuses only proven machinery, all copied into ``src/`` so this dir is st
   * Generation goes through the pinned single-file ``src.vllm_runner`` (the repo's
     high-throughput offline runner). Base uses ``Qwen/Qwen3.5-4B`` at the pinned revision;
     ``--model-override`` points at a merged Qwen3.5 composite dir (fingerprint-checked by
-    the runner). Greedy, ``n=1``, thinking off, seed 0 -> deterministic.
+    the runner). Greedy, ``n=1``, seed 0 -> deterministic. Qwen3.5-4B is a thinking
+    model, so we evaluate WITH thinking on (default: budget mode, 8192-token think
+    budget); the code answer is parsed from what follows the final ``</think>``.
 
 We deliberately do NOT mix backends: base and every adapter/composite arm are all graded
 through the same vLLM path, so their pass@1 numbers are directly comparable.
@@ -144,15 +146,25 @@ def run_generation(
     prompt_rows: list[dict],
     *,
     model_override: str | None,
+    thinking: str,
+    thinking_budget: int,
+    answer_max_tokens: int,
     max_new_tokens: int,
     max_model_len: int,
     gpu_mem: float,
     max_num_seqs: int,
+    max_num_batched_tokens: int,
     workdir: Path,
 ) -> tuple[dict[str, dict], dict]:
-    """Invoke the pinned vLLM runner CLI (greedy, thinking off, seed 0). Returns
+    """Invoke the pinned vLLM runner CLI (greedy, seed 0, thinking on). Returns
     (outputs-by-id, runner-metadata). The CLI auto-handles the Qwen3.5 Mamba-cache
-    concurrency cap via a single deterministic process re-exec."""
+    concurrency cap via a single deterministic process re-exec.
+
+    Qwen3.5-4B is a thinking model whose coding performance depends on its full
+    <think> trace, so we evaluate WITH thinking on. In ``budget`` mode the runner
+    runs its two-stage protocol: stage-1 emits the think trace up to
+    ``thinking_budget`` tokens, then stage-2 emits the code answer up to
+    ``answer_max_tokens`` tokens (force-closing </think> if the budget was hit)."""
     in_path = workdir / "prompts.jsonl"
     out_path = workdir / "gen.jsonl"
     meta_path = workdir / "gen.meta.json"
@@ -165,15 +177,22 @@ def run_generation(
         "--input", str(in_path),
         "--output", str(out_path),
         "--metadata", str(meta_path),
-        "--thinking", "off",
+        "--thinking", thinking,
         "--greedy",
         "--n", "1",
         "--max-tokens", str(max_new_tokens),
+        "--answer-max-tokens", str(answer_max_tokens),
         "--seed", "0",
         "--max-model-len", str(max_model_len),
         "--gpu-memory-utilization", str(gpu_mem),
         "--max-num-seqs", str(max_num_seqs),
+        # Chunk large prefills: force-closed budget continuations carry the full
+        # ~8k-token think trace as their prompt, so several concurrent stage-2
+        # prefills otherwise spike activations and OOM the 24GB card.
+        "--max-num-batched-tokens", str(max_num_batched_tokens),
     ]
+    if thinking == "budget":
+        cmd += ["--thinking-budget", str(thinking_budget)]
     if model_override:
         cmd += ["--model-override", str(Path(model_override).expanduser().resolve())]
 
@@ -214,11 +233,20 @@ def main() -> int:
     ap.add_argument("--smoke", action="store_true", help="tiny n=4 validation run")
     ap.add_argument("--visible-tests", type=int, default=1, help="public examples shown in-prompt (grading uses hidden tests)")
     ap.add_argument("--timeout-s", type=float, default=5.0)
-    ap.add_argument("--max-new-tokens", type=int, default=512)
+    # Qwen3.5-4B is a thinking model; standardized think budget is 8192 (see repo doctrine).
+    # Budget mode runs the runner's two-stage force-close protocol: stage-1 generates the
+    # <think> trace up to --thinking-budget, stage-2 emits the code answer up to
+    # --answer-max-tokens. --max-new-tokens is the stage cap only for natural/off modes.
+    ap.add_argument("--thinking", choices=["off", "natural", "budget"], default="budget")
+    ap.add_argument("--thinking-budget", type=int, default=8192, help="stage-1 think-token cap for --thinking budget")
+    ap.add_argument("--answer-max-tokens", type=int, default=1024, help="stage-2 code-answer cap for --thinking budget")
+    ap.add_argument("--max-new-tokens", type=int, default=9216, help="stage cap for --thinking natural/off (>= budget+answer)")
     ap.add_argument("--mbpp-config", choices=["full", "sanitized"], default="full")
-    ap.add_argument("--max-model-len", type=int, default=4096)
+    ap.add_argument("--max-model-len", type=int, default=16384)
     ap.add_argument("--gpu-memory-utilization", type=float, default=0.90)
     ap.add_argument("--max-num-seqs", type=int, default=16)
+    ap.add_argument("--max-num-batched-tokens", type=int, default=8192,
+                    help="prefill chunk size; keep <= max-model-len so long force-closed think traces chunk instead of OOMing")
     ap.add_argument("--keep-raw", action="store_true", help="keep the intermediate vLLM JSONL + metadata next to --out")
     a = ap.parse_args()
 
@@ -249,30 +277,41 @@ def main() -> int:
     outputs, meta = run_generation(
         prompt_rows,
         model_override=a.model_override,
+        thinking=a.thinking,
+        thinking_budget=a.thinking_budget,
+        answer_max_tokens=a.answer_max_tokens,
         max_new_tokens=a.max_new_tokens,
         max_model_len=a.max_model_len,
         gpu_mem=a.gpu_memory_utilization,
         max_num_seqs=a.max_num_seqs,
+        max_num_batched_tokens=a.max_num_batched_tokens,
         workdir=raw_dir,
     )
 
     per_problem = []
-    passed = n_parse_failed = n_truncated = 0
+    passed = n_parse_failed = n_truncated = n_forced_close = 0
     for rid, rec in rec_by_id.items():
         row = outputs.get(rid)
         if row is None:
             raise SystemExit(f"[eval_pass1] missing generation output for {rid!r}")
         out = row["outputs"][0]
         # Match the reference decode exactly: strip special tokens from the completion.
+        # The completion is now "<think> reasoning </think>\n\n<code>"; extraction strips
+        # everything through the final </think> before parsing the code answer.
         text = tok.decode(out["token_ids"], skip_special_tokens=True)
         cand = candidate_from_completion(text, rec, source="greedy", order=0)
         ok = bool(cand.get("full_pass"))
         passed += int(ok)
         n_parse_failed += int(cand.get("parse_status") != "parsed")
         n_truncated += int(bool(out.get("truncated")))
+        n_forced_close += int(bool(out.get("forced_close")))
         per_problem.append({"task_id": rec["task_id"], "passed": ok,
                             "parse_ok": cand.get("parse_status") == "parsed",
+                            "n_thinking_tokens": out.get("n_thinking_tokens"),
                             "n_answer_tokens": out.get("n_answer_tokens"),
+                            "n_completion_tokens": out.get("n_completion_tokens"),
+                            "thinking_closed": bool(out.get("thinking_closed")),
+                            "forced_close": bool(out.get("forced_close")),
                             "truncated": bool(out.get("truncated"))})
 
     total = len(per_problem)
@@ -289,14 +328,18 @@ def main() -> int:
         # provenance / diagnostics
         "greedy": True,
         "seed": 0,
-        "thinking": "off",
+        "thinking": a.thinking,
+        "thinking_budget": a.thinking_budget if a.thinking == "budget" else None,
+        "answer_max_tokens": a.answer_max_tokens,
         "max_new_tokens": a.max_new_tokens,
+        "max_model_len": a.max_model_len,
         "visible_tests": a.visible_tests,
         "timeout_s": a.timeout_s,
         "mbpp_config": a.mbpp_config if a.dataset == "mbpp" else None,
         "offset": a.offset,
         "n_parse_failed": n_parse_failed,
         "n_truncated": n_truncated,
+        "n_forced_close": n_forced_close,
         "runner_sha256": meta.get("runner_sha256"),
         "resolved_sampling": meta.get("resolved_sampling"),
         "generation_seconds": meta.get("timing", {}).get("generation_seconds"),
@@ -308,7 +351,9 @@ def main() -> int:
     a.out.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(
         f"[eval_pass1] {a.dataset} pass@1 = {result['pass_at_1']:.4f} "
-        f"({passed}/{total}) | parse_fail={n_parse_failed} truncated={n_truncated} | "
+        f"({passed}/{total}) | parse_fail={n_parse_failed} truncated={n_truncated} "
+        f"forced_close={n_forced_close} | thinking={a.thinking} "
+        f"budget={a.thinking_budget if a.thinking == 'budget' else '-'} | "
         f"wall={result['wall_seconds']:.1f}s -> {a.out}",
         flush=True,
     )

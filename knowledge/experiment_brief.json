@@ -15296,6 +15296,37 @@
         }
       ],
       "charts": []
+    },
+    "qwen35_4b_why_think_scale": {
+      "verdict_tag": "Design frozen: the CORRECTED dual-channel WHY curriculum - a genuine step-by-step <think> derivation AND strippable #WHY: code comments - built to scale WHY without destroying the 4B's native thinking (GPU sweep not yet run)",
+      "concept_primer": "This small model is a THINKING model: before it answers it writes a hidden step-by-step reasoning trace, and its coding skill depends heavily on that trace - it is the single most-replicated finding in this project. An earlier winning idea taught the model WHY each line of correct code is correct by attaching a short true reason to every line as a comment (graders ignore comments, so any score gain was a clean signal that explaining WHY helped). But that curriculum, and the version that scaled it up, left the model's hidden thinking channel almost empty during training - which risks teaching the model to STOP thinking, wrecking the very ability its coding rests on. This experiment is the correction: every training example now carries BOTH channels - a genuine hidden derivation that reads the spec, decides an approach, builds the code step by step, and traces a real worked example by hand to check the answer, AND the clean code with the strippable WHY comments. So the model learns to think richly first, then write well-reasoned code. The question is the same scaling question as before - does teaching WHY keep improving the score as you add more data, up to a peak - but asked the RIGHT way for a thinking model, and measured with thinking turned ON (the shared exam was previously, mistakenly, run with thinking OFF).",
+      "plain_question": "Can we teach a thinking model WHY code is correct WITHOUT emptying out (and destroying) its native hidden reasoning - by training a genuine step-by-step think derivation alongside the WHY-commented code - and does that dual-channel WHY signal SCALE (climb to a peak, stay flat, or collapse) on the coding exams when measured with thinking turned ON? And first: can we generate that much genuinely-diverse, self-checked, contamination-free dual-channel data?",
+      "plain_answer": "This phase built and proved the machinery; the GPU training sweep has not run yet. The generator now emits, for every example, a real hidden reasoning trace generated mechanically from the program's shape - parse the spec, pick an approach (a running total? a builder? a search?), build the code step by step, then trace one of the example's own tests by hand, running the program to get every intermediate value so the trace is true - plus the clean code with strippable WHY comments. Every example is checked by actually running it: strip the comments and the code passes all its tests; the commented version runs identically; and the hidden trace's worked example is recomputed byte-for-byte and must match real execution (a tamper of any traced number is rejected). Measured on a 5000-example sample it hits all 59 program families across 13 task kinds, keeps 100% distinct programs, carries about 1,196 distinct comment-reasoning patterns AND about 4,997 distinct think-derivation skeletons (out of 5000 - the reasoning genuinely varies, it is not one template); at 10,000 examples the think skeletons stay ~100% distinct. Nothing looks like the benchmarks (zero banned benchmark names anywhere - prompt, hidden think, or answer - and zero distinctive shared code fragments through 10,000 examples). Crucially the added thinking fits the training window: the real tokenizer render tops out at 739 tokens (median 467) against a 4096 cap, with zero examples truncated. On top sits a five-rung ladder (2000/5000/10000/20000/40000), each corpus fingerprinted so it rebuilds identically, a fail-closed trainer that trains a fresh small adapter per rung at ONE epoch (unlimited unique data, never re-shown), with a POSITIVE weight on the think channel so the native thinking is preserved and shaped rather than emptied, and a per-rung exam sweep on HumanEval + MBPP run with thinking ON and the base co-measured each rung (no stale thinking-off number carried). Tests pass.",
+      "why_it_matters": "This is Phase A of a scale-then-reinforcement-learning plan, and it fixes a design flaw that could have quietly sabotaged the whole WHY family: training a thinking model with an empty think channel can teach it to stop thinking, and this model's coding skill lives in its thinking. By putting a true, self-checked reasoning derivation in the think channel AND keeping the clean WHY-commented code, the curriculum teaches WHY while PRESERVING the model's native reasoning - and the measurement is finally thinking-ON, matching how the model actually works. The winning rung becomes the supervised foundation the reinforcement-learning phase builds on; a flat curve would honestly reprice the WHY family instead. The retention read alone - does thinking-on coding survive training - is a first-order result.",
+      "verdict_tone": "neutral",
+      "key_numbers": [
+        {
+          "label": "Distinct think derivations",
+          "value": "~4,997",
+          "sub": "distinct think skeletons out of 5000 rows (not one template)"
+        },
+        {
+          "label": "WHY families",
+          "value": "59",
+          "sub": "13 task categories; all 59 hit at 5000 rows; 100% unique programs"
+        },
+        {
+          "label": "Think fits the window",
+          "value": "739 tok",
+          "sub": "real-tokenizer render max (median 467) vs 4096 cap; 0 truncated"
+        },
+        {
+          "label": "Scaling ladder",
+          "value": "2k-40k",
+          "sub": "five sha-pinned rungs; measured thinking-ON, base co-measured"
+        }
+      ],
+      "charts": []
     }
   }
 }

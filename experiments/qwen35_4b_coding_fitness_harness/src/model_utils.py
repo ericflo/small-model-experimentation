@@ -28,8 +28,9 @@ def load_tokenizer(model_path: Path = DEFAULT_MODEL_PATH, padding_side: str = "r
 
 def code_chat_prompt(tokenizer: Any, user_content: str) -> str:
     system = (
-        "You are a Python coding assistant. Return only runnable Python code. "
-        "Do not include markdown, explanations, tests, or reasoning."
+        "You are a Python coding assistant. Reason through the problem step by step, "
+        "then give ONLY the final runnable Python function as your answer "
+        "(no markdown, no tests)."
     )
     if getattr(tokenizer, "chat_template", None):
         messages = [{"role": "system", "content": system}, {"role": "user", "content": user_content}]
@@ -38,7 +39,7 @@ def code_chat_prompt(tokenizer: Any, user_content: str) -> str:
                 messages,
                 tokenize=False,
                 add_generation_prompt=True,
-                enable_thinking=False,
+                enable_thinking=True,
             )
         except TypeError:
             return tokenizer.apply_chat_template(
