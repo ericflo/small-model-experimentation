@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 265
-- Manifest files: 627
+- Experiments with manifests: 266
+- Manifest files: 628
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 123 |
 | `run-data` | 101 |
-| `standard-artifact` | 138 |
+| `standard-artifact` | 139 |
 
 ## Manifests
 
@@ -251,6 +251,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_reliability_exec_opsd_audit` | `large-artifact` | [manifest](../experiments/qwen35_4b_reliability_exec_opsd_audit/large_artifacts_manifest.md) |
 | `qwen35_4b_repair_verifier_signal_probe` | `other` | [manifest](../experiments/qwen35_4b_repair_verifier_signal_probe/data/lineage/lineage_manifest.json) |
 | `qwen35_4b_repair_verifier_signal_probe` | `standard-artifact` | [manifest](../experiments/qwen35_4b_repair_verifier_signal_probe/reports/artifact_manifest.yaml) |
+| `qwen35_4b_repair_why_stack` | `standard-artifact` | [manifest](../experiments/qwen35_4b_repair_why_stack/reports/artifact_manifest.yaml) |
 | `qwen35_4b_repo_search_compress_bank` | `standard-artifact` | [manifest](../experiments/qwen35_4b_repo_search_compress_bank/reports/artifact_manifest.yaml) |
 | `qwen35_4b_retention_screen_calibration` | `standard-artifact` | [manifest](../experiments/qwen35_4b_retention_screen_calibration/reports/artifact_manifest.yaml) |
 | `qwen35_4b_retrieval_adapt_verify_scale` | `run-data` | [manifest](../experiments/qwen35_4b_retrieval_adapt_verify_scale/data/base_direct_k4_records.manifest.json) |

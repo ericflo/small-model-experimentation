@@ -163,6 +163,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_recovery_verifier_branch_tournament` | [README](../experiments/qwen35_4b_recovery_verifier_branch_tournament/README.md) | [report](../experiments/qwen35_4b_recovery_verifier_branch_tournament/reports/report.md) |
 | `qwen35_4b_reliability_exec_opsd_audit` | [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md) | [report](../experiments/qwen35_4b_reliability_exec_opsd_audit/reports/final_report.md) |
 | `qwen35_4b_repair_verifier_signal_probe` | [README](../experiments/qwen35_4b_repair_verifier_signal_probe/README.md) | [report](../experiments/qwen35_4b_repair_verifier_signal_probe/reports/report.md) |
+| `qwen35_4b_repair_why_stack` | [README](../experiments/qwen35_4b_repair_why_stack/README.md) | [report](../experiments/qwen35_4b_repair_why_stack/reports/report.md) |
 | `qwen35_4b_repo_search_compress_bank` | [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md) | [report](../experiments/qwen35_4b_repo_search_compress_bank/reports/report.md) |
 | `qwen35_4b_retention_screen_calibration` | [README](../experiments/qwen35_4b_retention_screen_calibration/README.md) | [report](../experiments/qwen35_4b_retention_screen_calibration/reports/report.md) |
 | `qwen35_4b_retrieval_adapt_verify_scale` | [README](../experiments/qwen35_4b_retrieval_adapt_verify_scale/README.md) | [report](../experiments/qwen35_4b_retrieval_adapt_verify_scale/reports/final_report.md) |

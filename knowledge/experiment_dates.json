@@ -2577,6 +2577,14 @@
       "sources": [
         "dated experiment_log.md heading (2026-07-18 model-free construction freeze; GPU train/merge/measure stages pending staged reviews, no seed consumed)"
       ]
+    },
+    "qwen35_4b_repair_why_stack": {
+      "start": "2026-07-18",
+      "end": "2026-07-18",
+      "confidence": "high",
+      "sources": [
+        "dated experiment_log.md heading (2026-07-18 model-free construction freeze; GPU train/merge/measure stages pending staged reviews, no seed consumed)"
+      ]
     }
   }
 }

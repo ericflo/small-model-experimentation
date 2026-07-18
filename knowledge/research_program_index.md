@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 293
+- Experiments: 294
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 206
+- Assigned experiments: 207
 
 ### Seed Evidence
 
@@ -110,6 +110,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_recovery_payload_budget_harness` (new): [README](../experiments/qwen35_4b_recovery_payload_budget_harness/README.md)
 - `qwen35_4b_recovery_verifier_branch_tournament` (new): [README](../experiments/qwen35_4b_recovery_verifier_branch_tournament/README.md)
 - `qwen35_4b_reliability_exec_opsd_audit` (track-z): [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md)
+- `qwen35_4b_repair_why_stack` (new): [README](../experiments/qwen35_4b_repair_why_stack/README.md)
 - `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_same_prefix_advantage_routing` (new): [README](../experiments/qwen35_4b_same_prefix_advantage_routing/README.md)
 - `qwen35_4b_self_repair_install` (new): [README](../experiments/qwen35_4b_self_repair_install/README.md)
@@ -1058,7 +1059,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 Install general agentic capability in Qwen3.5-4B via breadth-first expert iteration on a firewall-clean multi-family gym, arbitrated by the blackbox menagerie instrument.
 
 - Charter: [agentic_breadth_installation](../research_programs/agentic_breadth_installation/charter.md)
-- Assigned experiments: 60
+- Assigned experiments: 61
 
 ### Assigned Experiments
 
@@ -1093,6 +1094,7 @@ Install general agentic capability in Qwen3.5-4B via breadth-first expert iterat
 - `qwen35_4b_recovery_reason_locality_interpolation` (new): [README](../experiments/qwen35_4b_recovery_reason_locality_interpolation/README.md)
 - `qwen35_4b_recovery_verifier_branch_tournament` (new): [README](../experiments/qwen35_4b_recovery_verifier_branch_tournament/README.md)
 - `qwen35_4b_repair_verifier_signal_probe` (new): [README](../experiments/qwen35_4b_repair_verifier_signal_probe/README.md)
+- `qwen35_4b_repair_why_stack` (new): [README](../experiments/qwen35_4b_repair_why_stack/README.md)
 - `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
 - `qwen35_4b_retention_screen_calibration` (new): [README](../experiments/qwen35_4b_retention_screen_calibration/README.md)
 - `qwen35_4b_same_prefix_advantage_routing` (new): [README](../experiments/qwen35_4b_same_prefix_advantage_routing/README.md)

@@ -15234,6 +15234,32 @@
     }
    ],
    "charts": []
+  },
+  "qwen35_4b_repair_why_stack": {
+   "verdict_tag": "Design (not yet run): stack the two complementary weak wins — a debug-loop set and a reasoning set — and see if the combined model shows BOTH gains or neither.",
+   "concept_primer": "The team is trying to turn a small model that can write one correct function into one that can carry a coding task across many steps. Several earlier training sets each nudged the model a little, and two of them helped in DIFFERENT ways. One set taught the model to notice a failing check and fix its own code — a debug-and-retry behavior — and it lifted the model's multi-step coding score. A different set taught the model to write the reason each line of correct code is correct (as short inline notes the grader throws away), and it lifted the model's single-function correctness on the coding exams. Neither gain was large enough on its own to be sure it was real rather than luck. Because the two gains point at different weaknesses and neither hurt the other, the natural next move is to STACK them: shuffle the two training sets together into one and train the model once on the combination. This experiment builds and freezes that combined set (a deterministic 1008-example mix of the two 504-example sets, re-checked to contain no exam answers) and the exact training and scoring recipe; the training and evaluation runs themselves are gated behind reviews and have not happened yet.",
+   "plain_question": "If one training set nudged the model's multi-step 'debug and retry' coding and a different one nudged its single-function correctness, does training on BOTH at once capture both gains — or were the two small wins just noise?",
+   "plain_answer": "Not measured yet — the training and evaluation runs are gated behind staged reviews. The setup: take the two training sets that each produced a small, real, DIFFERENT coding gain — one lifted the model's multi-step debug-and-retry behavior, the other lifted its single-function correctness — shuffle them together into one 1008-example set, and train once. If the combined model shows BOTH gains, the two small wins were real and additive; if it comes out flat, they were probably noise. Honest going-in odds of a clear win: about 40%. The combined set is built, frozen, and re-checked to be clean of exam answers; the go/no-go rule and the plain-language expectation are locked before any run.",
+   "why_it_matters": "This is the program's test of whether small, separate coding gains ADD UP. The mission is to install real multi-step coding ability into one small model without a bigger teacher. Four earlier attempts landed short of a clear win; two of them nudged different weaknesses. If stacking two believed-in but individually-weak ingredients produces a clear, confirmed gain, it validates a cheap, composable recipe for building capability a piece at a time. If it stays flat, it is honest evidence the earlier nudges were noise — which saves the team from stacking more of them.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Debug-loop set",
+     "value": "8 to 10 of 35",
+     "sub": "lifted multi-step coding; flat on single functions"
+    },
+    {
+     "label": "Reasoning set",
+     "value": "+5 problems",
+     "sub": "biggest single-function exam gain; flat on multi-step"
+    },
+    {
+     "label": "The stack test",
+     "value": "both or noise",
+     "sub": "combine both sets; ~40% going-in odds of a clear win"
+    }
+   ],
+   "charts": []
   }
  }
 }

@@ -50264,6 +50264,49 @@
      "source": "experiments/qwen35_4b_why_comment_install/reports/measure_review.md"
     }
    ]
+  },
+  "qwen35_4b_repair_why_stack": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Stack design: capture why_comment's function gain AND self_repair's agentic gain",
+     "categories": [
+      "base",
+      "exec_trace (#1)",
+      "self_repair (#2)",
+      "why_comment (#4)",
+      "stack (#5 design)"
+     ],
+     "series": [
+      {
+       "label": "HumanEval pass@1",
+       "values": [
+        0.7622,
+        0.7683,
+        0.7805,
+        0.7927,
+        0.7927
+       ]
+      },
+      {
+       "label": "Agentic (of 35)",
+       "values": [
+        8,
+        8,
+        10,
+        8,
+        10
+       ]
+      }
+     ],
+     "x_label": "cognitive-core coding arm (bet #)",
+     "y_label": "pass rate (HumanEval) / count (agentic of 35)",
+     "y_format": "number",
+     "note": "DESIGN chart (this cell has not run). The four prior arms are measured results on the shared fitness harness: bet #1 exec_trace NULL (HumanEval +1, agentic 8/35 flat); bet #2 self_repair a weak positive on the AGENTIC target (agentic 8->10/35, HumanEval +3); bet #4 why_comment a weak positive on the FUNCTION target (HumanEval +5, the program's biggest fast gain, agentic 8/35 flat). The two positive bets help DIFFERENT targets and neither regressed the other. The fifth bar is this cell's DESIGN HYPOTHESIS, NOT a result: training one fresh adapter on the deterministic UNION of the two committed 504-row curricula (1008 rows, combined sha 2462c93e...) should capture BOTH the HumanEval +5 (from WHY) and the agentic 10/35 (from repair). If both appear, the stack works and the two individual weak signals are confirmed real; if flat, they were likely noise. Honest prior on a meaningful install (>=3-problem gain with retention): ~40%. The agentic duet-eval is the primary real target and a manual follow-on confirm.",
+     "source": "experiments/qwen35_4b_repair_why_stack/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

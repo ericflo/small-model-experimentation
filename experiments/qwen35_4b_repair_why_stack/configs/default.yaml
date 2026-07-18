@@ -1,0 +1,52 @@
+# Repair + Why stack installation trial (lifecycle 36, cognitive-core coding).
+# Frozen configuration; the authoritative pins live in scripts/train_trial.py and
+# scripts/build_corpus.py. This file documents the recipe.
+experiment_id: qwen35_4b_repair_why_stack
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+base_composite:
+  path: large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized
+  tree_sha256: 26d8ee48583adb0fb557d0ff668664949adff0068fa5baafe6f0af68e22fb677
+  weights_sha256: b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db
+curriculum:
+  builder: scripts/build_corpus.py
+  method: deterministic_union_of_two_committed_source_corpora
+  shuffle_seed: 93570
+  combine_order: [self_repair, why_comment]
+  corpus: data/sft_repair_why_stack.jsonl
+  corpus_sha256: 2462c93ea2a8dcfbd9413e1c6115ed1456ad438e5dabfdc01e924be6148ddbe5
+  rows: 1008
+  kinds: {self_repair: 504, why_comment: 504}
+  sources:
+    self_repair:
+      path: data/source_corpora/sft_self_repair.jsonl
+      sha256: 920cb228172677f005bdbc4501f593ce60dc7a9c4f22cbf177f05660ffc392cb
+      origin_experiment: qwen35_4b_self_repair_install
+    why_comment:
+      path: data/source_corpora/sft_why_comment.jsonl
+      sha256: 040be350678ea0337b8fe0607f783aba9e9071f789471b0ea00f7ce1ebef2962
+      origin_experiment: qwen35_4b_why_comment_install
+train:
+  arm: repair_why_stack
+  adapter: fresh_lora
+  rank: 32
+  alpha: 64
+  epochs: 4  # inherited: the why_comment rows undertrain at 1 epoch
+  lr: 1.0e-5
+  batch_size: 1
+  grad_accum: 8
+  max_length: 4096
+  w_think: 0.2
+  w_close: 0.2
+  seed: 93571
+  optimizer_steps_per_epoch: 126
+measure:
+  harness: experiments/qwen35_4b_coding_fitness_harness/scripts/eval_pass1.py
+  datasets: {humaneval: 164, mbpp: 200}
+  decoding: greedy_pass_at_1
+  consequence: {installed_min_gain_problems: 3, retention_tolerance: 0.02}
+  grader_ignores_comments: true
+agentic_followon:  # PRIMARY real target, manual (not gated here)
+  eval: duet-eval gen4 (n=35)
+  baselines: {base: 8, self_repair: 10, why_comment: 8}
