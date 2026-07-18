@@ -843,6 +843,28 @@ because the entire program's value rests on whether the menagerie proxy
 gains translate to the actual target, and that link has never been
 measured.
 
+The coding-harness transfer measurement (2026-07-17) is the pivotal
+result of this program and it is a clean negative. Running the three
+current composites through a REAL agentic coding harness (duet-eval
+driving the Pi coding agent against each model, graded on real
+filesystem outcomes) over 35 held-out scenarios, bare config, gave:
+base 8/35 (22.9%), count_walk 9/35 (25.7%), state_track 8/35 (22.9%) —
+statistically indistinguishable (paired McNemar p=1.00 for both
+composites vs base). The ~2-3x menagerie aggregate gains, and
+state_track's confirmed +0.02 menagerie edge, did NOT transfer to real
+coding. The one texture worth keeping: 10 of 35 scenarios are solved by
+DIFFERENT model subsets, so the LoRA training moved WHICH coding tasks
+the 4B can do without moving HOW MANY — capability was reshuffled, not
+raised. The strategic consequence is decisive: the menagerie aggregate
+is not a valid proxy for the coding target, so continuing to optimize it
+is not a path to a better coding agent. The measured-but-not-yet-run
+lever is Duet's crystallized-workflow LIBRARY lift (bare-vs-library),
+the scaffolding designed to make weak local models useful — the natural
+higher-relevance next measurement, since it may make the 4B useful in a
+coding agent even though its bare capability is flat. See
+knowledge/coding_harness_transfer_measurement.md. See details in
+[[coding-harness-transfer]].
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.
