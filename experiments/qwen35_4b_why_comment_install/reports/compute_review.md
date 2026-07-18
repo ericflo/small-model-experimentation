@@ -29,3 +29,16 @@ markers).
   Tightened rule (>=3-problem gain); agentic is the primary follow-on.
 
 **Verdict:** `PASS_CONTROL_TRAINING`.
+
+## 2026-07-18 — Recipe fix (pre-measurement): epochs 1 -> 4
+
+The epoch-1 recipe UNDERTRAINED this higher-entropy target: the #WHY:
+causal comment phrasings are surprising to the base (train loss started
+~10.3 and ended epoch 1 at ~4.2, avg 6.30 — vs exec_trace 0.70 /
+self_repair 1.15 which fit in one epoch). A loss-4+ adapter has not
+installed the WHY-comment behavior, so measuring it would be a false
+NULL. Recipe adjusted to epochs 4 (63 -> 252 optimizer steps; lr 1e-5
+cosine schedule now spans the longer run) BEFORE any measurement. If 4
+epochs still plateaus high (~>2.5), the WHY phrasing is too arbitrary and
+the curriculum needs regeneration with more natural/lower-entropy
+rationale; that will be recorded as a finding. Verdict stands.

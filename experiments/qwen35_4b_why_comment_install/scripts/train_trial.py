@@ -147,7 +147,7 @@ def normalize_log(path: Path) -> None:
 
 def expected_hyperparameters() -> dict:
     return {
-        "epochs": 1.0,
+        "epochs": 4.0,
         "lr": 1e-5,
         "rank": 32,
         "alpha": 64,
@@ -331,7 +331,7 @@ def main() -> int:
     parser.add_argument("--train", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--model-path", type=Path, required=True)
-    parser.add_argument("--epochs", type=float, default=1.0)
+    parser.add_argument("--epochs", type=float, default=4.0)
     parser.add_argument("--lr", type=float, default=1e-5)
     parser.add_argument("--rank", type=int, default=32)
     parser.add_argument("--alpha", type=int, default=64)

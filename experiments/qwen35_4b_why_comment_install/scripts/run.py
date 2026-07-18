@@ -171,7 +171,7 @@ def train_stage() -> None:
         "--train", str(CORPUS),
         "--out", str(ADAPTER_ROOT / ARM),
         "--model-path", str(BASE_MODEL),
-        "--epochs", "1",
+        "--epochs", "4",
         "--lr", "1e-5",
         "--rank", "32",
         "--alpha", "64",

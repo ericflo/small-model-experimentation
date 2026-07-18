@@ -66,3 +66,13 @@ anneal is a documented FUTURE follow-on only if this clears the bar. Pre-committ
 next member of the WHY family if NULL: the think-block variant (bet #3).
 
 GPU stages (train/merge/measure) are pending their staged reviews.
+
+## 2026-07-18 — Recipe fix: epochs 1 -> 4 (epoch-1 undertrained)
+
+- First train (epochs 1) gave train_loss 6.301 (10.3 start -> 4.2 end) -
+  the #WHY: causal phrasings are high-entropy and 63 steps badly
+  undertrained the target (vs exec_trace 0.70 / self_repair 1.15 in one
+  epoch). A loss-4+ adapter has NOT installed the WHY behavior; measuring
+  it would be a false NULL. Bumped to epochs 4 (252 steps) pre-measurement
+  and re-froze. Watch: if loss still plateaus >~2.5, the WHY phrasing is
+  too arbitrary -> regenerate the curriculum with more natural rationale.
