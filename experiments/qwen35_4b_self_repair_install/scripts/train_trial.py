@@ -99,7 +99,7 @@ PUBLISHED_ARM_HASHES = {
     # dict of the four published sha256 values:
     # {"adapter_config": "<64hex>", "adapter_weights": "<64hex>",
     #  "log": "<64hex>", "receipt": "<64hex>"}.
-    "self_repair": None,
+    "self_repair": {"adapter_config": "702360585faa42545551734b58bc8c0b0347f5ad92a9b1ec27c96b1745dae686", "adapter_weights": "fe84c983c2188483ebb99ae1887c1f2fbe87065c17fdf5d0b6b0d66849bee91f", "log": "d6b469d2bd9c23b55a40310898fd1d2f865c6ab1c8b63f1fcd7079a4bbcde0cc", "receipt": "90b33c8e1ce528f10a0d0dc72da07ae510d96a97f50fe7d3f6e82efe1b67b66a"},
 }
 ADAPTER_ROOT = ROOT / "large_artifacts" / EXP.name / "adapters"
 
