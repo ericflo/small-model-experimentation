@@ -865,6 +865,25 @@ coding agent even though its bare capability is flat. See
 knowledge/coding_harness_transfer_measurement.md. See details in
 [[coding-harness-transfer]].
 
+Cognitive-core bet #1 (execution tracing, 2026-07-18) came back NULL,
+and instructively so. Training base Qwen3.5-4B on 400 execution-verified
+program traces (self-generated, no teacher, contamination-clean) to
+install a 'mental interpreter' did not move real coding on any signal:
+HumanEval +1 problem (noise near ceiling), MBPP -3, and the real target
+— the agentic eval — exactly flat (8/35 vs 8/35, 5v5 discordant).
+Retention held (the catastrophic-forgetting risk was real; the
+distinct-instruction + moderate-dose design beat it), but capability was
+RESHUFFLED not RAISED — the identical signature the menagerie composites
+showed on this same harness. Two independent curriculum families now
+reshuffle-without-raising, which sharpens the hypothesis: narrow
+static-SFT skill-install has a structural limit for coding capability,
+and installing a PASSIVE cognitive primitive (execution modeling) does
+not convert to ACTIVE coding ability (install!=convert extends to
+coding). The observed agentic failure mode is not missing knowledge but
+missing LOOP behavior — the model takes one pass at a multi-step task
+and stops rather than planning, verifying, and repairing. Bet #2 targets
+that loop directly. See experiments/qwen35_4b_exec_trace_install.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

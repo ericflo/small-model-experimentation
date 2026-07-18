@@ -42,3 +42,23 @@ sampling-seed default (`qwen35_4b_gauntlet_frontier/scripts/gym_confidence.py`),
 a different seed context — no training-seed collision in this chain.
 
 GPU stages (train/merge/measure) are pending their staged reviews.
+
+## 2026-07-18 — Transfer measurement complete: NULL (bet #1 closed)
+
+- exec_trace vs base: HumanEval 0.7622->0.7683 (+1 problem), MBPP
+  0.5650->0.5500 (-3), agentic 8/35->8/35 (5v5 discordant). Retention
+  held (no catastrophic forgetting - the distinct-instruction +
+  moderate-dose design worked). No real coding improvement on any
+  signal. The frozen fast-rule technically fired INSTALLED_CODING on the
+  +1 HumanEval, but that is noise (near ceiling) and the agentic real
+  target is exactly flat -> honest verdict NULL.
+- LAW: install!=convert extends to coding. Installing a passive
+  cognitive primitive (execution-tracing / state-tracking) reshuffles
+  WHICH coding tasks are solved, not HOW MANY - the same signature the
+  menagerie composites showed. Two independent curriculum families now
+  reshuffle-without-raising, suggesting narrow static-SFT skill-install
+  has a structural limit for coding capability.
+- NEXT (bet #2): target the AGENTIC LOOP directly (plan-act-verify-
+  repair / persistence + self-correction), the observed failure mode
+  (model does one pass and stops), rather than a passive component; and
+  tighten the transfer rule to a meaningful-delta / significance bar.

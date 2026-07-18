@@ -1,6 +1,6 @@
 # Qwen35 4B Exec-Trace Install
 
-**Status:** in-progress · since 2026-07-17 · model-free construction frozen (curriculum built + triple-verified, pipeline authenticated, tests green); the train/merge/measure GPU stages are gated behind staged adversarial reviews and have not run.
+**Status:** finished · 2026-07-18 · NULL — execution-tracing did not move real coding (HumanEval +1, MBPP -3, agentic 8/35 flat); retention held
 
 ## Research Program
 
