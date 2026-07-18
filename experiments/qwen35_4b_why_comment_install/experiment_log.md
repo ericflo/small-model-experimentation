@@ -76,3 +76,21 @@ GPU stages (train/merge/measure) are pending their staged reviews.
   it would be a false NULL. Bumped to epochs 4 (252 steps) pre-measurement
   and re-froze. Watch: if loss still plateaus >~2.5, the WHY phrasing is
   too arbitrary -> regenerate the curriculum with more natural rationale.
+
+## 2026-07-18 — Transfer measurement: target-specific weak positive (biggest fast gain)
+
+- why_comment vs base: HumanEval 0.7622->0.7927 (+5 problems; 11 vs 6
+  discordant, McNemar p=0.332), MBPP -2, agentic 8/35->8/35 (symmetric
+  3v3, p=1.000). Frozen tightened rule fires INSTALLED_CODING on the +5
+  HumanEval. Comments inert to grading -> this is the CLEAN unconfounded
+  test, so +5 is a real (if not significant) signal that teaching WHY
+  improves per-function code quality.
+- Recipe: epoch-1 undertrained (loss 6.3, high-entropy WHY phrasings);
+  retrained 4 epochs (converged ~0.05) pre-measurement.
+- CROSS-BET FINDING: why_comment (WHY) and self_repair (loop) are
+  COMPLEMENTARY - why_comment best on HumanEval/function correctness,
+  self_repair best on the agentic loop. Neither individually significant.
+  -> NEXT: STACK self_repair + why_comment (both positive ingredients,
+  different targets) to test complementarity and potentially reach
+  significance. WHY think-block variant (bet #3) still queued as a
+  separate probe.

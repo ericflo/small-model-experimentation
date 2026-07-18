@@ -903,6 +903,27 @@ the generating process, tested cleanest via inert-to-grading inline #WHY:
 comments) push the same lever — teach WHY the answer follows, not just what
 it is. See experiments/qwen35_4b_self_repair_install.
 
+Cognitive-core bet #4 (WHY inline #WHY: comments, 2026-07-18) delivered
+the program's biggest single-function gain and, with bet #2, a clean
+COMPLEMENTARITY finding. Trained (by construction, no teacher) to write
+code carrying a true per-line causal #WHY: comment, and measured on the
+clean inert-to-grading test (comments do not affect the execution
+grader), why_comment hit HumanEval +5 problems (76.2->79.3%, 11-vs-6
+discordant) — genuine evidence that teaching WHY improves per-function
+code quality — but was FLAT on the agentic multi-step real target (8/35,
+symmetric). self_repair (bet #2, loop behavior) is the mirror image:
+best on the agentic loop (+2), moderate on HumanEval. Neither is
+individually significant (why_comment HE McNemar p=0.33), but the two
+positives are mechanistically complementary and target-specific: WHY ->
+function correctness, repair -> agentic loop. This is the most
+actionable result of the program and motivates the next bet: STACK
+self_repair + why_comment to test whether the combined effect captures
+both gains and clears significance (which would confirm both weak
+signals are real). Operational law: high-entropy rationale targets need
+more epochs than component/skill targets (the WHY comments needed 4x the
+training to install; 1 epoch left loss at 6.3). See
+experiments/qwen35_4b_why_comment_install.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

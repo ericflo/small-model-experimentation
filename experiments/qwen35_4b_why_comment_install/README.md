@@ -1,6 +1,6 @@
 # Qwen35 4B WHY-Comment Install
 
-**Status:** in-progress · since 2026-07-18 · model-free construction frozen and verified; GPU train/merge/measure stages pending staged adversarial reviews
+**Status:** finished · 2026-07-18 · TARGET-SPECIFIC WEAK POSITIVE — HumanEval +5 (biggest fast gain, clean inert-to-grading test) but agentic flat (8/35); complementary to self_repair; not individually significant. Retrained 4 epochs (epoch-1 undertrained).
 
 ## Research Program
 
