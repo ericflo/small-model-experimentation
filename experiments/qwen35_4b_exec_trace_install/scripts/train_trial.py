@@ -100,7 +100,7 @@ PUBLISHED_ARM_HASHES = {
     # dict of the four published sha256 values:
     # {"adapter_config": "<64hex>", "adapter_weights": "<64hex>",
     #  "log": "<64hex>", "receipt": "<64hex>"}.
-    "exec_trace": None,
+    "exec_trace": {"adapter_config": "f816a44af10b8380b77ada9f4c67d8babd4bcfe845483783ca946eb92f0aeec4", "adapter_weights": "09353583714c8ef3f2fbb0716a253e382cc32d50d69cdf558646f7fb86a0376a", "log": "96d83112e7daff10c701694e8bf9c49481e9d4af25be0b8fae5a6e6f7a843c43", "receipt": "35bfa1c1ddad6ea43c180d81402e85f682e0d12521d436cb7217129e949dfb55"},
 }
 ADAPTER_ROOT = ROOT / "large_artifacts" / EXP.name / "adapters"
 
