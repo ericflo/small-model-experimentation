@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 262
-- Manifest files: 624
+- Experiments with manifests: 263
+- Manifest files: 625
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 123 |
 | `run-data` | 101 |
-| `standard-artifact` | 135 |
+| `standard-artifact` | 136 |
 
 ## Manifests
 
@@ -135,6 +135,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_enumerative_repair_protocol` | `other` | [manifest](../experiments/qwen35_4b_enumerative_repair_protocol/data/stream_manifest.json) |
 | `qwen35_4b_enumerative_repair_protocol` | `standard-artifact` | [manifest](../experiments/qwen35_4b_enumerative_repair_protocol/reports/artifact_manifest.yaml) |
 | `qwen35_4b_error_localization` | `standard-artifact` | [manifest](../experiments/qwen35_4b_error_localization/reports/artifact_manifest.yaml) |
+| `qwen35_4b_exec_trace_install` | `standard-artifact` | [manifest](../experiments/qwen35_4b_exec_trace_install/reports/artifact_manifest.yaml) |
 | `qwen35_4b_executable_program_posttraining` | `dataset` | [manifest](../experiments/qwen35_4b_executable_program_posttraining/data/and_bridge/dataset_manifest.json) |
 | `qwen35_4b_executable_program_posttraining` | `dataset` | [manifest](../experiments/qwen35_4b_executable_program_posttraining/data/dataset_manifest.json) |
 | `qwen35_4b_executable_program_posttraining` | `large-artifact` | [manifest](../experiments/qwen35_4b_executable_program_posttraining/large_artifacts_manifest.md) |

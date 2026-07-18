@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 290
+- Experiments: 291
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 203
+- Assigned experiments: 204
 
 ### Seed Evidence
 
@@ -70,6 +70,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_diversity_keyed_coverage_gate` (track-z): [README](../experiments/qwen35_4b_diversity_keyed_coverage_gate/README.md)
 - `qwen35_4b_dose_diversity_mechanism_cell` (new): [README](../experiments/qwen35_4b_dose_diversity_mechanism_cell/README.md)
 - `qwen35_4b_early_text_hypothesis_forking` (new): [README](../experiments/qwen35_4b_early_text_hypothesis_forking/README.md)
+- `qwen35_4b_exec_trace_install` (new): [README](../experiments/qwen35_4b_exec_trace_install/README.md)
 - `qwen35_4b_executable_program_posttraining` (track-z): [README](../experiments/qwen35_4b_executable_program_posttraining/README.md)
 - `qwen35_4b_feedback_loop_state_chain_install` (new): [README](../experiments/qwen35_4b_feedback_loop_state_chain_install/README.md)
 - `qwen35_4b_foofah_adaptive_program_budget_router` (track-z): [README](../experiments/qwen35_4b_foofah_adaptive_program_budget_router/README.md)
@@ -1052,7 +1053,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 Install general agentic capability in Qwen3.5-4B via breadth-first expert iteration on a firewall-clean multi-family gym, arbitrated by the blackbox menagerie instrument.
 
 - Charter: [agentic_breadth_installation](../research_programs/agentic_breadth_installation/charter.md)
-- Assigned experiments: 57
+- Assigned experiments: 58
 
 ### Assigned Experiments
 
@@ -1068,6 +1069,7 @@ Install general agentic capability in Qwen3.5-4B via breadth-first expert iterat
 - `qwen35_4b_deep_advantage_mopd` (new): [README](../experiments/qwen35_4b_deep_advantage_mopd/README.md)
 - `qwen35_4b_dose_diversity_mechanism_cell` (new): [README](../experiments/qwen35_4b_dose_diversity_mechanism_cell/README.md)
 - `qwen35_4b_enumerative_repair_protocol` (new): [README](../experiments/qwen35_4b_enumerative_repair_protocol/README.md)
+- `qwen35_4b_exec_trace_install` (new): [README](../experiments/qwen35_4b_exec_trace_install/README.md)
 - `qwen35_4b_feedback_loop_state_chain_install` (new): [README](../experiments/qwen35_4b_feedback_loop_state_chain_install/README.md)
 - `qwen35_4b_gauntlet_breadth_round1` (new): [README](../experiments/qwen35_4b_gauntlet_breadth_round1/README.md)
 - `qwen35_4b_gauntlet_frontier` (new): [README](../experiments/qwen35_4b_gauntlet_frontier/README.md)

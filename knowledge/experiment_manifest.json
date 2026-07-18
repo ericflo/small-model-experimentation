@@ -2476,6 +2476,39 @@
   },
   {
     "file_counts": {
+      ".json": 3,
+      ".jsonl": 1,
+      ".md": 4,
+      ".py": 11,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_exec_trace_install",
+    "path": "experiments/qwen35_4b_exec_trace_install",
+    "primary_readme": "experiments/qwen35_4b_exec_trace_install/README.md",
+    "primary_report": "experiments/qwen35_4b_exec_trace_install/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "base Qwen/Qwen3.5-4B by designed, contamination-free curricula, proven by transfer to held-out coding \u2014 after the menagerie proxy was shown NOT to transfer (McNemar p=1.00 vs base)? `experiments/qwen35_4b_coding_fitness_harness` \u2014 HumanEval 76.2% (strong function coder), MBPP 56.5%, agentic duet-eval 23% (weak agent). The gap is agentic/multi-step cognition (state-tracking across steps).",
+    "tags": [
+      "latent-state",
+      "small-model"
+    ],
+    "title": "Qwen35 4B Exec-Trace Install",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "tests"
+    ],
+    "total_files": 22,
+    "total_size_bytes": 911183
+  },
+  {
+    "file_counts": {
       ".json": 8,
       ".jsonl": 6,
       ".log": 12,

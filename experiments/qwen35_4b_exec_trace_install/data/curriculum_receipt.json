@@ -1,0 +1,47 @@
+{
+  "contamination": {
+    "banned_function_names": 663,
+    "banned_hits": 0,
+    "ngram_overlap": {
+      "benchmark_ngrams": 43645,
+      "corpus_ngrams": 30025,
+      "ngram_n": 7,
+      "shared_ngrams_distinctive": 0,
+      "shared_ngrams_structural_idiom": 34,
+      "status": "checked"
+    }
+  },
+  "corpus_sha256": "7c5b77ea87438f4fb46b1d6d1b468edb275feee4e915161c9180c109d410e32e",
+  "experiment_id": "qwen35_4b_exec_trace_install",
+  "kinds": {
+    "exec_trace": 400
+  },
+  "max_steps": 47,
+  "mean_steps": 23.11,
+  "min_steps": 5,
+  "mix_retention": 0,
+  "out": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_exec_trace_install/data/sft_exec_trace.jsonl",
+  "rows": 400,
+  "schema_version": 1,
+  "seed": 90210,
+  "tier_schedule": [
+    [
+      "short",
+      80
+    ],
+    [
+      "medium",
+      160
+    ],
+    [
+      "long",
+      160
+    ]
+  ],
+  "tiers": {
+    "long": 160,
+    "medium": 160,
+    "short": 80
+  },
+  "unique_codes": 400
+}

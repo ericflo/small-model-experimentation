@@ -88,6 +88,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_early_text_hypothesis_forking` | [README](../experiments/qwen35_4b_early_text_hypothesis_forking/README.md) | [report](../experiments/qwen35_4b_early_text_hypothesis_forking/reports/report.md) |
 | `qwen35_4b_enumerative_repair_protocol` | [README](../experiments/qwen35_4b_enumerative_repair_protocol/README.md) | [report](../experiments/qwen35_4b_enumerative_repair_protocol/reports/report.md) |
 | `qwen35_4b_error_localization` | [README](../experiments/qwen35_4b_error_localization/README.md) | [report](../experiments/qwen35_4b_error_localization/reports/report.md) |
+| `qwen35_4b_exec_trace_install` | [README](../experiments/qwen35_4b_exec_trace_install/README.md) | [report](../experiments/qwen35_4b_exec_trace_install/reports/report.md) |
 | `qwen35_4b_executable_program_posttraining` | [README](../experiments/qwen35_4b_executable_program_posttraining/README.md) | [report](../experiments/qwen35_4b_executable_program_posttraining/reports/qwen35_4b_executable_program_posttraining_report.md) |
 | `qwen35_4b_feedback_loop_state_chain_install` | [README](../experiments/qwen35_4b_feedback_loop_state_chain_install/README.md) | [report](../experiments/qwen35_4b_feedback_loop_state_chain_install/reports/report.md) |
 | `qwen35_4b_foofah_adaptive_program_budget_router` | [README](../experiments/qwen35_4b_foofah_adaptive_program_budget_router/README.md) | [report](../experiments/qwen35_4b_foofah_adaptive_program_budget_router/reports/report.md) |
