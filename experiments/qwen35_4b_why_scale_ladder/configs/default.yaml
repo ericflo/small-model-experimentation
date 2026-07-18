@@ -1,0 +1,69 @@
+# WHY scale-ladder configuration (Phase A of scale-then-RLVR). Frozen design.
+experiment_id: qwen35_4b_why_scale_ladder
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+  base_composite: large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized
+  base_tree_sha256: 26d8ee48583adb0fb557d0ff668664949adff0068fa5baafe6f0af68e22fb677
+  base_weights_sha256: b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db
+
+curriculum:
+  generator: scripts/gen_why_scale_curriculum.py
+  construction_seed: 94100
+  families: 59
+  categories: 13
+  marker: "#WHY:"
+  prompt_frames_comment_instruction: false   # WHY-writing is the model's default
+  teacher_model: none                         # rationale emitted BY CONSTRUCTION
+  diversity_targets:
+    min_families_in_5000: 50
+    min_normalized_why_templates_in_10000: 300
+    min_unique_program_pct_in_20000: 95.0
+  token_budget:
+    max_length_tokens: 4096
+    measured_max_tokens_5000: 499
+    measured_median_tokens_5000: 337
+
+ladder:
+  manifest: data/ladder_manifest.json
+  sizes: [2000, 5000, 10000, 20000]
+  corpus_storage: large_artifacts/qwen35_4b_why_scale_ladder/corpora   # gitignored, regenerable
+  contamination:
+    fixture: data/contamination/banned_function_names.json
+    banned_names: 668
+    banned_after_whitelist: 663
+    ngram_n: 7
+
+train:
+  trainer: scripts/train_think.py            # vendored, sha e0eca2a2...
+  trainer_sha256: e0eca2a230dae5d109d418dcb4cc19af05882a770af14350ffd741a8d5e90f01
+  fresh_adapter: true
+  rank: 32
+  alpha: 64
+  lr: 1.0e-5
+  batch_size: 1
+  grad_accum: 8
+  max_length: 4096
+  w_think: 0.2
+  w_close: 0.2
+  seed: 94101
+  epoch_schedule: "epochs = max(1, round(8000 / rows))"   # 4 / 2 / 1 / 1
+  epochs_by_rows: {2000: 4, 5000: 2, 10000: 1, 20000: 1}
+  target_modules: [q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj]
+
+merge:
+  merger: scripts/merge_adapter.py           # vendored, sha cb9af8b4...
+  merger_sha256: cb9af8b45ca1e5754cb36f2213b7e25290f6eb16427d1a8b41f0b12b10396672
+
+measure:
+  harness: experiments/qwen35_4b_coding_fitness_harness/scripts/eval_pass1.py  # referenced, not copied
+  datasets: {humaneval: 164, mbpp: 200}
+  decoding: greedy_pass_at_1
+  base_anchor: {humaneval: 0.7622, mbpp: 0.565}
+  prior_504row_why_comment: {humaneval: 0.7927}   # +5 problems, the fast gain being scaled
+  mode: sweep                                 # per-rung curve, no single-shot verdict
+
+review_gates:
+  train:   {file: reports/compute_review.md, verdict: "PASS_CONTROL_TRAINING"}
+  merge:   {file: reports/merge_review.md,   verdict: "PASS_CONTROL_MERGE"}
+  measure: {file: reports/measure_review.md, verdict: "PASS_MEASURE"}

@@ -33,7 +33,7 @@
       "end": "",
       "confidence": "none",
       "sources": [
-        "exhaustive scan of README.md, reports/belief_filter_executor_experiment_log.md, runs/*/results.json (keys: mode/args/env/train/eval/checkpoints — no time keys), runs/*/metrics_step*.csv, checkpoint_manifest.csv (run,filename,size only): zero date/timestamp records"
+        "exhaustive scan of README.md, reports/belief_filter_executor_experiment_log.md, runs/*/results.json (keys: mode/args/env/train/eval/checkpoints \u2014 no time keys), runs/*/metrics_step*.csv, checkpoint_manifest.csv (run,filename,size only): zero date/timestamp records"
       ],
       "caveat": "metadata.yaml generated_on 2026-07-01 (catalog sweep); decimal metric values in analysis/*.csv false-match epoch regexes"
     },
@@ -83,8 +83,8 @@
       "confidence": "none",
       "sources": [
         "reports/dense_supervision_ladder_experiment_log.md: undated section headings only (Objective/Smoke/Pilot/Main)",
-        "runs/*/results.json: keys mode/args/env/train/eval — no time keys",
-        "checkpoint_manifest.csv: run,filename,size only — no dates"
+        "runs/*/results.json: keys mode/args/env/train/eval \u2014 no time keys",
+        "checkpoint_manifest.csv: run,filename,size only \u2014 no dates"
       ],
       "caveat": "metadata.yaml generated_on: 2026-07-01 is catalog sweep; long float mantissas in metrics CSV/JSON false-match unix-epoch regexes (e.g. 1760249137 fragments); seed=53 not date-encoded. Only bound: imported in git 42c23ac 2026-06-28, so ran on/before 2026-06-28."
     },
@@ -111,8 +111,8 @@
       "end": "2026-06-26",
       "confidence": "high",
       "sources": [
-        "experiment_log.md: per-run bullets '- Started: 2026-06-26 03:48:57 UTC' … '- Started: 2026-06-26 03:58:38 UTC' (5 runs)",
-        "runs/*/run_summary.json elapsed_sec ≤ 336s confirms all runs ended same day"
+        "experiment_log.md: per-run bullets '- Started: 2026-06-26 03:48:57 UTC' \u2026 '- Started: 2026-06-26 03:58:38 UTC' (5 runs)",
+        "runs/*/run_summary.json elapsed_sec \u2264 336s confirms all runs ended same day"
       ],
       "caveat": "metadata.yaml 2026-07-01; epoch-like numeric column values in runs/pilot_episodic_echo_ttt_batched_v3/details_seed_101_eval_indist.csv are data"
     },
@@ -163,7 +163,7 @@
       "confidence": "none",
       "sources": [
         "reports/latent_executor_experiment_log.md: undated headings only",
-        "runs/*/results.json: keys mode/args/train/eval — no time keys"
+        "runs/*/results.json: keys mode/args/train/eval \u2014 no time keys"
       ],
       "caveat": "metadata.yaml generated_on 2026-07-01 (catalog sweep); seed defaults 11 (not date-encoded). Bound: imported 2026-06-28."
     },
@@ -190,7 +190,7 @@
       "end": "2026-07-03",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_active_counterexample_trace_selection": {
@@ -198,8 +198,8 @@
       "end": "2026-06-24",
       "confidence": "high",
       "sources": [
-        "logs/experiment_log.md: headings '## 2026-06-24 02:26 UTC' … '## 2026-06-24 04:40 UTC'",
-        "run_logs/*.log: ISO timestamps 2026-06-24 02:26 → 2026-06-24 04:40"
+        "logs/experiment_log.md: headings '## 2026-06-24 02:26 UTC' \u2026 '## 2026-06-24 04:40 UTC'",
+        "run_logs/*.log: ISO timestamps 2026-06-24 02:26 \u2192 2026-06-24 04:40"
       ]
     },
     "qwen35_4b_adaptive_evidence_budget_policy": {
@@ -226,7 +226,7 @@
       "end": "2026-07-10",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_axis_corpus_v2_staged_repair": {
@@ -234,7 +234,7 @@
       "end": "2026-07-15",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_axis_replay_stack_medium_target_match": {
@@ -242,7 +242,7 @@
       "end": "2026-07-15",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_axis_stack_readjudication_medium_pilot": {
@@ -250,7 +250,7 @@
       "end": "2026-07-15",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_balanced_core_answer_potential_sft": {
@@ -258,7 +258,7 @@
       "end": "2026-07-12",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_balanced_discriminative_bridge": {
@@ -277,7 +277,7 @@
       "end": "2026-07-05",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_banking_installs_structure": {
@@ -285,7 +285,7 @@
       "end": "2026-07-06",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_banking_thinking_stack": {
@@ -293,7 +293,7 @@
       "end": "2026-07-05",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_bucket_belief_probe_ranker": {
@@ -345,7 +345,7 @@
       "end": "2026-07-07",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_commit_slot_jacobian_value_transport": {
@@ -353,7 +353,7 @@
       "end": "2026-07-12",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_commit_slot_semantic_power_replication": {
@@ -361,7 +361,7 @@
       "end": "2026-07-12",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_confidence_guided_compute": {
@@ -369,7 +369,7 @@
       "end": "2026-07-07",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_confidence_policy": {
@@ -377,7 +377,7 @@
       "end": "2026-07-13",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_constrained_coverage_dpo": {
@@ -394,7 +394,7 @@
       "end": "2026-07-02",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_context_local_jacobian_clamp": {
@@ -402,7 +402,7 @@
       "end": "2026-07-12",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_counterexample_directed_dsl": {
@@ -418,7 +418,7 @@
       "end": "2026-07-13",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_counterfactual_order_support_selector": {
@@ -426,7 +426,7 @@
       "end": "2026-07-13",
       "confidence": "high",
       "sources": [
-        "experiments/qwen35_4b_counterfactual_order_support_selector/experiment_log.md: dated heading '## 2026-07-13 — Intake and adversarial design'"
+        "experiments/qwen35_4b_counterfactual_order_support_selector/experiment_log.md: dated heading '## 2026-07-13 \u2014 Intake and adversarial design'"
       ],
       "caveat": "Qualification was still sealed at this design-boundary date."
     },
@@ -435,7 +435,7 @@
       "end": "2026-07-15",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_coverage_banking": {
@@ -443,7 +443,7 @@
       "end": "2026-07-03",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_coverage_vs_selection": {
@@ -451,7 +451,7 @@
       "end": "2026-07-03",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_crossfamily_laws": {
@@ -459,7 +459,7 @@
       "end": "2026-07-02",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_crosssubstrate_structure": {
@@ -467,7 +467,7 @@
       "end": "2026-07-06",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_decompose_compose_frontier": {
@@ -485,7 +485,7 @@
       "end": "2026-07-12",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_deployable_information_ceiling_sweep": {
@@ -502,7 +502,7 @@
       "end": "2026-07-04",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_depth_scaling_controls": {
@@ -510,7 +510,7 @@
       "end": "2026-07-05",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_depth_wall_anatomy": {
@@ -518,7 +518,7 @@
       "end": "2026-07-02",
       "confidence": "high",
       "sources": [
-        "git: dir created and iterated in three dedicated post-import commits on 2026-07-02 (0844e60 03:18, 035e8cb 04:13, 151c9cd 04:24 -0700) — not part of the 2026-06-28 corpus import, so git dates are the real run record"
+        "git: dir created and iterated in three dedicated post-import commits on 2026-07-02 (0844e60 03:18, 035e8cb 04:13, 151c9cd 04:24 -0700) \u2014 not part of the 2026-06-28 corpus import, so git dates are the real run record"
       ]
     },
     "qwen35_4b_diversity_keyed_coverage_gate": {
@@ -536,7 +536,7 @@
       "end": "2026-07-15",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_early_text_hypothesis_forking": {
@@ -544,7 +544,7 @@
       "end": "2026-07-13",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_enumerative_repair_protocol": {
@@ -560,7 +560,7 @@
       "end": "2026-07-07",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_executable_program_posttraining": {
@@ -617,7 +617,7 @@
         "configs/experiment.json: \"date\": \"2026-06-27\"",
         "logs/experiment_log.md: heading '## 2026-06-27'"
       ],
-      "caveat": "foofah is a string/table-transform benchmark — treat any date-like strings in data/ and run_logs as task data (none found in this dir's data/)"
+      "caveat": "foofah is a string/table-transform benchmark \u2014 treat any date-like strings in data/ and run_logs as task data (none found in this dir's data/)"
     },
     "qwen35_4b_foofah_program_ensemble_consensus": {
       "start": "2026-06-27",
@@ -674,7 +674,7 @@
       "end": "2026-07-12",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_gauntlet_breadth_round1": {
@@ -682,7 +682,7 @@
       "end": "2026-07-10",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_gauntlet_frontier": {
@@ -690,7 +690,7 @@
       "end": "2026-07-11",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_generator_verifier_gap": {
@@ -707,7 +707,7 @@
       "end": "2026-07-15",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_goal_gate_confirmation": {
@@ -733,7 +733,7 @@
       "end": "2026-06-25",
       "confidence": "low",
       "sources": [
-        "data/dataset_manifest.json: \"seed\": 20260625 (date-shaped seed; only date-bearing artifact in dir — logs/experiment_log.md and reports/eval/*.json are undated)"
+        "data/dataset_manifest.json: \"seed\": 20260625 (date-shaped seed; only date-bearing artifact in dir \u2014 logs/experiment_log.md and reports/eval/*.json are undated)"
       ],
       "caveat": "date-shaped seeds proven unreliable elsewhere (static_bridge seed 20260630 pre-existed the 2026-06-28 import); metadata.yaml 2026-07-01"
     },
@@ -758,7 +758,7 @@
       "end": "2026-07-09",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_icl_retrieval_vs_induction": {
@@ -766,7 +766,7 @@
       "end": "2026-07-07",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_independent_code_abi_coverage_gate": {
@@ -794,7 +794,7 @@
       "end": "2026-07-11",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_interleaved_replay_dose_medium": {
@@ -802,7 +802,7 @@
       "end": "2026-07-15",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_inventory_shortlister_training": {
@@ -819,7 +819,7 @@
       "end": "2026-07-13",
       "confidence": "high",
       "sources": [
-        "experiments/qwen35_4b_jacobian_counterfactual_branching/experiment_log.md: dated heading '## 2026-07-13 — Design and data preflight'"
+        "experiments/qwen35_4b_jacobian_counterfactual_branching/experiment_log.md: dated heading '## 2026-07-13 \u2014 Design and data preflight'"
       ],
       "caveat": "Experiment remains in progress; this date covers design, fresh-data generation, and CPU geometry smoke only."
     },
@@ -828,7 +828,7 @@
       "end": "2026-07-12",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_jacobian_value_transport": {
@@ -836,7 +836,7 @@
       "end": "2026-07-12",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_joint_shortlister_ladder": {
@@ -852,7 +852,7 @@
       "end": "2026-07-07",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_language_reasoning_wall": {
@@ -860,7 +860,7 @@
       "end": "2026-07-07",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_latent_composition_probe": {
@@ -868,7 +868,7 @@
       "end": "2026-07-03",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_latent_decomposition": {
@@ -876,7 +876,7 @@
       "end": "2026-07-05",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_learn_from_failures": {
@@ -884,7 +884,7 @@
       "end": "2026-07-06",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_learned_active_trace_policy": {
@@ -920,7 +920,7 @@
       "end": "2026-07-13",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_materialized_residual_sibling_search": {
@@ -928,7 +928,7 @@
       "end": "2026-07-13",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_materialized_residual_sibling_search_fresh_replication": {
@@ -976,7 +976,7 @@
       "end": "2026-07-07",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_metacognitive_boundary": {
@@ -984,7 +984,7 @@
       "end": "2026-07-07",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_model_in_loop_counterexamples": {
@@ -1001,7 +1001,7 @@
       "end": "2026-07-12",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_native_thought_seam_budget_ladder": {
@@ -1009,7 +1009,7 @@
       "end": "2026-07-12",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_neurosymbolic_repl_substrate": {
@@ -1017,7 +1017,7 @@
       "end": "2026-07-01",
       "confidence": "high",
       "sources": [
-        "file mtimes (in-place work, post-import): configs/default.yaml 2026-06-30 23:41 → analysis/failure_profile.png 2026-07-01 00:24 → reports/report.md 2026-07-01 14:26",
+        "file mtimes (in-place work, post-import): configs/default.yaml 2026-06-30 23:41 \u2192 analysis/failure_profile.png 2026-07-01 00:24 \u2192 reports/report.md 2026-07-01 14:26",
         "git log: c928ffa 2026-07-01 05:03 -0700 adds experiment; bc7a408 2026-07-01 14:29 -0700 M4 flywheel"
       ],
       "caveat": "metadata.yaml 2026-07-01 17:03 is catalog sweep; runs/*.json have no time keys"
@@ -1093,7 +1093,7 @@
       "end": "2026-06-30",
       "confidence": "high",
       "sources": [
-        "file mtimes (in-place work): configs/default.yaml 2026-06-30 13:37 → reports/report.md 2026-06-30 18:53",
+        "file mtimes (in-place work): configs/default.yaml 2026-06-30 13:37 \u2192 reports/report.md 2026-06-30 18:53",
         "git log: 817fb6f 2026-06-30 18:58 -0700 'Add overthinking content ladder'"
       ],
       "caveat": "metadata.yaml 2026-07-01 17:03 catalog sweep"
@@ -1103,7 +1103,7 @@
       "end": "2026-07-12",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_partial_structure_search": {
@@ -1111,7 +1111,7 @@
       "end": "2026-07-10",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_passk_coverage_rl": {
@@ -1137,7 +1137,7 @@
       "end": "2026-07-06",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_probe_to_prompt": {
@@ -1145,7 +1145,7 @@
       "end": "2026-07-06",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_rank_capacity_vehicle_cell": {
@@ -1153,7 +1153,7 @@
       "end": "2026-07-15",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_real_sample_verify_commit": {
@@ -1169,7 +1169,7 @@
       "end": "2026-07-12",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_recovery_reason_locality_interpolation": {
@@ -1177,7 +1177,7 @@
       "end": "2026-07-12",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_recovery_verifier_branch_tournament": {
@@ -1185,7 +1185,7 @@
       "end": "2026-07-12",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_reliability_exec_opsd_audit": {
@@ -1212,7 +1212,7 @@
       "end": "2026-07-12",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_retention_screen_calibration": {
@@ -1231,14 +1231,14 @@
         "configs/experiment.json:3 \"date_utc\": \"2026-06-26\"",
         "logs/experiment_log.md:3 heading '## 2026-06-26'"
       ],
-      "caveat": "data/verified_algorithm_library.jsonl contains date-format-conversion code and example dates (e.g. 2026-01-02, regex \\d{4})-(\\d{1,2})-(\\d{1,2}) — DATA, not run dates."
+      "caveat": "data/verified_algorithm_library.jsonl contains date-format-conversion code and example dates (e.g. 2026-01-02, regex \\d{4})-(\\d{1,2})-(\\d{1,2}) \u2014 DATA, not run dates."
     },
     "qwen35_4b_same_prefix_advantage_routing": {
       "start": "2026-07-12",
       "end": "2026-07-12",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_sampler_portfolio_scheduler": {
@@ -1257,7 +1257,7 @@
       "end": "2026-07-13",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_semantic_policy_headroom_tournament": {
@@ -1265,7 +1265,7 @@
       "end": "2026-07-13",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_simulation_keystone_repair": {
@@ -1273,7 +1273,7 @@
       "end": "2026-07-02",
       "confidence": "high",
       "sources": [
-        "git: dir created in dedicated post-import commits on 2026-07-02 (P12 capstone follow-up) — not part of the 2026-06-28 corpus import, so git dates are the real run record"
+        "git: dir created in dedicated post-import commits on 2026-07-02 (P12 capstone follow-up) \u2014 not part of the 2026-06-28 corpus import, so git dates are the real run record"
       ]
     },
     "qwen35_4b_sketch_coverage_shift_probe": {
@@ -1289,7 +1289,7 @@
       "end": "2026-07-11",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_state_carry_vs_state_bag": {
@@ -1297,7 +1297,7 @@
       "end": "2026-07-12",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_state_carry_vs_state_bag_fullrank_delta": {
@@ -1305,7 +1305,7 @@
       "end": "2026-07-13",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_state_formation_analysis_recovery": {
@@ -1313,7 +1313,7 @@
       "end": "2026-07-14",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_state_formation_branch_handoff_recovery": {
@@ -1321,7 +1321,7 @@
       "end": "2026-07-14",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_state_formation_branch_recovery": {
@@ -1353,7 +1353,7 @@
       "end": "",
       "confidence": "none",
       "sources": [
-        "only date-shaped token is \"seed\": 20260630 in configs/experiment.json and data/dataset_manifest.json, but git show 42c23ac (import commit dated 2026-06-28 12:34 -0700) already contains that seed — a 2026-06-30 'date' cannot be the run date of work imported 06-28, so the seed is a fabricated constant; logs/experiment_log.md and run_logs/*.log carry no timestamps"
+        "only date-shaped token is \"seed\": 20260630 in configs/experiment.json and data/dataset_manifest.json, but git show 42c23ac (import commit dated 2026-06-28 12:34 -0700) already contains that seed \u2014 a 2026-06-30 'date' cannot be the run date of work imported 06-28, so the seed is a fabricated constant; logs/experiment_log.md and run_logs/*.log carry no timestamps"
       ],
       "caveat": "seed 20260630 is date-shaped but provably not a run date; metadata.yaml 2026-07-01"
     },
@@ -1371,7 +1371,7 @@
       "end": "2026-07-06",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_structure_search_scaling": {
@@ -1379,7 +1379,7 @@
       "end": "2026-07-06",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_substrate_coverage_ladder": {
@@ -1405,7 +1405,7 @@
       "end": "2026-07-11",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_think_ftpo_round2": {
@@ -1413,7 +1413,7 @@
       "end": "2026-07-11",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_thinking_budget_controller": {
@@ -1441,7 +1441,7 @@
       "end": "2026-06-30",
       "confidence": "medium",
       "sources": [
-        "git: dir first added e405cf0 2026-06-30 12:19:18 -0700 'Add foreign-thinking control', then 8ceb592 12:41 (filler arm), 817fb6f 18:58 (overthinking ladder) — all experiment-specific work commits, post-import so credible",
+        "git: dir first added e405cf0 2026-06-30 12:19:18 -0700 'Add foreign-thinking control', then 8ceb592 12:41 (filler arm), 817fb6f 18:58 (overthinking ladder) \u2014 all experiment-specific work commits, post-import so credible",
         "large_artifacts/qwen35_4b_thinking_content_vs_compute/*.npy mtimes 2026-06-30 12:05-12:36 (untracked activation dumps corroborate)"
       ],
       "caveat": "experiment_log.md is undated; runs/probe_results.json has no time keys; metadata.yaml generated_on 2026-07-01 is sweep. Only later commit touching dir (c928ffa 07-01) is catalog/metadata churn."
@@ -1451,7 +1451,7 @@
       "end": "2026-07-05",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_thinking_separability_probe": {
@@ -1468,7 +1468,7 @@
       "end": "2026-07-14",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_tokenizer_eos_residual_mechanics_fresh_replay": {
@@ -1484,7 +1484,7 @@
       "end": "2026-07-04",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_tool_state_policy_lora": {
@@ -1511,7 +1511,7 @@
       "end": "2026-07-12",
       "confidence": "high",
       "sources": [
-        "experiments/qwen35_4b_transaction_invariant_recovery_curriculum/experiment_log.md: dated heading '## 2026-07-12 — design and CPU validation'"
+        "experiments/qwen35_4b_transaction_invariant_recovery_curriculum/experiment_log.md: dated heading '## 2026-07-12 \u2014 design and CPU validation'"
       ],
       "caveat": "Candidate training and result-bearing generation had not started at this design boundary."
     },
@@ -1538,7 +1538,7 @@
       "end": "2026-07-14",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_universal_curriculum": {
@@ -1555,7 +1555,7 @@
       "end": "2026-07-14",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_universal_fresh_surface_budget_commit_target_match": {
@@ -1563,7 +1563,7 @@
       "end": "2026-07-15",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_universal_low_density_token_match": {
@@ -1598,7 +1598,7 @@
       "end": "2026-07-14",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_universal_replay_anchor": {
@@ -1606,7 +1606,7 @@
       "end": "2026-07-13",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_universal_residual_successful_sibling_target_match": {
@@ -1614,7 +1614,7 @@
       "end": "2026-07-14",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_universal_search_scaffold_token_match": {
@@ -1631,7 +1631,7 @@
       "end": "2026-07-14",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_universal_successful_sibling_target_match": {
@@ -1639,7 +1639,7 @@
       "end": "2026-07-14",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_unsaturated_frontier_active_bridge": {
@@ -1655,7 +1655,7 @@
       "end": "2026-07-13",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_verified_algorithm_retrieval_adaptation": {
@@ -1676,14 +1676,14 @@
         "logs/experiment_log.md: undated step log, only references seed 20260630",
         "run_logs/*console.log: no timestamps or clock strings at all"
       ],
-      "caveat": "configs/experiment.json \"seed\": 20260630 LOOKS like a run date but is impossible — the file was committed in the 2026-06-28 import (42c23ac), proving date-encoded seeds are not reliable run dates. Bound: ran on/before 2026-06-28."
+      "caveat": "configs/experiment.json \"seed\": 20260630 LOOKS like a run date but is impossible \u2014 the file was committed in the 2026-06-28 import (42c23ac), proving date-encoded seeds are not reliable run dates. Bound: ran on/before 2026-06-28."
     },
     "qwen35_4b_verified_macro_capacity_fit_rerun": {
       "start": "2026-07-10",
       "end": "2026-07-10",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_verified_macro_exact_cudagraph_rerun": {
@@ -1691,7 +1691,7 @@
       "end": "2026-07-10",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_verified_macro_invention": {
@@ -1699,7 +1699,7 @@
       "end": "2026-07-09",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_verified_macro_long_context_rerun": {
@@ -1707,7 +1707,7 @@
       "end": "2026-07-10",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_verifier_conditioned_recovery_bank": {
@@ -1715,7 +1715,7 @@
       "end": "2026-07-12",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_verifier_free_banking": {
@@ -1723,7 +1723,7 @@
       "end": "2026-07-08",
       "confidence": "high",
       "sources": [
-        "dated records in the dir + git history (post-import) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "dated records in the dir + git history (post-import) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_verifier_guided_self_improvement": {
@@ -1752,7 +1752,7 @@
       "end": "2026-07-03",
       "confidence": "high",
       "sources": [
-        "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+        "git history (post-import; metadata-only sweeps excluded) \u2014 auto-filled by scripts/extract_experiment_dates.py --apply"
       ]
     },
     "qwen35_4b_zero_root_lineage_rebuild": {
@@ -1768,7 +1768,7 @@
       "end": "2026-06-24",
       "confidence": "high",
       "sources": [
-        "checkpoint_manifest.csv: created_unix column, 5 rows spanning 1782261141… = 2026-06-24 00:32 → 00:45 UTC",
+        "checkpoint_manifest.csv: created_unix column, 5 rows spanning 1782261141\u2026 = 2026-06-24 00:32 \u2192 00:45 UTC",
         "experiment_log.md: heading '## 2026-06-24'"
       ]
     },
@@ -1802,7 +1802,7 @@
         "runs/*/config.json and runs/*/done.json: ISO date fields 2026-06-27",
         "config in log: sample_seed 20260627 (date-derived seed matches)"
       ],
-      "caveat": "analysis/row_details.csv and runs/*/row_details.csv contain DateTime-benchmark DATA dates (2002-09-12, 2038-05-17, 2048-11-30 etc.) — not run dates"
+      "caveat": "analysis/row_details.csv and runs/*/row_details.csv contain DateTime-benchmark DATA dates (2002-09-12, 2038-05-17, 2048-11-30 etc.) \u2014 not run dates"
     },
     "qwen_budgeted_action_value_compiler": {
       "start": "2026-06-23",
@@ -1845,7 +1845,7 @@
       "confidence": "high",
       "sources": [
         "smoke_suite_manifest.json: started_at 2026-06-24 23:20:36 UTC",
-        "main_suite_manifest.json: started_at 2026-06-24 23:30:35 UTC → finished_at 2026-06-25 05:38:54 UTC",
+        "main_suite_manifest.json: started_at 2026-06-24 23:30:35 UTC \u2192 finished_at 2026-06-25 05:38:54 UTC",
         "experiment_log.md: heading '## 2026-06-24'"
       ]
     },
@@ -1875,7 +1875,7 @@
         "experiment_log.md:5: '- Created: 2026-06-26 UTC'",
         "experiment_log.md:18,36,54: '- Started: 2026-06-26 15:43:38 / 15:56:19 / 16:08:48 UTC'; main_v1 completed in 4058.7s -> finished ~17:16 UTC same day"
       ],
-      "caveat": "runs/main_v1/details.csv, runs/pilot_v1/details.csv, analysis/all_details.csv are full of task DATA calendar dates (2026-01-03 ... 2026-07-24, incl. dates after the run) — parser benchmark inputs, not run dates"
+      "caveat": "runs/main_v1/details.csv, runs/pilot_v1/details.csv, analysis/all_details.csv are full of task DATA calendar dates (2026-01-03 ... 2026-07-24, incl. dates after the run) \u2014 parser benchmark inputs, not run dates"
     },
     "qwen_context_trace_verifier": {
       "start": "2026-06-23",
@@ -1894,7 +1894,7 @@
         "experiment_log.md: per-run bullets 'Time UTC: `2026-06-28T03:23:44.477998+00:00`' through main_v1 at 2026-06-28T03:56:44 + 1410.9s elapsed (ends ~04:20 UTC), all before the 19:34 UTC import commit",
         "experiment_log.md configs: \"seed\": 20260628 matches run date"
       ],
-      "caveat": "HEAVY dates-as-data: runs/main_v1/probe_labels.csv, analysis/probe_labels.csv and reports/*report.{md,html} contain DateTime-benchmark cells (2026-04-15, 2026-12-30, malformed 2026-12-30T06.25.57Z, 'Apr 2026'/'Dec 2026') — task inputs/outputs, NOT run dates."
+      "caveat": "HEAVY dates-as-data: runs/main_v1/probe_labels.csv, analysis/probe_labels.csv and reports/*report.{md,html} contain DateTime-benchmark cells (2026-04-15, 2026-12-30, malformed 2026-12-30T06.25.57Z, 'Apr 2026'/'Dec 2026') \u2014 task inputs/outputs, NOT run dates."
     },
     "qwen_counterexample_guided_projection": {
       "start": "2026-06-27",
@@ -1919,9 +1919,9 @@
       "end": "2026-06-28",
       "confidence": "high",
       "sources": [
-        "experiment_log.md: per-run bullets '- Time UTC: `2026-06-28T05:50:51.863838+00:00`' … '2026-06-28T06:30:03+00:00' — real run records, and all precede the import commit (2026-06-28 19:34 UTC), so not import artifacts"
+        "experiment_log.md: per-run bullets '- Time UTC: `2026-06-28T05:50:51.863838+00:00`' \u2026 '2026-06-28T06:30:03+00:00' \u2014 real run records, and all precede the import commit (2026-06-28 19:34 UTC), so not import artifacts"
       ],
-      "caveat": "runs/ JSON contains many dates as ICL task DATA (2004-09-30, 2006-02-21, 2002-12-12, …) — never use runs/ dates here"
+      "caveat": "runs/ JSON contains many dates as ICL task DATA (2004-09-30, 2006-02-21, 2002-12-12, \u2026) \u2014 never use runs/ dates here"
     },
     "qwen_counterfactual_trace_preference_distillation": {
       "start": "2026-06-24",
@@ -1939,7 +1939,7 @@
       "sources": [
         "qwen_crystallized_trace_abi_tournament/experiment_log.md: '- Created: 2026-06-26 UTC' plus '- Started: 2026-06-26 04:20:46/04:24:02/04:30:45 UTC' run entries"
       ],
-      "caveat": "runs/**/details.csv (9-41 dates each, 2026-01 to 2027-01) and runs/*_data_*/dataset_manifest.json (e.g. 2026-05-10, 2026-05-16) are DateTime benchmark data, NOT run dates — the May dates here are the biggest trap in this slice"
+      "caveat": "runs/**/details.csv (9-41 dates each, 2026-01 to 2027-01) and runs/*_data_*/dataset_manifest.json (e.g. 2026-05-10, 2026-05-16) are DateTime benchmark data, NOT run dates \u2014 the May dates here are the biggest trap in this slice"
     },
     "qwen_dense_state_dagger_vm_agent": {
       "start": "2026-06-24",
@@ -1992,9 +1992,9 @@
       "end": "2026-06-27",
       "confidence": "high",
       "sources": [
-        "experiment_log.md: dated headings '### 2026-06-27 07:19 UTC - Scaffold' → '### 2026-06-27 07:32 UTC - Report hardening'"
+        "experiment_log.md: dated headings '### 2026-06-27 07:19 UTC - Scaffold' \u2192 '### 2026-06-27 07:32 UTC - Report hardening'"
       ],
-      "caveat": "DateTime/table-transform benchmark: runs/ and analysis/ are saturated with dates as DATA (324x '2002-09-12', '23/5/1984', impossible '2/8/2160', …) — only the log headings are run dates"
+      "caveat": "DateTime/table-transform benchmark: runs/ and analysis/ are saturated with dates as DATA (324x '2002-09-12', '23/5/1984', impossible '2/8/2160', \u2026) \u2014 only the log headings are run dates"
     },
     "qwen_fuyu_vm_grpo_echo": {
       "start": "2026-06-24",
@@ -2172,7 +2172,7 @@
       "sources": [
         "experiment_log.md:'- Created: 2026-06-26 UTC' and '- Started: 2026-06-26 06:06:48 / 06:09:13 / 06:15:31 UTC'"
       ],
-      "caveat": "MASSIVE: runs/**/details.csv, analysis/*_details.csv, runs/*/dataset_manifest.json are date-arithmetic task data ('Starting from 2026-12-12, add 10 days...') spanning 2025-07..2026-12 — hundreds of fake dates; only experiment_log.md is trustworthy"
+      "caveat": "MASSIVE: runs/**/details.csv, analysis/*_details.csv, runs/*/dataset_manifest.json are date-arithmetic task data ('Starting from 2026-12-12, add 10 days...') spanning 2025-07..2026-12 \u2014 hundreds of fake dates; only experiment_log.md is trustworthy"
     },
     "qwen_progressive_repair_compiler": {
       "start": "",
@@ -2209,7 +2209,7 @@
       "end": "2026-06-25",
       "confidence": "high",
       "sources": [
-        "experiment_log.md: 8 dated phase headings '### 2026-06-25 Scaffold' → '### 2026-06-25 Main Iteration 5', all same day"
+        "experiment_log.md: 8 dated phase headings '### 2026-06-25 Scaffold' \u2192 '### 2026-06-25 Main Iteration 5', all same day"
       ]
     },
     "qwen_real_task_abi_coverage_gate": {
@@ -2285,7 +2285,7 @@
       "end": "2026-06-24",
       "confidence": "high",
       "sources": [
-        "checkpoint_manifest.csv: created_unix 1782294225… = 2026-06-24 09:43 → 11:15 UTC (5 rows)",
+        "checkpoint_manifest.csv: created_unix 1782294225\u2026 = 2026-06-24 09:43 \u2192 11:15 UTC (5 rows)",
         "run name embeds date: smoke_search_rollout_distill_20260624",
         "experiment_log.md: heading '## 2026-06-24'"
       ]
@@ -2306,14 +2306,14 @@
       "sources": [
         "qwen_shared_parser_compiler/reports/qwen_shared_parser_compiler_experiment_log.md: headings '## 2026-06-21 Setup' through '## 2026-06-21 Final Audit' (8 dated sections, single day)"
       ],
-      "caveat": "runs/*/results.json and analysis/final_metrics.csv contain epoch-looking 10-digit substrings that are decimals of float metrics (e.g. 0.1767578125) — an epoch regex without a decimal-point guard falsely reads them as 2026-01-05"
+      "caveat": "runs/*/results.json and analysis/final_metrics.csv contain epoch-looking 10-digit substrings that are decimals of float metrics (e.g. 0.1767578125) \u2014 an epoch regex without a decimal-point guard falsely reads them as 2026-01-05"
     },
     "qwen_slot_repair_distillation": {
       "start": "",
       "end": "",
       "confidence": "none",
       "sources": [
-        "metadata.yaml: generated_on 2026-07-01 is the catalog sweep, not a run date — the ONLY date in the dir",
+        "metadata.yaml: generated_on 2026-07-01 is the catalog sweep, not a run date \u2014 the ONLY date in the dir",
         "checkpoint_manifest.csv: run,artifact_path,bytes format, no timestamp column",
         "runs/*/results.json: seeds are small ints (61-66/61001-66001), not date-derived; no time keys; reports/*_experiment_log.md has no dated headings"
       ],
@@ -2365,7 +2365,7 @@
       "end": "2026-06-21",
       "confidence": "medium",
       "sources": [
-        "reports/qwen_structured_bridge_experiment_log.md:six '## 2026-06-21 ...' headings ('Main Qwen Run', 'Length Scale Check', 'Final Audit') — single file, single day"
+        "reports/qwen_structured_bridge_experiment_log.md:six '## 2026-06-21 ...' headings ('Main Qwen Run', 'Length Scale Check', 'Final Audit') \u2014 single file, single day"
       ],
       "caveat": "metadata.yaml contains 2026-07-01 (catalog sweep)"
     },
@@ -2374,7 +2374,7 @@
       "end": "2026-06-28",
       "confidence": "high",
       "sources": [
-        "qwen_support_contrastive_meta_icl/experiment_log.md: entries '- Time UTC: `2026-06-28T16:41:31.417074+00:00`' through '- Time UTC: `2026-06-28T17:58:05.949981+00:00`' — microsecond-precision stamps that precede the 2026-06-28 19:34 UTC import commit, so credible despite the >=06-28 rule"
+        "qwen_support_contrastive_meta_icl/experiment_log.md: entries '- Time UTC: `2026-06-28T16:41:31.417074+00:00`' through '- Time UTC: `2026-06-28T17:58:05.949981+00:00`' \u2014 microsecond-precision stamps that precede the 2026-06-28 19:34 UTC import commit, so credible despite the >=06-28 rule"
       ],
       "caveat": "runs/*/row_predictions.csv and analysis/aggregate_row_predictions.csv contain dates 2002-2045 and epoch-like numbers (row-transform task data)"
     },
@@ -2425,7 +2425,7 @@
       "end": "2026-06-27",
       "confidence": "high",
       "sources": [
-        "experiment_log.md: dated headings '### 2026-06-27 08:45 UTC - Scaffold' → '### 2026-06-27 08:59 UTC - Report Hardening'"
+        "experiment_log.md: dated headings '### 2026-06-27 08:45 UTC - Scaffold' \u2192 '### 2026-06-27 08:59 UTC - Report Hardening'"
       ]
     },
     "qwen_verifier_guided_slot_repair": {
@@ -2474,7 +2474,7 @@
         "reports/rule_family_diversity_scaling_paper.md:3 'Date: 2026-06-21'",
         "scripts/make_report.py:377 hardcodes 'Date: 2026-06-21' (report template, consistent)"
       ],
-      "caveat": "figures/*.png tEXt only carries 'Matplotlib version 3.11.0' — no dates; metadata.yaml generated_on 2026-07-01 is sweep."
+      "caveat": "figures/*.png tEXt only carries 'Matplotlib version 3.11.0' \u2014 no dates; metadata.yaml generated_on 2026-07-01 is sweep."
     },
     "sampled_query_filter_executor": {
       "start": "",
@@ -2498,7 +2498,7 @@
       "end": "2026-06-21",
       "confidence": "high",
       "sources": [
-        "reports/structured_slot_initializer_ladder_experiment_log.md: dated phase headings '2026-06-21 Setup' → '2026-06-21 Final Audit' (7 entries, all same day)"
+        "reports/structured_slot_initializer_ladder_experiment_log.md: dated phase headings '2026-06-21 Setup' \u2192 '2026-06-21 Final Audit' (7 entries, all same day)"
       ],
       "caveat": "metadata.yaml 2026-07-01; epoch-like numeric values in analysis/all_metrics_query_mean.csv are metric data"
     },
@@ -2584,6 +2584,14 @@
       "confidence": "high",
       "sources": [
         "dated experiment_log.md heading (2026-07-18 model-free construction freeze; GPU train/merge/measure stages pending staged reviews, no seed consumed)"
+      ]
+    },
+    "qwen35_4b_why_scale_ladder": {
+      "start": "2026-07-18",
+      "end": "",
+      "confidence": "high",
+      "sources": [
+        "dated experiment_log.md heading (2026-07-18 model-free design freeze; generator + sha-pinned ladder + harness + tests; no GPU stage run, seeds 94100/94101 consumed by design only)"
       ]
     }
   }

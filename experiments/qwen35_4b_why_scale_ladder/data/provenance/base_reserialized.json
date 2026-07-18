@@ -1,0 +1,18 @@
+{
+  "config_sha256": "a1c80f0efa6f83f631eaa9c25ffa166e3b1f9db395cc3b14374dfc0962261f60",
+  "dtype": "bfloat16",
+  "generation_config_sha256": "0c46d8aa4f0ae5e611c961f70b87c83fb696043c1e319337708e96f882180de1",
+  "method": "pinned_base_composite_reserialization",
+  "model_lineage": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "processor_saved": false,
+  "schema_version": 1,
+  "tokenizer_sha256": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+  "weight_files": [
+    {
+      "name": "model.safetensors",
+      "sha256": "b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db",
+      "size_bytes": 9078620536
+    }
+  ]
+}
