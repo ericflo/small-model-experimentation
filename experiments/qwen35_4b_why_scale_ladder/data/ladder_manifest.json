@@ -8,7 +8,8 @@
     2000,
     5000,
     10000,
-    20000
+    20000,
+    40000
   ],
   "rungs": [
     {
@@ -59,7 +60,7 @@
       "rows": 2000,
       "seed": 94100,
       "unique_programs": 2000,
-      "wall_seconds": 3.52
+      "wall_seconds": 3.59
     },
     {
       "categories": {
@@ -109,7 +110,7 @@
       "rows": 5000,
       "seed": 94100,
       "unique_programs": 5000,
-      "wall_seconds": 8.96
+      "wall_seconds": 8.88
     },
     {
       "categories": {
@@ -159,7 +160,7 @@
       "rows": 10000,
       "seed": 94100,
       "unique_programs": 10000,
-      "wall_seconds": 18.57
+      "wall_seconds": 18.42
     },
     {
       "categories": {
@@ -209,7 +210,57 @@
       "rows": 20000,
       "seed": 94100,
       "unique_programs": 20000,
-      "wall_seconds": 38.96
+      "wall_seconds": 38.59
+    },
+    {
+      "categories": {
+        "arith": 5171,
+        "branch": 1230,
+        "dict": 1672,
+        "digit": 2090,
+        "interval": 934,
+        "modular": 2953,
+        "nested": 3266,
+        "pairwise": 2542,
+        "reduce": 8387,
+        "search": 786,
+        "state": 1280,
+        "string": 2645,
+        "transform": 7044
+      },
+      "contamination": {
+        "banned_function_names": 663,
+        "banned_hits": 0,
+        "ngram_overlap": {
+          "benchmark_ngrams": 43645,
+          "corpus_ngrams": 40918,
+          "ngram_n": 7,
+          "shared_ngrams_distinctive": 0,
+          "shared_ngrams_structural_idiom": 78,
+          "status": "checked"
+        }
+      },
+      "corpus_sha256": "c177c989b48e7be9de2aed3bb2496a94bfeb5b8acab9ef156b3420d9d859d331",
+      "diversity": {
+        "distinct_categories": 13,
+        "distinct_families": 59,
+        "distinct_normalized_why_templates": 1197,
+        "unique_program_pct": 100.0
+      },
+      "length_stats": {
+        "chars_max": 1567,
+        "chars_median": 1029,
+        "chars_min": 775,
+        "est_tokens_max_chars_over_3": 523,
+        "note": "conservative >=3 chars/token estimate; the measured tokenizer max is recorded in reports/report.md",
+        "render": "prompt+think+answer characters",
+        "train_max_length_tokens": 4096
+      },
+      "path": "large_artifacts/qwen35_4b_why_scale_ladder/corpora/why_scale_40000.jsonl",
+      "rows": 40000,
+      "seed": 94100,
+      "unique_programs": 40000,
+      "wall_seconds": 85.03
     }
   ],
   "schema_version": 1

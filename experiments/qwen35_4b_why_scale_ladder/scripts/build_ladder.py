@@ -41,7 +41,7 @@ EXP = Path(__file__).resolve().parents[1]
 ROOT = EXP.parents[1]
 
 CONSTRUCTION_SEED = gen.CONSTRUCTION_SEED  # 94100
-LADDER_SIZES = (2000, 5000, 10000, 20000)
+LADDER_SIZES = (2000, 5000, 10000, 20000, 40000)
 CORPUS_ROOT = ROOT / "large_artifacts" / EXP.name / "corpora"
 MANIFEST = EXP / "data" / "ladder_manifest.json"
 GENERATOR = EXP / "scripts" / "gen_why_scale_curriculum.py"

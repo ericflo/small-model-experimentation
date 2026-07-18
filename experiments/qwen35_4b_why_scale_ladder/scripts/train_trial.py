@@ -10,8 +10,8 @@ ladder manifest (``data/ladder_manifest.json``, sha-pinned).
 
 Recipe (frozen, identical across rungs except epochs): lr 1e-5, rank 32, alpha 64,
 batch 1, grad-accum 8, max-length 4096, w_think 0.2, w_close 0.2, training seed
-94101. EPOCH SCHEDULE: larger corpora need fewer epochs, so epochs =
-``max(1, round(8000 / rows))`` — 4 epochs at 2000, 2 at 5000, 1 at 10000, 1 at
+94101. EPOCH SCHEDULE: ALWAYS 1 EPOCH (owner directive) - with unlimited unique data, vary data volume not epochs; every step sees fresh data (no memorization, no epoch confound). Was:
+``max(1, round(8000/rows))`` (RETIRED); now epochs_for()==1 for all rungs at
 20000 — which holds total sample exposures roughly comparable (8k / 10k / 10k /
 20k) while letting the model see each rung enough. Optimizer steps = rows * epochs
 / (batch 1 x grad-accum 8).
@@ -48,7 +48,7 @@ MANIFEST = EXP / "data" / "ladder_manifest.json"
 GENERATOR = EXP / "scripts" / "gen_why_scale_curriculum.py"
 FIXTURE = EXP / "data" / "contamination" / "banned_function_names.json"
 
-LADDER_SIZES = (2000, 5000, 10000, 20000)
+LADDER_SIZES = (2000, 5000, 10000, 20000, 40000)
 
 # Training base: the reserialized BASE composite (a directory of full bf16
 # weights), NOT an adapter. Each fresh rank-32 adapter trains on top of it.
@@ -93,13 +93,13 @@ GRAD_ACCUM = 8
 
 # TODO-PIN per rung after training: the SINGLE-LINE sorted-key dict of the four
 # published sha256 values {"adapter_config","adapter_weights","log","receipt"}.
-PUBLISHED_RUNG_HASHES: dict[int, dict | None] = {2000: None, 5000: None, 10000: None, 20000: None}
+PUBLISHED_RUNG_HASHES: dict[int, dict | None] = {2000: None, 5000: None, 10000: None, 20000: None, 40000: None}
 ADAPTER_ROOT = ROOT / "large_artifacts" / EXP.name / "adapters"
 
 
 def epochs_for(rows: int) -> int:
     """Larger corpora need fewer epochs; keep total exposures roughly comparable."""
-    return max(1, round(8000 / rows))
+    return 1  # 1 epoch everywhere: unlimited unique data -> vary data volume, never repeat (no memorization, no epoch confound)
 
 
 def optimizer_steps_for(rows: int) -> int:

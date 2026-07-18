@@ -119,15 +119,18 @@ class TestTreeManifest(unittest.TestCase):
 
 
 class TestEpochScheduleAndRecipe(unittest.TestCase):
-    def test_epoch_schedule_is_size_appropriate(self):
-        self.assertEqual(tt.epochs_for(2000), 4)
-        self.assertEqual(tt.epochs_for(5000), 2)
-        self.assertEqual(tt.epochs_for(10000), 1)
-        self.assertEqual(tt.epochs_for(20000), 1)
+    def test_epoch_schedule_is_always_one(self):
+        # Owner directive: 1 epoch everywhere. With unlimited unique data we
+        # vary data volume, never re-show examples (no memorization, no
+        # epoch confound in the scale ladder).
+        for rows in tt.LADDER_SIZES:
+            self.assertEqual(tt.epochs_for(rows), 1)
 
-    def test_total_exposures_are_roughly_comparable(self):
+    def test_exposures_equal_unique_rows(self):
+        # Every example is seen exactly once (1 epoch), so total exposures ==
+        # unique-row count at each rung; the scale variable is pure data volume.
         exposures = {rows: rows * tt.epochs_for(rows) for rows in tt.LADDER_SIZES}
-        self.assertEqual(exposures, {2000: 8000, 5000: 10000, 10000: 10000, 20000: 20000})
+        self.assertEqual(exposures, {rows: rows for rows in tt.LADDER_SIZES})
 
     def test_optimizer_steps_are_consistent(self):
         for rows in tt.LADDER_SIZES:

@@ -32,7 +32,7 @@ HARNESS = ROOT / "experiments" / "qwen35_4b_coding_fitness_harness" / "scripts" 
 VLLM_PYTHON = ROOT / ".venv-vllm" / "bin" / "python"
 MERGED_ROOT = ROOT / "large_artifacts" / EXP.name / "merged"
 
-LADDER_SIZES = (2000, 5000, 10000, 20000)
+LADDER_SIZES = (2000, 5000, 10000, 20000, 40000)
 DATASETS = (("humaneval", 164), ("mbpp", 200))
 # Program anchor (co-measured base baseline; the 504-row why_comment bet moved
 # HumanEval +5 -> 0.7927 on this exact harness, the fast gain the ladder scales).

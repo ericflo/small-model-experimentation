@@ -35,7 +35,7 @@ ROOT = EXP.parents[1]
 SCRIPTS = EXP / "scripts"
 EXP_REL = f"experiments/{EXP.name}"
 
-LADDER_SIZES = (2000, 5000, 10000, 20000)
+LADDER_SIZES = (2000, 5000, 10000, 20000, 40000)
 MANIFEST = EXP / "data" / "ladder_manifest.json"
 COMPUTE_REVIEW = EXP / "reports" / "compute_review.md"
 MERGE_REVIEW = EXP / "reports" / "merge_review.md"
@@ -161,7 +161,7 @@ def smoke() -> None:
         "unique programs at 20000 rows, every render <4096 tokens); a sha-pinned "
         "four-rung ladder (2000/5000/10000/20000) with a fail-closed per-rung trainer "
         "from the authenticated base_reserialized composite (fresh r32/a64, seed 94101, "
-        "epochs max(1, round(8000/rows))), the vendored external merger, and a per-rung "
+        "epochs=1 for all rungs), the vendored external merger, and a per-rung "
         "transfer sweep on the shared HumanEval+MBPP fitness harness (comments IGNORED "
         "by the grader) to locate the WHY scaling PEAK as the SFT foundation for RLVR"
     )

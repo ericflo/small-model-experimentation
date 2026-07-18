@@ -74,3 +74,14 @@ repo-wide as SEEDS. No training-seed collision.
 GPU stages (train/merge/measure, per rung) are a SWEEP pending their staged
 reviews; the orchestrator runs each rung and records the curve to find the peak as
 the SFT foundation for the RLVR phase (Phase B).
+
+## 2026-07-18 — Epoch schedule -> 1 epoch everywhere (owner directive)
+
+- Owner flagged the epoch>1 confound: with unlimited unique data, multi-
+  epoch on small rungs re-shows examples (memorization) AND varies epochs
+  across rungs (confounds the scale variable). Switched epochs_for() to
+  return 1 for ALL rungs; scale = pure unique-data volume, every step sees
+  fresh data. Extended the ladder to 40000 (generator holds 100% unique
+  through 40k, verified). Rungs 2000/5000/10000/20000/40000 @ 1 epoch,
+  optimizer steps 250/625/1250/2500/5000. Killed the 4-epoch rung-2000
+  before it finished; no measurement taken. Tests updated (52 green).

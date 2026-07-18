@@ -21,12 +21,14 @@ top_level_dirs:
   - "configs"
   - "data"
   - "reports"
+  - "runs"
   - "scripts"
   - "tests"
 file_counts:
-  json: 3
+  json: 4
+  log: 1
   md: 7
   py: 12
   yaml: 3
-total_files: 25
-total_size_bytes: 275150
+total_files: 27
+total_size_bytes: 356981
