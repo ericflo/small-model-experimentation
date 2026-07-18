@@ -924,6 +924,21 @@ more epochs than component/skill targets (the WHY comments needed 4x the
 training to install; 1 epoch left loss at 6.3). See
 experiments/qwen35_4b_why_comment_install.
 
+Cognitive-core bet #5 (the stack, 2026-07-18) tested whether the two
+complementary coding positives combine, and the answer is: NOT via
+corpus-mixing. Training one adapter on the union of the self_repair and
+why_comment corpora (1008 rows) DILUTED both effects - why_comment's +5
+HumanEval collapsed to +1, self_repair's 10/35 agentic to 7/35 (at/below
+base). This is the menagerie MIXTURE-DILUTION law replicating on coding:
+one small adapter on a half-concentration mixture splits capacity and
+installs less of each. The complementary effects are real enough to
+compete for capacity but do not ADD in a joint corpus. The correct
+combination of full-concentration complementary fine-tunes is
+weight-space arithmetic (task vectors: base + (self_repair-base) +
+(why_comment-base), each delta at full magnitude) - a cheap no-training
+follow-on that is the immediate next test. See
+experiments/qwen35_4b_repair_why_stack.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.

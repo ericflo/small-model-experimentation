@@ -1,6 +1,6 @@
 # Qwen35 4B Repair + Why Stack
 
-**Status:** in-progress · since 2026-07-18 · DESIGN-FROZEN (model-free construction complete; GPU train/merge/measure stages pending staged adversarial reviews, no seed consumed). Lifecycle 36 — the STACK of the two positive coding bets.
+**Status:** finished · 2026-07-18 · NULL (mixture dilution) - corpus-union washed out both effects (HumanEval +5->+1, agentic 10->7); correct combination is task-vector weight arithmetic (next)
 
 ## Research Program
 

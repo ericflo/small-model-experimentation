@@ -76,3 +76,15 @@ manually as a follow-on. If BOTH the HumanEval gain (~+5) AND the agentic gain
 real; if flat, they were likely noise. Honest prior on a MEANINGFUL install: ~40%.
 
 GPU stages (train/merge/measure) are pending their staged reviews.
+
+## 2026-07-18 — Transfer measurement: MIXTURE DILUTION (naive stack fails)
+
+- Corpus-union stack vs base: HumanEval +1 (why_comment alone was +5),
+  MBPP -3, agentic 7/35 (self_repair alone was 10/35). Frozen rule: NULL.
+- The union DILUTED BOTH component effects - one adapter on both
+  curricula at half concentration splits capacity. Confirms the
+  menagerie mixture-dilution law for coding: complementary effects do
+  NOT combine via corpus-mixing.
+- CORRECT combination is weight-space at full magnitude: task vectors
+  (base + repair_delta + why_delta). Testing that next (cheap, no
+  training).
