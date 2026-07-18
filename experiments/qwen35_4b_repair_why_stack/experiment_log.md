@@ -88,3 +88,18 @@ GPU stages (train/merge/measure) are pending their staged reviews.
 - CORRECT combination is weight-space at full magnitude: task vectors
   (base + repair_delta + why_delta). Testing that next (cheap, no
   training).
+
+## 2026-07-18 — Task-vector combination ALSO fails (worse than dilution)
+
+- Tested the weight-space combination (base + (self_repair-base) +
+  (why_comment-base), 128/723 tensors changed, full-magnitude both
+  deltas): HumanEval 126/164 (+1, same as the union - WHY gain gone),
+  agentic 3/35 (WELL BELOW base 8/35). Summing two full-strength deltas
+  INTERFERES/overshoots, hurting agentic badly.
+- CONCLUSION: the two weak positives do NOT combine by ANY method -
+  corpus-union DILUTES (both -> ~base), task-vector INTERFERES (agentic
+  degrades to 3/35). Combined with neither being individually
+  significant, this is strong evidence the individual effects
+  (why_comment +5 HE, self_repair +2 agentic) are FRAGILE / at the noise
+  floor. The SFT-curriculum thread has been thoroughly explored (6 bets)
+  without a robust, combinable, significant coding gain.

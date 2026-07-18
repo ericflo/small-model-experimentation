@@ -939,6 +939,29 @@ weight-space arithmetic (task vectors: base + (self_repair-base) +
 follow-on that is the immediate next test. See
 experiments/qwen35_4b_repair_why_stack.
 
+COGNITIVE-CORE CODING PROGRAM - honest interim verdict (2026-07-18,
+after 6 bets). Mapping the SFT-curriculum space for installing real
+coding in the base 4B: PASSIVE-skill curricula (execution-tracing) are
+NULL; BEHAVIOR/REASONING curricula give WEAK, TARGET-SPECIFIC positives
+- self_repair (repair loop) -> agentic 8/35->10/35 (+2), why_comment
+(inline #WHY: rationale) -> HumanEval +5 - but NEITHER is individually
+significant (agentic McNemar p~0.63; HE p~0.33), and CRUCIALLY they do
+NOT COMBINE: the corpus-union stack DILUTES both to ~base (mixture-
+dilution law), and the weight-space task-vector merge INTERFERES
+(agentic degrades to 3/35). The honest read: the individual positives
+are fragile, at the noise floor - installing coding via narrow static
+SFT curricula produces effects too small and non-robust to compound into
+a real gain on this 4B (whose base is already a strong function coder at
+76% HumanEval, weak agent at 23%). Two directional findings survive as
+hypotheses for a stronger paradigm: (1) LOOP/BEHAVIOR beats PASSIVE-SKILL
+(repair > tracing), and (2) WHY-rationale helps function correctness -
+both consistent with the agentic gap being a BEHAVIOR gap. The principled
+next paradigm if the goal continues is RL-FROM-EXECUTION-REWARD (RLVR):
+have the 4B PRACTICE the coding loop with reward = tests pass (provenance-
+clean, no teacher; installs behavior where SFT-imitation could not),
+rather than more static curricula. See experiments/qwen35_4b_repair_why_stack
+and the exec_trace/self_repair/why_comment cells.
+
 ## Portfolio Implications
 
 - Start with a program question, not an isolated run idea.
