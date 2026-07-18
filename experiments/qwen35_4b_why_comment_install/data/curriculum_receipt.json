@@ -1,0 +1,54 @@
+{
+  "contamination": {
+    "banned_function_names": 663,
+    "banned_hits": 0,
+    "ngram_overlap": {
+      "benchmark_ngrams": 43645,
+      "corpus_ngrams": 2734,
+      "ngram_n": 7,
+      "note": "code-only n-grams; #WHY: rationale prose excluded (audited by the banned-name gate)",
+      "shared_ngrams_distinctive": 0,
+      "shared_ngrams_structural_idiom": 51,
+      "status": "checked"
+    }
+  },
+  "corpus_sha256": "040be350678ea0337b8fe0607f783aba9e9071f789471b0ea00f7ce1ebef2962",
+  "distinct_commented_sources": 438,
+  "experiment_id": "qwen35_4b_why_comment_install",
+  "kinds": {
+    "why_comment": 504
+  },
+  "length_stats": {
+    "chars_max": 1343,
+    "chars_median": 1015,
+    "chars_min": 751,
+    "est_tokens_max_chars_over_3": 448,
+    "note": "conservative >=3 chars/token estimate; the measured tokenizer max is recorded in reports/report.md",
+    "render": "prompt+think+answer characters",
+    "train_max_length_tokens": 4096
+  },
+  "out": "/home/ericflo/Development/small-model-experimentation/experiments/qwen35_4b_why_comment_install/data/sft_why_comment.jsonl",
+  "rows": 504,
+  "schema_version": 1,
+  "seed": 92450,
+  "tier_schedule": [
+    [
+      "short",
+      120
+    ],
+    [
+      "medium",
+      192
+    ],
+    [
+      "long",
+      192
+    ]
+  ],
+  "tiers": {
+    "long": 192,
+    "medium": 192,
+    "short": 120
+  },
+  "unique_keys": 504
+}

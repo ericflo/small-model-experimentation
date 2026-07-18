@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 292
-- Anchor-ready: 275
-- Human-authored READMEs: 279
+- Experiments: 293
+- Anchor-ready: 276
+- Human-authored READMEs: 280
 - Generated README stubs: 13
-- Primary reports: 290
-- Experiment logs: 194
-- Smoke commands: 160
-- Artifact manifests: 264
+- Primary reports: 291
+- Experiment logs: 195
+- Smoke commands: 161
+- Artifact manifests: 265
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 178 |
+| `documented-scripts` | 179 |
 | `scripts-undocumented` | 23 |
 | `source-or-analysis` | 53 |
 
@@ -246,6 +246,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | no | [`qwen35_4b_verifier_guided_self_improvement`](../experiments/qwen35_4b_verifier_guided_self_improvement/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, reliability_and_safety | `generated-stub` | [report](../experiments/qwen35_4b_verifier_guided_self_improvement/reports/qwen35_4b_verifier_guided_self_improvement_report.md) | no | `scripts-undocumented` | yes | run-data | replace-generated-readme, add-experiment-log, document-run-path |
 | yes | [`qwen35_4b_verifier_selector_showdown`](../experiments/qwen35_4b_verifier_selector_showdown/README.md) | evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety | `human-authored` | [report](../experiments/qwen35_4b_verifier_selector_showdown/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_wall_climbing`](../experiments/qwen35_4b_wall_climbing/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_wall_climbing/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
+| yes | [`qwen35_4b_why_comment_install`](../experiments/qwen35_4b_why_comment_install/README.md) | agentic_breadth_installation, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_why_comment_install/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_zero_root_lineage_rebuild`](../experiments/qwen35_4b_zero_root_lineage_rebuild/README.md) | agentic_breadth_installation, posttraining_and_adaptation, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_zero_root_lineage_rebuild/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen_action_conditioned_vm_echo_policy_iteration`](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/README.md) | posttraining_and_adaptation, process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen_action_conditioned_vm_echo_policy_iteration/reports/qwen_action_conditioned_vm_echo_policy_iteration_report.md) | yes | `source-or-analysis` | no | checkpoint, dataset | document-run-path, add-smoke-command |
 | yes | [`qwen_active_crystallizer_public_gate`](../experiments/qwen_active_crystallizer_public_gate/README.md) | active_evidence_acquisition, benchmark_generalization, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen_active_crystallizer_public_gate/reports/qwen_active_crystallizer_public_gate_report.md) | yes | `source-or-analysis` | no |  | document-run-path, add-smoke-command, add-artifact-manifest |

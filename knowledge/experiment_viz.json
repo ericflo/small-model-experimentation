@@ -50227,6 +50227,35 @@
      "source": "experiments/qwen35_4b_self_repair_install/reports/measure_review.md"
     }
    ]
+  },
+  "qwen35_4b_why_comment_install": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "bar",
+     "title": "Bet #4 (WHY-comment): design chart — the base bar the WHY test must beat",
+     "categories": [
+      "HumanEval",
+      "MBPP",
+      "Agentic (of 35)"
+     ],
+     "series": [
+      {
+       "label": "base (target to beat)",
+       "values": [
+        0.7622,
+        0.565,
+        8
+       ]
+      }
+     ],
+     "x_label": "coding fitness signal (agentic in raw count of 35)",
+     "y_label": "pass rate / count",
+     "y_format": "number",
+     "note": "Pre-run design chart, not a model result. Cognitive-core bet #4 and the first of the WHY-not-WHAT family: teach the 4B WHY a correct answer is correct by putting a trailing #WHY: causal comment on every meaningful line of 504 by-construction correct solutions (no teacher; each row execution-verified: strip the comments and the code still passes all asserts; the commented code runs identically; every comment is line-specific and non-boilerplate). The inline variant goes first because comments are INERT to the execution grader, so the WHY hypothesis is testable with ZERO annealing and any pass@1 gain is an unconfounded CODE gain. Frozen tightened rule (identical to bet #2): INSTALLED_CODING needs >=3 problems on HumanEval OR MBPP with the other retained within 0.02; else RETENTION_FAIL or NULL. Honest prior on install ~35%. Base bars shown: HumanEval 76.2%, MBPP 56.5%, agentic 8/35. Result pending the sealed measurement.",
+     "source": "experiments/qwen35_4b_why_comment_install/reports/preregistration.md"
+    }
+   ]
   }
  }
 }

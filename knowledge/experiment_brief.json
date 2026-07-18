@@ -15203,6 +15203,37 @@
     }
    ],
    "charts": []
+  },
+  "qwen35_4b_why_comment_install": {
+   "verdict_tag": "Design frozen (bet #4, teach the model WHY): the clean comment-inert test of the WHY idea, built and verified, not yet run",
+   "concept_primer": "The team is trying to turn a small model that can write one function into one that can carry a task across many steps. Three earlier attempts to install coding cognition landed short of a clear win: a cheap proxy did not predict real coding, teaching the model to trace code was flat, and teaching it to debug (fix a broken function) nudged the score up only weakly. The new idea is the one most likely to matter: teach the model WHY a correct answer is correct — the reason behind each line — not just what the answer is. This experiment does that in the cleanest possible way. It generates 504 tiny correct Python functions and, on every meaningful line, writes a short comment giving the true reason that line is right (why this bound is n+1, why this starts at index 0, why this branch fires). Because the team builds each problem and its solution, they already know the reason for every line, so no bigger 'teacher' model is used, and every example is self-checked by running the code. The trick that makes this a clean test: code comments are ignored when the code is graded, so the model can be trained to write richly-commented code and then scored on plain coding exams with the comments thrown away — if the CODE got better, the act of explaining WHY is what did it, with nothing else to credit. The training material also looks nothing like the exams (the exams say 'write code from a description'; this teaches the same but with the reasons attached), so any improvement is real transfer.",
+   "plain_question": "Does teaching the 4B to explain WHY each line of correct code is correct — as inline comments the grader ignores — make its actual code better on real coding exams (HumanEval + MBPP), and move the multi-step agentic score, without breaking function-writing?",
+   "plain_answer": "Not yet measured — this is the frozen, fully-built design, not a result. The 504-row curriculum is complete and every row is verified by actually running the code: strip the WHY comments and the function still passes all its tests, the commented version runs identically, and every comment is specific to its line (not boilerplate). It is contamination-clean (zero benchmark function-name hits, zero distinctive shared code fragments) and the longest training example is 468 tokens, far under the limit, so nothing is cut off. The GPU train/merge/measure steps are gated behind staged reviews and have not run. When they do, a win is defined up front as at least 3 more problems solved on HumanEval or MBPP with the other held steady; anything smaller reads as no-change, and a drop reads as forgetting. Honest expectation going in: about a 35% chance of a real install — slightly better than the debug bet because explaining WHY is the most direct attack on the gap between 'knowing the answer' and 'being able to produce it', but still below even odds, so a flat result is a real possibility that would point to the next variant (put the reasoning in the model's private scratchpad instead of inline).",
+   "why_it_matters": "This is the program's fourth and most theory-driven attempt to INSTALL coding cognition. The first three attempts (a proxy, code-tracing, debugging) taught the team that passive skills reshuffle coding ability without raising it while loop/behavior training nudges it. Teaching WHY tests a different lever entirely — the causal reason behind a correct answer — and the inline-comment form is the cleanest experiment the team can run, because the grader ignores the comments, so a gain cannot be an artifact of the model being scored on its explanations. If it works, it validates that reasoning about WHY is trainable by a designed curriculum and unlocks a follow-on that strips the comments to check the improvement sticks; if it is flat, that is clean evidence to move the reasoning into the model's scratchpad (the next WHY variant) rather than guessing.",
+   "verdict_tone": "neutral",
+   "key_numbers": [
+    {
+     "label": "Design",
+     "value": "504 rows",
+     "sub": "WHY comment on every meaningful line; 0 skipped"
+    },
+    {
+     "label": "Base to beat",
+     "value": "76.2 / 56.5%",
+     "sub": "HumanEval / MBPP; agentic 8/35"
+    },
+    {
+     "label": "Win bar",
+     "value": ">= +3 problems",
+     "sub": "tightened rule, with retention within 0.02"
+    },
+    {
+     "label": "Prior",
+     "value": "~35%",
+     "sub": "honest pre-run odds of a real install"
+    }
+   ],
+   "charts": []
   }
  }
 }

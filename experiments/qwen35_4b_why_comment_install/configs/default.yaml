@@ -1,0 +1,40 @@
+# WHY-comment installation trial (lifecycle 35, cognitive-core coding bet #4).
+# Frozen configuration; the authoritative pins live in scripts/train_trial.py and
+# scripts/gen_why_comment_curriculum.py. This file documents the recipe.
+experiment_id: qwen35_4b_why_comment_install
+model:
+  id: Qwen/Qwen3.5-4B
+  revision: 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a
+base_composite:
+  path: large_artifacts/qwen35_4b_universal_curriculum/merged/base_reserialized
+  tree_sha256: 26d8ee48583adb0fb557d0ff668664949adff0068fa5baafe6f0af68e22fb677
+  weights_sha256: b654e033d525d87cbbd746bb681d80813c4b00d8e6202cb3edcfb6dfa3b416db
+curriculum:
+  generator: scripts/gen_why_comment_curriculum.py
+  construction_seed: 92450
+  corpus: data/sft_why_comment.jsonl
+  corpus_sha256: 040be350678ea0337b8fe0607f783aba9e9071f789471b0ea00f7ce1ebef2962
+  rows: 504
+  tier_schedule: {short: 120, medium: 192, long: 192}
+  marker: "#WHY:"
+train:
+  arm: why_comment
+  adapter: fresh_lora
+  rank: 32
+  alpha: 64
+  epochs: 1
+  lr: 1.0e-5
+  batch_size: 1
+  grad_accum: 8
+  max_length: 4096
+  w_think: 0.2
+  w_close: 0.2
+  seed: 92451
+  optimizer_steps: 63
+measure:
+  harness: experiments/qwen35_4b_coding_fitness_harness/scripts/eval_pass1.py
+  datasets: {humaneval: 164, mbpp: 200}
+  decoding: greedy_pass_at_1
+  consequence: {installed_min_gain_problems: 3, retention_tolerance: 0.02}
+  grader_ignores_comments: true
+anneal: none  # the commented model IS the test; comment-strip anneal is a future follow-on
