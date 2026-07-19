@@ -57,7 +57,12 @@ def main():
         model_init_kwargs={"dtype": "bfloat16"},
         gradient_checkpointing=True,
     )
-    trainer = SFTTrainer(model=a.model, args=args, train_dataset=ds, peft_config=peft_config)
+    # Pass a TOKENIZER (not AutoProcessor): Qwen3.5-4B is multimodal-capable, so TRL's default
+    # AutoProcessor sets _is_vlm=True and REFUSES assistant_only_loss. Our data is pure text.
+    from transformers import AutoTokenizer
+    tokenizer = AutoTokenizer.from_pretrained(a.model)
+    trainer = SFTTrainer(model=a.model, args=args, train_dataset=ds, peft_config=peft_config,
+                         processing_class=tokenizer)
     print("=== training SFT warm-start ===", flush=True)
     trainer.train()
     trainer.save_model(a.out)
