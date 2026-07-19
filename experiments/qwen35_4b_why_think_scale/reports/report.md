@@ -1,11 +1,12 @@
 # Qwen35 4B WHY-Think Scale — Report
 
-**Design-frozen report.** The dual-channel construction (the scale-capable
-generator with a genuine `<think>` derivation, the sha-pinned five-rung ladder, the
-train/eval harness, the tests) is complete and verified; the per-rung
-train/merge/measure GPU stages are gated behind staged adversarial reviews and have
-not run. Rung pass@1 numbers (measured thinking-on) and the assembled scaling curve
-will be appended to Results as the sweep is read.
+**FINISHED 2026-07-19 — see §Results.** NEGATIVE for the dual-channel design,
+POSITIVE for the method it surfaced (claim C60). The synthetic-`<think>` scale
+ladder collapses coding; a 2×2 ablation pins the cause on synthetic-think
+supervision; rejection-sampled NATIVE think retains. Only rungs 2k/5k of the
+sha-pinned ladder were run — the collapse is monotonic (worse as loss drops) with no
+pre-collapse peak, so 10k/20k/40k of a known-broken design were not spent; the
+diagnostic ablation + native-trace confirmation replaced them.
 
 ## Summary
 
@@ -152,15 +153,73 @@ risk, not a capability claim. The agentic duet-eval is the eventual deployable t
 but is a manual follow-on confirm on the peak composite, not gated here. No metric
 here uses hidden labels beyond the per-rung pass@1 reads.
 
+## Results (2026-07-19, thinking-on, shared fitness harness)
+
+Base (thinking-on, 8192 budget): HumanEval 147/164 (89.6%), MBPP 151/200 (75.5%).
+
+**Scale ladder (dual-channel: synthetic `<think>` @w=0.2 + inline `#WHY:` code), 1 epoch:**
+
+| rows | opt steps | train_loss | HumanEval | MBPP |
+|------|-----------|-----------|-----------|------|
+| 2000 | 250 | 5.854 | 129 (−18) | 136 (−15) |
+| 5000 | 625 | 2.700 | 121 (−26) | 119 (−32) |
+
+Monotonic COLLAPSE — lower loss (tighter fit to the synthetic target) ⇒ worse coding;
+no pre-collapse peak. Diagnostic on rung 5k (29 regressions vs 3 gains): native
+thinking SHORTENS (median 608→503 tok; regression set 759→540) and answers BALLOON
+(140→319 tok). The model is dragged toward my shallower templated reasoning + verbose
+commented code.
+
+**2×2 ablation @ 5000 rows (same recipe: lr 1e-5, r32/a64, bs1 ga8, seed 95201):**
+
+| arm | synth-think supervised (w=0.2) | `#WHY:` in code | HumanEval | MBPP |
+|-----|--------------------------------|-----------------|-----------|------|
+| base | — | — | 147 | 151 |
+| full (rung 5k) | yes | yes | 121 (−26) | 119 (−32) |
+| nowhy | yes | no | 113 (−34) | 124 (−27) |
+| thinkfree | no (w=0) | yes | 138 (−9) | 129 (−22) |
+| cleanfree | no (w=0) | no | 145 (−2) | 142 (−9) |
+
+Synthetic-think SUPERVISION is the dominant damage: turning it off is +17 HE (WHY on)
+to +32 HE (WHY off). `#WHY:` comments are secondary (+7 HE, +13 MBPP when removed).
+cleanfree (clean code + native/unsupervised think) is nearly retention-neutral ⇒ the
+synthetic PROBLEM distribution is fine; the hand-authored ANNOTATIONS were toxic.
+
+**Rejection-sampling confirmation (native think, execution-verified):** 3000 disjoint
+synthetic problems (offset 10000 of the 40k pool), sampled from base (K=2, temp 0.8,
+thinking-budget 8192), execution-filtered against the problem asserts (100% solved,
+99.6% per-sample pass), trained on native think + native CLEAN code, 1 epoch:
+
+| arm | think source | weight | HumanEval | MBPP |
+|-----|-------------|--------|-----------|------|
+| nowhy (from ablation) | authored (synthetic) | 0.2 | 113 (−34) | 124 (−27) |
+| rft_w0.2 | HARVESTED (native) | 0.2 | 148 (+1) | 142 (−9) |
+| rft_w1.0 | HARVESTED (native) | 1.0 | 148 (+1) | 139 (−12) |
+
+Same recipe + same weight, only synthetic→native think ⇒ **+35 HumanEval** (113→148).
+Native retains; native think survives FULL w=1.0 supervision (148). The residual MBPP
+−9 is a thinking-LENGTH bias: base hits the 8192 think-budget on 106/200 MBPP, the RFT
+model on only 21; training on easy short-trace problems globally shortened thinking,
+costing the long-budget-dependent hard MBPP problems (fixable with harder problems).
+
+The RFT harvesting scripts are preserved under `scripts/rft/` (build_problems.py,
+sample.sh, filter_build.py, train/ablation drivers) for reproducibility; corpora +
+adapters are ephemeral large-artifacts (not committed).
+
 ## Interpretation
 
-Pending the sweep. A rising-then-peaking curve makes the peak rung the SFT
-foundation for the RLVR phase (Phase B) and shows the dual-channel design scales WHY
-without the empty-think retention risk; it funds the agentic confirm. A flat curve
-reprices the WHY mechanism on this surface and takes RLVR from base. A collapse at the
-large rungs bounds the usable dose and makes the small rung the foundation. The
-distinctive design goal — teaching WHY WHILE preserving the model's native thinking —
-is testable independently as a thinking-on retention read.
+The dual-channel WHY-think design FAILS: you cannot improve — or even retain — a
+near-ceiling reasoner by SUPERVISING it on `<think>` traces worse than its own. The
+base's 89.6% HumanEval IS its native reasoning; AST-templated derivations are strictly
+worse and regress it, more so the better the model fits them. The durable rule: good
+think blocks must be HARVESTED from the model (execution-verified rejection sampling /
+STaR), never hand-authored. Native-trace RFT is a retention-SAFE SFT substrate.
+Separately, the corrected thinking-on baseline (HumanEval 89.6%, near ceiling) closes
+the "push function-writing up with SFT" goal — the old 76% was a thinking-off
+measurement artifact. The real prize is the agentic gap (duet-eval 8/35 = 23%), which
+needs multi-step BEHAVIOR curricula + RLVR, not more function completion. Successor:
+point the harvest method at a synthetic execution-verified AGENTIC environment (mirror
+the duet raw 4-tool schema) feeding an SFT warm-start, then RLVR.
 
 ## Next Experiments
 

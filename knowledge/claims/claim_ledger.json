@@ -1748,6 +1748,32 @@
     "Do not feed a raw last-layer hidden state back as an INPUT embedding expecting compute-depth gains: it is out-of-distribution (the model never learned to read its own hidden states as input) and accuracy is flat-to-declining with N.",
     "Do not expect free test-time compute on reasoning walls from latent hidden-state recurrence OR content-free filler tokens: both are flat at the wall; only real generated reasoning content (CoT) crosses it (3x on held-out shift)."
    ]
+  },
+  {
+   "id": "C60",
+   "title": "CODING THINK BLOCKS MUST BE HARVESTED, NOT AUTHORED: SFT on synthetic AST-templated <think> traces monotonically CRATERS a near-ceiling coder (HumanEval 147/164->129 at 2k rows, ->121 at 5k rows -- WORSE as train loss drops 5.85->2.70), because the base's 89.6% IS its native reasoning and templated traces are strictly worse. At matched recipe+weight, swapping synthetic->NATIVE (self-sampled, execution-verified) think is +35 HumanEval (113->148) and RETAINS coding (+1); native think survives FULL w=1.0 supervision (148). A 2x2 ablation isolates synthetic-think SUPERVISION as the dominant damage (+17 to +32 HE when removed), #WHY code-comments secondary (+7 HE / +13 MBPP). The -9 MBPP residual is training on easy short-trace problems globally SHORTENING thinking (base hits the 8192 budget on 106/200 MBPP, RFT on 21), hurting long-budget-dependent hard problems.",
+   "status": "Promising",
+   "programs": [
+    "agentic_breadth_installation"
+   ],
+   "summary": "Experiment qwen35_4b_why_think_scale (cognitive-core coding sub-program). Tests whether teaching the 4B WHY via a dual-channel curriculum -- a synthetic step-by-step <think> derivation (AST-derived, genuine, not comment-concat) PLUS strippable inline #WHY: code comments -- can be scaled to an SFT peak worth an RLVR foundation WITHOUT destroying native thinking. Measured thinking-ON (8192 budget) on the shared fitness harness; base HumanEval 147/164 (89.6%), MBPP 151/200 (75.5%). The scale ladder COLLAPSES: rung 2k (loss 5.85) HE -18/MBPP -15, rung 5k (loss 2.70) HE -26/MBPP -32 -- lower loss = worse coding, no pre-collapse peak. Diagnostic: on 29 regressions vs 3 gains the native think SHORTENS (median 608->503 tok) and answers BALLOON (140->319 tok). A 2x2 ablation at 5k (synthetic-think supervised y/n x #WHY-comments y/n): full 121/119, nowhy 113/124, thinkfree(w_think=0) 138/129, cleanfree(clean code + unsupervised think) 145/142 -- synthetic-think supervision is the dominant damage; clean-code SFT with native think is nearly retention-neutral, so the synthetic PROBLEM distribution is fine, the ANNOTATIONS were toxic. Rejection-sampling confirmation: 3000 disjoint synthetic problems sampled from base (K=2, temp 0.8, thinking-budget 8192), execution-filtered vs asserts (100% solved), trained native think + native clean code -- rft w=0.2 HE 148/MBPP 142, rft w=1.0 HE 148/MBPP 139. Same recipe+weight, synthetic-think (nowhy 113) vs native-think (rft 148) = +35 HumanEval.",
+   "evidence": [
+    {
+     "kind": "experiment",
+     "id": "qwen35_4b_why_think_scale"
+    }
+   ],
+   "implication": "Good think blocks for a near-ceiling reasoner must be HARVESTED from the model itself (execution-verified rejection sampling / STaR), never hand-authored -- authored traces regress native reasoning. Native-trace RFT is a retention-SAFE SFT substrate. Separately, the corrected thinking-on baseline reveals HumanEval at 89.6% (near ceiling): the 'push function-writing up with SFT' goal is largely closed (the 76% was a thinking-off measurement artifact); the real prize is the agentic gap (duet-eval 8/35 = 23%), which needs multi-step BEHAVIOR curricula + RLVR, not more function completion. Points the harvest method at a synthetic execution-verified AGENTIC environment feeding SFT warm-start then RLVR.",
+   "next_tests": [
+    "Build a synthetic execution-verified multi-step agentic env (mirror duet raw 4-tool schema: read_file/write_file/list_dir/run), harvest base multi-turn traces + hint-rationalization for the failing tail, SFT warm-start, measure transfer to duet-eval gen4.",
+    "Fix the MBPP thinking-shortening residual by harvesting on HARDER problems (longer native traces) and confirm it removes the -9 without re-introducing collapse.",
+    "RLVR with execution reward on the same agentic env from the SFT warm-start."
+   ],
+   "avoid": [
+    "Hand-authoring <think> traces (AST templates, teacher-free synthetic reasoning) for any near-ceiling capability -- it strictly regresses native reasoning; the more faithfully the model fits it (lower loss), the worse it codes.",
+    "Putting rich WHY annotations as inline code comments -- balloons answers 140->319 tok and dents coding.",
+    "Treating HumanEval/MBPP as SFT headroom -- both are near ceiling thinking-on; measure the agentic target instead."
+   ]
   }
  ]
 }

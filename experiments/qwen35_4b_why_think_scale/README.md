@@ -1,6 +1,6 @@
 # Qwen35 4B WHY-Think Scale
 
-**Status:** in-progress · since 2026-07-18 · dual-channel construction frozen (generator + sha-pinned ladder + harness + tests); GPU rungs (train/merge/measure) gated behind staged reviews and not yet run.
+**Status:** finished · 2026-07-19 · NEGATIVE for the dual-channel design + POSITIVE method finding (claim C60). The synthetic `<think>` scale ladder COLLAPSES coding thinking-on (rung 2k HE −18/MBPP −15, rung 5k HE −26/MBPP −32; lower loss = worse). A 2×2 ablation isolates synthetic-think SUPERVISION as the dominant damage. Rejection-sampled NATIVE think (self-sampled, execution-verified, 3000 problems) RETAINS coding (HE +1) — same recipe+weight, synthetic→native think = +35 HumanEval. Corrected baseline puts HumanEval at 89.6% (near ceiling): the SFT-push-function-writing goal is closed; prize is agentic. See `reports/report.md` §Results.
 
 ## Research Program
 

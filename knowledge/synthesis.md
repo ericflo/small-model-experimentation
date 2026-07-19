@@ -39,6 +39,8 @@ For the machine-checkable claim ledger, use [claims/index.md](claims/index.md).
 
 22. `In progress`: **the clean three-seed LoRA joint adjudication also misses state, so rank-causal controls are now compulsory** (`qwen35_4b_state_carry_vs_state_bag`, `qwen35_4b_state_carry_vs_state_bag_fullrank_delta`, and `qwen35_4b_state_formation_capacity_adjudication`; unclaimed; no claim ID allocated, 2026-07-14). The first exact-compute rank-32 LoRA pilot formed almost no joint node+phase+checksum state (0.00459 versus 0.40), while its direct-full-shape successor reached 0.00277 but was `PILOT_PROMOTION_BLOCKED` by simultaneous non-capacity failures and unmatched initialization/dropout RNG. The fresh adjudication removes those confounds: bit-identical shared state initialization, seed-matched data/order/dropout, exact K=1 bypass, positive state-path controls, three fixed-final 1,500-step seeds, and an immutable source-bound analyzer. Its LoRA joint result is again near chance: **0/57 required seed×split×depth cells pass 0.40**, maximum intact accuracy 0.0234375, all trained/deep/joint-shift categories miss, and adaptation contrast is uncertain. This validly establishes that the registered LoRA joint recipe does not form the state, but **still does not establish LoRA rank as the cause**. The frozen next branch mandates three LoRA state-only controls plus three matched 892M-parameter direct-full-shape joint runs; sealed contrast, representation pivots, and rank conclusions remain prohibited until that receipt.
 
+23. `Promising`: **coding think blocks must be HARVESTED from the model, not authored — the corrected baseline also closes the "push HumanEval with SFT" goal** (`qwen35_4b_why_think_scale`, claim C60, 2026-07-19). A dual-channel WHY curriculum (synthetic step-by-step `<think>` derivation + strippable inline `#WHY:` comments), measured thinking-on (base HumanEval 147/164 = 89.6%, MBPP 151/200), COLLAPSES on its scale ladder: rung 2k (loss 5.85) HE −18, rung 5k (loss 2.70) HE −26 — lower loss = worse coding, no pre-collapse peak. A 2×2 ablation isolates synthetic-`<think>` SUPERVISION as the dominant damage (+17 to +32 HE when removed; `#WHY:` comments secondary +7 HE); clean code + native/unsupervised think is near-neutral (−2 HE), so the synthetic problem distribution is fine and the hand-authored annotations were toxic. Rejection-sampled NATIVE think (3000 disjoint synthetic problems sampled from the base, execution-filtered, 100% solved) RETAINS coding (HE 148, +1) and survives full w=1.0 supervision — identical recipe/weight, only synthetic→native think, is **+35 HumanEval** (113→148). Durable rule: you cannot improve or even retain a near-ceiling reasoner by supervising it on `<think>` traces worse than its own; harvest them (execution-verified rejection sampling / STaR). The corrected thinking-on HumanEval (89.6%, near ceiling) reveals the old 76% was a thinking-off measurement artifact, so the SFT-push-function-writing goal is largely closed; the prize is the agentic gap (duet-eval 8/35 = 23%). Successor points the harvest method at a synthetic execution-verified agentic environment (mirror the duet raw 4-tool schema) feeding an SFT warm-start then RLVR.
+
 ## How To Read Prior Results
 
 Do not read the imported tracks as a closed agenda. Read them as seed data for research-program design:
@@ -212,6 +214,28 @@ Positive-only pull-up is safer than pairwise demotion, but shared LoRA weights s
 enough to erase transfer. Require an exact-logit locality preflight—then an absolute base and matched-compute
 agentic win—before treating thought-token steering as capability elicitation. Higher varentropy is not a
 license to push harder; its measured safety relationship was non-monotone.
+
+C60 carries the same lesson into coding SFT. **Coding `<think>` blocks must be HARVESTED from the
+model, not authored** ([qwen35_4b_why_think_scale](../experiments/qwen35_4b_why_think_scale/reports/report.md),
+claim C60, 2026-07-19). A dual-channel WHY curriculum — a synthetic step-by-step `<think>` derivation
+(AST-derived, genuine, not comment-concat) plus strippable inline `#WHY:` code comments — was built to
+scale WHY *while* preserving native thinking. Measured thinking-on (the corrected 8192-budget harness;
+base HumanEval 147/164 = 89.6%, MBPP 151/200), the synthetic-`<think>` scale ladder **collapses**: rung
+2k (loss 5.85) HE −18, rung 5k (loss 2.70) HE −26 — *lower loss = worse coding*, no pre-collapse peak.
+On the rung-5k regressions the native trace SHORTENS (median 608→503 tok) and answers BALLOON (140→319).
+A clean 2×2 ablation (synthetic-think supervised y/n × `#WHY:`-comments y/n) pins the dominant damage on
+**synthetic-think supervision** (+17 to +32 HE when removed; `#WHY:` comments secondary at +7 HE); clean
+code + native/unsupervised think is nearly retention-neutral (−2 HE), so the synthetic *problem
+distribution* is fine and the hand-authored *annotations* were toxic. The positive half: 3000 disjoint
+synthetic problems, sampled from the base itself (K=2, temp 0.8, budget 8192) and execution-filtered
+against their asserts, trained as native think + native clean code, **retain** (HE 148, +1) and survive
+full w=1.0 think supervision — the identical recipe and weight, only synthetic→native think, is **+35
+HumanEval** (113→148). The durable rule: you cannot improve or even retain a near-ceiling reasoner by
+supervising it on `<think>` traces worse than its own; harvest them (execution-verified rejection
+sampling / STaR), never write them. This also re-baselines the coding program — the corrected thinking-on
+HumanEval (89.6%, near ceiling) closes the "push function-writing up with SFT" goal (the old 76% was the
+thinking-off measurement artifact), leaving the agentic gap (duet-eval 8/35) as the prize; the successor
+points the harvest method at a synthetic execution-verified agentic environment feeding SFT-then-RLVR.
 
 The unclaimed Jacobian transport result adds a causal-representation corollary. An averaged J coordinate at
 layer 24 redirected 18/24 direct concept reports, but the same edit changed 0/24 separately mapped
