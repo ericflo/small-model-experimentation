@@ -18,8 +18,8 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 182 |
-| `scripts-undocumented` | 24 |
+| `documented-scripts` | 183 |
+| `scripts-undocumented` | 23 |
 | `source-or-analysis` | 53 |
 
 ## Curation Needs
@@ -28,7 +28,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | --- | ---: |
 | `add-smoke-command` | 132 |
 | `add-experiment-log` | 99 |
-| `document-run-path` | 77 |
+| `document-run-path` | 76 |
 | `add-artifact-manifest` | 28 |
 | `replace-generated-readme` | 13 |
 | `add-primary-report` | 2 |
@@ -59,7 +59,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_active_counterexample_trace_selection`](../experiments/qwen35_4b_active_counterexample_trace_selection/README.md) | active_evidence_acquisition, evidence_conditioned_selection, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_active_counterexample_trace_selection/reports/qwen35_4b_active_counterexample_trace_selection_report.md) | no | `documented-scripts` | no | dataset, large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_adaptive_evidence_budget_policy`](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md) | active_evidence_acquisition, benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, process_control_and_tool_use, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_adaptive_evidence_budget_policy/reports/qwen35_4b_adaptive_evidence_budget_policy_report.md) | no | `documented-scripts` | no | dataset, large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_adaptive_tool_controller`](../experiments/qwen35_4b_adaptive_tool_controller/README.md) | benchmark_generalization, process_control_and_tool_use, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_adaptive_tool_controller/reports/report.md) | no | `documented-scripts` | no |  | add-experiment-log, add-smoke-command, add-artifact-manifest |
-| yes | [`qwen35_4b_agentic_rlvr_feasibility`](../experiments/qwen35_4b_agentic_rlvr_feasibility/README.md) | posttraining_and_adaptation, process_control_and_tool_use | `human-authored` | [report](../experiments/qwen35_4b_agentic_rlvr_feasibility/reports/report.md) | no | `scripts-undocumented` | yes | standard-artifact | add-experiment-log, document-run-path |
+| yes | [`qwen35_4b_agentic_rlvr_feasibility`](../experiments/qwen35_4b_agentic_rlvr_feasibility/README.md) | posttraining_and_adaptation, process_control_and_tool_use | `human-authored` | [report](../experiments/qwen35_4b_agentic_rlvr_feasibility/reports/report.md) | no | `documented-scripts` | yes | standard-artifact | add-experiment-log |
 | yes | [`qwen35_4b_answer_potential_trace_sft`](../experiments/qwen35_4b_answer_potential_trace_sft/README.md) | evidence_conditioned_selection, posttraining_and_adaptation, reliability_and_safety, structured_execution_and_compilers, test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_answer_potential_trace_sft/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_axis_corpus_v2_staged_repair`](../experiments/qwen35_4b_axis_corpus_v2_staged_repair/README.md) | agentic_breadth_installation, benchmark_generalization, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_axis_corpus_v2_staged_repair/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen35_4b_axis_replay_stack_medium_target_match`](../experiments/qwen35_4b_axis_replay_stack_medium_target_match/README.md) | agentic_breadth_installation | `human-authored` | [report](../experiments/qwen35_4b_axis_replay_stack_medium_target_match/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |

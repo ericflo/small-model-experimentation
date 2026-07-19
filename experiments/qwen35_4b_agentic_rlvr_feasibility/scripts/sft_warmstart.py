@@ -27,7 +27,7 @@ def main():
     ap.add_argument("--epochs", type=float, default=3.0)
     ap.add_argument("--lr", type=float, default=1e-4)
     ap.add_argument("--rank", type=int, default=32)
-    ap.add_argument("--max-length", type=int, default=8192)
+    ap.add_argument("--max-length", type=int, default=6144)
     a = ap.parse_args()
 
     rows = [json.loads(l) for l in open(a.rows) if l.strip()]
@@ -54,7 +54,10 @@ def main():
         save_strategy="no",
         report_to=[],
         bf16=True,
-        model_init_kwargs={"dtype": "bfloat16"},
+        # HOST RAM is the binding constraint on this box (15GB total): plain from_pretrained stages
+        # the whole 4B through CPU and leaves a copy resident (~9GB RSS) -> the kernel OOM-killer
+        # kills training a few steps in. low_cpu_mem_usage loads shard-by-shard onto the GPU.
+        model_init_kwargs={"dtype": "bfloat16", "low_cpu_mem_usage": True},
         gradient_checkpointing=True,
     )
     # Pass a TOKENIZER (not AutoProcessor): Qwen3.5-4B is multimodal-capable, so TRL's default

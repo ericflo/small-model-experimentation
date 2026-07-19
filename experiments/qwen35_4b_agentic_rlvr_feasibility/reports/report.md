@@ -67,6 +67,20 @@ prerequisite that makes the base engage → produce reward variance → RLVR lea
 successor stage: harvest pi-coding-agent's own execution-verified completed trajectories (it engages
 the base well), convert to multi-turn tool-calling SFT rows, warm-start, then RLVR from there.
 
+## Operational constraint: HOST RAM (15GB), not just VRAM
+
+This box has **15GB of system RAM**, and it is a binding constraint independent of the 24GB GPU.
+Plain `from_pretrained` stages the whole 4B through CPU and leaves a resident copy: the SFT trainer
+grew to ~9.2GB RSS and the kernel OOM-killer silently killed it 2-5 steps into training, twice, with
+NO traceback in the log (`dmesg`: `Out of memory: Killed process (python3) anon-rss:9165056kB`).
+Symptom to recognize: training dies mid-run, no Python error, adapter never saved.
+
+FIX: `model_init_kwargs={"dtype": "bfloat16", "low_cpu_mem_usage": True}` — loads shard-by-shard
+straight onto the GPU. Trainer RSS dropped 9.2GB -> 2.2GB and training ran clean. Also keep
+`max_length` modest (6144) for multi-turn agentic rows. Long-running jobs should be launched with
+`setsid nohup ... &` so they survive shell/agent teardown, and outputs written under
+`large_artifacts/` (a crash wiped the /tmp scratchpad and cost ~4h of harvest).
+
 ## Next Experiments
 
 - Harvest pi trajectories on solvable real-repo tasks → multi-turn tool-calling SFT warm-start.
