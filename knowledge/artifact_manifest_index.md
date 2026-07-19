@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 268
-- Manifest files: 632
+- Experiments with manifests: 269
+- Manifest files: 633
 
 ## Manifest Types
 
@@ -14,7 +14,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `large-artifact` | 50 |
 | `other` | 125 |
 | `run-data` | 101 |
-| `standard-artifact` | 141 |
+| `standard-artifact` | 142 |
 
 ## Manifests
 
@@ -49,6 +49,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_active_counterexample_trace_selection` | `large-artifact` | [manifest](../experiments/qwen35_4b_active_counterexample_trace_selection/large_artifacts_manifest.md) |
 | `qwen35_4b_adaptive_evidence_budget_policy` | `dataset` | [manifest](../experiments/qwen35_4b_adaptive_evidence_budget_policy/data/dataset_manifest.json) |
 | `qwen35_4b_adaptive_evidence_budget_policy` | `large-artifact` | [manifest](../experiments/qwen35_4b_adaptive_evidence_budget_policy/large_artifacts_manifest.md) |
+| `qwen35_4b_agentic_rlvr_feasibility` | `standard-artifact` | [manifest](../experiments/qwen35_4b_agentic_rlvr_feasibility/reports/artifact_manifest.yaml) |
 | `qwen35_4b_answer_potential_trace_sft` | `standard-artifact` | [manifest](../experiments/qwen35_4b_answer_potential_trace_sft/reports/artifact_manifest.yaml) |
 | `qwen35_4b_axis_corpus_v2_staged_repair` | `other` | [manifest](../experiments/qwen35_4b_axis_corpus_v2_staged_repair/data/corpus_manifest.json) |
 | `qwen35_4b_axis_corpus_v2_staged_repair` | `other` | [manifest](../experiments/qwen35_4b_axis_corpus_v2_staged_repair/data/stream_manifest.json) |

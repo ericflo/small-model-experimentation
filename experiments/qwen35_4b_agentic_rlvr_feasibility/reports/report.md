@@ -1,0 +1,76 @@
+# Qwen35 4B Agentic RLVR Feasibility — Report
+
+**In-progress (2026-07-19).** Establishes that single-GPU agentic RLVR (execution-reward GRPO)
+physically works for Qwen3.5-4B, the exact recipe to fit it on one 24GB card, and that a narrow SFT
+warm-start is a prerequisite for the raw base to produce a learning signal. Successor stages: harvest
+(pi-coding-agent trajectories) → SFT warm-start → RLVR → transfer to a held-out real-coding split.
+
+## Stack
+
+Installed into `.venv-vllm` (no breakage to vllm 0.24 / transformers 5.13 / torch 2.11): `trl==1.8.0`,
+`openenv==0.4.1`, `trackio`. TRL 1.8 provides `GRPOTrainer(environment_factory=...)` where an env
+instance's non-underscore methods become the model's tools, TRL drives the multi-turn tool-calling
+loop AND owns the token logprobs GRPO needs, `reset(**row)` receives the dataset row and returns the
+task text, `get_reward()` is the terminal reward, and instances are pooled/reused. TRL ships Qwen3.5
+chat templates + tool-call parse schemas (`qwen3_5_think.jinja`, `qwen3_5_schema`) so agentic
+tool-calling with thinking is natively supported.
+
+Why not pi rollouts directly for GRPO: pi-coding-agent drives the base headlessly and produces
+faithful text trajectories (ideal for harvest/SFT and for eval), but records NO per-token logprobs
+(`grep logprob` across pi dist + all trajectories = 0). GRPO needs logprobs, so RLVR generation is
+TRL-driven through `CodingEnv` (whose tools mirror pi's interface, so it trains for pi deployment);
+pi remains the harvest + eval scaffold.
+
+## M0 GATE — the single-GPU GRPO colocate loop CLOSES
+
+C49 (Confirmed) says vLLM 0.24 runtime-LoRA is a silent no-op for Qwen3.5-4B PEFT adapters, which
+threatens TRL colocate's per-step LoRA→vLLM sync (it could train a frozen policy). Test: 20-step
+GRPO on base Qwen3.5-4B, colocate vLLM, bf16 LoRA, a trivial MOVABLE reward, asserting the served
+policy shifts. A "push-shorter" completion-length reward (base is verbose → starts 0.028) reached
+**0.38 within 3 steps** — impossible if the policy were frozen. **Verdict: the loop closes; C49 does
+NOT bite TRL colocate.** (The trend is noisy/oscillating → tune lr/KL for stability; not a blocker.)
+
+### The recipe that fits two 4B copies on one 24GB card (all three required)
+
+1. **enforce_eager**: monkeypatch `vllm.LLM.__init__` to inject `enforce_eager=True`. TRL has no
+   config field for it, and Qwen3.5's hybrid GDN/Mamba+attention arch HANGS on torch.compile /
+   CUDAGraph capture (also true for plain `vllm serve` — must pass `--enforce-eager`).
+2. **bf16 model load**: `model_init_kwargs={"dtype":"bfloat16"}`. `bf16=True` alone only sets the
+   training autocast; HF still loads the model in fp32 (16GB) → vLLM init OOM. bf16 load = 8.5GB.
+3. **memory split**: `vllm_gpu_memory_utilization=0.55` + `vllm_enable_sleep_mode=True` + a small
+   `vllm_max_model_length`. Below ~0.55 the KV cache computes NEGATIVE (weights + activation eat the
+   budget); at 0.55 KV ≈ 1.7GB and peak ≈ 22.6GB. Sleep mode frees ~12.8GB between generation and the
+   optimizer step (time-slices the two copies). `beta=0` skips the reference model.
+
+## Agentic integration — RAN END-TO-END
+
+`GRPOTrainer(environment_factory=lambda: CodingEnv())` on toolz stub-a-function tasks, thinking-on,
+num_generations=2, max_completion_length=1536, max_tool_calling_iterations=6, vllm_max_model_length
+4096: 3 GRPO steps at ~25s/step, fit 24GB. `tools/failure_frequency 0` — the pi-mirroring tools
+execute correctly. **The whole agentic RLVR machine works on one 4090.** (num_gen 4 + completion 3072
++ len 8192 crashed "CUDA device not ready" = too-long multi-turn sequences in the logprob forward;
+num_gen 8 OOMs — so the feasible group size on 24GB is ≈ 4.)
+
+## The learning blocker → warm-start prerequisite
+
+Across configs (± engagement scaffold, ± strong system prompt, num_generations up to the 24GB
+ceiling of ~4): `reward_std = 0`, `frac_reward_zero_std = 1` → zero advantage → zero gradient
+(loss 0). Logged completions show the base thinks briefly, emits 1–2 read/list tool calls (~120–150
+tokens), then STOPS on turn 2 without ever writing a fix — the same non-engagement diagnosed on real
+duet tasks (61% no-diff). Every rollout leaves the stub → identical reward → no variance. On 24GB the
+group size can't be grown enough (num_gen 8 OOMs) to catch the base's rare (~10%) successes.
+
+**Conclusion:** RLVR from the raw base is blocked by low engagement × small feasible group size. A
+NARROW SFT warm-start — teach the read→edit→test→iterate loop discipline and commit-from-partial
+(NOT success-only minimization, which deletes recovery per the program graveyard) — is the
+prerequisite that makes the base engage → produce reward variance → RLVR learns. This is the
+successor stage: harvest pi-coding-agent's own execution-verified completed trajectories (it engages
+the base well), convert to multi-turn tool-calling SFT rows, warm-start, then RLVR from there.
+
+## Next Experiments
+
+- Harvest pi trajectories on solvable real-repo tasks → multi-turn tool-calling SFT warm-start.
+- RLVR (GRPO) from the merged warm-start; reward = FAIL_TO_PASS AND PASS_TO_PASS, no-network sandbox
+  (reward-hacking guard); kill rule: RLVR must beat matched-compute sample-more on held-out pass-rate.
+- OpenEnv packaging of `CodingEnv` (create_app) for portability + pi/harvest reuse; mine duet-eval
+  scenarios into OpenEnv envs under a strict train/test firewall (never eval on trained scenarios).

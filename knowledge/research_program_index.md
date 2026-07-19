@@ -3,7 +3,7 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 296
+- Experiments: 297
 
 ## Structured Execution And Compilers
 
@@ -468,7 +468,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and other update mechanisms.
 
 - Charter: [posttraining_and_adaptation](../research_programs/posttraining_and_adaptation/charter.md)
-- Assigned experiments: 102
+- Assigned experiments: 103
 
 ### Seed Evidence
 
@@ -483,6 +483,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 - `dense_teacher_distillation` (track-y): [README](../experiments/dense_teacher_distillation/README.md)
 - `execution_conditioned_repair` (track-z): [README](../experiments/execution_conditioned_repair/README.md)
 - `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
+- `qwen35_4b_agentic_rlvr_feasibility` (new): [README](../experiments/qwen35_4b_agentic_rlvr_feasibility/README.md)
 - `qwen35_4b_answer_potential_trace_sft` (new): [README](../experiments/qwen35_4b_answer_potential_trace_sft/README.md)
 - `qwen35_4b_balanced_core_answer_potential_sft` (new): [README](../experiments/qwen35_4b_balanced_core_answer_potential_sft/README.md)
 - `qwen35_4b_balanced_discriminative_bridge` (track-z): [README](../experiments/qwen35_4b_balanced_discriminative_bridge/README.md)
@@ -587,7 +588,7 @@ Change small-model behavior through LoRA, DPO, distillation, GRPO, DAgger, and o
 Train or evaluate small models as controllers over tools, verifiers, budgets, and intermediate actions.
 
 - Charter: [process_control_and_tool_use](../research_programs/process_control_and_tool_use/charter.md)
-- Assigned experiments: 57
+- Assigned experiments: 58
 
 ### Seed Evidence
 
@@ -600,6 +601,7 @@ Train or evaluate small models as controllers over tools, verifiers, budgets, an
 
 - `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
 - `qwen35_4b_adaptive_tool_controller` (track-z): [README](../experiments/qwen35_4b_adaptive_tool_controller/README.md)
+- `qwen35_4b_agentic_rlvr_feasibility` (new): [README](../experiments/qwen35_4b_agentic_rlvr_feasibility/README.md)
 - `qwen35_4b_bucket_belief_probe_ranker` (track-z): [README](../experiments/qwen35_4b_bucket_belief_probe_ranker/README.md)
 - `qwen35_4b_code_confidence` (new): [README](../experiments/qwen35_4b_code_confidence/README.md)
 - `qwen35_4b_confidence_policy` (new): [README](../experiments/qwen35_4b_confidence_policy/README.md)

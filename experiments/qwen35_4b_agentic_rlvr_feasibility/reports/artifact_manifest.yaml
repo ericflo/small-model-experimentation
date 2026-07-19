@@ -1,0 +1,41 @@
+# Artifact manifest — agentic RLVR feasibility (infra + gate; no committed trained model yet).
+schema_version: 1
+experiment_id: "qwen35_4b_agentic_rlvr_feasibility"
+external_artifacts:
+  - name: "base Qwen/Qwen3.5-4B (RLVR policy + gate model)"
+    storage: "Qwen/Qwen3.5-4B @ 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a (HF cache)"
+    required_for: "GRPO policy init + the M0 loop-closure gate smoke"
+    checksum: "HF revision 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+    regenerate: "pinned HF revision; no regeneration needed"
+  - name: "real-repo task store (OSS repos + per-repo pytest venv)"
+    storage: "large_artifacts/_taskrepos/<repo> (e.g. toolz @ 568c2b83, .venv-test with pytest)"
+    required_for: "CodingEnv reset() workspace + get_reward() pytest grading; toolz stub-a-function tasks"
+    checksum: "per-repo pinned commit (toolz 568c2b8393973cd172a466546c9d95779c452438)"
+    regenerate: "git clone --depth 1 the repo; uv venv + uv pip install pytest -e .; scripts/gen_repo_tasks.py enumerates tested functions"
+  - name: "RLVR stack (inference venv)"
+    storage: ".venv-vllm (trl==1.8.0, openenv==0.4.1, vllm 0.24.0, transformers 5.13, peft 0.19, torch 2.11)"
+    required_for: "GRPOTrainer colocate + CodingEnv; all scripts run under .venv-vllm"
+    checksum: "requirements-vllm.lock.txt + uv pip install trl==1.8.0 openenv trackio"
+    regenerate: "uv pip install --python .venv-vllm/bin/python trl==1.8.0 openenv trackio (no upgrade to vllm/transformers/torch)"
+  - name: "any GRPO adapter/merged composite produced (measurement target, successor stages)"
+    storage: "large_artifacts/qwen35_4b_agentic_rlvr_feasibility/ (adapters/merged; not yet produced)"
+    required_for: "future warm-start / RLVR checkpoints"
+    checksum: "per-checkpoint (produced by the successor SFT/RLVR stages)"
+    regenerate: "produced by the harvest->SFT->RLVR pipeline once run"
+omitted_artifacts:
+  - path: "large_artifacts/ (task repos, adapters, merged composites) + HF model cache"
+    reason: "weights + repo checkouts; never checked into git; read/written by the pipeline"
+reproducibility:
+  smoke_command: "PATH=.venv-vllm/bin:$PATH .venv-vllm/bin/python scripts/m0_loopclose.py   # loop-closure gate"
+  full_command: "PATH=.venv-vllm/bin:$PATH .venv-vllm/bin/python scripts/agentic_grpo_test.py   # end-to-end agentic GRPO on toolz tasks"
+  required_external_artifacts:
+    - "Qwen/Qwen3.5-4B @ 851bf6e8..."
+    - "large_artifacts/_taskrepos/toolz @ 568c2b83 (+ .venv-test with pytest)"
+    - ".venv-vllm with trl==1.8.0 + openenv"
+notes: >
+  Feasibility + gate cell for single-GPU agentic RLVR (execution-reward GRPO) on Qwen3.5-4B (owner
+  /goal 2026-07-19). Establishes the loop closes (C49 does not bite TRL colocate), the 24GB recipe
+  (enforce_eager monkeypatch + bf16 model load + util 0.55 + sleep_mode), that the agentic machine
+  runs end-to-end, and that a narrow SFT warm-start is the prerequisite for reward variance. No
+  trained composite is committed yet; successor stages harvest pi-coding-agent trajectories -> SFT
+  warm-start -> RLVR, proven by transfer. See reports/report.md + claim C61.

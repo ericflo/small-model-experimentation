@@ -1,0 +1,169 @@
+"""CodingEnv — a real-repo agentic coding environment for TRL 1.8 GRPO environment_factory.
+
+TRL contract (verified in trl/trainer/grpo_trainer.py):
+- environment_factory() -> instance (no args); instances are POOLED/REUSED across batches.
+- reset(**kwargs) receives the FULL dataset row as kwargs; returns a string appended to the last
+  user message (the task instructions + initial state). MUST fully re-initialize (pooled reuse).
+- Every non-underscore method except reset/get_reward becomes a TOOL (needs type hints + docstring
+  for the tool schema). TRL drives the multi-turn tool-calling loop and owns the token logprobs.
+- get_reward() -> float, called once per completed rollout = the terminal reward.
+
+Tools mirror pi-coding-agent's interface (read/write/list/bash) so training transfers to pi deploy.
+Reward = fraction of the task's tests that pass (dense-ish signal for sparse binary success), with
+a strict full-pass=1.0. Runs in the repo's own venv (isolated via cwd-insertion of the local copy).
+"""
+import os, re, shutil, subprocess, tempfile
+from pathlib import Path
+
+RUN_TIMEOUT = 30
+TEST_TIMEOUT = 120
+MAX_OUT = 8000
+
+
+def _stub_function(repo_root: Path, rel_file: str, func_name: str):
+    import ast
+    p = repo_root / rel_file
+    src = p.read_text()
+    tree = ast.parse(src)
+    target = next((n for n in ast.walk(tree)
+                   if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)) and n.name == func_name), None)
+    if target is None:
+        return False
+    lines = src.split("\n")
+    body = target.body
+    first = body[0]
+    keep_doc = (isinstance(first, ast.Expr) and isinstance(getattr(first, "value", None), ast.Constant)
+                and isinstance(first.value.value, str))
+    start = (body[1].lineno - 1) if (keep_doc and len(body) > 1) else (first.lineno - 1)
+    end = body[-1].end_lineno
+    indent = " " * target.body[0].col_offset
+    lines[start:end] = [indent + "raise NotImplementedError  # TODO: implement"]
+    p.write_text("\n".join(lines))
+    return True
+
+
+class CodingEnv:
+    """Stub-a-function real-repo task. reset() kwargs: repo_dir, rel_file, func_name, python, test_cmd."""
+
+    def __init__(self):
+        self.project = None
+        self.env = None
+        self.test_cmd = None
+        self._task = None
+
+    # -- lifecycle -------------------------------------------------------------
+    def reset(self, **kwargs) -> str:
+        self._cleanup()
+        self._task = kwargs
+        repo_dir = kwargs["repo_dir"]
+        rel_file = kwargs["rel_file"]
+        func_name = kwargs["func_name"]
+        python = kwargs["python"]
+        self.test_cmd = kwargs.get("test_cmd", "python -m pytest -q")
+        self.project = Path(tempfile.mkdtemp(prefix="grpoenv_"))
+        shutil.copytree(repo_dir, self.project, dirs_exist_ok=True,
+                        ignore=shutil.ignore_patterns(".git", ".venv*", "__pycache__", "*.pyc"))
+        _stub_function(self.project, rel_file, func_name)
+        venv_bin = str(Path(python).parent)
+        self.env = {**os.environ, "PATH": venv_bin + os.pathsep + os.environ.get("PATH", ""),
+                    "VIRTUAL_ENV": str(Path(python).parent.parent), "PYTHONDONTWRITEBYTECODE": "1"}
+        return (f"You are in the project root of a Python repo. The function `{func_name}` in `{rel_file}` "
+                f"has had its body replaced with `raise NotImplementedError`. Implement it so the tests pass. "
+                f"Work methodically and DO NOT give up early:\n"
+                f"1. Read `{rel_file}` and the function's tests (under the tests directory) to learn the exact "
+                f"required behavior.\n"
+                f"2. You MUST edit `{rel_file}` with write_file to implement `{func_name}` — never finish "
+                f"without having written your implementation.\n"
+                f"3. Run `{self.test_cmd}` with run_bash to check. If it fails, read the error, fix, and repeat.\n"
+                f"4. Only stop once the tests actually pass. Only edit `{rel_file}`.")
+
+    def get_reward(self) -> float:
+        if self.project is None:
+            return 0.0
+        # engagement gate: did the agent actually implement the function (remove the stub)?
+        try:
+            edited = "raise NotImplementedError  # TODO: implement" not in (self.project / self._task["rel_file"]).read_text()
+        except Exception:
+            edited = False
+        if not edited:
+            return 0.0  # never wrote -> 0 (forces engagement, creates variance vs writers)
+        r = self._run(self.test_cmd, TEST_TIMEOUT)
+        out = r["out"]
+        if r["code"] == 0:
+            return 1.0
+        m_pass = re.search(r"(\d+) passed", out)
+        m_fail = re.search(r"(\d+) failed", out)
+        p = int(m_pass.group(1)) if m_pass else 0
+        f = int(m_fail.group(1)) if m_fail else 0
+        if p + f == 0:
+            return 0.05  # edited but crashes / collection error -> tiny credit for attempting
+        return 0.1 + 0.5 * (p / (p + f))  # edited + partial pass: 0.1..0.6; full pass=1.0
+
+    # -- tools (become the model's tool interface) -----------------------------
+    def read_file(self, path: str) -> str:
+        """Read a UTF-8 text file in the project and return its contents.
+
+        Args:
+            path: Project-relative path to the file to read.
+        """
+        f = self._safe(path)
+        return f.read_text(errors="replace")[:MAX_OUT] if f and f.exists() else "(no such file)"
+
+    def write_file(self, path: str, content: str) -> str:
+        """Create or overwrite a UTF-8 text file in the project with the full new content.
+
+        Args:
+            path: Project-relative path to write.
+            content: Full file contents to write.
+        """
+        f = self._safe(path)
+        if f is None:
+            return "(invalid path)"
+        f.parent.mkdir(parents=True, exist_ok=True)
+        f.write_text(content)
+        return f"wrote {path} ({len(content)} bytes)"
+
+    def list_dir(self, path: str = ".") -> str:
+        """List the entries of a directory in the project.
+
+        Args:
+            path: Project-relative directory path (default '.').
+        """
+        d = self._safe(path)
+        if d is None or not d.exists():
+            return "(no such directory)"
+        return "\n".join(sorted(x.name + ("/" if x.is_dir() else "") for x in d.iterdir())) or "(empty)"
+
+    def run_bash(self, command: str) -> str:
+        """Run a shell command in the project root and return combined stdout/stderr and exit code.
+
+        Args:
+            command: The shell command to run.
+        """
+        r = self._run(command, RUN_TIMEOUT)
+        return f"[exit {r['code']}]\n{r['out']}"
+
+    # -- internals -------------------------------------------------------------
+    def _safe(self, path):
+        try:
+            p = (self.project / (path or ".")).resolve()
+            if not str(p).startswith(str(self.project.resolve())):
+                return None
+            return p
+        except Exception:
+            return None
+
+    def _run(self, command, timeout):
+        try:
+            r = subprocess.run(command, shell=True, cwd=str(self.project), text=True, env=self.env,
+                               stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=timeout)
+            return {"code": r.returncode, "out": (r.stdout or "")[:MAX_OUT]}
+        except subprocess.TimeoutExpired:
+            return {"code": 124, "out": f"[timeout after {timeout}s]"}
+        except Exception as e:
+            return {"code": 1, "out": f"[error: {type(e).__name__}: {e}]"}
+
+    def _cleanup(self):
+        if self.project is not None:
+            shutil.rmtree(self.project, ignore_errors=True)
+            self.project = None

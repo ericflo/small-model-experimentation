@@ -50433,6 +50433,79 @@
      "source": "experiments/qwen35_4b_why_think_scale/reports/preregistration.md"
     }
    ]
+  },
+  "qwen35_4b_agentic_rlvr_feasibility": {
+   "charts": [
+    {
+     "headline": true,
+     "kind": "line",
+     "title": "M0 gate: does the single-GPU GRPO loop physically close? (movable push-shorter reward)",
+     "series": [
+      {
+       "label": "actual served-policy reward (loop CLOSES)",
+       "points": [
+        [
+         1,
+         0.028
+        ],
+        [
+         2,
+         0.271
+        ],
+        [
+         3,
+         0.379
+        ],
+        [
+         4,
+         0.0
+        ],
+        [
+         5,
+         0.021
+        ],
+        [
+         6,
+         0.054
+        ]
+       ]
+      },
+      {
+       "label": "frozen-policy prediction if C49 bit (schematic)",
+       "points": [
+        [
+         1,
+         0.028
+        ],
+        [
+         2,
+         0.028
+        ],
+        [
+         3,
+         0.028
+        ],
+        [
+         4,
+         0.028
+        ],
+        [
+         5,
+         0.028
+        ],
+        [
+         6,
+         0.028
+        ]
+       ]
+      }
+     ],
+     "x_label": "GRPO step",
+     "y_label": "mean reward (fraction; higher=shorter completions)",
+     "y_format": "number",
+     "note": "The reward climbing to 0.38 (vs the flat ~0.028 a frozen policy would show) proves the vLLM-served policy updates each step: C49's runtime-LoRA no-op does NOT bite TRL colocate. Noisy/oscillating -> lr/KL tuning. Recipe: enforce_eager monkeypatch + bf16 model load + vllm_gpu_memory_utilization 0.55 + sleep_mode on one 24GB card."
+    }
+   ]
   }
  }
 }

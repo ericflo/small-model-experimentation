@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 60
+- Claims: 61
 
 ## Status Counts
 
@@ -11,14 +11,14 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 7 |
 | Negative | 3 |
 | Open | 2 |
-| Promising | 48 |
+| Promising | 49 |
 
 ## Program Counts
 
 | Program | Claims |
 | --- | ---: |
 | `active_evidence_acquisition` | 1 |
-| `agentic_breadth_installation` | 8 |
+| `agentic_breadth_installation` | 9 |
 | `algorithmic_memory_and_retrieval` | 1 |
 | `benchmark_generalization` | 13 |
 | `collective_experimentation_infrastructure` | 2 |
@@ -1464,3 +1464,26 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Hand-authoring <think> traces (AST templates, teacher-free synthetic reasoning) for any near-ceiling capability -- it strictly regresses native reasoning; the more faithfully the model fits it (lower loss), the worse it codes.
 - Putting rich WHY annotations as inline code comments -- balloons answers 140->319 tok and dents coding.
 - Treating HumanEval/MBPP as SFT headroom -- both are near ceiling thinking-on; measure the agentic target instead.
+
+## C61: SINGLE-GPU AGENTIC RLVR IS FEASIBLE FOR Qwen3.5-4B, BUT NEEDS AN SFT WARM-START FOR SIGNAL: TRL 1.8 GRPO colocate closes the loop on one 24GB card (movable reward 0.028->0.38 in 3 steps -> the vLLM-served policy updates, so C49's runtime-LoRA no-op does NOT bite TRL colocate), with a required recipe (enforce_eager monkeypatch for the hybrid arch's CUDAGraph hang; bf16 model_init load not fp32; vllm_gpu_memory_utilization 0.55 + sleep_mode -> peak ~22.6GB). The full agentic loop (environment_factory CodingEnv, thinking-on, pi-mirroring read/write/list/bash tools, pytest reward) runs end-to-end. But the RAW base yields reward_std=0 (explores 1-2 reads ~120 tok then quits WITHOUT writing) and the 24GB card caps num_generations at ~4 (8 OOMs), so a narrow loop-discipline SFT warm-start is the prerequisite before RLVR learns.
+
+- Status: `Promising`
+- Programs: `agentic_breadth_installation`
+- Summary: Experiment qwen35_4b_agentic_rlvr_feasibility. Owner /goal (2026-07-19): install real-codebase agentic coding into Qwen3.5-4B via pi-coding-agent + OpenEnv, harvest->SFT->RLVR, proven by transfer. Stack: trl==1.8.0 + openenv==0.4.1 into .venv-vllm (no break to vllm 0.24). M0 gate (C49 test): a push-shorter length reward on 20-step colocate GRPO reached 0.38 within 3 steps vs base 0.028 -> served policy updates -> loop closes. Recipe to fit two 4B copies on 24GB: monkeypatch vllm.LLM enforce_eager=True (TRL has no field; hybrid mamba/attn hangs on torch.compile), model_init_kwargs dtype bfloat16 (bf16=True alone loads fp32 16GB), util 0.55 + sleep_mode (<0.55 -> negative KV cache). Integration: GRPOTrainer(environment_factory=CodingEnv) on toolz stub-a-function tasks, thinking-on, ran 3 steps ~25s/step, tools/failure 0. Blocker: across scaffold/system-prompt/num_gen variants, reward_std=0 (frac_reward_zero_std=1) -> zero gradient; logged completions show the base thinks briefly, does 1-2 read/list calls, stops without writing; num_gen 8 OOMs. pi-coding-agent drives the base well headlessly but records NO logprobs (harvest/eval scaffold, not a GRPO rollout source).
+- Implication: Single-GPU agentic RLVR is a viable install mechanism for this 4B with the pinned recipe, and C49 does not obstruct it (deploy via colocate, not runtime-LoRA-through-a-separate-server). The next stage is a NARROW SFT warm-start (teach explore->edit->test->iterate loop discipline + commit-from-partial, NOT success-only minimization which deletes recovery per the program graveyard) harvested from pi-coding-agent's own execution-verified completed trajectories, then RLVR from the merged warm-start, proven by transfer to a held-out real-coding split (duet-eval final external read only).
+
+### Evidence
+
+- [`qwen35_4b_agentic_rlvr_feasibility`](../../experiments/qwen35_4b_agentic_rlvr_feasibility/reports/report.md)
+
+### Next Tests
+
+- Harvest pi-coding-agent completed+passing trajectories on solvable real-repo tasks -> multi-turn tool-calling SFT rows -> warm-start; confirm the warm-started model then produces reward_std>0 in the agentic env.
+- RLVR (GRPO) from the merged warm-start; reward = FAIL_TO_PASS AND PASS_TO_PASS, no-network sandbox; kill rule: beat matched-compute sample-more on held-out pass-rate.
+- Tune GRPO stability (lr, beta/KL, loss_type grpo vs dr_grpo) - the M0 reward trend oscillated.
+
+### Avoid
+
+- Expecting RLVR to learn from the raw base on one 24GB GPU: reward variance is zero (base quits without writing) and num_generations can't be grown past ~4 (OOM) to catch rare successes.
+- Running colocate vLLM WITHOUT enforce_eager (hangs on Qwen3.5 hybrid arch) or WITHOUT bf16 model_init (loads fp32 -> OOM).
+- Using pi-coding-agent rollouts as GRPO samples: pi records no per-token logprobs; use it for harvest/eval, and TRL-driven CodingEnv (pi-mirroring tools) for RLVR generation.
