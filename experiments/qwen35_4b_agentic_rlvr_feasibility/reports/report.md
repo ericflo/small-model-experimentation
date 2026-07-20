@@ -348,6 +348,36 @@ per-token.
 The good policy (merged warm-start, 0.606) is preserved and remains the deployment baseline;
 `merged/pi_rft` is kept only as the evidence for this finding.
 
+## Iteration: the short-success + low-LR fix CONFIRMS the mechanism (2026-07-20)
+
+Re-ran the loop with two of the pre-registered fixes: keep only trajectories with ≤8 assistant turns
+(21 of 46 survive) and drop LR 1e-4 → 2e-5. Same harvest, same holdout, same harness.
+
+| | held-out mean pass | timeouts (exit 124) | mean episode secs |
+|---|---|---|---|
+| baseline (warm-start) | **0.606** | 13/32 | 364 |
+| pi-RFT v1 (all 46, lr 1e-4) | 0.121 | 28/33 | 572 |
+| **pi-RFT v2 (≤8 turns, lr 2e-5)** | **0.576** | 12/33 | 363 |
+
+**This confirms the v1 diagnosis.** Recovering almost the entire regression (0.121 → 0.576) by exactly
+the two changes predicted to fix non-termination — with timeouts falling 28/33 → 12/33 and speed
+returning to baseline — proves v1's collapse WAS the long-trajectory/high-LR loop-forever pathology,
+not something inherent to fitting pi trajectories.
+
+**But v2 still does not beat baseline (0.576 vs 0.606).** It rescued two previously-unsolved tasks
+(`case_convert`, `schema_lite`: 0.00 → 0.33) and lost ground on three (`expr_eval`, `flatten`,
+`pretty_bytes`), for a net slightly-negative move that is within noise at k=3. So the honest status is:
+**execution-filtered SFT on pi's own successes has been made SAFE but not yet NET-POSITIVE.**
+
+Why this is expected, not a surprise: fitting successes reinforces what the policy already does right
+and has NO signal to suppress the failures (the timeouts, the wrong answers). It cannot push a task
+from 0 → 1 unless a success for that task was harvested, and the tasks that most need help are exactly
+the ones with the fewest harvested successes. The missing ingredient is a NEGATIVE gradient on the bad
+rollouts — which is what advantage-weighted RLVR provides and what execution-filtered SFT structurally
+cannot. On this hardware that means either (a) patching pi to surface logprobs so GRPO can consume its
+rollouts, or (b) a preference method (DPO) over pi's passing-vs-timing-out trajectory pairs, which
+needs no logprobs and directly penalizes the loop-forever behaviour. (b) is the next bet.
+
 ## Next Experiments
 
 - Harvest pi trajectories on solvable real-repo tasks → multi-turn tool-calling SFT warm-start.

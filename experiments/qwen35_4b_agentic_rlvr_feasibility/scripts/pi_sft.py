@@ -88,10 +88,22 @@ def main():
     ap.add_argument("--lr", type=float, default=1e-4)
     ap.add_argument("--rank", type=int, default=32)
     ap.add_argument("--max-length", type=int, default=8192)
+    ap.add_argument("--max-turns", type=int, default=0,
+                    help="keep only trajectories with <= this many assistant turns (0 = no filter). "
+                         "The first pi-RFT run (lr 1e-4, all 46 trajectories, mean 12 turns) taught "
+                         "the model to LOOP FOREVER: 92%% of assistant turns were tool calls, so "
+                         "'stop and answer' was drowned out ~11:1 and holdout pass fell 0.606->0.121. "
+                         "SHORT successes carry the stop-early signal the long ones dilute.")
     a = ap.parse_args()
 
     rows = [json.loads(l) for l in open(a.rows) if l.strip()]
-    keep = [_arrow_safe(r) for r in rows if r.get("messages")]
+    keep = [r for r in rows if r.get("messages")]
+    if a.max_turns:
+        before = len(keep)
+        keep = [r for r in keep
+                if sum(1 for m in r["messages"] if m.get("role") == "assistant") <= a.max_turns]
+        print(f"short-success filter (<= {a.max_turns} turns): {before} -> {len(keep)} trajectories", flush=True)
+    keep = [_arrow_safe(r) for r in keep]
     print(f"pi RFT rows: {len(keep)} | tools rendered per row: "
           f"{len(json.loads(keep[0]['tools']))} schemas", flush=True)
     turns = [sum(1 for m in r["messages"] if m.get("role") == "assistant") for r in keep]
