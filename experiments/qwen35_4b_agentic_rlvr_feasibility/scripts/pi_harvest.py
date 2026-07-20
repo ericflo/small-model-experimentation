@@ -58,6 +58,33 @@ def ensure_providers(n, base_port, upstream_model):
     return [f"kiln-harvest{i}" for i in range(n)]
 
 
+def _normalize(msg):
+    """Coerce a logged OpenAI message into what the Qwen training template expects.
+
+    pi sends tool_call arguments as JSON STRINGS (the OpenAI wire format), but the Qwen chat
+    template calls .items() on `arguments`, so a string silently renders wrong or raises. Only the
+    final completion was being converted; the REPLAYED assistant turns in `messages` -- i.e. most of
+    the trajectory -- still carried strings. Convert every one.
+    """
+    m = dict(msg)
+    out = []
+    for tc in (m.get("tool_calls") or []):
+        tc = dict(tc)
+        fn = dict(tc.get("function") or {})
+        args = fn.get("arguments")
+        if isinstance(args, str):
+            try:
+                args = json.loads(args)
+            except Exception:
+                args = {"_raw": args}
+        fn["arguments"] = args if isinstance(args, dict) else {}
+        tc["function"] = fn
+        out.append(tc)
+    if out:
+        m["tool_calls"] = out
+    return m
+
+
 def rows_from_log(lines):
     """Turn one episode's logged exchanges into ONE conversational SFT row.
 
@@ -68,7 +95,7 @@ def rows_from_log(lines):
     if not lines:
         return None
     last = max(lines, key=lambda r: len(r.get("messages") or []))
-    msgs = list(last.get("messages") or [])
+    msgs = [_normalize(m) for m in (last.get("messages") or [])]
     comp = last.get("completion") or {}
     assistant = {"role": "assistant", "content": comp.get("content") or ""}
     if comp.get("reasoning_content"):
