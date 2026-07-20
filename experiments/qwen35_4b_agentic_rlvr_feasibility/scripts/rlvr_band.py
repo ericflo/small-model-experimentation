@@ -90,6 +90,9 @@ def main():
         learning_rate=a.lr, logging_steps=1, max_steps=a.steps, save_strategy="no", report_to=[],
         bf16=True, model_init_kwargs={"dtype": "bfloat16", "low_cpu_mem_usage": True},
         gradient_checkpointing=True,
+        # explicit: with a FROZEN base + LoRA, reentrant checkpointing can silently drop
+        # gradients through the first checkpointed segment. non-reentrant is the safe default.
+        gradient_checkpointing_kwargs={"use_reentrant": False},
         use_vllm=True, vllm_mode="colocate", vllm_enable_sleep_mode=True,
         vllm_gpu_memory_utilization=a.vllm_util, vllm_max_model_length=a.model_len,
         temperature=1.0, loss_type="dr_grpo", importance_sampling_level="sequence", beta=a.beta,

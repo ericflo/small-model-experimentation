@@ -59,6 +59,9 @@ def main():
         # kills training a few steps in. low_cpu_mem_usage loads shard-by-shard onto the GPU.
         model_init_kwargs={"dtype": "bfloat16", "low_cpu_mem_usage": True},
         gradient_checkpointing=True,
+        # explicit: with a FROZEN base + LoRA, reentrant checkpointing can silently drop
+        # gradients through the first checkpointed segment. non-reentrant is the safe default.
+        gradient_checkpointing_kwargs={"use_reentrant": False},
     )
     # Pass a TOKENIZER (not AutoProcessor): Qwen3.5-4B is multimodal-capable, so TRL's default
     # AutoProcessor sets _is_vlm=True and REFUSES assistant_only_loss. Our data is pure text.
