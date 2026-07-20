@@ -167,7 +167,9 @@ def main():
     ap.add_argument("--model", default="qwen35-4b-pi8k")
     ap.add_argument("--timeout", type=int, default=600)
     ap.add_argument("--split", default=str(OUTD / "adapters" / "rlvr_band_split.json"))
-    ap.add_argument("--split-key", default="train", choices=["train", "holdout"])
+    ap.add_argument("--split-key", default="train", choices=["train", "holdout", "harvest"],
+                    help="`harvest` = train tasks the policy can actually pass in pi "
+                         "(pass>0); harvesting a 0.00 task yields ~nothing")
     ap.add_argument("--tasks", default=None, help="explicit comma-separated ids (overrides --split)")
     ap.add_argument("--out", default=str(OUTD / "pi_sft_rows.jsonl"))
     a = ap.parse_args()
