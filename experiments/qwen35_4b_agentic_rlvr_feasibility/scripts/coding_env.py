@@ -12,8 +12,40 @@ Tools mirror pi-coding-agent's interface (read/write/list/bash) so training tran
 Reward = fraction of the task's tests that pass (dense-ish signal for sparse binary success), with
 a strict full-pass=1.0. Runs in the repo's own venv (isolated via cwd-insertion of the local copy).
 """
-import os, re, shutil, subprocess, tempfile
+import functools, inspect, os, re, shutil, subprocess, tempfile
 from pathlib import Path
+
+
+def _tolerant(fn):
+    """Drop tool arguments the tool does not declare, instead of raising TypeError.
+
+    Measured: the policy emits a spurious `<parameter=content>None</parameter>` on EVERY tool call,
+    so `read_file(path=..., content=None)` raised TypeError and 86% of all tool calls failed
+    (tools/failure_frequency 0.8621). The agent then burned every iteration on rejected calls and
+    never reached write_file -> every rollout scored exactly 0.0 -> reward_std 0 -> no GRPO gradient.
+    That looked like a task-difficulty problem for a long time; it was a harness-strictness problem.
+
+    Real agent harnesses (pi-coding-agent included) tolerate extra arguments, so tolerating them here
+    also makes the training env behave like the deployment target. Genuine errors still surface:
+    a MISSING required argument (e.g. write_file without content) still raises.
+
+    functools.wraps sets __wrapped__, so inspect.signature() follows through to the ORIGINAL
+    signature -- transformers still builds the correct tool JSON schema from it, which is why this
+    does not repeat the earlier `*a, **k` mistake that produced DocstringParsingException.
+    """
+    params = set(inspect.signature(fn).parameters)
+
+    @functools.wraps(fn)
+    def wrapper(self, *args, **kwargs):
+        dropped = [k for k in kwargs if k not in params]
+        for k in dropped:
+            kwargs.pop(k)
+        out = fn(self, *args, **kwargs)
+        if dropped and isinstance(out, str):
+            out += f"\n[note: ignored unsupported argument(s): {', '.join(sorted(dropped))}]"
+        return out
+
+    return wrapper
 
 RUN_TIMEOUT = 30
 TEST_TIMEOUT = 120
@@ -102,6 +134,7 @@ class CodingEnv:
         return 0.1 + 0.5 * (p / (p + f))  # edited + partial pass: 0.1..0.6; full pass=1.0
 
     # -- tools (become the model's tool interface) -----------------------------
+    @_tolerant
     def read_file(self, path: str) -> str:
         """Read a UTF-8 text file in the project and return its contents.
 
@@ -111,6 +144,7 @@ class CodingEnv:
         f = self._safe(path)
         return f.read_text(errors="replace")[:MAX_OUT] if f and f.exists() else "(no such file)"
 
+    @_tolerant
     def write_file(self, path: str, content: str) -> str:
         """Create or overwrite a UTF-8 text file in the project with the full new content.
 
@@ -125,6 +159,7 @@ class CodingEnv:
         f.write_text(content)
         return f"wrote {path} ({len(content)} bytes)"
 
+    @_tolerant
     def list_dir(self, path: str = ".") -> str:
         """List the entries of a directory in the project.
 
@@ -136,6 +171,7 @@ class CodingEnv:
             return "(no such directory)"
         return "\n".join(sorted(x.name + ("/" if x.is_dir() else "") for x in d.iterdir())) or "(empty)"
 
+    @_tolerant
     def run_bash(self, command: str) -> str:
         """Run a shell command in the project root and return combined stdout/stderr and exit code.
 
@@ -219,10 +255,10 @@ class SynthEnv(CodingEnv):
         except Exception:
             return 0.0
         if not edited:
-            return 0.0
+            return self._log_reward(0.0, edited)
         r = self._run(self.test_cmd, TEST_TIMEOUT)
         if r["code"] == 0:
-            return 1.0
+            return self._log_reward(1.0, edited, r)
         try:
             total = max(1, test.read_text().count("def t"))
         except Exception:
@@ -230,4 +266,25 @@ class SynthEnv(CodingEnv):
         import re as _re
         idx = _re.findall(r"in t(\d+)", r["out"])
         passed = max(int(x) for x in idx) if idx else 0   # died in tN => t0..t(N-1) passed
-        return round(0.15 + 0.6 * min(1.0, passed / total), 4)
+        return self._log_reward(round(0.15 + 0.6 * min(1.0, passed / total), 4), edited, r)
+
+    def _log_reward(self, reward, edited, r=None):
+        """Optional per-rollout reward trace (RLVR_REWARD_LOG=path).
+
+        GRPO only ever logs the BATCH MEAN, which cannot distinguish "policy never engaged" from
+        "policy engaged and failed" -- and that difference decides whether the blocker is the task
+        band or the harness. One JSON line per scored rollout makes the distinction observable.
+        """
+        import os as _os
+        path = _os.environ.get("RLVR_REWARD_LOG")
+        if path:
+            import json as _j
+            try:
+                with open(path, "a") as fh:
+                    fh.write(_j.dumps({"task": (self._task or {}).get("scenario_id"),
+                                       "reward": reward, "edited": bool(edited),
+                                       "code": (r or {}).get("code"),
+                                       "out": ((r or {}).get("out") or "")[:200]}) + "\n")
+            except Exception:
+                pass
+        return reward

@@ -13,7 +13,14 @@ OOMs a 15GB box), bf16 load, util 0.50.
 import argparse, json, os, sys
 os.environ.setdefault("TRL_EXPERIMENTAL_SILENCE", "1")
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
-os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
+# DO NOT enable expandable_segments here. It makes torch's caching allocator use the CUDA virtual
+# memory driver APIs (cuMemCreate/cuMemMap/cuMemSetAccess) -- the SAME APIs vLLM's sleep-mode
+# CuMemAllocator uses to unmap/remap its arena on the same device. Under colocate the two collide and
+# the BACKWARD pass dies with "RuntimeError: CUDA driver error: device not ready" (torch surfaces
+# driver-API failures with the "CUDA driver error" prefix via C10_CUDA_DRIVER_CHECK). It only bites
+# once sequences are long enough to force segment growth during backward -- which is exactly why the
+# short-completion M0 gate passed and every long-rollout config crashed.
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = os.environ.get("RLVR_ALLOC_CONF", "")
 from pathlib import Path
 
 import vllm
@@ -22,16 +29,25 @@ def _patched_init(self, *a, **kw):
     kw["enforce_eager"] = True
     return _orig_init(self, *a, **kw)
 vllm.LLM.__init__ = _patched_init
+# vLLM sleep level controls the VRAM/host tradeoff between generation and the training forward:
+#   level 1 = free KV only, weights STAY on GPU  -> vLLM holds ~8.5GB during training
+#             (long-sequence training forwards then OOM: "CUDA driver error: device not ready")
+#   level 2 = ALSO offload weights to HOST RAM   -> training gets the full card back
+# Level 2 was previously fatal here because the trainer held ~9.2GB RSS (9.2+8.5 > 15GB host).
+# With low_cpu_mem_usage the trainer is ~2.2GB, so the 8.5GB offload now fits -> level 2 is what
+# makes LONG rollouts affordable without truncating the task.
+_SLEEP_LEVEL = int(os.environ.get("RLVR_SLEEP_LEVEL", "2"))
 _orig_sleep = vllm.LLM.sleep
-def _sleep_level1(self, level=2):
-    return _orig_sleep(self, level=1)
-vllm.LLM.sleep = _sleep_level1
+def _sleep_patched(self, level=2):
+    return _orig_sleep(self, level=_SLEEP_LEVEL)
+vllm.LLM.sleep = _sleep_patched
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 ROOT = HERE.parents[2]
 from coding_env import SynthEnv
 import synth_scenarios
+import mined_scenarios
 from datasets import Dataset
 from peft import LoraConfig
 from trl import GRPOConfig, GRPOTrainer
@@ -61,16 +77,26 @@ def main():
                     help="KEY: micro-batch x grad-accum = generation batch, which must be divisible by\n"
                          "num_generations. Accumulation lets the GROUP stay large (signal) while the\n"
                          "logprob-forward micro-batch stays small (memory).")
+    ap.add_argument("--pool", choices=["band", "all"], default="band",
+                    help="band = the calibrated 0.25-0.75 tasks; all = the full 52-scenario pool "
+                         "(12 hand-authored + 40 mined from duet SHAPES under the train/test firewall)")
+    ap.add_argument("--log-completions", action="store_true", help="dump rollout text for diagnosis")
+    ap.add_argument("--no-liger", action="store_true",
+                    help="disable the fused chunked GRPO loss (see below) -- for A/B only")
     ap.add_argument("--micro-batch", type=int, default=1,
                     help="per_device_train_batch_size: sequences in ONE logprob forward (memory knob)")
     a = ap.parse_args()
 
-    band = set(t.split(":", 1)[1] for t in json.load(open(a.band))["band"] if t.startswith("synth:"))
-    scen = {s["id"]: s for s in synth_scenarios.SCENARIOS}
-    picked = [scen[i] for i in sorted(band) if i in scen]
+    all_scen = list(synth_scenarios.SCENARIOS) + list(mined_scenarios.SCENARIOS)
+    scen = {s["id"]: s for s in all_scen}
+    if a.pool == "all":
+        picked = all_scen
+    else:
+        band = set(t.split(":", 1)[1] for t in json.load(open(a.band))["band"] if t.startswith("synth:"))
+        picked = [scen[i] for i in sorted(band) if i in scen]
     if not picked:
-        print("no band tasks found — run calibrate_difficulty.py first"); return
-    print(f"RLVR band tasks ({len(picked)}): {[s['id'] for s in picked]}", flush=True)
+        print("no tasks found — run calibrate_difficulty.py first, or pass --pool all"); return
+    print(f"RLVR pool={a.pool} tasks ({len(picked)}): {[s['id'] for s in picked]}", flush=True)
 
     rows = [{"prompt": [{"role": "system", "content": SYSTEM},
                         {"role": "user", "content": "Complete the coding task using the available tools."}],
@@ -80,7 +106,7 @@ def main():
     # reset(**row) receives every column; name the task text `prompt_text` -> map to what reset expects
     for r in rows:
         r["prompt_text"] = r["prompt_text"]
-    ds = Dataset.from_list(rows * 12)
+    ds = Dataset.from_list(rows * (12 if a.pool == "band" else 3))
 
     args = GRPOConfig(
         output_dir=a.out + "_out",
@@ -93,10 +119,19 @@ def main():
         # explicit: with a FROZEN base + LoRA, reentrant checkpointing can silently drop
         # gradients through the first checkpointed segment. non-reentrant is the safe default.
         gradient_checkpointing_kwargs={"use_reentrant": False},
+        # THE long-rollout unlock. Qwen3.5's vocab is 248320, so the LM head dominates training
+        # memory: MEASURED at seq 4096, full-loss activations were 12.04GiB vs 2.60GiB when the head
+        # was excluded -- i.e. the head alone was 9.44GiB, 78% of all activation memory (the body is
+        # only ~0.65GiB/1k). That, not attention and not vLLM colocation, is what made 8k rollouts
+        # need 32.8GiB on a 24GiB card. Liger's chunked fused GRPO loss never materializes the full
+        # [seq, 248320] logits tensor. Safe here because our LoRA does NOT target lm_head (TRL raises
+        # if it does, since Liger reads lm_head.weight directly and would silently freeze the head).
+        use_liger_kernel=not a.no_liger,
         use_vllm=True, vllm_mode="colocate", vllm_enable_sleep_mode=True,
         vllm_gpu_memory_utilization=a.vllm_util, vllm_max_model_length=a.model_len,
         temperature=1.0, loss_type="dr_grpo", importance_sampling_level="sequence", beta=a.beta,
         chat_template_kwargs={"enable_thinking": True},
+        log_completions=a.log_completions, num_completions_to_print=2,
     )
     peft_config = LoraConfig(r=32, lora_alpha=64, lora_dropout=0.0,
                              target_modules=["q_proj", "k_proj", "v_proj", "o_proj",
