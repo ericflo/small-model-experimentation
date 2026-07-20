@@ -167,3 +167,48 @@ class CodingEnv:
         if self.project is not None:
             shutil.rmtree(self.project, ignore_errors=True)
             self.project = None
+
+
+class SynthEnv(CodingEnv):
+    """Self-contained-scenario variant for TRL environment_factory.
+
+    The difficulty calibration found the RLVR-usable band (per-task pass rate 0.25-0.75 for the
+    warm-started policy) lives in the SELF-CONTAINED scenarios, not the real-repo stub tasks (which
+    are uniformly 0.00). This env seeds a scenario's files into a temp project instead of stubbing a
+    function in a repo checkout. Tools + reward semantics are inherited from CodingEnv, so the model
+    sees the IDENTICAL pi-mirroring tool interface it was warm-started on.
+
+    reset(**row) expects: scenario_id, files (dict path->content), check (shell cmd), prompt.
+    """
+
+    def reset(self, **kwargs) -> str:
+        self._cleanup()
+        self._task = kwargs
+        import json as _json
+        files = kwargs["files"]
+        if isinstance(files, str):           # datasets may serialize the dict
+            files = _json.loads(files)
+        self.test_cmd = kwargs.get("check", "python3 test_solution.py")
+        self.project = Path(tempfile.mkdtemp(prefix="grposynth_"))
+        for rel, content in files.items():
+            f = self._safe(rel); f.parent.mkdir(parents=True, exist_ok=True)
+            f.write_text(content, encoding="utf-8")
+        self.env = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1"}
+        # NOTE: TRL passes the WHOLE dataset row to reset(**row), so kwargs["prompt"] is the chat
+        # messages list, not the task text. The task text is carried as `prompt_text`.
+        return kwargs.get("prompt_text") or (
+            "Implement the solution in `solution.py` so that the tests pass. Read `test_solution.py` "
+            f"first, then implement and run `{self.test_cmd}` to verify. Iterate until it passes.")
+
+    def get_reward(self) -> float:
+        if self.project is None:
+            return 0.0
+        r = self._run(self.test_cmd, TEST_TIMEOUT)
+        if r["code"] == 0:
+            return 1.0
+        # engagement gate: did the agent replace the NotImplementedError stub at all?
+        try:
+            edited = "NotImplementedError" not in (self.project / "solution.py").read_text()
+        except Exception:
+            edited = False
+        return 0.1 if edited else 0.0
