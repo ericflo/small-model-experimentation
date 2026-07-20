@@ -83,6 +83,11 @@ def main():
                     help="band = the calibrated 0.25-0.75 tasks; all = the full 52-scenario pool "
                          "(12 hand-authored + 40 mined from duet SHAPES under the train/test firewall)")
     ap.add_argument("--log-completions", action="store_true", help="dump rollout text for diagnosis")
+    ap.add_argument("--holdout-every", type=int, default=4,
+                    help="TRAIN/TEST FIREWALL: every Nth band task (sorted, deterministic) is held "
+                         "OUT of training and reserved for evaluation. The goal forbids evaluating on "
+                         "a scenario we trained on, so the split is made HERE, at the training entry "
+                         "point, and written to disk -- not left to whoever runs the eval later.")
     ap.add_argument("--no-liger", action="store_true",
                     help="disable the fused chunked GRPO loss (see below) -- for A/B only")
     ap.add_argument("--micro-batch", type=int, default=1,
@@ -96,7 +101,15 @@ def main():
     else:
         # accept both id styles: the legacy calibrator prefixed "synth:", calibrate_trl.py does not
         band = set(t.split(":", 1)[1] if ":" in t else t for t in json.load(open(a.band))["band"])
-        picked = [scen[i] for i in sorted(band) if i in scen]
+        ordered = [i for i in sorted(band) if i in scen]
+        held = [i for n, i in enumerate(ordered) if a.holdout_every and n % a.holdout_every == 0]
+        train_ids = [i for i in ordered if i not in set(held)]
+        picked = [scen[i] for i in train_ids]
+        split_path = Path(a.out + "_split.json")
+        split_path.parent.mkdir(parents=True, exist_ok=True)
+        split_path.write_text(json.dumps({"train": train_ids, "holdout": held}, indent=1))
+        print(f"FIREWALL: train {len(train_ids)} tasks | HELD OUT {len(held)}: {held}", flush=True)
+        print(f"          split -> {split_path}", flush=True)
     if not picked:
         print("no tasks found — run calibrate_difficulty.py first, or pass --pool all"); return
     print(f"RLVR pool={a.pool} tasks ({len(picked)}): {[s['id'] for s in picked]}", flush=True)
