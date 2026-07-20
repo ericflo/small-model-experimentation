@@ -309,6 +309,45 @@ execution-filtered policy improvement: pi generates → execution verifies → f
 repeat. That needs no logprobs and is what the goal separately asks for ("harvest pi-coding-agent's
 own execution-verified successful trajectories").
 
+## The pi-driven loop CLOSED — and RFT made the policy WORSE (2026-07-20)
+
+The full cycle ran end to end: pi generated 78 episodes on the train split → execution verified them
+(63 passed, 81%) → the passing trajectories were fitted on top of the policy that produced them →
+merged → re-evaluated through pi on the stratified holdout. **Result: a large regression.**
+
+| | held-out mean pass | episodes timing out (exit 124) | mean episode secs |
+|---|---|---|---|
+| baseline (merged warm-start) | **0.606** | 13/32 | 364 |
+| pi-RFT composite | **0.121** | **28/33** | 572 |
+
+Every held-out task got worse or stayed at zero. This is a real, execution-verified NEGATIVE result,
+recorded as such.
+
+**Mechanism: the RFT policy never stops.** The regression is not "wrong answers" — it is timeouts.
+Baseline timed out on 13/32 episodes; RFT on 28/33, at exactly the 600s wall clock, having looped
+tool calls the whole time. The 1.6x slowdown is the same fact seen from the side.
+
+**Why fitting SUCCESSFUL trajectories taught non-termination.** The harvested trajectories are long
+(mean 12 assistant turns, up to 31) and 92% of ALL assistant turns are tool calls; only the final
+turn of each is a clean stop. With `assistant_only_loss` weighting every assistant span equally, the
+model saw "call another tool" ~11x more than "stop and answer", and LoRA at lr 1e-4 on top of an
+already-working policy over-fit the continuation behaviour into a loop-forever regime. Fitting
+*verified successes* is not automatically safe when the successes are long and stop-behaviour is rare
+per-token.
+
+**What this rules in for the next iteration** (hypotheses, pre-registered so the next run is a test):
+1. Down-weight or cap length: fit only the LAST k turns, or add explicit terminal-stop emphasis, so
+   "stop when done" is not drowned out ~11:1.
+2. Much lower LR / fewer steps: 1e-4 full-strength SFT is too aggressive for polishing a working
+   policy; try 2e-5, or KL-anchor to the warm-start.
+3. Reward SHORT successes: prefer trajectories that solved in few turns, since those carry the
+   stop-early signal the long ones dilute.
+4. This is exactly the gap RLVR (advantage-weighted, penalize the timeouts) would close if pi
+   surfaced logprobs — the execution-filtered SFT surrogate has no negative signal for looping.
+
+The good policy (merged warm-start, 0.606) is preserved and remains the deployment baseline;
+`merged/pi_rft` is kept only as the evidence for this finding.
+
 ## Next Experiments
 
 - Harvest pi trajectories on solvable real-repo tasks → multi-turn tool-calling SFT warm-start.
