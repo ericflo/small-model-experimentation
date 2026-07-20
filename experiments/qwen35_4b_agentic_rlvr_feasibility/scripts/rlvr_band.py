@@ -63,7 +63,9 @@ SYSTEM = ("You are an expert Python coding agent. Think step by step, then use t
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", required=True)
-    ap.add_argument("--band", default=str(OUTD / "difficulty.json"))
+    ap.add_argument("--band", default=str(OUTD / "difficulty_trl.json"),
+                    help="TRL-faithful calibration (difficulty.json came from the old "
+                         "hand-rolled harness and does not reflect what the trainer sees)")
     ap.add_argument("--out", default=str(OUTD / "adapters" / "rlvr_band"))
     ap.add_argument("--steps", type=int, default=40)
     ap.add_argument("--num-generations", type=int, default=6)
@@ -92,7 +94,8 @@ def main():
     if a.pool == "all":
         picked = all_scen
     else:
-        band = set(t.split(":", 1)[1] for t in json.load(open(a.band))["band"] if t.startswith("synth:"))
+        # accept both id styles: the legacy calibrator prefixed "synth:", calibrate_trl.py does not
+        band = set(t.split(":", 1)[1] if ":" in t else t for t in json.load(open(a.band))["band"])
         picked = [scen[i] for i in sorted(band) if i in scen]
     if not picked:
         print("no tasks found — run calibrate_difficulty.py first, or pass --pool all"); return
