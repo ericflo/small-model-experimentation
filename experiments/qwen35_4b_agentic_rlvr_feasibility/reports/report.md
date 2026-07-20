@@ -378,8 +378,66 @@ cannot. On this hardware that means either (a) patching pi to surface logprobs s
 rollouts, or (b) a preference method (DPO) over pi's passing-vs-timing-out trajectory pairs, which
 needs no logprobs and directly penalizes the loop-forever behaviour. (b) is the next bet.
 
+## DPO on the loop-forever pathology REGRESSED the policy (2026-07-20)
+
+The pre-registered bet (b): DPO supplies the negative gradient RFT structurally lacks. Built it end to
+end and it is a **NEGATIVE result** — worse than the null RFT.
+
+**How the rejected side was actually constructed, and why it changed.** The plan was real pass-vs-
+timeout pairs. Harvesting the timeouts turned out to be infeasible as designed: pi_rft's timeout is
+NOT a clean multi-turn loop but a **single non-terminating generation** (measured on one episode: 92
+stream deltas, 1 `message_end`, content frozen at "let me read the test file" while `<think>` ran to
+the wall). The logging proxy records an exchange on stream COMPLETION, so a stream that never
+completes logs nothing → every harvested rejected had 0 turns. (Two real wiring bugs surfaced on the
+way and are worth keeping: pi must be served as `--served-model-name qwen35-4b-pi8k`, NOT `Qwen3.5-4B`
+— the stale `pi_episode.py` docstring is wrong and a 404 model-name mismatch silently yields empty
+trajectories; and the `kiln-harvest{i}` providers are pinned to base-port 8431, so a harvester on any
+other base-port gets "Connection error".)
+
+So the rejected side became a **synthetic decision-point negative**: at the solved state (last tool
+result = `ALL PASS`), chosen = the real terminal stop, rejected = one more redundant tool call. Pure
+stop-vs-continue, 45 pairs over 24 train tasks, firewall-clean. DPO trained cleanly and learned it
+emphatically: `rewards/accuracies` 0 → **1.0**, `rewards/margins` 0 → **0.565**, loss 0.693 → 0.451.
+
+**Deployment result (pi, 11-task holdout, k=3, same conditions as the 0.606 baseline):**
+
+| | holdout mean pass | Δ vs baseline |
+|---|---|---|
+| warm-start baseline | **0.606** | — |
+| pi-RFT v2 (short+lowLR SFT) | 0.576 | −0.030 (null) |
+| **pi-DPO (synthetic stop-signal)** | **0.515** | **−0.091 (regression)** |
+
+Per task, DPO rescued two (`expr_eval` 0.33→0.67, `case_convert` 0.00→0.33) but damaged four that were
+solid (`min_heap` 1.00→0.33, `rle`/`pretty_bytes` 1.00→0.67, `allocate` 0.33→0.00). The three
+persistent zeros (`json_pointer`, `schema_lite`, and now `allocate`) never move.
+
+**Two lessons, both about mis-targeting.**
+1. **Wrong target.** The holdout failure is looping *before* the task is solved; the synthetic
+   negative only teaches termination *after* it is solved (a state those episodes never reach). The
+   signal cannot fire where the failure lives.
+2. **Right method, wrong dose — same fragility as RFT-v1.** Learned to accuracy 1.0 / margin 0.57 on
+   45 pairs, the "prefer stop over act" preference generalized into *premature stopping / degraded
+   acting* and broke tasks the policy already solved. This is the third time a narrow policy edit on
+   the working 0.606 warm-start has failed to beat it (RFT-v1 crashed, RFT-v2 null, DPO regressed).
+
+**Converging conclusion:** on this curriculum the 0.606 warm-start behaves like a local optimum that
+narrow SFT/preference edits perturb *downward*. The remaining holdout headroom is concentrated in a
+few tasks the model solves 0% of the time in *both* policies — that reads as a CAPABILITY gap, not a
+termination-discipline gap, and termination framing (the loop-forever lens) addressed the wrong bottleneck.
+The 0.606 warm-start remains the deployment policy; `merged/pi_dpo` is kept only as this finding's evidence.
+Caveat: k=3, so per-task rates are noisy — but a solid task falling to 0.33 (min_heap) is a real
+2-of-3 flip, and the direction (down, via damage to working tasks) is consistent across four tasks.
+
 ## Next Experiments
 
+- **Diverge from policy-editing this warm-start.** Three narrow edits (RFT×2, DPO) have now failed to
+  beat 0.606; stop iterating hyperparameters and attack the CAPABILITY gap directly. The headroom is
+  `json_pointer`/`schema_lite`/`allocate` at 0% under both policies — get ANY execution-verified
+  success on them (more inference compute: best-of-n with execution selection; or a targeted
+  sub-curriculum that builds the missing skill) before trying to install it.
+- If returning to a negative gradient: target loop-*before*-solve (the real failure), pair against it
+  with a gentler dose (higher beta, ≤1 epoch, lower LR) so the working policy is not perturbed — the
+  DPO regression was overshoot on a mis-targeted signal, not proof the method cannot help.
 - Harvest pi trajectories on solvable real-repo tasks → multi-turn tool-calling SFT warm-start.
 - RLVR (GRPO) from the merged warm-start; reward = FAIL_TO_PASS AND PASS_TO_PASS, no-network sandbox
   (reward-hacking guard); kill rule: RLVR must beat matched-compute sample-more on held-out pass-rate.

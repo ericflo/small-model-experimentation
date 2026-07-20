@@ -141,6 +141,7 @@ def main():
         print(f"  {t:22s} pass {v:.2f}  meanR {sum(per[t])/len(per[t]):.2f}  (n={len(per[t])})", flush=True)
     print(f"\nMEAN pass rate: {mean_pass:.3f} over {len(rates)} tasks", flush=True)
     print(f"engaged (edited): {sum(r['edited'] for r in recs)}/{len(recs)}", flush=True)
+    Path(a.out).parent.mkdir(parents=True, exist_ok=True)  # never lose a 50-min eval to a missing dir
     Path(a.out).write_text(json.dumps(
         {"label": a.label, "provider": a.provider, "model": a.model, "k": a.k,
          "rates": rates, "mean_pass": mean_pass, "episodes": recs}, indent=1))

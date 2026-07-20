@@ -2,13 +2,13 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 61
+- Claims: 62
 
 ## Status Counts
 
 | Status | Claims |
 | --- | ---: |
-| Confirmed | 7 |
+| Confirmed | 8 |
 | Negative | 3 |
 | Open | 2 |
 | Promising | 49 |
@@ -18,7 +18,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Program | Claims |
 | --- | ---: |
 | `active_evidence_acquisition` | 1 |
-| `agentic_breadth_installation` | 9 |
+| `agentic_breadth_installation` | 10 |
 | `algorithmic_memory_and_retrieval` | 1 |
 | `benchmark_generalization` | 13 |
 | `collective_experimentation_infrastructure` | 2 |
@@ -1487,3 +1487,27 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Expecting RLVR to learn from the raw base on one 24GB GPU: reward variance is zero (base quits without writing) and num_generations can't be grown past ~4 (OOM) to catch rare successes.
 - Running colocate vLLM WITHOUT enforce_eager (hangs on Qwen3.5 hybrid arch) or WITHOUT bf16 model_init (loads fp32 -> OOM).
 - Using pi-coding-agent rollouts as GRPO samples: pi records no per-token logprobs; use it for harvest/eval, and TRL-driven CodingEnv (pi-mirroring tools) for RLVR generation.
+
+## C62: NARROW POLICY EDITS PERTURB THE 0.606 pi-DEPLOYMENT WARM-START DOWNWARD; THE REMAINING HOLDOUT HEADROOM IS A CAPABILITY GAP, NOT TERMINATION DISCIPLINE
+
+- Status: `Confirmed`
+- Programs: `agentic_breadth_installation`
+- Summary: Experiment qwen35_4b_agentic_rlvr_feasibility (owner /goal 2026-07-19). Three narrow policy edits on top of the merged SFT warm-start (the pi-deployment baseline, 0.606 mean pass over an 11-task pi_split holdout, measured through pi-coding-agent itself, k=3) all FAIL to beat it: pi-RFT v1 (execution-filtered SFT on 46 passing pi trajectories, lr 1e-4) CRASHED it to 0.121 by teaching loop-forever; v2 (short-success <=8 turns + lr 2e-5) recovered to 0.576 = NULL; and DPO on synthetic decision-point pass-vs-continue pairs (chosen=terminal stop after ALL PASS, rejected=one more redundant tool call; 45 pairs/24 train tasks; learned emphatically to rewards/accuracies 1.0, margins 0.565) REGRESSED it to 0.515 (-0.091). DPO rescued 2 tasks but damaged 4 that were already solid (min_heap 1.00->0.33). The pi_rft loop-forever timeout is a SINGLE non-terminating generation (92 stream deltas, 1 message_end, <think> to the wall), not a harvestable multi-turn loop, so real timeout rejected could not be captured by the completion-logging proxy; the synthetic negative that replaced it mis-targets (it teaches termination AFTER solving, but the holdout failure is looping BEFORE solving) and, learned too strongly on few pairs, generalizes into premature stopping.
+- Implication: On this curriculum the 0.606 warm-start is a local optimum that narrow SFT/preference edits move downward; the deployment headroom is concentrated in a few holdout tasks (json_pointer, schema_lite, allocate) that score 0% under BOTH policies -- a capability gap, not a termination-discipline gap. Stop iterating narrow policy edits on the warm-start; attack the persistent-zero tasks directly (inference-time execution-selected best-of-n, or a targeted sub-curriculum) to get ANY execution-verified success there before trying to install it. A negative gradient, if revisited, must target loop-BEFORE-solve and use a gentler dose (higher beta, <=1 epoch, lower lr) so the working policy is not perturbed.
+
+### Evidence
+
+- [`qwen35_4b_agentic_rlvr_feasibility`](../../experiments/qwen35_4b_agentic_rlvr_feasibility/reports/report.md)
+
+### Next Tests
+
+- Get any execution-verified success on json_pointer/schema_lite/allocate via inference-time best-of-n with execution selection (verification-free is impossible here; tests exist, so select on FAIL_TO_PASS).
+- If revisiting DPO: capture REAL loop-before-solve rejected via pi --mode json stdout parsing (the proxy cannot log non-terminating streams), pair against solves, beta>=0.3, 1 epoch, lr<=2e-6, and gate on not regressing the 6 currently-1.00 holdout tasks.
+- Re-derive whether the persistent zeros are truly unsolvable by the base at high inference budget, or merely unreached under pi's default loop.
+
+### Avoid
+
+- Editing the working 0.606 warm-start with narrow SFT/preference signals learned to high accuracy on few examples: RFT-v1 crashed it, DPO regressed it -- the policy is fragile to overshoot.
+- Framing the holdout gap as termination discipline: the loop-forever lens addressed the wrong bottleneck; the zeros are a capability gap.
+- Trusting a logging reverse-proxy to capture pi_rft timeouts: its loop-forever is a single stream that never completes, so nothing is logged (0-turn rejected).
+- Serving the policy to pi as --served-model-name Qwen3.5-4B (the stale pi_episode docstring): pi requests qwen35-4b-pi8k and a name mismatch 404s silently into empty trajectories.

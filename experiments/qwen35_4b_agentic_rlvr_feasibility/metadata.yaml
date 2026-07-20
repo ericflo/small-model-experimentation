@@ -16,8 +16,9 @@ top_level_dirs:
   - "reports"
   - "scripts"
 file_counts:
+  json: 5
   md: 2
-  py: 16
+  py: 24
   yaml: 2
-total_files: 20
-total_size_bytes: 107224
+total_files: 33
+total_size_bytes: 413341
