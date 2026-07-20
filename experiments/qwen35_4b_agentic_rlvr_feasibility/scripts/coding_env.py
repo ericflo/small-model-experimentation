@@ -17,7 +17,7 @@ from pathlib import Path
 
 RUN_TIMEOUT = 30
 TEST_TIMEOUT = 120
-MAX_OUT = 8000
+MAX_OUT = 2000   # tool results are masked from loss but still occupy the logprob forward -> keep small
 
 
 def _stub_function(repo_root: Path, rel_file: str, func_name: str):
@@ -201,14 +201,31 @@ class SynthEnv(CodingEnv):
             f"first, then implement and run `{self.test_cmd}` to verify. Iterate until it passes.")
 
     def get_reward(self) -> float:
+        """Graded progress reward (dense enough that GRPO groups rarely tie).
+
+        A near-binary reward makes both rollouts in a small group score 0.0 -> zero advantage ->
+        the step is wasted (observed: only 1 of 7 steps had reward_std > 0). Ladder:
+          0.00 no edit | 0.15 edited but crashes | 0.15 + 0.6*(tests_passed/total) | 1.00 all pass
+        tests_passed is inferred from which test function the runner died in (they are named t0..tN).
+        """
         if self.project is None:
+            return 0.0
+        sol = self.project / "solution.py"
+        test = self.project / "test_solution.py"
+        try:
+            edited = "NotImplementedError" not in sol.read_text()
+        except Exception:
+            return 0.0
+        if not edited:
             return 0.0
         r = self._run(self.test_cmd, TEST_TIMEOUT)
         if r["code"] == 0:
             return 1.0
-        # engagement gate: did the agent replace the NotImplementedError stub at all?
         try:
-            edited = "NotImplementedError" not in (self.project / "solution.py").read_text()
+            total = max(1, test.read_text().count("def t"))
         except Exception:
-            edited = False
-        return 0.1 if edited else 0.0
+            total = 1
+        import re as _re
+        idx = _re.findall(r"in t(\d+)", r["out"])
+        passed = max(int(x) for x in idx) if idx else 0   # died in tN => t0..t(N-1) passed
+        return round(0.15 + 0.6 * min(1.0, passed / total), 4)

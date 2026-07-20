@@ -50,11 +50,12 @@ def main():
     ap.add_argument("--band", default=str(OUTD / "difficulty.json"))
     ap.add_argument("--out", default=str(OUTD / "adapters" / "rlvr_band"))
     ap.add_argument("--steps", type=int, default=40)
-    ap.add_argument("--num-generations", type=int, default=4)
+    ap.add_argument("--num-generations", type=int, default=6)
     ap.add_argument("--max-completion-length", type=int, default=1280)
     ap.add_argument("--lr", type=float, default=2e-6)
     ap.add_argument("--beta", type=float, default=0.02)
     ap.add_argument("--vllm-util", type=float, default=0.50)
+    ap.add_argument("--grad-accum", type=int, default=4, help="average over more GROUPS (does not fix within-group ties)")
     a = ap.parse_args()
 
     band = set(t.split(":", 1)[1] for t in json.load(open(a.band))["band"] if t.startswith("synth:"))
@@ -77,7 +78,8 @@ def main():
     args = GRPOConfig(
         output_dir=a.out + "_out",
         per_device_train_batch_size=a.num_generations, num_generations=a.num_generations,
-        max_completion_length=a.max_completion_length, max_tool_calling_iterations=10,
+        max_completion_length=a.max_completion_length, max_tool_calling_iterations=8,
+        gradient_accumulation_steps=a.grad_accum,
         learning_rate=a.lr, logging_steps=1, max_steps=a.steps, save_strategy="no", report_to=[],
         bf16=True, model_init_kwargs={"dtype": "bfloat16", "low_cpu_mem_usage": True},
         gradient_checkpointing=True,
