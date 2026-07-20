@@ -47,13 +47,27 @@ def _tolerant(fn):
     signature -- transformers still builds the correct tool JSON schema from it, which is why this
     does not repeat the earlier `*a, **k` mistake that produced DocstringParsingException.
     """
-    params = set(inspect.signature(fn).parameters)
+    sig = inspect.signature(fn)
+    params = set(sig.parameters)
 
     @functools.wraps(fn)
     def wrapper(self, *args, **kwargs):
         dropped = [k for k in kwargs if k not in params]
         for k in dropped:
             kwargs.pop(k)
+        missing = [p for p, sp in sig.parameters.items()
+                   if p != "self" and sp.default is inspect.Parameter.empty and p not in kwargs][len(args):]
+        if missing:
+            # The policy emits a UNION of every tool's parameter names on each call (measured: run_bash
+            # called with content+path and no `command` 16/29 times; write_file with path and no
+            # `content` 10/22). Raising TypeError burns the turn and teaches nothing. A real harness
+            # names the mistake so the agent can retry inside the same episode -- that is recovery,
+            # not reward-hacking: the model still has to produce a correct call to make progress.
+            _trace_tool(fn.__name__, dropped, TypeError(f"missing {missing}"))
+            return (f"[error] {fn.__name__} is missing required argument(s): {', '.join(missing)}. "
+                    f"You provided: {', '.join(sorted(kwargs) + sorted(dropped)) or '(none)'}. "
+                    f"{fn.__name__} accepts exactly: {', '.join(p for p in sig.parameters if p != 'self')}. "
+                    f"Retry the call with the missing parameter supplied.")
         try:
             out = fn(self, *args, **kwargs)
         except Exception as exc:                      # TRL converts this to {'error': ...} for the
