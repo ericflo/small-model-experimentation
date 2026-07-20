@@ -17,7 +17,9 @@ from pathlib import Path
 
 RUN_TIMEOUT = 30
 TEST_TIMEOUT = 120
-MAX_OUT = 2000   # tool results are masked from loss but still occupy the logprob forward -> keep small
+MAX_OUT = 8000   # keep tool results REALISTIC (pi serves full files); memory is handled by the
+                 # logprob-forward micro-batch (per_device_train_batch_size=1), NOT by truncating
+                 # context — truncation would distort the task and not transfer to deployment.
 
 
 def _stub_function(repo_root: Path, rel_file: str, func_name: str):

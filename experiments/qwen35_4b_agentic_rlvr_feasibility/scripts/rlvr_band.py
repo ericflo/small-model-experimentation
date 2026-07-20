@@ -51,11 +51,18 @@ def main():
     ap.add_argument("--out", default=str(OUTD / "adapters" / "rlvr_band"))
     ap.add_argument("--steps", type=int, default=40)
     ap.add_argument("--num-generations", type=int, default=6)
-    ap.add_argument("--max-completion-length", type=int, default=1280)
+    ap.add_argument("--max-completion-length", type=int, default=4096)
     ap.add_argument("--lr", type=float, default=2e-6)
     ap.add_argument("--beta", type=float, default=0.02)
     ap.add_argument("--vllm-util", type=float, default=0.50)
-    ap.add_argument("--grad-accum", type=int, default=4, help="average over more GROUPS (does not fix within-group ties)")
+    ap.add_argument("--tool-iters", type=int, default=12, help="max multi-turn tool iterations per episode")
+    ap.add_argument("--model-len", type=int, default=16384, help="vLLM context for LONG agentic rollouts")
+    ap.add_argument("--grad-accum", type=int, default=12,
+                    help="KEY: micro-batch x grad-accum = generation batch, which must be divisible by\n"
+                         "num_generations. Accumulation lets the GROUP stay large (signal) while the\n"
+                         "logprob-forward micro-batch stays small (memory).")
+    ap.add_argument("--micro-batch", type=int, default=1,
+                    help="per_device_train_batch_size: sequences in ONE logprob forward (memory knob)")
     a = ap.parse_args()
 
     band = set(t.split(":", 1)[1] for t in json.load(open(a.band))["band"] if t.startswith("synth:"))
@@ -77,14 +84,14 @@ def main():
 
     args = GRPOConfig(
         output_dir=a.out + "_out",
-        per_device_train_batch_size=a.num_generations, num_generations=a.num_generations,
-        max_completion_length=a.max_completion_length, max_tool_calling_iterations=8,
+        per_device_train_batch_size=a.micro_batch, num_generations=a.num_generations,
+        max_completion_length=a.max_completion_length, max_tool_calling_iterations=a.tool_iters,
         gradient_accumulation_steps=a.grad_accum,
         learning_rate=a.lr, logging_steps=1, max_steps=a.steps, save_strategy="no", report_to=[],
         bf16=True, model_init_kwargs={"dtype": "bfloat16", "low_cpu_mem_usage": True},
         gradient_checkpointing=True,
         use_vllm=True, vllm_mode="colocate", vllm_enable_sleep_mode=True,
-        vllm_gpu_memory_utilization=a.vllm_util, vllm_max_model_length=4096,
+        vllm_gpu_memory_utilization=a.vllm_util, vllm_max_model_length=a.model_len,
         temperature=1.0, loss_type="dr_grpo", importance_sampling_level="sequence", beta=a.beta,
         chat_template_kwargs={"enable_thinking": True},
     )
