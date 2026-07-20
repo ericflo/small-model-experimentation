@@ -109,6 +109,11 @@ def main():
     ap.add_argument("--url", default="http://127.0.0.1:1234")
     ap.add_argument("--model", default="Qwen/Qwen3.5-4B", help="tokenizer source")
     ap.add_argument("--out", default=str(OUTD / "difficulty_trl.json"))
+    ap.add_argument("--tasks", default=None,
+                    help="comma-separated task ids to restrict to (e.g. the HELD-OUT split), or a "
+                         "path to a *_split.json written by rlvr_band.py -- use its 'holdout' list. "
+                         "This is how transfer is measured without touching a trained-on scenario.")
+    ap.add_argument("--split-key", default="holdout", choices=["holdout", "train"])
     a = ap.parse_args()
 
     import trl
@@ -122,6 +127,15 @@ def main():
     tools = [get_json_schema(getattr(probe, n)) for n in ("read_file", "write_file", "list_dir", "run_bash")]
 
     scenarios = list(synth_scenarios.SCENARIOS) + list(mined_scenarios.SCENARIOS)
+    if a.tasks:
+        if a.tasks.endswith(".json"):
+            want = set(json.load(open(a.tasks))[a.split_key])
+            print(f"restricting to {a.split_key} split from {a.tasks}: {sorted(want)}", flush=True)
+        else:
+            want = {t.strip() for t in a.tasks.split(",") if t.strip()}
+        scenarios = [s for s in scenarios if s["id"] in want]
+        if not scenarios:
+            print("no matching tasks"); return
     jobs = [s for s in scenarios for _ in range(a.k)]
     print(f"{len(jobs)} episodes = {len(scenarios)} tasks x k={a.k} | TRL template + TRL tool parser", flush=True)
 
