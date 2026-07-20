@@ -16,6 +16,20 @@ import functools, inspect, os, re, shutil, subprocess, tempfile
 from pathlib import Path
 
 
+def _trace_tool(name, dropped, exc):
+    """Append one line per tool call when RLVR_TOOL_LOG is set (diagnosing failure_frequency)."""
+    path = os.environ.get("RLVR_TOOL_LOG")
+    if not path:
+        return
+    import json as _j
+    try:
+        with open(path, "a") as fh:
+            fh.write(_j.dumps({"tool": name, "dropped": sorted(dropped),
+                               "error": f"{type(exc).__name__}: {exc}"[:160] if exc else None}) + "\n")
+    except Exception:
+        pass
+
+
 def _tolerant(fn):
     """Drop tool arguments the tool does not declare, instead of raising TypeError.
 
@@ -40,7 +54,12 @@ def _tolerant(fn):
         dropped = [k for k in kwargs if k not in params]
         for k in dropped:
             kwargs.pop(k)
-        out = fn(self, *args, **kwargs)
+        try:
+            out = fn(self, *args, **kwargs)
+        except Exception as exc:                      # TRL converts this to {'error': ...} for the
+            _trace_tool(fn.__name__, dropped, exc)    # model; trace it so the residual tool-failure
+            raise                                     # rate is diagnosable instead of just a number
+        _trace_tool(fn.__name__, dropped, None)
         if dropped and isinstance(out, str):
             out += f"\n[note: ignored unsupported argument(s): {', '.join(sorted(dropped))}]"
         return out

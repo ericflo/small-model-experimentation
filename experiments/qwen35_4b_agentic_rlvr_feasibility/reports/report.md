@@ -116,6 +116,89 @@ the WARM-STARTED policy across a task mix, select the 30-70% band, and run RLVR 
 - Adapters trained against multimodal `Qwen/Qwen3.5-4B` carry a `language_model.` key segment that the
   vendored text-only merger rejects; use `merge_peft.py` (PEFT `merge_and_unload`) instead.
 
+## Breaking the zero-gradient wall: it was THREE bugs, not task difficulty (2026-07-19)
+
+The previous section concluded the blocker was "task DIFFICULTY CALIBRATION". That was wrong, and
+the way it was wrong is the lesson. `reward_std=0` is consistent with both "the band is miscalibrated"
+and "the harness is broken", and those were only distinguishable by tracing INDIVIDUAL rollouts —
+GRPO logs the batch MEAN, which cannot tell "policy never engaged" from "policy engaged and failed".
+Adding a per-rollout reward trace (`RLVR_REWARD_LOG`) resolved in one run what inference had not in
+many. **Instrument the unit the metric aggregates over.**
+
+### Bug 1 — tool strictness (the dominant one)
+
+The policy emits a spurious `<parameter=content>None</parameter>` on EVERY tool call. TRL passes tool
+args straight through, so `read_file(path=..., content=None)` raised TypeError and **86% of all tool
+calls failed** (`tools/failure_frequency 0.8621`). The agent burned all 8-12 iterations on rejected
+calls, never reached `write_file`, and every rollout scored exactly 0.0 → tied group → no advantage.
+
+Verified NOT self-inflicted: the SFT rows carry 0% spurious args (462 tool calls audited) and the
+training template renders them correctly, so the warm-start did not teach it — it is the policy's own
+generation habit. Fix: `_tolerant` drops undeclared kwargs; `functools.wraps` sets `__wrapped__` so
+`inspect.signature()` still resolves the ORIGINAL signature and tool JSON schemas generate correctly
+(this is what the earlier `*a, **k` attempt got wrong → `DocstringParsingException`). Missing REQUIRED
+args still raise. pi-coding-agent also tolerates extra args, so this makes the training env behave
+like the deployment target rather than papering over a defect.
+
+### Bug 2 — the LM head, not attention, dominates training memory
+
+Qwen3.5-4B's vocab is **248320**, so logits are enormous. Measured at seq 4096, micro-batch 1,
+gradient checkpointing ON:
+
+| what | activations |
+|---|---|
+| full loss over all positions | 12.04 GiB |
+| loss over last 128 positions only (head cost ≈ 0) | 2.60 GiB |
+
+**The LM head alone is 9.44 GiB — 78% of all activation memory** (predicted 9.47 from
+`seq × 248320 × 10 bytes`; body is only ~0.65 GiB/1k). This is what made 8k rollouts need 32.8 GiB on
+a 24 GiB card. Fix: TRL `use_liger_kernel=True` → `LigerFusedLinearGRPOLoss`, a chunked loss that
+never materializes the `[seq, 248320]` logits. Safe here only because our LoRA does not target
+`lm_head` (TRL raises otherwise — Liger reads `lm_head.weight` directly and would silently train a
+frozen head).
+
+`flash-linear-attention` was installed for the gated-delta-net fast path and is numerically correct
+(loss diff 0.0008 vs the torch fallback) but bought only 14% (3.5 → 3.0 GiB/1k). **It was the wrong
+20%.** Chasing the loud warning (`Falling back to torch implementation`) instead of measuring first
+cost real time. NOTE: PyPI `flash-linear-attention` is BROKEN — it ships only `fla/layers` and
+`fla/models`, no `fla/ops`, yet still flips `is_flash_linear_attention_available()` to True, which
+hard-breaks every Qwen3.5 load. Install from GitHub source or not at all.
+
+### Bug 3 — truncation made the task physically unsolvable
+
+At `model_len 3072` the prompt (mostly ~1200 tokens of tool schemas) left ~1100 tokens for
+read+think+write+test: `clipped_ratio 1.0`, i.e. 100% of episodes truncated before `write_file`. No
+policy could have scored above 0. At 8192 → `clipped_ratio 0.25`.
+
+### Result (same tasks, same policy)
+
+| metric | before | after |
+|---|---|---|
+| `frac_reward_zero_std` | 1.0 (no gradient) | **0.0** |
+| `reward_std` | 0 | **0.075** |
+| edited solution.py | 0/4 | 3/4 |
+| completion length | 1076 | 2164 |
+| `tools/failure_frequency` | 0.8621 | 0.4583 |
+
+GRPO now has advantage signal. Remaining: no full passes yet (rewards cluster at 0.15 = edited but
+tests fail), so current variance is about ENGAGEMENT rather than SOLUTION QUALITY.
+
+### Additional single-4090 constraints found here
+
+- **`expandable_segments` must stay OFF under vLLM colocate.** It makes torch's allocator use the CUDA
+  virtual-memory driver APIs (`cuMemCreate`/`cuMemMap`) that vLLM's sleep-mode `CuMemAllocator` also
+  uses on the same device. The collision surfaces as `RuntimeError: CUDA driver error: device not
+  ready` **in backward** (torch tags driver-API failures via `C10_CUDA_DRIVER_CHECK`), and only once
+  sequences are long enough to force segment growth — which is exactly why the short-completion M0
+  gate passed and every long-rollout config crashed.
+- Sleep **level 2** is now correct (it was ruled out earlier for OOM-ing a 15GB host, but that was
+  before `low_cpu_mem_usage` cut trainer RSS 9.2 → 2.2 GiB). It frees 12.12 GiB between generation and
+  the optimizer step. Full vLLM teardown would recover only ~1.5 GiB more and is not worth it.
+- **Unloading either model does not enable long rollouts.** Trainer-alone peaks, whole card free:
+  1024→12.22, 2048→15.70, 4096→22.66, 8192→**36.59 GiB**. The constraint was never coexistence.
+- `pgrep -f rlvr_band` matches the agent's OWN shell wrapper and reports a dead run as "running".
+  Check `nvidia-smi --query-compute-apps` instead.
+
 ## Next Experiments
 
 - Harvest pi trajectories on solvable real-repo tasks → multi-turn tool-calling SFT warm-start.
