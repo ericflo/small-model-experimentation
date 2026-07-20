@@ -22,6 +22,14 @@ def _patched(self, *a, **kw):
     return _orig(self, *a, **kw)
 vllm.LLM.__init__ = _patched
 
+# TRL sleeps the colocate engine at level=2, which OFFLOADS the 8.5GB of weights to HOST RAM and
+# reloads them on every wake. This box has 15GB host RAM -> the reload gets OOM-killed. Level 1
+# frees only the KV cache and keeps weights resident on the GPU: same VRAM time-sharing, no host hit.
+_orig_sleep = vllm.LLM.sleep
+def _sleep_level1(self, level=2):
+    return _orig_sleep(self, level=1)
+vllm.LLM.sleep = _sleep_level1
+
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 ROOT = HERE.parents[2]
@@ -45,7 +53,9 @@ def main():
     ap.add_argument("--model", required=True)
     ap.add_argument("--steps", type=int, default=4)
     ap.add_argument("--num-generations", type=int, default=4)
-    ap.add_argument("--max-completion-length", type=int, default=1536)
+    ap.add_argument("--max-completion-length", type=int, default=1280)
+    ap.add_argument("--vllm-util", type=float, default=0.50)
+    ap.add_argument("--no-sleep", action="store_true", help="disable vLLM sleep entirely")
     a = ap.parse_args()
 
     tasks = [t for t in json.load(open(TASKS)) if 4 <= t["body_lines"] <= 14][:8]
@@ -63,8 +73,8 @@ def main():
         max_completion_length=a.max_completion_length, max_tool_calling_iterations=8,
         learning_rate=1e-6, logging_steps=1, max_steps=a.steps, save_strategy="no", report_to=[],
         bf16=True, model_init_kwargs={"dtype": "bfloat16"}, gradient_checkpointing=True,
-        use_vllm=True, vllm_mode="colocate", vllm_enable_sleep_mode=True,
-        vllm_gpu_memory_utilization=0.55, vllm_max_model_length=4096,
+        use_vllm=True, vllm_mode="colocate", vllm_enable_sleep_mode=not a.no_sleep,
+        vllm_gpu_memory_utilization=a.vllm_util, vllm_max_model_length=4096,
         temperature=1.0, loss_type="dr_grpo", importance_sampling_level="sequence", beta=0.0,
         chat_template_kwargs={"enable_thinking": True},
     )

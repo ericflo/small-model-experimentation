@@ -81,6 +81,41 @@ straight onto the GPU. Trainer RSS dropped 9.2GB -> 2.2GB and training ran clean
 `setsid nohup ... &` so they survive shell/agent teardown, and outputs written under
 `large_artifacts/` (a crash wiped the /tmp scratchpad and cost ~4h of harvest).
 
+
+## SFT warm-start result: engagement INSTALLED, variance now a difficulty problem (2026-07-19)
+
+Harvested 89 completed+passing multi-turn trajectories (self-contained tasks, 93% yield in 18 min —
+~30x more efficient than real-repo stub tasks at ~6%), converted to TRL conversational rows
+(assistant turns carry the base's OWN harvested reasoning + tool_calls; tool results masked), and SFT'd
+a LoRA with the Qwen3.5 THINK training template + assistant_only_loss (24 steps, loss 0.23 -> 0.055),
+then merged to a composite.
+
+Measured in the agentic GRPO env (verify_engagement.py, toolz stub tasks):
+
+| metric | raw base | + warm-start |
+|---|---|---|
+| completions/mean_length | ~130 tok | **517** (4x) |
+| tools/call_frequency | 1.5 | **3.38** (2.3x) |
+| reward / reward_std | 0 / 0 | 0 / **0** |
+
+**The warm-start installs ENGAGEMENT** — the model now runs the explore->edit->test loop instead of
+quitting after 1-2 reads, exactly what it was trained to do, and it transfers from the self-contained
+training tasks to real-repo tasks. **But reward_std is still 0**: it passes 0/8 toolz episodes, so
+GRPO still has no within-group advantage. The blocker has CHANGED SHAPE: not engagement, but task
+DIFFICULTY CALIBRATION. GRPO needs tasks the policy passes SOMETIMES (~30-70%); toolz stub tasks are
+~0% for the warm-start and the self-contained tasks are ~100%. Next: calibrate per-task pass rate for
+the WARM-STARTED policy across a task mix, select the 30-70% band, and run RLVR on that band.
+
+### Additional single-4090 constraints found here
+- TRL sleeps the colocate engine at **level=2**, which offloads the 8.5GB of weights to HOST RAM and
+  reloads on every wake -> OOM-killed on a 15GB box. Monkeypatch `vllm.LLM.sleep` to force **level=1**
+  (frees only KV, weights stay on GPU): same VRAM time-sharing, no host hit. With util 0.50 this runs.
+- TRL refuses `assistant_only_loss` for "vision-language models", and Qwen3.5-4B is multimodal-capable,
+  so the default `AutoProcessor` triggers that guard. Pass a **tokenizer** as `processing_class`
+  (our data is pure text) -> `_is_vlm=False` -> masked multi-turn SFT works.
+- Adapters trained against multimodal `Qwen/Qwen3.5-4B` carry a `language_model.` key segment that the
+  vendored text-only merger rejects; use `merge_peft.py` (PEFT `merge_and_unload`) instead.
+
 ## Next Experiments
 
 - Harvest pi trajectories on solvable real-repo tasks → multi-turn tool-calling SFT warm-start.
