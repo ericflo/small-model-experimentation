@@ -188,6 +188,20 @@ def main():
     print(f"pi harvest: {len(jobs)} episodes = {len(scenarios)} tasks x k={a.k} "
           f"| {a.workers} workers (split={a.split_key})", flush=True)
 
+    # FAIL FAST on a busy port. A stale proxy left bound to base_port silently stole worker 0's
+    # traffic in an earlier run: its proxy could not bind, pi still got served by the stale process,
+    # and every one of that worker's episodes logged 0 exchanges -- 17 execution-verified successes
+    # were discarded with no error anywhere. A bind check is cheaper than losing a quarter of a
+    # 100-minute harvest.
+    import socket
+    for i in range(a.workers):
+        with socket.socket() as sk:
+            sk.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            try:
+                sk.bind(("127.0.0.1", a.base_port + i))
+            except OSError:
+                raise SystemExit(f"port {a.base_port + i} is already in use -- kill the stale "
+                                 f"pi_proxy first (pgrep -af pi_proxy.py), or pass --base-port")
     providers = ensure_providers(a.workers, a.base_port, a.model)
     logdir = Path(OUTD / "logs"); logdir.mkdir(parents=True, exist_ok=True)
     procs, logs = [], []
