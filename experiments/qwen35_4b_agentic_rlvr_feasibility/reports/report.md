@@ -199,6 +199,51 @@ tests fail), so current variance is about ENGAGEMENT rather than SOLUTION QUALIT
 - `pgrep -f rlvr_band` matches the agent's OWN shell wrapper and reports a dead run as "running".
   Check `nvidia-smi --query-compute-apps` instead.
 
+## Tool-call failures: the policy emits a UNION of all tools' parameters (2026-07-20)
+
+After the three fixes above, `tools/failure_frequency` was still 0.46. Per-call tracing
+(`RLVR_TOOL_LOG`) showed the policy emits a blend of every tool's parameter names — `path`,
+`content`, `command` — on each call, and fails whenever the argument that tool actually requires is
+absent from the blend:
+
+| tool | what it emits | failure rate |
+|---|---|---|
+| `read_file` | path + spurious content | 0% (extras dropped) |
+| `run_bash` | content + path, often no `command` | 55% (16/29) |
+| `write_file` | path, sometimes no `content` | 45% (10/22) |
+
+Two plausible hypotheses were tested and **refuted by measurement** before this one was found:
+1. *"content is truncated mid-write so `</parameter>` never closes"* — doubling
+   `max_completion_length` 4096→8192 left the failure rate identical at 41%.
+2. *"the parser drops multi-line values"* — `transformers`' `_xml_inline` uses `re.DOTALL` and
+   handles multi-line content correctly, verified directly against the real parser.
+
+Fix: a missing REQUIRED argument returns an instructive error naming what is missing, what was
+provided, and the exact accepted parameter list, instead of raising `TypeError`. The agent retries
+inside the same episode instead of burning an iteration it needs to reach `write_file`. This is
+recovery, not reward-hacking — a correct call is still required to make progress.
+
+Cumulative effect on tool failures: **0.86 → 0.26 (tolerant dispatch) → ~0.00 (instructive recovery)**.
+
+### Trainable context ceiling on a 24GB card
+
+With Liger, `model_len 12288` runs typical episodes but OOMs in `create_causal_mask` on the longest
+ones (crashed at step 3). **8192 is the proven ceiling**; at 8192 with `max_completion_length 6144`
+the run is stable with `clipped_ratio 0` (no truncation at all) and `tools/failure_frequency 0`.
+
+### Healthy-loop reference numbers
+
+For comparison when this regresses: step ~260s at 4 rollouts × 10 tool iterations, `reward_std`
+0.07–0.46, `frac_reward_zero_std` 0, rollout rewards distributed across {0.0, 0.15, 1.0} with real
+passes appearing.
+
+### Train/test firewall
+
+RLVR trains on 20 of the 27 band tasks; **7 are held out** (`base_convert`, `dedup`, `flood_fill`,
+`json_pointer`, `point_in_polygon`, `roman`, `stats2`) and written to `<out>_split.json` at the
+TRAINING entry point, so the eval cannot silently include a trained-on scenario. `calibrate_trl.py
+--tasks <split.json>` reads the `holdout` list directly.
+
 ## Next Experiments
 
 - Harvest pi trajectories on solvable real-repo tasks → multi-turn tool-calling SFT warm-start.
