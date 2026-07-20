@@ -244,6 +244,71 @@ RLVR trains on 20 of the 27 band tasks; **7 are held out** (`base_convert`, `ded
 TRAINING entry point, so the eval cannot silently include a trained-on scenario. `calibrate_trl.py
 --tasks <split.json>` reads the `holdout` list directly.
 
+## DEPLOYMENT TRUTH: the model is far stronger in pi than in our harness (2026-07-20)
+
+Everything above measures the model in OUR tool loop. Driving the SAME merged warm-start through
+pi-coding-agent itself, on the SAME 7 held-out tasks:
+
+| harness | held-out mean pass rate |
+|---|---|
+| ours (`calibrate_trl.py`, TRL template + TRL parser) | 0.486 |
+| **pi-coding-agent (deployment truth)** | **0.810** |
+
+5 of 7 held-out tasks pass 100% of the time through pi (`stats2`, `roman`, `base_convert`, `dedup`,
+`point_in_polygon`); engagement 19/20. **Our harness was underselling the model by ~1.7x.**
+
+Two consequences, both serious:
+
+1. **The 0.2–0.8 "difficulty band" is a harness artifact.** It was computed in our loop. In pi most
+   of those tasks are saturated, so the band does not describe the deployment policy.
+2. **The GRPO run was optimizing against that artifact.** It trains on tasks selected for being hard
+   *in our harness*, and its reward is our harness's execution loop. Improvements there are not
+   guaranteed to be improvements in the scaffold the model actually ships in. The 8-step partial run
+   is preserved (`trl_grpo_partial_history.json`) but its band needs re-deriving from pi.
+
+### Correction: our tools do NOT mirror pi's interface
+
+Earlier sections of this report claim `CodingEnv`'s tools "mirror pi-coding-agent's interface".
+**That is false**, and measuring through pi is what exposed it. pi's actual tools are:
+
+    read, edit, write, bash
+
+versus ours: `read_file, write_file, list_dir, run_bash`. Every name differs, and pi has an **`edit`**
+tool (targeted string replacement) that we never trained on at all — in the first successful pi
+episode the model solved the task using `read` ×2, **`edit` ×2**, `bash` ×3, i.e. its main
+code-modification tool was one absent from training. Training installed tool habits for an interface
+that does not exist downstream.
+
+### The pi recipe (was never codified from the earlier probe)
+
+    vllm serve <merged-composite> \
+      --served-model-name qwen35-4b-pi8k --port 8420 \
+      --enforce-eager --max-model-len 40960 --gpu-memory-utilization 0.90 \
+      --enable-auto-tool-choice --tool-call-parser qwen3_xml
+
+    pi --provider kiln-local --model qwen35-4b-pi8k -p "<task>" --mode json --no-session < /dev/null
+
+Each flag was required, and each was found by a failing run:
+- **`--enable-auto-tool-choice --tool-call-parser qwen3_xml`** — without them vLLM returns
+  `400 "auto" tool choice requires ...` and pi completes 0 tool calls. `qwen3_xml` matches Qwen3.5's
+  `<tool_call><function=><parameter=>` format.
+- **`--max-model-len 40960` + a pi model entry with `maxTokens 8192`** — pi sends its entry's
+  `maxTokens` as `max_completion_tokens` on EVERY call, and vLLM rejects
+  `prompt + max_completion_tokens > max_model_len`. With the stock 32768 entry the agent died the
+  moment the conversation passed ~8k. (Added additively as `qwen35-4b-pi8k` in
+  `~/.pi/agent/models.json`; original backed up to `models.json.bak-preRLVR`.)
+- **stdin closed** — pi is interactive by default and otherwise hangs.
+- pi **auto-retries 3x with backoff**, so transport failures look like slow episodes, not errors.
+
+### Why RLVR cannot be driven by pi rollouts directly
+
+pi's distribution contains **no logprob support**, and TRL's GRPO requires `per_token_logps` to form
+the objective. Policy-gradient RL over pi rollouts is therefore not possible without patching pi to
+surface logprobs. The executable form of "RLVR from execution reward through pi rollouts" is
+execution-filtered policy improvement: pi generates → execution verifies → fit the verified winners →
+repeat. That needs no logprobs and is what the goal separately asks for ("harvest pi-coding-agent's
+own execution-verified successful trajectories").
+
 ## Next Experiments
 
 - Harvest pi trajectories on solvable real-repo tasks → multi-turn tool-calling SFT warm-start.

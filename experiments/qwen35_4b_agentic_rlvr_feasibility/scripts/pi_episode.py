@@ -85,7 +85,10 @@ def run_pi_episode(scenario, provider, model, timeout, extra_args=()):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--provider", default="kiln-local")
-    ap.add_argument("--model", default="Qwen3.5-4B")
+    ap.add_argument("--model", default="qwen35-4b-pi8k",
+                    help="pi model entry whose maxTokens fits the served context: pi sends "
+                         "maxTokens as max_completion_tokens on EVERY call, so the stock 32768 "
+                         "entry dies once the conversation passes ~8k in a 40960 window")
     ap.add_argument("--k", type=int, default=3, help="samples per task")
     ap.add_argument("--workers", type=int, default=4)
     ap.add_argument("--timeout", type=int, default=900,
