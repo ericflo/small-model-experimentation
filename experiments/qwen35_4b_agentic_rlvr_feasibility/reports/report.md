@@ -433,15 +433,26 @@ Caveat: k=3, so per-task rates are noisy — but a solid task falling to 0.33 (m
 To decide whether the persistent zeros are latent (harvestable) or absent, ran best-of-8 through pi on
 the zero tasks with the warm-start. It cleanly split them:
 
-| task | pass@8 (warm-start) | verdict |
-|---|---|---|
-| bellman_ford | 0.88 | reliably solvable (the earlier 0.00 was unlucky k=2 sampling, not a gap) |
-| topo_lex | 0.25 | partially solvable — real single-shot headroom |
-| allocate | 0.12 | solvable, holdout (transfer-only) |
-| case_convert, deep_merge, schema_lite, semver, glob_match, patch_apply, json_pointer | 0.00, meanR 0.00 | **ABSENT** — never makes productive progress even in 8 tries |
+| task | pass@8 (full) | mean partial reward | verdict |
+|---|---|---|---|
+| bellman_ford | 0.88 | — | reliably solvable (the earlier 0.00 was unlucky k=2 sampling) |
+| topo_lex | 0.25 | — | partially solvable — real single-shot headroom |
+| allocate | 0.12 | — | solvable, holdout (transfer-only) |
+| deep_merge | 0.00 | 0.41 (max 0.55) | **edits, passes ~half the tests, TIMES OUT — never closes** |
+| semver | 0.00 | 0.33 (max 0.53) | partial, close, times out |
+| schema_lite | 0.00 | 0.21 | partial, times out |
+| glob_match/case_convert/patch_apply/json_pointer | 0.00 | 0.13–0.18 (max 0.32–0.49) | partial, times out |
 
-The 7 absent tasks (meanR 0.00) are a genuine capability gap best-of-8 does not crack. The headroom
-that IS reachable is topo_lex (0.25) and, marginally, allocate.
+**CORRECTION (2026-07-21).** An earlier version of this section called these seven tasks "ABSENT —
+never makes productive progress (meanR 0.00)". That was a codification ERROR: the `meanR` value came
+from `dict.get(task, 0)` on a field that was never written to the result JSON, so a missing key read as
+0.00. The episode-level rewards (above) show the opposite — the model DOES engage: it edits
+`solution.py` on 3–8 of 8 tries and passes SOME tests every time (partial reward 0.13–0.41, up to 0.55
+on deep_merge), but never ALL of them, and **every episode times out (exit 124) — it loops instead of
+terminating**. So this is not a hard capability wall; it is "close-but-can't-finish + a termination
+failure," which is materially more tractable. Lesson: verify against episode-level data, not a summary
+field that may be absent. A best-of-12 probe (timeout 240) is in flight to test whether more sampling
+ever fully CLOSES any of these, or they plateau at partial.
 
 **Elicitation SFT (STaR-style):** harvested 15 execution-verified best-of-n successes on the two
 latent TRAIN tasks (bellman_ford 8/16, topo_lex 7/16), mixed them with the 46 existing diverse passes
@@ -468,10 +479,12 @@ distillation. **The original merged warm-start (0.606) is the deployment artifac
   (include the now-known-solvable topo_lex/bellman_ford), rather than editing the current optimum —
   the "scale the curriculum 10-20x, train once" bet, not another adapter on top.
 - Diverge from policy-editing this warm-start. Four narrow edits (RFT×2, DPO, elicit-SFT) have now
-  failed to beat 0.606; stop iterating hyperparameters and attack the CAPABILITY gap directly. The headroom is
-  `json_pointer`/`schema_lite`/`allocate` at 0% under both policies — get ANY execution-verified
-  success on them (more inference compute: best-of-n with execution selection; or a targeted
-  sub-curriculum that builds the missing skill) before trying to install it.
+  failed to beat 0.606; stop iterating hyperparameters. The holdout headroom (`schema_lite`,
+  `json_pointer`, and the train-side `deep_merge`/`semver`/etc.) is NOT absent capability — the model
+  edits and passes SOME tests (partial reward up to 0.55) but never CLOSES and times out. So the
+  intervention to test is one that helps it FINISH a partial solution and TERMINATE: more inference
+  compute (best-of-n with execution selection, which the pending best-of-12 probe informs), a
+  higher think/turn budget, or targeting the specific failing tests — not "installing a missing skill".
 - If returning to a negative gradient: target loop-*before*-solve (the real failure), pair against it
   with a gentler dose (higher beta, ≤1 epoch, lower LR) so the working policy is not perturbed — the
   DPO regression was overshoot on a mis-targeted signal, not proof the method cannot help.
