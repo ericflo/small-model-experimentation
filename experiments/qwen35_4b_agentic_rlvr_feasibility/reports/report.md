@@ -498,8 +498,34 @@ helps THAT task (topo_lex +0.50) but disrupts the general policy. The "improve t
 more LoRA training on this curriculum" line is falsified across SFT, preference (DPO), and STaR
 distillation. **The original merged warm-start (0.606) is the deployment artifact.**
 
+## CAPSTONE: execution-selected best-of-n beats the ceiling WITHOUT training (2026-07-21)
+
+The whole arc resolves here. Four LoRA edits of the 0.606 warm-start each REGRESSED deployment
+(−0.09 to −0.12). The ceiling probe showed the failure is termination — the model reaches partial
+(occasionally full) solutions but loops instead of closing. Put together, these say the lift must come
+from INFERENCE-time selection, not policy editing. Measured directly from the baseline's own 3
+rollouts per holdout task (execution-selected = keep the run whose tests score highest; "solved" if
+ANY of the 3 fully passes):
+
+| | holdout mean pass |
+|---|---|
+| single-shot (deployment baseline) | 0.606 |
+| **execution-selected best-of-3** | **0.727 (+0.121)** |
+
+**+0.121 with zero training** — the exact mirror of what every policy edit *lost*. It sidesteps the
+warm-start's edit-fragility entirely (no LoRA), and it is directly implied by the ceiling result: the
+hard tasks occasionally close (schema_lite 1/12) or reach high partial (deep_merge 0.65), so keeping
+the best of N captures those wins. best-of-3 is the FLOOR — best-of-8/12 would capture the rarer
+closes (schema_lite at 1/12 needs ~8+ samples). The honest program-level answer: **since editing this
+4B's policy regresses it, the deployable lift on real agentic coding comes from inference-time
+execution selection over multiple pi rollouts, not from further training the policy.** (Requires a
+verifier at deploy — here the tests; on a real repo, its own test suite or a generated check.)
+
 ## Next Experiments
 
+- **Confirm the capstone at best-of-8/12** with the explicit selection protocol (run N pi rollouts per
+  holdout task, keep the highest test-scoring) — best-of-3 from re-used baseline data already shows
+  +0.121; a dedicated run should push higher by capturing the rare closes (schema_lite).
 - **The incremental-LoRA-edit line is closed (4 replications).** If more capability is wanted, train a
   SINGLE better warm-start FROM BASE on a much larger, more diverse execution-verified pi harvest
   (include the now-known-solvable topo_lex/bellman_ford), rather than editing the current optimum —

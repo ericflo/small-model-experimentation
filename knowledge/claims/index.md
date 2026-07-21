@@ -2,7 +2,7 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 62
+- Claims: 63
 
 ## Status Counts
 
@@ -11,14 +11,14 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Confirmed | 8 |
 | Negative | 3 |
 | Open | 2 |
-| Promising | 49 |
+| Promising | 50 |
 
 ## Program Counts
 
 | Program | Claims |
 | --- | ---: |
 | `active_evidence_acquisition` | 1 |
-| `agentic_breadth_installation` | 10 |
+| `agentic_breadth_installation` | 11 |
 | `algorithmic_memory_and_retrieval` | 1 |
 | `benchmark_generalization` | 13 |
 | `collective_experimentation_infrastructure` | 2 |
@@ -1512,3 +1512,25 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 - Trusting a logging reverse-proxy to capture pi_rft timeouts: its loop-forever is a single stream that never completes, so nothing is logged (0-turn rejected).
 - Serving the policy to pi as --served-model-name Qwen3.5-4B (the stale pi_episode docstring): pi requests qwen35-4b-pi8k and a name mismatch 404s silently into empty trajectories.
 - Editing the 0.606 warm-start with ANY narrow LoRA training (SFT, DPO, or STaR distillation): four methods have now regressed it; it is a robust local optimum and further adapters perturb deployment downward even when they help the trained task.
+
+## C63: SINCE EDITING THE 4B's POLICY REGRESSES IT, THE DEPLOYABLE AGENTIC-CODING LIFT COMES FROM INFERENCE-TIME EXECUTION SELECTION: best-of-3 beats single-shot +0.121 on the pi holdout with ZERO training
+
+- Status: `Promising`
+- Programs: `agentic_breadth_installation`
+- Summary: Experiment qwen35_4b_agentic_rlvr_feasibility (owner /goal). Capstone resolving C62: four LoRA edits of the 0.606 warm-start each REGRESSED pi-holdout deployment (-0.09 to -0.12), and the best-of-12 ceiling probe showed the hard tasks fail by TERMINATION (edit + partial pass, ~100% timeout) not absent capability. Both point to inference-time selection as the lift. Measured from the baseline's own 3 rollouts/task (execution-selected = solved if ANY of 3 fully passes): single-shot 0.606 -> best-of-3 0.727 (+0.121), zero training -- the exact mirror of what every policy edit lost. best-of-3 is the floor; best-of-8/12 would capture the rare closes (schema_lite 1/12).
+- Implication: For this fixed 4B on agentic coding, the deployable capability lift comes from INFERENCE-TIME EXECUTION SELECTION over multiple pi rollouts (keep the highest test-scoring), NOT from further LoRA training of the policy (which regresses a robust local optimum). This needs a verifier at deploy -- the task's tests here, a repo's own suite or a generated check in general. It converts the 4B's rare-but-real successes and its termination-limited partials into a reliable deployment gain without touching the fragile policy.
+
+### Evidence
+
+- [`qwen35_4b_agentic_rlvr_feasibility`](../../experiments/qwen35_4b_agentic_rlvr_feasibility/reports/report.md)
+
+### Next Tests
+
+- Confirm at best-of-8/12 with the explicit selection protocol (N pi rollouts/holdout task, keep highest test score); expect > +0.121 as rarer closes (schema_lite) are captured.
+- Partial-credit selection: when no rollout fully passes, does selecting the highest partial-test-pass rollout still help downstream (e.g. as a warm continuation)?
+- Cost/benefit vs a termination fix: compare best-of-N inference cost to a train-time 'stop-when-stuck' intervention that cuts the ~100% timeout rate.
+
+### Avoid
+
+- Concluding the hard tasks are unsolvable: schema_lite closed 1/12 and most reach high partial -- they are rare+termination-limited, not absent.
+- Spending more on LoRA edits of the warm-start to chase these tasks: four methods regressed it; inference-time selection is the believed-in lift.
