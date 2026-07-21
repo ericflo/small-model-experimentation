@@ -1,0 +1,661 @@
+{
+ "label": "bestof_warmstart",
+ "provider": "kiln-local",
+ "model": "qwen35-4b-pi8k",
+ "k": 8,
+ "rates": {
+  "case_convert": 0.0,
+  "deep_merge": 0.0,
+  "schema_lite": 0.0,
+  "semver": 0.0,
+  "allocate": 0.125,
+  "glob_match": 0.0,
+  "topo_lex": 0.25,
+  "bellman_ford": 0.875,
+  "patch_apply": 0.0,
+  "json_pointer": 0.0
+ },
+ "mean_pass": 0.125,
+ "episodes": [
+  {
+   "id": "case_convert",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.25,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.35,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.25,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "deep_merge",
+   "reward": 0.55,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "deep_merge",
+   "reward": 0.55,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "deep_merge",
+   "reward": 0.35,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "deep_merge",
+   "reward": 0.25,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "deep_merge",
+   "reward": 0.35,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "deep_merge",
+   "reward": 0.55,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "deep_merge",
+   "reward": 0.35,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "deep_merge",
+   "reward": 0.35,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "semver",
+   "reward": 0.45,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "semver",
+   "reward": 0.3,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "semver",
+   "reward": 0.525,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "semver",
+   "reward": 0.525,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "semver",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "semver",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "semver",
+   "reward": 0.525,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "semver",
+   "reward": 0.3,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "allocate",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "allocate",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "allocate",
+   "reward": 0.4071,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "allocate",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "allocate",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 177.6,
+   "out_tail": "oken by lowest index)\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":4869,\"output\":62,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":4931,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784580561132,\"responseId\":\"chatcmpl-b188cab2fa8139f3\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "allocate",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "allocate",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "allocate",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "glob_match",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "glob_match",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "glob_match",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "glob_match",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "glob_match",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "glob_match",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "glob_match",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "glob_match",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "topo_lex",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "topo_lex",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 210.8,
+   "out_tail": "y.\\n\\nAll tests pass.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":4758,\"output\":18,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":4776,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784581497424,\"responseId\":\"chatcmpl-8a1ba6c2f4237481\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "topo_lex",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 259.3,
+   "out_tail": "nd working correctly.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":6072,\"output\":21,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":6093,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784581545051,\"responseId\":\"chatcmpl-b95c038869158994\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "topo_lex",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "topo_lex",
+   "reward": 0.5786,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "topo_lex",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "topo_lex",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "topo_lex",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "bellman_ford",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 138.4,
+   "out_tail": "m.\\n\\nAll tests pass.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":4191,\"output\":87,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":4278,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784581897773,\"responseId\":\"chatcmpl-be614bcccb325692\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "bellman_ford",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 109.9,
+   "out_tail": "n\\nAll 5 tests pass!\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3677,\"output\":214,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":3891,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784581983825,\"responseId\":\"chatcmpl-aa03f5d07abc7ff6\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "bellman_ford",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 228.9,
+   "out_tail": "egative weights (t5)\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":6995,\"output\":221,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":7216,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784582058551,\"responseId\":\"chatcmpl-940959f3a010394a\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "bellman_ford",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "bellman_ford",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 199.2,
+   "out_tail": "\"All tests pass 100>>>\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":5738,\"output\":9,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":5747,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784582102363,\"responseId\":\"chatcmpl-b83d89225727e39c\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "bellman_ford",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 122.4,
+   "out_tail": "nywhere in the graph.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":4174,\"output\":76,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":4250,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784582215855,\"responseId\":\"chatcmpl-9832d852f9dce135\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "bellman_ford",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "bellman_ford",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "patch_apply",
+   "reward": 0.4071,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "patch_apply",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "patch_apply",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "patch_apply",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "patch_apply",
+   "reward": 0.4071,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "patch_apply",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "patch_apply",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "patch_apply",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 0,
+   "secs": 195.8,
+   "out_tail": "s to lists\\n3. `remov\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":7867,\"output\":94,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":7961,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784583010143,\"responseId\":\"chatcmpl-a0db0cdab03fef4d\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.4929,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  }
+ ]
+}

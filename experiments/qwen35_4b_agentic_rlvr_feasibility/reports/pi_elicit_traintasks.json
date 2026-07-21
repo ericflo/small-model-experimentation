@@ -1,0 +1,141 @@
+{
+ "label": "pi_elicit_train",
+ "provider": "kiln-local",
+ "model": "qwen35-4b-pi8k",
+ "k": 8,
+ "rates": {
+  "topo_lex": 0.75,
+  "bellman_ford": 0.5
+ },
+ "mean_pass": 0.625,
+ "episodes": [
+  {
+   "id": "topo_lex",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 254.5,
+   "out_tail": "te dependency depths.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":6495,\"output\":55,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":6550,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784604050266,\"responseId\":\"chatcmpl-8e3409297fae553c\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "topo_lex",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 294.6,
+   "out_tail": ".\\n\\nAll tests pass.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":6484,\"output\":135,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":6619,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784604084871,\"responseId\":\"chatcmpl-b3137e2d0ca2be4c\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "topo_lex",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 295.0,
+   "out_tail": "inal answer provided\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":7330,\"output\":201,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":7531,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784604079642,\"responseId\":\"chatcmpl-afb19cafb55e1d32\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "topo_lex",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "topo_lex",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 185.5,
+   "out_tail": "n\\nAll 7 tests pass.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":5447,\"output\":203,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":5650,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784604227305,\"responseId\":\"chatcmpl-b496a36b7705ac0e\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "topo_lex",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "topo_lex",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "topo_lex",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "bellman_ford",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 291.5,
+   "out_tail": "e cycle in the graph.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":7668,\"output\":58,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":7726,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784604526380,\"responseId\":\"chatcmpl-b5338296f930450a\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "bellman_ford",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "bellman_ford",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "bellman_ford",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "bellman_ford",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "bellman_ford",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "bellman_ford",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "bellman_ford",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  }
+ ]
+}

@@ -428,10 +428,47 @@ The 0.606 warm-start remains the deployment policy; `merged/pi_dpo` is kept only
 Caveat: k=3, so per-task rates are noisy — but a solid task falling to 0.33 (min_heap) is a real
 2-of-3 flip, and the direction (down, via damage to working tasks) is consistent across four tasks.
 
+## Best-of-8 capability map + elicitation SFT: distillation works on the task, regresses deployment (2026-07-20)
+
+To decide whether the persistent zeros are latent (harvestable) or absent, ran best-of-8 through pi on
+the zero tasks with the warm-start. It cleanly split them:
+
+| task | pass@8 (warm-start) | verdict |
+|---|---|---|
+| bellman_ford | 0.88 | reliably solvable (the earlier 0.00 was unlucky k=2 sampling, not a gap) |
+| topo_lex | 0.25 | partially solvable — real single-shot headroom |
+| allocate | 0.12 | solvable, holdout (transfer-only) |
+| case_convert, deep_merge, schema_lite, semver, glob_match, patch_apply, json_pointer | 0.00, meanR 0.00 | **ABSENT** — never makes productive progress even in 8 tries |
+
+The 7 absent tasks (meanR 0.00) are a genuine capability gap best-of-8 does not crack. The headroom
+that IS reachable is topo_lex (0.25) and, marginally, allocate.
+
+**Elicitation SFT (STaR-style):** harvested 15 execution-verified best-of-n successes on the two
+latent TRAIN tasks (bellman_ford 8/16, topo_lex 7/16), mixed them with the 46 existing diverse passes
+(to preserve breadth), and SFT'd the warm-start at a gentle 2e-5 / 1 epoch.
+
+- **On the TRAINED task, distillation worked:** topo_lex single-shot 0.25 → **0.75** (k=8). Fitting
+  best-of-n successes does raise single-shot reliability on that task. (bellman_ford 0.88→0.50 is
+  within noise — the harvest itself showed 0.50, so ~0.5 is its true rate and 0.88 was a high sample.)
+- **On the holdout it REGRESSED, worse than DPO:** 0.606 → **0.485** (−0.121), damaging four
+  previously-solid tasks (min_heap/pretty_bytes 1.00→0.33, base_convert/rle 1.00→0.67) while rescuing
+  two — the identical damage signature as DPO, despite the breadth-preserving mix and gentle LR.
+
+**The converging law (now four independent replications):** every LoRA edit of the 0.606 warm-start
+perturbs deployment DOWNWARD — RFT-v1 crash (0.121), RFT-v2 null (0.576), DPO −0.091 (0.515),
+elicit-SFT −0.121 (0.485). The warm-start is a robust local optimum; fitting new task-specific data
+helps THAT task (topo_lex +0.50) but disrupts the general policy. The "improve the warm-start with
+more LoRA training on this curriculum" line is falsified across SFT, preference (DPO), and STaR
+distillation. **The original merged warm-start (0.606) is the deployment artifact.**
+
 ## Next Experiments
 
-- **Diverge from policy-editing this warm-start.** Three narrow edits (RFT×2, DPO) have now failed to
-  beat 0.606; stop iterating hyperparameters and attack the CAPABILITY gap directly. The headroom is
+- **The incremental-LoRA-edit line is closed (4 replications).** If more capability is wanted, train a
+  SINGLE better warm-start FROM BASE on a much larger, more diverse execution-verified pi harvest
+  (include the now-known-solvable topo_lex/bellman_ford), rather than editing the current optimum —
+  the "scale the curriculum 10-20x, train once" bet, not another adapter on top.
+- Diverge from policy-editing this warm-start. Four narrow edits (RFT×2, DPO, elicit-SFT) have now
+  failed to beat 0.606; stop iterating hyperparameters and attack the CAPABILITY gap directly. The headroom is
   `json_pointer`/`schema_lite`/`allocate` at 0% under both policies — get ANY execution-verified
   success on them (more inference compute: best-of-n with execution selection; or a targeted
   sub-curriculum that builds the missing skill) before trying to install it.
