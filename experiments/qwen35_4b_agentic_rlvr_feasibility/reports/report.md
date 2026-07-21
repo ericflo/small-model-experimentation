@@ -468,9 +468,10 @@ ceiling question decisively:
 Two decisive conclusions:
 1. **The capability is NOT absent.** `schema_lite` fully closed once in 12 (maxR 1.00) and most tasks
    reach real partial credit (deep_merge 0.65). These are rare-and-hard, not impossible.
-2. **The universal failure is TERMINATION.** Across all 84 episodes the model engages, gets partway,
-   cannot close, and **loops to the wall — ~100% timeout (exit 124)**. The bottleneck is finishing +
-   terminating, NOT missing skill.
+2. **The universal failure is TERMINATION.** Across all 83 episodes the model engages, gets partway,
+   cannot close, and **loops to the wall — 96% timeout (80/83 exit 124)**. Even the single schema_lite
+   full solve itself timed out (it closed the task, then kept going instead of stopping). The
+   bottleneck is finishing + terminating, NOT missing skill.
 
 This reframes the whole program: the deployment ceiling is a **termination / finishing** problem, not
 a capability wall. It also retroactively explains why DPO's "stop after solving" failed — these tasks
@@ -520,6 +521,16 @@ closes (schema_lite at 1/12 needs ~8+ samples). The honest program-level answer:
 4B's policy regresses it, the deployable lift on real agentic coding comes from inference-time
 execution selection over multiple pi rollouts, not from further training the policy.** (Requires a
 verifier at deploy — here the tests; on a real repo, its own test suite or a generated check.)
+
+## Verification
+
+Every headline number in the two sections above was independently re-derived from the raw per-episode
+data by an 8-way adversarial audit (each auditor recomputed one statistic from the `episodes` arrays,
+forbidden from trusting any pre-aggregated field — the discipline that would have caught the `meanR`
+bug). **All 8 matched, zero discrepancies:** baseline 0.606 / best-of-3 0.727 (8/11 tasks), RFT
+0.121 & 0.576, DPO 0.515 (rates-only, episode-level unverifiable), elicit 0.485 + all four damage
+drops, topo_lex 0.25→0.75 & bellman_ford 0.875→0.50, the partial-not-absent correction (all seven
+tasks nonzero mean 0.13–0.41, none absent), and best-of-12 schema_lite 1/12 + 96% timeout.
 
 ## Next Experiments
 
