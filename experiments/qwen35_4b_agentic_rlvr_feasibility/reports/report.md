@@ -451,8 +451,34 @@ from `dict.get(task, 0)` on a field that was never written to the result JSON, s
 on deep_merge), but never ALL of them, and **every episode times out (exit 124) — it loops instead of
 terminating**. So this is not a hard capability wall; it is "close-but-can't-finish + a termination
 failure," which is materially more tractable. Lesson: verify against episode-level data, not a summary
-field that may be absent. A best-of-12 probe (timeout 240) is in flight to test whether more sampling
-ever fully CLOSES any of these, or they plateau at partial.
+field that may be absent.
+
+**Best-of-12 ceiling result (2026-07-21).** Re-ran these seven at k=12 (timeout 240). It settles the
+ceiling question decisively:
+
+| task | pass@12 | mean partial | max | edits | timeouts |
+|---|---|---|---|---|---|
+| schema_lite | **1/12** | 0.31 | **1.00** | 11/12 | 12/12 |
+| deep_merge | 0/12 | 0.36 | 0.65 | 11/12 | 12/12 |
+| json_pointer | 0/12 | 0.20 | 0.49 | 9/12 | 10/12 |
+| semver | 0/12 | 0.29 | 0.38 | 11/12 | 12/12 |
+| case_convert, glob_match | 0/12 | 0.16–0.19 | 0.32–0.35 | 9–11/12 | 11/12 |
+| patch_apply | 0/12 | 0.03 | 0.24 | 2/12 | 12/12 |
+
+Two decisive conclusions:
+1. **The capability is NOT absent.** `schema_lite` fully closed once in 12 (maxR 1.00) and most tasks
+   reach real partial credit (deep_merge 0.65). These are rare-and-hard, not impossible.
+2. **The universal failure is TERMINATION.** Across all 84 episodes the model engages, gets partway,
+   cannot close, and **loops to the wall — ~100% timeout (exit 124)**. The bottleneck is finishing +
+   terminating, NOT missing skill.
+
+This reframes the whole program: the deployment ceiling is a **termination / finishing** problem, not
+a capability wall. It also retroactively explains why DPO's "stop after solving" failed — these tasks
+are almost never *solved*, so that signal never fires; the need is "recognize you are stuck, finish or
+stop cleanly." The natural non-training lift is **execution-selected best-of-n at deploy**: run N pi
+rollouts, keep the highest-scoring by the tests. Since these tasks occasionally close (schema_lite)
+and often reach high partial (deep_merge 0.65), selection captures the rare full solve and the best
+partial — and it sidesteps the warm-start's proven edit-fragility entirely (no LoRA training).
 
 **Elicitation SFT (STaR-style):** harvested 15 execution-verified best-of-n successes on the two
 latent TRAIN tasks (bellman_ford 8/16, topo_lex 7/16), mixed them with the 46 existing diverse passes

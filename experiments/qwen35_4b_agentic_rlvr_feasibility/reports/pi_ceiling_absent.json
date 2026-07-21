@@ -1,0 +1,682 @@
+{
+ "label": "ceiling_bestof12",
+ "provider": "kiln-local",
+ "model": "qwen35-4b-pi8k",
+ "k": 12,
+ "rates": {
+  "case_convert": 0.0,
+  "deep_merge": 0.0,
+  "schema_lite": 0.08333333333333333,
+  "semver": 0.0,
+  "glob_match": 0.0,
+  "patch_apply": 0.0,
+  "json_pointer": 0.0
+ },
+ "mean_pass": 0.011904761904761904,
+ "episodes": [
+  {
+   "id": "case_convert",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.25,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.25,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.35,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.1,
+   "out_tail": ""
+  },
+  {
+   "id": "deep_merge",
+   "reward": 0.65,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "deep_merge",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "deep_merge",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "deep_merge",
+   "reward": 0.35,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "deep_merge",
+   "reward": 0.35,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "deep_merge",
+   "reward": 0.35,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "deep_merge",
+   "reward": 0.55,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "deep_merge",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 240.1,
+   "out_tail": ""
+  },
+  {
+   "id": "deep_merge",
+   "reward": 0.35,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "deep_merge",
+   "reward": 0.35,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "deep_merge",
+   "reward": 0.65,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "deep_merge",
+   "reward": 0.45,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.1,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.1,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.1,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 240.1,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "semver",
+   "reward": 0.3,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "semver",
+   "reward": 0.375,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "semver",
+   "reward": 0.3,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "semver",
+   "reward": 0.3,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "semver",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "semver",
+   "reward": 0.375,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "semver",
+   "reward": 0.3,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "semver",
+   "reward": 0.375,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.1,
+   "out_tail": ""
+  },
+  {
+   "id": "semver",
+   "reward": 0.375,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "semver",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.1,
+   "out_tail": ""
+  },
+  {
+   "id": "semver",
+   "reward": 0.3,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "semver",
+   "reward": 0.3,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "glob_match",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "glob_match",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "glob_match",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "glob_match",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "glob_match",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 0,
+   "secs": 185.9,
+   "out_tail": "to see if this works.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":5748,\"output\":12,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":5760,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784625588055,\"responseId\":\"chatcmpl-8cb59913dbdbc716\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "glob_match",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "glob_match",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "glob_match",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "glob_match",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.1,
+   "out_tail": ""
+  },
+  {
+   "id": "glob_match",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "glob_match",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "glob_match",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "patch_apply",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "patch_apply",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "patch_apply",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "patch_apply",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "patch_apply",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "patch_apply",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 240.1,
+   "out_tail": ""
+  },
+  {
+   "id": "patch_apply",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "patch_apply",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "patch_apply",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 240.1,
+   "out_tail": ""
+  },
+  {
+   "id": "patch_apply",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "patch_apply",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 240.1,
+   "out_tail": ""
+  },
+  {
+   "id": "patch_apply",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 0,
+   "secs": 74.8,
+   "out_tail": "eters>\\n</tool_call>\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3822,\"output\":339,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":4161,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784626601031,\"responseId\":\"chatcmpl-bee7b9842e41456e\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.4929,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.1,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 0,
+   "secs": 52.3,
+   "out_tail": "licit parameters.\\n\\n\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3295,\"output\":85,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":3380,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784626910764,\"responseId\":\"chatcmpl-a0d76acb6415fd4b\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.1,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.0,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.4071,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.1,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 240.1,
+   "out_tail": ""
+  }
+ ]
+}
