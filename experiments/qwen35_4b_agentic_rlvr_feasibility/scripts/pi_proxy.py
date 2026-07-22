@@ -29,6 +29,7 @@ LOCK = threading.Lock()
 def _accumulate(chunks):
     """Reassemble an OpenAI SSE stream into a single completion dict."""
     content, reasoning, calls = [], [], {}
+    finish = None
     for raw in chunks:
         for line in raw.split("\n"):
             line = line.strip()
@@ -42,6 +43,8 @@ def _accumulate(chunks):
             except Exception:
                 continue
             for ch in d.get("choices") or []:
+                if ch.get("finish_reason"):
+                    finish = ch["finish_reason"]
                 delta = ch.get("delta") or {}
                 if delta.get("content"):
                     content.append(delta["content"])
@@ -56,6 +59,7 @@ def _accumulate(chunks):
                     if fn.get("arguments"):
                         slot["arguments"] += fn["arguments"]
     return {"content": "".join(content), "reasoning_content": "".join(reasoning),
+            "finish_reason": finish,
             "tool_calls": [calls[k] for k in sorted(calls)]}
 
 
@@ -120,16 +124,27 @@ def make_handler(upstream, logpath):
                 comp = _accumulate(chunks)
             else:
                 try:
-                    m = (json.loads(raw)["choices"][0]).get("message", {})
+                    choice = json.loads(raw)["choices"][0]
+                    m = choice.get("message", {})
                     comp = {"content": m.get("content") or "",
                             "reasoning_content": m.get("reasoning_content") or "",
+                            "finish_reason": choice.get("finish_reason"),
                             "tool_calls": [{"name": (c.get("function") or {}).get("name", ""),
                                             "arguments": (c.get("function") or {}).get("arguments", "")}
                                            for c in (m.get("tool_calls") or [])]}
                 except Exception:
                     return
+            # Per-call size metrics for the token-cap mechanism readout. NOTE: the server runs
+            # WITHOUT --reasoning-parser, so <think> text arrives as ordinary CONTENT deltas --
+            # `content` length is the runaway-generation signal; `reasoning_content` will be empty.
+            tool_arg_chars = sum(len(c.get("arguments") or "") for c in comp.get("tool_calls") or [])
             rec = {"t": time.time(), "messages": reqd.get("messages") or [],
-                   "tools": reqd.get("tools") or [], "completion": comp}
+                   "tools": reqd.get("tools") or [], "completion": comp,
+                   "max_completion_tokens": reqd.get("max_completion_tokens") or reqd.get("max_tokens"),
+                   "finish_reason": comp.get("finish_reason"),
+                   "n_content_chars": len(comp.get("content") or ""),
+                   "n_reasoning_chars": len(comp.get("reasoning_content") or ""),
+                   "n_tool_arg_chars": tool_arg_chars}
             with LOCK:
                 with open(logpath, "a") as fh:
                     fh.write(json.dumps(rec) + "\n")

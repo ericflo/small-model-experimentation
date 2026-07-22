@@ -522,6 +522,21 @@ closes (schema_lite at 1/12 needs ~8+ samples). The honest program-level answer:
 execution selection over multiple pi rollouts, not from further training the policy.** (Requires a
 verifier at deploy — here the tests; on a real repo, its own test suite or a generated check.)
 
+### Operational: full-WSL crashes under sustained eval load (2026-07-21)
+
+The WSL2 VM itself died twice in one day under the same workload shape: vLLM API server (~90% of a
+24GB GPU plus its host-side process) + 4 concurrent pi Node processes + python eval workers on a
+15GB-host-RAM box. Consistent with host-memory exhaustion killing the VM (not just our process; dmesg
+does not survive the reboot to prove it). Mitigations now standard:
+- `pi_episode.py` checkpoints every 5 episodes and RESUMES from its own partial checkpoint (both
+  proven: the first checkpoint outing preserved 20 episodes through a WSL crash, and resume
+  re-enqueued only the remaining 68).
+- Run evals with `--workers 2` (each pi worker is a Node process holding an SSE stream + a vLLM
+  request in flight; halving workers halves that footprint for ~1.4x wall-clock, a good trade
+  against losing the whole VM).
+- Commit before every long run: the repo survived both crashes green because nothing important
+  lived only in memory or /tmp.
+
 ## Verification
 
 Every headline number in the two sections above was independently re-derived from the raw per-episode
