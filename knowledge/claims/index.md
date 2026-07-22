@@ -8,10 +8,10 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 
 | Status | Claims |
 | --- | ---: |
-| Confirmed | 8 |
+| Confirmed | 9 |
 | Negative | 3 |
 | Open | 2 |
-| Promising | 50 |
+| Promising | 49 |
 
 ## Program Counts
 
@@ -1515,10 +1515,10 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 
 ## C63: SINCE EDITING THE 4B's POLICY REGRESSES IT, THE DEPLOYABLE AGENTIC-CODING LIFT COMES FROM INFERENCE-TIME EXECUTION SELECTION: best-of-3 beats single-shot +0.121 on the pi holdout with ZERO training
 
-- Status: `Promising`
+- Status: `Confirmed`
 - Programs: `agentic_breadth_installation`
-- Summary: Experiment qwen35_4b_agentic_rlvr_feasibility (owner /goal). Capstone resolving C62: four LoRA edits of the 0.606 warm-start each REGRESSED pi-holdout deployment (-0.09 to -0.12), and the best-of-12 ceiling probe showed the hard tasks fail by TERMINATION (edit + partial pass, ~100% timeout) not absent capability. Both point to inference-time selection as the lift. Measured from the baseline's own 3 rollouts/task (execution-selected = solved if ANY of 3 fully passes): single-shot 0.606 -> best-of-3 0.727 (+0.121), zero training -- the exact mirror of what every policy edit lost. best-of-3 is the floor; best-of-8/12 would capture the rare closes (schema_lite 1/12).
-- Implication: For this fixed 4B on agentic coding, the deployable capability lift comes from INFERENCE-TIME EXECUTION SELECTION over multiple pi rollouts (keep the highest test-scoring), NOT from further LoRA training of the policy (which regresses a robust local optimum). This needs a verifier at deploy -- the task's tests here, a repo's own suite or a generated check in general. It converts the 4B's rare-but-real successes and its termination-limited partials into a reliable deployment gain without touching the fragile policy.
+- Summary: Experiment qwen35_4b_agentic_rlvr_feasibility (owner /goal). Capstone resolving C62: four LoRA edits of the 0.606 warm-start each REGRESSED pi-holdout deployment (-0.09 to -0.12), and the best-of-12 ceiling probe showed the hard tasks fail by TERMINATION (edit + partial pass, ~100% timeout) not absent capability. Both point to inference-time selection as the lift. Measured from the baseline's own 3 rollouts/task (execution-selected = solved if ANY of 3 fully passes): single-shot 0.606 -> best-of-3 0.727 (+0.121), zero training -- the exact mirror of what every policy edit lost. best-of-3 is the floor; best-of-8/12 would capture the rare closes (schema_lite 1/12). CONFIRMED 2026-07-22 by the dedicated best-of-8 run (T=300, instrumented, checkpoint-resumed through two system crashes): execution-selected best-of-8 = 0.818 (9/11), headline criterion >=0.78 passed, case_convert's first-ever pass captured. Same-day best-of-3@600 also 0.818 at 1.8x less compute (3.1 vs 5.5 GPU-h) -- the selection-efficiency frontier is FLAT in wall-clock T (the T=300 single-shot drop, 0.443 vs 0.621 = 71% retention, matches the disk-scoring prediction of 72% almost exactly; solves land on disk before the wall and are scored from disk). Selection saturates ~0.82 at practical k because the last three tasks are rare-solve (case_convert 1/33, json_pointer 1/33, schema_lite 1/34 pooled). POOLED ACROSS ALL RUNS: 11/11 holdout tasks have >=1 warm-start solve -- the policy's solvable ceiling is 100%; per-task solve RATE is the entire remaining gap.
+- Implication: Deploy recommendation: N~3 pi rollouts at the full 600s wall, execution-select on the tests -- 0.818 vs 0.606 single-shot on the holdout, and the frontier is flat in T so short walls buy nothing for selection. The remaining gap is rare-solve RATE (three tasks at ~1/33), not solvability: every holdout task is solvable by the warm-start. Raising a rare-solve rate is a different problem from installing a missing capability, and both training (4x regressions, C62) and mechanical termination fixes (cap ladder, killed by its own gate) have failed to do it -- sampling past it is the only proven lever.
 
 ### Evidence
 
@@ -1526,9 +1526,9 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 
 ### Next Tests
 
-- Confirm at best-of-8/12 with the explicit selection protocol (N pi rollouts/holdout task, keep highest test score); expect > +0.121 as rarer closes (schema_lite) are captured.
-- Partial-credit selection: when no rollout fully passes, does selecting the highest partial-test-pass rollout still help downstream (e.g. as a warm continuation)?
-- Cost/benefit vs a termination fix: compare best-of-N inference cost to a train-time 'stop-when-stuck' intervention that cuts the ~100% timeout rate.
+- Adaptive selection at deploy: spend samples only on tasks not yet solved (sequential best-of-N with early stop on first pass) -- pooled data implies ~11/11 reachable at k<=33 worst-case, far cheaper than uniform k.
+- Does a partial-credit selector (keep the highest test-score rollout when none fully passes) provide a useful warm continuation for a second round?
+- Port the selection protocol to real-repo tasks (the OpenEnv/OSS mining line) where the verifier is the repo's own test suite.
 
 ### Avoid
 

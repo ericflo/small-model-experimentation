@@ -1,0 +1,728 @@
+{
+ "label": "bestof8_confirm",
+ "provider": "kiln-proxy",
+ "model": "qwen35-4b-pi8k",
+ "k": 8,
+ "partial": false,
+ "n_episodes": 88,
+ "rates": {
+  "wordcount": 1.0,
+  "flatten": 0.75,
+  "expr_eval": 0.25,
+  "base_convert": 0.75,
+  "rle": 0.875,
+  "pretty_bytes": 0.375,
+  "case_convert": 0.125,
+  "schema_lite": 0.0,
+  "allocate": 0.25,
+  "min_heap": 0.5,
+  "json_pointer": 0.0
+ },
+ "mean_pass": 0.4431818181818182,
+ "episodes": [
+  {
+   "id": "wordcount",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 62.7,
+   "out_tail": "s the top k results.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":2711,\"output\":109,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":2820,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784636684125,\"responseId\":\"chatcmpl-a2de8fb0d204062e\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "wordcount",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 64.3,
+   "out_tail": " (word, count) tuples\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":2904,\"output\":88,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":2992,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784636687163,\"responseId\":\"chatcmpl-8b4d25e1a536f497\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "wordcount",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 74.0,
+   "out_tail": "\\n\\nAll 4 tests pass.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3091,\"output\":55,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":3146,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784636698640,\"responseId\":\"chatcmpl-874137d3ef5881bd\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "wordcount",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 116.2,
+   "out_tail": "rds as list of tuples\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3709,\"output\":73,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":3782,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784636739725,\"responseId\":\"chatcmpl-8c405245a5cce2e1\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "wordcount",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 62.1,
+   "out_tail": "Returns top `k` words\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":2722,\"output\":80,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":2802,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784636749785,\"responseId\":\"chatcmpl-b3ede939847ec409\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "wordcount",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 81.6,
+   "out_tail": "test cases now pass.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3134,\"output\":124,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":3258,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784636763278,\"responseId\":\"chatcmpl-a361d3c1589e5000\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "flatten",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 38.9,
+   "out_tail": ", and all tests pass.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":2397,\"output\":44,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":2441,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784636808636,\"responseId\":\"chatcmpl-8dc8a754ba9f9f5f\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "flatten",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 74.5,
+   "out_tail": "ining keys with dots.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3003,\"output\":48,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":3051,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784636825976,\"responseId\":\"chatcmpl-bf7b8253e260b1f0\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "wordcount",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 107.0,
+   "out_tail": "ns the top K results.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3782,\"output\":70,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":3852,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784636846159,\"responseId\":\"chatcmpl-97b3962bfaf0a5a3\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "flatten",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 104.5,
+   "out_tail": "o dot-separated keys.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3576,\"output\":19,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":3595,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784636932449,\"responseId\":\"chatcmpl-8608a8aef41d3f83\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "flatten",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 100.4,
+   "out_tail": "ed with dot prefixes.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3607,\"output\":51,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":3658,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784636948135,\"responseId\":\"chatcmpl-a93cc33fc2efa8cb\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "wordcount",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 259.9,
+   "out_tail": "eturns top k results.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":7379,\"output\":41,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":7420,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784636957939,\"responseId\":\"chatcmpl-a5ebbb48c2ce7fcb\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "flatten",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 75.1,
+   "out_tail": "dds it to the result.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3184,\"output\":61,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":3245,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784637004482,\"responseId\":\"chatcmpl-ac86506d44873939\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "flatten",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 75.7,
+   "out_tail": " as-is\\n\\nTests pass!\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3138,\"output\":76,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":3214,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784637032100,\"responseId\":\"chatcmpl-9c0ad71c7cb198b7\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "flatten",
+   "reward": 0.3,
+   "edited": true,
+   "exit": 0,
+   "secs": 296.0,
+   "out_tail": "end>\\n</end>\\n</end>\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":6697,\"output\":113,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":6810,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784637100017,\"responseId\":\"chatcmpl-8432748958aa8cbc\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "flatten",
+   "reward": 0.45,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "expr_eval",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "expr_eval",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "expr_eval",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 138.5,
+   "out_tail": "unary minus handling.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3883,\"output\":42,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":3925,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784637386978,\"responseId\":\"chatcmpl-9d0c794b64554114\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "expr_eval",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "expr_eval",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 103.0,
+   "out_tail": "3 test_solution.py`.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-local\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3728,\"output\":217,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":3945,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784693358125,\"responseId\":\"chatcmpl-980a248410d1f83d\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "expr_eval",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "expr_eval",
+   "reward": 0.45,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "expr_eval",
+   "reward": 0.45,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "base_convert",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "base_convert",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 86.1,
+   "out_tail": "ve numbers and zero.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3021,\"output\":127,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":3148,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784700545939,\"responseId\":\"chatcmpl-afb09e20b44dd0d6\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "base_convert",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 237.4,
+   "out_tail": "g digits 0-9 and a-z.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":7304,\"output\":61,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":7365,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784700702400,\"responseId\":\"chatcmpl-a2bf8b3c771df030\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "base_convert",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "base_convert",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 85.9,
+   "out_tail": "ing negative numbers.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3062,\"output\":69,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":3131,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784700936661,\"responseId\":\"chatcmpl-a58996d9215f5ec6\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "base_convert",
+   "reward": 0.55,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "base_convert",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 177.9,
+   "out_tail": "bers and bases 2-36.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":4686,\"output\":125,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":4811,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784701110527,\"responseId\":\"chatcmpl-85501a641c01ef26\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "base_convert",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 195.5,
+   "out_tail": "edge cases like zero.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":5705,\"output\":50,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":5755,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784701198146,\"responseId\":\"chatcmpl-91e864a723740032\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "rle",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 77.3,
+   "out_tail": "veral input strings.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3093,\"output\":145,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":3238,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784701268766,\"responseId\":\"chatcmpl-bd69b319e7987160\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "rle",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 82.3,
+   "out_tail": " working as expected.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3177,\"output\":71,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":3248,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784701357450,\"responseId\":\"chatcmpl-b96ec606572a5d13\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "rle",
+   "reward": 0.55,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "rle",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 60.7,
+   "out_tail": "t5) pass successfully\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":2743,\"output\":60,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":2803,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784701475226,\"responseId\":\"chatcmpl-9a70432d2f676e5e\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "rle",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 137.0,
+   "out_tail": "all tests passing **\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":4621,\"output\":129,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":4750,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784701489422,\"responseId\":\"chatcmpl-97e32f44cdcd8f53\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "rle",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 85.0,
+   "out_tail": "characters correctly.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3562,\"output\":79,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":3641,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784701578816,\"responseId\":\"chatcmpl-8742475685d430fe\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "rle",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 104.3,
+   "out_tail": "cter-count sequences.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3897,\"output\":45,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":3942,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784701581326,\"responseId\":\"chatcmpl-9b0de716e72b4508\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "rle",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 128.9,
+   "out_tail": " \\\"a3b1\\\" \u2192 \\\"aaab\\\")\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":4063,\"output\":82,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":4145,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784701706297,\"responseId\":\"chatcmpl-91ccd71a9b1cea4a\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "pretty_bytes",
+   "reward": 0.63,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "pretty_bytes",
+   "reward": 0.39,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "pretty_bytes",
+   "reward": 0.27,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "pretty_bytes",
+   "reward": 0.27,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "pretty_bytes",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 208.3,
+   "out_tail": "mals. All tests pass.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":5804,\"output\":48,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":5852,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784702389013,\"responseId\":\"chatcmpl-8a7689b9a4b75b9c\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "pretty_bytes",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 85.2,
+   "out_tail": "rips trailing zeros.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3120,\"output\":153,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":3273,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784702466859,\"responseId\":\"chatcmpl-9c3c8bc3d32d1b52\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "pretty_bytes",
+   "reward": 0.51,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "pretty_bytes",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 282.5,
+   "out_tail": "opriate unit display.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":6532,\"output\":45,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":6577,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784702757264,\"responseId\":\"chatcmpl-9314374ce84d85e7\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 290.4,
+   "out_tail": "constricted acronyms\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":6507,\"output\":108,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":6615,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784703043614,\"responseId\":\"chatcmpl-8e79371c4825c09d\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.65,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "case_convert",
+   "reward": 0.45,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 0,
+   "secs": 32.3,
+   "out_tail": " currently there.\\n\\n\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":2746,\"output\":76,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":2822,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784704140126,\"responseId\":\"chatcmpl-9cb732e2577ebaf0\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.4071,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "schema_lite",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "allocate",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "allocate",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "allocate",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "allocate",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "allocate",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "allocate",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "allocate",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 239.2,
+   "out_tail": "here's nothing left.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":7330,\"output\":148,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":7478,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784705981023,\"responseId\":\"chatcmpl-8871c2fcbda30a38\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "min_heap",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 198.1,
+   "out_tail": "sift_down operations.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":6214,\"output\":47,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":6261,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784706184982,\"responseId\":\"chatcmpl-8df2e62bcc1cb1fc\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "allocate",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "min_heap",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 255.8,
+   "out_tail": "0-indexed heap logic.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":7432,\"output\":41,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":7473,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784706440686,\"responseId\":\"chatcmpl-aec4d53818d03303\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "min_heap",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "min_heap",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 114.1,
+   "out_tail": "t importing `heapq`.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":3967,\"output\":168,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":4135,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784706646304,\"responseId\":\"chatcmpl-b2e8eda89683411a\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "min_heap",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "min_heap",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 133.9,
+   "out_tail": "on. All 7 tests pass.\"}],\"api\":\"openai-completions\",\"provider\":\"kiln-proxy\",\"model\":\"qwen35-4b-pi8k\",\"usage\":{\"input\":4379,\"output\":31,\"cacheRead\":0,\"cacheWrite\":0,\"reasoning\":0,\"totalTokens\":4410,\"cost\":{\"input\":0,\"output\":0,\"cacheRead\":0,\"cacheWrite\":0,\"total\":0}},\"stopReason\":\"stop\",\"timestamp\":1784706791173,\"responseId\":\"chatcmpl-ac7034a7e2456cb3\"}],\"willRetry\":false}\n{\"type\":\"agent_settled\"}\n"
+  },
+  {
+   "id": "min_heap",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.1,
+   "out_tail": ""
+  },
+  {
+   "id": "min_heap",
+   "reward": 0.4929,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.3214,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.2357,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  },
+  {
+   "id": "json_pointer",
+   "reward": 0.15,
+   "edited": true,
+   "exit": 124,
+   "secs": 300.0,
+   "out_tail": ""
+  }
+ ]
+}

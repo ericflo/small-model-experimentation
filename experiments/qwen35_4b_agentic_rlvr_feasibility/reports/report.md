@@ -566,6 +566,31 @@ passes cluster at 103–341s. A 300s wall therefore keeps nearly all passes whil
 the (frequent) failures: ~16 episodes/GPU-hour vs 10 at 600s. Deploy-selection should sample at
 T≈300, not 600.
 
+## Capstone CONFIRMED at best-of-8 — and the selection frontier fully mapped (2026-07-22)
+
+The dedicated best-of-8 run (T=300 wall, instrumented, resumed twice through crashes via the
+episode checkpointer) closes the arc:
+
+| | single-shot | execution-selected | GPU-hours |
+|---|---|---|---|
+| best-of-3 @ 600s (Arm 0, same-day) | 0.621 | **0.818** (9/11) | 3.1 |
+| best-of-8 @ 300s | 0.443 | **0.818** (9/11) | 5.5 |
+
+- **Headline criterion (≥0.78) PASSED**: 0.818, and `case_convert` got its first-ever pass (1/8).
+- **The T=300 single-shot drop is exactly the predicted retention**: 0.443/0.621 = 71% observed vs
+  72% predicted from pass-duration pooling — the disk-scoring economics model is quantitatively
+  validated. But its deployment conclusion is REFINED: the shorter wall trades single-shot for
+  throughput roughly evenly, so the selection-efficiency frontier is FLAT in T. k=3 @ 600s reaches
+  the same 0.818 for 1.8× less compute → **deploy recommendation: N≈3 rollouts at the full 600s
+  wall, execution-select on the tests.**
+- **Selection saturates at ~0.82 for practical k** because the three remaining tasks are
+  rare-solve: pooled across every warm-start run, `case_convert` 1/33, `json_pointer` 1/33,
+  `schema_lite` 1/34 — capturing them per-run needs k≳30.
+- **Pooled across all runs: 11/11 holdout tasks have now been solved by the warm-start at least
+  once.** The policy's solvable ceiling on this holdout is 100%; per-task solve RATE, not
+  solvability, is the entire remaining gap. "Install the capability" was the wrong frame for every
+  one of these tasks; "raise the rare-solve rate" (or sample past it) is the right one.
+
 ## Verification
 
 Every headline number in the two sections above was independently re-derived from the raw per-episode
