@@ -537,6 +537,35 @@ does not survive the reboot to prove it). Mitigations now standard:
 - Commit before every long run: the repo survived both crashes green because nothing important
   lived only in memory or /tmp.
 
+## Token-cap ladder: KILLED by its own pre-registered mechanism gate (2026-07-21)
+
+The designed termination fix (cap pi's per-call `maxTokens` 8192→2560, on the theory that one
+permitted-length `<think>` call ≈ 565s ≈ the whole 600s wall) died at Arm 0, exactly as the
+pre-registered kill rule intended. The instrumented re-anchor run (k=3, 600s wall, every call logged
+through the proxy with per-call decoded size) reconstructed all 33 episode chains by prefix matching:
+
+- **11 of 12 timeout episodes (92%) are MANY-SUB-CAP**: 8–28 calls each, max single decode only
+  ~1100–3500 tokens — far under the 8192 cap (mostly under 2560 too). The loop already turns over;
+  the model iterates edit→test→fail→… and simply never converges within the wall.
+- The "one runaway generation" shape was real only for the DEGRADED pi_rft policy (92 deltas, one
+  message_end); it does not describe the deployment warm-start. Capping per-call tokens would have
+  changed almost nothing. Kill rule 1 (≥80% many-sub-cap → kill) fired at 92%; Arm 1 never ran.
+
+Arm 0 doubled as a same-day re-anchor and STRENGTHENED the capstone: single-shot **0.621** (0.606
+originally — stable), execution-selected best-of-3 **0.818 (9/11)** vs 0.727 stored — including the
+first-ever `json_pointer` pass (1/3). Only `case_convert` and `schema_lite` remain never-passed in
+this run.
+
+### The corrected sampling economics (why the 300s wall is right)
+
+Pooling every pass across runs exposed a fact the naive timeout math missed: **solves land on DISK
+before the wall and are scored from disk**, so a wall-kill does not destroy a completed solve — many
+hard-task passes are literally `exit 124` episodes (bellman_ford 6/11 passes, schema_lite's only pass
+at wall 240): the model solved the task, kept looping, got killed, and still scored 1.0. Hard-task
+passes cluster at 103–341s. A 300s wall therefore keeps nearly all passes while halving the cost of
+the (frequent) failures: ~16 episodes/GPU-hour vs 10 at 600s. Deploy-selection should sample at
+T≈300, not 600.
+
 ## Verification
 
 Every headline number in the two sections above was independently re-derived from the raw per-episode
