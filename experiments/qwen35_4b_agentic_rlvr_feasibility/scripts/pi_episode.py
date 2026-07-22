@@ -114,11 +114,47 @@ def main():
     if not scenarios:
         print("no matching tasks"); return
 
-    jobs = [s for s in scenarios for _ in range(a.k)]
+    # Resume from a partial checkpoint: count how many episodes each task already has and only
+    # enqueue the remainder. Two full-system crashes have interrupted these 1-2h evals; the
+    # incremental checkpoint (below) preserves finished episodes, and this makes them count.
+    prior = []
+    if Path(a.out).exists():
+        try:
+            prev = json.loads(Path(a.out).read_text())
+            if prev.get("partial") and prev.get("label") == a.label:
+                prior = prev.get("episodes", [])
+        except Exception:
+            pass
+    done_per_task = {}
+    for r in prior:
+        done_per_task[r["id"]] = done_per_task.get(r["id"], 0) + 1
+    jobs = [s for s in scenarios for i in range(a.k) if i >= done_per_task.get(s["id"], 0)]
+    if prior:
+        print(f"RESUME: {len(prior)} episodes recovered from checkpoint; {len(jobs)} remaining", flush=True)
     print(f"pi-coding-agent eval: {len(jobs)} episodes = {len(scenarios)} tasks x k={a.k} "
           f"| provider={a.provider} model={a.model}", flush=True)
 
-    recs, t0 = [], time.time()
+    def _summarize(recs):
+        from collections import defaultdict
+        per = defaultdict(list)
+        for r in recs:
+            per[r["id"]].append(r["reward"])
+        rates = {t: sum(1 for x in v if x == 1.0) / len(v) for t, v in per.items()}
+        return per, rates, (sum(rates.values()) / max(1, len(rates)))
+
+    def _save(recs, partial):
+        """Checkpoint results to disk. These pi evals run 1-2h and have now been lost TWICE (once to
+        a missing output dir, once to a process crash at 20/88), so write after every batch: a
+        partial file with 60 episodes still answers the question, an empty one answers nothing."""
+        per, rates, mean_pass = _summarize(recs)
+        Path(a.out).parent.mkdir(parents=True, exist_ok=True)
+        Path(a.out).write_text(json.dumps(
+            {"label": a.label, "provider": a.provider, "model": a.model, "k": a.k,
+             "partial": partial, "n_episodes": len(recs),
+             "rates": rates, "mean_pass": mean_pass, "episodes": recs}, indent=1))
+        return rates, mean_pass
+
+    recs, t0 = list(prior), time.time()
     with ThreadPoolExecutor(max_workers=a.workers) as ex:
         futs = [ex.submit(run_pi_episode, s, a.provider, a.model, a.timeout) for s in jobs]
         for i, f in enumerate(as_completed(futs), 1):
@@ -129,22 +165,22 @@ def main():
                 print(f"  episode error: {type(exc).__name__}: {str(exc)[:90]}", flush=True)
             if i % 5 == 0:
                 print(f"  {i}/{len(jobs)} ({round(time.time()-t0)}s)", flush=True)
+                if recs:
+                    _save(recs, partial=True)
 
-    from collections import defaultdict
-    per = defaultdict(list)
-    for r in recs:
-        per[r["id"]].append(r["reward"])
-    rates = {t: sum(1 for x in v if x == 1.0) / len(v) for t, v in per.items()}
-    mean_pass = sum(rates.values()) / max(1, len(rates))
+    per, rates, mean_pass = _summarize(recs)
     print("\n=== pi-coding-agent per-task pass rate ===", flush=True)
     for t, v in sorted(rates.items(), key=lambda x: -x[1]):
         print(f"  {t:22s} pass {v:.2f}  meanR {sum(per[t])/len(per[t]):.2f}  (n={len(per[t])})", flush=True)
-    print(f"\nMEAN pass rate: {mean_pass:.3f} over {len(rates)} tasks", flush=True)
+    # execution-selected best-of-N: the task counts as solved if ANY of its rollouts fully passed.
+    # This is the C63 deployment metric, so report it alongside the single-shot mean rather than
+    # making every consumer recompute it from the episodes.
+    solved_any = sum(1 for t, v in per.items() if any(x == 1.0 for x in v))
+    bestofn = solved_any / max(1, len(per))
+    print(f"\nMEAN pass rate (single-shot): {mean_pass:.3f} over {len(rates)} tasks", flush=True)
+    print(f"EXECUTION-SELECTED best-of-{a.k}: {bestofn:.3f} ({solved_any}/{len(per)} tasks solved by any rollout)", flush=True)
     print(f"engaged (edited): {sum(r['edited'] for r in recs)}/{len(recs)}", flush=True)
-    Path(a.out).parent.mkdir(parents=True, exist_ok=True)  # never lose a 50-min eval to a missing dir
-    Path(a.out).write_text(json.dumps(
-        {"label": a.label, "provider": a.provider, "model": a.model, "k": a.k,
-         "rates": rates, "mean_pass": mean_pass, "episodes": recs}, indent=1))
+    _save(recs, partial=False)
     print(f"saved -> {a.out}", flush=True)
 
 
