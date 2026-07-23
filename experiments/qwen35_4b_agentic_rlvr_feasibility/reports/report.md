@@ -537,6 +537,22 @@ does not survive the reboot to prove it). Mitigations now standard:
 - Commit before every long run: the repo survived both crashes green because nothing important
   lived only in memory or /tmp.
 
+Update after crashes 3 and 4 (same day): the checkpoint+resume machinery held every time (zero
+episodes lost from completed batches). Three additional disciplines proved necessary:
+- **Gated restarts.** After a crash, bring the stack up with a hard verification gate at each step:
+  (1) kill stragglers by ANCHORED cmdline (`pgrep -f "^/home.*python -u .*script"` — an unanchored
+  `pgrep -f`/`pkill -f` matches the agent's own shell wrapper and has repeatedly killed or
+  miscounted the wrong thing); (2) start the proxy, gate on `ss -tln` showing the port LISTENING
+  and a real `curl` answering; (3) resume the eval, gate on the RESUME line; (4) gate on proxy
+  traffic actually GROWING before walking away. A proxy that lost a port-bind race died silently
+  once and pi fast-failed 38 episodes into empty results (caught before any checkpoint write, so
+  nothing was poisoned — but only because empty episodes never reached the write cadence).
+- Linux-side OOM is NOT the trigger: swap stays at 0B used and `free` shows 10+ GB free under
+  load. The VM itself dies — the WSL2 vmmem/GPU-driver instability under sustained CUDA load. The
+  inside-WSL levers are exhausted (vLLM 0.24 already removed `--swap-space`; kv-offloading
+  defaults off; `--max-num-seqs 8` trims bookkeeping). The real fix is Windows-side: a
+  `.wslconfig` raising the VM memory ceiling and enabling `autoMemoryReclaim=gradual`.
+
 ## Token-cap ladder: KILLED by its own pre-registered mechanism gate (2026-07-21)
 
 The designed termination fix (cap pi's per-call `maxTokens` 8192→2560, on the theory that one
