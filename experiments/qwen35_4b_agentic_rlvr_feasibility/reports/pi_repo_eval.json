@@ -1,0 +1,271 @@
+{
+ "label": "repo_warmstart",
+ "provider": "kiln-proxy",
+ "model": "qwen35-4b-pi8k",
+ "k": 3,
+ "partial": true,
+ "n_episodes": 35,
+ "rates": {
+  "has_varargs": 1.0,
+  "take_nth": 0.6666666666666666,
+  "first": 0.6666666666666666,
+  "last": 0.6666666666666666,
+  "cons": 1.0,
+  "identity": 0.6666666666666666,
+  "has_keywords": 0.0,
+  "mapcat": 0.6666666666666666,
+  "num_required_args": 0.3333333333333333,
+  "remove": 1.0,
+  "second": 1.0,
+  "interpose": 0.5
+ },
+ "mean_pass": 0.6805555555555555,
+ "selected": 0.9166666666666666,
+ "episodes": [
+  {
+   "id": "has_varargs",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 231.3
+  },
+  {
+   "id": "has_varargs",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 306.3
+  },
+  {
+   "id": "has_varargs",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 124,
+   "secs": 601.3
+  },
+  {
+   "id": "take_nth",
+   "reward": 0.5973118279569892,
+   "edited": true,
+   "exit": 124,
+   "secs": 601.0
+  },
+  {
+   "id": "take_nth",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 130.8
+  },
+  {
+   "id": "first",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 122.8
+  },
+  {
+   "id": "first",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 104.4
+  },
+  {
+   "id": "take_nth",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 429.5
+  },
+  {
+   "id": "first",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 600.0
+  },
+  {
+   "id": "last",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 97.9
+  },
+  {
+   "id": "last",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 267.1
+  },
+  {
+   "id": "last",
+   "reward": 0.05,
+   "edited": true,
+   "exit": 0,
+   "secs": 274.6
+  },
+  {
+   "id": "cons",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 199.1
+  },
+  {
+   "id": "cons",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 222.1
+  },
+  {
+   "id": "cons",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 130.6
+  },
+  {
+   "id": "identity",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 148.4
+  },
+  {
+   "id": "identity",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 122.0
+  },
+  {
+   "id": "identity",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 124,
+   "secs": 600.0
+  },
+  {
+   "id": "has_keywords",
+   "reward": 0.05,
+   "edited": true,
+   "exit": 124,
+   "secs": 601.2
+  },
+  {
+   "id": "has_keywords",
+   "reward": 0.05,
+   "edited": true,
+   "exit": 124,
+   "secs": 601.8
+  },
+  {
+   "id": "mapcat",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 190.0
+  },
+  {
+   "id": "has_keywords",
+   "reward": 0.5946236559139785,
+   "edited": true,
+   "exit": 124,
+   "secs": 601.2
+  },
+  {
+   "id": "mapcat",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 275.5
+  },
+  {
+   "id": "mapcat",
+   "reward": 0.05,
+   "edited": true,
+   "exit": 124,
+   "secs": 600.6
+  },
+  {
+   "id": "num_required_args",
+   "reward": 0.5946236559139785,
+   "edited": true,
+   "exit": 124,
+   "secs": 601.0
+  },
+  {
+   "id": "num_required_args",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 0,
+   "secs": 123.1
+  },
+  {
+   "id": "remove",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 82.5
+  },
+  {
+   "id": "remove",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 116.6
+  },
+  {
+   "id": "num_required_args",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 342.2
+  },
+  {
+   "id": "second",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 114.6
+  },
+  {
+   "id": "second",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 162.4
+  },
+  {
+   "id": "remove",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 473.3
+  },
+  {
+   "id": "interpose",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 100.6
+  },
+  {
+   "id": "second",
+   "reward": 1.0,
+   "edited": true,
+   "exit": 0,
+   "secs": 197.7
+  },
+  {
+   "id": "interpose",
+   "reward": 0.0,
+   "edited": false,
+   "exit": 0,
+   "secs": 247.0
+  }
+ ]
+}

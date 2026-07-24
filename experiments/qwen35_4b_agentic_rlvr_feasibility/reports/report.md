@@ -607,6 +607,30 @@ episode checkpointer) closes the arc:
   solvability, is the entire remaining gap. "Install the capability" was the wrong frame for every
   one of these tasks; "raise the rare-solve rate" (or sample past it) is the right one.
 
+## REAL CODEBASE: 0.70 single-shot / 0.91 execution-selected on toolz (2026-07-22)
+
+The goal's actual target — real-codebase agentic coding — measured for the first time through the
+deployment scaffold. Stub a function in a real `toolz` checkout, let pi drive the model against the
+repo's own pytest suite, score the checkout:
+
+| | our old harness | **pi (deployment truth)** |
+|---|---|---|
+| real toolz stub-a-function tasks | **~0.00** | **0.697 single-shot / 0.909 best-of-3** |
+
+11 tasks complete at k=3 (9/33 timeouts, mean 311s). Per-task: 4 tasks 3/3, 5 tasks 2/3, 1 task 1/3,
+and only `has_keywords` never passed (maxR 0.59). **10 of 11 real repo functions were implemented
+correctly by the 4B, verified by the repository's own test suite.**
+
+This overturns the experiment's founding premise. The real-repo tasks were written off as "uniformly
+0.00 — the model can't do real code" back when they were only ever measured in OUR harness; that
+number was a harness artifact, exactly like the 0.486-vs-0.810 synthetic gap. The 4B could do real
+repo work the whole time. Every conclusion drawn from "real repo tasks are unsolvable" (including the
+pivot to synthetic scenarios as the only viable curriculum) rested on a broken measurement.
+
+It also replicates C63 on a genuinely independent surface: execution-selected best-of-3 lifts
+0.697 → 0.909 (+0.21) with zero training, on real code, with the repo's own suite as the verifier.
+That is the deployable recipe, now demonstrated where it actually matters.
+
 ## Verification
 
 Every headline number in the two sections above was independently re-derived from the raw per-episode

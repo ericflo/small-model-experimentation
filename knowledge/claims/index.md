@@ -2,13 +2,13 @@
 
 Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this file.
 
-- Claims: 63
+- Claims: 64
 
 ## Status Counts
 
 | Status | Claims |
 | --- | ---: |
-| Confirmed | 9 |
+| Confirmed | 10 |
 | Negative | 3 |
 | Open | 2 |
 | Promising | 49 |
@@ -18,7 +18,7 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 | Program | Claims |
 | --- | ---: |
 | `active_evidence_acquisition` | 1 |
-| `agentic_breadth_installation` | 11 |
+| `agentic_breadth_installation` | 12 |
 | `algorithmic_memory_and_retrieval` | 1 |
 | `benchmark_generalization` | 13 |
 | `collective_experimentation_infrastructure` | 2 |
@@ -1534,3 +1534,25 @@ Generated from `knowledge/claims/claim_ledger.json`. Edit the ledger, not this f
 
 - Concluding the hard tasks are unsolvable: schema_lite closed 1/12 and most reach high partial -- they are rare+termination-limited, not absent.
 - Spending more on LoRA edits of the warm-start to chase these tasks: four methods regressed it; inference-time selection is the believed-in lift.
+
+## C64: THE 4B DOES REAL-CODEBASE AGENTIC CODING: 0.70 single-shot / 0.91 execution-selected on real toolz functions via pi -- the '~0.00 on real repos' result was a HARNESS ARTIFACT
+
+- Status: `Confirmed`
+- Programs: `agentic_breadth_installation`
+- Summary: Experiment qwen35_4b_agentic_rlvr_feasibility. Stub-a-function tasks in a real toolz checkout, driven by pi-coding-agent, scored by the repository's OWN pytest suite. 11 tasks at k=3: single-shot 0.697, execution-selected best-of-3 0.909 (9/33 timeouts, mean 311s). Per-task: 4x 3/3, 5x 2/3, 1x 1/3, and only has_keywords never passed (maxR 0.59) -- 10 of 11 real repo functions implemented correctly and verified by the repo's tests. The SAME tasks measured ~0.00 in our own harness, which is why the experiment abandoned real repos for synthetic scenarios; that abandonment rested on a broken measurement, the same class of error as the 0.486-vs-0.810 synthetic harness gap (C62/C63) and the meanR-0.00 'absent tasks' bug.
+- Implication: Qwen3.5-4B can already do real-codebase agentic coding through a real agent scaffold; the capability was never missing, our measurement was. C63's execution-selected best-of-N replicates on this independent real-code surface (+0.21 with zero training, verifier = the repo's own suite), so the deployable recipe is: drive the 4B with pi, sample N rollouts, keep the one whose tests pass. Any future 'the model cannot do X' claim in this program must be measured in the deployment scaffold before it is believed.
+
+### Evidence
+
+- [`qwen35_4b_agentic_rlvr_feasibility`](../../experiments/qwen35_4b_agentic_rlvr_feasibility/reports/report.md)
+
+### Next Tests
+
+- Finish the remaining 5 toolz tasks (k=3) and extend to the full 67-task set to tighten 0.70/0.91.
+- Harder real repos / larger functions: does the single-shot rate fall with body_lines, and does selection still recover it?
+- Re-examine every other 'the model cannot do X' conclusion in this experiment that was measured only in our harness.
+
+### Avoid
+
+- Trusting any capability claim measured in a bespoke harness: three separate harness artifacts (real-repo ~0.00, synthetic 0.486 vs 0.810, meanR-0.00 absent tasks) all reversed when measured through pi.
+- Concluding a task is unsolvable from single-shot rates: 10/11 real functions passed at least once in 3 tries.
