@@ -24,7 +24,7 @@ Adds (idempotent, additive; original backed up once):
 
 Serve all arms from ONE weight load:
   vllm serve <merged/warmstart> --served-model-name qwen35-4b-pi8k qwen35-4b-pi2560 qwen35-4b-pi4096 \
-    --enforce-eager --max-model-len 40960 --gpu-memory-utilization 0.90 \
+    --enforce-eager --max-model-len 40960 --gpu-memory-utilization 0.80 --max-num-seqs 8 \
     --enable-auto-tool-choice --tool-call-parser qwen3_xml --port 8420
 """
 import json

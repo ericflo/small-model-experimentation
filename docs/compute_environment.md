@@ -251,3 +251,13 @@ The full-vocab logits tensor is the recurring OOM source (~150K vocab):
   different budgets/batch compositions as independent reproducible protocols rather than common-
   random-number continuations. The shared runner disables async scheduling and records that choice,
   but this simplifies scheduling; it does not make pre-Hopper inference batch-invariant.
+
+## WSL VM stability under sustained vLLM load
+
+Five full-VM crashes occurred during multi-hour agentic-eval runs (the WSL2 VM dies, not a process —
+recovery is a manual Windows-side restart). Linux OOM was ruled out by measurement (swap 0B used,
+10–14 GB free, OOM killer never fired); the trigger is the WSL2 GPU paravirtualization layer under a
+long-lived high-VRAM allocation. Serve at `--gpu-memory-utilization 0.80 --max-num-seqs 8` (not
+0.90), restart the server between long runs, and apply the Windows-side `.wslconfig` in
+[docs/wsl_stability.md](wsl_stability.md) — which also records the checkpoint/resume and gated-restart
+discipline that has recovered all five crashes with zero completed episodes lost.
