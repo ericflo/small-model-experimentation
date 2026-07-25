@@ -1,9 +1,11 @@
 # Qwen35 4B Agentic RLVR Feasibility
 
-**Status:** in-progress · since 2026-07-19 · GATE PASSED (single-GPU agentic GRPO physically
-works for Qwen3.5-4B) + warm-start prerequisite established. Owner /goal (2026-07-19): install
-real-codebase agentic coding into the 4B via pi-coding-agent + OpenEnv, harvest→SFT→RLVR, proven
-by transfer, run relentlessly.
+**Status:** finished · 2026-07-19 → 2026-07-22 · Qwen3.5-4B already does REAL-codebase agentic
+coding through pi-coding-agent: 0.70 single-shot / 0.91 execution-selected on real toolz functions
+verified by the repo's own pytest (C64). The deployable lift is inference-time execution selection
+(+0.21 real code, +0.12 synthetic, zero training — C63), NOT further training: four LoRA edits of the
+warm-start each regressed deployment (C62). Three "the model cannot do X" conclusions turned out to be
+harness artifacts that reversed when measured in the deployment scaffold.
 
 ## Research Program
 

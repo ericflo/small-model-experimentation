@@ -10,7 +10,7 @@ Generated from `research_programs/registry.yaml` and experiment metadata. The im
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 209
+- Assigned experiments: 210
 
 ### Seed Evidence
 
@@ -38,6 +38,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_active_counterexample_trace_selection` (track-z): [README](../experiments/qwen35_4b_active_counterexample_trace_selection/README.md)
 - `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
 - `qwen35_4b_adaptive_tool_controller` (track-z): [README](../experiments/qwen35_4b_adaptive_tool_controller/README.md)
+- `qwen35_4b_agentic_rlvr_feasibility` (new): [README](../experiments/qwen35_4b_agentic_rlvr_feasibility/README.md)
 - `qwen35_4b_answer_potential_trace_sft` (new): [README](../experiments/qwen35_4b_answer_potential_trace_sft/README.md)
 - `qwen35_4b_axis_corpus_v2_staged_repair` (new): [README](../experiments/qwen35_4b_axis_corpus_v2_staged_repair/README.md)
 - `qwen35_4b_balanced_core_answer_potential_sft` (new): [README](../experiments/qwen35_4b_balanced_core_answer_potential_sft/README.md)
@@ -237,7 +238,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 Turn candidate-pool coverage into deployable decisions under visible evidence.
 
 - Charter: [evidence_conditioned_selection](../research_programs/evidence_conditioned_selection/charter.md)
-- Assigned experiments: 105
+- Assigned experiments: 106
 
 ### Seed Evidence
 
@@ -252,6 +253,7 @@ Turn candidate-pool coverage into deployable decisions under visible evidence.
 - `feature_factorized_rule_diversity` (track-z): [README](../experiments/feature_factorized_rule_diversity/README.md)
 - `qwen35_4b_active_counterexample_trace_selection` (track-z): [README](../experiments/qwen35_4b_active_counterexample_trace_selection/README.md)
 - `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
+- `qwen35_4b_agentic_rlvr_feasibility` (new): [README](../experiments/qwen35_4b_agentic_rlvr_feasibility/README.md)
 - `qwen35_4b_answer_potential_trace_sft` (new): [README](../experiments/qwen35_4b_answer_potential_trace_sft/README.md)
 - `qwen35_4b_axis_corpus_v2_staged_repair` (new): [README](../experiments/qwen35_4b_axis_corpus_v2_staged_repair/README.md)
 - `qwen35_4b_axis_stack_readjudication_medium_pilot` (new): [README](../experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/README.md)
@@ -810,7 +812,7 @@ Stress whether mechanisms transfer across substrates, families, lengths, distrib
 Measure why methods work or fail through attribution, probes, pressure audits, and controlled ablations.
 
 - Charter: [interpretability_and_diagnostics](../research_programs/interpretability_and_diagnostics/charter.md)
-- Assigned experiments: 89
+- Assigned experiments: 90
 
 ### Seed Evidence
 
@@ -822,6 +824,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 ### Assigned Experiments
 
 - `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
+- `qwen35_4b_agentic_rlvr_feasibility` (new): [README](../experiments/qwen35_4b_agentic_rlvr_feasibility/README.md)
 - `qwen35_4b_axis_corpus_v2_staged_repair` (new): [README](../experiments/qwen35_4b_axis_corpus_v2_staged_repair/README.md)
 - `qwen35_4b_axis_stack_readjudication_medium_pilot` (new): [README](../experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/README.md)
 - `qwen35_4b_code_abi_oracle_coverage_ladder` (track-z): [README](../experiments/qwen35_4b_code_abi_oracle_coverage_ladder/README.md)
@@ -916,7 +919,7 @@ Measure why methods work or fail through attribution, probes, pressure audits, a
 Improve precision, abstention, robustness, reproducibility, and safe artifact handling.
 
 - Charter: [reliability_and_safety](../research_programs/reliability_and_safety/charter.md)
-- Assigned experiments: 83
+- Assigned experiments: 84
 
 ### Seed Evidence
 
@@ -930,6 +933,7 @@ Improve precision, abstention, robustness, reproducibility, and safe artifact ha
 - `counterexample_rule_repair` (track-z): [README](../experiments/counterexample_rule_repair/README.md)
 - `qwen35_4b_active_counterexample_trace_selection` (track-z): [README](../experiments/qwen35_4b_active_counterexample_trace_selection/README.md)
 - `qwen35_4b_adaptive_evidence_budget_policy` (track-z): [README](../experiments/qwen35_4b_adaptive_evidence_budget_policy/README.md)
+- `qwen35_4b_agentic_rlvr_feasibility` (new): [README](../experiments/qwen35_4b_agentic_rlvr_feasibility/README.md)
 - `qwen35_4b_answer_potential_trace_sft` (new): [README](../experiments/qwen35_4b_answer_potential_trace_sft/README.md)
 - `qwen35_4b_axis_corpus_v2_staged_repair` (new): [README](../experiments/qwen35_4b_axis_corpus_v2_staged_repair/README.md)
 - `qwen35_4b_axis_stack_readjudication_medium_pilot` (new): [README](../experiments/qwen35_4b_axis_stack_readjudication_medium_pilot/README.md)

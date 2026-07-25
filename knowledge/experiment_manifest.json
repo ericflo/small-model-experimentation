@@ -769,14 +769,22 @@
     "primary_readme": "experiments/qwen35_4b_agentic_rlvr_feasibility/README.md",
     "primary_report": "experiments/qwen35_4b_agentic_rlvr_feasibility/reports/report.md",
     "research_programs": [
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
       "posttraining_and_adaptation",
-      "process_control_and_tool_use"
+      "process_control_and_tool_use",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
     ],
     "source_track": "new",
-    "summary": "works for Qwen3.5-4B) + warm-start prerequisite established. Owner /goal (2026-07-19): install real-codebase agentic coding into the 4B via pi-coding-agent + OpenEnv, harvest\u2192SFT\u2192RLVR, proven by transfer, run relentlessly.",
+    "summary": "coding through pi-coding-agent: 0.70 single-shot / 0.91 execution-selected on real toolz functions verified by the repo's own pytest (C64). The deployable lift is inference-time execution selection (+0.21 real code, +0.12 synthetic, zero training \u2014 C63), NOT further training: four LoRA edits of the warm-start each regressed deployment (C62). Three \"the model cannot do X\" conclusions turned out to be harness artifacts that reversed when measured in the deployment scaffold.",
     "tags": [
+      "execution",
+      "lora",
       "policy",
-      "small-model"
+      "small-model",
+      "tools",
+      "verification"
     ],
     "title": "Qwen35 4B Agentic RLVR Feasibility",
     "top_level_dirs": [
@@ -784,7 +792,7 @@
       "scripts"
     ],
     "total_files": 44,
-    "total_size_bytes": 543887
+    "total_size_bytes": 544601
   },
   {
     "file_counts": {
