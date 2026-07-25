@@ -1,11 +1,27 @@
-# WSL VM death under vLLM load — measured cause and fix
+# WSL VM death under vLLM load — what is measured, and what is NOT explained
 
-Six full-VM deaths in ~two days of GPU work (the WSL2 VM disappears; recovery is a manual
-Windows-side restart). **Cause is now measured, not guessed.** An earlier version of this document
-recommended *raising* the VM memory ceiling to 24 GB — that was WRONG and made the crashes more
-frequent. Corrected below.
+Seven full-VM deaths in ~two days of GPU work (the WSL2 VM disappears; recovery is a manual
+Windows-side restart). Two wrong calls were made along the way and are corrected here: first,
+recommending that the VM memory ceiling be *raised* to 24 GB (it should be capped); second, claiming
+the resulting memory measurements identified the cause (they do not).
 
-## The measurement that settles it
+**STATUS (after crash #7): the cause is NOT established.** An earlier version of this document
+claimed the host-memory/WDDM mechanism below *was* the cause. That claim is FALSIFIED: after capping
+the VM at 16 GB and serving at `--gpu-memory-utilization 0.60`, host free memory stayed at **7.3 GB
+under load** — no exhaustion — and the VM died anyway. The memory measurements below are real and
+worth keeping (they describe a genuine resource constraint, and 2.9 GB free was genuinely dangerous),
+but they do not explain the crashes.
+
+Also ruled out since: no `nvlddmkm`/display-driver faults in the Windows System log *ever*; no Xid
+errors; GPU healthy at idle (48 °C, 18 W of a 450 W limit); no Linux OOM. Seven VM deaths, all during
+sustained GPU work, none during CPU-only work, none immediately after start.
+
+What remains unexplained is why the VM dies at all. Candidates not yet distinguished: a dxgkrnl/WSL
+GPU-paravirtualization fault under long-lived CUDA contexts, a WSL kernel panic (the guest log does
+not survive the reboot), or a host-side watchdog. Diagnosing further requires Windows-side tracing
+that cannot be done reliably from inside the VM that keeps dying.
+
+## The memory measurements (real, but not the cause)
 
 On this box (host 31.9 GB RAM, RTX 4090 24 GB, HAGS on), with `.wslconfig memory=24GB`:
 
@@ -16,7 +32,7 @@ On this box (host 31.9 GB RAM, RTX 4090 24 GB, HAGS on), with `.wslconfig memory
 | after killing vLLM | 4.3 GB | 17.1 GB | 1.9 GB |
 | + `sync; drop_caches`, ~2 min later | 6.3 GB | 15.6 GB | 1.9 GB |
 
-Three facts follow directly:
+Three facts follow directly (all still true, none of them the crash cause):
 
 1. **In WSL2, VRAM is mirrored into host memory ~1:1.** Reserving 20.3 GB of VRAM grew `vmmem` by
    15.5 GB and drove host free memory from 18.3 GB to **2.9 GB**. GPU allocations are backed through
@@ -29,15 +45,14 @@ Three facts follow directly:
    memory usage upward — which is why crashes came deep into long sessions and why repeatedly
    restarting the server made things worse.
 
-Together: `memory=24GB` let `vmmem` balloon to 19.4 GB, leaving Windows ~2.9 GB. Any spike — a
-browser tab, a pytest subprocess, a Node worker — exhausts the host, and Windows terminates `vmmem`.
-That leaves **no** Windows System-log error (confirmed: no `nvlddmkm` reset, no TDR, no Hyper-V
-worker fault, only VmSwitch port create/delete marking VM lifecycle), which is exactly the symptom.
+`memory=24GB` therefore left Windows only ~2.9 GB, which is a genuinely bad operating point and worth
+avoiding on its own merits. It is simply not what kills the VM: at 16 GB / util 0.60 the same workload
+had 7.3 GB free and still died.
 
-The old 15 GB default was also unsafe by this arithmetic (13.6 + 15 = 28.6, leaving ~3.3 GB), which
-is why crashes happened before the change too — the change just made a marginal situation acute.
+## Settings worth keeping anyway
 
-## The fix
+These do not stop the crashes, but they keep the box out of a genuinely bad memory regime and make
+failures recoverable (a too-small KV cache fails cleanly inside Linux instead of thrashing).
 
 ### 1. `.wslconfig` — CAP the VM, do not raise it
 
@@ -72,6 +87,9 @@ bf16 weights alone are 8.5 GB and the KV cache would compute negative.)
 
 ### 3. Operating rules
 
+- **Prefer SHORT GPU bursts to multi-hour runs.** Every crash landed deep into a long run; none
+  happened at startup. Combined with checkpoint+resume this is the one mitigation with an evidence
+  base — a 10-minute burst that completes is worth more than an hour-long run that dies at minute 50.
 - **`wsl --shutdown` before a long GPU run.** Because `vmmem` never fully deflates, starting a
   multi-hour run on a VM that already holds 15 GB is starting in the danger zone.
 - **Close host memory hogs first.** 13.6 GB of Windows usage at idle is a lot; freeing 4–5 GB
@@ -88,7 +106,7 @@ bf16 weights alone are 8.5 GB and the KV cache would compute negative.)
 ## Crash discipline (assume it can still happen)
 
 - `pi_episode.py` / `pi_repo_episode.py` checkpoint every 5 episodes and resume from their own
-  partial file. This recovered all six crashes with **zero completed episodes lost**, including the
+  partial file. This recovered all seven crashes with **zero completed episodes lost**, including the
   35-episode run behind claim C64.
 - Commit before every long run.
 - On restart use the gated sequence: kill stragglers by ANCHORED cmdline
