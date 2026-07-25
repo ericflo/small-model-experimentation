@@ -1,17 +1,10 @@
 # Standard artifact manifest for external, omitted, or reproducibility-critical outputs.
 schema_version: 1
 experiment_id: "qwen35_4b_depth_recurrence_probe"
-external_artifacts:
-  # - name: "trained adapter"
-  #   storage: "/workspace/large_artifacts/replace_me/models/adapter"
-  #   required_for: "rerun trained-model evaluation"
-  #   checksum: ""
-  #   regenerate: "python scripts/run.py"
-omitted_artifacts:
-  # - path: "reports/adapters/"
-  #   reason: "trained adapter output; do not check into git"
+external_artifacts: []
+omitted_artifacts: []
 reproducibility:
-  smoke_command: "python scripts/run.py --smoke"
-  full_command: "python scripts/run.py"
+  smoke_command: "scripts/recur.py --n 16 --ks 2 --blocks 12:16 --alphas 1.0,0.25"
+  full_command: "scripts/recur.py --n 200 --ks 2,3 --blocks 12:20,16:24,12:16 --alphas 1.0,0.5,0.25,0.1 && scripts/verify.py --n 400"
   required_external_artifacts: []
-notes: "Update this before reporting results."
+notes: "All outputs are small and committed under reports/. No external artifacts: the probe is training-free and loads the pinned base model from the HF cache."

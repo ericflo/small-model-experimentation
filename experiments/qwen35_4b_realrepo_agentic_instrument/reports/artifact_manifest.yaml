@@ -2,16 +2,21 @@
 schema_version: 1
 experiment_id: "qwen35_4b_realrepo_agentic_instrument"
 external_artifacts:
-  # - name: "trained adapter"
-  #   storage: "/workspace/large_artifacts/replace_me/models/adapter"
-  #   required_for: "rerun trained-model evaluation"
-  #   checksum: ""
-  #   regenerate: "python scripts/run.py"
+  - name: "task repo checkouts + per-repo test venvs"
+    storage: "large_artifacts/_taskrepos/<repo>"
+    required_for: "generating or scoring any task (the repo's own pytest is the verifier)"
+    checksum: "resolved git SHA per repo recorded in data/repo_manifest.json"
+    regenerate: "scripts/fetch_repos.py --jobs 2"
+  - name: "pi episode trajectories (~4 MB each, --mode json event streams)"
+    storage: "large_artifacts/qwen35_4b_realrepo_agentic_instrument/trajectories/<label>/"
+    required_for: "the Line-1 harvest successor cell; not needed to reproduce scores"
+    checksum: ""
+    regenerate: "scripts/pi_episode_repo.py --label <arm> --split test --k 3"
 omitted_artifacts:
-  # - path: "reports/adapters/"
-  #   reason: "trained adapter output; do not check into git"
+  - path: "large_artifacts/qwen35_4b_realrepo_agentic_instrument/"
+    reason: "episode records, trajectories, serve/run logs; large and regenerable"
 reproducibility:
-  smoke_command: "python scripts/run.py --smoke"
-  full_command: "python scripts/run.py"
-  required_external_artifacts: []
-notes: "Update this before reporting results."
+  smoke_command: "scripts/fetch_repos.py --only toolz,mergedeep --jobs 1 && scripts/gen_tasks.py --only toolz --jobs 2"
+  full_command: "scripts/fetch_repos.py --jobs 2 && scripts/gen_tasks.py --jobs 4 && scripts/split_tasks.py"
+  required_external_artifacts: ["task repo checkouts + per-repo test venvs"]
+notes: "Task/split/baseline JSON under data/ is the reproduction path and is committed. Repo checkouts and per-episode pi trajectories live outside git (see omitted_artifacts) because they are large and regenerable."
