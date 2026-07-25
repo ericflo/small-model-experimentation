@@ -1,9 +1,39 @@
 # Qwen35 4B Agentic RLVR Feasibility — Report
 
-**In-progress (2026-07-19).** Establishes that single-GPU agentic RLVR (execution-reward GRPO)
-physically works for Qwen3.5-4B, the exact recipe to fit it on one 24GB card, and that a narrow SFT
-warm-start is a prerequisite for the raw base to produce a learning signal. Successor stages: harvest
-(pi-coding-agent trajectories) → SFT warm-start → RLVR → transfer to a held-out real-coding split.
+**WRAPPED 2026-07-22 (started 2026-07-19).** Began as a feasibility check for single-GPU agentic
+RLVR and ended somewhere more useful: **Qwen3.5-4B already does real-codebase agentic coding, and the
+deployable lift is inference-time execution selection, not training.**
+
+### Headline results
+
+| claim | result |
+|---|---|
+| **C64** — real codebase (toolz functions, repo's own pytest, driven by pi) | **0.697 single-shot / 0.909 execution-selected best-of-3**; 10 of 11 functions implemented correctly |
+| **C63** — execution-selected best-of-N | +0.12 synthetic (0.606→0.727 at k=3, 0.818 at k=8), **+0.21 on real code**, zero training |
+| **C62** — four LoRA edits of the 0.606 warm-start | ALL regressed deployment: RFT-v1 0.121, RFT-v2 0.576, DPO 0.515, elicit-SFT 0.485 |
+
+### The methodological through-line
+
+Three separate "the model cannot do X" conclusions were **harness artifacts** that reversed when
+measured through pi-coding-agent, the actual deployment scaffold: real-repo tasks (~0.00 → 0.70),
+synthetic holdout (0.486 → 0.810), and seven "absent" tasks (a missing `meanR` field read as 0.00 via
+`dict.get` default → actually partial-credit throughout). **Standing rule for this program: no
+capability claim is believed until it is measured in the deployment scaffold.** Every headline number
+above was independently re-derived from raw per-episode data by an 8-way adversarial audit — 8/8
+matched, zero discrepancies (see Verification).
+
+### Deployment recipe
+
+Serve the merged warm-start, drive it with pi, sample N≈3 rollouts per task, keep the one whose tests
+pass. Do not train the policy further on this curriculum.
+
+### Left open (deliberately)
+
+13 of 48 real-repo episodes (4 of 16 toolz tasks) are unrun; the checkpoint is resumable via
+`pi_repo_episode.py --label repo_warmstart`. They would tighten 0.70/0.91, not change it. Work stopped
+because the box suffered **seven full WSL VM deaths** under sustained GPU load whose cause is NOT
+established — see [docs/wsl_stability.md](../../../docs/wsl_stability.md), including two of my own
+wrong calls corrected there. Checkpoint+resume recovered all seven with zero completed episodes lost.
 
 ## Stack
 
