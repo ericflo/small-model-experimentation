@@ -2254,6 +2254,38 @@
   },
   {
     "file_counts": {
+      ".json": 3,
+      ".jsonl": 2,
+      ".md": 4,
+      ".py": 5,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_depth_recurrence_probe",
+    "path": "experiments/qwen35_4b_depth_recurrence_probe",
+    "primary_readme": "experiments/qwen35_4b_depth_recurrence_probe/README.md",
+    "primary_report": "experiments/qwen35_4b_depth_recurrence_probe/reports/report.md",
+    "research_programs": [
+      "test_time_reasoning_budget"
+    ],
+    "source_track": "new",
+    "summary": "Training-free mid-stack layer looping on Qwen3.5-4B: does added SERIAL DEPTH inside the forward pass move the induction wall that C59 showed only reasoning-token CONTENT crosses?",
+    "tags": [
+      "small-model"
+    ],
+    "title": "Depth Recurrence Probe",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 17,
+    "total_size_bytes": 456177
+  },
+  {
+    "file_counts": {
       ".json": 11,
       ".jsonl": 8,
       ".md": 6,
@@ -5185,6 +5217,40 @@
     ],
     "total_files": 57,
     "total_size_bytes": 3133020
+  },
+  {
+    "file_counts": {
+      ".json": 4,
+      ".md": 4,
+      ".py": 10,
+      ".sh": 2,
+      ".yaml": 3
+    },
+    "id": "qwen35_4b_realrepo_agentic_instrument",
+    "path": "experiments/qwen35_4b_realrepo_agentic_instrument",
+    "primary_readme": "experiments/qwen35_4b_realrepo_agentic_instrument/README.md",
+    "primary_report": "experiments/qwen35_4b_realrepo_agentic_instrument/reports/report.md",
+    "research_programs": [
+      "agentic_breadth_installation",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "Build a broad, firewalled real-codebase agentic-coding instrument for Qwen3.5-4B in pi-coding-agent \u2014 and measure the raw-base baseline this program has never had.",
+    "tags": [
+      "execution",
+      "small-model"
+    ],
+    "title": "Real-Repo Agentic Instrument",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 23,
+    "total_size_bytes": 1352662
   },
   {
     "file_counts": {

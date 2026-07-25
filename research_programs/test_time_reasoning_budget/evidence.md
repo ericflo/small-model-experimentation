@@ -227,3 +227,38 @@ selection stayed 1/12 and mean probability lift stayed <=0.00566. Thus no
 512-token continuation branches ran. The next budget experiment cannot assume
 an arbitrary final-prefix token is a semantic control site; it needs an explicit
 anchor or should leave J branching behind.
+
+## Mid-stack layer looping crosses the induction wall without tokens (2026-07-25)
+
+`qwen35_4b_depth_recurrence_probe` reopens the question C59 appeared to close. C59's law -- serial
+compute helps only through reasoning CONTENT -- was established against two mechanisms: feeding the
+last hidden state back as an INPUT EMBEDDING (a slot the model was never trained to consume) and
+content-free filler tokens. Neither is weight-shared depth.
+
+Running layers 12:16 of the frozen model a second time, in one forward pass with ZERO tokens emitted,
+takes forced-answer accuracy on held-out shift induction from 0.105 to 0.245 at n=400 -- matching what
+C59 measured for full chain-of-thought generation (0.235). On out-of-family affine it goes 0.217 ->
+0.278, which matters because CoT COLLAPSES there (C59: 0.020), so looping is not merely reproducing
+what CoT does.
+
+Four adversarial controls survived on both substrates: balanced accuracy (a constant predictor scores
+exactly 0.10) rises 0.112 -> 0.251, killing label-prior exploitation; a sweep of every 4-layer block
+shows only 12:16 and 16:20 help, with 20:24 onward at or below baseline; inserting a copy of a
+DIFFERENT 4-layer block at the same position -- identical added depth and parameters -- collapses to
+0.000/0.007, so the specific layers are load-bearing rather than depth; and disjoint halves replicate
+(0.240/0.250 and 0.265/0.290). Damping gives a monotone dose-response (0.240/0.195/0.155/0.095 as the
+second pass is admitted at 100/50/25/10%), and prose next-token logprob moves only -0.021 nats, so the
+looped stack is still a fluent LM. The winning block ENDS at layer 15, exactly where C19/C31 found
+op-type maximally decodable -- looping past it hurts.
+
+Two harness bugs manufactured fake results first and are now guarded. The Qwen3.5 decoder iterates
+`self.layers[: config.num_hidden_layers]`, so a lengthened ModuleList is silently truncated: the
+"deeper" model ran FEWER layers, producing a spurious +0.125 and a 6-nat coherence collapse, with
+byte-identical k=2/k=3 numbers as the tell. Every arm now asserts its own executed depth by counting
+layer invocations and refuses to report otherwise. Damping hooks also leaked hidden state across
+batches until reset per forward pass.
+
+What this does NOT establish: the gain is on a forced single-pass read chosen to isolate forward-pass
+computation, on two digit-induction substrates. Generation-mode behaviour (does looping STACK with CoT
+or merely substitute for it?), any deployable task (MBPP, pi-coding-agent), and general capability
+beyond a prose-logprob check are all untested. Those three, in that order, are what a claim needs.

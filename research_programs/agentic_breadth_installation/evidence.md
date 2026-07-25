@@ -1570,3 +1570,33 @@ effect. NEXT PHASE (owner-approved): measure base/count_walk/state_track
 on a real agentic coding harness (duet-eval driving Pi against the local
 composites), measurement-only, no contamination, to test whether the
 menagerie proxy gain translates to real coding.
+
+## A measurable instrument, and the raw-base control the program never had (2026-07-25)
+
+`qwen35_4b_realrepo_agentic_instrument`. C63/C64 left this program unable to measure its own next step:
+execution-selected best-of-N reaches 0.818 on the 11-task synthetic holdout and 0.909 on toolz, with
+11/11 holdout tasks solvable, so no +0.05 effect is resolvable; and no raw-base pi baseline exists
+anywhere, meaning "the warm-start improved pi deployment" is inferred from a TRL-env engagement
+contrast, never measured.
+
+Built: 200 execution-verified stub-a-function tasks over 15 real OSS libraries -- 138 train / 62
+held-out -- firewalled by REPO with each repo's side fixed before any task was generated, so a
+held-out task lives in a codebase never harvested. Scoring is per-test (SWE-bench style): each task
+carries the `fail_to_pass` set its stub breaks, and the repo's baseline passing set minus those is
+`pass_to_pass`, which makes "edit the test instead of the code" unrewardable.
+
+Three design traps were caught, each of which would have produced confident nonsense:
+- Requiring a globally GREEN suite discarded 11 of 24 libraries over one or two environment-dependent
+  failures (a package-metadata check, a test wanting >6 GB). Those tests fail identically before and
+  after an agent's edit, so per-test sets exclude them by construction.
+- The editable-install trap: `uv pip install -e .` + copy-per-episode makes pytest in the copy import
+  the ORIGINAL source for `src/` layouts, so the stub has no effect and every episode scores a free
+  1.0. Guarded three ways, the strongest being that a task is admitted only if stubbing it actually
+  breaks tests -- so an import leak yields ZERO tasks instead of free reward.
+- `-v` cannot read a suite whose own addopts enable pytest-xdist; `wcwidth` baselined at "0 passed"
+  until `-rA` was added. Adding it recovered 8 libraries.
+
+Operational: the pi trajectory for one real-repo episode is ~4 MB of JSON events. The prior runners
+captured that with `subprocess.run(stdout=PIPE)`, which buffers a child's entire output in the PARENT
+-- the mechanism behind eight WSL VM deaths (docs/wsl_stability.md). Output is now spooled to disk and
+the trajectories are retained deliberately as the harvest substrate for the Line-1 successor.

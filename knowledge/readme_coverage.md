@@ -82,6 +82,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_deep_advantage_mopd` | [README](../experiments/qwen35_4b_deep_advantage_mopd/README.md) | [report](../experiments/qwen35_4b_deep_advantage_mopd/reports/report.md) |
 | `qwen35_4b_deployable_information_ceiling_sweep` | [README](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md) | [report](../experiments/qwen35_4b_deployable_information_ceiling_sweep/reports/qwen35_4b_deployable_information_ceiling_sweep_report.md) |
 | `qwen35_4b_depth3_dose_response` | [README](../experiments/qwen35_4b_depth3_dose_response/README.md) | [report](../experiments/qwen35_4b_depth3_dose_response/reports/report.md) |
+| `qwen35_4b_depth_recurrence_probe` | [README](../experiments/qwen35_4b_depth_recurrence_probe/README.md) | [report](../experiments/qwen35_4b_depth_recurrence_probe/reports/report.md) |
 | `qwen35_4b_depth_scaling_controls` | [README](../experiments/qwen35_4b_depth_scaling_controls/README.md) | [report](../experiments/qwen35_4b_depth_scaling_controls/reports/report.md) |
 | `qwen35_4b_depth_wall_anatomy` | [README](../experiments/qwen35_4b_depth_wall_anatomy/README.md) | [report](../experiments/qwen35_4b_depth_wall_anatomy/reports/report.md) |
 | `qwen35_4b_diversity_keyed_coverage_gate` | [README](../experiments/qwen35_4b_diversity_keyed_coverage_gate/README.md) | [report](../experiments/qwen35_4b_diversity_keyed_coverage_gate/reports/qwen35_4b_diversity_keyed_coverage_gate_report.md) |
@@ -159,6 +160,7 @@ Top-level README files are required for all experiments. Generated entries shoul
 | `qwen35_4b_probe_to_prompt` | [README](../experiments/qwen35_4b_probe_to_prompt/README.md) | [report](../experiments/qwen35_4b_probe_to_prompt/reports/report.md) |
 | `qwen35_4b_rank_capacity_vehicle_cell` | [README](../experiments/qwen35_4b_rank_capacity_vehicle_cell/README.md) | [report](../experiments/qwen35_4b_rank_capacity_vehicle_cell/reports/report.md) |
 | `qwen35_4b_real_sample_verify_commit` | [README](../experiments/qwen35_4b_real_sample_verify_commit/README.md) | [report](../experiments/qwen35_4b_real_sample_verify_commit/reports/qwen35_4b_real_sample_verify_commit_report.md) |
+| `qwen35_4b_realrepo_agentic_instrument` | [README](../experiments/qwen35_4b_realrepo_agentic_instrument/README.md) | [report](../experiments/qwen35_4b_realrepo_agentic_instrument/reports/report.md) |
 | `qwen35_4b_recovery_payload_budget_harness` | [README](../experiments/qwen35_4b_recovery_payload_budget_harness/README.md) | [report](../experiments/qwen35_4b_recovery_payload_budget_harness/reports/report.md) |
 | `qwen35_4b_recovery_reason_locality_interpolation` | [README](../experiments/qwen35_4b_recovery_reason_locality_interpolation/README.md) | [report](../experiments/qwen35_4b_recovery_reason_locality_interpolation/reports/report.md) |
 | `qwen35_4b_recovery_verifier_branch_tournament` | [README](../experiments/qwen35_4b_recovery_verifier_branch_tournament/README.md) | [report](../experiments/qwen35_4b_recovery_verifier_branch_tournament/reports/report.md) |

@@ -4,21 +4,21 @@ Generated from tracked experiment contents. Use this as a triage surface for tur
 
 Anchor-ready means the experiment has a human-authored README, a detected primary report, recognized local artifacts, and an assigned research program. It does not mean the result is correct or final.
 
-- Experiments: 297
-- Anchor-ready: 280
-- Human-authored READMEs: 284
+- Experiments: 299
+- Anchor-ready: 282
+- Human-authored READMEs: 286
 - Generated README stubs: 13
-- Primary reports: 295
-- Experiment logs: 198
-- Smoke commands: 165
-- Artifact manifests: 269
+- Primary reports: 297
+- Experiment logs: 200
+- Smoke commands: 167
+- Artifact manifests: 271
 
 ## Run Surface Counts
 
 | Run surface | Experiments |
 | --- | ---: |
 | `documented-command` | 38 |
-| `documented-scripts` | 183 |
+| `documented-scripts` | 185 |
 | `scripts-undocumented` | 23 |
 | `source-or-analysis` | 53 |
 
@@ -98,6 +98,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_deep_advantage_mopd`](../experiments/qwen35_4b_deep_advantage_mopd/README.md) | agentic_breadth_installation, benchmark_generalization, posttraining_and_adaptation, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_deep_advantage_mopd/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_deployable_information_ceiling_sweep`](../experiments/qwen35_4b_deployable_information_ceiling_sweep/README.md) | evidence_conditioned_selection, posttraining_and_adaptation, process_control_and_tool_use | `human-authored` | [report](../experiments/qwen35_4b_deployable_information_ceiling_sweep/reports/qwen35_4b_deployable_information_ceiling_sweep_report.md) | no | `documented-scripts` | no | large-artifact | add-experiment-log, add-smoke-command |
 | yes | [`qwen35_4b_depth3_dose_response`](../experiments/qwen35_4b_depth3_dose_response/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_depth3_dose_response/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
+| yes | [`qwen35_4b_depth_recurrence_probe`](../experiments/qwen35_4b_depth_recurrence_probe/README.md) | test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_depth_recurrence_probe/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_depth_scaling_controls`](../experiments/qwen35_4b_depth_scaling_controls/README.md) | structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_depth_scaling_controls/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_depth_wall_anatomy`](../experiments/qwen35_4b_depth_wall_anatomy/README.md) | structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_depth_wall_anatomy/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | no | [`qwen35_4b_diversity_keyed_coverage_gate`](../experiments/qwen35_4b_diversity_keyed_coverage_gate/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, structured_execution_and_compilers | `generated-stub` | [report](../experiments/qwen35_4b_diversity_keyed_coverage_gate/reports/qwen35_4b_diversity_keyed_coverage_gate_report.md) | no | `scripts-undocumented` | no | run-data | replace-generated-readme, add-experiment-log, document-run-path, add-smoke-command |
@@ -175,6 +176,7 @@ Anchor-ready means the experiment has a human-authored README, a detected primar
 | yes | [`qwen35_4b_probe_to_prompt`](../experiments/qwen35_4b_probe_to_prompt/README.md) | interpretability_and_diagnostics, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_probe_to_prompt/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_rank_capacity_vehicle_cell`](../experiments/qwen35_4b_rank_capacity_vehicle_cell/README.md) | agentic_breadth_installation, evidence_conditioned_selection, interpretability_and_diagnostics, posttraining_and_adaptation, reliability_and_safety | `human-authored` | [report](../experiments/qwen35_4b_rank_capacity_vehicle_cell/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | no | [`qwen35_4b_real_sample_verify_commit`](../experiments/qwen35_4b_real_sample_verify_commit/README.md) | algorithmic_memory_and_retrieval, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety | `generated-stub` | [report](../experiments/qwen35_4b_real_sample_verify_commit/reports/qwen35_4b_real_sample_verify_commit_report.md) | no | `documented-scripts` | no | dataset | replace-generated-readme, add-experiment-log, add-smoke-command |
+| yes | [`qwen35_4b_realrepo_agentic_instrument`](../experiments/qwen35_4b_realrepo_agentic_instrument/README.md) | agentic_breadth_installation, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_realrepo_agentic_instrument/reports/report.md) | yes | `documented-scripts` | yes | other, standard-artifact | none |
 | yes | [`qwen35_4b_recovery_payload_budget_harness`](../experiments/qwen35_4b_recovery_payload_budget_harness/README.md) | agentic_breadth_installation, process_control_and_tool_use, structured_execution_and_compilers, test_time_reasoning_budget | `human-authored` | [report](../experiments/qwen35_4b_recovery_payload_budget_harness/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_recovery_reason_locality_interpolation`](../experiments/qwen35_4b_recovery_reason_locality_interpolation/README.md) | agentic_breadth_installation, posttraining_and_adaptation, process_control_and_tool_use | `human-authored` | [report](../experiments/qwen35_4b_recovery_reason_locality_interpolation/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |
 | yes | [`qwen35_4b_recovery_verifier_branch_tournament`](../experiments/qwen35_4b_recovery_verifier_branch_tournament/README.md) | agentic_breadth_installation, evidence_conditioned_selection, interpretability_and_diagnostics, reliability_and_safety, structured_execution_and_compilers | `human-authored` | [report](../experiments/qwen35_4b_recovery_verifier_branch_tournament/reports/report.md) | yes | `documented-scripts` | yes | standard-artifact | none |

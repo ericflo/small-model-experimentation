@@ -2,8 +2,8 @@
 
 Generated from manifest-like files under `experiments/`. Each experiment remains the source of truth for its own artifacts.
 
-- Experiments with manifests: 269
-- Manifest files: 633
+- Experiments with manifests: 271
+- Manifest files: 636
 
 ## Manifest Types
 
@@ -12,9 +12,9 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `checkpoint` | 83 |
 | `dataset` | 132 |
 | `large-artifact` | 50 |
-| `other` | 125 |
+| `other` | 126 |
 | `run-data` | 101 |
-| `standard-artifact` | 142 |
+| `standard-artifact` | 144 |
 
 ## Manifests
 
@@ -116,6 +116,7 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_deep_advantage_mopd` | `standard-artifact` | [manifest](../experiments/qwen35_4b_deep_advantage_mopd/reports/artifact_manifest.yaml) |
 | `qwen35_4b_deployable_information_ceiling_sweep` | `large-artifact` | [manifest](../experiments/qwen35_4b_deployable_information_ceiling_sweep/large_artifacts_manifest.md) |
 | `qwen35_4b_depth3_dose_response` | `standard-artifact` | [manifest](../experiments/qwen35_4b_depth3_dose_response/reports/artifact_manifest.yaml) |
+| `qwen35_4b_depth_recurrence_probe` | `standard-artifact` | [manifest](../experiments/qwen35_4b_depth_recurrence_probe/reports/artifact_manifest.yaml) |
 | `qwen35_4b_depth_scaling_controls` | `standard-artifact` | [manifest](../experiments/qwen35_4b_depth_scaling_controls/reports/artifact_manifest.yaml) |
 | `qwen35_4b_depth_wall_anatomy` | `standard-artifact` | [manifest](../experiments/qwen35_4b_depth_wall_anatomy/reports/artifact_manifest.yaml) |
 | `qwen35_4b_diversity_keyed_coverage_gate` | `run-data` | [manifest](../experiments/qwen35_4b_diversity_keyed_coverage_gate/data/main_base_k4_records.manifest.json) |
@@ -244,6 +245,8 @@ Generated from manifest-like files under `experiments/`. Each experiment remains
 | `qwen35_4b_rank_capacity_vehicle_cell` | `other` | [manifest](../experiments/qwen35_4b_rank_capacity_vehicle_cell/data/stream_manifest.json) |
 | `qwen35_4b_rank_capacity_vehicle_cell` | `standard-artifact` | [manifest](../experiments/qwen35_4b_rank_capacity_vehicle_cell/reports/artifact_manifest.yaml) |
 | `qwen35_4b_real_sample_verify_commit` | `dataset` | [manifest](../experiments/qwen35_4b_real_sample_verify_commit/data/dataset_manifest.json) |
+| `qwen35_4b_realrepo_agentic_instrument` | `other` | [manifest](../experiments/qwen35_4b_realrepo_agentic_instrument/data/repo_manifest.json) |
+| `qwen35_4b_realrepo_agentic_instrument` | `standard-artifact` | [manifest](../experiments/qwen35_4b_realrepo_agentic_instrument/reports/artifact_manifest.yaml) |
 | `qwen35_4b_recovery_payload_budget_harness` | `standard-artifact` | [manifest](../experiments/qwen35_4b_recovery_payload_budget_harness/reports/artifact_manifest.yaml) |
 | `qwen35_4b_recovery_reason_locality_interpolation` | `standard-artifact` | [manifest](../experiments/qwen35_4b_recovery_reason_locality_interpolation/reports/artifact_manifest.yaml) |
 | `qwen35_4b_recovery_verifier_branch_tournament` | `standard-artifact` | [manifest](../experiments/qwen35_4b_recovery_verifier_branch_tournament/reports/artifact_manifest.yaml) |

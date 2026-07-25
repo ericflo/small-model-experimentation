@@ -3,14 +3,14 @@
 Generated from `research_programs/registry.yaml` and experiment metadata. The imported tracks are seed evidence for durable future research programs, not the boundary of the repository.
 
 - Programs: 13
-- Experiments: 297
+- Experiments: 299
 
 ## Structured Execution And Compilers
 
 Represent tasks as executable, typed, latent, or stateful programs instead of direct final answers.
 
 - Charter: [structured_execution_and_compilers](../research_programs/structured_execution_and_compilers/charter.md)
-- Assigned experiments: 210
+- Assigned experiments: 211
 
 ### Seed Evidence
 
@@ -108,6 +108,7 @@ Represent tasks as executable, typed, latent, or stateful programs instead of di
 - `qwen35_4b_prefix_value_guided_search` (track-z): [README](../experiments/qwen35_4b_prefix_value_guided_search/README.md)
 - `qwen35_4b_probe_the_parameter` (new): [README](../experiments/qwen35_4b_probe_the_parameter/README.md)
 - `qwen35_4b_probe_to_prompt` (new): [README](../experiments/qwen35_4b_probe_to_prompt/README.md)
+- `qwen35_4b_realrepo_agentic_instrument` (new): [README](../experiments/qwen35_4b_realrepo_agentic_instrument/README.md)
 - `qwen35_4b_recovery_payload_budget_harness` (new): [README](../experiments/qwen35_4b_recovery_payload_budget_harness/README.md)
 - `qwen35_4b_recovery_verifier_branch_tournament` (new): [README](../experiments/qwen35_4b_recovery_verifier_branch_tournament/README.md)
 - `qwen35_4b_reliability_exec_opsd_audit` (track-z): [README](../experiments/qwen35_4b_reliability_exec_opsd_audit/README.md)
@@ -1040,7 +1041,7 @@ Make the repository itself better at spawning, comparing, validating, and rememb
 Study the native thinking-token budget as a first-class controllable test-time-compute axis for Qwen3.5-4B, which the corpus has universally disabled.
 
 - Charter: [test_time_reasoning_budget](../research_programs/test_time_reasoning_budget/charter.md)
-- Assigned experiments: 24
+- Assigned experiments: 25
 
 ### Assigned Experiments
 
@@ -1050,6 +1051,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 - `qwen35_4b_commit_slot_semantic_power_replication` (new): [README](../experiments/qwen35_4b_commit_slot_semantic_power_replication/README.md)
 - `qwen35_4b_confidence_policy` (new): [README](../experiments/qwen35_4b_confidence_policy/README.md)
 - `qwen35_4b_counterfactual_order_support_selector` (new): [README](../experiments/qwen35_4b_counterfactual_order_support_selector/README.md)
+- `qwen35_4b_depth_recurrence_probe` (new): [README](../experiments/qwen35_4b_depth_recurrence_probe/README.md)
 - `qwen35_4b_early_text_hypothesis_forking` (new): [README](../experiments/qwen35_4b_early_text_hypothesis_forking/README.md)
 - `qwen35_4b_forced_commit_jacobian_value_transport` (new): [README](../experiments/qwen35_4b_forced_commit_jacobian_value_transport/README.md)
 - `qwen35_4b_jacobian_value_transport` (new): [README](../experiments/qwen35_4b_jacobian_value_transport/README.md)
@@ -1074,7 +1076,7 @@ Study the native thinking-token budget as a first-class controllable test-time-c
 Install general agentic capability in Qwen3.5-4B via breadth-first expert iteration on a firewall-clean multi-family gym, arbitrated by the blackbox menagerie instrument.
 
 - Charter: [agentic_breadth_installation](../research_programs/agentic_breadth_installation/charter.md)
-- Assigned experiments: 63
+- Assigned experiments: 64
 
 ### Assigned Experiments
 
@@ -1105,6 +1107,7 @@ Install general agentic capability in Qwen3.5-4B via breadth-first expert iterat
 - `qwen35_4b_menders_sirens_tier_forensics` (new): [README](../experiments/qwen35_4b_menders_sirens_tier_forensics/README.md)
 - `qwen35_4b_pareto_policy_integration` (new): [README](../experiments/qwen35_4b_pareto_policy_integration/README.md)
 - `qwen35_4b_rank_capacity_vehicle_cell` (new): [README](../experiments/qwen35_4b_rank_capacity_vehicle_cell/README.md)
+- `qwen35_4b_realrepo_agentic_instrument` (new): [README](../experiments/qwen35_4b_realrepo_agentic_instrument/README.md)
 - `qwen35_4b_recovery_payload_budget_harness` (new): [README](../experiments/qwen35_4b_recovery_payload_budget_harness/README.md)
 - `qwen35_4b_recovery_reason_locality_interpolation` (new): [README](../experiments/qwen35_4b_recovery_reason_locality_interpolation/README.md)
 - `qwen35_4b_recovery_verifier_branch_tournament` (new): [README](../experiments/qwen35_4b_recovery_verifier_branch_tournament/README.md)
