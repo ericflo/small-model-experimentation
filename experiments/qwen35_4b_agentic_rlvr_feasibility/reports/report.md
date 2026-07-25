@@ -283,7 +283,7 @@ that does not exist downstream.
 
     vllm serve <merged-composite> \
       --served-model-name qwen35-4b-pi8k --port 8420 \
-      --enforce-eager --max-model-len 40960 --gpu-memory-utilization 0.80 --max-num-seqs 8 \
+      --enforce-eager --max-model-len 16384 --gpu-memory-utilization 0.45 --max-num-seqs 4 \
       --enable-auto-tool-choice --tool-call-parser qwen3_xml
 
     pi --provider kiln-local --model qwen35-4b-pi8k -p "<task>" --mode json --no-session < /dev/null

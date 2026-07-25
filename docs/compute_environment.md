@@ -252,12 +252,15 @@ The full-vocab logits tensor is the recurring OOM source (~150K vocab):
   random-number continuations. The shared runner disables async scheduling and records that choice,
   but this simplifies scheduling; it does not make pre-Hopper inference batch-invariant.
 
-## WSL VM stability under sustained vLLM load
+## WSL VM stability under sustained vLLM load — MEASURED
 
-Five full-VM crashes occurred during multi-hour agentic-eval runs (the WSL2 VM dies, not a process —
-recovery is a manual Windows-side restart). Linux OOM was ruled out by measurement (swap 0B used,
-10–14 GB free, OOM killer never fired); the trigger is the WSL2 GPU paravirtualization layer under a
-long-lived high-VRAM allocation. Serve at `--gpu-memory-utilization 0.80 --max-num-seqs 8` (not
-0.90), restart the server between long runs, and apply the Windows-side `.wslconfig` in
-[docs/wsl_stability.md](wsl_stability.md) — which also records the checkpoint/resume and gated-restart
-discipline that has recovered all five crashes with zero completed episodes lost.
+Six full-VM deaths during GPU runs. Cause is measured, not guessed: **in WSL2 the VRAM reservation is
+mirrored into host memory ~1:1**. Serving at `--gpu-memory-utilization 0.80` (20.3 GB VRAM) grew
+`vmmemWSL` from 3.9 GB to 19.4 GB and cut Windows host free memory from 18.3 GB to **2.9 GB** on this
+32 GB host; Windows then kills `vmmem`, leaving no System-log error. `vmmem` also does not return
+memory promptly (still 17.1 GB after vLLM exited), so every serve/restart cycle ratchets host usage up.
+
+The fix is to CAP the VM (`memory=12GB`, not raise it) and serve at `--gpu-memory-utilization 0.45
+--max-model-len 16384 --max-num-seqs 4`, `wsl --shutdown` before long runs, and watch HOST free memory
+(`free -h` inside WSL is misleading — it read 22 GB free while the host had 2.9 GB). Full numbers,
+reasoning and crash discipline: [docs/wsl_stability.md](wsl_stability.md).
