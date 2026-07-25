@@ -50513,106 +50513,67 @@
      "headline": true,
      "kind": "bar",
      "title": "Looping layers 12:16 twice matches chain-of-thought - with zero tokens generated",
+     "categories": [
+      "base single pass",
+      "loop 12:16 k=2",
+      "C59 ref: real CoT",
+      "C59 ref: latent recurrence",
+      "C59 ref: filler tokens"
+     ],
      "series": [
       {
        "label": "held-out shift induction (n=400)",
-       "points": [
-        [
-         "base single pass",
-         0.105
-        ],
-        [
-         "loop 12:16 k=2",
-         0.245
-        ],
-        [
-         "C59 ref: real CoT",
-         0.235
-        ],
-        [
-         "C59 ref: latent recurrence",
-         0.06
-        ],
-        [
-         "C59 ref: filler tokens",
-         0.095
-        ]
+       "values": [
+        0.105,
+        0.245,
+        0.235,
+        0.06,
+        0.095
        ]
       },
       {
        "label": "affine, out-of-family (n=400)",
-       "points": [
-        [
-         "base single pass",
-         0.217
-        ],
-        [
-         "loop 12:16 k=2",
-         0.278
-        ],
-        [
-         "C59 ref: real CoT",
-         0.02
-        ],
-        [
-         "C59 ref: latent recurrence",
-         0.107
-        ],
-        [
-         "C59 ref: filler tokens",
-         0.24
-        ]
+       "values": [
+        0.217,
+        0.278,
+        0.02,
+        0.107,
+        0.24
        ]
       }
      ],
      "x_label": "arm",
      "y_label": "forced-answer accuracy (fraction)",
      "y_format": "number",
-     "note": "One extra pass through layers 12-15 of a frozen Qwen3.5-4B lifts a chance-level forward pass to the chain-of-thought number on shift induction, and still helps on affine where CoT collapses to 0.020. Balanced accuracy (constant predictor = 0.10) rises 0.112->0.251, so this is not label-prior exploitation."
+     "note": "One extra pass through layers 12-15 of a frozen Qwen3.5-4B lifts a chance-level forward pass to the chain-of-thought number on shift induction, and still helps on affine where CoT collapses to 0.020. Balanced accuracy (a constant predictor scores exactly 0.10) rises 0.112->0.251, so this is not label-prior exploitation."
     },
     {
      "kind": "bar",
      "title": "The effect is localised: only the block ending at layer 15 helps",
+     "categories": [
+      "4:8",
+      "8:12",
+      "12:16",
+      "16:20",
+      "20:24",
+      "24:28",
+      "28:32",
+      "insert 4:8 instead",
+      "insert 20:24 instead"
+     ],
      "series": [
       {
        "label": "shift induction accuracy, loop k=2 (baseline 0.105)",
-       "points": [
-        [
-         "4:8",
-         0.113
-        ],
-        [
-         "8:12",
-         0.102
-        ],
-        [
-         "12:16",
-         0.245
-        ],
-        [
-         "16:20",
-         0.175
-        ],
-        [
-         "20:24",
-         0.072
-        ],
-        [
-         "24:28",
-         0.117
-        ],
-        [
-         "28:32",
-         0.1
-        ],
-        [
-         "insert 4:8 instead",
-         0.0
-        ],
-        [
-         "insert 20:24 instead",
-         0.007
-        ]
+       "values": [
+        0.113,
+        0.102,
+        0.245,
+        0.175,
+        0.072,
+        0.117,
+        0.1,
+        0.0,
+        0.007
        ]
       }
      ],
@@ -50629,22 +50590,18 @@
      "headline": true,
      "kind": "bar",
      "title": "A measurable instrument: 200 firewalled real-repo tasks replace an 11-task saturated holdout",
+     "categories": [
+      "old pi holdout (synthetic)",
+      "new: train repos",
+      "new: held-out repos"
+     ],
      "series": [
       {
        "label": "tasks",
-       "points": [
-        [
-         "old pi holdout (synthetic)",
-         11
-        ],
-        [
-         "new: train repos",
-         138
-        ],
-        [
-         "new: held-out repos",
-         62
-        ]
+       "values": [
+        11,
+        138,
+        62
        ]
       }
      ],
@@ -50652,6 +50609,29 @@
      "y_label": "number of tasks",
      "y_format": "number",
      "note": "The prior eval sat at 0.818 execution-selected with 11/11 tasks solvable, so it could not resolve a +0.05 change. The new set spans 15 real OSS libraries, split by REPO so held-out tasks live in codebases never harvested, and is scored per-test (each task's fail_to_pass set plus the repo's baseline as a regression guard)."
+    },
+    {
+     "kind": "bar",
+     "title": "Libraries recovered by per-test scoring instead of whole-suite-green",
+     "categories": [
+      "candidates",
+      "usable after baselining",
+      "yielding tasks"
+     ],
+     "series": [
+      {
+       "label": "libraries",
+       "values": [
+        24,
+        18,
+        15
+       ]
+      }
+     ],
+     "x_label": "stage",
+     "y_label": "number of libraries",
+     "y_format": "number",
+     "note": "Requiring a globally green suite discarded 11 of 24 libraries over one or two environment-dependent failures that behave identically before and after an agent's edit. Per-test sets exclude them by construction; adding -rA (pytest-xdist hides per-test lines from -v) recovered 8 more."
     }
    ]
   }

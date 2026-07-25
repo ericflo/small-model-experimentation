@@ -529,6 +529,14 @@
     "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
+  "qwen35_4b_depth_recurrence_probe": {
+   "start": "2026-07-25",
+   "end": "2026-07-25",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
+   ]
+  },
   "qwen35_4b_depth_scaling_controls": {
    "start": "2026-07-05",
    "end": "2026-07-05",
@@ -1194,6 +1202,14 @@
    "confidence": "high",
    "sources": [
     "logs/experiment_log.md:3: 'Date: 2026-06-25'"
+   ]
+  },
+  "qwen35_4b_realrepo_agentic_instrument": {
+   "start": "2026-07-25",
+   "end": "2026-07-25",
+   "confidence": "high",
+   "sources": [
+    "git history (post-import; metadata-only sweeps excluded) — auto-filled by scripts/extract_experiment_dates.py --apply"
    ]
   },
   "qwen35_4b_recovery_payload_budget_harness": {
