@@ -1,6 +1,8 @@
 # Qwen35 4b State Track Confirmation
 
-**Status:** in-progress · since 2026-07-17 · design-frozen eval-only six-seed confirmation of lifecycle 30's single-seed INSTALLED_TRANSFER; no seed consumed, benchmark event pending
+**Status:** finished · 2026-07-17 → 2026-07-22 · the six-seed eval-only benchmark event RAN in full (adversarial review `PASS_BENCHMARK_EVENT`; seeds 78170-78175 consumed, 12 sealed gateway runs, budget-clean) and returned the frozen verdict **CONFIRMED**: mean paired delta +0.0207, `state_track` winning 4 of 6, matching the single-seed 78169 lift (+0.0256).
+Honest effect size (promised at freeze): SD 0.0453, paired t = 1.12 on 5 df, one-sided p ≈ 0.16 — a directional replication, NOT strictly significant; the rule was preregistered as a LIBERAL directional check (false-CONFIRMED ≈ 0.31) whose decisive high-value outcome (NOT_CONFIRMED) did not fire.
+`state_track` was adopted as the program reference composite. No claim-ledger entry was ever filed for this cell, and the +0.02 menagerie edge did NOT transfer to the real coding harness (see `knowledge/coding_harness_transfer_measurement.md`).
 
 ## Research Program
 

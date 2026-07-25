@@ -1,6 +1,14 @@
 # State-Formation Capacity Adjudication
 
-**Status:** in-progress · since 2026-07-13 · authoritative Stage-A result is `LORA_JOINT_MISS_CONTROLS_REQUIRED`; Stage B LoRA-state-only and full-rank-joint arms are mandatory
+**Status:** finished · 2026-07-13 → 2026-07-22 · closed partial. Stage A ran on GPU to completion
+(3 seeds × 1,500 fixed LoRA-joint updates + 3 trigger evaluations) and the preregistered analyzer
+returned the authoritative verdict `LORA_JOINT_MISS_CONTROLS_REQUIRED`: 0/57 required seed×split×depth
+cells reached the 0.40 terminal joint-state threshold (best intact required cell 0.0234375) — a valid
+negative for the registered LoRA joint recipe, not a rank-causal conclusion, and to be cited only with
+the imperfect-operator-blinding disclosure in `reports/operator_deviation.md`. The mandated Stage-B
+arms (3 LoRA state-only controls + 3 full-rank-joint runs) reached only their non-scientific setup
+matrix (three-seed G0 + positive controls); Stage-B training, evaluation, and the sealed contrast were
+never executed, and no ledger claim was filed.
 
 ## Current status
 

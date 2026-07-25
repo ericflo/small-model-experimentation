@@ -5,11 +5,9 @@ source_track: "new"
 path: "experiments/qwen35_4b_why_scale_ladder"
 primary_readme: "experiments/qwen35_4b_why_scale_ladder/README.md"
 primary_report: "experiments/qwen35_4b_why_scale_ladder/reports/report.md"
-summary: "`Qwen/Qwen3.5-4B` by designed, contamination-free curricula, proven by transfer — and specifically, does teaching the 4B WHY a correct answer is correct SCALE with more (genuinely diverse) data to a peak worth building an RLVR foundation on? (0.7622), MBPP 56.5% (0.565), agentic duet-eval 8/35. Bet #4 (`qwen35_4b_why_comment_install`) gave the program's biggest fast gain — HumanEval +5 (0.7622 -> 0.7927) on the clean, comment-inert test — but was underpowered (McNemar p=0.33), flat on the agentic loop, and did not survive combination."
+summary: "construction is complete and frozen (generator + sha-pinned ladder + harness + 52 tests) and all three staged reviews PASSed (PASS_CONTROL_TRAINING / PASS_CONTROL_MERGE / PASS_MEASURE), but the sweep stopped mid-ladder — rungs 2000/5000 trained (1 epoch, loss 5.67 / 2.67; receipts in `runs/training/`) and rung 5000 merged, rung 10000 was SIGKILLed at 19% (`why_scale_10000.failure.json`, rc −9), rungs 20000/40000 never started, and MEASURE never ran for any rung: no HumanEval/MBPP pass@1, no scaling curve, no claim in the ledger. Voided by commit `115805e4` (the shared coding harness had been evaluating thinking-OFF; corrected base HumanEval 76.2% → 89.6%), which killed this ladder's minimal-`<think>` premise; the question moved to `experiments/qwen35_4b_why_think_scale`."
 tags:
   - "curriculum"
-  - "execution"
-  - "policy"
   - "small-model"
 research_programs:
   - "agentic_breadth_installation"
@@ -31,4 +29,4 @@ file_counts:
   py: 12
   yaml: 3
 total_files: 31
-total_size_bytes: 375834
+total_size_bytes: 376500

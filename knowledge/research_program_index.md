@@ -441,7 +441,7 @@ Use libraries of verified algorithms, examples, traces, skills, or failures as r
 Grow, search, shortlist, compose, and stress-test reusable operator and skill banks.
 
 - Charter: [operator_and_skill_inventories](../research_programs/operator_and_skill_inventories/charter.md)
-- Assigned experiments: 12
+- Assigned experiments: 13
 
 ### Seed Evidence
 
@@ -459,6 +459,7 @@ Grow, search, shortlist, compose, and stress-test reusable operator and skill ba
 - `qwen35_4b_oracle_probe_synthesis_mdp` (track-z): [README](../experiments/qwen35_4b_oracle_probe_synthesis_mdp/README.md)
 - `qwen35_4b_oracle_process_grpo` (track-z): [README](../experiments/qwen35_4b_oracle_process_grpo/README.md)
 - `qwen35_4b_repo_search_compress_bank` (new): [README](../experiments/qwen35_4b_repo_search_compress_bank/README.md)
+- `qwen35_4b_state_formation_capacity_adjudication` (new): [README](../experiments/qwen35_4b_state_formation_capacity_adjudication/README.md)
 - `qwen35_4b_verified_macro_capacity_fit_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_capacity_fit_rerun/README.md)
 - `qwen35_4b_verified_macro_exact_cudagraph_rerun` (new): [README](../experiments/qwen35_4b_verified_macro_exact_cudagraph_rerun/README.md)
 - `qwen35_4b_verified_macro_invention` (new): [README](../experiments/qwen35_4b_verified_macro_invention/README.md)

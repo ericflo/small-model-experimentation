@@ -1,6 +1,14 @@
 # Qwen3.5-4B Counterfactual Plan Reflection Transfer
 
-**Status:** in-progress · since 2026-07-14 · exact-SHA Review 12 returned HOLD; the lease-only pre-Python remediation passed detached model-free audits and awaits Review 13; model/GPU/training/evaluation remain unauthorized
+**Status:** finished · 2026-07-14 → 2026-07-22 · closed unrun: the model-free construction is
+complete and frozen (576 exact-depth-3 tasks across the 216/72/144/144 splits, exact
+77,020 prompt / 5,164 target / 82,184 forward token parity across the correct-reflection,
+shuffled-reflection, and auxiliary-label arms, 94-test model-free suite plus detached boundary
+audits green), but the GPU stages (train/merge/measure) never executed — zero Qwen forward passes,
+zero training, zero capability measurement. Authorization never advanced past exact-SHA Review 12's
+HOLD; the lease-only pre-Python remediation passed detached audits at
+`c8ff609ba9c0abb8eaa9be1775ec39e61f2a4f59` but Review 13 never happened. No claim-ledger entry
+exists and no capability inference is licensed.
 
 This experiment tests the paper's most actionable claim without relying on its
 consciousness framing: can supervision on what the model would say on a later

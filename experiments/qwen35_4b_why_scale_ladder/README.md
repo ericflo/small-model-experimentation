@@ -1,6 +1,16 @@
 # Qwen35 4B WHY Scale Ladder
 
-**Status:** in-progress · since 2026-07-18 · model-free construction frozen (generator + sha-pinned ladder + harness + tests); GPU rungs (train/merge/measure) gated behind staged reviews and not yet run.
+**Status:** finished · 2026-07-18 → 2026-07-22 · closed partial: the model-free
+construction is complete and frozen (generator + sha-pinned ladder + harness + 52
+tests) and all three staged reviews PASSed (PASS_CONTROL_TRAINING / PASS_CONTROL_MERGE
+/ PASS_MEASURE), but the sweep stopped mid-ladder — rungs 2000/5000 trained (1 epoch,
+loss 5.67 / 2.67; receipts in `runs/training/`) and rung 5000 merged, rung 10000 was
+SIGKILLed at 19% (`why_scale_10000.failure.json`, rc −9), rungs 20000/40000 never
+started, and MEASURE never ran for any rung: no HumanEval/MBPP pass@1, no scaling
+curve, no claim in the ledger. Voided by commit `115805e4` (the shared coding harness
+had been evaluating thinking-OFF; corrected base HumanEval 76.2% → 89.6%), which
+killed this ladder's minimal-`<think>` premise; the question moved to
+`experiments/qwen35_4b_why_think_scale`.
 
 ## Research Program
 

@@ -2,7 +2,7 @@
 
 Lifecycle 29 — stage 8 of the documented zero-root chain: REPLAY COMPOUNDING onto the count_walk composite. ONE fresh rank-32/alpha-64 adapter trains on the FULL 2,240-row replay pool (`data/sft_blend.jsonl`, sha `25a9595f…`) from the count_walk composite parent at fresh seed 86 with the chain's established replay-refresh recipe, merges through the vendored external merger, must pass a two-arm three-screen pooled_k3 retention non-drift gate, and only a locally promoted candidate may consume the ONE sealed medium seed 78168 under the frozen two-directional COMPOUNDED / BOUNDED consequence.
 
-**Status:** in-progress · since 2026-07-17 · model-free construction frozen (design receipt, lineage package, gate instruments, tests, drills all green); awaiting the staged reviews and the GPU stages
+**Status:** finished · 2026-07-17 → 2026-07-22 · ran to its planned endpoint: all four staged reviews passed (PASS_CONTROL_TRAINING / PASS_CONTROL_MERGE / PASS_LOCAL_EVENT / PASS_BENCHMARK_EVENT), the candidate was locally promoted in-band at seeds 88060-88062, and the ONE sealed medium/tb1024 seed 78168 was consumed. Verdict **BOUNDED**: replay_compound scored aggregate 0.3420 vs the count_walk parent's 0.3626 — a real −0.0206 loss (tie guard inactive) — and warren fell 0.15 below parent, past the per-family slack; either condition alone fires BOUNDED. First stage of the chain where replay compounding failed to add aggregate, so the count_walk composite remains the program reference and further aggregate pushes need a different move class. Descriptive only (never gating): the candidate still beats base by +0.238 with 8 strict family wins, 1 tie (menders), 1 loss (rites).
 
 ## Research Program
 

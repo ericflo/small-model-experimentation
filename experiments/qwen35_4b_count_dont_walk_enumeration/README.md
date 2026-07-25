@@ -1,6 +1,7 @@
 # Count-Don't-Walk Enumeration
 
-**Status:** in-progress · since 2026-07-16 · model-free construction frozen (corpus, exposure streams, gate, receipts, clean-chain package); GPU stages pending review
+**Status:** finished · 2026-07-16 → 2026-07-22 · all GPU stages ran (train → merge → local gate → sealed event 78,163); verdict PROMOTED_LOCALLY + MECHANISM_ANSWER with the cell's OWN hypothesis REFUTED — compact expression did NOT install (think length still at the 1,024-token cap in every arm; canonical-next fidelity 7/40 = 0.175 vs the frozen 0.50 precondition, and replay drew 5/40 off the rendered-ranges prompt delta alone), yet count_walk drew menders 0.1 with base/zero_root_parent/replay_ctl7 ALL at 0.0 → frozen_interpretation = MECHANISM_ANSWER on the preregistered positive-precedence branch (aggregate 0.3312 vs replay 0.3298 / parent 0.2950 / base 0.0753; goal gate vs base 9 wins / 1 tie / 0 losses).
+Scope at closure: n=1 episode on ONE sealed seed, the converting mechanism is NOT the taught five-line computation, NO claim was entered in the claim ledger, and the funded eval-only multi-seed confirmation cell was never run.
 
 ## Research Program
 

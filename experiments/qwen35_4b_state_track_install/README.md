@@ -2,7 +2,9 @@
 
 Lifecycle 30 — stage 9 of the documented zero-root chain: a DIVERGENT single-kind installation dose of a NEW transferable skill — STATE-TRACKING UNDER DECLARATIVE UPDATES — onto the count_walk composite. ONE fresh rank-32/alpha-64 adapter trains on a fresh 160-row single-kind state-tracking curriculum (`data/sft_state_track.jsonl`, sha `66a8d5be…`) from the count_walk composite parent at fresh seed 87 with the chain's frozen QLoRA recipe, merges through the vendored external merger, must pass a two-arm three-screen pooled_k3 retention non-drift gate, and only a locally promoted candidate may consume the ONE sealed medium seed 78169 under the frozen two-directional INSTALLED_TRANSFER / BOUNDED consequence.
 
-**Status:** in-progress · since 2026-07-17 · model-free construction frozen (design receipt, lineage package, gate instruments, generator, tests, drills all green); awaiting the staged reviews and the GPU stages
+**Status:** finished · 2026-07-17 → 2026-07-22 · ran to its planned endpoint: all four staged reviews passed, the candidate promoted through the two-arm pooled_k3 retention gate, and the ONE sealed medium seed 78169 was consumed → frozen verdict **INSTALLED_TRANSFER** (state_track 0.3260 > count_walk parent 0.3004 > base 0.1675; no family below the one-episode slack).
+HONEST SCOPE: single seed (the parent itself swings 0.30-0.36 across sealed draws) and the /goal bar is unmet (warren 0.200 < base 0.367); the six-seed successor `qwen35_4b_state_track_confirmation` replicated it only DIRECTIONALLY (+0.0207, p ≈ 0.16), and the edge did NOT transfer to the real coding harness.
+No claim-ledger entry was ever filed for this cell, and the "Pending" Results/Interpretation sections below are stale — see `experiment_log.md` and `runs/benchmark/medium_tb1024_seed78169_install/summary.json`.
 
 ## Research Program
 

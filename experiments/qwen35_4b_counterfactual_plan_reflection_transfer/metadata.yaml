@@ -5,9 +5,9 @@ source_track: "new"
 path: "experiments/qwen35_4b_counterfactual_plan_reflection_transfer"
 primary_readme: "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/README.md"
 primary_report: "experiments/qwen35_4b_counterfactual_plan_reflection_transfer/reports/report.md"
-summary: "This experiment tests the paper's most actionable claim without relying on its consciousness framing: can supervision on what the model would say on a later reflection branch change what it does on an unreflected action branch? The fixed `READY` seam makes this controlled branch transfer, not a claim about a literal interrupted internal action state."
+summary: "complete and frozen (576 exact-depth-3 tasks across the 216/72/144/144 splits, exact 77,020 prompt / 5,164 target / 82,184 forward token parity across the correct-reflection, shuffled-reflection, and auxiliary-label arms, 94-test model-free suite plus detached boundary audits green), but the GPU stages (train/merge/measure) never executed — zero Qwen forward passes, zero training, zero capability measurement. Authorization never advanced past exact-SHA Review 12's HOLD; the lease-only pre-Python remediation passed detached audits at `c8ff609ba9c0abb8eaa9be1775ec39e61f2a4f59` but Review 13 never happened. No claim-ledger entry exists and no capability inference is licensed."
 tags:
-  - "latent-state"
+  - "abi"
   - "small-model"
 research_programs:
   - "interpretability_and_diagnostics"
@@ -28,4 +28,4 @@ file_counts:
   yaml: 3
   "[none]": 2
 total_files: 65
-total_size_bytes: 2535346
+total_size_bytes: 2535902
