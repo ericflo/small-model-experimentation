@@ -1,0 +1,1072 @@
+{
+ "label": "base",
+ "split": "test",
+ "provider": "kiln-local",
+ "model": "qwen35-4b-pi8k",
+ "k": 1,
+ "n_episodes": 62,
+ "n_tasks": 62,
+ "single_shot": 0.3387,
+ "selected_best_of_k": 0.3387,
+ "mean_reward": 0.4961,
+ "per_task": {
+  "bidict::bidict/_bidict.py::MutableBidict.popitem": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.0
+  },
+  "bidict::bidict/_orderedbase.py::SentinelNode.new_last_node": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.116
+  },
+  "bidict::bidict/_base.py::BidictBase.equals_order_sensitive": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.563
+  },
+  "dpath::dpath/__init__.py::values": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "dpath::dpath/segments.py::int_str": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "bidict::bidict/_orderedbase.py::SentinelNode.iternodes": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.1
+  },
+  "bidict::bidict/_base.py::BidictBase.inverse": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.575
+  },
+  "dpath::dpath/segments.py::foldm": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "dpath::dpath/segments.py::fold": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.141
+  },
+  "dpath::dpath/segments.py::leafy": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "dpath::dpath/segments.py::get": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.55
+  },
+  "dpath::dpath/segments.py::make_walkable": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.575
+  },
+  "dpath::dpath/__init__.py::new": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.1
+  },
+  "dpath::dpath/__init__.py::set": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.3
+  },
+  "dpath::dpath/__init__.py::get": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.211
+  },
+  "dpath::dpath/segments.py::set": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.05
+  },
+  "dpath::dpath/segments.py::match": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.525
+  },
+  "glom::glom/streaming.py::Iter.split": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "glom::glom/core.py::Glommer.register": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "glom::glom/streaming.py::Iter.slice": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "glom::glom/core.py::Path.from_t": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.267
+  },
+  "glom::glom/matching.py::Optional.glomit": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.1
+  },
+  "glom::glom/core.py::arg_val": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.281
+  },
+  "glom::glom/core.py::Path.startswith": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.0
+  },
+  "glom::glom/core.py::Ref.glomit": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.0
+  },
+  "glom::glom/core.py::CoalesceError.get_message": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "glom::glom/core.py::GlomError.wrap": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.2
+  },
+  "glom::glom/reduction.py::flatten": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.1
+  },
+  "glom::glom/core.py::format_oneline_trace": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.1
+  },
+  "more-itertools::more_itertools/more.py::always_reversible": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.35
+  },
+  "more-itertools::more_itertools/more.py::takewhile_inclusive": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "more-itertools::more_itertools/more.py::idft": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "more-itertools::more_itertools/more.py::concurrent_tee": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.0
+  },
+  "more-itertools::more_itertools/more.py::derangements": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.0
+  },
+  "more-itertools::more_itertools/recipes.py::sliding_window": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "more-itertools::more_itertools/more.py::subfactorial": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "more-itertools::more_itertools/recipes.py::tail": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "more-itertools::more_itertools/more.py::exactly_n": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "more-itertools::more_itertools/recipes.py::nth_combination": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.225
+  },
+  "more-itertools::more_itertools/more.py::divide": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.433
+  },
+  "semver::src/semver/version.py::Version.is_valid": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "more-itertools::more_itertools/more.py::sort_together": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.05
+  },
+  "semver::src/semver/version.py::Version.to_dict": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.0
+  },
+  "semver::src/semver/version.py::Version.bump_build": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.0
+  },
+  "semver::src/semver/version.py::Version.replace": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.566
+  },
+  "semver::src/semver/version.py::Version.parse": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.275
+  },
+  "semver::src/semver/version.py::Version.is_compatible": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.571
+  },
+  "semver::src/semver/version.py::Version.bump_prerelease": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.556
+  },
+  "semver::src/semver/version.py::Version.next_version": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.415
+  },
+  "semver::src/semver/version.py::Version.compare": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.0
+  },
+  "voluptuous::voluptuous/validators.py::Url": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "semver::src/semver/version.py::Version.match": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.219
+  },
+  "voluptuous::voluptuous/schema_builder.py::default_factory": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "voluptuous::voluptuous/validators.py::IsDir": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "voluptuous::voluptuous/validators.py::IsFile": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "voluptuous::voluptuous/validators.py::FqdnUrl": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.35
+  },
+  "voluptuous::voluptuous/schema_builder.py::raises": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "voluptuous::voluptuous/validators.py::PathExists": {
+   "solved_any": true,
+   "rate": 1.0,
+   "mean_reward": 1.0
+  },
+  "voluptuous::voluptuous/validators.py::Email": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.433
+  },
+  "voluptuous::voluptuous/schema_builder.py::Schema.infer": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.1
+  },
+  "voluptuous::voluptuous/schema_builder.py::validate": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.05
+  },
+  "voluptuous::voluptuous/schema_builder.py::Schema.extend": {
+   "solved_any": false,
+   "rate": 0.0,
+   "mean_reward": 0.314
+  }
+ },
+ "engaged": 54,
+ "timeouts": 20,
+ "episodes_slim": [
+  {
+   "task_id": "bidict::bidict/_bidict.py::MutableBidict.popitem",
+   "repo": "bidict",
+   "edited": false,
+   "solved": false,
+   "reward": 0.0,
+   "ftp_passed": 0,
+   "ftp_total": 1,
+   "n_regressed": 0,
+   "secs": 550.7,
+   "pi_exit": 137
+  },
+  {
+   "task_id": "bidict::bidict/_orderedbase.py::SentinelNode.new_last_node",
+   "repo": "bidict",
+   "edited": true,
+   "solved": false,
+   "reward": 0.1161,
+   "ftp_passed": 1,
+   "ftp_total": 31,
+   "n_regressed": 0,
+   "secs": 610.1,
+   "pi_exit": 124
+  },
+  {
+   "task_id": "bidict::bidict/_base.py::BidictBase.equals_order_sensitive",
+   "repo": "bidict",
+   "edited": true,
+   "solved": false,
+   "reward": 0.563,
+   "ftp_passed": 25,
+   "ftp_total": 27,
+   "n_regressed": 0,
+   "secs": 610.1,
+   "pi_exit": 124
+  },
+  {
+   "task_id": "dpath::dpath/__init__.py::values",
+   "repo": "dpath",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 4,
+   "ftp_total": 4,
+   "n_regressed": 0,
+   "secs": 411.2,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::int_str",
+   "repo": "dpath",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 11,
+   "ftp_total": 11,
+   "n_regressed": 0,
+   "secs": 91.6,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "bidict::bidict/_orderedbase.py::SentinelNode.iternodes",
+   "repo": "bidict",
+   "edited": true,
+   "solved": false,
+   "reward": 0.1,
+   "ftp_passed": 0,
+   "ftp_total": 30,
+   "n_regressed": 0,
+   "secs": 609.4,
+   "pi_exit": 124
+  },
+  {
+   "task_id": "bidict::bidict/_base.py::BidictBase.inverse",
+   "repo": "bidict",
+   "edited": true,
+   "solved": false,
+   "reward": 0.575,
+   "ftp_passed": 38,
+   "ftp_total": 40,
+   "n_regressed": 0,
+   "secs": 609.4,
+   "pi_exit": 124
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::foldm",
+   "repo": "dpath",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 11,
+   "ftp_total": 11,
+   "n_regressed": 0,
+   "secs": 164.0,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::fold",
+   "repo": "dpath",
+   "edited": true,
+   "solved": false,
+   "reward": 0.1405,
+   "ftp_passed": 3,
+   "ftp_total": 37,
+   "n_regressed": 0,
+   "secs": 367.0,
+   "pi_exit": 137
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::leafy",
+   "repo": "dpath",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 3,
+   "ftp_total": 3,
+   "n_regressed": 0,
+   "secs": 164.4,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::get",
+   "repo": "dpath",
+   "edited": true,
+   "solved": false,
+   "reward": 0.55,
+   "ftp_passed": 36,
+   "ftp_total": 40,
+   "n_regressed": 0,
+   "secs": 129.7,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::make_walkable",
+   "repo": "dpath",
+   "edited": true,
+   "solved": false,
+   "reward": 0.575,
+   "ftp_passed": 38,
+   "ftp_total": 40,
+   "n_regressed": 0,
+   "secs": 115.7,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "dpath::dpath/__init__.py::new",
+   "repo": "dpath",
+   "edited": true,
+   "solved": false,
+   "reward": 0.1,
+   "ftp_passed": 0,
+   "ftp_total": 8,
+   "n_regressed": 0,
+   "secs": 608.8,
+   "pi_exit": 124
+  },
+  {
+   "task_id": "dpath::dpath/__init__.py::set",
+   "repo": "dpath",
+   "edited": true,
+   "solved": false,
+   "reward": 0.3,
+   "ftp_passed": 6,
+   "ftp_total": 6,
+   "n_regressed": 1,
+   "secs": 113.9,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "dpath::dpath/__init__.py::get",
+   "repo": "dpath",
+   "edited": true,
+   "solved": false,
+   "reward": 0.2111,
+   "ftp_passed": 2,
+   "ftp_total": 9,
+   "n_regressed": 0,
+   "secs": 608.2,
+   "pi_exit": 124
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::set",
+   "repo": "dpath",
+   "edited": true,
+   "solved": false,
+   "reward": 0.05,
+   "ftp_passed": 0,
+   "ftp_total": 40,
+   "n_regressed": 39,
+   "secs": 608.2,
+   "pi_exit": 124
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::match",
+   "repo": "dpath",
+   "edited": true,
+   "solved": false,
+   "reward": 0.525,
+   "ftp_passed": 34,
+   "ftp_total": 40,
+   "n_regressed": 0,
+   "secs": 607.5,
+   "pi_exit": 124
+  },
+  {
+   "task_id": "glom::glom/streaming.py::Iter.split",
+   "repo": "glom",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 1,
+   "ftp_total": 1,
+   "n_regressed": 0,
+   "secs": 92.6,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "glom::glom/core.py::Glommer.register",
+   "repo": "glom",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 9,
+   "ftp_total": 9,
+   "n_regressed": 0,
+   "secs": 219.5,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "glom::glom/streaming.py::Iter.slice",
+   "repo": "glom",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 1,
+   "ftp_total": 1,
+   "n_regressed": 0,
+   "secs": 144.6,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "glom::glom/core.py::Path.from_t",
+   "repo": "glom",
+   "edited": true,
+   "solved": false,
+   "reward": 0.2667,
+   "ftp_passed": 1,
+   "ftp_total": 3,
+   "n_regressed": 0,
+   "secs": 109.6,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "glom::glom/matching.py::Optional.glomit",
+   "repo": "glom",
+   "edited": true,
+   "solved": false,
+   "reward": 0.1,
+   "ftp_passed": 0,
+   "ftp_total": 2,
+   "n_regressed": 0,
+   "secs": 512.6,
+   "pi_exit": 137
+  },
+  {
+   "task_id": "glom::glom/core.py::arg_val",
+   "repo": "glom",
+   "edited": true,
+   "solved": false,
+   "reward": 0.2812,
+   "ftp_passed": 37,
+   "ftp_total": 40,
+   "n_regressed": 56,
+   "secs": 355.2,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "glom::glom/core.py::Path.startswith",
+   "repo": "glom",
+   "edited": false,
+   "solved": false,
+   "reward": 0.0,
+   "ftp_passed": 0,
+   "ftp_total": 19,
+   "n_regressed": 0,
+   "secs": 248.6,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "glom::glom/core.py::Ref.glomit",
+   "repo": "glom",
+   "edited": false,
+   "solved": false,
+   "reward": 0.0,
+   "ftp_passed": 0,
+   "ftp_total": 5,
+   "n_regressed": 0,
+   "secs": 381.4,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "glom::glom/core.py::CoalesceError.get_message",
+   "repo": "glom",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 1,
+   "ftp_total": 1,
+   "n_regressed": 0,
+   "secs": 380.7,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "glom::glom/core.py::GlomError.wrap",
+   "repo": "glom",
+   "edited": true,
+   "solved": false,
+   "reward": 0.2,
+   "ftp_passed": 2,
+   "ftp_total": 10,
+   "n_regressed": 0,
+   "secs": 600.1,
+   "pi_exit": 124
+  },
+  {
+   "task_id": "glom::glom/reduction.py::flatten",
+   "repo": "glom",
+   "edited": true,
+   "solved": false,
+   "reward": 0.1,
+   "ftp_passed": 0,
+   "ftp_total": 1,
+   "n_regressed": 0,
+   "secs": 600.0,
+   "pi_exit": 124
+  },
+  {
+   "task_id": "glom::glom/core.py::format_oneline_trace",
+   "repo": "glom",
+   "edited": true,
+   "solved": false,
+   "reward": 0.1,
+   "ftp_passed": 0,
+   "ftp_total": 1,
+   "n_regressed": 0,
+   "secs": 413.0,
+   "pi_exit": 137
+  },
+  {
+   "task_id": "more-itertools::more_itertools/more.py::always_reversible",
+   "repo": "more-itertools",
+   "edited": true,
+   "solved": false,
+   "reward": 0.35,
+   "ftp_passed": 1,
+   "ftp_total": 2,
+   "n_regressed": 0,
+   "secs": 497.3,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "more-itertools::more_itertools/more.py::takewhile_inclusive",
+   "repo": "more-itertools",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 3,
+   "ftp_total": 3,
+   "n_regressed": 0,
+   "secs": 398.0,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "more-itertools::more_itertools/more.py::idft",
+   "repo": "more-itertools",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 2,
+   "ftp_total": 2,
+   "n_regressed": 0,
+   "secs": 420.2,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "more-itertools::more_itertools/more.py::concurrent_tee",
+   "repo": "more-itertools",
+   "edited": false,
+   "solved": false,
+   "reward": 0.0,
+   "ftp_passed": 0,
+   "ftp_total": 1,
+   "n_regressed": 0,
+   "secs": 37.5,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "more-itertools::more_itertools/more.py::derangements",
+   "repo": "more-itertools",
+   "edited": false,
+   "solved": false,
+   "reward": 0.0,
+   "ftp_passed": 0,
+   "ftp_total": 4,
+   "n_regressed": 0,
+   "secs": 319.2,
+   "pi_exit": 137
+  },
+  {
+   "task_id": "more-itertools::more_itertools/recipes.py::sliding_window",
+   "repo": "more-itertools",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 2,
+   "ftp_total": 2,
+   "n_regressed": 0,
+   "secs": 116.6,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "more-itertools::more_itertools/more.py::subfactorial",
+   "repo": "more-itertools",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 1,
+   "ftp_total": 1,
+   "n_regressed": 0,
+   "secs": 189.8,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "more-itertools::more_itertools/recipes.py::tail",
+   "repo": "more-itertools",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 8,
+   "ftp_total": 8,
+   "n_regressed": 0,
+   "secs": 180.8,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "more-itertools::more_itertools/more.py::exactly_n",
+   "repo": "more-itertools",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 3,
+   "ftp_total": 3,
+   "n_regressed": 0,
+   "secs": 113.6,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "more-itertools::more_itertools/recipes.py::nth_combination",
+   "repo": "more-itertools",
+   "edited": true,
+   "solved": false,
+   "reward": 0.225,
+   "ftp_passed": 1,
+   "ftp_total": 4,
+   "n_regressed": 0,
+   "secs": 600.1,
+   "pi_exit": 124
+  },
+  {
+   "task_id": "more-itertools::more_itertools/more.py::divide",
+   "repo": "more-itertools",
+   "edited": true,
+   "solved": false,
+   "reward": 0.4333,
+   "ftp_passed": 2,
+   "ftp_total": 3,
+   "n_regressed": 0,
+   "secs": 600.0,
+   "pi_exit": 124
+  },
+  {
+   "task_id": "semver::src/semver/version.py::Version.is_valid",
+   "repo": "semver",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 6,
+   "ftp_total": 6,
+   "n_regressed": 0,
+   "secs": 168.8,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "more-itertools::more_itertools/more.py::sort_together",
+   "repo": "more-itertools",
+   "edited": true,
+   "solved": false,
+   "reward": 0.05,
+   "ftp_passed": 0,
+   "ftp_total": 6,
+   "n_regressed": 726,
+   "secs": 600.1,
+   "pi_exit": 124
+  },
+  {
+   "task_id": "semver::src/semver/version.py::Version.to_dict",
+   "repo": "semver",
+   "edited": false,
+   "solved": false,
+   "reward": 0.0,
+   "ftp_passed": 0,
+   "ftp_total": 40,
+   "n_regressed": 0,
+   "secs": 87.8,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "semver::src/semver/version.py::Version.bump_build",
+   "repo": "semver",
+   "edited": false,
+   "solved": false,
+   "reward": 0.0,
+   "ftp_passed": 0,
+   "ftp_total": 12,
+   "n_regressed": 0,
+   "secs": 205.9,
+   "pi_exit": 137
+  },
+  {
+   "task_id": "semver::src/semver/version.py::Version.replace",
+   "repo": "semver",
+   "edited": true,
+   "solved": false,
+   "reward": 0.5655,
+   "ftp_passed": 27,
+   "ftp_total": 29,
+   "n_regressed": 0,
+   "secs": 258.1,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "semver::src/semver/version.py::Version.parse",
+   "repo": "semver",
+   "edited": true,
+   "solved": false,
+   "reward": 0.275,
+   "ftp_passed": 36,
+   "ftp_total": 40,
+   "n_regressed": 6,
+   "secs": 244.4,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "semver::src/semver/version.py::Version.is_compatible",
+   "repo": "semver",
+   "edited": true,
+   "solved": false,
+   "reward": 0.5706,
+   "ftp_passed": 16,
+   "ftp_total": 17,
+   "n_regressed": 0,
+   "secs": 600.0,
+   "pi_exit": 124
+  },
+  {
+   "task_id": "semver::src/semver/version.py::Version.bump_prerelease",
+   "repo": "semver",
+   "edited": true,
+   "solved": false,
+   "reward": 0.5565,
+   "ftp_passed": 21,
+   "ftp_total": 23,
+   "n_regressed": 0,
+   "secs": 498.7,
+   "pi_exit": 137
+  },
+  {
+   "task_id": "semver::src/semver/version.py::Version.next_version",
+   "repo": "semver",
+   "edited": true,
+   "solved": false,
+   "reward": 0.4148,
+   "ftp_passed": 17,
+   "ftp_total": 27,
+   "n_regressed": 0,
+   "secs": 290.4,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "semver::src/semver/version.py::Version.compare",
+   "repo": "semver",
+   "edited": false,
+   "solved": false,
+   "reward": 0.0,
+   "ftp_passed": 0,
+   "ftp_total": 40,
+   "n_regressed": 0,
+   "secs": 380.7,
+   "pi_exit": 137
+  },
+  {
+   "task_id": "voluptuous::voluptuous/validators.py::Url",
+   "repo": "voluptuous",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 3,
+   "ftp_total": 3,
+   "n_regressed": 0,
+   "secs": 124.3,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "semver::src/semver/version.py::Version.match",
+   "repo": "semver",
+   "edited": true,
+   "solved": false,
+   "reward": 0.219,
+   "ftp_passed": 5,
+   "ftp_total": 21,
+   "n_regressed": 0,
+   "secs": 600.2,
+   "pi_exit": 124
+  },
+  {
+   "task_id": "voluptuous::voluptuous/schema_builder.py::default_factory",
+   "repo": "voluptuous",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 32,
+   "ftp_total": 32,
+   "n_regressed": 0,
+   "secs": 600.0,
+   "pi_exit": 124
+  },
+  {
+   "task_id": "voluptuous::voluptuous/validators.py::IsDir",
+   "repo": "voluptuous",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 1,
+   "ftp_total": 1,
+   "n_regressed": 0,
+   "secs": 165.1,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "voluptuous::voluptuous/validators.py::IsFile",
+   "repo": "voluptuous",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 1,
+   "ftp_total": 1,
+   "n_regressed": 0,
+   "secs": 161.6,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "voluptuous::voluptuous/validators.py::FqdnUrl",
+   "repo": "voluptuous",
+   "edited": true,
+   "solved": false,
+   "reward": 0.35,
+   "ftp_passed": 2,
+   "ftp_total": 4,
+   "n_regressed": 0,
+   "secs": 600.0,
+   "pi_exit": 124
+  },
+  {
+   "task_id": "voluptuous::voluptuous/schema_builder.py::raises",
+   "repo": "voluptuous",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 20,
+   "ftp_total": 20,
+   "n_regressed": 0,
+   "secs": 218.4,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "voluptuous::voluptuous/validators.py::PathExists",
+   "repo": "voluptuous",
+   "edited": true,
+   "solved": true,
+   "reward": 1.0,
+   "ftp_passed": 1,
+   "ftp_total": 1,
+   "n_regressed": 0,
+   "secs": 483.7,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "voluptuous::voluptuous/validators.py::Email",
+   "repo": "voluptuous",
+   "edited": true,
+   "solved": false,
+   "reward": 0.4333,
+   "ftp_passed": 4,
+   "ftp_total": 6,
+   "n_regressed": 0,
+   "secs": 600.0,
+   "pi_exit": 124
+  },
+  {
+   "task_id": "voluptuous::voluptuous/schema_builder.py::Schema.infer",
+   "repo": "voluptuous",
+   "edited": true,
+   "solved": false,
+   "reward": 0.1,
+   "ftp_passed": 0,
+   "ftp_total": 5,
+   "n_regressed": 0,
+   "secs": 600.0,
+   "pi_exit": 124
+  },
+  {
+   "task_id": "voluptuous::voluptuous/schema_builder.py::validate",
+   "repo": "voluptuous",
+   "edited": true,
+   "solved": false,
+   "reward": 0.05,
+   "ftp_passed": 0,
+   "ftp_total": 14,
+   "n_regressed": 166,
+   "secs": 555.3,
+   "pi_exit": 0
+  },
+  {
+   "task_id": "voluptuous::voluptuous/schema_builder.py::Schema.extend",
+   "repo": "voluptuous",
+   "edited": true,
+   "solved": false,
+   "reward": 0.3143,
+   "ftp_passed": 6,
+   "ftp_total": 14,
+   "n_regressed": 0,
+   "secs": 600.0,
+   "pi_exit": 124
+  }
+ ]
+}
