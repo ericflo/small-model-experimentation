@@ -1,0 +1,662 @@
+{
+ "repos": [
+  {
+   "name": "funcy",
+   "url": "https://github.com/Suor/funcy",
+   "group": "train",
+   "src": [
+    "funcy/seqs.py",
+    "funcy/colls.py",
+    "funcy/strings.py",
+    "funcy/funcs.py",
+    "funcy/calc.py",
+    "funcy/tree.py",
+    "funcy/types.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "usable",
+   "sha": "9eb04473e31b6b60bd459e4dda24f6b1db5a3773",
+   "commit_date": "2026-02-14T09:44:27+07:00",
+   "dist_name": "funcy",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 0,
+    "passed": 205,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+   },
+   "out_bytes": 26510,
+   "suite_secs": 2.8,
+   "n_baseline_pass": 205,
+   "n_baseline_fail": 0
+  },
+  {
+   "name": "boltons",
+   "url": "https://github.com/mahmoud/boltons",
+   "group": "train",
+   "src": [
+    "boltons/strutils.py",
+    "boltons/iterutils.py",
+    "boltons/dictutils.py",
+    "boltons/mathutils.py",
+    "boltons/listutils.py",
+    "boltons/setutils.py",
+    "boltons/urlutils.py",
+    "boltons/funcutils.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "usable",
+   "sha": "e66cade323f5c11cebb4bd0f099e634b245adccd",
+   "commit_date": "2026-07-17T17:44:24-07:00",
+   "dist_name": "boltons",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 0,
+    "passed": 445,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+   },
+   "out_bytes": 77041,
+   "suite_secs": 4.5,
+   "n_baseline_pass": 445,
+   "n_baseline_fail": 0
+  },
+  {
+   "name": "toolz",
+   "url": "https://github.com/pytoolz/toolz",
+   "group": "train",
+   "src": [
+    "toolz/itertoolz.py",
+    "toolz/functoolz.py",
+    "toolz/dicttoolz.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "usable",
+   "sha": "568c2b8393973cd172a466546c9d95779c452438",
+   "commit_date": "2025-10-16T22:29:39-05:00",
+   "dist_name": "toolz",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 1,
+    "passed": 184,
+    "failed": 2,
+    "errors": 0,
+    "skipped": 0
+   },
+   "out_bytes": 28470,
+   "suite_secs": 11.0,
+   "n_baseline_pass": 184,
+   "n_baseline_fail": 2
+  },
+  {
+   "name": "sortedcontainers",
+   "url": "https://github.com/grantjenks/python-sortedcontainers",
+   "group": "train",
+   "src": [
+    "src/sortedcontainers/sortedlist.py",
+    "src/sortedcontainers/sorteddict.py",
+    "src/sortedcontainers/sortedset.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "usable",
+   "sha": "3ac358631f58c1347f1d6d2d92784117db0f38ed",
+   "commit_date": "2024-03-01T15:03:38-08:00",
+   "dist_name": "sortedcontainers",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 0,
+    "passed": 366,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+   },
+   "out_bytes": 57419,
+   "suite_secs": 6.1,
+   "n_baseline_pass": 366,
+   "n_baseline_fail": 0
+  },
+  {
+   "name": "jsonpatch",
+   "url": "https://github.com/stefankoegl/python-json-patch",
+   "group": "train",
+   "src": [
+    "jsonpatch.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "suite_unusable",
+   "sha": "d8e1a6e244728c04229d601bc9a384d9b034c603",
+   "commit_date": "2024-08-05T22:10:52+02:00",
+   "dist_name": "jsonpatch",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 5,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+   },
+   "out_bytes": 414,
+   "detail": "============================= test session starts ==============================\nplatform linux -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0 -- /home/ericflo/Development/small-model-experimentation/large_artifacts/_taskrepos/jsonpatch/.venv-test/bin/python\nrootdir: /tmp/baseline_jsonpatch_1esz8wf5\ncollecting ... collected 0 items\n\n============================ no tests ran in 0.00s =============================\n",
+   "suite_secs": 2.3
+  },
+  {
+   "name": "inflection",
+   "url": "https://github.com/jpvanhal/inflection",
+   "group": "train",
+   "src": [
+    "inflection/__init__.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "usable",
+   "sha": "88eefaacf7d0caaa701af7c8ab2d0ab3f17086f1",
+   "commit_date": "2023-03-31T21:03:52+03:00",
+   "dist_name": "inflection",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 0,
+    "passed": 461,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+   },
+   "out_bytes": 69891,
+   "suite_secs": 3.0,
+   "n_baseline_pass": 461,
+   "n_baseline_fail": 0
+  },
+  {
+   "name": "tabulate",
+   "url": "https://github.com/astanin/python-tabulate",
+   "group": "train",
+   "src": [
+    "tabulate/__init__.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "usable",
+   "sha": "268615a5c27dc40e5c22454c07b44d5c50410da0",
+   "commit_date": "2026-03-11T09:42:59+01:00",
+   "dist_name": "tabulate",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 0,
+    "passed": 323,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 58
+   },
+   "out_bytes": 225758,
+   "suite_secs": 4.0,
+   "n_baseline_pass": 323,
+   "n_baseline_fail": 0
+  },
+  {
+   "name": "natsort",
+   "url": "https://github.com/SethMMorton/natsort",
+   "group": "train",
+   "src": [
+    "natsort/natsort.py",
+    "natsort/utils.py",
+    "natsort/ns_enum.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "usable",
+   "sha": "b543bdce8771b6e7a7dae0c6745ddf7e80299797",
+   "commit_date": "2026-06-27T17:07:13-04:00",
+   "dist_name": "natsort",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 1,
+    "passed": 267,
+    "failed": 0,
+    "errors": 65,
+    "skipped": 10
+   },
+   "out_bytes": 323227,
+   "suite_secs": 6.8,
+   "n_baseline_pass": 267,
+   "n_baseline_fail": 65
+  },
+  {
+   "name": "schema",
+   "url": "https://github.com/keleshev/schema",
+   "group": "train",
+   "src": [
+    "schema/__init__.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "usable",
+   "sha": "310a1239b62f500284ce3bd91b7dabf70467f23e",
+   "commit_date": "2026-06-20T10:39:05+01:00",
+   "dist_name": "schema",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 0,
+    "passed": 120,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 4
+   },
+   "out_bytes": 17973,
+   "suite_secs": 2.8,
+   "n_baseline_pass": 120,
+   "n_baseline_fail": 0
+  },
+  {
+   "name": "wcwidth",
+   "url": "https://github.com/jquast/wcwidth",
+   "group": "train",
+   "src": [
+    "wcwidth/wcwidth.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "suite_unusable",
+   "sha": "614156bc9cb54d5c552abec07a09d72b8df4f841",
+   "commit_date": "2026-07-22T12:32:24-04:00",
+   "dist_name": "wcwidth",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+   },
+   "out_bytes": 290088,
+   "detail": "xt\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_width.py::\u001b[1mtest_screen_title_sequences\u001b[0m\n\u001b[32mPASSED\u001b[0m tests/test_width.py::\u001b[1mtest_ris_indeterminate\u001b[0m\n\u001b[33mSKIPPED\u001b[0m [1] tests/test_benchmarks.py:526: udhr_combined.txt is missing; run bin/update-tables.py\n\u001b[33mSKIPPED\u001b[0m [1] tests/test_benchmarks.py:537: udhr_combined.txt is missing; run bin/update-tables.py\n\u001b[33mSKIPPED\u001b[0m [1] tests/test_benchmarks.py:547: udhr_combined.txt is missing; run bin/update-tables.py\n\u001b[33mSKIPPED\u001b[0m [1] tests/test_benchmarks.py:558: udhr_combined.txt is missing; run bin/update-tables.py\n\u001b[33mSKIPPED\u001b[0m [1] tests/test_benchmarks.py:579: udhr_combined.txt is missing; run bin/update-tables.py\n\u001b[33mSKIPPED\u001b[0m [1] tests/test_benchmarks.py:599: udhr_combined.txt is missing; run bin/update-tables.py\n\u001b[33mSKIPPED\u001b[0m [1] tests/test_emojis.py:145: emoji-zwj-sequences.txt; missing run bin/update-tables.py\n\u001b[33mSKIPPED\u001b[0m [1] tests/test_emojis.py:170: emoji-variation-sequences.txt is missing; run bin/update-tables.py\n\u001b[33mSKIPPED\u001b[0m [1] tests/test_grapheme.py:143: GraphemeBreakTest.txt is missing; run bin/update-tables.py\n\u001b[33mSKIPPED\u001b[0m [1] tests/test_grapheme.py:231: GraphemeBreakTest.txt is missing; run bin/update-tables.py\n\u001b[31mFAILED\u001b[0m tests/test_core.py::\u001b[1mtest_package_version\u001b[0m - importlib.metadata.PackageNotFoundError: No package metadata was found for ...\n\u001b[31m================== \u001b[31m\u001b[1m1 failed\u001b[0m, \u001b[32m1317 passed\u001b[0m, \u001b[33m10 skipped\u001b[0m\u001b[31m in 2.81s\u001b[0m\u001b[31m ==================\u001b[0m\n",
+   "suite_secs": 5.0
+  },
+  {
+   "name": "mergedeep",
+   "url": "https://github.com/clarketm/mergedeep",
+   "group": "train",
+   "src": [
+    "mergedeep/mergedeep.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "usable",
+   "sha": "b52fae95fb612a75c57182706294a26c81698621",
+   "commit_date": "2021-09-14T01:40:39-07:00",
+   "dist_name": "mergedeep",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 0,
+    "passed": 14,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+   },
+   "out_bytes": 4556,
+   "suite_secs": 2.3,
+   "n_baseline_pass": 14,
+   "n_baseline_fail": 0
+  },
+  {
+   "name": "pathspec",
+   "url": "https://github.com/cpburnz/python-pathspec",
+   "group": "train",
+   "src": [
+    "pathspec/pathspec.py",
+    "pathspec/util.py",
+    "pathspec/patterns/gitwildmatch.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "usable",
+   "sha": "6568072c2703c72796cd02467feb924540157c92",
+   "commit_date": "2026-06-03T23:27:27-04:00",
+   "dist_name": "pathspec",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 0,
+    "passed": 197,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+   },
+   "out_bytes": 95631,
+   "suite_secs": 2.3,
+   "n_baseline_pass": 197,
+   "n_baseline_fail": 0
+  },
+  {
+   "name": "more-itertools",
+   "url": "https://github.com/more-itertools/more-itertools",
+   "group": "test",
+   "src": [
+    "more_itertools/more.py",
+    "more_itertools/recipes.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "usable",
+   "sha": "9ddc55c57390707d97d96302eea1992919c8d930",
+   "commit_date": "2026-07-20T09:38:44-05:00",
+   "dist_name": "more-itertools",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 0,
+    "passed": 732,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+   },
+   "out_bytes": 1875551,
+   "suite_secs": 132.1,
+   "n_baseline_pass": 732,
+   "n_baseline_fail": 0
+  },
+  {
+   "name": "glom",
+   "url": "https://github.com/mahmoud/glom",
+   "group": "test",
+   "src": [
+    "glom/core.py",
+    "glom/reduction.py",
+    "glom/matching.py",
+    "glom/streaming.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "usable",
+   "sha": "30b477ab65560914a38f331614947d0894701044",
+   "commit_date": "2026-07-17T11:49:35-07:00",
+   "dist_name": "glom",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 1,
+    "passed": 201,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 0
+   },
+   "out_bytes": 36210,
+   "suite_secs": 3.5,
+   "n_baseline_pass": 201,
+   "n_baseline_fail": 1
+  },
+  {
+   "name": "bidict",
+   "url": "https://github.com/jab/bidict",
+   "group": "test",
+   "src": [
+    "bidict/_base.py",
+    "bidict/_bidict.py",
+    "bidict/_orderedbase.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "usable",
+   "sha": "0ce44cc8570dfc48f5827738470f1adf25ced562",
+   "commit_date": "2026-07-19T21:59:43-04:00",
+   "dist_name": "bidict",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 1,
+    "passed": 133,
+    "failed": 0,
+    "errors": 1,
+    "skipped": 0
+   },
+   "out_bytes": 36899,
+   "suite_secs": 10.0,
+   "n_baseline_pass": 133,
+   "n_baseline_fail": 1
+  },
+  {
+   "name": "dpath",
+   "url": "https://github.com/dpath-maintainers/dpath-python",
+   "group": "test",
+   "src": [
+    "dpath/__init__.py",
+    "dpath/util.py",
+    "dpath/segments.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "usable",
+   "sha": "c8722e6b815bedf4e6aaeea9ccc7d6ff3e9b4f84",
+   "commit_date": "2024-06-13T01:07:41+03:00",
+   "dist_name": "dpath",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 0,
+    "passed": 79,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+   },
+   "out_bytes": 12687,
+   "suite_secs": 14.3,
+   "n_baseline_pass": 79,
+   "n_baseline_fail": 0
+  },
+  {
+   "name": "semver",
+   "url": "https://github.com/python-semver/python-semver",
+   "group": "test",
+   "src": [
+    "src/semver/version.py",
+    "src/semver/_deprecated.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "usable",
+   "sha": "4e09ef0e4c94314731f960d4ce763a2da2e096f1",
+   "commit_date": "2026-07-15T12:24:39+02:00",
+   "dist_name": "semver",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 0,
+    "passed": 361,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+   },
+   "out_bytes": 79937,
+   "suite_secs": 3.3,
+   "n_baseline_pass": 361,
+   "n_baseline_fail": 0
+  },
+  {
+   "name": "humanize",
+   "url": "https://github.com/python-humanize/humanize",
+   "group": "test",
+   "src": [
+    "src/humanize/number.py",
+    "src/humanize/time.py",
+    "src/humanize/filesize.py",
+    "src/humanize/i18n.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "suite_unusable",
+   "sha": "c3a124cdeb272d7f63bc0aa66f79c6fbafd2fc6d",
+   "commit_date": "2026-07-06T21:53:37+00:00",
+   "dist_name": "humanize",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 1,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+   },
+   "out_bytes": 159175,
+   "detail": " [1] tests/test_i18n.py:200: Generate .mo with scripts/generate-translation-binaries.sh\n\u001b[33mSKIPPED\u001b[0m [7] tests/test_i18n.py:223: Generate .mo with scripts/generate-translation-binaries.sh\n\u001b[33mSKIPPED\u001b[0m [7] tests/test_i18n.py:248: Generate .mo with scripts/generate-translation-binaries.sh\n\u001b[33mSKIPPED\u001b[0m [1] tests/test_i18n.py:321: Generate .mo with scripts/generate-translation-binaries.sh\n\u001b[31mERROR\u001b[0m tests/test_benchmarks.py::\u001b[1mtest_apnumber\u001b[0m\n\u001b[31mERROR\u001b[0m tests/test_benchmarks.py::\u001b[1mtest_clamp\u001b[0m\n\u001b[31mERROR\u001b[0m tests/test_benchmarks.py::\u001b[1mtest_fractional\u001b[0m\n\u001b[31mERROR\u001b[0m tests/test_benchmarks.py::\u001b[1mtest_intcomma\u001b[0m\n\u001b[31mERROR\u001b[0m tests/test_benchmarks.py::\u001b[1mtest_intword\u001b[0m\n\u001b[31mERROR\u001b[0m tests/test_benchmarks.py::\u001b[1mtest_metric\u001b[0m\n\u001b[31mERROR\u001b[0m tests/test_benchmarks.py::\u001b[1mtest_natural_list\u001b[0m\n\u001b[31mERROR\u001b[0m tests/test_benchmarks.py::\u001b[1mtest_naturaldate\u001b[0m\n\u001b[31mERROR\u001b[0m tests/test_benchmarks.py::\u001b[1mtest_naturalday\u001b[0m\n\u001b[31mERROR\u001b[0m tests/test_benchmarks.py::\u001b[1mtest_naturaldelta\u001b[0m\n\u001b[31mERROR\u001b[0m tests/test_benchmarks.py::\u001b[1mtest_naturalsize\u001b[0m\n\u001b[31mERROR\u001b[0m tests/test_benchmarks.py::\u001b[1mtest_naturaltime\u001b[0m\n\u001b[31mERROR\u001b[0m tests/test_benchmarks.py::\u001b[1mtest_ordinal\u001b[0m\n\u001b[31mERROR\u001b[0m tests/test_benchmarks.py::\u001b[1mtest_precisedelta\u001b[0m\n\u001b[31mERROR\u001b[0m tests/test_benchmarks.py::\u001b[1mtest_scientific\u001b[0m\n\u001b[31m================== \u001b[32m700 passed\u001b[0m, \u001b[33m69 skipped\u001b[0m, \u001b[31m\u001b[1m15 errors\u001b[0m\u001b[31m in 1.22s\u001b[0m\u001b[31m ==================\u001b[0m\n",
+   "suite_secs": 3.6
+  },
+  {
+   "name": "parse",
+   "url": "https://github.com/r1chardj0n3s/parse",
+   "group": "test",
+   "src": [
+    "parse.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "usable",
+   "sha": "fc3875c33f4ae5f5703c3f17e8226cca0dea6eeb",
+   "commit_date": "2026-07-01T19:28:22+08:00",
+   "dist_name": "parse",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 0,
+    "passed": 99,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1
+   },
+   "out_bytes": 14465,
+   "suite_secs": 3.0,
+   "n_baseline_pass": 99,
+   "n_baseline_fail": 0
+  },
+  {
+   "name": "jmespath",
+   "url": "https://github.com/jmespath/jmespath.py",
+   "group": "train",
+   "src": [
+    "jmespath/functions.py",
+    "jmespath/lexer.py",
+    "jmespath/parser.py",
+    "jmespath/visitor.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "usable",
+   "sha": "2812594e69d43098ef60f81f4efc404c071b0418",
+   "commit_date": "2026-01-22T11:29:18-05:00",
+   "dist_name": "jmespath",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 0,
+    "passed": 998,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1
+   },
+   "out_bytes": 199933,
+   "suite_secs": 202.6,
+   "n_baseline_pass": 998,
+   "n_baseline_fail": 0
+  },
+  {
+   "name": "python-slugify",
+   "url": "https://github.com/un33k/python-slugify",
+   "group": "test",
+   "src": [
+    "slugify/slugify.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "suite_unusable",
+   "sha": "7b6d5d96c1995e6dccb39a19a13ba78d7d0a3ee4",
+   "commit_date": "2026-01-07T17:28:09+01:00",
+   "dist_name": "python-slugify",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 0,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+   },
+   "out_bytes": 15086,
+   "detail": "\n\u001b[32mPASSED\u001b[0m test.py::\u001b[1mTestSlugifyUnicode::test_starts_with_number\u001b[0m\n\u001b[32mPASSED\u001b[0m test.py::\u001b[1mTestSlugifyUnicode::test_stopword_removal\u001b[0m\n\u001b[32mPASSED\u001b[0m test.py::\u001b[1mTestSlugifyUnicode::test_stopword_removal_casesensitive\u001b[0m\n\u001b[32mPASSED\u001b[0m test.py::\u001b[1mTestSlugifyUnicode::test_stopwords_with_different_separator\u001b[0m\n\u001b[32mPASSED\u001b[0m test.py::\u001b[1mTestSlugifyUnicode::test_word_boundary\u001b[0m\n\u001b[32mPASSED\u001b[0m test.py::\u001b[1mTestUtils::test_smart_truncate_no_max_length\u001b[0m\n\u001b[32mPASSED\u001b[0m test.py::\u001b[1mTestUtils::test_smart_truncate_no_seperator\u001b[0m\n\u001b[32mPASSED\u001b[0m test.py::\u001b[1mTestCommandParams::test_affirmative_flags\u001b[0m\n\u001b[32mPASSED\u001b[0m test.py::\u001b[1mTestCommandParams::test_defaults\u001b[0m\n\u001b[32mPASSED\u001b[0m test.py::\u001b[1mTestCommandParams::test_multivalued_options_with_text\u001b[0m\n\u001b[32mPASSED\u001b[0m test.py::\u001b[1mTestCommandParams::test_negative_flags\u001b[0m\n\u001b[32mPASSED\u001b[0m test.py::\u001b[1mTestCommandParams::test_replacements_right\u001b[0m\n\u001b[32mPASSED\u001b[0m test.py::\u001b[1mTestCommandParams::test_replacements_wrong\u001b[0m\n\u001b[32mPASSED\u001b[0m test.py::\u001b[1mTestCommandParams::test_text_in_cli\u001b[0m\n\u001b[32mPASSED\u001b[0m test.py::\u001b[1mTestCommandParams::test_text_in_cli_multi\u001b[0m\n\u001b[32mPASSED\u001b[0m test.py::\u001b[1mTestCommandParams::test_text_in_stdin\u001b[0m\n\u001b[32mPASSED\u001b[0m test.py::\u001b[1mTestCommandParams::test_two_text_sources_fails\u001b[0m\n\u001b[32mPASSED\u001b[0m test.py::\u001b[1mTestCommandParams::test_valued_arguments\u001b[0m\n\u001b[32m============================== \u001b[32m\u001b[1m82 passed\u001b[0m\u001b[32m in 0.07s\u001b[0m\u001b[32m ==============================\u001b[0m\n",
+   "suite_secs": 2.5
+  },
+  {
+   "name": "voluptuous",
+   "url": "https://github.com/alecthomas/voluptuous",
+   "group": "test",
+   "src": [
+    "voluptuous/validators.py",
+    "voluptuous/schema_builder.py",
+    "voluptuous/util.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "usable",
+   "sha": "44593ce7c330faf9418252c4b5448f4736144a7f",
+   "commit_date": "2026-07-11T11:16:47+10:00",
+   "dist_name": "voluptuous",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 0,
+    "passed": 180,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+   },
+   "out_bytes": 28101,
+   "suite_secs": 2.5,
+   "n_baseline_pass": 180,
+   "n_baseline_fail": 0
+  },
+  {
+   "name": "jsonpointer",
+   "url": "https://github.com/stefankoegl/python-json-pointer",
+   "group": "test",
+   "src": [
+    "jsonpointer.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "suite_unusable",
+   "sha": "5998f951dcc5ace60f67f35afe6778c445401a07",
+   "commit_date": "2026-03-23T23:37:56+01:00",
+   "dist_name": "jsonpointer",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 5,
+    "passed": 0,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+   },
+   "out_bytes": 418,
+   "detail": "============================= test session starts ==============================\nplatform linux -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0 -- /home/ericflo/Development/small-model-experimentation/large_artifacts/_taskrepos/jsonpointer/.venv-test/bin/python\nrootdir: /tmp/baseline_jsonpointer_s1_5l_ej\ncollecting ... collected 0 items\n\n============================ no tests ran in 0.00s =============================\n",
+   "suite_secs": 2.3
+  },
+  {
+   "name": "cerberus",
+   "url": "https://github.com/pyeve/cerberus",
+   "group": "test",
+   "src": [
+    "cerberus/validator.py",
+    "cerberus/utils.py",
+    "cerberus/schema.py"
+   ],
+   "installed_extra": "\".[test]\"",
+   "repairs": [],
+   "verdict": "suite_unusable",
+   "sha": "65e977de08ab76d4b40ca981972f9ff68926ed63",
+   "commit_date": "2026-01-01T14:12:42+01:00",
+   "dist_name": "Cerberus",
+   "uninstalled_editable": true,
+   "suite": {
+    "code": 2,
+    "passed": 0,
+    "failed": 0,
+    "errors": 2,
+    "skipped": 0
+   },
+   "out_bytes": 1435,
+   "detail": "============================= test session starts ==============================\nplatform linux -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0 -- /home/ericflo/Development/small-model-experimentation/large_artifacts/_taskrepos/cerberus/.venv-test/bin/python\nrootdir: /tmp/baseline_cerberus_c1gpg5xn\nconfigfile: pyproject.toml\ncollecting ... collected 247 items / 2 errors\n\n==================================== ERRORS ====================================\n______ ERROR collecting cerberus/benchmarks/test_overall_performance_1.py ______\nE   pytest.PytestUnknownMarkWarning: Unknown pytest.mark.benchmark - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html\n______ ERROR collecting cerberus/benchmarks/test_overall_performance_2.py ______\nE   pytest.PytestUnknownMarkWarning: Unknown pytest.mark.benchmark - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html\n=========================== short test summary info ============================\nERROR cerberus/benchmarks/test_overall_performance_1.py - pytest.PytestUnknow...\nERROR cerberus/benchmarks/test_overall_performance_2.py - pytest.PytestUnknow...\n!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!!\n============================== 2 errors in 0.19s ===============================\n",
+   "suite_secs": 2.5
+  }
+ ]
+}
