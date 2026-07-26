@@ -2,6 +2,29 @@
 
 ## Summary
 
+## CORRECTION (2026-07-26): the C59 chain-of-thought anchor was TRUNCATION-BOUND, and the
+## "looping matches chain-of-thought" claim below is WITHDRAWN
+
+Every comparison in this cell was anchored to C59's `real_cot` = 0.235 on this substrate. That number
+was measured with a **768-token generation cap**. Measured here with a 3072 cap and stop-on-commit, base
+chain-of-thought reaches **0.685**, its mean generation is **1781 tokens (2.3x C59's entire budget)**,
+and **29.5% of episodes still never commit** -- so 3072 is not enough either. Among episodes that DO
+commit, base CoT is correct **97.2%** of the time.
+
+Consequences, stated plainly:
+1. **WITHDRAWN**: "looping to 0.245 matches what full chain-of-thought achieves (0.235)". CoT achieves
+   at least 0.685. Looping reaches roughly a THIRD of chain-of-thought, not parity.
+2. The forced-read effect itself STANDS and its controls stand (0.085 -> 0.245 at n=400; balanced
+   accuracy 0.112 -> 0.251, which a constant predictor cannot produce; only the block ending at layer 15
+   helps; inserting a different block of identical depth collapses to 0.000; both split-halves
+   replicate). What changes is its SIGNIFICANCE: this is a 2.8x lift on a chance-level probe that denies
+   the model tokens, NOT a route to what tokens buy.
+3. C59's qualitative ordering gets STRONGER (CoT beats forced/latent/filler by ~8x rather than ~3x), but
+   every CoT-anchored NUMBER in C59 is a budget artifact and should not be cited.
+4. Reported CoT numbers must carry the commit rate and the length distribution, and a cap that leaves
+   episodes uncommitted makes the arm NOT INTERPRETABLE (docs/model_playbook.md STOP-ON-COMMIT).
+
+
 Running four middle layers of the frozen Qwen3.5-4B a second time, inside a single forward pass with
 **zero tokens emitted**, lifts forced-answer induction accuracy from 0.105 to **0.245** (n=400) on
 held-out shift induction — matching what C59 measured for full chain-of-thought generation (0.235). On
@@ -43,7 +66,8 @@ uses. Only repeat iterations are damped, so k=1 is byte-identically the base mod
 |---|---|---|---|
 | held-out shift (n=400) | base single pass | 0.105 | 0.112 |
 | held-out shift | **loop 12:16, k=2** | **0.245** | **0.251** |
-| held-out shift | *C59 ref: real chain-of-thought* | *0.235* | — |
+| held-out shift | **base + chain-of-thought (corrected, 3072 cap)** | **0.685** | — |
+| held-out shift | *C59's 768-cap CoT figure — WITHDRAWN, truncation-bound* | *0.235* | — |
 | held-out shift | *C59 ref: latent recurrence N=8 / filler N=32* | *0.060 / 0.095* | — |
 | affine, out-of-family (n=400) | base single pass | 0.217 | 0.218 |
 | affine | **loop 12:16, k=2** | **0.278** | **0.275** |

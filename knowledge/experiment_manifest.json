@@ -2254,10 +2254,10 @@
   },
   {
     "file_counts": {
-      ".json": 3,
+      ".json": 4,
       ".jsonl": 2,
       ".md": 4,
-      ".py": 5,
+      ".py": 8,
       ".yaml": 3
     },
     "id": "qwen35_4b_depth_recurrence_probe",
@@ -2281,8 +2281,8 @@
       "src",
       "tests"
     ],
-    "total_files": 17,
-    "total_size_bytes": 463542
+    "total_files": 21,
+    "total_size_bytes": 491423
   },
   {
     "file_counts": {
@@ -5220,9 +5220,10 @@
   },
   {
     "file_counts": {
-      ".json": 4,
+      ".json": 8,
+      ".jsonl": 1,
       ".md": 4,
-      ".py": 10,
+      ".py": 11,
       ".sh": 2,
       ".yaml": 3
     },
@@ -5249,8 +5250,8 @@
       "src",
       "tests"
     ],
-    "total_files": 23,
-    "total_size_bytes": 1359302
+    "total_files": 29,
+    "total_size_bytes": 2413366
   },
   {
     "file_counts": {

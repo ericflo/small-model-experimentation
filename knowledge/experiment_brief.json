@@ -15362,42 +15362,42 @@
    ]
   },
   "qwen35_4b_depth_recurrence_probe": {
-   "verdict_tag": "DEPTH RECURRENCE CROSSES THE INDUCTION WALL WITHOUT TOKENS: running layers 12-15 of the frozen 4B twice lifts forced single-pass induction 0.105->0.245 (n=400), matching what full chain-of-thought achieves (0.235) while generating nothing - and it still helps (+0.061) on the affine substrate where CoT collapses to 0.020. Narrows C59's content-only law.",
+   "verdict_tag": "DEPTH RECURRENCE LIFTS A FORCED SINGLE-PASS READ 2.8x (0.105 -> 0.245, frozen weights, zero tokens) AND SURVIVES FOUR ADVERSARIAL CONTROLS -- but the original 'matches chain-of-thought' framing is WITHDRAWN: the C59 anchor (0.235) was truncation-bound, and base CoT actually reaches 0.685 (97.2% among episodes that commit). Looping gets ~a third of what tokens buy.",
    "concept_primer": "A transformer reads a prompt and produces an answer by passing information up through a fixed stack of layers - here 32 of them. If a problem needs more sequential steps than the stack has room for, the usual fix is to let the model think out loud: each written token buys another trip through the whole stack. Earlier work here established that for this model, writing the reasoning out is the ONLY thing that helps; simply adding compute without content did nothing. This experiment tries a different way to add sequential steps: send the hidden state back through a small group of middle layers a second time, so the model gets extra depth inside one pass, without writing anything. No training is involved - the weights are untouched.",
    "plain_question": "Can extra depth INSIDE a single forward pass - reusing four middle layers a second time - do what writing out reasoning does, on a frozen model with no training?",
-   "plain_answer": "Yes, on this task family. Re-running layers 12-15 once more takes accuracy from 0.105 (essentially guessing) to 0.245, which is what the model reaches when it writes out its reasoning (0.235) - but with no tokens written. On a harder, out-of-family variant it goes 0.217 to 0.278, notable because writing reasoning FAILS there (0.020). The effect is specific: sweeping every four-layer group, only the one ending at layer 15 helps, and inserting a copy of a different group with exactly the same added depth destroys the model instead (0.000). It also scales smoothly with how much of the second pass is let through, and the model stays a fluent language model throughout. Two harness bugs had to be fixed first, each of which had manufactured a fake result - most importantly, the library silently truncates a lengthened layer stack, so the 'deeper' model was really running FEWER layers.",
+   "plain_answer": "Partly, and the honest version is smaller than the first claim. Re-running layers 12-15 once more takes a single-pass answer from 0.105 (essentially guessing) to 0.245, on frozen weights with no tokens written, and that effect survives every check we threw at it: it is not an artifact of the answer distribution, only the one four-layer group ending at layer 15 helps, inserting a DIFFERENT group of the same size destroys the model instead (0.000), and both halves of the data replicate. What we got WRONG at first was the comparison: we said this matched what the model achieves by writing its reasoning out. It does not. That older reference number (0.235) had been measured with a generation limit far too small -- the model needs about 1781 tokens of reasoning here, more than twice that old limit -- and with room to finish it actually reaches 0.685, and is right 97% of the time whenever it finishes at all. So writing reasoning out remains roughly three times better than this architectural trick.",
    "why_it_matters": "It reopens a door the corpus had closed. The standing law was that this model's reasoning limit is only reachable through written reasoning content, which pushes every fix toward longer outputs and more sampling. If depth inside the pass can substitute - for free, on frozen weights - then the same capability may be reachable without paying for tokens, and a trained version (selective looping) becomes worth building. It is also the first datapoint on retrofitting recurrence to a hybrid mamba/attention checkpoint, which no published work covers. Scope is narrow so far: forced single-answer reads on digit-induction tasks, not generation and not a real coding task, so it is a lead, not a deployable win.",
-   "verdict_tone": "positive",
+   "verdict_tone": "mixed",
    "key_numbers": [
     {
-     "label": "Shift induction",
+     "label": "Forced single-pass",
      "value": "0.105 -> 0.245",
-     "sub": "forced single pass, n=400, zero tokens generated; C59's real chain-of-thought = 0.235"
+     "sub": "frozen weights, zero tokens generated, n=400"
     },
     {
      "label": "Not the label prior",
      "value": "balanced acc 0.112 -> 0.251",
-     "sub": "a constant predictor scores exactly 0.10 balanced; all 10 digits still predicted"
-    },
-    {
-     "label": "Out-of-family transfer",
-     "value": "0.217 -> 0.278",
-     "sub": "affine substrate, where chain-of-thought collapses to 0.020"
+     "sub": "a constant predictor scores exactly 0.10 balanced"
     },
     {
      "label": "Specific, not generic depth",
      "value": "0.000",
-     "sub": "inserting a DIFFERENT 4-layer block at the same position, same added depth/params"
+     "sub": "inserting a DIFFERENT 4-layer block at the same position, same added depth"
     },
     {
-     "label": "Dose-response",
-     "value": "0.240 / 0.195 / 0.155 / 0.095",
-     "sub": "as damping admits 100% / 50% / 25% / 10% of the second pass"
+     "label": "CORRECTED CoT anchor",
+     "value": "0.685, not 0.235",
+     "sub": "C59's 0.235 used a 768-token cap; mean generation here is 1781 tokens"
     },
     {
-     "label": "Still a fluent LM",
-     "value": "-0.021 nats",
-     "sub": "prose next-token logprob change at the winning arm"
+     "label": "Base CoT when it finishes",
+     "value": "0.972",
+     "sub": "accuracy among episodes that actually committed an answer"
+    },
+    {
+     "label": "Budget still insufficient",
+     "value": "29.5% uncommitted",
+     "sub": "even at a 3072-token cap -> that arm is NOT INTERPRETABLE"
     }
    ],
    "charts": [

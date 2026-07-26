@@ -236,10 +236,18 @@ last hidden state back as an INPUT EMBEDDING (a slot the model was never trained
 content-free filler tokens. Neither is weight-shared depth.
 
 Running layers 12:16 of the frozen model a second time, in one forward pass with ZERO tokens emitted,
-takes forced-answer accuracy on held-out shift induction from 0.105 to 0.245 at n=400 -- matching what
-C59 measured for full chain-of-thought generation (0.235). On out-of-family affine it goes 0.217 ->
-0.278, which matters because CoT COLLAPSES there (C59: 0.020), so looping is not merely reproducing
-what CoT does.
+takes forced-answer accuracy on held-out shift induction from 0.105 to 0.245 at n=400, and on
+out-of-family affine from 0.217 to 0.278.
+
+CORRECTION 2026-07-26: this entry originally said the looped forward pass "matches what C59 measured
+for full chain-of-thought generation (0.235)". THAT COMPARISON IS WITHDRAWN. C59's real_cot was
+measured with a 768-token cap; measured here at 3072 with stop-on-commit, base CoT reaches 0.685 with a
+mean generation of 1781 tokens (2.3x C59's whole budget) and 29.5% of episodes STILL uncommitted, and
+it is correct 97.2% of the time among episodes that do commit. So looping reaches about a THIRD of what
+generated reasoning buys, not parity, and C59's affine real-CoT 0.020 is unusable for the same reason.
+C59's qualitative ordering strengthens (CoT beats forced/latent/filler by ~8x, not ~3x) while every
+CoT-anchored NUMBER in it is a budget artifact. The forced-read effect and all four of its controls
+stand; only its significance shrinks -- a 2.8x lift on a probe that denies the model tokens.
 
 Four adversarial controls survived on both substrates: balanced accuracy (a constant predictor scores
 exactly 0.10) rises 0.112 -> 0.251, killing label-prior exploitation; a sweep of every 4-layer block

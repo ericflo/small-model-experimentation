@@ -10,6 +10,15 @@
  "arms": {
   "base_forced": {
    "acc": 0.085
+  },
+  "base_cot": {
+   "acc": 0.685,
+   "unparsed_frac": 0.295,
+   "mean_gen_tokens": 1781.4,
+   "truncation_bound": true
+  },
+  "loop_forced": {
+   "acc": 0.24
   }
  }
 }

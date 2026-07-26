@@ -3,8 +3,29 @@
 Training-free mid-stack layer looping on Qwen3.5-4B: does added SERIAL DEPTH inside the forward pass
 move the induction wall that C59 showed only reasoning-token CONTENT crosses?
 
-**Status:** in-progress · since 2026-07-25 · headline effect measured, adversarially verified, and
-replicated on two substrates; generation-mode and deployable transfer still open
+**Status:** in-progress · since 2026-07-25 · headline effect measured, adversarially verified, and replicated on two substrates; generation-mode and deployable transfer still open
+
+## CORRECTION (2026-07-26): the C59 chain-of-thought anchor was TRUNCATION-BOUND, and the
+## "looping matches chain-of-thought" claim below is WITHDRAWN
+
+Every comparison in this cell was anchored to C59's `real_cot` = 0.235 on this substrate. That number
+was measured with a **768-token generation cap**. Measured here with a 3072 cap and stop-on-commit, base
+chain-of-thought reaches **0.685**, its mean generation is **1781 tokens (2.3x C59's entire budget)**,
+and **29.5% of episodes still never commit** -- so 3072 is not enough either. Among episodes that DO
+commit, base CoT is correct **97.2%** of the time.
+
+Consequences, stated plainly:
+1. **WITHDRAWN**: "looping to 0.245 matches what full chain-of-thought achieves (0.235)". CoT achieves
+   at least 0.685. Looping reaches roughly a THIRD of chain-of-thought, not parity.
+2. The forced-read effect itself STANDS and its controls stand (0.085 -> 0.245 at n=400; balanced
+   accuracy 0.112 -> 0.251, which a constant predictor cannot produce; only the block ending at layer 15
+   helps; inserting a different block of identical depth collapses to 0.000; both split-halves
+   replicate). What changes is its SIGNIFICANCE: this is a 2.8x lift on a chance-level probe that denies
+   the model tokens, NOT a route to what tokens buy.
+3. C59's qualitative ordering gets STRONGER (CoT beats forced/latent/filler by ~8x rather than ~3x), but
+   every CoT-anchored NUMBER in C59 is a budget artifact and should not be cited.
+4. Reported CoT numbers must carry the commit rate and the length distribution, and a cap that leaves
+   episodes uncommitted makes the arm NOT INTERPRETABLE (docs/model_playbook.md STOP-ON-COMMIT).
 
 ## Research Program
 
@@ -28,7 +49,7 @@ is real when trained in (McLeish et al. 2511.07384: retrofitted TinyLlama GSM8K 
 recurrence 32; Saunshi et al. 2502.17416: a k-layer model looped L times approaches kL layers), with a
 May 2026 result claiming *training-free* mid-stack looping is worth +2.64pp MMLU-Pro on Qwen3-4B.
 
-## Result: looping layers 12:16 crosses the wall without emitting a single token
+## Result: looping layers 12:16 lifts a forced single-pass read 2.8x (but does not reach CoT)
 
 Forced-answer digit read (one forward pass, **zero tokens generated**), n=400, greedy,
 `enable_thinking=False` — the exact protocol of C59's `forced` arm. Balanced accuracy is mean per-class
@@ -38,16 +59,18 @@ recall, which any constant predictor scores 0.10 on by construction.
 |---|---|---|---|
 | held-out shift | baseline single pass | 0.105 | 0.112 |
 | held-out shift | **loop 12:16, k=2** | **0.245** | **0.251** |
-| held-out shift | *C59 ref: real chain-of-thought* | *0.235* | — |
+| held-out shift | **base + chain-of-thought (corrected, 3072 cap)** | **0.685** | — |
+| held-out shift | *C59's 768-cap CoT figure — WITHDRAWN, truncation-bound* | *0.235* | — |
 | held-out shift | *C59 ref: latent recurrence N=8 / filler N=32* | *0.060 / 0.095* | — |
 | affine (out-of-family) | baseline single pass | 0.217 | 0.218 |
 | affine (out-of-family) | **loop 12:16, k=2** | **0.278** | **0.275** |
 | affine (out-of-family) | *C59 ref: real chain-of-thought* | *0.020* | — |
 
-Two things stand out. On shift, the looped forward pass **matches what C59 measured for full
-chain-of-thought generation** (0.245 vs 0.235) while emitting nothing. On affine — the substrate where
-C59 found CoT *collapses* to 0.020 — looping still adds +0.061, so the mechanism is not simply
-"reproducing what CoT does".
+On shift the looped forward pass roughly triples a chance-level read while emitting nothing, and on
+affine it adds +0.061. It does **not** reach what generated reasoning buys: base chain-of-thought on
+shift is **0.685** once given room to finish (see the CORRECTION above), so looping lands at about a
+third of it. The affine comparison against C59's *real-CoT 0.020* is likewise unusable, since that
+figure shares the same 768-token cap.
 
 Damping gives a clean monotone dose-response on shift: 0.240 (α=1.0), 0.195 (0.5), 0.155 (0.25), 0.095
 (0.1) at n=200. The effect scales with how much of the second pass is admitted, which is what a
@@ -94,8 +117,8 @@ return to baseline as α→0 (measured −2.592 → −2.602 against a −2.603 
 
 ## What this does and does not establish
 
-**Does:** on two induction substrates, weight-shared looping of one specific mid-stack block converts a
-near-chance forward pass into one at or above the chain-of-thought number — untrained, on a frozen
+**Does:** on two induction substrates, weight-shared looping of one specific mid-stack block roughly
+triples a near-chance forward pass (it does NOT reach the chain-of-thought number — see CORRECTION) — untrained, on a frozen
 checkpoint, with coherence intact and four adversarial controls passed. That **narrows C59's law**:
 "compute-depth does not help" holds for input-embedding feedback and filler tokens, and does *not*
 generalise to mid-stack layer looping.

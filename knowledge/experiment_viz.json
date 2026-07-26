@@ -50512,40 +50512,28 @@
     {
      "headline": true,
      "kind": "bar",
-     "title": "Looping layers 12:16 twice matches chain-of-thought - with zero tokens generated",
+     "title": "Depth recurrence lifts a forced single-pass read 2.8x -- but chain-of-thought is 3x better still",
      "categories": [
-      "base single pass",
-      "loop 12:16 k=2",
-      "C59 ref: real CoT",
-      "C59 ref: latent recurrence",
-      "C59 ref: filler tokens"
+      "base, single pass",
+      "loop 12:16 k=2, single pass",
+      "base + chain-of-thought (corrected)",
+      "C59's truncated CoT figure (withdrawn)"
      ],
      "series": [
       {
-       "label": "held-out shift induction (n=400)",
+       "label": "held-out shift induction accuracy",
        "values": [
         0.105,
         0.245,
-        0.235,
-        0.06,
-        0.095
-       ]
-      },
-      {
-       "label": "affine, out-of-family (n=400)",
-       "values": [
-        0.217,
-        0.278,
-        0.02,
-        0.107,
-        0.24
+        0.685,
+        0.235
        ]
       }
      ],
      "x_label": "arm",
-     "y_label": "forced-answer accuracy (fraction)",
+     "y_label": "accuracy (fraction)",
      "y_format": "number",
-     "note": "One extra pass through layers 12-15 of a frozen Qwen3.5-4B lifts a chance-level forward pass to the chain-of-thought number on shift induction, and still helps on affine where CoT collapses to 0.020. Balanced accuracy (a constant predictor scores exactly 0.10) rises 0.112->0.251, so this is not label-prior exploitation."
+     "note": "Looping four middle layers of a frozen model doubles-plus a chance-level single-pass read with no tokens generated. The original claim that this MATCHED chain-of-thought is withdrawn: that 0.235 reference was measured with a 768-token cap, while the model needs ~1781 tokens of reasoning here. Given room, chain-of-thought reaches 0.685 -- and 0.972 among episodes that actually commit an answer. The rightmost bar is shown only to mark the retracted anchor."
     },
     {
      "kind": "bar",
