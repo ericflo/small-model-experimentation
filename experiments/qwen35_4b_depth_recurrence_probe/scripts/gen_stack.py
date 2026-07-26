@@ -90,7 +90,18 @@ def cot(model, tok, eps, bs=16, max_new=3072):
             if not m:
                 unparsed += 1                      # never committed -> counts as wrong, tracked
             ok += int((m[-1] if m else "") == e["answer"])
-    return ok / len(eps), unparsed / len(eps), sum(lens) / max(1, len(lens))
+    # Report the DISTRIBUTION, not just the mean. A mean well under the cap can still hide a
+    # truncated tail: at a 512 cap the mean was 510 (obvious), but a mean of 400 with p99 pinned at
+    # the cap looks healthy and is not. frac_at_cap is the statistic that actually answers "is the
+    # budget enough" -- together with unparsed_frac it makes the question empirical.
+    lens_sorted = sorted(lens)
+    def pct(q):
+        return lens_sorted[min(len(lens_sorted) - 1, int(q * len(lens_sorted)))] if lens_sorted else 0
+    at_cap = sum(1 for L in lens if L >= max_new - 2) / max(1, len(lens))
+    return ok / len(eps), unparsed / len(eps), {
+        "mean": round(sum(lens) / max(1, len(lens)), 1), "p50": pct(0.50),
+        "p90": pct(0.90), "p99": pct(0.99), "max": lens_sorted[-1] if lens_sorted else 0,
+        "frac_at_cap": round(at_cap, 3), "cap": max_new}
 
 
 def main():
@@ -121,11 +132,17 @@ def main():
     def record(name, acc, extra=None):
         res["arms"][name] = {"acc": round(acc, 4), **(extra or {})}
         warn = ""
+        gt = (extra or {}).get("gen_tokens") or {}
+        if gt and gt.get("frac_at_cap", 0) > 0.05:
+            res["arms"][name]["tail_at_cap"] = True
+            print(f"  NOTE {name}: {gt['frac_at_cap']:.1%} of generations hit the {gt['cap']}-token cap "
+                  f"(p99={gt['p99']}). The tail is budget-bound even though the parse rate looks fine.",
+                  flush=True)
         if extra and extra.get("unparsed_frac", 0) > 0.2:
             # HARD GATE: if the model mostly never commits an answer, the number measures the token
             # budget rather than the model, and must not be quoted as a capability result.
             warn = (f"  <-- TRUNCATION-BOUND ({extra['unparsed_frac']:.0%} never emitted an answer, "
-                    f"mean {extra.get('mean_gen_tokens')} tok): NOT INTERPRETABLE")
+                    f"lengths {extra.get('gen_tokens')}): NOT INTERPRETABLE")
             res["arms"][name]["truncation_bound"] = True
         print(f"  {name:22s} acc {acc:.4f}" + (f"   {extra}" if extra else "") + warn, flush=True)
         Path(args.out).parent.mkdir(parents=True, exist_ok=True)
@@ -134,11 +151,11 @@ def main():
     print(f"n={len(eps)} | block {args.block} k={args.k} | greedy, no-think (C59 protocol)", flush=True)
     record("base_forced", forced(model, tok, eps))
     acc, unp, ln = cot(model, tok, eps, max_new=args.max_new)
-    record("base_cot", acc, {"unparsed_frac": round(unp, 3), "mean_gen_tokens": round(ln, 1)})
+    record("base_cot", acc, {"unparsed_frac": round(unp, 3), "gen_tokens": ln})
     with CacheSafeLoop(model, a, b, args.k):
         record("loop_forced", forced(model, tok, eps))
         acc, unp, ln = cot(model, tok, eps, max_new=args.max_new)
-        record("loop_cot", acc, {"unparsed_frac": round(unp, 3), "mean_gen_tokens": round(ln, 1)})
+        record("loop_cot", acc, {"unparsed_frac": round(unp, 3), "gen_tokens": ln})
 
     A = res["arms"]
     print("\n=== VERDICT ===", flush=True)

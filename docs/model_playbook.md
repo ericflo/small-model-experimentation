@@ -23,8 +23,11 @@ changes a rule here, update the rule in the same commit.
        commits (e.g. `[f"Answer: {d}" for d in range(10)]`). Cost then scales with non-committal
        episodes only, so a generous cap is cheap.
     2. Set the cap generously anyway (3072+ for plain-text reasoning; 8192 for the think channel).
-    3. ALWAYS record the parse/commit rate and mean generated length alongside accuracy, and treat
-       any arm with >20% non-committal generations as `truncation_bound: true` / NOT INTERPRETABLE.
+    3. ALWAYS record the parse/commit rate and the length DISTRIBUTION (p50/p90/p99, max, and the
+       fraction of generations sitting at the cap) alongside accuracy. The MEAN is not sufficient: a
+       mean of 510 against a 512 cap is an obvious tell, but a mean of 400 with p99 pinned at the cap
+       looks healthy and is not. Treat any arm with >20% non-committal generations as
+       `truncation_bound: true` / NOT INTERPRETABLE, and flag `tail_at_cap` above 5% at the cap.
     4. A comparison between two arms is only valid if BOTH are saturated. A single fixed cap silently
        favours whichever arm commits sooner, which is exactly the kind of confound an intervention
        that changes reasoning length would exploit.
