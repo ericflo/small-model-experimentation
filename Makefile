@@ -24,7 +24,7 @@ GENERATED_PATHS := \
 	knowledge/source_tracks.md \
 	knowledge/tag_index.md
 
-.PHONY: catalog catalog-test validate active-experiments py-compile check-links check-text generated-clean lint site site-check check related new-program new-experiment from-queue site-dates site-content briefs-gate bench bench-validate
+.PHONY: catalog catalog-test validate active-experiments py-compile check-links check-text check-footguns generated-clean lint site site-check check related new-program new-experiment from-queue site-dates site-content briefs-gate bench bench-validate
 
 catalog:
 	$(PYTHON) scripts/build_knowledgebase.py
@@ -47,10 +47,15 @@ check-links:
 check-text:
 	$(PYTHON) scripts/check_repository_text.py
 
+# Ratcheting footgun gate: rules the repo has ALREADY paid for, enforced on CHANGED files so new
+# code must be clean while 299 experiments of history stay grandfathered (`--all` audits everything).
+check-footguns:
+	$(PYTHON) scripts/check_footguns.py
+
 generated-clean:
 	git diff --exit-code -- $(GENERATED_PATHS)
 
-lint: py-compile check-links check-text
+lint: py-compile check-links check-text check-footguns
 
 site: catalog
 	$(PYTHON) scripts/build_site.py --out $(SITE_DIR)

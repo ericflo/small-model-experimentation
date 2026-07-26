@@ -19,7 +19,7 @@ a deployed agent always has tokens available. If loop+CoT clears it, the model h
 depth per token AND its reasoning, and that is a lever a real agent can use.
 
 Protocol is copied from C59's `real_cot` arm so the numbers are directly comparable: same substrate,
-same chat template with enable_thinking=False, free generation, answer parsed from the trailing
+same no-think chat template, free generation, answer parsed from the trailing
 `Answer: <digit>`. Greedy, so any difference is the intervention rather than sampling.
 """
 from __future__ import annotations
@@ -48,7 +48,8 @@ C59 = {"forced": 0.090, "real_cot": 0.235}          # claim-ledger anchors, n=20
 
 def chat(tok, user):
     return tok.apply_chat_template([{"role": "user", "content": user}], tokenize=False,
-                                   add_generation_prompt=True, enable_thinking=False)
+                                   add_generation_prompt=True,
+                                   enable_thinking=False)  # footgun-ok: C59's real_cot arm is no-think; required for comparability
 
 
 @torch.no_grad()
@@ -130,7 +131,7 @@ def main():
         Path(args.out).parent.mkdir(parents=True, exist_ok=True)
         Path(args.out).write_text(json.dumps(res, indent=1))
 
-    print(f"n={len(eps)} | block {args.block} k={args.k} | greedy, enable_thinking=False", flush=True)
+    print(f"n={len(eps)} | block {args.block} k={args.k} | greedy, no-think (C59 protocol)", flush=True)
     record("base_forced", forced(model, tok, eps))
     acc, unp, ln = cot(model, tok, eps, max_new=args.max_new)
     record("base_cot", acc, {"unparsed_frac": round(unp, 3), "mean_gen_tokens": round(ln, 1)})
