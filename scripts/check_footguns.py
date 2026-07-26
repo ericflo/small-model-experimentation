@@ -151,7 +151,14 @@ def main():
     for name, group in sorted(by_rule.items()):
         print(f"[{name}] {len(group)} hit(s) -- {group[0][3]}")
         for path, ln, _, _, src in group[:12]:
-            print(f"    {path.relative_to(ROOT)}:{ln}: {src[:100]}")
+            # Not always inside the repo: the PreToolUse hook scans a TEMP copy of proposed content,
+            # and relative_to() raises for outside paths -- which lost the file:line detail behind a
+            # traceback until this fallback existed.
+            try:
+                shown = path.relative_to(ROOT)
+            except ValueError:
+                shown = path
+            print(f"    {shown}:{ln}: {src[:100]}")
         if len(group) > 12:
             print(f"    ... and {len(group) - 12} more")
         print()
