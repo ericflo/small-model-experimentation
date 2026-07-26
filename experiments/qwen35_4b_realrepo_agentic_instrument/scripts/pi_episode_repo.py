@@ -21,6 +21,7 @@ TWO DIFFERENCES FROM THE PRIOR RUNNER (experiments/qwen35_4b_agentic_rlvr_feasib
    reward, and "fix the test instead of the code" cannot raise it.
 """
 import argparse
+import gc
 import json
 import os
 import shutil
@@ -42,6 +43,9 @@ import stub as stubmod  # noqa: E402
 PI_BIN = os.environ.get("PI_BIN", "/home/ericflo/.nvm/versions/node/v24.16.0/bin/pi")
 NODE_BIN_DIR = str(Path(PI_BIN).parent)
 MAX_TRAJ_BYTES = 32 * 1024 * 1024      # keep a trajectory only if it is a sane size
+# Resident ceiling for ONE episode (the agent + every command it runs). Generous: a full third-party
+# suite peaks well under this, and the baseline captures ran fine under a 6 GB address-space cap.
+EPISODE_MEM_MAX = os.environ.get("EPISODE_MEM_MAX", "4G")
 
 
 def task_prompt(task, test_hint):
@@ -80,8 +84,25 @@ def run_episode(task, baselines, provider, model, timeout, traj_dir, idx):
         penv = {**env_util.build_env(copy, repo),
                 "PATH": NODE_BIN_DIR + os.pathsep + env_util.build_env(copy, repo)["PATH"]}
         t0 = time.time()
+        # PER-EPISODE MEMORY SCOPE. The agent runs its OWN commands through pi's bash tool -- typically
+        # `python -m pytest` over the whole suite -- and those descendants are covered by none of our
+        # caps: `ulimit -v` is applied only to scoring runs we invoke ourselves. One such in-episode
+        # pytest reached 6.17 GB and triggered a CONSTRAINT_MEMCG kill that took down the entire k=3
+        # run at episode 68 of 124 (the driver itself was flat at 39 MB, measured).
+        # `systemd-run --user --scope` from inside a scope creates a SIBLING scope, so a runaway
+        # episode is killed at its own ceiling without charging -- or killing -- the run that spawned
+        # it. MemoryMax bounds RESIDENT memory, which is safe for node (pi reserves large virtual
+        # address space, so ulimit -v would break the agent instead of bounding it).
+        # EPISODE_MEM_MAX="none" disables the wrapper. Needed for ARM COMPARABILITY: the k=1 arms and
+        # the first k=3 extension ran unscoped, and a ceiling that kills a 5 GB episode changes that
+        # episode's outcome, so scoping must be uniform across arms being compared. Use the default
+        # for new measurement campaigns (e.g. the Line-1 harvest) and "none" to match older arms.
+        base_cmd = " ".join(_shquote(c) for c in cmd)
+        wrapped = base_cmd if EPISODE_MEM_MAX.lower() in ("none", "", "0") else (
+            "systemd-run --user --scope --quiet "
+            f"-p MemoryMax={EPISODE_MEM_MAX} -p MemorySwapMax=0 -- " + base_cmd)
         code, tail, total, _ = env_util.run_spooled(
-            " ".join(_shquote(c) for c in cmd), cwd=copy, env=penv, timeout=timeout,
+            wrapped, cwd=copy, env=penv, timeout=timeout,
             spool_path=str(spool), max_out_bytes=MAX_TRAJ_BYTES)
         secs = round(time.time() - t0, 1)
 
@@ -108,6 +129,17 @@ def run_episode(task, baselines, provider, model, timeout, traj_dir, idx):
 def _shquote(s):
     import shlex
     return shlex.quote(s)
+
+
+def _rss_mb():
+    """Resident size of this driver, in MB (VmRSS from /proc/self/status)."""
+    try:
+        for line in Path("/proc/self/status").read_text().splitlines():
+            if line.startswith("VmRSS:"):
+                return int(line.split()[1]) // 1024
+    except Exception:
+        pass
+    return -1
 
 
 def main():
@@ -189,9 +221,21 @@ def main():
                 print(f"  episode error: {type(exc).__name__}: {str(exc)[:100]}", flush=True)
             if i % 4 == 0 or i == len(jobs):
                 _, single, sel, meanr = summarize(recs)
+                # Driver RSS is printed because this driver DID balloon to 6.17 GB over 68 episodes
+                # (~90 MB/episode) and was cgroup-OOM-killed mid-run. Output is already spooled to
+                # disk, so the growth is in-process and must be measured rather than guessed at; a
+                # linear climb here localises it to per-episode retention.
                 print(f"  {i}/{len(jobs)} ({round(time.time()-t0)}s) "
-                      f"single={single:.3f} selected={sel:.3f} meanR={meanr:.3f}", flush=True)
+                      f"single={single:.3f} selected={sel:.3f} meanR={meanr:.3f} "
+                      f"rss={_rss_mb()}MB", flush=True)
                 save(recs, partial=(i < len(jobs)))
+                # If RSS falls after an explicit collect, the growth is cyclic garbage (exception
+                # tracebacks holding frames, thread objects) rather than live retention -- a
+                # distinction worth one cheap call per checkpoint given this driver was OOM-killed.
+                freed = gc.collect()
+                after = _rss_mb()
+                if freed:
+                    print(f"      gc: {freed} objects, rss now {after}MB", flush=True)
 
     per, single, sel, meanr = summarize(recs)
     print(f"\n=== [{a.label}] {a.split} split: {len(per)} tasks ===", flush=True)
