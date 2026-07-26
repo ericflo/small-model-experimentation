@@ -14,7 +14,24 @@ changes a rule here, update the rule in the same commit.
   expect a one-token answer to a multi-step problem, and never use answer-only SFT to install
   a serial skill — it forces the computation where it cannot live and catastrophically
   forgets execution (C43/C44).
-- **Budget the CoT generously and check truncation.** The general hypothesize-and-verify CoT
+- **Budget the CoT generously and check truncation. USE STOP-ON-COMMIT, NOT A CHOSEN CAP.**
+  This rule has now been violated three times in this repo (C45's 256-cap false 0.00; the
+  thinking-OFF HumanEval 76.2% vs true 89.6%; and a 512-cap that made base CoT read 0.040 with
+  95.5% of generations never emitting an answer, 2026-07-26), so the wording below was not enough.
+  The recipe that removes the budget as a variable:
+    1. Pass `stop_strings=[...]` + `tokenizer=tok` to `generate()` so an episode ends the moment it
+       commits (e.g. `[f"Answer: {d}" for d in range(10)]`). Cost then scales with non-committal
+       episodes only, so a generous cap is cheap.
+    2. Set the cap generously anyway (3072+ for plain-text reasoning; 8192 for the think channel).
+    3. ALWAYS record the parse/commit rate and mean generated length alongside accuracy, and treat
+       any arm with >20% non-committal generations as `truncation_bound: true` / NOT INTERPRETABLE.
+    4. A comparison between two arms is only valid if BOTH are saturated. A single fixed cap silently
+       favours whichever arm commits sooner, which is exactly the kind of confound an intervention
+       that changes reasoning length would exploit.
+  Reference implementation: `experiments/qwen35_4b_depth_recurrence_probe/scripts/gen_stack.py`
+  (STOPS, the truncation gate in `record()`, and the pre-registered saturation gate in the verdict).
+
+- **Original wording, still true:** The general hypothesize-and-verify CoT
   needs ≥400 generated tokens; a 256 cap truncated it into a false 0.00 (C45). Thinking-budget
   accuracy is non-monotonic: optimum ≈512–1024 thinking tokens, and *unbudgeted* is worse than
   a cap (C9). Record generation lengths and report the truncation rate. Do not transfer a budget

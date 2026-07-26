@@ -63,15 +63,24 @@ def forced(model, tok, eps, bs=16):
     return ok / len(eps)
 
 
+# Stop as soon as the model commits, so the token budget stops being a variable at all. Without this
+# the budget is a confound in BOTH directions: too low truncates reasoning into a false failure (a 512
+# cap made base CoT read 0.040 with 95.5% never committing), and any single fixed cap silently favours
+# whichever arm happens to commit sooner -- looping may well change that. docs/model_playbook.md:
+# "Budget the CoT generously and check truncation... Do not transfer a budget."
+STOPS = [f"Answer: {d}" for d in range(10)]
+
+
 @torch.no_grad()
-def cot(model, tok, eps, bs=16, max_new=512):
-    """Free generation, answer parsed from the trailing `Answer: <digit>` (C59's arm)."""
+def cot(model, tok, eps, bs=16, max_new=3072):
+    """Free generation with stop-on-commit; answer parsed from trailing `Answer: <digit>` (C59's arm)."""
     ok, unparsed, lens = 0, 0, []
     for s in range(0, len(eps), bs):
         sub = eps[s:s + bs]
         enc = tok([chat(tok, e["prompt"]) for e in sub], return_tensors="pt", padding=True,
                   add_special_tokens=False).to("cuda")
         gen = model.generate(**enc, max_new_tokens=max_new, do_sample=False, use_cache=True,
+                             stop_strings=STOPS, tokenizer=tok,
                              pad_token_id=tok.pad_token_id or tok.eos_token_id)
         for e, row in zip(sub, gen):
             txt = tok.decode(row[enc.input_ids.shape[1]:], skip_special_tokens=True)
@@ -89,7 +98,13 @@ def main():
     ap.add_argument("--n", type=int, default=200)
     ap.add_argument("--block", default="12:16")
     ap.add_argument("--k", type=int, default=2)
-    ap.add_argument("--max-new", type=int, default=512)
+    # 1024, not 512: at 512 the base CoT arm generated a mean of 510 tokens and 95.5% NEVER emitted
+    # "Answer: <digit>" -- accuracy read 0.040 purely because the budget cut reasoning off before it
+    # could commit. C59 used 768 on this substrate. A truncation-bound arm is not a measurement, and
+    # this program has already been burned by exactly this class of artifact.
+    # Generous by default AND stop-on-commit (see STOPS): the budget should never be the thing being
+    # measured. Cost stays low because only non-committal episodes run to the cap.
+    ap.add_argument("--max-new", type=int, default=3072)
     ap.add_argument("--out", default=str(EXP / "reports" / "gen_stack.json"))
     args = ap.parse_args()
 
@@ -104,7 +119,14 @@ def main():
 
     def record(name, acc, extra=None):
         res["arms"][name] = {"acc": round(acc, 4), **(extra or {})}
-        print(f"  {name:22s} acc {acc:.4f}" + (f"   {extra}" if extra else ""), flush=True)
+        warn = ""
+        if extra and extra.get("unparsed_frac", 0) > 0.2:
+            # HARD GATE: if the model mostly never commits an answer, the number measures the token
+            # budget rather than the model, and must not be quoted as a capability result.
+            warn = (f"  <-- TRUNCATION-BOUND ({extra['unparsed_frac']:.0%} never emitted an answer, "
+                    f"mean {extra.get('mean_gen_tokens')} tok): NOT INTERPRETABLE")
+            res["arms"][name]["truncation_bound"] = True
+        print(f"  {name:22s} acc {acc:.4f}" + (f"   {extra}" if extra else "") + warn, flush=True)
         Path(args.out).parent.mkdir(parents=True, exist_ok=True)
         Path(args.out).write_text(json.dumps(res, indent=1))
 
@@ -123,6 +145,13 @@ def main():
     print(f"  CoT   : base {A['base_cot']['acc']:.3f} -> loop {A['loop_cot']['acc']:.3f}", flush=True)
     se = (0.25 / len(eps)) ** 0.5                  # conservative binomial SE at p=0.5
     delta = A["loop_cot"]["acc"] - A["base_cot"]["acc"]
+    # SATURATION GATE (pre-registered): a CoT comparison is only interpretable if BOTH arms actually
+    # commit. If either is truncation-bound the contrast measures the budget, not depth.
+    if A["base_cot"].get("truncation_bound") or A["loop_cot"].get("truncation_bound"):
+        print("  NOT INTERPRETABLE: a CoT arm is truncation-bound; raise the budget and re-run. "
+              "Reporting this contrast would repeat C45's false 0.00.", flush=True)
+        Path(args.out).write_text(json.dumps(res, indent=1))
+        return
     if delta > 2 * se:
         print(f"  STACKS: depth adds {delta:+.3f} ON TOP of chain-of-thought (2 SE = {2*se:.3f}). "
               f"Depth is a lever an agent with tokens can still use.", flush=True)
