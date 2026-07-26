@@ -19,6 +19,12 @@
   },
   "loop_forced": {
    "acc": 0.24
+  },
+  "loop_cot": {
+   "acc": 0.74,
+   "unparsed_frac": 0.215,
+   "mean_gen_tokens": 1762.2,
+   "truncation_bound": true
   }
  }
 }

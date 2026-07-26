@@ -73,9 +73,14 @@ STOPS = [f"Answer: {d}" for d in range(10)]
 
 
 @torch.no_grad()
-def cot(model, tok, eps, bs=16, max_new=3072):
+def cot(model, tok, eps, bs=8, max_new=3072):
     """Free generation with stop-on-commit; answer parsed from trailing `Answer: <digit>` (C59's arm)."""
+    # Record WHERE each episode commits, not just whether it did. One run at a generous cap then yields
+    # accuracy and commit-rate at ANY smaller budget post-hoc (see ladder()), so "is N enough" never has
+    # to be guessed again -- and the answer for a PRIOR published number becomes checkable: C59's 768
+    # cap can be evaluated directly against this distribution.
     ok, unparsed, lens = 0, 0, []
+    per_ep = []
     for s in range(0, len(eps), bs):
         sub = eps[s:s + bs]
         enc = tok([chat(tok, e["prompt"]) for e in sub], return_tensors="pt", padding=True,
@@ -86,10 +91,17 @@ def cot(model, tok, eps, bs=16, max_new=3072):
         for e, row in zip(sub, gen):
             txt = tok.decode(row[enc.input_ids.shape[1]:], skip_special_tokens=True)
             lens.append(len(tok(txt, add_special_tokens=False).input_ids))
-            m = ANS.findall(txt)
-            if not m:
+            m = ANS.search(txt)
+            commit_tok = None
+            if m is None:
                 unparsed += 1                      # never committed -> counts as wrong, tracked
-            ok += int((m[-1] if m else "") == e["answer"])
+            else:
+                # tokens consumed up to and including the commit
+                commit_tok = len(tok(txt[:m.end()], add_special_tokens=False).input_ids)
+            allm = ANS.findall(txt)
+            correct = int((allm[-1] if allm else "") == e["answer"])
+            ok += correct
+            per_ep.append({"commit_tok": commit_tok, "correct": correct})
     # Report the DISTRIBUTION, not just the mean. A mean well under the cap can still hide a
     # truncated tail: at a 512 cap the mean was 510 (obvious), but a mean of 400 with p99 pinned at
     # the cap looks healthy and is not. frac_at_cap is the statistic that actually answers "is the
@@ -98,10 +110,26 @@ def cot(model, tok, eps, bs=16, max_new=3072):
     def pct(q):
         return lens_sorted[min(len(lens_sorted) - 1, int(q * len(lens_sorted)))] if lens_sorted else 0
     at_cap = sum(1 for L in lens if L >= max_new - 2) / max(1, len(lens))
-    return ok / len(eps), unparsed / len(eps), {
+    return ok / len(eps), unparsed / len(eps), per_ep, {
         "mean": round(sum(lens) / max(1, len(lens)), 1), "p50": pct(0.50),
         "p90": pct(0.90), "p99": pct(0.99), "max": lens_sorted[-1] if lens_sorted else 0,
         "frac_at_cap": round(at_cap, 3), "cap": max_new}
+
+
+def ladder(per_ep, budgets=(512, 768, 1024, 2048, 3072, 4096, 6144, 8192)):
+    """Accuracy and commit-rate at every budget <= the run's cap, computed from one run.
+
+    An episode that commits at token T would have been TRUNCATED by any budget < T, scoring wrong. So
+    sweeping T against the recorded commit positions reconstructs the whole budget curve for free -- and
+    makes a previously published number auditable: C59's 768 cap can be read straight off this table.
+    """
+    n = max(1, len(per_ep))
+    out = {}
+    for b in budgets:
+        committed = [e for e in per_ep if e["commit_tok"] is not None and e["commit_tok"] <= b]
+        out[b] = {"commit_rate": round(len(committed) / n, 3),
+                  "acc": round(sum(e["correct"] for e in committed) / n, 3)}
+    return out
 
 
 def main():
@@ -150,12 +178,14 @@ def main():
 
     print(f"n={len(eps)} | block {args.block} k={args.k} | greedy, no-think (C59 protocol)", flush=True)
     record("base_forced", forced(model, tok, eps))
-    acc, unp, ln = cot(model, tok, eps, max_new=args.max_new)
-    record("base_cot", acc, {"unparsed_frac": round(unp, 3), "gen_tokens": ln})
+    acc, unp, eps_rec, ln = cot(model, tok, eps, max_new=args.max_new)
+    record("base_cot", acc, {"unparsed_frac": round(unp, 3), "gen_tokens": ln,
+                             "budget_ladder": ladder(eps_rec)})
     with CacheSafeLoop(model, a, b, args.k):
         record("loop_forced", forced(model, tok, eps))
-        acc, unp, ln = cot(model, tok, eps, max_new=args.max_new)
-        record("loop_cot", acc, {"unparsed_frac": round(unp, 3), "gen_tokens": ln})
+        acc, unp, eps_rec, ln = cot(model, tok, eps, max_new=args.max_new)
+        record("loop_cot", acc, {"unparsed_frac": round(unp, 3), "gen_tokens": ln,
+                                 "budget_ladder": ladder(eps_rec)})
 
     A = res["arms"]
     print("\n=== VERDICT ===", flush=True)
