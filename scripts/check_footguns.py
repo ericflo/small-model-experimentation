@@ -63,6 +63,19 @@ RULES = [
                  "silently empties a run. Anchor the pattern, e.g. pgrep -f \"^/home.*vllm serve\"."),
     ),
     dict(
+        name="hf-eager-attention",
+        # 2026-07-26: an entire experiment line ran with attn_implementation="eager" because vLLM needs
+        # --enforce-eager for this hybrid arch (C61). They are unrelated settings. sdpa is ~15% faster
+        # and free; the real throughput lever is batch size (docs/compute_environment.md).
+        pattern=re.compile(r"attn_implementation\s*=\s*[\"\']eager[\"\']"),
+        test=lambda m: True,
+        message=("attn_implementation=\"eager\" is HF's NAIVE attention kernel and is unrelated to vLLM's "
+                 "--enforce-eager (which this hybrid GDN arch does need, per C61). Use \"sdpa\" unless a "
+                 "measurement requires exact eager numerics -- and note the real throughput lever is "
+                 "BATCH SIZE (3.8x from bs 8->32), not the attention kernel. "
+                 "See docs/compute_environment.md."),
+    ),
+    dict(
         name="thinking-disabled",
         # Repo rule (memory 'think-is-the-default', AGENTS.md): measure WITH thinking by default. A
         # thinking-OFF harness bug made base HumanEval read 76.2% against a true 89.6% and invalidated

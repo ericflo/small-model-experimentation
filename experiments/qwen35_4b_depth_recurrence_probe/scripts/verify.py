@@ -106,7 +106,7 @@ def main():
     tok = AutoTokenizer.from_pretrained(recur.MODEL_ID, revision=recur.REV, padding_side="left")
     model = AutoModelForCausalLM.from_pretrained(recur.MODEL_ID, revision=recur.REV,
                                                  dtype=torch.bfloat16, device_map="cuda",
-                                                 attn_implementation="eager")
+                                                 attn_implementation="eager")  # footgun-ok: the PUBLISHED forced-read numbers (0.085/0.245/0.278) were measured under eager; sdpa shifts them ~0.005-0.010 via bf16 argmax flips, so switching would break comparability with committed results. New work should use sdpa.
     model.eval()
 
     arms = [("baseline", lambda: LoopedLayers(model, 0, 0, 1))]

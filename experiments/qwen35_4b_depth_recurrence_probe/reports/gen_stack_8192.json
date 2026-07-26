@@ -1,5 +1,5 @@
 {
- "n": 100,
+ "n": 200,
  "substrate": "heldout_shift.jsonl",
  "block": "12:16",
  "k": 2,
@@ -9,7 +9,7 @@
  },
  "arms": {
   "base_forced": {
-   "acc": 0.06
+   "acc": 0.09
   }
  }
 }

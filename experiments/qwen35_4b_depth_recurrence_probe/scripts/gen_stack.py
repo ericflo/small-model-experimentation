@@ -53,7 +53,7 @@ def chat(tok, user):
 
 
 @torch.no_grad()
-def forced(model, tok, eps, bs=16):
+def forced(model, tok, eps, bs=32):
     ok = 0
     for s in range(0, len(eps), bs):
         sub = eps[s:s + bs]
@@ -73,7 +73,7 @@ STOPS = [f"Answer: {d}" for d in range(10)]
 
 
 @torch.no_grad()
-def cot(model, tok, eps, bs=8, max_new=3072):
+def cot(model, tok, eps, bs=32, max_new=3072):
     """Free generation with stop-on-commit; answer parsed from trailing `Answer: <digit>` (C59's arm)."""
     # Record WHERE each episode commits, not just whether it did. One run at a generous cap then yields
     # accuracy and commit-rate at ANY smaller budget post-hoc (see ladder()), so "is N enough" never has
@@ -152,7 +152,7 @@ def main():
     eps = [json.loads(l) for l in open(args.data)][: args.n]
     tok = AutoTokenizer.from_pretrained(MODEL_ID, revision=REV, padding_side="left")
     model = AutoModelForCausalLM.from_pretrained(MODEL_ID, revision=REV, dtype=torch.bfloat16,
-                                                 device_map="cuda", attn_implementation="eager")
+                                                 device_map="cuda", attn_implementation="sdpa")
     model.eval()
     res = {"n": len(eps), "substrate": Path(args.data).name, "block": args.block, "k": args.k,
            "c59_reference": C59, "arms": {}}

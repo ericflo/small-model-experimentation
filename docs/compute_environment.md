@@ -264,3 +264,35 @@ The fix is to CAP the VM (`memory=12GB`, not raise it) and serve at `--gpu-memor
 --max-model-len 16384 --max-num-seqs 4`, `wsl --shutdown` before long runs, and watch HOST free memory
 (`free -h` inside WSL is misleading — it read 22 GB free while the host had 2.9 GB). Full numbers,
 reasoning and crash discipline: [docs/wsl_stability.md](wsl_stability.md).
+
+## GPU throughput for Qwen3.5-4B generation: BATCH is the lever, not the attention kernel (measured 2026-07-26)
+
+Generation on this box is **weight-bandwidth-bound, not attention-bound**, so the intuitive fix is the
+wrong one. Measured, HF generate, bf16, 512 new tokens, ~200-token prompts:
+
+| batch | total tok/s | s per 512 tok | peak allocated |
+|---|---|---|---|
+| 8  | 115 | 35.6 | 8.2 GiB |
+| 16 | 252 | 32.6 | 8.6 GiB |
+| 32 | 437 | 37.5 | 9.4 GiB |
+
+Throughput scales ~3.8x from batch 8 to 32 while wall-time per batch barely moves: each decode step
+re-reads all 8.6 GB of weights regardless of batch size, so larger batches amortise that read. Reaching
+~440 tok/s against the 4090's ~1 TB/s means the roofline is weights, not attention.
+
+Attention implementation is nearly irrelevant here: `sdpa` beat `eager` by only **15%** (96.8 -> 111.6
+tok/s at batch 8). The architecture explains it -- only 8 of 32 layers are full attention (24 are
+gated-delta-net), prompts are short, and decode is q_len=1. `flash_attn` is NOT installed, and head_dim
+256 sits at FlashAttention-2's limit, so chasing it is not worth the build.
+
+Two traps this replaces:
+- **`--enforce-eager` (vLLM) and `attn_implementation="eager"` (HF) are unrelated settings.** vLLM needs
+  the former because the hybrid GDN arch hangs on CUDA-graph capture (C61). That says nothing about HF's
+  attention kernel, and conflating them ran an entire experiment line on naive attention for no reason.
+- **`nvidia-smi` reports allocator RESERVATION, not need.** It showed 24 006 / 24 564 MiB while peak
+  *allocated* was 8.7 GiB, which made batch size look impossible when it was in fact the whole win.
+  Read `torch.cuda.max_memory_allocated()` before concluding you are out of VRAM.
+
+Numerics caveat: switching eager -> sdpa shifted forced-read accuracy 0.085 -> 0.090 and 0.240 -> 0.250
+(a couple of near-tie argmax flips in bf16). Harmless in isolation, but arms compared against each other
+must share one attention implementation.

@@ -68,7 +68,7 @@ PROMPT = "Write one sentence about why measurement discipline matters in researc
 def main():
     tok = AutoTokenizer.from_pretrained(MODEL_ID, revision=REV)
     model = AutoModelForCausalLM.from_pretrained(MODEL_ID, revision=REV, dtype=torch.bfloat16,
-                                                 device_map="cuda", attn_implementation="eager")
+                                                 device_map="cuda", attn_implementation="eager")  # footgun-ok: the PUBLISHED forced-read numbers (0.085/0.245/0.278) were measured under eager; sdpa shifts them ~0.005-0.010 via bf16 argmax flips, so switching would break comparability with committed results. New work should use sdpa.
     model.eval()
     inner = model.model.language_model if hasattr(model.model, "language_model") else model.model
     n_base = len(inner.layers)
