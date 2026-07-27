@@ -1,0 +1,65 @@
+{
+ "warmstart": {
+  "solved": {
+   "n": 51,
+   "bash_calls_median": 10,
+   "bash_calls_max": 36,
+   "edits_median": 2,
+   "edits_zero_frac": 0.0,
+   "turns_median": 16,
+   "repeated_bash_frac_median": 0.062
+  },
+  "timeout": {
+   "n": 72,
+   "bash_calls_median": 27.0,
+   "bash_calls_max": 62,
+   "edits_median": 3.0,
+   "edits_zero_frac": 0.167,
+   "turns_median": 35.0,
+   "repeated_bash_frac_median": 0.123
+  },
+  "failed_no_timeout": {
+   "n": 63,
+   "bash_calls_median": 12,
+   "bash_calls_max": 48,
+   "edits_median": 2,
+   "edits_zero_frac": 0.19,
+   "turns_median": 17,
+   "repeated_bash_frac_median": 0.084
+  },
+  "top_bash_in_timeouts": [
+   [
+    "",
+    227
+   ],
+   [
+    "cat",
+    49
+   ],
+   [
+    "ls -la",
+    40
+   ],
+   [
+    "pwd",
+    25
+   ],
+   [
+    "ls",
+    18
+   ],
+   [
+    "grep -n \"def test.*flatten\" /testbed/glom/test/test_reduction.py 2>/dev/null || echo \"File not found\"",
+    9
+   ],
+   [
+    "grep -n \"concurrent_tee\" /home/ericflo/.nvm/versions/node/v24.16.0/lib/node_modules/",
+    8
+   ],
+   [
+    "python -m pytest voluptuous/tests/tests.py -q",
+    7
+   ]
+  ]
+ }
+}
