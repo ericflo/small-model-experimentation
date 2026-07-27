@@ -10,6 +10,105 @@
  "arms": {
   "base_forced": {
    "acc": 0.09
+  },
+  "base_cot": {
+   "acc": 0.9,
+   "unparsed_frac": 0.08,
+   "gen_tokens": {
+    "mean": 2171.8,
+    "p50": 1573,
+    "p90": 5418,
+    "p99": 6144,
+    "max": 6144,
+    "frac_at_cap": 0.08,
+    "cap": 6144
+   },
+   "budget_ladder": {
+    "512": {
+     "commit_rate": 0.05,
+     "acc": 0.045
+    },
+    "768": {
+     "commit_rate": 0.23,
+     "acc": 0.215
+    },
+    "1024": {
+     "commit_rate": 0.34,
+     "acc": 0.325
+    },
+    "2048": {
+     "commit_rate": 0.605,
+     "acc": 0.59
+    },
+    "3072": {
+     "commit_rate": 0.77,
+     "acc": 0.75
+    },
+    "4096": {
+     "commit_rate": 0.85,
+     "acc": 0.83
+    },
+    "6144": {
+     "commit_rate": 0.92,
+     "acc": 0.9
+    },
+    "8192": {
+     "commit_rate": 0.92,
+     "acc": 0.9
+    }
+   },
+   "tail_at_cap": true
+  },
+  "loop_forced": {
+   "acc": 0.23
+  },
+  "loop_cot": {
+   "acc": 0.915,
+   "unparsed_frac": 0.07,
+   "gen_tokens": {
+    "mean": 2296.4,
+    "p50": 1762,
+    "p90": 5261,
+    "p99": 6144,
+    "max": 6144,
+    "frac_at_cap": 0.07,
+    "cap": 6144
+   },
+   "budget_ladder": {
+    "512": {
+     "commit_rate": 0.025,
+     "acc": 0.015
+    },
+    "768": {
+     "commit_rate": 0.065,
+     "acc": 0.055
+    },
+    "1024": {
+     "commit_rate": 0.25,
+     "acc": 0.24
+    },
+    "2048": {
+     "commit_rate": 0.575,
+     "acc": 0.565
+    },
+    "3072": {
+     "commit_rate": 0.755,
+     "acc": 0.745
+    },
+    "4096": {
+     "commit_rate": 0.845,
+     "acc": 0.835
+    },
+    "6144": {
+     "commit_rate": 0.93,
+     "acc": 0.915
+    },
+    "8192": {
+     "commit_rate": 0.93,
+     "acc": 0.915
+    }
+   },
+   "tail_at_cap": true
   }
  }
 }

@@ -1,0 +1,1282 @@
+{
+ "n": 210,
+ "n_solved": 78,
+ "majority_baseline": 0.6286,
+ "judge_auroc": 0.6795,
+ "surface_length_auroc": 0.3483,
+ "shuffled_control_auroc": 0.4998,
+ "mean_p_true_solved": 0.4364,
+ "mean_p_true_failed": 0.3202,
+ "per_arm": {
+  "base": {
+   "n": 87,
+   "auroc": 0.7187
+  },
+  "warmstart": {
+   "n": 123,
+   "auroc": 0.6598
+  }
+ },
+ "rows": [
+  {
+   "arm": "base",
+   "task": "bidict::bidict/_orderedbase.py::SentinelNode.new_last_node",
+   "solved": false,
+   "p_true": 0.37022536993026733
+  },
+  {
+   "arm": "base",
+   "task": "bidict::bidict/_base.py::BidictBase.equals_order_sensitive",
+   "solved": false,
+   "p_true": 0.36296921968460083
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/__init__.py::values",
+   "solved": true,
+   "p_true": 0.5389832258224487
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::int_str",
+   "solved": true,
+   "p_true": 0.3415825068950653
+  },
+  {
+   "arm": "base",
+   "task": "bidict::bidict/_orderedbase.py::SentinelNode.iternodes",
+   "solved": false,
+   "p_true": 0.3775406777858734
+  },
+  {
+   "arm": "base",
+   "task": "bidict::bidict/_base.py::BidictBase.inverse",
+   "solved": false,
+   "p_true": 0.46101680397987366
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::foldm",
+   "solved": true,
+   "p_true": 0.23370634019374847
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::fold",
+   "solved": false,
+   "p_true": 0.3849121630191803
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::leafy",
+   "solved": true,
+   "p_true": 0.3073580265045166
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::get",
+   "solved": false,
+   "p_true": 0.23370634019374847
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::make_walkable",
+   "solved": false,
+   "p_true": 0.42250463366508484
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/__init__.py::new",
+   "solved": false,
+   "p_true": 0.03993731737136841
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/__init__.py::set",
+   "solved": false,
+   "p_true": 0.32766830921173096
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/__init__.py::get",
+   "solved": false,
+   "p_true": 0.17328819632530212
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::set",
+   "solved": false,
+   "p_true": 0.1208532303571701
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::match",
+   "solved": false,
+   "p_true": 0.11757213622331619
+  },
+  {
+   "arm": "base",
+   "task": "glom::glom/streaming.py::Iter.split",
+   "solved": true,
+   "p_true": 0.6584175229072571
+  },
+  {
+   "arm": "base",
+   "task": "glom::glom/core.py::Glommer.register",
+   "solved": true,
+   "p_true": 0.07696083933115005
+  },
+  {
+   "arm": "base",
+   "task": "glom::glom/streaming.py::Iter.slice",
+   "solved": true,
+   "p_true": 0.28140559792518616
+  },
+  {
+   "arm": "base",
+   "task": "glom::glom/core.py::Path.from_t",
+   "solved": false,
+   "p_true": 0.22815649211406708
+  },
+  {
+   "arm": "base",
+   "task": "glom::glom/matching.py::Optional.glomit",
+   "solved": false,
+   "p_true": 0.36296921968460083
+  },
+  {
+   "arm": "base",
+   "task": "glom::glom/core.py::arg_val",
+   "solved": false,
+   "p_true": 0.4687906503677368
+  },
+  {
+   "arm": "base",
+   "task": "glom::glom/core.py::CoalesceError.get_message",
+   "solved": true,
+   "p_true": 0.7185943722724915
+  },
+  {
+   "arm": "base",
+   "task": "glom::glom/core.py::GlomError.wrap",
+   "solved": false,
+   "p_true": 0.2628418505191803
+  },
+  {
+   "arm": "base",
+   "task": "glom::glom/core.py::format_oneline_trace",
+   "solved": false,
+   "p_true": 0.1919327974319458
+  },
+  {
+   "arm": "base",
+   "task": "more-itertools::more_itertools/more.py::always_reversible",
+   "solved": false,
+   "p_true": 0.4532618820667267
+  },
+  {
+   "arm": "base",
+   "task": "more-itertools::more_itertools/more.py::takewhile_inclusive",
+   "solved": true,
+   "p_true": 0.4455295503139496
+  },
+  {
+   "arm": "base",
+   "task": "more-itertools::more_itertools/more.py::idft",
+   "solved": true,
+   "p_true": 0.2751297354698181
+  },
+  {
+   "arm": "base",
+   "task": "more-itertools::more_itertools/recipes.py::sliding_window",
+   "solved": true,
+   "p_true": 0.672331690788269
+  },
+  {
+   "arm": "base",
+   "task": "more-itertools::more_itertools/more.py::subfactorial",
+   "solved": true,
+   "p_true": 0.8080672025680542
+  },
+  {
+   "arm": "base",
+   "task": "more-itertools::more_itertools/recipes.py::tail",
+   "solved": true,
+   "p_true": 0.5467381477355957
+  },
+  {
+   "arm": "base",
+   "task": "more-itertools::more_itertools/more.py::exactly_n",
+   "solved": true,
+   "p_true": 0.6791787147521973
+  },
+  {
+   "arm": "base",
+   "task": "more-itertools::more_itertools/recipes.py::nth_combination",
+   "solved": false,
+   "p_true": 0.12421300262212753
+  },
+  {
+   "arm": "base",
+   "task": "semver::src/semver/version.py::Version.is_valid",
+   "solved": true,
+   "p_true": 0.6150878667831421
+  },
+  {
+   "arm": "base",
+   "task": "more-itertools::more_itertools/more.py::sort_together",
+   "solved": false,
+   "p_true": 0.006850480102002621
+  },
+  {
+   "arm": "base",
+   "task": "semver::src/semver/version.py::Version.replace",
+   "solved": false,
+   "p_true": 0.6076632142066956
+  },
+  {
+   "arm": "base",
+   "task": "semver::src/semver/version.py::Version.parse",
+   "solved": false,
+   "p_true": 0.32766830921173096
+  },
+  {
+   "arm": "base",
+   "task": "semver::src/semver/version.py::Version.is_compatible",
+   "solved": false,
+   "p_true": 0.30074557662010193
+  },
+  {
+   "arm": "base",
+   "task": "semver::src/semver/version.py::Version.next_version",
+   "solved": false,
+   "p_true": 0.39981165528297424
+  },
+  {
+   "arm": "base",
+   "task": "voluptuous::voluptuous/validators.py::Url",
+   "solved": true,
+   "p_true": 0.1208532303571701
+  },
+  {
+   "arm": "base",
+   "task": "semver::src/semver/version.py::Version.match",
+   "solved": false,
+   "p_true": 0.1755380630493164
+  },
+  {
+   "arm": "base",
+   "task": "voluptuous::voluptuous/schema_builder.py::default_factory",
+   "solved": true,
+   "p_true": 0.4455295503139496
+  },
+  {
+   "arm": "base",
+   "task": "voluptuous::voluptuous/validators.py::IsDir",
+   "solved": true,
+   "p_true": 0.4532618820667267
+  },
+  {
+   "arm": "base",
+   "task": "voluptuous::voluptuous/validators.py::IsFile",
+   "solved": true,
+   "p_true": 0.5467381477355957
+  },
+  {
+   "arm": "base",
+   "task": "voluptuous::voluptuous/validators.py::FqdnUrl",
+   "solved": false,
+   "p_true": 0.32766830921173096
+  },
+  {
+   "arm": "base",
+   "task": "voluptuous::voluptuous/schema_builder.py::raises",
+   "solved": true,
+   "p_true": 0.3849121630191803
+  },
+  {
+   "arm": "base",
+   "task": "voluptuous::voluptuous/validators.py::PathExists",
+   "solved": true,
+   "p_true": 0.28140559792518616
+  },
+  {
+   "arm": "base",
+   "task": "voluptuous::voluptuous/validators.py::Email",
+   "solved": false,
+   "p_true": 0.32766830921173096
+  },
+  {
+   "arm": "base",
+   "task": "voluptuous::voluptuous/schema_builder.py::Schema.infer",
+   "solved": false,
+   "p_true": 0.18713268637657166
+  },
+  {
+   "arm": "base",
+   "task": "voluptuous::voluptuous/schema_builder.py::validate",
+   "solved": false,
+   "p_true": 0.01615283451974392
+  },
+  {
+   "arm": "base",
+   "task": "bidict::bidict/_bidict.py::MutableBidict.popitem",
+   "solved": true,
+   "p_true": 0.3923368453979492
+  },
+  {
+   "arm": "base",
+   "task": "bidict::bidict/_base.py::BidictBase.equals_order_sensitive",
+   "solved": false,
+   "p_true": 0.49218812584877014
+  },
+  {
+   "arm": "base",
+   "task": "bidict::bidict/_base.py::BidictBase.equals_order_sensitive",
+   "solved": false,
+   "p_true": 0.4532618820667267
+  },
+  {
+   "arm": "base",
+   "task": "bidict::bidict/_bidict.py::MutableBidict.popitem",
+   "solved": true,
+   "p_true": 0.22815649211406708
+  },
+  {
+   "arm": "base",
+   "task": "bidict::bidict/_orderedbase.py::SentinelNode.new_last_node",
+   "solved": false,
+   "p_true": 0.2689414322376251
+  },
+  {
+   "arm": "base",
+   "task": "bidict::bidict/_orderedbase.py::SentinelNode.iternodes",
+   "solved": false,
+   "p_true": 0.3486451506614685
+  },
+  {
+   "arm": "base",
+   "task": "bidict::bidict/_orderedbase.py::SentinelNode.new_last_node",
+   "solved": false,
+   "p_true": 0.6150878667831421
+  },
+  {
+   "arm": "base",
+   "task": "bidict::bidict/_orderedbase.py::SentinelNode.iternodes",
+   "solved": false,
+   "p_true": 0.3486451506614685
+  },
+  {
+   "arm": "base",
+   "task": "bidict::bidict/_base.py::BidictBase.inverse",
+   "solved": false,
+   "p_true": 0.6150878667831421
+  },
+  {
+   "arm": "base",
+   "task": "bidict::bidict/_base.py::BidictBase.inverse",
+   "solved": false,
+   "p_true": 0.6992543935775757
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::int_str",
+   "solved": true,
+   "p_true": 0.3486451506614685
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::int_str",
+   "solved": true,
+   "p_true": 0.3415825068950653
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/__init__.py::values",
+   "solved": false,
+   "p_true": 0.1919327974319458
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::fold",
+   "solved": true,
+   "p_true": 0.3486451506614685
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/__init__.py::new",
+   "solved": true,
+   "p_true": 0.4073334336280823
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::fold",
+   "solved": true,
+   "p_true": 0.3486451506614685
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::foldm",
+   "solved": true,
+   "p_true": 0.30074557662010193
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::leafy",
+   "solved": true,
+   "p_true": 0.39981165528297424
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::leafy",
+   "solved": true,
+   "p_true": 0.531209409236908
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::foldm",
+   "solved": true,
+   "p_true": 0.3415825068950653
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::make_walkable",
+   "solved": false,
+   "p_true": 0.30074557662010193
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::make_walkable",
+   "solved": false,
+   "p_true": 0.2689414322376251
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::get",
+   "solved": false,
+   "p_true": 0.20946969091892242
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/__init__.py::set",
+   "solved": false,
+   "p_true": 0.02262919954955578
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::set",
+   "solved": false,
+   "p_true": 0.18713268637657166
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/__init__.py::get",
+   "solved": false,
+   "p_true": 0.038178276270627975
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::set",
+   "solved": false,
+   "p_true": 0.09534946084022522
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::match",
+   "solved": false,
+   "p_true": 0.18476751446723938
+  },
+  {
+   "arm": "base",
+   "task": "glom::glom/core.py::Glommer.register",
+   "solved": true,
+   "p_true": 0.4455295503139496
+  },
+  {
+   "arm": "base",
+   "task": "dpath::dpath/segments.py::match",
+   "solved": false,
+   "p_true": 0.20689405500888824
+  },
+  {
+   "arm": "base",
+   "task": "glom::glom/core.py::Glommer.register",
+   "solved": true,
+   "p_true": 0.29421496391296387
+  },
+  {
+   "arm": "base",
+   "task": "glom::glom/streaming.py::Iter.split",
+   "solved": true,
+   "p_true": 0.6791787147521973
+  },
+  {
+   "arm": "base",
+   "task": "glom::glom/matching.py::Optional.glomit",
+   "solved": false,
+   "p_true": 0.5544704794883728
+  },
+  {
+   "arm": "base",
+   "task": "glom::glom/streaming.py::Iter.split",
+   "solved": true,
+   "p_true": 0.6584175229072571
+  },
+  {
+   "arm": "base",
+   "task": "glom::glom/core.py::arg_val",
+   "solved": false,
+   "p_true": 0.03622005879878998
+  },
+  {
+   "arm": "base",
+   "task": "glom::glom/streaming.py::Iter.slice",
+   "solved": false,
+   "p_true": 0.22270014882087708
+  },
+  {
+   "arm": "base",
+   "task": "glom::glom/streaming.py::Iter.slice",
+   "solved": false,
+   "p_true": 0.1919327974319458
+  },
+  {
+   "arm": "warmstart",
+   "task": "bidict::bidict/_orderedbase.py::SentinelNode.iternodes",
+   "solved": true,
+   "p_true": 0.3345894515514374
+  },
+  {
+   "arm": "warmstart",
+   "task": "bidict::bidict/_base.py::BidictBase.inverse",
+   "solved": false,
+   "p_true": 0.6926419734954834
+  },
+  {
+   "arm": "warmstart",
+   "task": "bidict::bidict/_base.py::BidictBase.equals_order_sensitive",
+   "solved": false,
+   "p_true": 0.4687906503677368
+  },
+  {
+   "arm": "warmstart",
+   "task": "bidict::bidict/_orderedbase.py::SentinelNode.new_last_node",
+   "solved": false,
+   "p_true": 0.637030839920044
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/segments.py::int_str",
+   "solved": true,
+   "p_true": 0.36296921968460083
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/__init__.py::values",
+   "solved": false,
+   "p_true": 0.4843800961971283
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/__init__.py::new",
+   "solved": false,
+   "p_true": 0.28140559792518616
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/segments.py::leafy",
+   "solved": false,
+   "p_true": 0.4687906503677368
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/segments.py::foldm",
+   "solved": true,
+   "p_true": 0.2751297354698181
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/segments.py::get",
+   "solved": false,
+   "p_true": 0.3415825068950653
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/segments.py::make_walkable",
+   "solved": false,
+   "p_true": 0.08882028609514236
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/__init__.py::set",
+   "solved": false,
+   "p_true": 0.07477004081010818
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/matching.py::Optional.glomit",
+   "solved": false,
+   "p_true": 0.3345894515514374
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/streaming.py::Iter.split",
+   "solved": true,
+   "p_true": 0.637030839920044
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/core.py::Path.from_t",
+   "solved": false,
+   "p_true": 0.15203224122524261
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/streaming.py::Iter.slice",
+   "solved": false,
+   "p_true": 0.2120688110589981
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/core.py::Ref.glomit",
+   "solved": false,
+   "p_true": 0.3849121630191803
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/core.py::Path.startswith",
+   "solved": false,
+   "p_true": 0.42250463366508484
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/core.py::GlomError.wrap",
+   "solved": false,
+   "p_true": 0.4765796661376953
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/core.py::CoalesceError.get_message",
+   "solved": false,
+   "p_true": 0.562176525592804
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/reduction.py::flatten",
+   "solved": false,
+   "p_true": 0.0024630071129649878
+  },
+  {
+   "arm": "warmstart",
+   "task": "more-itertools::more_itertools/more.py::takewhile_inclusive",
+   "solved": false,
+   "p_true": 0.4687906503677368
+  },
+  {
+   "arm": "warmstart",
+   "task": "more-itertools::more_itertools/more.py::concurrent_tee",
+   "solved": false,
+   "p_true": 0.19930800795555115
+  },
+  {
+   "arm": "warmstart",
+   "task": "more-itertools::more_itertools/recipes.py::tail",
+   "solved": false,
+   "p_true": 0.18242551386356354
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.to_dict",
+   "solved": true,
+   "p_true": 0.5156199336051941
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.replace",
+   "solved": false,
+   "p_true": 0.4148988127708435
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.parse",
+   "solved": false,
+   "p_true": 0.42250463366508484
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.bump_prerelease",
+   "solved": false,
+   "p_true": 0.39981165528297424
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.match",
+   "solved": true,
+   "p_true": 0.4148988127708435
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.compare",
+   "solved": false,
+   "p_true": 0.3923368453979492
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/validators.py::Url",
+   "solved": false,
+   "p_true": 0.4843800961971283
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/validators.py::FqdnUrl",
+   "solved": true,
+   "p_true": 0.3923368453979492
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/schema_builder.py::default_factory",
+   "solved": false,
+   "p_true": 0.7662936449050903
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/validators.py::IsFile",
+   "solved": true,
+   "p_true": 0.5851011276245117
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/validators.py::PathExists",
+   "solved": false,
+   "p_true": 0.6442251205444336
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/schema_builder.py::raises",
+   "solved": false,
+   "p_true": 0.42250463366508484
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/validators.py::Email",
+   "solved": false,
+   "p_true": 0.3775406777858734
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/schema_builder.py::validate",
+   "solved": false,
+   "p_true": 0.14804719388484955
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/schema_builder.py::Schema.extend",
+   "solved": false,
+   "p_true": 0.2120688110589981
+  },
+  {
+   "arm": "warmstart",
+   "task": "bidict::bidict/_base.py::BidictBase.equals_order_sensitive",
+   "solved": false,
+   "p_true": 0.5774953961372375
+  },
+  {
+   "arm": "warmstart",
+   "task": "bidict::bidict/_base.py::BidictBase.equals_order_sensitive",
+   "solved": true,
+   "p_true": 0.5156199336051941
+  },
+  {
+   "arm": "warmstart",
+   "task": "bidict::bidict/_bidict.py::MutableBidict.popitem",
+   "solved": false,
+   "p_true": 0.19436782598495483
+  },
+  {
+   "arm": "warmstart",
+   "task": "bidict::bidict/_orderedbase.py::SentinelNode.new_last_node",
+   "solved": false,
+   "p_true": 0.14414885640144348
+  },
+  {
+   "arm": "warmstart",
+   "task": "bidict::bidict/_orderedbase.py::SentinelNode.iternodes",
+   "solved": true,
+   "p_true": 0.4532618820667267
+  },
+  {
+   "arm": "warmstart",
+   "task": "bidict::bidict/_orderedbase.py::SentinelNode.iternodes",
+   "solved": true,
+   "p_true": 0.2628418505191803
+  },
+  {
+   "arm": "warmstart",
+   "task": "bidict::bidict/_orderedbase.py::SentinelNode.new_last_node",
+   "solved": false,
+   "p_true": 0.6297746300697327
+  },
+  {
+   "arm": "warmstart",
+   "task": "bidict::bidict/_base.py::BidictBase.inverse",
+   "solved": false,
+   "p_true": 0.6926419734954834
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/__init__.py::values",
+   "solved": true,
+   "p_true": 0.6076632142066956
+  },
+  {
+   "arm": "warmstart",
+   "task": "bidict::bidict/_base.py::BidictBase.inverse",
+   "solved": false,
+   "p_true": 0.4073334336280823
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/segments.py::int_str",
+   "solved": false,
+   "p_true": 0.3557748794555664
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/segments.py::int_str",
+   "solved": true,
+   "p_true": 0.3415825068950653
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/__init__.py::values",
+   "solved": false,
+   "p_true": 0.3775406777858734
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/segments.py::fold",
+   "solved": true,
+   "p_true": 0.3486451506614685
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/__init__.py::new",
+   "solved": false,
+   "p_true": 0.02585877664387226
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/__init__.py::new",
+   "solved": false,
+   "p_true": 0.14414885640144348
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/segments.py::foldm",
+   "solved": true,
+   "p_true": 0.23370634019374847
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/segments.py::foldm",
+   "solved": true,
+   "p_true": 0.2689414322376251
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/segments.py::leafy",
+   "solved": true,
+   "p_true": 0.5234203934669495
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/segments.py::get",
+   "solved": false,
+   "p_true": 0.5467381477355957
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/segments.py::get",
+   "solved": false,
+   "p_true": 0.32766830921173096
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/segments.py::make_walkable",
+   "solved": false,
+   "p_true": 0.3849121630191803
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/segments.py::leafy",
+   "solved": false,
+   "p_true": 0.5156199336051941
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/segments.py::make_walkable",
+   "solved": false,
+   "p_true": 0.3486451506614685
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/__init__.py::get",
+   "solved": false,
+   "p_true": 0.3208213150501251
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/segments.py::set",
+   "solved": false,
+   "p_true": 0.2422056347131729
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/segments.py::match",
+   "solved": false,
+   "p_true": 0.15002882480621338
+  },
+  {
+   "arm": "warmstart",
+   "task": "dpath::dpath/segments.py::match",
+   "solved": false,
+   "p_true": 0.06233103945851326
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/matching.py::Optional.glomit",
+   "solved": false,
+   "p_true": 0.3923368453979492
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/matching.py::Optional.glomit",
+   "solved": false,
+   "p_true": 0.2568320035934448
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/streaming.py::Iter.split",
+   "solved": false,
+   "p_true": 0.29421496391296387
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/streaming.py::Iter.split",
+   "solved": false,
+   "p_true": 0.5078118443489075
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/core.py::arg_val",
+   "solved": false,
+   "p_true": 0.4687906503677368
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/core.py::Path.from_t",
+   "solved": false,
+   "p_true": 0.22815649211406708
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/streaming.py::Iter.slice",
+   "solved": false,
+   "p_true": 0.20689405500888824
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/core.py::Path.startswith",
+   "solved": true,
+   "p_true": 0.314050555229187
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/core.py::Path.from_t",
+   "solved": false,
+   "p_true": 0.22815649211406708
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/core.py::GlomError.wrap",
+   "solved": false,
+   "p_true": 0.28140559792518616
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/core.py::GlomError.wrap",
+   "solved": false,
+   "p_true": 0.027376487851142883
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/core.py::CoalesceError.get_message",
+   "solved": true,
+   "p_true": 0.622459352016449
+  },
+  {
+   "arm": "warmstart",
+   "task": "glom::glom/core.py::CoalesceError.get_message",
+   "solved": false,
+   "p_true": 0.3923368453979492
+  },
+  {
+   "arm": "warmstart",
+   "task": "more-itertools::more_itertools/more.py::always_reversible",
+   "solved": false,
+   "p_true": 0.3557748794555664
+  },
+  {
+   "arm": "warmstart",
+   "task": "more-itertools::more_itertools/more.py::always_reversible",
+   "solved": true,
+   "p_true": 0.3923368453979492
+  },
+  {
+   "arm": "warmstart",
+   "task": "more-itertools::more_itertools/more.py::takewhile_inclusive",
+   "solved": false,
+   "p_true": 0.39981165528297424
+  },
+  {
+   "arm": "warmstart",
+   "task": "more-itertools::more_itertools/more.py::takewhile_inclusive",
+   "solved": true,
+   "p_true": 0.5467381477355957
+  },
+  {
+   "arm": "warmstart",
+   "task": "more-itertools::more_itertools/more.py::idft",
+   "solved": true,
+   "p_true": 0.3208213150501251
+  },
+  {
+   "arm": "warmstart",
+   "task": "more-itertools::more_itertools/recipes.py::tail",
+   "solved": true,
+   "p_true": 0.3557748794555664
+  },
+  {
+   "arm": "warmstart",
+   "task": "more-itertools::more_itertools/more.py::concurrent_tee",
+   "solved": false,
+   "p_true": 0.18242551386356354
+  },
+  {
+   "arm": "warmstart",
+   "task": "more-itertools::more_itertools/recipes.py::sliding_window",
+   "solved": true,
+   "p_true": 0.20689405500888824
+  },
+  {
+   "arm": "warmstart",
+   "task": "more-itertools::more_itertools/recipes.py::tail",
+   "solved": true,
+   "p_true": 0.622459352016449
+  },
+  {
+   "arm": "warmstart",
+   "task": "more-itertools::more_itertools/recipes.py::sliding_window",
+   "solved": true,
+   "p_true": 0.6001883149147034
+  },
+  {
+   "arm": "warmstart",
+   "task": "more-itertools::more_itertools/more.py::exactly_n",
+   "solved": false,
+   "p_true": 0.013636834919452667
+  },
+  {
+   "arm": "warmstart",
+   "task": "more-itertools::more_itertools/recipes.py::nth_combination",
+   "solved": false,
+   "p_true": 0.4843800961971283
+  },
+  {
+   "arm": "warmstart",
+   "task": "more-itertools::more_itertools/recipes.py::nth_combination",
+   "solved": false,
+   "p_true": 0.3775406777858734
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.is_valid",
+   "solved": true,
+   "p_true": 0.6001883149147034
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.is_valid",
+   "solved": true,
+   "p_true": 0.6001883149147034
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.to_dict",
+   "solved": true,
+   "p_true": 0.7981867790222168
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.to_dict",
+   "solved": true,
+   "p_true": 0.3208213150501251
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.replace",
+   "solved": false,
+   "p_true": 0.6001883149147034
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.replace",
+   "solved": false,
+   "p_true": 0.5544704794883728
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.bump_build",
+   "solved": false,
+   "p_true": 0.20434190332889557
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.bump_build",
+   "solved": false,
+   "p_true": 0.42250463366508484
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.is_compatible",
+   "solved": false,
+   "p_true": 0.2751297354698181
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.bump_prerelease",
+   "solved": true,
+   "p_true": 0.3923368453979492
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.parse",
+   "solved": false,
+   "p_true": 0.13846179842948914
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.compare",
+   "solved": false,
+   "p_true": 0.43014732003211975
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.compare",
+   "solved": false,
+   "p_true": 0.314050555229187
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.match",
+   "solved": true,
+   "p_true": 0.0832919329404831
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.next_version",
+   "solved": false,
+   "p_true": 0.2751297354698181
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/schema_builder.py::default_factory",
+   "solved": true,
+   "p_true": 0.3775406777858734
+  },
+  {
+   "arm": "warmstart",
+   "task": "semver::src/semver/version.py::Version.match",
+   "solved": true,
+   "p_true": 0.5234203934669495
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/schema_builder.py::default_factory",
+   "solved": true,
+   "p_true": 0.46101680397987366
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/validators.py::Url",
+   "solved": true,
+   "p_true": 0.562176525592804
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/validators.py::FqdnUrl",
+   "solved": true,
+   "p_true": 0.46101680397987366
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/validators.py::IsDir",
+   "solved": true,
+   "p_true": 0.5851011276245117
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/validators.py::IsDir",
+   "solved": true,
+   "p_true": 0.5698526501655579
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/validators.py::IsFile",
+   "solved": true,
+   "p_true": 0.6584175229072571
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/schema_builder.py::raises",
+   "solved": true,
+   "p_true": 0.30074557662010193
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/validators.py::PathExists",
+   "solved": false,
+   "p_true": 0.10669060051441193
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/validators.py::PathExists",
+   "solved": false,
+   "p_true": 0.2393493503332138
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/validators.py::Email",
+   "solved": false,
+   "p_true": 0.4532618820667267
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/schema_builder.py::Schema.infer",
+   "solved": false,
+   "p_true": 0.1561049073934555
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/schema_builder.py::validate",
+   "solved": true,
+   "p_true": 0.1919327974319458
+  },
+  {
+   "arm": "warmstart",
+   "task": "voluptuous::voluptuous/schema_builder.py::Schema.extend",
+   "solved": false,
+   "p_true": 0.2120688110589981
+  }
+ ]
+}
