@@ -14,7 +14,16 @@ This file plus `docs/` and `knowledge/` are the complete operating context: ever
 6. Read [docs/model_playbook.md](docs/model_playbook.md) — how to elicit and evaluate Qwen3.5-4B correctly (distilled from the claim ledger).
 7. Read [docs/compute_environment.md](docs/compute_environment.md) — how to run on the current box, including GPU failure recovery.
 8. Read [docs/vllm_inference.md](docs/vllm_inference.md) before bulk generation — the pinned high-throughput runner, LoRA path, parity gates, and backend-mixing prohibition.
-9. Use `make related QUERY="<rough idea>"`, [knowledge/experiment_catalog.md](knowledge/experiment_catalog.md), and [knowledge/tag_index.md](knowledge/tag_index.md) to find close prior work.
+9. **When a result changes what you believe the bottleneck IS, run `make parked QUERY="<the failure mode>"`.**
+   This corpus records unrun follow-ups on every claim (`next_tests`) plus a future queue and open
+   questions, and they are easy to miss precisely when they matter most. On 2026-07-26 a session
+   independently re-derived C59's layer-looping next-test, proposed C63's adaptive selection as new, and
+   never surfaced C62's termination intervention or C52's parked loop-FTPO -- all four were already
+   written down. Also: a technique filed as FAILED in the ledger may have failed on a DIFFERENT target
+   (FTPO reads as failed via C52's reasoning-fork application, while
+   `docs/final_token_preference_optimization.md` names loop-targeted FTPO as the outstanding
+   experiment). Read the doc, not just the verdict.
+10. Use `make related QUERY="<rough idea>"`, [knowledge/experiment_catalog.md](knowledge/experiment_catalog.md), and [knowledge/tag_index.md](knowledge/tag_index.md) to find close prior work.
 10. Before adding work, read [docs/discovery_workflow.md](docs/discovery_workflow.md), [docs/idea_intake_protocol.md](docs/idea_intake_protocol.md), [docs/experiment_lifecycle.md](docs/experiment_lifecycle.md), [docs/research_program_lifecycle.md](docs/research_program_lifecycle.md), [docs/artifact_policy.md](docs/artifact_policy.md), and [docs/knowledgebase_protocol.md](docs/knowledgebase_protocol.md).
 11. Use [docs/quality_gates.md](docs/quality_gates.md) to understand what `make check` enforces and how to fix its common failures.
 

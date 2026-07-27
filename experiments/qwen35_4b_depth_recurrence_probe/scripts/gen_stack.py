@@ -73,7 +73,7 @@ STOPS = [f"Answer: {d}" for d in range(10)]
 
 
 @torch.no_grad()
-def cot(model, tok, eps, bs=32, max_new=3072):
+def cot(model, tok, eps, bs=16, max_new=3072):
     """Free generation with stop-on-commit; answer parsed from trailing `Answer: <digit>` (C59's arm)."""
     # Record WHERE each episode commits, not just whether it did. One run at a generous cap then yields
     # accuracy and commit-rate at ANY smaller budget post-hoc (see ladder()), so "is N enough" never has

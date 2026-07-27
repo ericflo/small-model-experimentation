@@ -1,0 +1,19 @@
+{
+ "detector": {
+  "min_repeats": 4,
+  "min_chars": 60
+ },
+ "arms": {
+  "warmstart": {
+   "n_trajectories": 186,
+   "chars_scanned": 4255907,
+   "n_timeout": 75,
+   "n_completed": 111,
+   "loop_rate_timeout": 0.0,
+   "loop_rate_completed": 0.0,
+   "loop_rate_overall": 0.0,
+   "top_repeating_spans": [],
+   "examples": []
+  }
+ }
+}

@@ -24,7 +24,7 @@ GENERATED_PATHS := \
 	knowledge/source_tracks.md \
 	knowledge/tag_index.md
 
-.PHONY: catalog catalog-test validate active-experiments py-compile check-links check-text check-footguns generated-clean lint site site-check check related new-program new-experiment from-queue site-dates site-content briefs-gate bench bench-validate
+.PHONY: parked catalog catalog-test validate active-experiments py-compile check-links check-text check-footguns generated-clean lint site site-check check related new-program new-experiment from-queue site-dates site-content briefs-gate bench bench-validate
 
 catalog:
 	$(PYTHON) scripts/build_knowledgebase.py
@@ -86,6 +86,13 @@ bench-validate:
 
 related:
 	$(PYTHON) scripts/find_related.py "$(QUERY)" $(EXTRA_ARGS)
+
+# Match a NEWLY FOUND bottleneck against the corpus's own unrun follow-ups (claim next_tests/avoid,
+# future queue, open questions, docs). `related` matches ideas against past EXPERIMENTS; this matches
+# findings against PARKED work -- the gap that let a session re-derive C59's layer-looping next-test
+# from scratch while never surfacing C62's termination intervention.
+parked:
+	$(PYTHON) scripts/mine_parked.py "$(QUERY)"
 
 new-program:
 	$(PYTHON) scripts/scaffold_research_program.py "$(PROGRAM)" --title "$(TITLE)" --focus "$(FOCUS)" $(EXTRA_ARGS)
