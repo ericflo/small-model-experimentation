@@ -145,6 +145,10 @@ def main():
     # Generous by default AND stop-on-commit (see STOPS): the budget should never be the thing being
     # measured. Cost stays low because only non-committal episodes run to the cap.
     ap.add_argument("--max-new", type=int, default=3072)
+    ap.add_argument("--arms", default="both", choices=["both", "base"],
+                    help="'base' skips the loop arms -- for budget-ladder audits where looping is not the question")
+    ap.add_argument("--bs", type=int, default=32,
+                    help="generation batch; DROP for long caps (KV = bs*cap*32KB: bs32@16k = 16.8GB -> OOM)")
     ap.add_argument("--out", default=str(EXP / "reports" / "gen_stack.json"))
     args = ap.parse_args()
 
@@ -178,12 +182,17 @@ def main():
 
     print(f"n={len(eps)} | block {args.block} k={args.k} | greedy, no-think (C59 protocol)", flush=True)
     record("base_forced", forced(model, tok, eps))
-    acc, unp, eps_rec, ln = cot(model, tok, eps, max_new=args.max_new)
+    acc, unp, eps_rec, ln = cot(model, tok, eps, bs=args.bs, max_new=args.max_new)
     record("base_cot", acc, {"unparsed_frac": round(unp, 3), "gen_tokens": ln,
-                             "budget_ladder": ladder(eps_rec)})
+                             "budget_ladder": ladder(eps_rec, budgets=(512, 768, 1024, 2048, 3072,
+                                                                       4096, 6144, 8192, 12288, 16384))})
+    if args.arms == "base":
+        Path(args.out).write_text(json.dumps(res, indent=1))
+        print("base-only run; skipping loop arms", flush=True)
+        return
     with CacheSafeLoop(model, a, b, args.k):
         record("loop_forced", forced(model, tok, eps))
-        acc, unp, eps_rec, ln = cot(model, tok, eps, max_new=args.max_new)
+        acc, unp, eps_rec, ln = cot(model, tok, eps, bs=args.bs, max_new=args.max_new)
         record("loop_cot", acc, {"unparsed_frac": round(unp, 3), "gen_tokens": ln,
                                  "budget_ladder": ladder(eps_rec)})
 
