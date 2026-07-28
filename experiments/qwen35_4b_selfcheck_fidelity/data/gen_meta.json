@@ -1,267 +1,68 @@
 {
  "bidict::bidict/_orderedbase.py::SentinelNode.new_last_node": {
-  "gen_tokens": 6144,
+  "gen_tokens": 16384,
   "parsed": true,
-  "n_tests": 1
+  "n_tests": 8
  },
  "bidict::bidict/_base.py::BidictBase.equals_order_sensitive": {
-  "gen_tokens": 6144,
+  "gen_tokens": 16383,
   "parsed": false
  },
  "dpath::dpath/__init__.py::values": {
-  "gen_tokens": 6144,
+  "gen_tokens": 16384,
   "parsed": false
  },
  "dpath::dpath/segments.py::int_str": {
-  "gen_tokens": 6144,
-  "parsed": true,
-  "n_tests": 0
+  "gen_tokens": 16384,
+  "parsed": false
  },
  "bidict::bidict/_orderedbase.py::SentinelNode.iternodes": {
-  "gen_tokens": 6144,
+  "gen_tokens": 16384,
   "parsed": false
  },
  "bidict::bidict/_base.py::BidictBase.inverse": {
-  "gen_tokens": 6144,
+  "gen_tokens": 16384,
   "parsed": false
  },
  "dpath::dpath/segments.py::foldm": {
-  "gen_tokens": 6144,
+  "gen_tokens": 16384,
   "parsed": false
  },
  "dpath::dpath/segments.py::fold": {
-  "gen_tokens": 6144,
+  "gen_tokens": 16384,
   "parsed": false
  },
  "dpath::dpath/segments.py::leafy": {
-  "gen_tokens": 6144,
+  "gen_tokens": 16384,
   "parsed": false
  },
  "dpath::dpath/segments.py::get": {
-  "gen_tokens": 6144,
+  "gen_tokens": 16384,
   "parsed": false
  },
  "dpath::dpath/segments.py::make_walkable": {
-  "gen_tokens": 6144,
-  "parsed": true,
-  "n_tests": 10
+  "gen_tokens": 16384,
+  "parsed": false
  },
  "dpath::dpath/__init__.py::new": {
-  "gen_tokens": 6144,
+  "gen_tokens": 16384,
   "parsed": false
  },
  "dpath::dpath/__init__.py::set": {
-  "gen_tokens": 6144,
+  "gen_tokens": 16384,
   "parsed": false
  },
  "dpath::dpath/__init__.py::get": {
-  "gen_tokens": 6144,
+  "gen_tokens": 16384,
   "parsed": true,
-  "n_tests": 1
+  "n_tests": 7
  },
  "dpath::dpath/segments.py::set": {
-  "gen_tokens": 6144,
+  "gen_tokens": 16384,
   "parsed": false
  },
  "dpath::dpath/segments.py::match": {
-  "gen_tokens": 6144,
-  "parsed": true,
-  "n_tests": 9
- },
- "glom::glom/streaming.py::Iter.split": {
-  "gen_tokens": 6144,
+  "gen_tokens": 16384,
   "parsed": false
- },
- "glom::glom/core.py::Glommer.register": {
-  "gen_tokens": 6144,
-  "parsed": true,
-  "n_tests": 0
- },
- "glom::glom/streaming.py::Iter.slice": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "glom::glom/core.py::Path.from_t": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "glom::glom/matching.py::Optional.glomit": {
-  "gen_tokens": 6141,
-  "parsed": true,
-  "n_tests": 0
- },
- "glom::glom/core.py::arg_val": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "glom::glom/core.py::CoalesceError.get_message": {
-  "gen_tokens": 6144,
-  "parsed": true,
-  "n_tests": 0
- },
- "glom::glom/core.py::GlomError.wrap": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "glom::glom/core.py::format_oneline_trace": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "more-itertools::more_itertools/more.py::always_reversible": {
-  "gen_tokens": 6144,
-  "parsed": true,
-  "n_tests": 0
- },
- "more-itertools::more_itertools/more.py::takewhile_inclusive": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "more-itertools::more_itertools/more.py::idft": {
-  "gen_tokens": 6143,
-  "parsed": false
- },
- "more-itertools::more_itertools/recipes.py::sliding_window": {
-  "gen_tokens": 6144,
-  "parsed": true,
-  "n_tests": 7
- },
- "more-itertools::more_itertools/more.py::subfactorial": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "more-itertools::more_itertools/recipes.py::tail": {
-  "gen_tokens": 6144,
-  "parsed": true,
-  "n_tests": 8
- },
- "more-itertools::more_itertools/more.py::exactly_n": {
-  "gen_tokens": 6144,
-  "parsed": true,
-  "n_tests": 8
- },
- "more-itertools::more_itertools/recipes.py::nth_combination": {
-  "gen_tokens": 6144,
-  "parsed": true,
-  "n_tests": 9
- },
- "semver::src/semver/version.py::Version.is_valid": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "more-itertools::more_itertools/more.py::sort_together": {
-  "gen_tokens": 6143,
-  "parsed": true,
-  "n_tests": 1
- },
- "semver::src/semver/version.py::Version.replace": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "semver::src/semver/version.py::Version.parse": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "semver::src/semver/version.py::Version.is_compatible": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "semver::src/semver/version.py::Version.next_version": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "voluptuous::voluptuous/validators.py::Url": {
-  "gen_tokens": 6144,
-  "parsed": true,
-  "n_tests": 7
- },
- "semver::src/semver/version.py::Version.match": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "voluptuous::voluptuous/schema_builder.py::default_factory": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "voluptuous::voluptuous/validators.py::IsDir": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "voluptuous::voluptuous/validators.py::IsFile": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "voluptuous::voluptuous/validators.py::FqdnUrl": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "voluptuous::voluptuous/schema_builder.py::raises": {
-  "gen_tokens": 6144,
-  "parsed": true,
-  "n_tests": 0
- },
- "voluptuous::voluptuous/validators.py::PathExists": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "voluptuous::voluptuous/validators.py::Email": {
-  "gen_tokens": 6144,
-  "parsed": true,
-  "n_tests": 6
- },
- "voluptuous::voluptuous/schema_builder.py::Schema.infer": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "voluptuous::voluptuous/schema_builder.py::validate": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "bidict::bidict/_bidict.py::MutableBidict.popitem": {
-  "gen_tokens": 6144,
-  "parsed": true,
-  "n_tests": 7
- },
- "glom::glom/core.py::Ref.glomit": {
-  "gen_tokens": 6143,
-  "parsed": true,
-  "n_tests": 0
- },
- "glom::glom/core.py::Path.startswith": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "glom::glom/reduction.py::flatten": {
-  "gen_tokens": 6143,
-  "parsed": true,
-  "n_tests": 8
- },
- "more-itertools::more_itertools/more.py::concurrent_tee": {
-  "gen_tokens": 6144,
-  "parsed": true,
-  "n_tests": 1
- },
- "semver::src/semver/version.py::Version.to_dict": {
-  "gen_tokens": 6144,
-  "parsed": true,
-  "n_tests": 8
- },
- "semver::src/semver/version.py::Version.bump_prerelease": {
-  "gen_tokens": 6144,
-  "parsed": false
- },
- "semver::src/semver/version.py::Version.compare": {
-  "gen_tokens": 6144,
-  "parsed": true,
-  "n_tests": 1
- },
- "voluptuous::voluptuous/schema_builder.py::Schema.extend": {
-  "gen_tokens": 6144,
-  "parsed": true,
-  "n_tests": 4
- },
- "semver::src/semver/version.py::Version.bump_build": {
-  "gen_tokens": 6144,
-  "parsed": true,
-  "n_tests": 1
  }
 }

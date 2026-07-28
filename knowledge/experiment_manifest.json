@@ -2254,6 +2254,7 @@
   },
   {
     "file_counts": {
+      ".done": 1,
       ".json": 8,
       ".jsonl": 2,
       ".md": 4,
@@ -2281,8 +2282,8 @@
       "src",
       "tests"
     ],
-    "total_files": 25,
-    "total_size_bytes": 498686
+    "total_files": 26,
+    "total_size_bytes": 499641
   },
   {
     "file_counts": {
@@ -5726,7 +5727,7 @@
       ".json": 2,
       ".jsonl": 2,
       ".md": 4,
-      ".py": 34,
+      ".py": 36,
       ".yaml": 3,
       "[none]": 1
     },
@@ -5758,8 +5759,8 @@
       "src",
       "tests"
     ],
-    "total_files": 47,
-    "total_size_bytes": 903516
+    "total_files": 49,
+    "total_size_bytes": 901997
   },
   {
     "file_counts": {

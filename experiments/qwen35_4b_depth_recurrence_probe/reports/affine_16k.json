@@ -10,6 +10,63 @@
  "arms": {
   "base_forced": {
    "acc": 0.19
+  },
+  "base_cot": {
+   "acc": 0.37,
+   "unparsed_frac": 0.42,
+   "gen_tokens": {
+    "mean": 11101.2,
+    "p50": 14058,
+    "p90": 16384,
+    "p99": 16384,
+    "max": 16384,
+    "frac_at_cap": 0.42,
+    "cap": 16384
+   },
+   "budget_ladder": {
+    "512": {
+     "commit_rate": 0.01,
+     "acc": 0.01
+    },
+    "768": {
+     "commit_rate": 0.03,
+     "acc": 0.02
+    },
+    "1024": {
+     "commit_rate": 0.04,
+     "acc": 0.03
+    },
+    "2048": {
+     "commit_rate": 0.07,
+     "acc": 0.06
+    },
+    "3072": {
+     "commit_rate": 0.11,
+     "acc": 0.09
+    },
+    "4096": {
+     "commit_rate": 0.2,
+     "acc": 0.17
+    },
+    "6144": {
+     "commit_rate": 0.29,
+     "acc": 0.25
+    },
+    "8192": {
+     "commit_rate": 0.36,
+     "acc": 0.3
+    },
+    "12288": {
+     "commit_rate": 0.46,
+     "acc": 0.37
+    },
+    "16384": {
+     "commit_rate": 0.58,
+     "acc": 0.37
+    }
+   },
+   "tail_at_cap": true,
+   "truncation_bound": true
   }
  }
 }
