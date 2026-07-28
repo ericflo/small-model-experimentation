@@ -1,0 +1,15 @@
+{
+ "n": 100,
+ "substrate": "test_affine.jsonl",
+ "block": "12:16",
+ "k": 2,
+ "c59_reference": {
+  "forced": 0.09,
+  "real_cot": 0.235
+ },
+ "arms": {
+  "base_forced": {
+   "acc": 0.19
+  }
+ }
+}

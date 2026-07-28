@@ -1,0 +1,1065 @@
+{
+ "gates": {
+  "bidict::bidict/_base.py::BidictBase.equals_order_sensitive": {
+   "has_suite": false
+  },
+  "bidict::bidict/_base.py::BidictBase.inverse": {
+   "has_suite": false
+  },
+  "bidict::bidict/_bidict.py::MutableBidict.popitem": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": false,
+   "orig_frac": 0.0,
+   "valid": false
+  },
+  "bidict::bidict/_orderedbase.py::SentinelNode.iternodes": {
+   "has_suite": false
+  },
+  "bidict::bidict/_orderedbase.py::SentinelNode.new_last_node": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": false,
+   "orig_frac": 0.0,
+   "valid": false
+  },
+  "dpath::dpath/__init__.py::get": {
+   "has_suite": true,
+   "recon_failed": true
+  },
+  "dpath::dpath/__init__.py::new": {
+   "has_suite": false
+  },
+  "dpath::dpath/__init__.py::set": {
+   "has_suite": false
+  },
+  "dpath::dpath/__init__.py::values": {
+   "has_suite": false
+  },
+  "dpath::dpath/segments.py::fold": {
+   "has_suite": false
+  },
+  "dpath::dpath/segments.py::foldm": {
+   "has_suite": false
+  },
+  "dpath::dpath/segments.py::get": {
+   "has_suite": false
+  },
+  "dpath::dpath/segments.py::int_str": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": false,
+   "orig_frac": 0.0,
+   "valid": false
+  },
+  "dpath::dpath/segments.py::leafy": {
+   "has_suite": false
+  },
+  "dpath::dpath/segments.py::make_walkable": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": false,
+   "orig_frac": 0.0,
+   "valid": false
+  },
+  "dpath::dpath/segments.py::match": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": false,
+   "orig_frac": 0.556,
+   "valid": false
+  },
+  "dpath::dpath/segments.py::set": {
+   "has_suite": false
+  },
+  "glom::glom/core.py::CoalesceError.get_message": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": false,
+   "orig_frac": 0.0,
+   "valid": false
+  },
+  "glom::glom/core.py::GlomError.wrap": {
+   "has_suite": false
+  },
+  "glom::glom/core.py::Glommer.register": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": false,
+   "orig_frac": 0.0,
+   "valid": false
+  },
+  "glom::glom/core.py::Path.from_t": {
+   "has_suite": false
+  },
+  "glom::glom/core.py::Path.startswith": {
+   "has_suite": false
+  },
+  "glom::glom/core.py::Ref.glomit": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": false,
+   "orig_frac": 0.0,
+   "valid": false
+  },
+  "glom::glom/core.py::arg_val": {
+   "has_suite": false
+  },
+  "glom::glom/core.py::format_oneline_trace": {
+   "has_suite": false
+  },
+  "glom::glom/matching.py::Optional.glomit": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": false,
+   "orig_frac": 0.0,
+   "valid": false
+  },
+  "glom::glom/reduction.py::flatten": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": false,
+   "orig_frac": 0.0,
+   "valid": false
+  },
+  "glom::glom/streaming.py::Iter.slice": {
+   "has_suite": false
+  },
+  "glom::glom/streaming.py::Iter.split": {
+   "has_suite": false
+  },
+  "more-itertools::more_itertools/more.py::always_reversible": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": false,
+   "orig_frac": 0.0,
+   "valid": false
+  },
+  "more-itertools::more_itertools/more.py::concurrent_tee": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": false,
+   "orig_frac": 0.0,
+   "valid": false
+  },
+  "more-itertools::more_itertools/more.py::exactly_n": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": true,
+   "orig_frac": 1.0,
+   "valid": true
+  },
+  "more-itertools::more_itertools/more.py::idft": {
+   "has_suite": false
+  },
+  "more-itertools::more_itertools/more.py::sort_together": {
+   "has_suite": true,
+   "recon_failed": true
+  },
+  "more-itertools::more_itertools/more.py::subfactorial": {
+   "has_suite": false
+  },
+  "more-itertools::more_itertools/more.py::takewhile_inclusive": {
+   "has_suite": false
+  },
+  "more-itertools::more_itertools/recipes.py::nth_combination": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": false,
+   "orig_frac": 0.0,
+   "valid": false
+  },
+  "more-itertools::more_itertools/recipes.py::sliding_window": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": true,
+   "orig_frac": 1.0,
+   "valid": true
+  },
+  "more-itertools::more_itertools/recipes.py::tail": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": false,
+   "orig_frac": 0.0,
+   "valid": false
+  },
+  "semver::src/semver/version.py::Version.bump_build": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": false,
+   "orig_frac": 0.0,
+   "valid": false
+  },
+  "semver::src/semver/version.py::Version.bump_prerelease": {
+   "has_suite": false
+  },
+  "semver::src/semver/version.py::Version.compare": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": false,
+   "orig_frac": 0.0,
+   "valid": false
+  },
+  "semver::src/semver/version.py::Version.is_compatible": {
+   "has_suite": false
+  },
+  "semver::src/semver/version.py::Version.is_valid": {
+   "has_suite": false
+  },
+  "semver::src/semver/version.py::Version.match": {
+   "has_suite": false
+  },
+  "semver::src/semver/version.py::Version.next_version": {
+   "has_suite": false
+  },
+  "semver::src/semver/version.py::Version.parse": {
+   "has_suite": false
+  },
+  "semver::src/semver/version.py::Version.replace": {
+   "has_suite": false
+  },
+  "semver::src/semver/version.py::Version.to_dict": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": true,
+   "orig_frac": 1.0,
+   "valid": true
+  },
+  "voluptuous::voluptuous/schema_builder.py::Schema.extend": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": false,
+   "orig_frac": 0.0,
+   "valid": false
+  },
+  "voluptuous::voluptuous/schema_builder.py::Schema.infer": {
+   "has_suite": false
+  },
+  "voluptuous::voluptuous/schema_builder.py::default_factory": {
+   "has_suite": false
+  },
+  "voluptuous::voluptuous/schema_builder.py::raises": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": false,
+   "orig_frac": 0.0,
+   "valid": false
+  },
+  "voluptuous::voluptuous/schema_builder.py::validate": {
+   "has_suite": false
+  },
+  "voluptuous::voluptuous/validators.py::Email": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": false,
+   "orig_frac": 0.0,
+   "valid": false
+  },
+  "voluptuous::voluptuous/validators.py::FqdnUrl": {
+   "has_suite": false
+  },
+  "voluptuous::voluptuous/validators.py::IsDir": {
+   "has_suite": false
+  },
+  "voluptuous::voluptuous/validators.py::IsFile": {
+   "has_suite": false
+  },
+  "voluptuous::voluptuous/validators.py::PathExists": {
+   "has_suite": false
+  },
+  "voluptuous::voluptuous/validators.py::Url": {
+   "has_suite": true,
+   "fails_on_stub": true,
+   "passes_on_original": false,
+   "orig_frac": 0.0,
+   "valid": false
+  }
+ },
+ "rows": [
+  {
+   "task_id": "bidict::bidict/_bidict.py::MutableBidict.popitem",
+   "pair_id": "base_62",
+   "suite_valid": false,
+   "hidden": true,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 507
+  },
+  {
+   "task_id": "bidict::bidict/_bidict.py::MutableBidict.popitem",
+   "pair_id": "base_65",
+   "suite_valid": false,
+   "hidden": true,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 718
+  },
+  {
+   "task_id": "bidict::bidict/_bidict.py::MutableBidict.popitem",
+   "pair_id": "warmstart_65",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 908
+  },
+  {
+   "task_id": "bidict::bidict/_orderedbase.py::SentinelNode.new_last_node",
+   "pair_id": "base_1",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 300
+  },
+  {
+   "task_id": "bidict::bidict/_orderedbase.py::SentinelNode.new_last_node",
+   "pair_id": "base_66",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 292
+  },
+  {
+   "task_id": "bidict::bidict/_orderedbase.py::SentinelNode.new_last_node",
+   "pair_id": "base_68",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 503
+  },
+  {
+   "task_id": "bidict::bidict/_orderedbase.py::SentinelNode.new_last_node",
+   "pair_id": "warmstart_4",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 121
+  },
+  {
+   "task_id": "bidict::bidict/_orderedbase.py::SentinelNode.new_last_node",
+   "pair_id": "warmstart_66",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 416
+  },
+  {
+   "task_id": "bidict::bidict/_orderedbase.py::SentinelNode.new_last_node",
+   "pair_id": "warmstart_69",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 125
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::int_str",
+   "pair_id": "base_4",
+   "suite_valid": false,
+   "hidden": true,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 309
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::int_str",
+   "pair_id": "base_72",
+   "suite_valid": false,
+   "hidden": true,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 317
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::int_str",
+   "pair_id": "base_73",
+   "suite_valid": false,
+   "hidden": true,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 309
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::int_str",
+   "pair_id": "warmstart_5",
+   "suite_valid": false,
+   "hidden": true,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 313
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::int_str",
+   "pair_id": "warmstart_73",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 245
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::int_str",
+   "pair_id": "warmstart_74",
+   "suite_valid": false,
+   "hidden": true,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 309
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::make_walkable",
+   "pair_id": "base_11",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 971
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::make_walkable",
+   "pair_id": "base_84",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 723
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::make_walkable",
+   "pair_id": "base_86",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 690
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::make_walkable",
+   "pair_id": "warmstart_12",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 948
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::make_walkable",
+   "pair_id": "warmstart_85",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 721
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::make_walkable",
+   "pair_id": "warmstart_87",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 807
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::match",
+   "pair_id": "base_16",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.556,
+   "episode_solved": false,
+   "impl_len": 1327
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::match",
+   "pair_id": "base_94",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.556,
+   "episode_solved": false,
+   "impl_len": 1679
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::match",
+   "pair_id": "base_96",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.556,
+   "episode_solved": false,
+   "impl_len": 2007
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::match",
+   "pair_id": "warmstart_94",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.556,
+   "episode_solved": false,
+   "impl_len": 2804
+  },
+  {
+   "task_id": "dpath::dpath/segments.py::match",
+   "pair_id": "warmstart_96",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.556,
+   "episode_solved": false,
+   "impl_len": 2294
+  },
+  {
+   "task_id": "glom::glom/core.py::CoalesceError.get_message",
+   "pair_id": "base_25",
+   "suite_valid": false,
+   "hidden": true,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 519
+  },
+  {
+   "task_id": "glom::glom/core.py::CoalesceError.get_message",
+   "pair_id": "warmstart_26",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 471
+  },
+  {
+   "task_id": "glom::glom/core.py::CoalesceError.get_message",
+   "pair_id": "warmstart_114",
+   "suite_valid": false,
+   "hidden": true,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 290
+  },
+  {
+   "task_id": "glom::glom/core.py::CoalesceError.get_message",
+   "pair_id": "warmstart_115",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 821
+  },
+  {
+   "task_id": "glom::glom/core.py::Glommer.register",
+   "pair_id": "base_18",
+   "suite_valid": false,
+   "hidden": true,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 226
+  },
+  {
+   "task_id": "glom::glom/core.py::Glommer.register",
+   "pair_id": "base_95",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 1255
+  },
+  {
+   "task_id": "glom::glom/core.py::Glommer.register",
+   "pair_id": "base_97",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 2792
+  },
+  {
+   "task_id": "glom::glom/core.py::Ref.glomit",
+   "pair_id": "warmstart_23",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 382
+  },
+  {
+   "task_id": "glom::glom/matching.py::Optional.glomit",
+   "pair_id": "base_21",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 298
+  },
+  {
+   "task_id": "glom::glom/matching.py::Optional.glomit",
+   "pair_id": "base_100",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 415
+  },
+  {
+   "task_id": "glom::glom/matching.py::Optional.glomit",
+   "pair_id": "warmstart_18",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 598
+  },
+  {
+   "task_id": "glom::glom/matching.py::Optional.glomit",
+   "pair_id": "warmstart_98",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 754
+  },
+  {
+   "task_id": "glom::glom/matching.py::Optional.glomit",
+   "pair_id": "warmstart_99",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 325
+  },
+  {
+   "task_id": "glom::glom/reduction.py::flatten",
+   "pair_id": "warmstart_27",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 2136
+  },
+  {
+   "task_id": "more-itertools::more_itertools/more.py::always_reversible",
+   "pair_id": "base_29",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 691
+  },
+  {
+   "task_id": "more-itertools::more_itertools/more.py::always_reversible",
+   "pair_id": "warmstart_120",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 953
+  },
+  {
+   "task_id": "more-itertools::more_itertools/more.py::always_reversible",
+   "pair_id": "warmstart_121",
+   "suite_valid": false,
+   "hidden": true,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 722
+  },
+  {
+   "task_id": "more-itertools::more_itertools/more.py::concurrent_tee",
+   "pair_id": "warmstart_34",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 609
+  },
+  {
+   "task_id": "more-itertools::more_itertools/more.py::concurrent_tee",
+   "pair_id": "warmstart_131",
+   "suite_valid": false,
+   "hidden": true,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 634
+  },
+  {
+   "task_id": "more-itertools::more_itertools/more.py::exactly_n",
+   "pair_id": "base_37",
+   "suite_valid": true,
+   "hidden": true,
+   "self_pass": true,
+   "self_frac": 1.0,
+   "episode_solved": true,
+   "impl_len": 771
+  },
+  {
+   "task_id": "more-itertools::more_itertools/more.py::exactly_n",
+   "pair_id": "warmstart_137",
+   "suite_valid": true,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 359
+  },
+  {
+   "task_id": "more-itertools::more_itertools/recipes.py::nth_combination",
+   "pair_id": "base_38",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 3819
+  },
+  {
+   "task_id": "more-itertools::more_itertools/recipes.py::nth_combination",
+   "pair_id": "warmstart_139",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 2186
+  },
+  {
+   "task_id": "more-itertools::more_itertools/recipes.py::nth_combination",
+   "pair_id": "warmstart_140",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 1457
+  },
+  {
+   "task_id": "more-itertools::more_itertools/recipes.py::sliding_window",
+   "pair_id": "base_34",
+   "suite_valid": true,
+   "hidden": true,
+   "self_pass": true,
+   "self_frac": 1.0,
+   "episode_solved": true,
+   "impl_len": 573
+  },
+  {
+   "task_id": "more-itertools::more_itertools/recipes.py::sliding_window",
+   "pair_id": "warmstart_133",
+   "suite_valid": true,
+   "hidden": true,
+   "self_pass": true,
+   "self_frac": 1.0,
+   "episode_solved": true,
+   "impl_len": 475
+  },
+  {
+   "task_id": "more-itertools::more_itertools/recipes.py::sliding_window",
+   "pair_id": "warmstart_135",
+   "suite_valid": true,
+   "hidden": true,
+   "self_pass": true,
+   "self_frac": 1.0,
+   "episode_solved": true,
+   "impl_len": 761
+  },
+  {
+   "task_id": "more-itertools::more_itertools/recipes.py::tail",
+   "pair_id": "base_36",
+   "suite_valid": false,
+   "hidden": true,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 845
+  },
+  {
+   "task_id": "more-itertools::more_itertools/recipes.py::tail",
+   "pair_id": "warmstart_35",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 1052
+  },
+  {
+   "task_id": "more-itertools::more_itertools/recipes.py::tail",
+   "pair_id": "warmstart_130",
+   "suite_valid": false,
+   "hidden": true,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 535
+  },
+  {
+   "task_id": "more-itertools::more_itertools/recipes.py::tail",
+   "pair_id": "warmstart_134",
+   "suite_valid": false,
+   "hidden": true,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 306
+  },
+  {
+   "task_id": "semver::src/semver/version.py::Version.bump_build",
+   "pair_id": "warmstart_150",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 2082
+  },
+  {
+   "task_id": "semver::src/semver/version.py::Version.bump_build",
+   "pair_id": "warmstart_151",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 899
+  },
+  {
+   "task_id": "semver::src/semver/version.py::Version.compare",
+   "pair_id": "warmstart_50",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 2158
+  },
+  {
+   "task_id": "semver::src/semver/version.py::Version.compare",
+   "pair_id": "warmstart_158",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 1859
+  },
+  {
+   "task_id": "semver::src/semver/version.py::Version.compare",
+   "pair_id": "warmstart_160",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 3266
+  },
+  {
+   "task_id": "semver::src/semver/version.py::Version.to_dict",
+   "pair_id": "warmstart_40",
+   "suite_valid": true,
+   "hidden": false,
+   "self_pass": true,
+   "self_frac": 1.0,
+   "episode_solved": true,
+   "impl_len": 383
+  },
+  {
+   "task_id": "semver::src/semver/version.py::Version.to_dict",
+   "pair_id": "warmstart_146",
+   "suite_valid": true,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 726
+  },
+  {
+   "task_id": "semver::src/semver/version.py::Version.to_dict",
+   "pair_id": "warmstart_147",
+   "suite_valid": true,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 213
+  },
+  {
+   "task_id": "voluptuous::voluptuous/schema_builder.py::Schema.extend",
+   "pair_id": "warmstart_61",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 2132
+  },
+  {
+   "task_id": "voluptuous::voluptuous/schema_builder.py::Schema.extend",
+   "pair_id": "warmstart_184",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 3733
+  },
+  {
+   "task_id": "voluptuous::voluptuous/schema_builder.py::raises",
+   "pair_id": "base_56",
+   "suite_valid": false,
+   "hidden": true,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 1406
+  },
+  {
+   "task_id": "voluptuous::voluptuous/schema_builder.py::raises",
+   "pair_id": "warmstart_57",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 1057
+  },
+  {
+   "task_id": "voluptuous::voluptuous/schema_builder.py::raises",
+   "pair_id": "warmstart_174",
+   "suite_valid": false,
+   "hidden": true,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 413
+  },
+  {
+   "task_id": "voluptuous::voluptuous/validators.py::Email",
+   "pair_id": "base_58",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 1118
+  },
+  {
+   "task_id": "voluptuous::voluptuous/validators.py::Email",
+   "pair_id": "warmstart_58",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 925
+  },
+  {
+   "task_id": "voluptuous::voluptuous/validators.py::Email",
+   "pair_id": "warmstart_179",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 1332
+  },
+  {
+   "task_id": "voluptuous::voluptuous/validators.py::Url",
+   "pair_id": "base_50",
+   "suite_valid": false,
+   "hidden": true,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 373
+  },
+  {
+   "task_id": "voluptuous::voluptuous/validators.py::Url",
+   "pair_id": "warmstart_51",
+   "suite_valid": false,
+   "hidden": false,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": false,
+   "impl_len": 384
+  },
+  {
+   "task_id": "voluptuous::voluptuous/validators.py::Url",
+   "pair_id": "warmstart_166",
+   "suite_valid": false,
+   "hidden": true,
+   "self_pass": false,
+   "self_frac": 0.0,
+   "episode_solved": true,
+   "impl_len": 479
+  }
+ ],
+ "metrics": {
+  "gates_valid": 3,
+  "gates_total": 60,
+  "all": {
+   "n": 76,
+   "hidden_pass_rate": 0.303,
+   "agreement": 0.737,
+   "auroc_self_frac": 0.5386,
+   "auroc_neg_length": 0.7252,
+   "majority": 0.697
+  },
+  "valid_suites": {
+   "n": 8,
+   "hidden_pass_rate": 0.5,
+   "agreement": 0.875,
+   "auroc_self_frac": 0.875,
+   "auroc_neg_length": 0.125,
+   "majority": 0.5
+  },
+  "selection": {
+   "tasks": 2,
+   "selfcheck_pick_rate": 1.0,
+   "random_pick_rate": 0.75
+  }
+ }
+}

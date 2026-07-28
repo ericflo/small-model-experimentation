@@ -2254,7 +2254,7 @@
   },
   {
     "file_counts": {
-      ".json": 6,
+      ".json": 8,
       ".jsonl": 2,
       ".md": 4,
       ".py": 8,
@@ -2281,8 +2281,8 @@
       "src",
       "tests"
     ],
-    "total_files": 23,
-    "total_size_bytes": 495947
+    "total_files": 25,
+    "total_size_bytes": 498686
   },
   {
     "file_counts": {
@@ -5719,6 +5719,47 @@
     ],
     "total_files": 27,
     "total_size_bytes": 1046699
+  },
+  {
+    "file_counts": {
+      ".done": 1,
+      ".json": 2,
+      ".jsonl": 2,
+      ".md": 4,
+      ".py": 34,
+      ".yaml": 3,
+      "[none]": 1
+    },
+    "id": "qwen35_4b_selfcheck_fidelity",
+    "path": "experiments/qwen35_4b_selfcheck_fidelity",
+    "primary_readme": "experiments/qwen35_4b_selfcheck_fidelity/README.md",
+    "primary_report": "experiments/qwen35_4b_selfcheck_fidelity/reports/report.md",
+    "research_programs": [
+      "benchmark_generalization",
+      "evidence_conditioned_selection",
+      "interpretability_and_diagnostics",
+      "reliability_and_safety",
+      "structured_execution_and_compilers"
+    ],
+    "source_track": "new",
+    "summary": "Can the 4B write executable checks from a spec alone that predict a hidden real-repo test suite's verdict? Converts weak self-judgment (0.679 AUROC) into strong execution; the load-bearing question for verifier-gated search on tasks with no test suite.",
+    "tags": [
+      "execution",
+      "small-model",
+      "table-transform",
+      "verification"
+    ],
+    "title": "Self-Written Verifier Fidelity",
+    "top_level_dirs": [
+      "configs",
+      "data",
+      "reports",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "total_files": 47,
+    "total_size_bytes": 903516
   },
   {
     "file_counts": {
