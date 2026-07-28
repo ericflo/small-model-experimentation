@@ -296,3 +296,28 @@ Two traps this replaces:
 Numerics caveat: switching eager -> sdpa shifted forced-read accuracy 0.085 -> 0.090 and 0.240 -> 0.250
 (a couple of near-tie argmax flips in bf16). Harmless in isolation, but arms compared against each other
 must share one attention implementation.
+
+## Waiting for a background run: poll an ARTIFACT, never a process pattern (2026-07-27)
+
+`until ! pgrep -f "myscript.py"; do sleep 60; done` does not work, and fails silently in the worst
+way: the waiting shell's OWN command line contains "myscript.py", so pgrep always matches, the loop
+never exits, and the completion notification never fires. This has now swallowed three separate
+completion reports in one session -- including an auto-verify run that had been dead for three hours
+while its watcher reported nothing. The `unanchored-process-match` footgun check catches this in
+committed scripts but cannot see ad-hoc shell used for monitoring.
+
+Correct pattern -- have the runner write a sentinel on completion, and poll for that:
+
+    # in the runner, after the final save:
+    Path(str(out) + ".DONE").write_text(...)
+
+    # in the waiter:
+    until [ -f reports/pi_arm_test.json.DONE ]; do sleep 60; done; <print results>
+
+A sentinel also distinguishes FINISHED from DIED, which a process check cannot: an OOM-killed run and
+a completed run both stop matching pgrep. If the process is gone and no sentinel exists, it crashed --
+check `journalctl -b 0 | grep oom-kill` first.
+
+Cgroup ceilings must scale with what the arm actually does: the auto-verify arm was given GUARD_MEM=8G
+while the plain pi arm ran at 11G, even though auto-verify runs the repo's test suite after every edit
+and therefore holds MORE concurrent pytest processes. It was cgroup-OOM-killed at 8.25 GB anon-RSS.

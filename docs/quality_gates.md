@@ -143,3 +143,28 @@ gate failures:
   or repository catalog/index outputs in an experiment's frozen design-file set. Adding the tracked
   lock receipt changes file counts and therefore legitimately regenerates those surfaces; freeze the
   scientific config, code, tests, intake, preregistration, and design review instead.
+
+## Scaffold arms need an ACTIVITY-PARITY gate (2026-07-27)
+
+This corpus enforces matched-compute for TRAINING arms and had nothing equivalent for SCAFFOLD arms —
+harness changes that leave the model untouched. That gap voided a 4-GPU-hour experiment.
+
+The auto-verify arm ran the task's test suite after every edit so the agent could not skip verification.
+It scored 0.145 against base's 0.339 and looked like a clean, large negative result. It was an artifact:
+
+    arm          turns   tool calls   wall median
+    base          10.0        10.0        467s
+    auto-verify    3.0         3.0        600s   <- every episode hit the deadline
+
+The watcher's repeated full-suite runs shared 8 cores with the agent's own pytest calls, so the agent
+got a THIRD of the turns inside the same wall. The comparison measured CPU contention, not the
+intervention. Nothing about forced verification was learned.
+
+GATE, required for any arm that changes the harness rather than the weights: report the agent's
+effective activity (turns and tool calls per episode) alongside the score, and treat the comparison as
+VOID if it differs materially from the baseline arm. Wall-clock alone does not catch this — both arms
+"used 600 seconds"; only the turn count reveals that one of them spent it waiting.
+
+Cheap fixes when the arm is re-run: verify against a SNAPSHOT copy rather than the agent's live working
+tree, run only the task's fail_to_pass test files instead of the whole suite, trigger on edit-tool
+events rather than polling, nice/ionice the verifier, and drop to one worker so the box is not saturated.
