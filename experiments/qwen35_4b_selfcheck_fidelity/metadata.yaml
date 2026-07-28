@@ -1,0 +1,20 @@
+# Generated starter metadata. Run make check after adding artifacts.
+id: "qwen35_4b_selfcheck_fidelity"
+title: "Self-Written Verifier Fidelity"
+source_track: "new"
+path: "experiments/qwen35_4b_selfcheck_fidelity"
+primary_readme: "experiments/qwen35_4b_selfcheck_fidelity/README.md"
+primary_report: "experiments/qwen35_4b_selfcheck_fidelity/reports/report.md"
+summary: "Can the 4B write executable checks from a spec alone that predict a hidden real-repo test suite's verdict? Converts weak self-judgment (0.679 AUROC) into strong execution; the load-bearing question for verifier-gated search on tasks with no test suite."
+tags:
+  - "experiment"
+research_programs:
+  - "evidence_conditioned_selection"
+top_level_dirs:
+  - "configs"
+  - "reports"
+  - "scripts"
+  - "src"
+file_counts: {}
+total_files: 0
+total_size_bytes: 0
